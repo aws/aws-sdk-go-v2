@@ -13,6 +13,11 @@ var GetItem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetItem",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetLists = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "GetLists",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetMaps = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "GetMaps",
@@ -35,6 +40,12 @@ var _AwsJson1KitchenSink = smithy.NewSchema(smithy.ShapeID{
 
 var AwsJson1KitchenSink = smithy.NewServiceSchema(_AwsJson1KitchenSink, "2025-03-01")
 
+var _DenseIntegerList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "DenseIntegerList",
+}, smithy.ShapeTypeList, 1)
+var _DenseIntegerList_member *smithy.Schema
+
 var _DenseIntegerMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "DenseIntegerMap",
@@ -43,6 +54,12 @@ var _DenseIntegerMap_key *smithy.Schema
 
 var _DenseIntegerMap_value *smithy.Schema
 
+var _DenseStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "DenseStringList",
+}, smithy.ShapeTypeList, 1)
+var _DenseStringList_member *smithy.Schema
+
 var _DenseStringMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "DenseStringMap",
@@ -50,6 +67,12 @@ var _DenseStringMap = smithy.NewSchema(smithy.ShapeID{
 var _DenseStringMap_key *smithy.Schema
 
 var _DenseStringMap_value *smithy.Schema
+
+var _DenseStructList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "DenseStructList",
+}, smithy.ShapeTypeList, 1)
+var _DenseStructList_member *smithy.Schema
 
 var _DenseStructMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
@@ -76,6 +99,12 @@ var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ItemNotFound_message *smithy.Schema
 
+var ListValueStruct = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "ListValueStruct",
+}, smithy.ShapeTypeStructure, 1)
+var ListValueStruct_name *smithy.Schema
+
 var MapValueStruct = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "MapValueStruct",
@@ -87,6 +116,12 @@ var MessageEvent = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MessageEvent",
 }, smithy.ShapeTypeStructure, 1)
 var MessageEvent_body *smithy.Schema
+
+var _SparseStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "SparseStringList",
+}, smithy.ShapeTypeList, 1)
+var _SparseStringList_member *smithy.Schema
 
 var _SparseStringMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
@@ -108,6 +143,23 @@ var GetItemOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "GetItemOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var GetListsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "GetListsInput",
+}, smithy.ShapeTypeStructure, 0)
+
+var GetListsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "GetListsOutput",
+}, smithy.ShapeTypeStructure, 4)
+var GetListsOutput_strings *smithy.Schema
+
+var GetListsOutput_integers *smithy.Schema
+
+var GetListsOutput_structs *smithy.Schema
+
+var GetListsOutput_sparseStrings *smithy.Schema
 
 var GetMapsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
@@ -151,13 +203,21 @@ var SubscribeEventsOutput_events *smithy.Schema
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_DenseIntegerList_member = _DenseIntegerList.AddMember("member", smithyprelude.Integer)
+
 	_DenseIntegerMap_key = _DenseIntegerMap.AddMember("key", smithyprelude.String)
 
 	_DenseIntegerMap_value = _DenseIntegerMap.AddMember("value", smithyprelude.Integer)
 
+	_DenseStringList_member = _DenseStringList.AddMember("member", smithyprelude.String)
+
 	_DenseStringMap_key = _DenseStringMap.AddMember("key", smithyprelude.String)
 
 	_DenseStringMap_value = _DenseStringMap.AddMember("value", smithyprelude.String)
+
+	ListValueStruct_name = ListValueStruct.AddMember("name", smithyprelude.String)
+
+	_DenseStructList_member = _DenseStructList.AddMember("member", ListValueStruct)
 
 	MapValueStruct_name = MapValueStruct.AddMember("name", smithyprelude.String)
 
@@ -171,6 +231,8 @@ func init() {
 
 	ItemNotFound_message = ItemNotFound.AddMember("message", smithyprelude.String)
 
+	_SparseStringList_member = _SparseStringList.AddMember("member", smithyprelude.String)
+
 	_SparseStringMap_key = _SparseStringMap.AddMember("key", smithyprelude.String)
 
 	_SparseStringMap_value = _SparseStringMap.AddMember("value", smithyprelude.String)
@@ -178,6 +240,14 @@ func init() {
 	GetItemInput_item = GetItemInput.AddMember("item", Item)
 
 	GetItemInput_id = GetItemInput.AddMember("id", smithyprelude.String, &smithytraits.ContextParam{})
+
+	GetListsOutput_strings = GetListsOutput.AddMember("strings", _DenseStringList)
+
+	GetListsOutput_integers = GetListsOutput.AddMember("integers", _DenseIntegerList)
+
+	GetListsOutput_structs = GetListsOutput.AddMember("structs", _DenseStructList)
+
+	GetListsOutput_sparseStrings = GetListsOutput.AddMember("sparseStrings", _SparseStringList)
 
 	GetMapsOutput_strings = GetMapsOutput.AddMember("strings", _DenseStringMap)
 

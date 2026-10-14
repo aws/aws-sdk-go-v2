@@ -128,6 +128,46 @@ func TestCheckResponseSnapshot_GetItem(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetLists(t *testing.T) {
+	want := &GetListsOutput{
+		Strings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Integers: []int32{
+			1,
+			1,
+		},
+		Structs: []types.ListValueStruct{
+			{
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		SparseStrings: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetLists.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetLists(context.Background(), &GetListsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetLists.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetMaps(t *testing.T) {
 	want := &GetMapsOutput{
 		Strings: map[string]string{

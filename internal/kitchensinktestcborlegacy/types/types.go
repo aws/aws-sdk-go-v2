@@ -6,6 +6,12 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+type ListValueStruct struct {
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 type MapValueStruct struct {
 	Name *string
 
