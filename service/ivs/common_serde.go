@@ -309,6 +309,14 @@ func deserializeAdConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.AdConfigurationSummary, 0)
 	var vv types.AdConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AdConfigurationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AdConfigurationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -323,6 +331,14 @@ func deserializeAudioConfigurationList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.AudioConfiguration, 0)
 	var vv types.AudioConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AudioConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AudioConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -337,6 +353,14 @@ func deserializeBatchErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.BatchError, 0)
 	var vv types.BatchError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -351,6 +375,14 @@ func deserializeBatchStartViewerSessionRevocationErrors(d smithy.ShapeDeserializ
 	*v = make([]types.BatchStartViewerSessionRevocationError, 0)
 	var vv types.BatchStartViewerSessionRevocationError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchStartViewerSessionRevocationError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchStartViewerSessionRevocationError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -365,6 +397,14 @@ func deserializeBatchStartViewerSessionRevocationViewerSessionList(d smithy.Shap
 	*v = make([]types.BatchStartViewerSessionRevocationViewerSession, 0)
 	var vv types.BatchStartViewerSessionRevocationViewerSession
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchStartViewerSessionRevocationViewerSession
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchStartViewerSessionRevocationViewerSession{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -379,6 +419,13 @@ func deserializeChannelArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -393,6 +440,14 @@ func deserializeChannelList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.ChannelSummary, 0)
 	var vv types.ChannelSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChannelSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ChannelSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -407,6 +462,14 @@ func deserializeChannels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	*v = make([]types.Channel, 0)
 	var vv types.Channel
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Channel
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Channel{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -421,6 +484,14 @@ func deserializeMediaTailorPlaybackConfigurationsList(d smithy.ShapeDeserializer
 	*v = make([]types.MediaTailorPlaybackConfiguration, 0)
 	var vv types.MediaTailorPlaybackConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MediaTailorPlaybackConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MediaTailorPlaybackConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -435,6 +506,14 @@ func deserializePlaybackKeyPairList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.PlaybackKeyPairSummary, 0)
 	var vv types.PlaybackKeyPairSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PlaybackKeyPairSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PlaybackKeyPairSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -449,6 +528,13 @@ func deserializePlaybackRestrictionPolicyAllowedCountryList(d smithy.ShapeDeseri
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -463,6 +549,13 @@ func deserializePlaybackRestrictionPolicyAllowedOriginList(d smithy.ShapeDeseria
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -477,6 +570,14 @@ func deserializePlaybackRestrictionPolicyList(d smithy.ShapeDeserializer, s *smi
 	*v = make([]types.PlaybackRestrictionPolicySummary, 0)
 	var vv types.PlaybackRestrictionPolicySummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PlaybackRestrictionPolicySummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PlaybackRestrictionPolicySummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -491,6 +592,14 @@ func deserializeRecordingConfigurationList(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]types.RecordingConfigurationSummary, 0)
 	var vv types.RecordingConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RecordingConfigurationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RecordingConfigurationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -505,6 +614,13 @@ func deserializeRenditionConfigurationRenditionList(d smithy.ShapeDeserializer, 
 	*v = make([]types.RenditionConfigurationRendition, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RenditionConfigurationRendition
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -519,6 +635,14 @@ func deserializeStreamEvents(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]types.StreamEvent, 0)
 	var vv types.StreamEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StreamEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StreamEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -533,6 +657,13 @@ func deserializeStreamKeyArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -547,6 +678,14 @@ func deserializeStreamKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]types.StreamKeySummary, 0)
 	var vv types.StreamKeySummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StreamKeySummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StreamKeySummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -561,6 +700,14 @@ func deserializeStreamKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.StreamKey, 0)
 	var vv types.StreamKey
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StreamKey
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StreamKey{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -575,6 +722,14 @@ func deserializeStreamList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.StreamSummary, 0)
 	var vv types.StreamSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StreamSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StreamSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -589,6 +744,14 @@ func deserializeStreamSessionList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.StreamSessionSummary, 0)
 	var vv types.StreamSessionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StreamSessionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StreamSessionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -603,6 +766,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -617,6 +787,13 @@ func deserializeThumbnailConfigurationStorageList(d smithy.ShapeDeserializer, s 
 	*v = make([]types.ThumbnailConfigurationStorage, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ThumbnailConfigurationStorage
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -631,6 +808,14 @@ func deserializeVideoConfigurationList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.VideoConfiguration, 0)
 	var vv types.VideoConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.VideoConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.VideoConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

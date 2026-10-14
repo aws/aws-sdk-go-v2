@@ -13,6 +13,11 @@ var CborGetItem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CborGetItem",
 }, smithy.ShapeTypeOperation, 0)
 
+var CborGetLists = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "CborGetLists",
+}, smithy.ShapeTypeOperation, 0)
+
 var CborGetMaps = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "CborGetMaps",
@@ -35,6 +40,12 @@ var CborItemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CborItemNotFound",
 }, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
 
+var _DenseIntegerList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "DenseIntegerList",
+}, smithy.ShapeTypeList, 1)
+var _DenseIntegerList_member *smithy.Schema
+
 var _DenseIntegerMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "DenseIntegerMap",
@@ -42,6 +53,12 @@ var _DenseIntegerMap = smithy.NewSchema(smithy.ShapeID{
 var _DenseIntegerMap_key *smithy.Schema
 
 var _DenseIntegerMap_value *smithy.Schema
+
+var _DenseStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "DenseStringList",
+}, smithy.ShapeTypeList, 1)
+var _DenseStringList_member *smithy.Schema
 
 var _DenseStringMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
@@ -51,6 +68,12 @@ var _DenseStringMap_key *smithy.Schema
 
 var _DenseStringMap_value *smithy.Schema
 
+var _DenseStructList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "DenseStructList",
+}, smithy.ShapeTypeList, 1)
+var _DenseStructList_member *smithy.Schema
+
 var _DenseStructMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "DenseStructMap",
@@ -59,11 +82,23 @@ var _DenseStructMap_key *smithy.Schema
 
 var _DenseStructMap_value *smithy.Schema
 
+var ListValueStruct = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "ListValueStruct",
+}, smithy.ShapeTypeStructure, 1)
+var ListValueStruct_name *smithy.Schema
+
 var MapValueStruct = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "MapValueStruct",
 }, smithy.ShapeTypeStructure, 1)
 var MapValueStruct_name *smithy.Schema
+
+var _SparseStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "SparseStringList",
+}, smithy.ShapeTypeList, 1)
+var _SparseStringList_member *smithy.Schema
 
 var _SparseStringMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
@@ -83,6 +118,23 @@ var CborGetItemOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
 	Name:      "CborGetItemOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var CborGetListsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "CborGetListsInput",
+}, smithy.ShapeTypeStructure, 0)
+
+var CborGetListsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestcbor",
+	Name:      "CborGetListsOutput",
+}, smithy.ShapeTypeStructure, 4)
+var CborGetListsOutput_strings *smithy.Schema
+
+var CborGetListsOutput_integers *smithy.Schema
+
+var CborGetListsOutput_structs *smithy.Schema
+
+var CborGetListsOutput_sparseStrings *smithy.Schema
 
 var CborGetMapsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestcbor",
@@ -115,13 +167,21 @@ var CborPutCompressedDataOutput = smithy.NewSchema(smithy.ShapeID{
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_DenseIntegerList_member = _DenseIntegerList.AddMember("member", smithyprelude.Integer)
+
 	_DenseIntegerMap_key = _DenseIntegerMap.AddMember("key", smithyprelude.String)
 
 	_DenseIntegerMap_value = _DenseIntegerMap.AddMember("value", smithyprelude.Integer)
 
+	_DenseStringList_member = _DenseStringList.AddMember("member", smithyprelude.String)
+
 	_DenseStringMap_key = _DenseStringMap.AddMember("key", smithyprelude.String)
 
 	_DenseStringMap_value = _DenseStringMap.AddMember("value", smithyprelude.String)
+
+	ListValueStruct_name = ListValueStruct.AddMember("name", smithyprelude.String)
+
+	_DenseStructList_member = _DenseStructList.AddMember("member", ListValueStruct)
 
 	MapValueStruct_name = MapValueStruct.AddMember("name", smithyprelude.String)
 
@@ -129,11 +189,21 @@ func init() {
 
 	_DenseStructMap_value = _DenseStructMap.AddMember("value", MapValueStruct)
 
+	_SparseStringList_member = _SparseStringList.AddMember("member", smithyprelude.String)
+
 	_SparseStringMap_key = _SparseStringMap.AddMember("key", smithyprelude.String)
 
 	_SparseStringMap_value = _SparseStringMap.AddMember("value", smithyprelude.String)
 
 	CborGetItemInput_id = CborGetItemInput.AddMember("id", smithyprelude.String)
+
+	CborGetListsOutput_strings = CborGetListsOutput.AddMember("strings", _DenseStringList)
+
+	CborGetListsOutput_integers = CborGetListsOutput.AddMember("integers", _DenseIntegerList)
+
+	CborGetListsOutput_structs = CborGetListsOutput.AddMember("structs", _DenseStructList)
+
+	CborGetListsOutput_sparseStrings = CborGetListsOutput.AddMember("sparseStrings", _SparseStringList)
 
 	CborGetMapsOutput_strings = CborGetMapsOutput.AddMember("strings", _DenseStringMap)
 

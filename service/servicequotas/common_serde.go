@@ -137,6 +137,13 @@ func deserializeExcludedQuotaList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -151,6 +158,13 @@ func deserializeInputTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -165,6 +179,14 @@ func deserializeInputTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -179,6 +201,14 @@ func deserializeOutputTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -193,6 +223,14 @@ func deserializeQuotaInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]types.QuotaInfo, 0)
 	var vv types.QuotaInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.QuotaInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.QuotaInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -207,6 +245,14 @@ func deserializeQuotaUtilizationInfoList(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]types.QuotaUtilizationInfo, 0)
 	var vv types.QuotaUtilizationInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.QuotaUtilizationInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.QuotaUtilizationInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -221,6 +267,14 @@ func deserializeRequestedServiceQuotaChangeHistoryListDefinition(d smithy.ShapeD
 	*v = make([]types.RequestedServiceQuotaChange, 0)
 	var vv types.RequestedServiceQuotaChange
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RequestedServiceQuotaChange
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RequestedServiceQuotaChange{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -235,6 +289,14 @@ func deserializeServiceInfoListDefinition(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]types.ServiceInfo, 0)
 	var vv types.ServiceInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ServiceInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ServiceInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -249,6 +311,14 @@ func deserializeServiceQuotaIncreaseRequestInTemplateList(d smithy.ShapeDeserial
 	*v = make([]types.ServiceQuotaIncreaseRequestInTemplate, 0)
 	var vv types.ServiceQuotaIncreaseRequestInTemplate
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ServiceQuotaIncreaseRequestInTemplate
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ServiceQuotaIncreaseRequestInTemplate{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -263,6 +333,14 @@ func deserializeServiceQuotaListDefinition(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]types.ServiceQuota, 0)
 	var vv types.ServiceQuota
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ServiceQuota
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ServiceQuota{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

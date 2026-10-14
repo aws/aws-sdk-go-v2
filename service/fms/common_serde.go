@@ -597,6 +597,13 @@ func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -611,6 +618,14 @@ func deserializeAdminAccountSummaryList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.AdminAccountSummary, 0)
 	var vv types.AdminAccountSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AdminAccountSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AdminAccountSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -625,6 +640,14 @@ func deserializeAppsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	*v = make([]types.App, 0)
 	var vv types.App
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.App
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.App{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -639,6 +662,14 @@ func deserializeAppsListsData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]types.AppsListDataSummary, 0)
 	var vv types.AppsListDataSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AppsListDataSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AppsListDataSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -653,6 +684,13 @@ func deserializeAWSAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -667,6 +705,14 @@ func deserializeAwsEc2NetworkInterfaceViolations(d smithy.ShapeDeserializer, s *
 	*v = make([]types.AwsEc2NetworkInterfaceViolation, 0)
 	var vv types.AwsEc2NetworkInterfaceViolation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AwsEc2NetworkInterfaceViolation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AwsEc2NetworkInterfaceViolation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -681,6 +727,13 @@ func deserializeAWSRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -695,6 +748,14 @@ func deserializeComplianceViolators(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.ComplianceViolator, 0)
 	var vv types.ComplianceViolator
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ComplianceViolator
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ComplianceViolator{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -709,6 +770,13 @@ func deserializeCustomerPolicyScopeIdList(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -723,6 +791,14 @@ func deserializeDiscoveredResourceList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.DiscoveredResource, 0)
 	var vv types.DiscoveredResource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DiscoveredResource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.DiscoveredResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -737,6 +813,13 @@ func deserializeDnsRuleGroupPriorities(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]int32, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
 			return err
@@ -751,6 +834,14 @@ func deserializeEntriesDescription(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.EntryDescription, 0)
 	var vv types.EntryDescription
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EntryDescription
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EntryDescription{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -765,6 +856,14 @@ func deserializeEntriesWithConflicts(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.EntryDescription, 0)
 	var vv types.EntryDescription
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EntryDescription
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EntryDescription{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -779,6 +878,13 @@ func deserializeEntryViolationReasons(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.EntryViolationReason, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EntryViolationReason
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -793,6 +899,14 @@ func deserializeEntryViolations(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.EntryViolation, 0)
 	var vv types.EntryViolation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EntryViolation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EntryViolation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -807,6 +921,14 @@ func deserializeEvaluationResults(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.EvaluationResult, 0)
 	var vv types.EvaluationResult
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EvaluationResult
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EvaluationResult{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -821,6 +943,14 @@ func deserializeExpectedRoutes(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.ExpectedRoute, 0)
 	var vv types.ExpectedRoute
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExpectedRoute
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ExpectedRoute{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -835,6 +965,14 @@ func deserializeFailedItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.FailedItem, 0)
 	var vv types.FailedItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FailedItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.FailedItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -849,6 +987,13 @@ func deserializeIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -863,6 +1008,13 @@ func deserializeLengthBoundedStringList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -877,6 +1029,13 @@ func deserializeMemberAccounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -891,6 +1050,14 @@ func deserializeNetworkAclEntries(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.NetworkAclEntry, 0)
 	var vv types.NetworkAclEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.NetworkAclEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.NetworkAclEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -905,6 +1072,13 @@ func deserializeNetworkFirewallActionList(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -919,6 +1093,14 @@ func deserializeOrderedRemediationActions(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]types.RemediationActionWithOrder, 0)
 	var vv types.RemediationActionWithOrder
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RemediationActionWithOrder
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RemediationActionWithOrder{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -933,6 +1115,13 @@ func deserializeOrganizationalUnitIdList(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -947,6 +1136,14 @@ func deserializePartialMatches(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.PartialMatch, 0)
 	var vv types.PartialMatch
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PartialMatch
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PartialMatch{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -961,6 +1158,14 @@ func deserializePolicyComplianceStatusList(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]types.PolicyComplianceStatus, 0)
 	var vv types.PolicyComplianceStatus
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PolicyComplianceStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PolicyComplianceStatus{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -975,6 +1180,14 @@ func deserializePolicySummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.PolicySummary, 0)
 	var vv types.PolicySummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PolicySummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PolicySummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -989,6 +1202,14 @@ func deserializePossibleRemediationActionList(d smithy.ShapeDeserializer, s *smi
 	*v = make([]types.PossibleRemediationAction, 0)
 	var vv types.PossibleRemediationAction
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PossibleRemediationAction
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PossibleRemediationAction{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1003,6 +1224,13 @@ func deserializeProtocolsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1017,6 +1245,14 @@ func deserializeProtocolsListsData(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.ProtocolsListDataSummary, 0)
 	var vv types.ProtocolsListDataSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ProtocolsListDataSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ProtocolsListDataSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1031,6 +1267,13 @@ func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1045,6 +1288,13 @@ func deserializeResourceIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1059,6 +1309,14 @@ func deserializeResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]types.Resource, 0)
 	var vv types.Resource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Resource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Resource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1073,6 +1331,13 @@ func deserializeResourceSetIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1087,6 +1352,14 @@ func deserializeResourceSetSummaryList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.ResourceSetSummary, 0)
 	var vv types.ResourceSetSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceSetSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceSetSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1101,6 +1374,14 @@ func deserializeResourceTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]types.ResourceTag, 0)
 	var vv types.ResourceTag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceTag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceTag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1115,6 +1396,13 @@ func deserializeResourceTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1129,6 +1417,14 @@ func deserializeResourceViolations(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.ResourceViolation, 0)
 	var vv types.ResourceViolation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceViolation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceViolation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1143,6 +1439,14 @@ func deserializeRoutes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.
 	*v = make([]types.Route, 0)
 	var vv types.Route
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Route
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Route{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1157,6 +1461,14 @@ func deserializeSecurityGroupRemediationActions(d smithy.ShapeDeserializer, s *s
 	*v = make([]types.SecurityGroupRemediationAction, 0)
 	var vv types.SecurityGroupRemediationAction
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SecurityGroupRemediationAction
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SecurityGroupRemediationAction{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1171,6 +1483,13 @@ func deserializeSecurityServiceTypeList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.SecurityServiceType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SecurityServiceType
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1185,6 +1504,14 @@ func deserializeStatefulRuleGroupList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.StatefulRuleGroup, 0)
 	var vv types.StatefulRuleGroup
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StatefulRuleGroup
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StatefulRuleGroup{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1199,6 +1526,14 @@ func deserializeStatelessRuleGroupList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.StatelessRuleGroup, 0)
 	var vv types.StatelessRuleGroup
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StatelessRuleGroup
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.StatelessRuleGroup{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1213,6 +1548,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1227,6 +1569,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1241,6 +1591,13 @@ func deserializeTargetViolationReasons(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -1255,6 +1612,14 @@ func deserializeThirdPartyFirewallFirewallPolicies(d smithy.ShapeDeserializer, s
 	*v = make([]types.ThirdPartyFirewallFirewallPolicy, 0)
 	var vv types.ThirdPartyFirewallFirewallPolicy
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ThirdPartyFirewallFirewallPolicy
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ThirdPartyFirewallFirewallPolicy{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

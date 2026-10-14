@@ -7,6 +7,143 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeDenseIntegerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteInt32(schema.ListMember(), int32(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDenseStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDenseStructList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListValueStruct) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSparseStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []*string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		if vv != nil {
+			s.WriteString(schema.ListMember(), *vv)
+		} else {
+			s.WriteNil(schema.ListMember())
+		}
+	}
+	s.CloseList()
+}
+
+func deserializeDenseIntegerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
+	*v = make([]int32, 0)
+	var vv int32
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDenseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDenseStructList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListValueStruct) error {
+	*v = make([]types.ListValueStruct, 0)
+	var vv types.ListValueStruct
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ListValueStruct
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ListValueStruct{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSparseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]*string) error {
+	*v = make([]*string, 0)
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			*v = append(*v, nil)
+			return nil
+		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv string
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, &vv)
+		return nil
+	})
+}
+
 func serializeDenseIntegerMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]int32) {
 	if v == nil {
 		return

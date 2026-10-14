@@ -122,6 +122,14 @@ func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	*v = make([]types.Filter, 0)
 	var vv types.Filter
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Filter
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Filter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -136,6 +144,13 @@ func deserializeFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -150,6 +165,14 @@ func deserializeFunctionEndpointSummaryList(d smithy.ShapeDeserializer, s *smith
 	*v = make([]types.FunctionEndpointSummary, 0)
 	var vv types.FunctionEndpointSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FunctionEndpointSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.FunctionEndpointSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -164,6 +187,14 @@ func deserializeFunctionRevisionSummaryList(d smithy.ShapeDeserializer, s *smith
 	*v = make([]types.FunctionRevisionSummary, 0)
 	var vv types.FunctionRevisionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FunctionRevisionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.FunctionRevisionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -178,6 +209,14 @@ func deserializeFunctionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.FunctionSummary, 0)
 	var vv types.FunctionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FunctionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.FunctionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -192,6 +231,13 @@ func deserializeRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -206,6 +252,14 @@ func deserializeRevisionErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.RevisionError, 0)
 	var vv types.RevisionError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RevisionError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RevisionError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -220,6 +274,14 @@ func deserializeRevisionWeightList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.RevisionWeight, 0)
 	var vv types.RevisionWeight
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RevisionWeight
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.RevisionWeight{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -234,6 +296,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err

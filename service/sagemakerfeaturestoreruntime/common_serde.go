@@ -170,6 +170,14 @@ func deserializeBatchGetRecordErrors(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.BatchGetRecordError, 0)
 	var vv types.BatchGetRecordError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchGetRecordError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchGetRecordError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -184,6 +192,14 @@ func deserializeBatchGetRecordIdentifiers(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]types.BatchGetRecordIdentifier, 0)
 	var vv types.BatchGetRecordIdentifier
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchGetRecordIdentifier
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchGetRecordIdentifier{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -198,6 +214,14 @@ func deserializeBatchGetRecordResultDetails(d smithy.ShapeDeserializer, s *smith
 	*v = make([]types.BatchGetRecordResultDetail, 0)
 	var vv types.BatchGetRecordResultDetail
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchGetRecordResultDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchGetRecordResultDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -212,6 +236,14 @@ func deserializeBatchWriteRecordEntries(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.BatchWriteRecordEntry, 0)
 	var vv types.BatchWriteRecordEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchWriteRecordEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchWriteRecordEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -226,6 +258,14 @@ func deserializeBatchWriteRecordErrors(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.BatchWriteRecordError, 0)
 	var vv types.BatchWriteRecordError
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchWriteRecordError
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchWriteRecordError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -240,6 +280,13 @@ func deserializeFeatureNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -254,6 +301,14 @@ func deserializeRecord(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.
 	*v = make([]types.FeatureValue, 0)
 	var vv types.FeatureValue
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FeatureValue
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.FeatureValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -268,6 +323,13 @@ func deserializeRecordIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -282,6 +344,13 @@ func deserializeRecordIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -296,6 +365,13 @@ func deserializeTargetStores(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]types.TargetStore, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TargetStore
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -310,6 +386,14 @@ func deserializeUnprocessedBatchWriteRecordEntries(d smithy.ShapeDeserializer, s
 	*v = make([]types.BatchWriteRecordEntry, 0)
 	var vv types.BatchWriteRecordEntry
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchWriteRecordEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchWriteRecordEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -324,6 +408,14 @@ func deserializeUnprocessedIdentifiers(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]types.BatchGetRecordIdentifier, 0)
 	var vv types.BatchGetRecordIdentifier
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchGetRecordIdentifier
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.BatchGetRecordIdentifier{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -338,6 +430,13 @@ func deserializeValueAsStringList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err

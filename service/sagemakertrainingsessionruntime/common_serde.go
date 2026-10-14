@@ -351,6 +351,14 @@ func deserializeDatumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 	*v = make([]types.Datum, 0)
 	var vv types.Datum
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Datum
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Datum{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -365,6 +373,13 @@ func deserializeDoubleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]fl
 	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero float64
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadFloat64(s.ListMember(), &vv); err != nil {
 			return err
@@ -379,6 +394,14 @@ func deserializeEncodedTextChunkList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.EncodedTextChunk, 0)
 	var vv types.EncodedTextChunk
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EncodedTextChunk
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.EncodedTextChunk{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -393,6 +416,13 @@ func deserializeIntegerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]i
 	*v = make([]int32, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
 			return err
@@ -407,6 +437,14 @@ func deserializeSampledSequenceList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.SampledSequence, 0)
 	var vv types.SampledSequence
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SampledSequence
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SampledSequence{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -421,6 +459,13 @@ func deserializeStopSequenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -435,6 +480,14 @@ func deserializeTensorDataMapList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]map[string]types.TensorData, 0)
 	var vv map[string]types.TensorData
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]types.TensorData
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeTensorDataMap(d, s.ListMember(), &vv); err != nil {
 			return err
@@ -449,6 +502,14 @@ func deserializeTokenLogprobList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]types.TokenLogprob, 0)
 	var vv types.TokenLogprob
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TokenLogprob
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.TokenLogprob{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -463,6 +524,14 @@ func deserializeTopkPromptLogprobsList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([][]types.TokenLogprob, 0)
 	var vv []types.TokenLogprob
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.TokenLogprob
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeTokenLogprobList(d, s.ListMember(), &vv); err != nil {
 			return err

@@ -255,6 +255,14 @@ func deserializeDatastorePropertiesList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]DatastoreProperties, 0)
 	var vv DatastoreProperties
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DatastoreProperties
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = DatastoreProperties{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -269,6 +277,13 @@ func deserializeDataTransformationChatOptionsList(d smithy.ShapeDeserializer, s 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -283,6 +298,14 @@ func deserializeDataTransformationProfileSummaryList(d smithy.ShapeDeserializer,
 	*v = make([]DataTransformationProfileSummary, 0)
 	var vv DataTransformationProfileSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DataTransformationProfileSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = DataTransformationProfileSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -297,6 +320,14 @@ func deserializeDataTransformationProfileVersionSummaryList(d smithy.ShapeDeseri
 	*v = make([]DataTransformationProfileVersionSummary, 0)
 	var vv DataTransformationProfileVersionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DataTransformationProfileVersionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = DataTransformationProfileVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -311,6 +342,13 @@ func deserializeDefaultProfiles(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -325,6 +363,14 @@ func deserializeExportJobPropertiesList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]ExportJobProperties, 0)
 	var vv ExportJobProperties
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ExportJobProperties
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ExportJobProperties{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -339,6 +385,14 @@ func deserializeImportJobPropertiesList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]ImportJobProperties, 0)
 	var vv ImportJobProperties
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ImportJobProperties
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ImportJobProperties{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -353,6 +407,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -367,6 +428,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -381,6 +450,14 @@ func deserializeTransformationJobSummaryList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]TransformationJobSummary, 0)
 	var vv TransformationJobSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TransformationJobSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = TransformationJobSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

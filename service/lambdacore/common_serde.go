@@ -94,6 +94,13 @@ func deserializeAssociatedComputeResourceTypesList(d smithy.ShapeDeserializer, s
 	*v = make([]types.ComputeResourceType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ComputeResourceType
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -108,6 +115,13 @@ func deserializeNetworkConnectorSecurityGroupIds(d smithy.ShapeDeserializer, s *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -122,6 +136,14 @@ func deserializeNetworkConnectorsList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.NetworkConnectorSummary, 0)
 	var vv types.NetworkConnectorSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.NetworkConnectorSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.NetworkConnectorSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -136,6 +158,13 @@ func deserializeNetworkConnectorSubnetIds(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -150,6 +179,14 @@ func deserializeNetworkConnectorVersionsList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]types.NetworkConnectorVersionSummary, 0)
 	var vv types.NetworkConnectorVersionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.NetworkConnectorVersionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.NetworkConnectorVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

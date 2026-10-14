@@ -79,6 +79,14 @@ func deserializeAttachedToList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.AttachedTo, 0)
 	var vv types.AttachedTo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AttachedTo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AttachedTo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -93,6 +101,14 @@ func deserializeEvaluations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 	*v = make([]types.Evaluation, 0)
 	var vv types.Evaluation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Evaluation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Evaluation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -107,6 +123,14 @@ func deserializeMatchedPolicyList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]types.MatchedPolicy, 0)
 	var vv types.MatchedPolicy
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MatchedPolicy
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MatchedPolicy{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -121,6 +145,14 @@ func deserializeMatchedStatementList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.MatchedStatement, 0)
 	var vv types.MatchedStatement
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MatchedStatement
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.MatchedStatement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -135,6 +167,14 @@ func deserializePolicyInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.PolicyInfo, 0)
 	var vv types.PolicyInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PolicyInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.PolicyInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

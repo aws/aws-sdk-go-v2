@@ -24,6 +24,14 @@ func deserializeReportDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.ReportDefinition, 0)
 	var vv types.ReportDefinition
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ReportDefinition
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ReportDefinition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

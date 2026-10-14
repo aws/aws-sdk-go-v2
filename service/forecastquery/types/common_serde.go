@@ -23,6 +23,14 @@ func deserializeTimeSeries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Da
 	*v = make([]DataPoint, 0)
 	var vv DataPoint
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DataPoint
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = DataPoint{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

@@ -127,6 +127,46 @@ func TestCheckResponseSnapshot_CborGetItem(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CborGetLists(t *testing.T) {
+	want := &CborGetListsOutput{
+		Strings: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Integers: []int32{
+			1,
+			1,
+		},
+		Structs: []types.ListValueStruct{
+			{
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+			},
+		},
+		SparseStrings: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CborGetLists.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CborGetLists(context.Background(), &CborGetListsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CborGetLists.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CborGetMaps(t *testing.T) {
 	want := &CborGetMapsOutput{
 		Strings: map[string]string{

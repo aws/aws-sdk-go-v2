@@ -62,6 +62,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -76,6 +84,14 @@ func deserializeUsageAllocations(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]UsageAllocation, 0)
 	var vv UsageAllocation
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UsageAllocation
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = UsageAllocation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -90,6 +106,14 @@ func deserializeUsageRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]UsageRecord, 0)
 	var vv UsageRecord
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UsageRecord
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = UsageRecord{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -104,6 +128,14 @@ func deserializeUsageRecordResultList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]UsageRecordResult, 0)
 	var vv UsageRecordResult
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UsageRecordResult
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = UsageRecordResult{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

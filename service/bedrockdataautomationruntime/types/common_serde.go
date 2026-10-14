@@ -84,6 +84,14 @@ func deserializeBlueprintList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]Blueprint, 0)
 	var vv Blueprint
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Blueprint
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Blueprint{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -98,6 +106,14 @@ func deserializeOutputSegmentList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]OutputSegment, 0)
 	var vv OutputSegment
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero OutputSegment
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = OutputSegment{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -112,6 +128,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -126,6 +149,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

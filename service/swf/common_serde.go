@@ -124,6 +124,14 @@ func deserializeActivityTypeInfoList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.ActivityTypeInfo, 0)
 	var vv types.ActivityTypeInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ActivityTypeInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ActivityTypeInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -138,6 +146,14 @@ func deserializeDecisionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]types.Decision, 0)
 	var vv types.Decision
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Decision
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.Decision{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -152,6 +168,14 @@ func deserializeDomainInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.DomainInfo, 0)
 	var vv types.DomainInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DomainInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.DomainInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -166,6 +190,14 @@ func deserializeHistoryEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]types.HistoryEvent, 0)
 	var vv types.HistoryEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.HistoryEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.HistoryEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -180,6 +212,13 @@ func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -194,6 +233,14 @@ func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]types.ResourceTag, 0)
 	var vv types.ResourceTag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceTag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ResourceTag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -208,6 +255,13 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -222,6 +276,14 @@ func deserializeWorkflowExecutionInfoList(d smithy.ShapeDeserializer, s *smithy.
 	*v = make([]types.WorkflowExecutionInfo, 0)
 	var vv types.WorkflowExecutionInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.WorkflowExecutionInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.WorkflowExecutionInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -236,6 +298,14 @@ func deserializeWorkflowTypeInfoList(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.WorkflowTypeInfo, 0)
 	var vv types.WorkflowTypeInfo
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.WorkflowTypeInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.WorkflowTypeInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

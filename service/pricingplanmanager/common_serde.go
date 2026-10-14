@@ -35,6 +35,13 @@ func deserializeResourceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -49,6 +56,14 @@ func deserializeSubscriptionSummaryList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]types.SubscriptionSummary, 0)
 	var vv types.SubscriptionSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SubscriptionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.SubscriptionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

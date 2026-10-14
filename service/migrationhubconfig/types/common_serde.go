@@ -23,6 +23,14 @@ func deserializeHomeRegionControls(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]HomeRegionControl, 0)
 	var vv HomeRegionControl
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero HomeRegionControl
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = HomeRegionControl{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

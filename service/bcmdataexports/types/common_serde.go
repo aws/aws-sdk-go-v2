@@ -123,6 +123,14 @@ func deserializeColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Co
 	*v = make([]Column, 0)
 	var vv Column
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Column
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Column{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -137,6 +145,14 @@ func deserializeExecutionReferenceList(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]ExecutionReference, 0)
 	var vv ExecutionReference
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ExecutionReference
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ExecutionReference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -151,6 +167,14 @@ func deserializeExportReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]ExportReference, 0)
 	var vv ExportReference
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ExportReference
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ExportReference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -165,6 +189,13 @@ func deserializeGenericStringList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -179,6 +210,13 @@ func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -193,6 +231,14 @@ func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]ResourceTag, 0)
 	var vv ResourceTag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ResourceTag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ResourceTag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -207,6 +253,14 @@ func deserializeTableList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tab
 	*v = make([]Table, 0)
 	var vv Table
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Table
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Table{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -221,6 +275,14 @@ func deserializeTablePropertyDescriptionList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]TablePropertyDescription, 0)
 	var vv TablePropertyDescription
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TablePropertyDescription
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = TablePropertyDescription{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -235,6 +297,14 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ValidationExceptionField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

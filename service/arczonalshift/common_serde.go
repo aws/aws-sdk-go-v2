@@ -146,6 +146,13 @@ func deserializeAllowedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -160,6 +167,14 @@ func deserializeAutoshiftsInResource(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make([]types.AutoshiftInResource, 0)
 	var vv types.AutoshiftInResource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AutoshiftInResource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AutoshiftInResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -174,6 +189,14 @@ func deserializeAutoshiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]types.AutoshiftSummary, 0)
 	var vv types.AutoshiftSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AutoshiftSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.AutoshiftSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -188,6 +211,13 @@ func deserializeAvailabilityZones(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -202,6 +232,13 @@ func deserializeBlockedDates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -216,6 +253,13 @@ func deserializeBlockedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -230,6 +274,14 @@ func deserializeBlockingAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make([]types.ControlCondition, 0)
 	var vv types.ControlCondition
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ControlCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ControlCondition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -244,6 +296,14 @@ func deserializeManagedResourceSummaries(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]types.ManagedResourceSummary, 0)
 	var vv types.ManagedResourceSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ManagedResourceSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ManagedResourceSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -258,6 +318,14 @@ func deserializeOutcomeAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]types.ControlCondition, 0)
 	var vv types.ControlCondition
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ControlCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ControlCondition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -272,6 +340,14 @@ func deserializeZonalShiftsInResource(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]types.ZonalShiftInResource, 0)
 	var vv types.ZonalShiftInResource
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ZonalShiftInResource
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ZonalShiftInResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -286,6 +362,14 @@ func deserializeZonalShiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]types.ZonalShiftSummary, 0)
 	var vv types.ZonalShiftSummary
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ZonalShiftSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = types.ZonalShiftSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

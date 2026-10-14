@@ -69,6 +69,13 @@ func deserializeChatConfigurationArns(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -83,6 +90,14 @@ func deserializeCrossAccountConfigurations(d smithy.ShapeDeserializer, s *smithy
 	*v = make([]CrossAccountConfiguration, 0)
 	var vv CrossAccountConfiguration
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CrossAccountConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = CrossAccountConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -97,6 +112,14 @@ func deserializeInvestigationGroups(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]ListInvestigationGroupsModel, 0)
 	var vv ListInvestigationGroupsModel
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListInvestigationGroupsModel
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ListInvestigationGroupsModel{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -111,6 +134,13 @@ func deserializeTagKeyBoundaries(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -125,6 +155,13 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err

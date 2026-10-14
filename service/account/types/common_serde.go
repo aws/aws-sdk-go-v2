@@ -47,6 +47,14 @@ func deserializeRegionOptList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]Region, 0)
 	var vv Region
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Region
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Region{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -61,6 +69,13 @@ func deserializeRegionOptStatusList(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make([]RegionOptStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RegionOptStatus
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -75,6 +90,14 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ValidationExceptionField{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

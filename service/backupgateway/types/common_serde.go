@@ -123,6 +123,14 @@ func deserializeBandwidthRateLimitIntervals(d smithy.ShapeDeserializer, s *smith
 	*v = make([]BandwidthRateLimitInterval, 0)
 	var vv BandwidthRateLimitInterval
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BandwidthRateLimitInterval
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = BandwidthRateLimitInterval{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -137,6 +145,13 @@ func deserializeDaysOfWeek(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]in
 	*v = make([]int32, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
 			return err
@@ -151,6 +166,14 @@ func deserializeGateways(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Gate
 	*v = make([]Gateway, 0)
 	var vv Gateway
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Gateway
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Gateway{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -165,6 +188,14 @@ func deserializeHypervisors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]H
 	*v = make([]Hypervisor, 0)
 	var vv Hypervisor
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Hypervisor
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Hypervisor{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -179,6 +210,13 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -193,6 +231,14 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) err
 	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -207,6 +253,14 @@ func deserializeVirtualMachines(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]VirtualMachine, 0)
 	var vv VirtualMachine
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero VirtualMachine
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = VirtualMachine{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -221,6 +275,14 @@ func deserializeVmwareTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Vm
 	*v = make([]VmwareTag, 0)
 	var vv VmwareTag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero VmwareTag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = VmwareTag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -235,6 +297,14 @@ func deserializeVmwareToAwsTagMappings(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make([]VmwareToAwsTagMapping, 0)
 	var vv VmwareToAwsTagMapping
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero VmwareToAwsTagMapping
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = VmwareToAwsTagMapping{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

@@ -75,6 +75,14 @@ func deserializeDefinitions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]D
 	*v = make([]Definition, 0)
 	var vv Definition
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Definition
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Definition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -89,6 +97,14 @@ func deserializeDeploymentModels(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]DeploymentModel, 0)
 	var vv DeploymentModel
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DeploymentModel
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = DeploymentModel{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -103,6 +119,14 @@ func deserializeEdgeDeployments(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make([]EdgeDeployment, 0)
 	var vv EdgeDeployment
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EdgeDeployment
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = EdgeDeployment{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -117,6 +141,14 @@ func deserializeEdgeMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]E
 	*v = make([]EdgeMetric, 0)
 	var vv EdgeMetric
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EdgeMetric
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = EdgeMetric{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -131,6 +163,14 @@ func deserializeModels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Model)
 	*v = make([]Model, 0)
 	var vv Model
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Model
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Model{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

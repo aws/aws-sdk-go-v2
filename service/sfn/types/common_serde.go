@@ -175,6 +175,14 @@ func deserializeActivityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	*v = make([]ActivityListItem, 0)
 	var vv ActivityListItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ActivityListItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ActivityListItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -189,6 +197,14 @@ func deserializeExecutionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	*v = make([]ExecutionListItem, 0)
 	var vv ExecutionListItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ExecutionListItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ExecutionListItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -203,6 +219,14 @@ func deserializeHistoryEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]HistoryEvent, 0)
 	var vv HistoryEvent
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero HistoryEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = HistoryEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -217,6 +241,14 @@ func deserializeLogDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make([]LogDestination, 0)
 	var vv LogDestination
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero LogDestination
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = LogDestination{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -231,6 +263,14 @@ func deserializeMapRunList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ma
 	*v = make([]MapRunListItem, 0)
 	var vv MapRunListItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MapRunListItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = MapRunListItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -245,6 +285,14 @@ func deserializeRoutingConfigurationList(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make([]RoutingConfigurationListItem, 0)
 	var vv RoutingConfigurationListItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RoutingConfigurationListItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = RoutingConfigurationListItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -259,6 +307,14 @@ func deserializeStateMachineAliasList(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make([]StateMachineAliasListItem, 0)
 	var vv StateMachineAliasListItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero StateMachineAliasListItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = StateMachineAliasListItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -273,6 +329,14 @@ func deserializeStateMachineList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]StateMachineListItem, 0)
 	var vv StateMachineListItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero StateMachineListItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = StateMachineListItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -287,6 +351,14 @@ func deserializeStateMachineVersionList(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make([]StateMachineVersionListItem, 0)
 	var vv StateMachineVersionListItem
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero StateMachineVersionListItem
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = StateMachineVersionListItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -301,6 +373,13 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -315,6 +394,14 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -329,6 +416,14 @@ func deserializeValidateStateMachineDefinitionDiagnosticList(d smithy.ShapeDeser
 	*v = make([]ValidateStateMachineDefinitionDiagnostic, 0)
 	var vv ValidateStateMachineDefinitionDiagnostic
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ValidateStateMachineDefinitionDiagnostic
+			*v = append(*v, zero)
+			return nil
+		}
+
 		vv = ValidateStateMachineDefinitionDiagnostic{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -343,6 +438,13 @@ func deserializeVariableNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
