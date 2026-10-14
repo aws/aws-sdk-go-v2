@@ -19,37 +19,70 @@ import (
 )
 
 func TestConcurrentReaderReadUsesSliceLenForBounds(t *testing.T) {
-	tests := map[string]func(*concurrentReader){
-		"buffered chunk": func(r *concurrentReader) {
-			r.capacity = 2
-			r.receiveCount = 2
-			r.buf[1] = &outChunk{
-				body:   bytes.NewReader([]byte("chunk")),
-				index:  1,
-				length: int64(len("chunk")),
-			}
+	tests := map[string]struct {
+		readType types.GetObjectType
+		readerFn func(*concurrentReader)
+	}{
+		"part read buffered chunk": {
+			readType: types.GetObjectParts,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 2
+				r.buf[1] = &outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
 		},
-		"received chunk": func(r *concurrentReader) {
-			r.capacity = 2
-			r.receiveCount = 1
-			r.ch <- outChunk{
-				body:   bytes.NewReader([]byte("chunk")),
-				index:  1,
-				length: int64(len("chunk")),
-			}
+		"part read received chunk": {
+			readType: types.GetObjectParts,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 1
+				r.ch <- outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
+		},
+		"range read buffered chunk": {
+			readType: types.GetObjectRanges,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 2
+				r.buf[1] = &outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
+		},
+		"range read received chunk": {
+			readType: types.GetObjectRanges,
+			readerFn: func(r *concurrentReader) {
+				r.capacity = 2
+				r.receiveCount = 1
+				r.ch <- outChunk{
+					body:   bytes.NewReader([]byte("chunk")),
+					index:  1,
+					length: int64(len("chunk")),
+				}
+			},
 		},
 	}
 
-	for name, setup := range tests {
+	for name, c := range tests {
 		t.Run(name, func(t *testing.T) {
 			r := &concurrentReader{
 				partSize:   8,
 				partsCount: 2,
 				buf:        make(map[int32]*outChunk),
 				ch:         make(chan outChunk, 1),
-				getType:    types.GetObjectRanges,
+				getType:    c.readType,
 			}
-			setup(r)
+			c.readerFn(r)
 
 			p := make([]byte, 4, 9)
 			n, err := r.read(p)
