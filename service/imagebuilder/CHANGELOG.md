@@ -1,3 +1,7 @@
+# v1.67.0 (2026-10-14)
+
+* **Feature**: This release adds parentInstance to infrastructure configurations, so builds can use an already-running instance from an Amazon EC2 Auto Scaling group. It also adds terminateInstanceOnCompletion, which keeps build and test instances running after image creation ends.
+
 # v1.66.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

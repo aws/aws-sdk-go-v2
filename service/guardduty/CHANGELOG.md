@@ -1,3 +1,7 @@
+# v1.100.0 (2026-10-14)
+
+* **Feature**: Releasing support for Custom Detection Rule Runtime Monitoring
+
 # v1.99.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

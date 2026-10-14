@@ -1,8 +1,0 @@
-{
-    "id": "949d826c-e8b2-4114-9211-8d28e6c4a779",
-    "type": "feature",
-    "description": "Releasing support for Custom Detection Rule Runtime Monitoring",
-    "modules": [
-        "service/guardduty"
-    ]
-}

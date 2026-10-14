@@ -1,3 +1,7 @@
+# v1.86.0 (2026-10-14)
+
+* **Feature**: AWS Transfer Family now lets you store SFTP server host keys in AWS Secrets Manager in your own AWS account. This gives you greater control over your server identity and helps simplify server migrations and failover.
+
 # v1.85.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

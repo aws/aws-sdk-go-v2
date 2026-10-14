@@ -1,3 +1,7 @@
+# v1.62.0 (2026-10-14)
+
+* **Feature**: With dual-stack enabled, all requests now resolve to the endpoint in the partition's primary Region (for example, organizations.us-east-1.api.aws) and are signed for that Region. Previously, requests from other Regions resolved to a nonexistent endpoint. No API changes.
+
 # v1.61.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.
