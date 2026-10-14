@@ -5588,6 +5588,16 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#DetectionRuleAgentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9]+(\\.[0-9]+){1,3}$"
+            }
+        },
         "com.amazonaws.guardduty#DetectionRuleArn": {
             "type": "string",
             "traits": {
@@ -5629,6 +5639,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CloudTrailManagementEvent"
                     }
+                },
+                "RUNTIME_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RuntimeMonitoring"
+                    }
                 }
             }
         },
@@ -5639,6 +5655,51 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleEc2Requirements": {
+            "type": "structure",
+            "members": {
+                "MinAgentVersion": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum GuardDuty agent version required to run the rule on Amazon EC2.</p>",
+                        "smithy.api#jsonName": "minAgentVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requirements for running a Runtime Monitoring custom detection rule on Amazon EC2.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleEcsFargateRequirements": {
+            "type": "structure",
+            "members": {
+                "MinAgentVersion": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum GuardDuty agent version required to run the rule on Amazon ECS with the Fargate launch type.</p>",
+                        "smithy.api#jsonName": "minAgentVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requirements for running a Runtime Monitoring custom detection rule on Amazon ECS with the Fargate launch type.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleEksRequirements": {
+            "type": "structure",
+            "members": {
+                "MinAgentVersion": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum GuardDuty agent version required to run the rule on Amazon EKS.</p>",
+                        "smithy.api#jsonName": "minAgentVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requirements for running a Runtime Monitoring custom detection rule on Amazon EKS.</p>"
             }
         },
         "com.amazonaws.guardduty#DetectionRuleFilter": {
@@ -5890,6 +5951,50 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummary"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleRuntimeMonitoringDetails": {
+            "type": "structure",
+            "members": {
+                "Platforms": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleRuntimePlatforms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platforms on which the rule can run. The presence of a platform member indicates that the rule is supported on that platform; the absence of a member indicates that the rule cannot run on that platform at any agent version.</p>",
+                        "smithy.api#jsonName": "platforms"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains Runtime Monitoring-specific details for a custom detection rule.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleRuntimePlatforms": {
+            "type": "structure",
+            "members": {
+                "Eks": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleEksRequirements",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requirements for running the rule on Amazon EKS.</p>",
+                        "smithy.api#jsonName": "eks"
+                    }
+                },
+                "Ec2": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleEc2Requirements",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requirements for running the rule on Amazon EC2.</p>",
+                        "smithy.api#jsonName": "ec2"
+                    }
+                },
+                "EcsFargate": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleEcsFargateRequirements",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requirements for running the rule on Amazon ECS with the Fargate launch type.</p>",
+                        "smithy.api#jsonName": "ecsFargate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The platforms on which a Runtime Monitoring custom detection rule can run. A member's presence is the support statement: when present, the rule runs on that platform and <code>minAgentVersion</code> is the minimum GuardDuty agent version required there. When absent, the rule cannot run on that platform at any agent version.</p>"
             }
         },
         "com.amazonaws.guardduty#DetectionRuleServiceName": {
@@ -7800,6 +7905,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Resource Name (ARN) associated with the attack sequence finding.</p>",
                         "smithy.api#jsonName": "associatedAttackSequenceArn"
+                    }
+                },
+                "CustomDetectionRuleName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the custom detection rule that generated this finding.</p>",
+                        "smithy.api#jsonName": "customDetectionRuleName"
                     }
                 }
             },
@@ -19213,6 +19326,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The schema version used by the rule definition.</p>",
                         "smithy.api#jsonName": "schema"
+                    }
+                },
+                "RuntimeMonitoringDetails": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleRuntimeMonitoringDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime Monitoring-specific details for the rule, including the platforms on which the rule can run and the minimum GuardDuty agent version required on each.</p>",
+                        "smithy.api#jsonName": "runtimeMonitoringDetails"
                     }
                 },
                 "CreatedAt": {

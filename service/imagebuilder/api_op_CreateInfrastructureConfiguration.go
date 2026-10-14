@@ -93,6 +93,17 @@ type CreateInfrastructureConfigurationInput struct {
 	// the specified bucket under the key prefix.
 	Logging *types.Logging
 
+	// The Amazon EC2 Auto Scaling group that Image Builder takes the build instance
+	// from, instead of launching a new instance. This applies only to the build phase.
+	//
+	// To use this feature, the execution role for the build must have permissions to
+	// describe the Auto Scaling group, tag the instance while it's still in the group,
+	// and detach it from the group. For more information, see [Build on an instance from an Auto Scaling group]in the EC2 Image
+	// Builder User Guide.
+	//
+	// [Build on an instance from an Auto Scaling group]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html
+	ParentInstance *types.ParentInstanceConfiguration
+
 	// The instance placement settings that define where the build and test instances
 	// that Image Builder launches during image creation run. These settings don't
 	// affect instances that you launch from the output image.
@@ -126,6 +137,11 @@ type CreateInfrastructureConfigurationInput struct {
 	// The metadata tags to assign to the infrastructure configuration resource that
 	// Image Builder creates as output. Tags are formatted as key value pairs.
 	Tags map[string]string
+
+	// Specifies whether Image Builder terminates build and test instances when image
+	// creation ends without a failure (success, cancellation, or expiration). Defaults
+	// to true .
+	TerminateInstanceOnCompletion *bool
 
 	// Specifies whether to terminate the instance on failure. Set to false if you
 	// want Image Builder to retain the instance used to configure your AMI if the
@@ -171,6 +187,11 @@ func (v *CreateInfrastructureConfigurationInput) SerializeMembers(s smithy.Shape
 	if v.Name != nil {
 		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_name, *v.Name)
 	}
+	if v.ParentInstance != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_parentInstance)
+		v.ParentInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Placement != nil {
 		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_placement)
 		v.Placement.SerializeMembers(s)
@@ -185,6 +206,9 @@ func (v *CreateInfrastructureConfigurationInput) SerializeMembers(s smithy.Shape
 		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_subnetId, *v.SubnetId)
 	}
 	serializeTagMap(s, schemas.CreateInfrastructureConfigurationRequest_tags, v.Tags)
+	if v.TerminateInstanceOnCompletion != nil {
+		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_terminateInstanceOnCompletion, *v.TerminateInstanceOnCompletion)
+	}
 	if v.TerminateInstanceOnFailure != nil {
 		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_terminateInstanceOnFailure, *v.TerminateInstanceOnFailure)
 	}

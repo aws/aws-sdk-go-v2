@@ -564,12 +564,12 @@ func (e *Encoder) encodeMap(v reflect.Value, fieldTag tag) (types.AttributeValue
 		// Both OmitEmpty and OmitEmptyElem are set to fieldTag.OmitEmptyElem here.
 		// This ensures that omitempty logic is applied both to the map element itself (OmitEmpty)
 		// and recursively to any nested elements (OmitEmptyElem), so that omitempty is respected
-		// at all levels of nested maps or slices. This is necessary for correct DynamoDB marshaling
+		// at all levels of nested maps or slices. This is necessary for correct DynamoDBStreams marshaling
 		// when omitemptyelem is specified on the parent map or slice field.
 		//
 		// Note: For pointer types (including double pointers), omitempty only omits the field if the outer pointer is nil.
 		// If the outer pointer is non-nil but the inner pointer is nil (e.g., **int where *int is nil),
-		// omitempty does not omit the field; instead, the encoder emits a DynamoDB NULL attribute for that field.
+		// omitempty does not omit the field; instead, the encoder emits a DynamoDBStreams NULL attribute for that field.
 		elem, err := e.encode(elemVal, tag{
 			OmitEmpty:     fieldTag.OmitEmptyElem,
 			OmitEmptyElem: fieldTag.OmitEmptyElem,

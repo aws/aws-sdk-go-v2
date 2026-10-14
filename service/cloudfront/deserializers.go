@@ -63222,6 +63222,19 @@ func awsRestxml_deserializeDocumentVpcOriginEndpointConfig(v **types.VpcOriginEn
 				sv.HTTPSPort = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("IpAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = types.VpcIpAddressType(xtv)
+			}
+
 		case strings.EqualFold("Name", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -63462,6 +63475,19 @@ func awsRestxml_deserializeDocumentVpcOriginSummary(v **types.VpcOriginSummary, 
 			{
 				xtv := string(val)
 				sv.Id = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IpAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = types.VpcIpAddressType(xtv)
 			}
 
 		case strings.EqualFold("LastModifiedTime", t.Name.Local):

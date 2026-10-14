@@ -1039,6 +1039,16 @@ type ChainedInvokeOptions struct {
 	// The tenant identifier for the chained invocation.
 	TenantId *string
 
+	// The optional X-Ray trace header to use when starting the chained invocation. If
+	// you omit this value, the child invocation inherits the parent durable
+	// execution's trace header.
+	//
+	// Specify this value on the START update for the chained invocation operation.
+	// For more information about the header format, see [Tracing header]in the X-Ray Developer Guide.
+	//
+	// [Tracing header]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
+	XAmznTraceId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1055,6 +1065,9 @@ func (v *ChainedInvokeOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TenantId != nil {
 		s.WriteString(schemas.ChainedInvokeOptions_TenantId, *v.TenantId)
 	}
+	if v.XAmznTraceId != nil {
+		s.WriteString(schemas.ChainedInvokeOptions_XAmznTraceId, *v.XAmznTraceId)
+	}
 }
 func (v *ChainedInvokeOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChainedInvokeOptions, func(s *smithy.Schema) error {
@@ -1065,6 +1078,9 @@ func (v *ChainedInvokeOptions) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ChainedInvokeOptions_TenantId:
 			v.TenantId = new(string)
 			return d.ReadString(schemas.ChainedInvokeOptions_TenantId, v.TenantId)
+		case schemas.ChainedInvokeOptions_XAmznTraceId:
+			v.XAmznTraceId = new(string)
+			return d.ReadString(schemas.ChainedInvokeOptions_XAmznTraceId, v.XAmznTraceId)
 		}
 		return nil
 	})

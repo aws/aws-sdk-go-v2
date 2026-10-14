@@ -426,7 +426,8 @@ func TestCheckResponseSnapshot_CreateServer(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1437,6 +1438,8 @@ func TestCheckResponseSnapshot_DescribeHostKey(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+			SecretId:    ptr.String("__SecretId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeHostKey.response")
@@ -2188,6 +2191,8 @@ func TestCheckResponseSnapshot_ImportHostKey(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2517,6 +2522,8 @@ func TestCheckResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 			{
 				Arn:          ptr.String("__Arn__"),
@@ -2525,6 +2532,8 @@ func TestCheckResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 		},
 	}
@@ -3313,6 +3322,8 @@ func TestCheckResponseSnapshot_UpdateHostKey(t *testing.T) {
 		ServerId:    ptr.String("__ServerId__"),
 		HostKeyId:   ptr.String("__HostKeyId__"),
 		Description: ptr.String("__Description__"),
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3685,7 +3696,8 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

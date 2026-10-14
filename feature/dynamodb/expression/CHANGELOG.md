@@ -1,3 +1,8 @@
+# v1.10.0 (2026-10-14)
+
+* **Feature**: Support multi-attribute key conditions in `expression`. `KeyAnd` now accepts two or more conditions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.11 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

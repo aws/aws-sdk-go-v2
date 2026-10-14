@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Returns a shard iterator. A shard iterator provides information about how to
@@ -55,6 +56,9 @@ type GetShardIteratorInput struct {
 	//   - LATEST - Start reading just after the most recent stream record in the
 	//   shard, so that you always read the most recent data in the shard.
 	//
+	//   - AT_TIMESTAMP - Start reading from the position denoted by a specific
+	//   timestamp, provided in the parameter Timestamp .
+	//
 	// This member is required.
 	ShardIteratorType types.ShardIteratorType
 
@@ -65,6 +69,16 @@ type GetShardIteratorInput struct {
 
 	// The sequence number of a stream record in the shard from which to start reading.
 	SequenceNumber *string
+
+	// The timestamp of the stream record from which to start reading. Used with shard
+	// iterator type AT_TIMESTAMP . A timestamp is the Unix epoch date with precision
+	// in milliseconds. For example, 1791316726.480 . The iterator points to the first
+	// stream record whose ApproximateCreationDateTime is at or after the specified
+	// timestamp. If no record with that exact timestamp exists, the iterator points to
+	// the next (later) record. If the timestamp is older than the current trim
+	// horizon, the iterator points to the oldest untrimmed stream record ( TRIM_HORIZON
+	// ). If the timestamp is in the future, the request returns a ValidationException .
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -87,6 +101,9 @@ func (v *GetShardIteratorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.StreamArn != nil {
 		s.WriteString(schemas.GetShardIteratorInput_StreamArn, *v.StreamArn)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.GetShardIteratorInput_Timestamp, *v.Timestamp)
 	}
 }
 

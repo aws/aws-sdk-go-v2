@@ -1332,6 +1332,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href=\"https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html\">EndpointDetails</a> for the server.</p> </note>"
                     }
+                },
+                "HostKeyStorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3883,6 +3889,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for host keys.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>).</p>"
+                    }
+                },
+                "SecretId": {
+                    "target": "com.amazonaws.transfer#SecretId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret that stores the host key material, when <code>StorageType</code> is <code>SECRETS_MANAGER</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5056,6 +5074,23 @@
                 "smithy.api#pattern": "^hostkey-[0-9a-f]{17}$"
             }
         },
+        "com.amazonaws.transfer#HostKeyStorageType": {
+            "type": "enum",
+            "members": {
+                "SERVICE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_MANAGED"
+                    }
+                },
+                "SECRETS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECRETS_MANAGER"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#HostKeyType": {
             "type": "string"
         },
@@ -5333,6 +5368,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for host keys.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>"
+                    }
+                },
+                "KmsKey": {
+                    "target": "com.amazonaws.transfer#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5535,6 +5582,16 @@
                         "smithy.api#enumValue": "DUALSTACK"
                     }
                 }
+            }
+        },
+        "com.amazonaws.transfer#KmsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:\\S+$"
             }
         },
         "com.amazonaws.transfer#ListAccesses": {
@@ -6972,6 +7029,18 @@
                     "target": "com.amazonaws.transfer#DateImported",
                     "traits": {
                         "smithy.api#documentation": "<p>The date on which the host key was added to the server.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>).</p>"
+                    }
+                },
+                "SecretId": {
+                    "target": "com.amazonaws.transfer#SecretId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret that stores the host key material, when <code>StorageType</code> is <code>SECRETS_MANAGER</code>.</p>"
                     }
                 }
             },
@@ -11309,7 +11378,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the description for the host key that's specified by the <code>ServerId</code> and <code>HostKeyId</code> parameters.</p>"
+                "smithy.api#documentation": "<p>Updates the host key that's specified by the <code>ServerId</code> and <code>HostKeyId</code> parameters. You can update the description of the host key, change where the host key is stored by specifying the <code>StorageType</code>, and specify the KMS key used to encrypt the host key when it's stored in Secrets Manager.</p> <p>To change a host key's storage type from <code>SERVICE_MANAGED</code> to <code>SECRETS_MANAGER</code>, you must have the <code>transfer:ExportHostKey</code> permission. <code>transfer:ExportHostKey</code> is a permission-only action that has no corresponding API operation.</p>"
             }
         },
         "com.amazonaws.transfer#UpdateHostKeyRequest": {
@@ -11332,8 +11401,19 @@
                 "Description": {
                     "target": "com.amazonaws.transfer#HostKeyDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>An updated description for the host key.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An updated description for the host key.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>"
+                    }
+                },
+                "KmsKey": {
+                    "target": "com.amazonaws.transfer#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>"
                     }
                 }
             },

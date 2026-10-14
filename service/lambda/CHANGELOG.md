@@ -1,3 +1,7 @@
+# v1.113.0 (2026-10-14)
+
+* **Feature**: AWS Lambda now supports an optional X-Ray trace header for chained invocations in durable executions, enabling child invocations to be linked to the initiating span.
+
 # v1.112.2 (2026-10-12)
 
 * **Documentation**: Doc updates to reposition Lambda Functions as Lambda Event Functions

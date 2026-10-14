@@ -1,3 +1,7 @@
+# v1.75.0 (2026-10-14)
+
+* **Feature**: This release adds a new "IpAddressType" field to "VPCOriginEndpointConfig", allowing customers to specify whether their VPC origin accepts IPv4-only or dualstack connections.
+
 # v1.74.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

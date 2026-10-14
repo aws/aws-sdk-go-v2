@@ -43,6 +43,19 @@ type ImportHostKeyInput struct {
 	// The text description that identifies this host key.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets
+	// Manager secret that stores the host key. If you specify a customer managed key,
+	// its key policy must allow the AWSServiceRoleForTransfer service-linked role to
+	// decrypt the secret. If you don't specify a value, Transfer Family uses the
+	// Amazon Web Services managed key for Secrets Manager.
+	KmsKey *string
+
+	// Specifies whether the host key is stored by Transfer Family ( SERVICE_MANAGED )
+	// or in Secrets Manager ( SECRETS_MANAGER ). When you specify SECRETS_MANAGER ,
+	// Transfer Family stores the private host key material in an Secrets Manager
+	// secret.
+	StorageType types.HostKeyStorageType
+
 	// Key-value pairs that can be used to group and search for host keys.
 	Tags []types.Tag
 
@@ -62,8 +75,14 @@ func (v *ImportHostKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostKeyBody != nil {
 		s.WriteString(schemas.ImportHostKeyRequest_HostKeyBody, *v.HostKeyBody)
 	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.ImportHostKeyRequest_KmsKey, *v.KmsKey)
+	}
 	if v.ServerId != nil {
 		s.WriteString(schemas.ImportHostKeyRequest_ServerId, *v.ServerId)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.ImportHostKeyRequest_StorageType, string(v.StorageType))
 	}
 	serializeTags(s, schemas.ImportHostKeyRequest_Tags, v.Tags)
 }

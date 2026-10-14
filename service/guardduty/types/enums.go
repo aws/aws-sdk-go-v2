@@ -444,6 +444,7 @@ type DetectionRuleDataSource string
 // Enum values for DetectionRuleDataSource
 const (
 	DetectionRuleDataSourceCloudtrailManagementEvent DetectionRuleDataSource = "CloudTrailManagementEvent"
+	DetectionRuleDataSourceRuntimeMonitoring         DetectionRuleDataSource = "RuntimeMonitoring"
 )
 
 // Values returns all known values for DetectionRuleDataSource. Note that this can
@@ -453,6 +454,7 @@ const (
 func (DetectionRuleDataSource) Values() []DetectionRuleDataSource {
 	return []DetectionRuleDataSource{
 		"CloudTrailManagementEvent",
+		"RuntimeMonitoring",
 	}
 }
 

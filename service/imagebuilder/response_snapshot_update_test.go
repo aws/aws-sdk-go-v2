@@ -1502,6 +1502,13 @@ func TestUpdateResponseSnapshot_GetImage(t *testing.T) {
 					HostId:               ptr.String("__HostId__"),
 					HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
 				},
+				TerminateInstanceOnCompletion: ptr.Bool(true),
+				ParentInstance: &types.ParentInstanceConfiguration{
+					AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+						Name:                       ptr.String("__Name__"),
+						CapacityWaitTimeoutSeconds: ptr.Int32(1),
+					},
+				},
 			},
 			DistributionConfiguration: &types.DistributionConfiguration{
 				Arn:         ptr.String("__Arn__"),
@@ -2280,6 +2287,13 @@ func TestUpdateResponseSnapshot_GetInfrastructureConfiguration(t *testing.T) {
 				Tenancy:              types.TenancyType("default"),
 				HostId:               ptr.String("__HostId__"),
 				HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+			},
+			TerminateInstanceOnCompletion: ptr.Bool(true),
+			ParentInstance: &types.ParentInstanceConfiguration{
+				AutoScalingGroup: &types.AutoScalingGroupConfiguration{
+					Name:                       ptr.String("__Name__"),
+					CapacityWaitTimeoutSeconds: ptr.Int32(1),
+				},
 			},
 		},
 	}

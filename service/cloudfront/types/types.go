@@ -7026,6 +7026,10 @@ type VpcOriginEndpointConfig struct {
 	// This member is required.
 	OriginProtocolPolicy OriginProtocolPolicy
 
+	// The IP address type of the CloudFront VPC origin endpoint configuration. Valid
+	// values are ipv4 and dualstack . IPv6-only is not supported for VPC origins.
+	IpAddressType VpcIpAddressType
+
 	// A complex type that contains information about the SSL/TLS protocols that
 	// CloudFront can use when establishing an HTTPS connection with your origin.
 	OriginSslProtocols *OriginSslProtocols
@@ -7107,6 +7111,10 @@ type VpcOriginSummary struct {
 
 	// The account ID of the Amazon Web Services account that owns the VPC origin.
 	AccountId *string
+
+	// The IP address type of the CloudFront VPC origin. Valid values are ipv4 and
+	// dualstack . IPv6-only is not supported for VPC origins.
+	IpAddressType VpcIpAddressType
 
 	noSmithyDocumentSerde
 }

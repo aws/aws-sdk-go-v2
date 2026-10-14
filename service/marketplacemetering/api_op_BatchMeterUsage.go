@@ -10,6 +10,16 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// The Amazon Web Services Marketplace AI Metering Agent Skill (
+// aws-marketplace-metering ) helps an AI coding agent integrate your SaaS
+// product's usage reporting with the BatchMeterUsage API. The skill is a curated
+// package of instructions and reference material that guides your AI coding agent
+// through building, deploying, and testing the metering integration. To get the
+// skill on demand without checking it out locally, install the [Amazon Web Services MCP Server]in your coding
+// agent; the agent then discovers and loads the skill at runtime. The skill source
+// is also available on [GitHub]. For more information, see [Get started with the Amazon Web Services Marketplace AI Metering Agent Skill] on the Amazon Web Services
+// Marketplace blog.
+//
 // Amazon Web Services Marketplace is introducing Concurrent Agreements, enabling
 // buyers to make multiple purchases per Amazon Web Services account. Starting June
 // 1, 2026, new SaaS products must use CustomerAWSAccountId (instead of
@@ -60,10 +70,13 @@ import (
 //
 // [here]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
 // [BatchMeterUsage code example with LicenseArn]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
+// [GitHub]: https://github.com/aws/agent-toolkit-for-aws/blob/main/skills/specialized-skills/aws-marketplace-skills/aws-marketplace-metering
 // [Vendor-metered tagging]: https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging
+// [Amazon Web Services MCP Server]: https://docs.aws.amazon.com/agent-toolkit/latest/userguide/mcp-server.html
 // [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
 // [BatchMeterUsage with usage allocation tagging code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging
 // [BatchMeterUsage Region support]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
+// [Get started with the Amazon Web Services Marketplace AI Metering Agent Skill]: https://aws.amazon.com/blogs/awsmarketplace/build-aws-marketplace-saas-metering-with-the-metering-agent-skill/
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
 	if params == nil {
 		params = &BatchMeterUsageInput{}

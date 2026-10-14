@@ -279,6 +279,7 @@ func TestCheckResponseSnapshot_GetShardIterator(t *testing.T) {
 		ShardId:           ptr.String("__ShardId__"),
 		ShardIteratorType: types.ShardIteratorType("TRIM_HORIZON"),
 		SequenceNumber:    ptr.String("__SequenceNumber__"),
+		Timestamp:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	})
 	if err != nil {
 		t.Fatal(err)

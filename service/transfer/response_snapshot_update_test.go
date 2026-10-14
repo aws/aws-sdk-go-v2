@@ -954,6 +954,8 @@ func TestUpdateResponseSnapshot_DescribeHostKey(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
+			StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+			SecretId:    ptr.String("__SecretId__"),
 		},
 	}
 	proto := awsjson.New11(schemas.TransferService)
@@ -2008,6 +2010,8 @@ func TestUpdateResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 			{
 				Arn:          ptr.String("__Arn__"),
@@ -2016,6 +2020,8 @@ func TestUpdateResponseSnapshot_ListHostKeys(t *testing.T) {
 				Description:  ptr.String("__Description__"),
 				Type:         ptr.String("__Type__"),
 				DateImported: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageType:  types.HostKeyStorageType("SERVICE_MANAGED"),
+				SecretId:     ptr.String("__SecretId__"),
 			},
 		},
 	}

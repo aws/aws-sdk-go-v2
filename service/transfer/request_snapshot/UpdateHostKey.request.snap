@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TransferService.UpdateHostKey
 
-{"Description":"__Description__","HostKeyId":"__HostKeyId__","ServerId":"__ServerId__"}
+{"Description":"__Description__","HostKeyId":"__HostKeyId__","KmsKey":"__KmsKey__","ServerId":"__ServerId__","StorageType":"SERVICE_MANAGED"}

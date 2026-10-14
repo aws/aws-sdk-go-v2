@@ -529,7 +529,8 @@ func TestCheckRequestSnapshot_CreateServer(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1699,6 +1700,8 @@ func TestCheckRequestSnapshot_ImportHostKey(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2696,6 +2699,8 @@ func TestCheckRequestSnapshot_UpdateHostKey(t *testing.T) {
 		ServerId:    ptr.String("__ServerId__"),
 		HostKeyId:   ptr.String("__HostKeyId__"),
 		Description: ptr.String("__Description__"),
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3314,7 +3319,8 @@ func TestUpdateRequestSnapshot_CreateServer(t *testing.T) {
 		S3StorageOptions: &types.S3StorageOptions{
 			DirectoryListingOptimization: types.DirectoryListingOptimization("ENABLED"),
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:      types.IpAddressType("IPV4"),
+		HostKeyStorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4484,6 +4490,8 @@ func TestUpdateRequestSnapshot_ImportHostKey(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5481,6 +5489,8 @@ func TestUpdateRequestSnapshot_UpdateHostKey(t *testing.T) {
 		ServerId:    ptr.String("__ServerId__"),
 		HostKeyId:   ptr.String("__HostKeyId__"),
 		Description: ptr.String("__Description__"),
+		StorageType: types.HostKeyStorageType("SERVICE_MANAGED"),
+		KmsKey:      ptr.String("__KmsKey__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

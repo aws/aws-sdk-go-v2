@@ -1,3 +1,36 @@
+# Release (2026-10-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.21.12](feature/dynamodb/attributevalue/CHANGELOG.md#v12112-2026-10-14)
+  * **Bug Fix**: attributevalue marshal to AttributeValueMemberNULL with double pointer when outer pointer is not nil
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression`: [v1.10.0](feature/dynamodb/expression/CHANGELOG.md#v1100-2026-10-14)
+  * **Feature**: Support multi-attribute key conditions in `expression`. `KeyAnd` now accepts two or more conditions.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.20.12](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v12012-2026-10-14)
+  * **Bug Fix**: attributevalue marshal to AttributeValueMemberNULL with double pointer when outer pointer is not nil
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.22.0](service/arcregionswitch/CHANGELOG.md#v1220-2026-10-14)
+  * **Feature**: Features - Adds support for an optional payload to invoke the Lambda function with as part of the Custom action Lambda execution block
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.75.0](service/cloudfront/CHANGELOG.md#v1750-2026-10-14)
+  * **Feature**: This release adds a new "IpAddressType" field to "VPCOriginEndpointConfig", allowing customers to specify whether their VPC origin accepts IPv4-only or dualstack connections.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.46.0](service/dynamodbstreams/CHANGELOG.md#v1460-2026-10-14)
+  * **Feature**: Add support for a new iterator type (AT TIMESTAMP) for DynamoDB Streams GetShardIterator API that allows reading from a specific point in time from the stream.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.339.0](service/ec2/CHANGELOG.md#v13390-2026-10-14)
+  * **Feature**: Adds T8i instance sizes to the InstanceType enum. T8i instances are low-cost burstable instances powered by custom sixth generation Intel Xeon 6 processors, available exclusively on AWS, and built on the latest sixth generation AWS Nitro cards
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.100.0](service/guardduty/CHANGELOG.md#v11000-2026-10-14)
+  * **Feature**: Releasing support for Custom Detection Rule Runtime Monitoring
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.67.0](service/imagebuilder/CHANGELOG.md#v1670-2026-10-14)
+  * **Feature**: This release adds parentInstance to infrastructure configurations, so builds can use an already-running instance from an Amazon EC2 Auto Scaling group. It also adds terminateInstanceOnCompletion, which keeps build and test instances running after image creation ends.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.113.0](service/lambda/CHANGELOG.md#v11130-2026-10-14)
+  * **Feature**: AWS Lambda now supports an optional X-Ray trace header for chained invocations in durable executions, enabling child invocations to be linked to the initiating span.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.46.2](service/marketplacemetering/CHANGELOG.md#v1462-2026-10-14)
+  * **Documentation**: Documentation update - added a Get started pointer to the AWS Marketplace AI Metering Agent Skill in the BatchMeterUsage API reference. No API or behavior change.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.62.0](service/organizations/CHANGELOG.md#v1620-2026-10-14)
+  * **Feature**: With dual-stack enabled, all requests now resolve to the endpoint in the partition's primary Region (for example, organizations.us-east-1.api.aws) and are signed for that Region. Previously, requests from other Regions resolved to a nonexistent endpoint. No API changes.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.86.0](service/transfer/CHANGELOG.md#v1860-2026-10-14)
+  * **Feature**: AWS Transfer Family now lets you store SFTP server host keys in AWS Secrets Manager in your own AWS account. This gives you greater control over your server identity and helps simplify server migrations and failover.
+
 # Release (2026-10-13)
 
 ## Module Highlights

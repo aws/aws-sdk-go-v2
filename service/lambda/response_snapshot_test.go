@@ -361,6 +361,7 @@ func TestCheckResponseSnapshot_CheckpointDurableExecution(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 			{
@@ -396,6 +397,7 @@ func TestCheckResponseSnapshot_CheckpointDurableExecution(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 		},
@@ -8502,6 +8504,7 @@ func TestCheckResponseSnapshot_Error_KMSAccessDeniedException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 			{
@@ -8537,6 +8540,7 @@ func TestCheckResponseSnapshot_Error_KMSAccessDeniedException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 		},
@@ -8604,6 +8608,7 @@ func TestCheckResponseSnapshot_Error_KMSDisabledException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 			{
@@ -8639,6 +8644,7 @@ func TestCheckResponseSnapshot_Error_KMSDisabledException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 		},
@@ -8706,6 +8712,7 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 			{
@@ -8741,6 +8748,7 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 		},
@@ -8808,6 +8816,7 @@ func TestCheckResponseSnapshot_Error_KMSNotFoundException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 			{
@@ -8843,6 +8852,7 @@ func TestCheckResponseSnapshot_Error_KMSNotFoundException(t *testing.T) {
 				ChainedInvokeOptions: &types.ChainedInvokeOptions{
 					FunctionName: ptr.String("__FunctionName__"),
 					TenantId:     ptr.String("__TenantId__"),
+					XAmznTraceId: ptr.String("__XAmznTraceId__"),
 				},
 			},
 		},

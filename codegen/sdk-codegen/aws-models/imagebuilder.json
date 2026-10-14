@@ -255,6 +255,27 @@
                 "smithy.api#documentation": "<p>Defines the rules by which an image pipeline is automatically disabled when\n\t\t\tit fails. By default, if the schedule doesn't include an auto-disable\n\t\t\tpolicy, Image Builder disables the pipeline after 5 consecutive failed scheduled\n\t\t\tbuilds.</p>"
             }
         },
+        "com.amazonaws.imagebuilder#AutoScalingGroupConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group, in the same account and Amazon Web Services Region as the\n\t\t\tinfrastructure configuration. To specify a group, you must have permissions to describe\n\t\t\tit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "capacityWaitTimeoutSeconds": {
+                    "target": "com.amazonaws.imagebuilder#CapacityWaitTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds that Image Builder waits for an instance to become available in the\n\t\t\tgroup before the build fails. If you set this value to 0 or omit it, the build fails as\n\t\t\tsoon as the group has no instance available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the Amazon EC2 Auto Scaling group that Image Builder takes the build instance from,\n\t\t\tand how long Image Builder waits when the group has no instance available.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#Boolean": {
             "type": "boolean",
             "traits": {
@@ -501,6 +522,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.imagebuilder#CapacityWaitTimeoutSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 3600
+                }
             }
         },
         "com.amazonaws.imagebuilder#ClientException": {
@@ -2968,6 +2998,12 @@
                         "smithy.api#documentation": "<p>Specifies whether to terminate the instance on failure. Set to\n\t\t\tfalse if you want Image Builder to retain the instance used to configure your AMI if the build or\n\t\t\ttest phase of your workflow fails. Defaults to <code>true</code>.</p>"
                     }
                 },
+                "terminateInstanceOnCompletion": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Image Builder terminates build and test instances when image creation\n\t\t\tends without a failure (success, cancellation, or expiration). Defaults to\n\t\t\t<code>true</code>.</p>"
+                    }
+                },
                 "snsTopicArn": {
                     "target": "com.amazonaws.imagebuilder#SnsTopicArn",
                     "traits": {
@@ -2996,6 +3032,12 @@
                     "target": "com.amazonaws.imagebuilder#Placement",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance placement settings that define where the build and test\n\t\t\tinstances that Image Builder launches during image creation run. These settings\n\t\t\tdon't affect instances that you launch from the output image.</p>"
+                    }
+                },
+                "parentInstance": {
+                    "target": "com.amazonaws.imagebuilder#ParentInstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from, instead of\n\t\t\tlaunching a new instance. This applies only to the build phase.</p>\n         <p>To use this feature, the execution role for the build must have permissions to\n\t\t\tdescribe the Auto Scaling group, tag the instance while it's still in the group, and\n\t\t\tdetach it from the group. For more information, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html\">Build on an\n\t\t\t\tinstance from an Auto Scaling group</a> in the <i>EC2 Image Builder User\n\t\t\t\tGuide</i>.</p>"
                     }
                 },
                 "clientToken": {
@@ -8908,6 +8950,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The instance placement settings that define where the build and test\n\t\t\tinstances that Image Builder launches during image creation run. These settings\n\t\t\tdon't affect instances that you launch from the output image.</p>"
                     }
+                },
+                "terminateInstanceOnCompletion": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Image Builder terminates build and test instances when image creation\n\t\t\tends without a failure.</p>"
+                    }
+                },
+                "parentInstance": {
+                    "target": "com.amazonaws.imagebuilder#ParentInstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from, instead of\n\t\t\tlaunching a new instance. This applies only to the build phase.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13586,6 +13640,21 @@
                 "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9-_+#]{0,99}$"
             }
         },
+        "com.amazonaws.imagebuilder#ParentInstanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "autoScalingGroup": {
+                    "target": "com.amazonaws.imagebuilder#AutoScalingGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from. This is\n\t\t\trequired when you specify <code>parentInstance</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for building on an instance that is already running, instead of an\n\t\t\tinstance that Image Builder launches for the build.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#PipelineExecutionStartCondition": {
             "type": "enum",
             "members": {
@@ -15932,6 +16001,12 @@
                         "smithy.api#documentation": "<p>Specifies whether to terminate the instance on failure. Set to\n\t\t\tfalse if you want Image Builder to retain the instance used to configure your AMI if the build or\n\t\t\ttest phase of your workflow fails. Defaults to <code>true</code>.</p>"
                     }
                 },
+                "terminateInstanceOnCompletion": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Image Builder terminates build and test instances when image creation\n\t\t\tends without a failure (success, cancellation, or expiration). Defaults to\n\t\t\t<code>true</code>.</p>"
+                    }
+                },
                 "snsTopicArn": {
                     "target": "com.amazonaws.imagebuilder#SnsTopicArn",
                     "traits": {
@@ -15954,6 +16029,12 @@
                     "target": "com.amazonaws.imagebuilder#Placement",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance placement settings that define where the build and test\n\t\t\tinstances that Image Builder launches during image creation run. These settings\n\t\t\tdon't affect instances that you launch from the output image.</p>"
+                    }
+                },
+                "parentInstance": {
+                    "target": "com.amazonaws.imagebuilder#ParentInstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 Auto Scaling group that Image Builder takes the build instance from, instead of\n\t\t\tlaunching a new instance. This applies only to the build phase.</p>\n         <p>To use this feature, the execution role for the build must have permissions to\n\t\t\tdescribe the Auto Scaling group, tag the instance while it's still in the group, and\n\t\t\tdetach it from the group. For more information, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html\">Build on an\n\t\t\t\tinstance from an Auto Scaling group</a> in the <i>EC2 Image Builder User\n\t\t\t\tGuide</i>.</p>"
                     }
                 },
                 "clientToken": {

@@ -325,6 +325,54 @@ func (v *AutoDisablePolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Identifies the Amazon EC2 Auto Scaling group that Image Builder takes the build
+// instance from, and how long Image Builder waits when the group has no instance
+// available.
+type AutoScalingGroupConfiguration struct {
+
+	// The name of the Auto Scaling group, in the same account and Amazon Web Services
+	// Region as the infrastructure configuration. To specify a group, you must have
+	// permissions to describe it.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of seconds that Image Builder waits for an instance to become
+	// available in the group before the build fails. If you set this value to 0 or
+	// omit it, the build fails as soon as the group has no instance available.
+	CapacityWaitTimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoScalingGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityWaitTimeoutSeconds != nil {
+		s.WriteInt32(schemas.AutoScalingGroupConfiguration_capacityWaitTimeoutSeconds, *v.CapacityWaitTimeoutSeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutoScalingGroupConfiguration_name, *v.Name)
+	}
+}
+func (v *AutoScalingGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupConfiguration_capacityWaitTimeoutSeconds:
+			v.CapacityWaitTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroupConfiguration_capacityWaitTimeoutSeconds, v.CapacityWaitTimeoutSeconds)
+		case schemas.AutoScalingGroupConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutoScalingGroupConfiguration_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A detailed view of a component.
 type Component struct {
 
@@ -4464,6 +4512,10 @@ type InfrastructureConfiguration struct {
 	// The name of the infrastructure configuration.
 	Name *string
 
+	// The Amazon EC2 Auto Scaling group that Image Builder takes the build instance
+	// from, instead of launching a new instance. This applies only to the build phase.
+	ParentInstance *ParentInstanceConfiguration
+
 	// The instance placement settings that define where the build and test instances
 	// that Image Builder launches during image creation run. These settings don't
 	// affect instances that you launch from the output image.
@@ -4490,6 +4542,10 @@ type InfrastructureConfiguration struct {
 
 	// The tags of the infrastructure configuration.
 	Tags map[string]string
+
+	// Specifies whether Image Builder terminates build and test instances when image
+	// creation ends without a failure.
+	TerminateInstanceOnCompletion *bool
 
 	// Indicates whether Image Builder terminates the build and test instances when
 	// the image build fails. When false , Image Builder retains the instance so that
@@ -4538,6 +4594,11 @@ func (v *InfrastructureConfiguration) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.InfrastructureConfiguration_name, *v.Name)
 	}
+	if v.ParentInstance != nil {
+		s.WriteStruct(schemas.InfrastructureConfiguration_parentInstance)
+		v.ParentInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Placement != nil {
 		s.WriteStruct(schemas.InfrastructureConfiguration_placement)
 		v.Placement.SerializeMembers(s)
@@ -4552,6 +4613,9 @@ func (v *InfrastructureConfiguration) SerializeMembers(s smithy.ShapeSerializer)
 		s.WriteString(schemas.InfrastructureConfiguration_subnetId, *v.SubnetId)
 	}
 	serializeTagMap(s, schemas.InfrastructureConfiguration_tags, v.Tags)
+	if v.TerminateInstanceOnCompletion != nil {
+		s.WriteBool(schemas.InfrastructureConfiguration_terminateInstanceOnCompletion, *v.TerminateInstanceOnCompletion)
+	}
 	if v.TerminateInstanceOnFailure != nil {
 		s.WriteBool(schemas.InfrastructureConfiguration_terminateInstanceOnFailure, *v.TerminateInstanceOnFailure)
 	}
@@ -4588,6 +4652,9 @@ func (v *InfrastructureConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.InfrastructureConfiguration_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.InfrastructureConfiguration_name, v.Name)
+		case schemas.InfrastructureConfiguration_parentInstance:
+			v.ParentInstance = &ParentInstanceConfiguration{}
+			return v.ParentInstance.Deserialize(d)
 		case schemas.InfrastructureConfiguration_placement:
 			v.Placement = &Placement{}
 			return v.Placement.Deserialize(d)
@@ -4603,6 +4670,9 @@ func (v *InfrastructureConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 			return d.ReadString(schemas.InfrastructureConfiguration_subnetId, v.SubnetId)
 		case schemas.InfrastructureConfiguration_tags:
 			return deserializeTagMap(d, schemas.InfrastructureConfiguration_tags, &v.Tags)
+		case schemas.InfrastructureConfiguration_terminateInstanceOnCompletion:
+			v.TerminateInstanceOnCompletion = new(bool)
+			return d.ReadBool(schemas.InfrastructureConfiguration_terminateInstanceOnCompletion, v.TerminateInstanceOnCompletion)
 		case schemas.InfrastructureConfiguration_terminateInstanceOnFailure:
 			v.TerminateInstanceOnFailure = new(bool)
 			return d.ReadBool(schemas.InfrastructureConfiguration_terminateInstanceOnFailure, v.TerminateInstanceOnFailure)
@@ -6412,6 +6482,43 @@ func (v *PackageVulnerabilityDetails) Deserialize(d smithy.ShapeDeserializer) er
 			return d.ReadString(schemas.PackageVulnerabilityDetails_vulnerabilityId, v.VulnerabilityId)
 		case schemas.PackageVulnerabilityDetails_vulnerablePackages:
 			return deserializeVulnerablePackageList(d, schemas.PackageVulnerabilityDetails_vulnerablePackages, &v.VulnerablePackages)
+		}
+		return nil
+	})
+}
+
+// Settings for building on an instance that is already running, instead of an
+// instance that Image Builder launches for the build.
+type ParentInstanceConfiguration struct {
+
+	// The Amazon EC2 Auto Scaling group that Image Builder takes the build instance
+	// from. This is required when you specify parentInstance .
+	//
+	// This member is required.
+	AutoScalingGroup *AutoScalingGroupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *ParentInstanceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParentInstanceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParentInstanceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroup != nil {
+		s.WriteStruct(schemas.ParentInstanceConfiguration_autoScalingGroup)
+		v.AutoScalingGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ParentInstanceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParentInstanceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParentInstanceConfiguration_autoScalingGroup:
+			v.AutoScalingGroup = &AutoScalingGroupConfiguration{}
+			return v.AutoScalingGroup.Deserialize(d)
 		}
 		return nil
 	})

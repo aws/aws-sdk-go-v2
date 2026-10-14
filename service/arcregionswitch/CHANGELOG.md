@@ -1,3 +1,7 @@
+# v1.22.0 (2026-10-14)
+
+* **Feature**: Features - Adds support for an optional payload to invoke the Lambda function with as part of the Custom action Lambda execution block
+
 # v1.21.0 (2026-10-13)
 
 * **Feature**: Adds support for SSM Execution Block in Region switch plans

@@ -3029,9 +3029,6 @@ func validateOpUpdateHostKeyInput(v *UpdateHostKeyInput) error {
 	if v.HostKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HostKeyId"))
 	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

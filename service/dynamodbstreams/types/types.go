@@ -792,9 +792,11 @@ func (v *StreamDescription) Deserialize(d smithy.ShapeDeserializer) error {
 // DynamoDB table.
 type StreamRecord struct {
 
-	// The approximate date and time when the stream record was created, in [ISO 8601] format
-	// and rounded down to the closest second.
+	// The approximate date and time when the stream record was created, in [UNIX epoch time] format
+	// and rounded down to the closest second. Some tools and SDKs may convert this
+	// value to a different format, such as [ISO 8601].
 	//
+	// [UNIX epoch time]: http://www.epochconverter.com/
 	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	ApproximateCreationDateTime *time.Time
 
