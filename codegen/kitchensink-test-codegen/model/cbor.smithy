@@ -27,7 +27,7 @@ namespace aws.kitchensinktestcbor
 })
 service RpcV2CborKitchenSink {
     version: "2025-03-01",
-    operations: [CborGetItem, CborPutCompressedData, CborGetMaps],
+    operations: [CborGetItem, CborPutCompressedData, CborGetMaps, CborGetLists],
 }
 
 operation CborGetItem {
@@ -100,5 +100,42 @@ map SparseStringMap {
 }
 
 structure MapValueStruct {
+    name: String,
+}
+
+// Dense lists where the server sends an explicit null element. Clients keep
+// the element with the zero value, matching legacy JSON deserializer behavior.
+operation CborGetLists {
+    input: CborGetListsInput,
+    output: CborGetListsOutput,
+}
+
+structure CborGetListsInput {}
+
+structure CborGetListsOutput {
+    strings: DenseStringList,
+    integers: DenseIntegerList,
+    structs: DenseStructList,
+    sparseStrings: SparseStringList,
+}
+
+list DenseStringList {
+    member: String,
+}
+
+list DenseIntegerList {
+    member: Integer,
+}
+
+list DenseStructList {
+    member: ListValueStruct,
+}
+
+@sparse
+list SparseStringList {
+    member: String,
+}
+
+structure ListValueStruct {
     name: String,
 }
