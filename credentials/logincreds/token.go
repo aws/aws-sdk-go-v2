@@ -101,10 +101,24 @@ func (t *loginToken) Credentials() aws.Credentials {
 	}
 }
 
-func (t *loginToken) Update(out *signin.CreateOAuth2TokenOutput) {
-	t.AccessToken.AccessKeyID = *out.TokenOutput.AccessToken.AccessKeyId
-	t.AccessToken.SecretAccessKey = *out.TokenOutput.AccessToken.SecretAccessKey
-	t.AccessToken.SessionToken = *out.TokenOutput.AccessToken.SessionToken
-	t.AccessToken.ExpiresAt = sdk.NowTime().Add(time.Duration(*out.TokenOutput.ExpiresIn) * time.Second)
-	t.RefreshToken = *out.TokenOutput.RefreshToken
+func (t *loginToken) Update(out *signin.CreateOAuth2TokenOutput) error {
+	if out == nil || out.TokenOutput == nil || out.TokenOutput.AccessToken == nil {
+		return fmt.Errorf("missing token payload in CreateOAuth2Token response")
+	}
+	if out.TokenOutput.AccessToken.AccessKeyId != nil {
+		t.AccessToken.AccessKeyID = *out.TokenOutput.AccessToken.AccessKeyId
+	}
+	if out.TokenOutput.AccessToken.SecretAccessKey != nil {
+		t.AccessToken.SecretAccessKey = *out.TokenOutput.AccessToken.SecretAccessKey
+	}
+	if out.TokenOutput.AccessToken.SessionToken != nil {
+		t.AccessToken.SessionToken = *out.TokenOutput.AccessToken.SessionToken
+	}
+	if out.TokenOutput.ExpiresIn != nil {
+		t.AccessToken.ExpiresAt = sdk.NowTime().Add(time.Duration(*out.TokenOutput.ExpiresIn) * time.Second)
+	}
+	if out.TokenOutput.RefreshToken != nil {
+		t.RefreshToken = *out.TokenOutput.RefreshToken
+	}
+	return nil
 }
