@@ -555,8 +555,9 @@ func TestCheckResponseSnapshot_CreatePublishingDestination(t *testing.T) {
 		DetectorId:      ptr.String("__DetectorId__"),
 		DestinationType: types.DestinationType("S3"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
@@ -1237,8 +1238,9 @@ func TestCheckResponseSnapshot_DescribePublishingDestination(t *testing.T) {
 		Status:                          types.PublishingStatus("PENDING_VERIFICATION"),
 		PublishingFailureStartTimestamp: ptr.Int64(1),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -8522,8 +8524,9 @@ func TestCheckResponseSnapshot_UpdatePublishingDestination(t *testing.T) {
 		DetectorId:    ptr.String("__DetectorId__"),
 		DestinationId: ptr.String("__DestinationId__"),
 		DestinationProperties: &types.DestinationProperties{
-			DestinationArn: ptr.String("__DestinationArn__"),
-			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+			DestinationArn:      ptr.String("__DestinationArn__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	})
 	if err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "d51ff5fe-c8c0-4003-ae64-12f958c02fb9",
+    "type": "feature",
+    "description": "Adds SDK and CLI support for the Iceberg REST catalog connection types already available in Amazon SageMaker Unified Studio - ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, and DATABRICKSICEBERGRESTCATALOG.",
+    "modules": [
+        "service/datazone"
+    ]
+}

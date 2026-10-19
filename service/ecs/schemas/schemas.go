@@ -4142,7 +4142,7 @@ var _ServiceConnectClientAliasList_member *smithy.Schema
 var ServiceConnectConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ServiceConnectConfiguration",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ServiceConnectConfiguration_enabled *smithy.Schema
 
 var ServiceConnectConfiguration_namespace *smithy.Schema
@@ -4152,6 +4152,28 @@ var ServiceConnectConfiguration_services *smithy.Schema
 var ServiceConnectConfiguration_logConfiguration *smithy.Schema
 
 var ServiceConnectConfiguration_accessLogConfiguration *smithy.Schema
+
+var ServiceConnectConfiguration_containerConfigurations *smithy.Schema
+
+var ServiceConnectContainerConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ServiceConnectContainerConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var ServiceConnectContainerConfiguration_logLevel *smithy.Schema
+
+var _ServiceConnectContainerConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ServiceConnectContainerConfigurations",
+}, smithy.ShapeTypeList, 1)
+var _ServiceConnectContainerConfigurations_member *smithy.Schema
+
+var ServiceConnectContainerLogLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ServiceConnectContainerLogLevel",
+}, smithy.ShapeTypeEnum, 2)
+var ServiceConnectContainerLogLevel_DEBUG *smithy.Schema
+
+var ServiceConnectContainerLogLevel_INFO *smithy.Schema
 
 var ServiceConnectIncludeQueryParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -8655,6 +8677,14 @@ func init() {
 
 	ServiceConnectAccessLogConfiguration_includeQueryParameters = ServiceConnectAccessLogConfiguration.AddMember("includeQueryParameters", ServiceConnectIncludeQueryParameters)
 
+	ServiceConnectContainerLogLevel_DEBUG = ServiceConnectContainerLogLevel.AddMember("DEBUG", smithyprelude.Unit)
+
+	ServiceConnectContainerLogLevel_INFO = ServiceConnectContainerLogLevel.AddMember("INFO", smithyprelude.Unit)
+
+	ServiceConnectContainerConfiguration_logLevel = ServiceConnectContainerConfiguration.AddMember("logLevel", ServiceConnectContainerLogLevel)
+
+	_ServiceConnectContainerConfigurations_member = _ServiceConnectContainerConfigurations.AddMember("member", ServiceConnectContainerConfiguration)
+
 	ServiceConnectConfiguration_enabled = ServiceConnectConfiguration.AddMember("enabled", _Boolean)
 
 	ServiceConnectConfiguration_namespace = ServiceConnectConfiguration.AddMember("namespace", _String)
@@ -8664,6 +8694,8 @@ func init() {
 	ServiceConnectConfiguration_logConfiguration = ServiceConnectConfiguration.AddMember("logConfiguration", LogConfiguration)
 
 	ServiceConnectConfiguration_accessLogConfiguration = ServiceConnectConfiguration.AddMember("accessLogConfiguration", ServiceConnectAccessLogConfiguration)
+
+	ServiceConnectConfiguration_containerConfigurations = ServiceConnectConfiguration.AddMember("containerConfigurations", _ServiceConnectContainerConfigurations)
 
 	ServiceConnectServiceResource_discoveryName = ServiceConnectServiceResource.AddMember("discoveryName", _String)
 

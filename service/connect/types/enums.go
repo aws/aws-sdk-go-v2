@@ -925,6 +925,25 @@ func (ContactState) Values() []ContactState {
 	}
 }
 
+type ContentDisposition string
+
+// Enum values for ContentDisposition
+const (
+	ContentDispositionInline     ContentDisposition = "INLINE"
+	ContentDispositionAttachment ContentDisposition = "ATTACHMENT"
+)
+
+// Values returns all known values for ContentDisposition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentDisposition) Values() []ContentDisposition {
+	return []ContentDisposition{
+		"INLINE",
+		"ATTACHMENT",
+	}
+}
+
 type CurrentMetricName string
 
 // Enum values for CurrentMetricName
@@ -1866,6 +1885,7 @@ const (
 	FileStatusTypeRejected   FileStatusType = "REJECTED"
 	FileStatusTypeProcessing FileStatusType = "PROCESSING"
 	FileStatusTypeFailed     FileStatusType = "FAILED"
+	FileStatusTypeDrafting   FileStatusType = "DRAFTING"
 )
 
 // Values returns all known values for FileStatusType. Note that this can be
@@ -1878,6 +1898,7 @@ func (FileStatusType) Values() []FileStatusType {
 		"REJECTED",
 		"PROCESSING",
 		"FAILED",
+		"DRAFTING",
 	}
 }
 

@@ -8975,6 +8975,15 @@ func awsRestjson1_deserializeDocumentDestinationLogsConfiguration(v **types.Dest
 				return err
 			}
 
+		case "LogGroupDeletionProtection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeletionProtection to be of type string, got %T instead", value)
+				}
+				sv.LogGroupDeletionProtection = types.DeletionProtection(jtv)
+			}
+
 		case "LogGroupNameConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogGroupNameConfiguration(&sv.LogGroupNameConfiguration, value); err != nil {
 				return err

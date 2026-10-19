@@ -1,0 +1,8 @@
+{
+    "id": "b3b682ce-370b-4d16-a5a6-5b10af48e320",
+    "type": "feature",
+    "description": "Documentation update release for AWS service",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

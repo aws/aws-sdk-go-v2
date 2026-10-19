@@ -1222,6 +1222,10 @@ func TestCheckResponseSnapshot_DescribeDeliveries(t *testing.T) {
 	got, err := svc.DescribeDeliveries(context.Background(), &DescribeDeliveriesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		DeliverySourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1274,6 +1278,10 @@ func TestCheckResponseSnapshot_DescribeDeliveryDestinations(t *testing.T) {
 	got, err := svc.DescribeDeliveryDestinations(context.Background(), &DescribeDeliveryDestinationsInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1336,6 +1344,10 @@ func TestCheckResponseSnapshot_DescribeDeliverySources(t *testing.T) {
 	got, err := svc.DescribeDeliverySources(context.Background(), &DescribeDeliverySourcesInput{
 		NextToken: ptr.String("__NextToken__"),
 		Limit:     ptr.Int32(1),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -2285,6 +2285,20 @@ func awsAwsjson10_serializeDocumentInfluxDBv3EnterpriseParameters(v *types.Influ
 		}
 	}
 
+	if v.SnapshotDuration != nil {
+		ok := object.Key("snapshotDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.SnapshotDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnapshotSize != nil {
+		ok := object.Key("snapshotSize")
+		if err := awsAwsjson10_serializeDocumentPercentOrAbsoluteLong(v.SnapshotSize, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SnapshottedWalFilesToKeep != nil {
 		ok := object.Key("snapshottedWalFilesToKeep")
 		ok.Integer(*v.SnapshottedWalFilesToKeep)
@@ -2298,6 +2312,16 @@ func awsAwsjson10_serializeDocumentInfluxDBv3EnterpriseParameters(v *types.Influ
 	if v.TableIndexCacheMaxEntries != nil {
 		ok := object.Key("tableIndexCacheMaxEntries")
 		ok.Integer(*v.TableIndexCacheMaxEntries)
+	}
+
+	if v.UpgradePachaTree != nil {
+		ok := object.Key("upgradePachaTree")
+		ok.Boolean(*v.UpgradePachaTree)
+	}
+
+	if v.WalBufferSize != nil {
+		ok := object.Key("walBufferSize")
+		ok.Long(*v.WalBufferSize)
 	}
 
 	if v.WalMaxWriteBufferSize != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "0cb38464-0b1a-4c2a-b34a-b4e59de0b7f2",
+    "type": "feature",
+    "description": "This release adds ActionConfiguration to PutMetricAlarm, PutCompositeAlarm and PutLogAlarm. It allows customers to include an alarm's tags in its notifications and alarm state change events",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

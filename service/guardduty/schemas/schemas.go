@@ -1839,10 +1839,12 @@ var Destination_Status *smithy.Schema
 var DestinationProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
 	Name:      "DestinationProperties",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DestinationProperties_DestinationArn *smithy.Schema
 
 var DestinationProperties_KmsKeyArn *smithy.Schema
+
+var DestinationProperties_ExpectedBucketOwner *smithy.Schema
 
 var _Destinations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.guardduty",
@@ -9076,6 +9078,8 @@ func init() {
 	DestinationProperties_DestinationArn = DestinationProperties.AddMember("DestinationArn", _String, &smithytraits.JSONName{Name: "destinationArn"})
 
 	DestinationProperties_KmsKeyArn = DestinationProperties.AddMember("KmsKeyArn", _String, &smithytraits.JSONName{Name: "kmsKeyArn"})
+
+	DestinationProperties_ExpectedBucketOwner = DestinationProperties.AddMember("ExpectedBucketOwner", _AccountId, &smithytraits.JSONName{Name: "expectedBucketOwner"})
 
 	_Destinations_member = _Destinations.AddMember("member", Destination)
 

@@ -208,3 +208,37 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The volume has a previous modification that is still in progress, or has
+// reached the limit of four modifications in a rolling 24-hour period. Wait for
+// the current modification to finish, or wait until the time indicated in the
+// error message, and then retry the request.
+type VolumeModificationRateExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId   *string
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *VolumeModificationRateExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *VolumeModificationRateExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *VolumeModificationRateExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "VolumeModificationRateExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *VolumeModificationRateExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}

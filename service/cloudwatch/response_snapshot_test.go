@@ -576,6 +576,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 				ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 				ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				ActionsEnabled: ptr.Bool(true),
@@ -606,6 +619,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 				ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 				ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		MetricAlarms: []types.MetricAlarm{
@@ -729,6 +755,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				AlarmName:                          ptr.String("__AlarmName__"),
@@ -850,6 +889,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		LogAlarms: []types.LogAlarm{
@@ -913,6 +965,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
 				},
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				AlarmName:                          ptr.String("__AlarmName__"),
@@ -973,6 +1038,19 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				WarmUpConfiguration: &types.WarmUpConfiguration{
 					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+				},
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -1134,6 +1212,19 @@ func TestCheckResponseSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				AlarmName:                          ptr.String("__AlarmName__"),
@@ -1255,6 +1346,19 @@ func TestCheckResponseSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 					},
 				},
 				EvaluationInterval: ptr.Int32(1),
+				ActionConfiguration: &types.ActionConfiguration{
+					AlarmTagsPropagation: &types.AlarmTagsPropagation{
+						Enabled: ptr.Bool(true),
+						IncludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ExcludedTagKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -2849,6 +2953,19 @@ func TestCheckResponseSnapshot_PutCompositeAlarm(t *testing.T) {
 		ActionsSuppressor:                ptr.String("__ActionsSuppressor__"),
 		ActionsSuppressorWaitPeriod:      ptr.Int32(1),
 		ActionsSuppressorExtensionPeriod: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3006,6 +3123,19 @@ func TestCheckResponseSnapshot_PutLogAlarm(t *testing.T) {
 		WarmUpConfiguration: &types.WarmUpConfiguration{
 			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
 			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+		},
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	})
 	if err != nil {
@@ -3213,6 +3343,19 @@ func TestCheckResponseSnapshot_PutMetricAlarm(t *testing.T) {
 			},
 		},
 		EvaluationInterval: ptr.Int32(1),
+		ActionConfiguration: &types.ActionConfiguration{
+			AlarmTagsPropagation: &types.AlarmTagsPropagation{
+				Enabled: ptr.Bool(true),
+				IncludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExcludedTagKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

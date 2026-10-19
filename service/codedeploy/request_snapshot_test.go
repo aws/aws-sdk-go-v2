@@ -665,6 +665,12 @@ func TestCheckRequestSnapshot_CreateDeployment(t *testing.T) {
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -967,6 +973,12 @@ func TestCheckRequestSnapshot_CreateDeploymentGroup(t *testing.T) {
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 		TerminationHookEnabled: ptr.Bool(true),
@@ -2235,6 +2247,12 @@ func TestCheckRequestSnapshot_UpdateDeploymentGroup(t *testing.T) {
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 		TerminationHookEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
@@ -2718,6 +2736,12 @@ func TestUpdateRequestSnapshot_CreateDeployment(t *testing.T) {
 				},
 			},
 		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3020,6 +3044,12 @@ func TestUpdateRequestSnapshot_CreateDeploymentGroup(t *testing.T) {
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 		TerminationHookEnabled: ptr.Bool(true),
@@ -4286,6 +4316,12 @@ func TestUpdateRequestSnapshot_UpdateDeploymentGroup(t *testing.T) {
 						Type:  types.TagFilterType("KEY_ONLY"),
 					},
 				},
+			},
+		},
+		Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+			AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+				types.AutoScalingGroupProcess("Terminate"),
+				types.AutoScalingGroupProcess("Terminate"),
 			},
 		},
 		TerminationHookEnabled: ptr.Bool(true),

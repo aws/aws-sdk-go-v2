@@ -928,6 +928,14 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
 			{
@@ -5508,6 +5516,14 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
 			{
@@ -6479,6 +6495,14 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 			AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
 			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
@@ -11059,6 +11083,14 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 			AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
 			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{

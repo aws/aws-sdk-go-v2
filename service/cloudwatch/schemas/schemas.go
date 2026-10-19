@@ -296,6 +296,12 @@ var _AccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AccountId",
 }, smithy.ShapeTypeString, 0)
 
+var ActionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ActionConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ActionConfiguration_AlarmTagsPropagation *smithy.Schema
+
 var _ActionLogLineCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ActionLogLineCount",
@@ -457,6 +463,32 @@ var _AlarmRule = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AlarmRule",
 }, smithy.ShapeTypeString, 0)
 
+var AlarmTagsPropagation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "AlarmTagsPropagation",
+}, smithy.ShapeTypeStructure, 3)
+var AlarmTagsPropagation_Enabled *smithy.Schema
+
+var AlarmTagsPropagation_IncludedTagKeys *smithy.Schema
+
+var AlarmTagsPropagation_ExcludedTagKeys *smithy.Schema
+
+var _AlarmTagsPropagationEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "AlarmTagsPropagationEnabled",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _AlarmTagsPropagationTagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "AlarmTagsPropagationTagKey",
+}, smithy.ShapeTypeString, 0)
+
+var _AlarmTagsPropagationTagKeys = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "AlarmTagsPropagationTagKeys",
+}, smithy.ShapeTypeList, 1)
+var _AlarmTagsPropagationTagKeys_member *smithy.Schema
+
 var AlarmType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "AlarmType",
@@ -614,7 +646,7 @@ var ComparisonOperator_GreaterThanUpperThreshold *smithy.Schema
 var CompositeAlarm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "CompositeAlarm",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var CompositeAlarm_ActionsEnabled *smithy.Schema
 
 var CompositeAlarm_AlarmActions *smithy.Schema
@@ -652,6 +684,8 @@ var CompositeAlarm_ActionsSuppressor *smithy.Schema
 var CompositeAlarm_ActionsSuppressorWaitPeriod *smithy.Schema
 
 var CompositeAlarm_ActionsSuppressorExtensionPeriod *smithy.Schema
+
+var CompositeAlarm_ActionConfiguration *smithy.Schema
 
 var _CompositeAlarms = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -1364,7 +1398,7 @@ var _ListMetricStreamsMaxResults = smithy.NewSchema(smithy.ShapeID{
 var LogAlarm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "LogAlarm",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var LogAlarm_AlarmName *smithy.Schema
 
 var LogAlarm_AlarmArn *smithy.Schema
@@ -1410,6 +1444,8 @@ var LogAlarm_ActionLogLineCount *smithy.Schema
 var LogAlarm_ActionLogLineRoleArn *smithy.Schema
 
 var LogAlarm_WarmUpConfiguration *smithy.Schema
+
+var LogAlarm_ActionConfiguration *smithy.Schema
 
 var _LogAlarms = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -1509,7 +1545,7 @@ var Metric_Dimensions *smithy.Schema
 var MetricAlarm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "MetricAlarm",
-}, smithy.ShapeTypeStructure, 33)
+}, smithy.ShapeTypeStructure, 34)
 var MetricAlarm_AlarmName *smithy.Schema
 
 var MetricAlarm_AlarmArn *smithy.Schema
@@ -1575,6 +1611,8 @@ var MetricAlarm_WarmUpConfiguration *smithy.Schema
 var MetricAlarm_EvaluationCriteria *smithy.Schema
 
 var MetricAlarm_EvaluationInterval *smithy.Schema
+
+var MetricAlarm_ActionConfiguration *smithy.Schema
 
 var _MetricAlarms = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3097,7 +3135,7 @@ var PutAnomalyDetectorOutput_AnomalyDetectorId *smithy.Schema
 var PutCompositeAlarmInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutCompositeAlarmInput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var PutCompositeAlarmInput_ActionsEnabled *smithy.Schema
 
 var PutCompositeAlarmInput_AlarmActions *smithy.Schema
@@ -3119,6 +3157,8 @@ var PutCompositeAlarmInput_ActionsSuppressor *smithy.Schema
 var PutCompositeAlarmInput_ActionsSuppressorWaitPeriod *smithy.Schema
 
 var PutCompositeAlarmInput_ActionsSuppressorExtensionPeriod *smithy.Schema
+
+var PutCompositeAlarmInput_ActionConfiguration *smithy.Schema
 
 var PutDashboardInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3158,7 +3198,7 @@ var PutInsightRuleOutput = smithy.NewSchema(smithy.ShapeID{
 var PutLogAlarmInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutLogAlarmInput",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var PutLogAlarmInput_AlarmName *smithy.Schema
 
 var PutLogAlarmInput_AlarmDescription *smithy.Schema
@@ -3191,6 +3231,8 @@ var PutLogAlarmInput_Tags *smithy.Schema
 
 var PutLogAlarmInput_WarmUpConfiguration *smithy.Schema
 
+var PutLogAlarmInput_ActionConfiguration *smithy.Schema
+
 var PutManagedInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutManagedInsightRulesInput",
@@ -3206,7 +3248,7 @@ var PutManagedInsightRulesOutput_Failures *smithy.Schema
 var PutMetricAlarmInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutMetricAlarmInput",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 27)
 var PutMetricAlarmInput_AlarmName *smithy.Schema
 
 var PutMetricAlarmInput_AlarmDescription *smithy.Schema
@@ -3258,6 +3300,8 @@ var PutMetricAlarmInput_WarmUpConfiguration *smithy.Schema
 var PutMetricAlarmInput_EvaluationCriteria *smithy.Schema
 
 var PutMetricAlarmInput_EvaluationInterval *smithy.Schema
+
+var PutMetricAlarmInput_ActionConfiguration *smithy.Schema
 
 var PutMetricDataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3426,6 +3470,16 @@ var UpdateResourceMetricsConfigurationOutput_ResourceMetricsConfiguration *smith
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_AlarmTagsPropagationTagKeys_member = _AlarmTagsPropagationTagKeys.AddMember("member", _AlarmTagsPropagationTagKey)
+
+	AlarmTagsPropagation_Enabled = AlarmTagsPropagation.AddMember("Enabled", _AlarmTagsPropagationEnabled)
+
+	AlarmTagsPropagation_IncludedTagKeys = AlarmTagsPropagation.AddMember("IncludedTagKeys", _AlarmTagsPropagationTagKeys)
+
+	AlarmTagsPropagation_ExcludedTagKeys = AlarmTagsPropagation.AddMember("ExcludedTagKeys", _AlarmTagsPropagationTagKeys)
+
+	ActionConfiguration_AlarmTagsPropagation = ActionConfiguration.AddMember("AlarmTagsPropagation", AlarmTagsPropagation)
+
 	ActionsSuppressedBy_WaitPeriod = ActionsSuppressedBy.AddMember("WaitPeriod", smithyprelude.Unit)
 
 	ActionsSuppressedBy_ExtensionPeriod = ActionsSuppressedBy.AddMember("ExtensionPeriod", smithyprelude.Unit)
@@ -3730,6 +3784,8 @@ func init() {
 
 	CompositeAlarm_ActionsSuppressorExtensionPeriod = CompositeAlarm.AddMember("ActionsSuppressorExtensionPeriod", _SuppressorPeriod)
 
+	CompositeAlarm_ActionConfiguration = CompositeAlarm.AddMember("ActionConfiguration", ActionConfiguration)
+
 	_CompositeAlarms_member = _CompositeAlarms.AddMember("member", CompositeAlarm)
 
 	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _FaultDescription)
@@ -4010,6 +4066,8 @@ func init() {
 
 	LogAlarm_WarmUpConfiguration = LogAlarm.AddMember("WarmUpConfiguration", WarmUpConfiguration)
 
+	LogAlarm_ActionConfiguration = LogAlarm.AddMember("ActionConfiguration", ActionConfiguration)
+
 	_LogAlarms_member = _LogAlarms.AddMember("member", LogAlarm)
 
 	ManagedRule_TemplateName = ManagedRule.AddMember("TemplateName", _TemplateName)
@@ -4111,6 +4169,8 @@ func init() {
 	MetricAlarm_EvaluationCriteria = MetricAlarm.AddMember("EvaluationCriteria", EvaluationCriteria)
 
 	MetricAlarm_EvaluationInterval = MetricAlarm.AddMember("EvaluationInterval", _EvaluationInterval)
+
+	MetricAlarm_ActionConfiguration = MetricAlarm.AddMember("ActionConfiguration", ActionConfiguration)
 
 	_MetricAlarms_member = _MetricAlarms.AddMember("member", MetricAlarm)
 
@@ -4670,6 +4730,8 @@ func init() {
 
 	PutCompositeAlarmInput_ActionsSuppressorExtensionPeriod = PutCompositeAlarmInput.AddMember("ActionsSuppressorExtensionPeriod", _SuppressorPeriod)
 
+	PutCompositeAlarmInput_ActionConfiguration = PutCompositeAlarmInput.AddMember("ActionConfiguration", ActionConfiguration)
+
 	PutDashboardInput_DashboardName = PutDashboardInput.AddMember("DashboardName", _DashboardName)
 
 	PutDashboardInput_DashboardBody = PutDashboardInput.AddMember("DashboardBody", _DashboardBody)
@@ -4719,6 +4781,8 @@ func init() {
 	PutLogAlarmInput_Tags = PutLogAlarmInput.AddMember("Tags", _TagList)
 
 	PutLogAlarmInput_WarmUpConfiguration = PutLogAlarmInput.AddMember("WarmUpConfiguration", WarmUpConfiguration)
+
+	PutLogAlarmInput_ActionConfiguration = PutLogAlarmInput.AddMember("ActionConfiguration", ActionConfiguration)
 
 	PutManagedInsightRulesInput_ManagedRules = PutManagedInsightRulesInput.AddMember("ManagedRules", _ManagedRules)
 
@@ -4775,6 +4839,8 @@ func init() {
 	PutMetricAlarmInput_EvaluationCriteria = PutMetricAlarmInput.AddMember("EvaluationCriteria", EvaluationCriteria)
 
 	PutMetricAlarmInput_EvaluationInterval = PutMetricAlarmInput.AddMember("EvaluationInterval", _EvaluationInterval)
+
+	PutMetricAlarmInput_ActionConfiguration = PutMetricAlarmInput.AddMember("ActionConfiguration", ActionConfiguration)
 
 	PutMetricDataInput_Namespace = PutMetricDataInput.AddMember("Namespace", _Namespace)
 

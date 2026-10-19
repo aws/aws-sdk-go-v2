@@ -2191,6 +2191,57 @@ func (v *InvalidAutoScalingGroupException) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// The autoScalingGroupProcessesToSuspend list in ec2DeploymentOptions contains a
+// process that is not valid. Valid values are Terminate , AZRebalance ,
+// InstanceRefresh , and ScheduledActions . Process names are case sensitive.
+type InvalidAutoScalingGroupProcessToSuspendException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidAutoScalingGroupProcessToSuspendException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidAutoScalingGroupProcessToSuspendException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidAutoScalingGroupProcessToSuspendException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidAutoScalingGroupProcessToSuspendException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidAutoScalingGroupProcessToSuspendException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *InvalidAutoScalingGroupProcessToSuspendException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidAutoScalingGroupProcessToSuspendException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidAutoScalingGroupProcessToSuspendException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidAutoScalingGroupProcessToSuspendException_message, *v.Message)
+	}
+}
+func (v *InvalidAutoScalingGroupProcessToSuspendException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidAutoScalingGroupProcessToSuspendException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidAutoScalingGroupProcessToSuspendException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidAutoScalingGroupProcessToSuspendException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The configuration for the blue/green deployment group was provided in an
 // invalid format. For information about deployment configuration format, see CreateDeploymentConfig.
 type InvalidBlueGreenDeploymentConfigurationException struct {

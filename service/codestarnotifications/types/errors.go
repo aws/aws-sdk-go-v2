@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// CodeStar Notifications can't create the notification rule because you do not
+//	CodeStar Notifications can't create the notification rule because you do not
+//
 // have sufficient permissions.
 type AccessDeniedException struct {
 	Message *string
@@ -34,8 +35,9 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// CodeStar Notifications can't complete the request because the resource is being
-// modified by another process. Wait a few minutes and try again.
+//	CodeStar Notifications can't complete the request because the resource is
+//
+// being modified by another process. Wait a few minutes and try again.
 type ConcurrentModificationException struct {
 	Message *string
 

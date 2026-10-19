@@ -1756,6 +1756,7 @@ const (
 	TLSSecurityPolicyPolicyMinTls12201907            TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
 	TLSSecurityPolicyPolicyMinTls12Pfs202310         TLSSecurityPolicy = "Policy-Min-TLS-1-2-PFS-2023-10"
 	TLSSecurityPolicyPolicyMinTls12Rfc9151Fips202408 TLSSecurityPolicy = "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+	TLSSecurityPolicyPolicyMinTls12FipsPq202610      TLSSecurityPolicy = "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
 )
 
 // Values returns all known values for TLSSecurityPolicy. Note that this can be
@@ -1768,6 +1769,7 @@ func (TLSSecurityPolicy) Values() []TLSSecurityPolicy {
 		"Policy-Min-TLS-1-2-2019-07",
 		"Policy-Min-TLS-1-2-PFS-2023-10",
 		"Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08",
+		"Policy-Min-TLS-1-2-FIPS-PQ-2026-10",
 	}
 }
 

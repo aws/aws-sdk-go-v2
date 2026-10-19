@@ -1,3 +1,3 @@
-GET /attached-files/__InstanceId__/__FileId__?associatedResourceArn=__AssociatedResourceArn__&urlExpiryInSeconds=1
+GET /attached-files/__InstanceId__/__FileId__?associatedResourceArn=__AssociatedResourceArn__&urlContentDisposition=INLINE&urlExpiryInSeconds=1
 
 

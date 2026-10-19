@@ -75,6 +75,10 @@ type CreateDeploymentInput struct {
 	// A comment about the deployment.
 	Description *string
 
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *types.EC2DeploymentOptions
+
 	// Information about how CodeDeploy handles files that already exist in a
 	// deployment target location but weren't part of the previous successful
 	// deployment.
@@ -170,6 +174,11 @@ func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateDeploymentInput_description, *v.Description)
+	}
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.FileExistsBehavior != "" {
 		s.WriteString(schemas.CreateDeploymentInput_fileExistsBehavior, string(v.FileExistsBehavior))

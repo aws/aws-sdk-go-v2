@@ -280,6 +280,22 @@ type DestinationLogsConfiguration struct {
 	// destination.
 	BackupConfiguration *LogsBackupConfiguration
 
+	// Specifies whether this centralization rule enables deletion protection on the
+	// destination log groups that it creates. If you don't specify this setting, the
+	// rule doesn't enable deletion protection on the log groups that it creates. If
+	// you specify a backup Region in BackupConfiguration , the setting also applies to
+	// the log groups that the rule creates in the backup Region.
+	//
+	// When you set this to ENABLED , the rule enables deletion protection only on log
+	// groups that it creates after you enable the setting. It does not add deletion
+	// protection to log groups the rule created before you enabled the setting.
+	//
+	// If you remove this setting from the rule or delete the rule, deletion
+	// protection stays enabled on log groups that already have it. To delete one of
+	// these log groups, first disable deletion protection on the log group in the
+	// destination account.
+	LogGroupDeletionProtection DeletionProtection
+
 	// Configuration that specifies a naming pattern for destination log groups
 	// created during centralization. The pattern supports static text and dynamic
 	// variables that are replaced with source attributes when log groups are created.
@@ -933,8 +949,8 @@ type TelemetryRule struct {
 
 	//  The type of Amazon Web Services resource to configure telemetry for (for
 	// example, AWS::EC2::VPC , AWS::EKS::Cluster ,
-	// AWS::ElasticLoadBalancingV2::LoadBalancer , AWS::Bedrock::KnowledgeBase , or
-	// AWS::BedrockAgentCore::PaymentManager ).
+	// AWS::ElasticLoadBalancingV2::LoadBalancer , AWS::Bedrock::KnowledgeBase ,
+	// AWS::BedrockAgentCore::PaymentManager , or AWS::XRay::TransactionSearchConfig ).
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts

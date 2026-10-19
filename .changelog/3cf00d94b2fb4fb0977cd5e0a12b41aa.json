@@ -1,0 +1,8 @@
+{
+    "id": "3cf00d94-b2fb-4fb0-977c-d5e0a12b41aa",
+    "type": "feature",
+    "description": "Documentation update release for AWS service",
+    "modules": [
+        "service/codecommit"
+    ]
+}

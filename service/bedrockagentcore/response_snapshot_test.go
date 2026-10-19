@@ -1308,6 +1308,302 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 				},
 			},
 		},
+		InsightResults: []types.InsightResult{
+			{
+				Type:                 types.InsightType("FAILURE"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount: ptr.Int32(1),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+				RootCauses: []types.InsightRootCause{
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Type:                 types.InsightType("FAILURE"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount: ptr.Int32(1),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+				RootCauses: []types.InsightRootCause{
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+					{
+						Name:                 ptr.String("__Name__"),
+						Explanation:          ptr.String("__Explanation__"),
+						AffectedSessionCount: ptr.Int32(1),
+						SuggestedFix:         ptr.String("__SuggestedFix__"),
+						SampleSessions: []types.SampleSession{
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+							{
+								SessionId:  ptr.String("__SessionId__"),
+								LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								Findings: []types.SessionFinding{
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+									{
+										TargetId:    ptr.String("__TargetId__"),
+										TargetType:  types.FindingTargetType("SPAN_ID"),
+										Description: ptr.String("__Description__"),
+										Category:    ptr.String("__Category__"),
+										Confidence:  ptr.Float64(1.0),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 		FailureAnalysisResult: &types.FailureAnalysisResultContent{
 			Failures: []types.FailureCategoryCluster{
 				{

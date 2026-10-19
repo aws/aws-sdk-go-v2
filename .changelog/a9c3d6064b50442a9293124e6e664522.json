@@ -1,0 +1,8 @@
+{
+    "id": "a9c3d606-4b50-442a-9293-124e6e664522",
+    "type": "feature",
+    "description": "Documentation update release for AWS service",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

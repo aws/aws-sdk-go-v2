@@ -92,6 +92,20 @@ var CreatePromptVersion = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/prompts/{promptIdentifier}/versions",
 	Code: 201})
 
+var CreateRetrievalInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateRetrievalInstruction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/retrievalinstructions/",
+	Code: 202})
+
+var CreateRetrievalInstructionVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateRetrievalInstructionVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/retrievalinstructions/{retrievalInstructionId}/versions",
+	Code: 201})
+
 var CreateVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "CreateVpcConfiguration",
@@ -181,6 +195,13 @@ var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteResourcePolicy",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/resourcepolicy/{resourceArn}",
+	Code: 200})
+
+var DeleteRetrievalInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "DeleteRetrievalInstruction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/retrievalinstructions/{retrievalInstructionId}",
 	Code: 200})
 
 var DeleteVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -309,6 +330,13 @@ var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/resourcepolicy/{resourceArn}",
 	Code: 200})
 
+var GetRetrievalInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "GetRetrievalInstruction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/retrievalinstructions/{retrievalInstructionId}",
+	Code: 200})
+
 var GetVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "GetVpcConfiguration",
@@ -419,6 +447,20 @@ var ListPrompts = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListPrompts",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/prompts/",
+	Code: 200})
+
+var ListRetrievalInstructions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListRetrievalInstructions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/retrievalinstructions/",
+	Code: 200})
+
+var ListRetrievalInstructionVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListRetrievalInstructionVersions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/retrievalinstructions/{retrievalInstructionId}/versions",
 	Code: 200})
 
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
@@ -553,6 +595,13 @@ var UpdatePrompt = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/prompts/{promptIdentifier}/",
 	Code: 200})
+
+var UpdateRetrievalInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "UpdateRetrievalInstruction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/retrievalinstructions/{retrievalInstructionId}",
+	Code: 202})
 
 var ValidateFlowDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -4368,6 +4417,160 @@ var RetrievalFlowNodeServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeUnion, 1)
 var RetrievalFlowNodeServiceConfiguration_s3 *smithy.Schema
 
+var _RetrievalInstructionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionArn",
+}, smithy.ShapeTypeString, 0)
+
+var RetrievalInstructionContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionContent",
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
+var RetrievalInstructionContent_retrievalGuidance *smithy.Schema
+
+var RetrievalInstructionContent_persona *smithy.Schema
+
+var RetrievalInstructionContent_answerFormat *smithy.Schema
+
+var RetrievalInstructionContent_answerPolicy *smithy.Schema
+
+var _RetrievalInstructionDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionDescription",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var RetrievalInstructionFailureReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionFailureReason",
+}, smithy.ShapeTypeStructure, 3)
+var RetrievalInstructionFailureReason_fieldName *smithy.Schema
+
+var RetrievalInstructionFailureReason_code *smithy.Schema
+
+var RetrievalInstructionFailureReason_message *smithy.Schema
+
+var RetrievalInstructionFailureReasonCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionFailureReasonCode",
+}, smithy.ShapeTypeEnum, 3)
+var RetrievalInstructionFailureReasonCode_CONTENT_REJECTED *smithy.Schema
+
+var RetrievalInstructionFailureReasonCode_CLIENT_ERROR *smithy.Schema
+
+var RetrievalInstructionFailureReasonCode_INTERNAL_ERROR *smithy.Schema
+
+var _RetrievalInstructionFailureReasons = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionFailureReasons",
+}, smithy.ShapeTypeList, 1)
+var _RetrievalInstructionFailureReasons_member *smithy.Schema
+
+var RetrievalInstructionFieldName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionFieldName",
+}, smithy.ShapeTypeEnum, 4)
+var RetrievalInstructionFieldName_RETRIEVAL_GUIDANCE *smithy.Schema
+
+var RetrievalInstructionFieldName_PERSONA *smithy.Schema
+
+var RetrievalInstructionFieldName_ANSWER_FORMAT *smithy.Schema
+
+var RetrievalInstructionFieldName_ANSWER_POLICY *smithy.Schema
+
+var _RetrievalInstructionFieldText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionFieldText",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _RetrievalInstructionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionId",
+}, smithy.ShapeTypeString, 0)
+
+var RetrievalInstructionLastTransitionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionLastTransitionStatus",
+}, smithy.ShapeTypeEnum, 6)
+var RetrievalInstructionLastTransitionStatus_CREATING *smithy.Schema
+
+var RetrievalInstructionLastTransitionStatus_UPDATING *smithy.Schema
+
+var RetrievalInstructionLastTransitionStatus_CREATE_SUCCESSFUL *smithy.Schema
+
+var RetrievalInstructionLastTransitionStatus_CREATE_FAILED *smithy.Schema
+
+var RetrievalInstructionLastTransitionStatus_UPDATE_SUCCESSFUL *smithy.Schema
+
+var RetrievalInstructionLastTransitionStatus_UPDATE_FAILED *smithy.Schema
+
+var _RetrievalInstructionMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var _RetrievalInstructionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _RetrievalInstructionNumericalVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionNumericalVersion",
+}, smithy.ShapeTypeString, 0)
+
+var RetrievalInstructionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionStatus",
+}, smithy.ShapeTypeEnum, 2)
+var RetrievalInstructionStatus_ACTIVE *smithy.Schema
+
+var RetrievalInstructionStatus_INACTIVE *smithy.Schema
+
+var _RetrievalInstructionSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionSummaries",
+}, smithy.ShapeTypeList, 1)
+var _RetrievalInstructionSummaries_member *smithy.Schema
+
+var RetrievalInstructionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionSummary",
+}, smithy.ShapeTypeStructure, 8)
+var RetrievalInstructionSummary_retrievalInstructionId *smithy.Schema
+
+var RetrievalInstructionSummary_retrievalInstructionArn *smithy.Schema
+
+var RetrievalInstructionSummary_name *smithy.Schema
+
+var RetrievalInstructionSummary_status *smithy.Schema
+
+var RetrievalInstructionSummary_lastTransitionStatus *smithy.Schema
+
+var RetrievalInstructionSummary_createdAt *smithy.Schema
+
+var RetrievalInstructionSummary_updatedAt *smithy.Schema
+
+var RetrievalInstructionSummary_description *smithy.Schema
+
+var _RetrievalInstructionVersionSelector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionVersionSelector",
+}, smithy.ShapeTypeString, 0)
+
+var _RetrievalInstructionVersionSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionVersionSummaries",
+}, smithy.ShapeTypeList, 1)
+var _RetrievalInstructionVersionSummaries_member *smithy.Schema
+
+var RetrievalInstructionVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "RetrievalInstructionVersionSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RetrievalInstructionVersionSummary_version *smithy.Schema
+
+var RetrievalInstructionVersionSummary_createdAt *smithy.Schema
+
 var _RevisionId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "RevisionId",
@@ -5688,6 +5891,64 @@ var CreatePromptVersionResponse_createdAt *smithy.Schema
 
 var CreatePromptVersionResponse_updatedAt *smithy.Schema
 
+var CreateRetrievalInstructionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateRetrievalInstructionRequest",
+}, smithy.ShapeTypeStructure, 6)
+var CreateRetrievalInstructionRequest_clientToken *smithy.Schema
+
+var CreateRetrievalInstructionRequest_name *smithy.Schema
+
+var CreateRetrievalInstructionRequest_instruction *smithy.Schema
+
+var CreateRetrievalInstructionRequest_description *smithy.Schema
+
+var CreateRetrievalInstructionRequest_customerEncryptionKeyArn *smithy.Schema
+
+var CreateRetrievalInstructionRequest_tags *smithy.Schema
+
+var CreateRetrievalInstructionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateRetrievalInstructionResponse",
+}, smithy.ShapeTypeStructure, 7)
+var CreateRetrievalInstructionResponse_retrievalInstructionId *smithy.Schema
+
+var CreateRetrievalInstructionResponse_retrievalInstructionArn *smithy.Schema
+
+var CreateRetrievalInstructionResponse_name *smithy.Schema
+
+var CreateRetrievalInstructionResponse_status *smithy.Schema
+
+var CreateRetrievalInstructionResponse_lastTransitionStatus *smithy.Schema
+
+var CreateRetrievalInstructionResponse_createdAt *smithy.Schema
+
+var CreateRetrievalInstructionResponse_updatedAt *smithy.Schema
+
+var CreateRetrievalInstructionVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateRetrievalInstructionVersionRequest",
+}, smithy.ShapeTypeStructure, 3)
+var CreateRetrievalInstructionVersionRequest_retrievalInstructionId *smithy.Schema
+
+var CreateRetrievalInstructionVersionRequest_description *smithy.Schema
+
+var CreateRetrievalInstructionVersionRequest_clientToken *smithy.Schema
+
+var CreateRetrievalInstructionVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "CreateRetrievalInstructionVersionResponse",
+}, smithy.ShapeTypeStructure, 5)
+var CreateRetrievalInstructionVersionResponse_retrievalInstructionId *smithy.Schema
+
+var CreateRetrievalInstructionVersionResponse_retrievalInstructionArn *smithy.Schema
+
+var CreateRetrievalInstructionVersionResponse_version *smithy.Schema
+
+var CreateRetrievalInstructionVersionResponse_createdAt *smithy.Schema
+
+var CreateRetrievalInstructionVersionResponse_description *smithy.Schema
+
 var CreateVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "CreateVpcConfigurationRequest",
@@ -5924,6 +6185,24 @@ var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteResourcePolicyResponse_resourceArn *smithy.Schema
 
 var DeleteResourcePolicyResponse_revisionId *smithy.Schema
+
+var DeleteRetrievalInstructionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "DeleteRetrievalInstructionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteRetrievalInstructionRequest_retrievalInstructionId *smithy.Schema
+
+var DeleteRetrievalInstructionRequest_retrievalInstructionVersion *smithy.Schema
+
+var DeleteRetrievalInstructionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "DeleteRetrievalInstructionResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteRetrievalInstructionResponse_retrievalInstructionId *smithy.Schema
+
+var DeleteRetrievalInstructionResponse_retrievalInstructionArn *smithy.Schema
+
+var DeleteRetrievalInstructionResponse_version *smithy.Schema
 
 var DeleteVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -6267,6 +6546,44 @@ var GetResourcePolicyResponse_policy *smithy.Schema
 
 var GetResourcePolicyResponse_revisionId *smithy.Schema
 
+var GetRetrievalInstructionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "GetRetrievalInstructionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetRetrievalInstructionRequest_retrievalInstructionId *smithy.Schema
+
+var GetRetrievalInstructionRequest_retrievalInstructionVersion *smithy.Schema
+
+var GetRetrievalInstructionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "GetRetrievalInstructionResponse",
+}, smithy.ShapeTypeStructure, 13)
+var GetRetrievalInstructionResponse_retrievalInstructionId *smithy.Schema
+
+var GetRetrievalInstructionResponse_retrievalInstructionArn *smithy.Schema
+
+var GetRetrievalInstructionResponse_name *smithy.Schema
+
+var GetRetrievalInstructionResponse_status *smithy.Schema
+
+var GetRetrievalInstructionResponse_lastTransitionStatus *smithy.Schema
+
+var GetRetrievalInstructionResponse_instruction *smithy.Schema
+
+var GetRetrievalInstructionResponse_createdAt *smithy.Schema
+
+var GetRetrievalInstructionResponse_updatedAt *smithy.Schema
+
+var GetRetrievalInstructionResponse_description *smithy.Schema
+
+var GetRetrievalInstructionResponse_customerEncryptionKeyArn *smithy.Schema
+
+var GetRetrievalInstructionResponse_lastTransitionStatusReasons *smithy.Schema
+
+var GetRetrievalInstructionResponse_version *smithy.Schema
+
+var GetRetrievalInstructionResponse_latestVersion *smithy.Schema
+
 var GetVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
 	Name:      "GetVpcConfigurationRequest",
@@ -6558,6 +6875,42 @@ var ListPromptsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListPromptsResponse_promptSummaries *smithy.Schema
 
 var ListPromptsResponse_nextToken *smithy.Schema
+
+var ListRetrievalInstructionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListRetrievalInstructionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListRetrievalInstructionsRequest_status *smithy.Schema
+
+var ListRetrievalInstructionsRequest_maxResults *smithy.Schema
+
+var ListRetrievalInstructionsRequest_nextToken *smithy.Schema
+
+var ListRetrievalInstructionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListRetrievalInstructionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRetrievalInstructionsResponse_retrievalInstructionSummaries *smithy.Schema
+
+var ListRetrievalInstructionsResponse_nextToken *smithy.Schema
+
+var ListRetrievalInstructionVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListRetrievalInstructionVersionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListRetrievalInstructionVersionsRequest_retrievalInstructionId *smithy.Schema
+
+var ListRetrievalInstructionVersionsRequest_maxResults *smithy.Schema
+
+var ListRetrievalInstructionVersionsRequest_nextToken *smithy.Schema
+
+var ListRetrievalInstructionVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "ListRetrievalInstructionVersionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRetrievalInstructionVersionsResponse_retrievalInstructionVersionSummaries *smithy.Schema
+
+var ListRetrievalInstructionVersionsResponse_nextToken *smithy.Schema
 
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -7004,6 +7357,34 @@ var UpdatePromptResponse_version *smithy.Schema
 var UpdatePromptResponse_createdAt *smithy.Schema
 
 var UpdatePromptResponse_updatedAt *smithy.Schema
+
+var UpdateRetrievalInstructionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "UpdateRetrievalInstructionRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateRetrievalInstructionRequest_retrievalInstructionId *smithy.Schema
+
+var UpdateRetrievalInstructionRequest_instruction *smithy.Schema
+
+var UpdateRetrievalInstructionRequest_description *smithy.Schema
+
+var UpdateRetrievalInstructionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagent",
+	Name:      "UpdateRetrievalInstructionResponse",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateRetrievalInstructionResponse_retrievalInstructionId *smithy.Schema
+
+var UpdateRetrievalInstructionResponse_retrievalInstructionArn *smithy.Schema
+
+var UpdateRetrievalInstructionResponse_name *smithy.Schema
+
+var UpdateRetrievalInstructionResponse_status *smithy.Schema
+
+var UpdateRetrievalInstructionResponse_lastTransitionStatus *smithy.Schema
+
+var UpdateRetrievalInstructionResponse_createdAt *smithy.Schema
+
+var UpdateRetrievalInstructionResponse_updatedAt *smithy.Schema
 
 var ValidateFlowDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagent",
@@ -9208,6 +9589,76 @@ func init() {
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _NonBlankString)
 
+	RetrievalInstructionContent_retrievalGuidance = RetrievalInstructionContent.AddMember("retrievalGuidance", _RetrievalInstructionFieldText)
+
+	RetrievalInstructionContent_persona = RetrievalInstructionContent.AddMember("persona", _RetrievalInstructionFieldText)
+
+	RetrievalInstructionContent_answerFormat = RetrievalInstructionContent.AddMember("answerFormat", _RetrievalInstructionFieldText)
+
+	RetrievalInstructionContent_answerPolicy = RetrievalInstructionContent.AddMember("answerPolicy", _RetrievalInstructionFieldText)
+
+	RetrievalInstructionFieldName_RETRIEVAL_GUIDANCE = RetrievalInstructionFieldName.AddMember("RETRIEVAL_GUIDANCE", smithyprelude.Unit)
+
+	RetrievalInstructionFieldName_PERSONA = RetrievalInstructionFieldName.AddMember("PERSONA", smithyprelude.Unit)
+
+	RetrievalInstructionFieldName_ANSWER_FORMAT = RetrievalInstructionFieldName.AddMember("ANSWER_FORMAT", smithyprelude.Unit)
+
+	RetrievalInstructionFieldName_ANSWER_POLICY = RetrievalInstructionFieldName.AddMember("ANSWER_POLICY", smithyprelude.Unit)
+
+	RetrievalInstructionFailureReasonCode_CONTENT_REJECTED = RetrievalInstructionFailureReasonCode.AddMember("CONTENT_REJECTED", smithyprelude.Unit)
+
+	RetrievalInstructionFailureReasonCode_CLIENT_ERROR = RetrievalInstructionFailureReasonCode.AddMember("CLIENT_ERROR", smithyprelude.Unit)
+
+	RetrievalInstructionFailureReasonCode_INTERNAL_ERROR = RetrievalInstructionFailureReasonCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	RetrievalInstructionFailureReason_fieldName = RetrievalInstructionFailureReason.AddMember("fieldName", RetrievalInstructionFieldName)
+
+	RetrievalInstructionFailureReason_code = RetrievalInstructionFailureReason.AddMember("code", RetrievalInstructionFailureReasonCode)
+
+	RetrievalInstructionFailureReason_message = RetrievalInstructionFailureReason.AddMember("message", smithyprelude.String)
+
+	_RetrievalInstructionFailureReasons_member = _RetrievalInstructionFailureReasons.AddMember("member", RetrievalInstructionFailureReason)
+
+	RetrievalInstructionLastTransitionStatus_CREATING = RetrievalInstructionLastTransitionStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	RetrievalInstructionLastTransitionStatus_UPDATING = RetrievalInstructionLastTransitionStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	RetrievalInstructionLastTransitionStatus_CREATE_SUCCESSFUL = RetrievalInstructionLastTransitionStatus.AddMember("CREATE_SUCCESSFUL", smithyprelude.Unit)
+
+	RetrievalInstructionLastTransitionStatus_CREATE_FAILED = RetrievalInstructionLastTransitionStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	RetrievalInstructionLastTransitionStatus_UPDATE_SUCCESSFUL = RetrievalInstructionLastTransitionStatus.AddMember("UPDATE_SUCCESSFUL", smithyprelude.Unit)
+
+	RetrievalInstructionLastTransitionStatus_UPDATE_FAILED = RetrievalInstructionLastTransitionStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
+	RetrievalInstructionStatus_ACTIVE = RetrievalInstructionStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	RetrievalInstructionStatus_INACTIVE = RetrievalInstructionStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	RetrievalInstructionSummary_retrievalInstructionId = RetrievalInstructionSummary.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	RetrievalInstructionSummary_retrievalInstructionArn = RetrievalInstructionSummary.AddMember("retrievalInstructionArn", _RetrievalInstructionArn)
+
+	RetrievalInstructionSummary_name = RetrievalInstructionSummary.AddMember("name", _RetrievalInstructionName)
+
+	RetrievalInstructionSummary_status = RetrievalInstructionSummary.AddMember("status", RetrievalInstructionStatus)
+
+	RetrievalInstructionSummary_lastTransitionStatus = RetrievalInstructionSummary.AddMember("lastTransitionStatus", RetrievalInstructionLastTransitionStatus)
+
+	RetrievalInstructionSummary_createdAt = RetrievalInstructionSummary.AddMember("createdAt", _DateTimestamp)
+
+	RetrievalInstructionSummary_updatedAt = RetrievalInstructionSummary.AddMember("updatedAt", _DateTimestamp)
+
+	RetrievalInstructionSummary_description = RetrievalInstructionSummary.AddMember("description", _RetrievalInstructionDescription)
+
+	_RetrievalInstructionSummaries_member = _RetrievalInstructionSummaries.AddMember("member", RetrievalInstructionSummary)
+
+	RetrievalInstructionVersionSummary_version = RetrievalInstructionVersionSummary.AddMember("version", _RetrievalInstructionNumericalVersion)
+
+	RetrievalInstructionVersionSummary_createdAt = RetrievalInstructionVersionSummary.AddMember("createdAt", _DateTimestamp)
+
+	_RetrievalInstructionVersionSummaries_member = _RetrievalInstructionVersionSummaries.AddMember("member", RetrievalInstructionVersionSummary)
+
 	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _NonBlankString)
 
 	_SubnetIdList_member = _SubnetIdList.AddMember("member", _SubnetId)
@@ -9594,6 +10045,48 @@ func init() {
 
 	CreatePromptVersionResponse_updatedAt = CreatePromptVersionResponse.AddMember("updatedAt", _DateTimestamp)
 
+	CreateRetrievalInstructionRequest_clientToken = CreateRetrievalInstructionRequest.AddMember("clientToken", _ClientToken)
+
+	CreateRetrievalInstructionRequest_name = CreateRetrievalInstructionRequest.AddMember("name", _RetrievalInstructionName)
+
+	CreateRetrievalInstructionRequest_instruction = CreateRetrievalInstructionRequest.AddMember("instruction", RetrievalInstructionContent)
+
+	CreateRetrievalInstructionRequest_description = CreateRetrievalInstructionRequest.AddMember("description", _RetrievalInstructionDescription)
+
+	CreateRetrievalInstructionRequest_customerEncryptionKeyArn = CreateRetrievalInstructionRequest.AddMember("customerEncryptionKeyArn", _KmsKeyArn)
+
+	CreateRetrievalInstructionRequest_tags = CreateRetrievalInstructionRequest.AddMember("tags", _TagsMap)
+
+	CreateRetrievalInstructionResponse_retrievalInstructionId = CreateRetrievalInstructionResponse.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	CreateRetrievalInstructionResponse_retrievalInstructionArn = CreateRetrievalInstructionResponse.AddMember("retrievalInstructionArn", _RetrievalInstructionArn)
+
+	CreateRetrievalInstructionResponse_name = CreateRetrievalInstructionResponse.AddMember("name", _RetrievalInstructionName)
+
+	CreateRetrievalInstructionResponse_status = CreateRetrievalInstructionResponse.AddMember("status", RetrievalInstructionStatus)
+
+	CreateRetrievalInstructionResponse_lastTransitionStatus = CreateRetrievalInstructionResponse.AddMember("lastTransitionStatus", RetrievalInstructionLastTransitionStatus)
+
+	CreateRetrievalInstructionResponse_createdAt = CreateRetrievalInstructionResponse.AddMember("createdAt", _DateTimestamp)
+
+	CreateRetrievalInstructionResponse_updatedAt = CreateRetrievalInstructionResponse.AddMember("updatedAt", _DateTimestamp)
+
+	CreateRetrievalInstructionVersionRequest_retrievalInstructionId = CreateRetrievalInstructionVersionRequest.AddMember("retrievalInstructionId", _RetrievalInstructionId, &smithytraits.HTTPLabel{})
+
+	CreateRetrievalInstructionVersionRequest_description = CreateRetrievalInstructionVersionRequest.AddMember("description", _RetrievalInstructionDescription)
+
+	CreateRetrievalInstructionVersionRequest_clientToken = CreateRetrievalInstructionVersionRequest.AddMember("clientToken", _ClientToken)
+
+	CreateRetrievalInstructionVersionResponse_retrievalInstructionId = CreateRetrievalInstructionVersionResponse.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	CreateRetrievalInstructionVersionResponse_retrievalInstructionArn = CreateRetrievalInstructionVersionResponse.AddMember("retrievalInstructionArn", _RetrievalInstructionArn)
+
+	CreateRetrievalInstructionVersionResponse_version = CreateRetrievalInstructionVersionResponse.AddMember("version", _RetrievalInstructionNumericalVersion)
+
+	CreateRetrievalInstructionVersionResponse_createdAt = CreateRetrievalInstructionVersionResponse.AddMember("createdAt", _DateTimestamp)
+
+	CreateRetrievalInstructionVersionResponse_description = CreateRetrievalInstructionVersionResponse.AddMember("description", _RetrievalInstructionDescription)
+
 	CreateVpcConfigurationRequest_knowledgeBaseId = CreateVpcConfigurationRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
 
 	CreateVpcConfigurationRequest_clientToken = CreateVpcConfigurationRequest.AddMember("clientToken", _ClientToken)
@@ -9725,6 +10218,16 @@ func init() {
 	DeleteResourcePolicyResponse_resourceArn = DeleteResourcePolicyResponse.AddMember("resourceArn", _ResourceArn)
 
 	DeleteResourcePolicyResponse_revisionId = DeleteResourcePolicyResponse.AddMember("revisionId", _RevisionId)
+
+	DeleteRetrievalInstructionRequest_retrievalInstructionId = DeleteRetrievalInstructionRequest.AddMember("retrievalInstructionId", _RetrievalInstructionId, &smithytraits.HTTPLabel{})
+
+	DeleteRetrievalInstructionRequest_retrievalInstructionVersion = DeleteRetrievalInstructionRequest.AddMember("retrievalInstructionVersion", _RetrievalInstructionNumericalVersion, &smithytraits.HTTPQuery{Name: "retrievalInstructionVersion"})
+
+	DeleteRetrievalInstructionResponse_retrievalInstructionId = DeleteRetrievalInstructionResponse.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	DeleteRetrievalInstructionResponse_retrievalInstructionArn = DeleteRetrievalInstructionResponse.AddMember("retrievalInstructionArn", _RetrievalInstructionArn)
+
+	DeleteRetrievalInstructionResponse_version = DeleteRetrievalInstructionResponse.AddMember("version", _RetrievalInstructionNumericalVersion)
 
 	DeleteVpcConfigurationRequest_knowledgeBaseId = DeleteVpcConfigurationRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
 
@@ -9922,6 +10425,36 @@ func init() {
 
 	GetResourcePolicyResponse_revisionId = GetResourcePolicyResponse.AddMember("revisionId", _RevisionId)
 
+	GetRetrievalInstructionRequest_retrievalInstructionId = GetRetrievalInstructionRequest.AddMember("retrievalInstructionId", _RetrievalInstructionId, &smithytraits.HTTPLabel{})
+
+	GetRetrievalInstructionRequest_retrievalInstructionVersion = GetRetrievalInstructionRequest.AddMember("retrievalInstructionVersion", _RetrievalInstructionVersionSelector, &smithytraits.HTTPQuery{Name: "retrievalInstructionVersion"})
+
+	GetRetrievalInstructionResponse_retrievalInstructionId = GetRetrievalInstructionResponse.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	GetRetrievalInstructionResponse_retrievalInstructionArn = GetRetrievalInstructionResponse.AddMember("retrievalInstructionArn", _RetrievalInstructionArn)
+
+	GetRetrievalInstructionResponse_name = GetRetrievalInstructionResponse.AddMember("name", _RetrievalInstructionName)
+
+	GetRetrievalInstructionResponse_status = GetRetrievalInstructionResponse.AddMember("status", RetrievalInstructionStatus)
+
+	GetRetrievalInstructionResponse_lastTransitionStatus = GetRetrievalInstructionResponse.AddMember("lastTransitionStatus", RetrievalInstructionLastTransitionStatus)
+
+	GetRetrievalInstructionResponse_instruction = GetRetrievalInstructionResponse.AddMember("instruction", RetrievalInstructionContent)
+
+	GetRetrievalInstructionResponse_createdAt = GetRetrievalInstructionResponse.AddMember("createdAt", _DateTimestamp)
+
+	GetRetrievalInstructionResponse_updatedAt = GetRetrievalInstructionResponse.AddMember("updatedAt", _DateTimestamp)
+
+	GetRetrievalInstructionResponse_description = GetRetrievalInstructionResponse.AddMember("description", _RetrievalInstructionDescription)
+
+	GetRetrievalInstructionResponse_customerEncryptionKeyArn = GetRetrievalInstructionResponse.AddMember("customerEncryptionKeyArn", _KmsKeyArn)
+
+	GetRetrievalInstructionResponse_lastTransitionStatusReasons = GetRetrievalInstructionResponse.AddMember("lastTransitionStatusReasons", _RetrievalInstructionFailureReasons)
+
+	GetRetrievalInstructionResponse_version = GetRetrievalInstructionResponse.AddMember("version", _RetrievalInstructionVersionSelector)
+
+	GetRetrievalInstructionResponse_latestVersion = GetRetrievalInstructionResponse.AddMember("latestVersion", _RetrievalInstructionNumericalVersion)
+
 	GetVpcConfigurationRequest_knowledgeBaseId = GetVpcConfigurationRequest.AddMember("knowledgeBaseId", _Id, &smithytraits.HTTPLabel{})
 
 	GetVpcConfigurationRequest_vpcConfigurationId = GetVpcConfigurationRequest.AddMember("vpcConfigurationId", _VpcConfigurationId, &smithytraits.HTTPLabel{})
@@ -10085,6 +10618,26 @@ func init() {
 	ListPromptsResponse_promptSummaries = ListPromptsResponse.AddMember("promptSummaries", _PromptSummaries)
 
 	ListPromptsResponse_nextToken = ListPromptsResponse.AddMember("nextToken", _NextToken)
+
+	ListRetrievalInstructionsRequest_status = ListRetrievalInstructionsRequest.AddMember("status", RetrievalInstructionStatus, &smithytraits.HTTPQuery{Name: "status"})
+
+	ListRetrievalInstructionsRequest_maxResults = ListRetrievalInstructionsRequest.AddMember("maxResults", _RetrievalInstructionMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListRetrievalInstructionsRequest_nextToken = ListRetrievalInstructionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListRetrievalInstructionsResponse_retrievalInstructionSummaries = ListRetrievalInstructionsResponse.AddMember("retrievalInstructionSummaries", _RetrievalInstructionSummaries)
+
+	ListRetrievalInstructionsResponse_nextToken = ListRetrievalInstructionsResponse.AddMember("nextToken", _NextToken)
+
+	ListRetrievalInstructionVersionsRequest_retrievalInstructionId = ListRetrievalInstructionVersionsRequest.AddMember("retrievalInstructionId", _RetrievalInstructionId, &smithytraits.HTTPLabel{})
+
+	ListRetrievalInstructionVersionsRequest_maxResults = ListRetrievalInstructionVersionsRequest.AddMember("maxResults", _RetrievalInstructionMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListRetrievalInstructionVersionsRequest_nextToken = ListRetrievalInstructionVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListRetrievalInstructionVersionsResponse_retrievalInstructionVersionSummaries = ListRetrievalInstructionVersionsResponse.AddMember("retrievalInstructionVersionSummaries", _RetrievalInstructionVersionSummaries)
+
+	ListRetrievalInstructionVersionsResponse_nextToken = ListRetrievalInstructionVersionsResponse.AddMember("nextToken", _NextToken)
 
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _TaggableResourcesArn, &smithytraits.HTTPLabel{})
 
@@ -10377,6 +10930,26 @@ func init() {
 	UpdatePromptResponse_createdAt = UpdatePromptResponse.AddMember("createdAt", _DateTimestamp)
 
 	UpdatePromptResponse_updatedAt = UpdatePromptResponse.AddMember("updatedAt", _DateTimestamp)
+
+	UpdateRetrievalInstructionRequest_retrievalInstructionId = UpdateRetrievalInstructionRequest.AddMember("retrievalInstructionId", _RetrievalInstructionId, &smithytraits.HTTPLabel{})
+
+	UpdateRetrievalInstructionRequest_instruction = UpdateRetrievalInstructionRequest.AddMember("instruction", RetrievalInstructionContent)
+
+	UpdateRetrievalInstructionRequest_description = UpdateRetrievalInstructionRequest.AddMember("description", _RetrievalInstructionDescription)
+
+	UpdateRetrievalInstructionResponse_retrievalInstructionId = UpdateRetrievalInstructionResponse.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	UpdateRetrievalInstructionResponse_retrievalInstructionArn = UpdateRetrievalInstructionResponse.AddMember("retrievalInstructionArn", _RetrievalInstructionArn)
+
+	UpdateRetrievalInstructionResponse_name = UpdateRetrievalInstructionResponse.AddMember("name", _RetrievalInstructionName)
+
+	UpdateRetrievalInstructionResponse_status = UpdateRetrievalInstructionResponse.AddMember("status", RetrievalInstructionStatus)
+
+	UpdateRetrievalInstructionResponse_lastTransitionStatus = UpdateRetrievalInstructionResponse.AddMember("lastTransitionStatus", RetrievalInstructionLastTransitionStatus)
+
+	UpdateRetrievalInstructionResponse_createdAt = UpdateRetrievalInstructionResponse.AddMember("createdAt", _DateTimestamp)
+
+	UpdateRetrievalInstructionResponse_updatedAt = UpdateRetrievalInstructionResponse.AddMember("updatedAt", _DateTimestamp)
 
 	ValidateFlowDefinitionRequest_definition = ValidateFlowDefinitionRequest.AddMember("definition", FlowDefinition)
 

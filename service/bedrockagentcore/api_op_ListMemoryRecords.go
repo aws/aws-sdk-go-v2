@@ -49,9 +49,9 @@ type ListMemoryRecordsInput struct {
 	// A list of metadata filter expressions to scope the returned memory records.
 	MetadataFilters []types.MemoryMetadataFilterExpression
 
-	// The namespace prefix to filter memory records by. Returns all memory records in
-	// namespaces that start with the provided prefix. Either namespace or
-	// namespacePath is required.
+	// The exact namespace to filter memory records by. Returns all memory records
+	// that matches the provided namespace. Either namespace or namespacePath is
+	// required.
 	Namespace *string
 
 	// Use namespacePath for hierarchical retrievals. Return all memory records where

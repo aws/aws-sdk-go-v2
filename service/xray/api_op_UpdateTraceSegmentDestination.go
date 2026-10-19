@@ -33,6 +33,10 @@ func (c *Client) UpdateTraceSegmentDestination(ctx context.Context, params *Upda
 
 type UpdateTraceSegmentDestinationInput struct {
 
+	//  Specifies settings for the CloudWatch Logs log groups that X-Ray creates for
+	// Transaction Search. Specify this only when Destination is CloudWatchLogs .
+	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
+
 	//  The configured destination of trace segments.
 	Destination types.TraceSegmentDestination
 
@@ -46,6 +50,11 @@ func (v *UpdateTraceSegmentDestinationInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateTraceSegmentDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateTraceSegmentDestinationRequest_CloudWatchLogsConfiguration)
+		v.CloudWatchLogsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Destination != "" {
 		s.WriteString(schemas.UpdateTraceSegmentDestinationRequest_Destination, string(v.Destination))
 	}

@@ -114,6 +114,9 @@ type Target struct {
 	//
 	//   - Amazon Q Developer in chat applications clients are specified as
 	//   AWSChatbotSlack .
+	//
+	//   - Amazon Q Developer in chat applications clients for Microsoft Teams are
+	//   specified as AWSChatbotMicrosoftTeams .
 	TargetType *string
 
 	noSmithyDocumentSerde
@@ -133,8 +136,11 @@ type TargetSummary struct {
 	//
 	//   - Amazon Q Developer in chat applications topics are specified as SNS .
 	//
-	//   - Amazon Q Developer in chat applications clients are specified as
+	//   - Amazon Q Developer in chat applications clients for Slack are specified as
 	//   AWSChatbotSlack .
+	//
+	//   - Amazon Q Developer in chat applications clients for Microsoft Teams are
+	//   specified as AWSChatbotMicrosoftTeams .
 	TargetType *string
 
 	noSmithyDocumentSerde

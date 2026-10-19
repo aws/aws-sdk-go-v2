@@ -5624,6 +5624,14 @@ var ContentAttributes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ContentAttributes_RecommenderConfig *smithy.Schema
 
+var ContentDisposition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContentDisposition",
+}, smithy.ShapeTypeEnum, 2)
+var ContentDisposition_INLINE *smithy.Schema
+
+var ContentDisposition_ATTACHMENT *smithy.Schema
+
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContentType",
@@ -8644,7 +8652,7 @@ var _FileSourceUri = smithy.NewSchema(smithy.ShapeID{
 var FileStatusType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "FileStatusType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var FileStatusType_APPROVED *smithy.Schema
 
 var FileStatusType_REJECTED *smithy.Schema
@@ -8652,6 +8660,8 @@ var FileStatusType_REJECTED *smithy.Schema
 var FileStatusType_PROCESSING *smithy.Schema
 
 var FileStatusType_FAILED *smithy.Schema
+
+var FileStatusType_DRAFTING *smithy.Schema
 
 var FileUseCaseType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -20146,7 +20156,7 @@ var EvaluateDataTableValuesResponse_NextToken *smithy.Schema
 var GetAttachedFileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetAttachedFileRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var GetAttachedFileRequest_InstanceId *smithy.Schema
 
 var GetAttachedFileRequest_FileId *smithy.Schema
@@ -20154,6 +20164,8 @@ var GetAttachedFileRequest_FileId *smithy.Schema
 var GetAttachedFileRequest_UrlExpiryInSeconds *smithy.Schema
 
 var GetAttachedFileRequest_AssociatedResourceArn *smithy.Schema
+
+var GetAttachedFileRequest_UrlContentDisposition *smithy.Schema
 
 var GetAttachedFileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -25415,6 +25427,8 @@ func init() {
 
 	FileStatusType_FAILED = FileStatusType.AddMember("FAILED", smithyprelude.Unit)
 
+	FileStatusType_DRAFTING = FileStatusType.AddMember("DRAFTING", smithyprelude.Unit)
+
 	CreatedByInfo_ConnectUserArn = CreatedByInfo.AddMember("ConnectUserArn", _ARN)
 
 	CreatedByInfo_AWSIdentityArn = CreatedByInfo.AddMember("AWSIdentityArn", _ARN)
@@ -27480,6 +27494,10 @@ func init() {
 	RecommenderConfig_Context = RecommenderConfig.AddMember("Context", _RecommenderContext)
 
 	ContentAttributes_RecommenderConfig = ContentAttributes.AddMember("RecommenderConfig", RecommenderConfig)
+
+	ContentDisposition_INLINE = ContentDisposition.AddMember("INLINE", smithyprelude.Unit)
+
+	ContentDisposition_ATTACHMENT = ContentDisposition.AddMember("ATTACHMENT", smithyprelude.Unit)
 
 	ControlPlaneUserAttributeFilter_OrConditions = ControlPlaneUserAttributeFilter.AddMember("OrConditions", _AttributeOrConditionList)
 
@@ -33754,6 +33772,8 @@ func init() {
 	GetAttachedFileRequest_UrlExpiryInSeconds = GetAttachedFileRequest.AddMember("UrlExpiryInSeconds", _URLExpiryInSeconds, &smithytraits.HTTPQuery{Name: "urlExpiryInSeconds"})
 
 	GetAttachedFileRequest_AssociatedResourceArn = GetAttachedFileRequest.AddMember("AssociatedResourceArn", _ARN, &smithytraits.HTTPQuery{Name: "associatedResourceArn"})
+
+	GetAttachedFileRequest_UrlContentDisposition = GetAttachedFileRequest.AddMember("UrlContentDisposition", ContentDisposition, &smithytraits.HTTPQuery{Name: "urlContentDisposition"})
 
 	GetAttachedFileResponse_FileArn = GetAttachedFileResponse.AddMember("FileArn", _ARN)
 

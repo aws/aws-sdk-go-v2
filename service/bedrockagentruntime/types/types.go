@@ -652,6 +652,51 @@ func (v *AgenticRetrieveActionDetails) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// The retrieval instruction, identified by its ID and version, that was applied
+// to the request.
+type AgenticRetrieveAppliedInstruction struct {
+
+	// The identifier of the retrieval instruction applied.
+	//
+	// This member is required.
+	Id *string
+
+	// The version that was applied: a version number, or DRAFT. The service reports
+	// this version whenever it reports appliedInstruction, including DRAFT when the
+	// request did not specify a version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveAppliedInstruction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveAppliedInstruction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveAppliedInstruction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AgenticRetrieveAppliedInstruction_id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.AgenticRetrieveAppliedInstruction_version, *v.Version)
+	}
+}
+func (v *AgenticRetrieveAppliedInstruction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveAppliedInstruction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveAppliedInstruction_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AgenticRetrieveAppliedInstruction_id, v.Id)
+		case schemas.AgenticRetrieveAppliedInstruction_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AgenticRetrieveAppliedInstruction_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Configuration for a Bedrock guardrail applied during agentic retrieval.
 type AgenticRetrieveBedrockGuardrailConfiguration struct {
 
@@ -1108,6 +1153,52 @@ func (v *AgenticRetrieveGuardrailWarning) Deserialize(d smithy.ShapeDeserializer
 		case schemas.AgenticRetrieveGuardrailWarning_version:
 			v.Version = new(string)
 			return d.ReadString(schemas.AgenticRetrieveGuardrailWarning_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// The retrieval instruction, identified by its ID and optional version, to apply
+// to this request.
+type AgenticRetrieveInstructionConfiguration struct {
+
+	// The identifier of the retrieval instruction. The instruction must exist in the
+	// caller's account and its status must be ACTIVE.
+	//
+	// This member is required.
+	RetrievalInstructionId *string
+
+	// The version of the retrieval instruction to apply: a version number, or DRAFT
+	// for the instruction's current reviewed content. When omitted, DRAFT is used.
+	// This default is permanent.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveInstructionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveInstructionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveInstructionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetrievalInstructionId != nil {
+		s.WriteString(schemas.AgenticRetrieveInstructionConfiguration_retrievalInstructionId, *v.RetrievalInstructionId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.AgenticRetrieveInstructionConfiguration_version, *v.Version)
+	}
+}
+func (v *AgenticRetrieveInstructionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveInstructionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveInstructionConfiguration_retrievalInstructionId:
+			v.RetrievalInstructionId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveInstructionConfiguration_retrievalInstructionId, v.RetrievalInstructionId)
+		case schemas.AgenticRetrieveInstructionConfiguration_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AgenticRetrieveInstructionConfiguration_version, v.Version)
 		}
 		return nil
 	})
@@ -2120,6 +2211,10 @@ type AgenticRetrieveTraceEventAttributes struct {
 	// The list of actions taken during this step.
 	Actions []AgenticRetrieveAction
 
+	// The agent reports the retrieval instruction applied to this request on the
+	// first planning step.
+	AppliedInstruction *AgenticRetrieveAppliedInstruction
+
 	// Failures that occurred during this step.
 	Failures []AgenticRetrieveFailure
 
@@ -2143,6 +2238,11 @@ func (v *AgenticRetrieveTraceEventAttributes) Serialize(s smithy.ShapeSerializer
 
 func (v *AgenticRetrieveTraceEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeAgenticRetrieveActions(s, schemas.AgenticRetrieveTraceEventAttributes_actions, v.Actions)
+	if v.AppliedInstruction != nil {
+		s.WriteStruct(schemas.AgenticRetrieveTraceEventAttributes_appliedInstruction)
+		v.AppliedInstruction.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serializeAgenticRetrieveFailures(s, schemas.AgenticRetrieveTraceEventAttributes_failures, v.Failures)
 	if v.Message != nil {
 		s.WriteString(schemas.AgenticRetrieveTraceEventAttributes_message, *v.Message)
@@ -2162,6 +2262,9 @@ func (v *AgenticRetrieveTraceEventAttributes) Deserialize(d smithy.ShapeDeserial
 		switch s {
 		case schemas.AgenticRetrieveTraceEventAttributes_actions:
 			return deserializeAgenticRetrieveActions(d, schemas.AgenticRetrieveTraceEventAttributes_actions, &v.Actions)
+		case schemas.AgenticRetrieveTraceEventAttributes_appliedInstruction:
+			v.AppliedInstruction = &AgenticRetrieveAppliedInstruction{}
+			return v.AppliedInstruction.Deserialize(d)
 		case schemas.AgenticRetrieveTraceEventAttributes_failures:
 			return deserializeAgenticRetrieveFailures(d, schemas.AgenticRetrieveTraceEventAttributes_failures, &v.Failures)
 		case schemas.AgenticRetrieveTraceEventAttributes_message:

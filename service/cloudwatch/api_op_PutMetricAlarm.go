@@ -87,6 +87,11 @@ type PutMetricAlarmInput struct {
 	// This member is required.
 	AlarmName *string
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *types.ActionConfiguration
+
 	// Indicates whether actions should be executed during any changes to the alarm
 	// state. The default is TRUE .
 	ActionsEnabled *bool
@@ -506,6 +511,11 @@ func (v *PutMetricAlarmInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutMetricAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.PutMetricAlarmInput_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.PutMetricAlarmInput_ActionsEnabled, *v.ActionsEnabled)
 	}

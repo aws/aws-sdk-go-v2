@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":"2000-01-01T00:00:00Z","customerEncryptionKeyArn":"__CustomerEncryptionKeyArn__","description":"__Description__","instruction":{"answerFormat":"__AnswerFormat__","answerPolicy":"__AnswerPolicy__","persona":"__Persona__","retrievalGuidance":"__RetrievalGuidance__"},"lastTransitionStatus":"CREATING","lastTransitionStatusReasons":[{"code":"CONTENT_REJECTED","fieldName":"RETRIEVAL_GUIDANCE","message":"__Message__"},{"code":"CONTENT_REJECTED","fieldName":"RETRIEVAL_GUIDANCE","message":"__Message__"}],"latestVersion":"__LatestVersion__","name":"__Name__","retrievalInstructionArn":"__RetrievalInstructionArn__","retrievalInstructionId":"__RetrievalInstructionId__","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}

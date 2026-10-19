@@ -1767,6 +1767,14 @@ var ImageType_OWNED *smithy.Schema
 
 var ImageType_SHARED *smithy.Schema
 
+var ImageValidationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.workspaces",
+	Name:      "ImageValidationMode",
+}, smithy.ShapeTypeEnum, 2)
+var ImageValidationMode_CUSTOMER_MANAGED *smithy.Schema
+
+var ImageValidationMode_SERVICE_MANAGED *smithy.Schema
+
 var IncompatibleApplicationsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "IncompatibleApplicationsException",
@@ -4579,7 +4587,7 @@ var ImportClientBrandingResult_DeviceTypeWeb *smithy.Schema
 var ImportCustomWorkspaceImageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ImportCustomWorkspaceImageRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ImportCustomWorkspaceImageRequest_ImageName *smithy.Schema
 
 var ImportCustomWorkspaceImageRequest_ImageDescription *smithy.Schema
@@ -4597,6 +4605,8 @@ var ImportCustomWorkspaceImageRequest_Platform *smithy.Schema
 var ImportCustomWorkspaceImageRequest_OsVersion *smithy.Schema
 
 var ImportCustomWorkspaceImageRequest_Tags *smithy.Schema
+
+var ImportCustomWorkspaceImageRequest_ImageValidationMode *smithy.Schema
 
 var ImportCustomWorkspaceImageResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -6126,6 +6136,10 @@ func init() {
 
 	ImageType_SHARED = ImageType.AddMember("SHARED", smithyprelude.Unit)
 
+	ImageValidationMode_CUSTOMER_MANAGED = ImageValidationMode.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
+
+	ImageValidationMode_SERVICE_MANAGED = ImageValidationMode.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
+
 	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
 
 	InvalidParameterCombinationException_message = InvalidParameterCombinationException.AddMember("message", _ExceptionMessage)
@@ -7209,6 +7223,8 @@ func init() {
 	ImportCustomWorkspaceImageRequest_OsVersion = ImportCustomWorkspaceImageRequest.AddMember("OsVersion", OSVersion)
 
 	ImportCustomWorkspaceImageRequest_Tags = ImportCustomWorkspaceImageRequest.AddMember("Tags", _TagList)
+
+	ImportCustomWorkspaceImageRequest_ImageValidationMode = ImportCustomWorkspaceImageRequest.AddMember("ImageValidationMode", ImageValidationMode)
 
 	ImportCustomWorkspaceImageResult_ImageId = ImportCustomWorkspaceImageResult.AddMember("ImageId", _WorkspaceImageId)
 

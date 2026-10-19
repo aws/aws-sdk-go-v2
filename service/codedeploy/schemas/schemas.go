@@ -435,6 +435,24 @@ var _AutoScalingGroupNameList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AutoScalingGroupNameList_member *smithy.Schema
 
+var AutoScalingGroupProcess = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codedeploy",
+	Name:      "AutoScalingGroupProcess",
+}, smithy.ShapeTypeEnum, 4)
+var AutoScalingGroupProcess_TERMINATE *smithy.Schema
+
+var AutoScalingGroupProcess_AZ_REBALANCE *smithy.Schema
+
+var AutoScalingGroupProcess_INSTANCE_REFRESH *smithy.Schema
+
+var AutoScalingGroupProcess_SCHEDULED_ACTIONS *smithy.Schema
+
+var _AutoScalingGroupProcessesToSuspendList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codedeploy",
+	Name:      "AutoScalingGroupProcessesToSuspendList",
+}, smithy.ShapeTypeList, 1)
+var _AutoScalingGroupProcessesToSuspendList_member *smithy.Schema
+
 var BatchLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "BatchLimitExceededException",
@@ -638,7 +656,7 @@ var _DeploymentGroupId = smithy.NewSchema(smithy.ShapeID{
 var DeploymentGroupInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentGroupInfo",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var DeploymentGroupInfo_applicationName *smithy.Schema
 
 var DeploymentGroupInfo_deploymentGroupId *smithy.Schema
@@ -682,6 +700,8 @@ var DeploymentGroupInfo_onPremisesTagSet *smithy.Schema
 var DeploymentGroupInfo_computePlatform *smithy.Schema
 
 var DeploymentGroupInfo_ecsServices *smithy.Schema
+
+var DeploymentGroupInfo_ec2DeploymentOptions *smithy.Schema
 
 var DeploymentGroupInfo_terminationHookEnabled *smithy.Schema
 
@@ -728,7 +748,7 @@ var DeploymentIdRequiredException_message *smithy.Schema
 var DeploymentInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentInfo",
-}, smithy.ShapeTypeStructure, 31)
+}, smithy.ShapeTypeStructure, 32)
 var DeploymentInfo_applicationName *smithy.Schema
 
 var DeploymentInfo_deploymentGroupName *smithy.Schema
@@ -790,6 +810,8 @@ var DeploymentInfo_externalId *smithy.Schema
 var DeploymentInfo_relatedDeployments *smithy.Schema
 
 var DeploymentInfo_overrideAlarmConfiguration *smithy.Schema
+
+var DeploymentInfo_ec2DeploymentOptions *smithy.Schema
 
 var DeploymentIsNotInReadyStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
@@ -1002,6 +1024,12 @@ var _Duration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "Duration",
 }, smithy.ShapeTypeInteger, 0)
+
+var EC2DeploymentOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codedeploy",
+	Name:      "EC2DeploymentOptions",
+}, smithy.ShapeTypeStructure, 1)
+var EC2DeploymentOptions_autoScalingGroupProcessesToSuspend *smithy.Schema
 
 var EC2TagFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
@@ -1563,6 +1591,12 @@ var InvalidAutoScalingGroupException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InvalidAutoScalingGroupException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidAutoScalingGroupException_message *smithy.Schema
+
+var InvalidAutoScalingGroupProcessToSuspendException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codedeploy",
+	Name:      "InvalidAutoScalingGroupProcessToSuspendException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var InvalidAutoScalingGroupProcessToSuspendException_message *smithy.Schema
 
 var InvalidBlueGreenDeploymentConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
@@ -2801,7 +2835,7 @@ var CreateDeploymentConfigOutput_deploymentConfigId *smithy.Schema
 var CreateDeploymentGroupInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "CreateDeploymentGroupInput",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var CreateDeploymentGroupInput_applicationName *smithy.Schema
 
 var CreateDeploymentGroupInput_deploymentGroupName *smithy.Schema
@@ -2838,6 +2872,8 @@ var CreateDeploymentGroupInput_onPremisesTagSet *smithy.Schema
 
 var CreateDeploymentGroupInput_tags *smithy.Schema
 
+var CreateDeploymentGroupInput_ec2DeploymentOptions *smithy.Schema
+
 var CreateDeploymentGroupInput_terminationHookEnabled *smithy.Schema
 
 var CreateDeploymentGroupOutput = smithy.NewSchema(smithy.ShapeID{
@@ -2849,7 +2885,7 @@ var CreateDeploymentGroupOutput_deploymentGroupId *smithy.Schema
 var CreateDeploymentInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "CreateDeploymentInput",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateDeploymentInput_applicationName *smithy.Schema
 
 var CreateDeploymentInput_deploymentGroupName *smithy.Schema
@@ -2873,6 +2909,8 @@ var CreateDeploymentInput_fileExistsBehavior *smithy.Schema
 var CreateDeploymentInput_deploymentMode *smithy.Schema
 
 var CreateDeploymentInput_overrideAlarmConfiguration *smithy.Schema
+
+var CreateDeploymentInput_ec2DeploymentOptions *smithy.Schema
 
 var CreateDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
@@ -3328,7 +3366,7 @@ var UpdateApplicationInput_newApplicationName *smithy.Schema
 var UpdateDeploymentGroupInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "UpdateDeploymentGroupInput",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var UpdateDeploymentGroupInput_applicationName *smithy.Schema
 
 var UpdateDeploymentGroupInput_currentDeploymentGroupName *smithy.Schema
@@ -3364,6 +3402,8 @@ var UpdateDeploymentGroupInput_ec2TagSet *smithy.Schema
 var UpdateDeploymentGroupInput_ecsServices *smithy.Schema
 
 var UpdateDeploymentGroupInput_onPremisesTagSet *smithy.Schema
+
+var UpdateDeploymentGroupInput_ec2DeploymentOptions *smithy.Schema
 
 var UpdateDeploymentGroupInput_terminationHookEnabled *smithy.Schema
 
@@ -3451,6 +3491,16 @@ func init() {
 	_AutoScalingGroupList_member = _AutoScalingGroupList.AddMember("member", AutoScalingGroup)
 
 	_AutoScalingGroupNameList_member = _AutoScalingGroupNameList.AddMember("member", _AutoScalingGroupName)
+
+	AutoScalingGroupProcess_TERMINATE = AutoScalingGroupProcess.AddMember("TERMINATE", smithyprelude.Unit)
+
+	AutoScalingGroupProcess_AZ_REBALANCE = AutoScalingGroupProcess.AddMember("AZ_REBALANCE", smithyprelude.Unit)
+
+	AutoScalingGroupProcess_INSTANCE_REFRESH = AutoScalingGroupProcess.AddMember("INSTANCE_REFRESH", smithyprelude.Unit)
+
+	AutoScalingGroupProcess_SCHEDULED_ACTIONS = AutoScalingGroupProcess.AddMember("SCHEDULED_ACTIONS", smithyprelude.Unit)
+
+	_AutoScalingGroupProcessesToSuspendList_member = _AutoScalingGroupProcessesToSuspendList.AddMember("member", AutoScalingGroupProcess)
 
 	BatchLimitExceededException_message = BatchLimitExceededException.AddMember("message", _Message)
 
@@ -3832,6 +3882,8 @@ func init() {
 
 	_ECSServiceList_member = _ECSServiceList.AddMember("member", ECSService)
 
+	EC2DeploymentOptions_autoScalingGroupProcessesToSuspend = EC2DeploymentOptions.AddMember("autoScalingGroupProcessesToSuspend", _AutoScalingGroupProcessesToSuspendList)
+
 	DeploymentGroupInfo_applicationName = DeploymentGroupInfo.AddMember("applicationName", _ApplicationName)
 
 	DeploymentGroupInfo_deploymentGroupId = DeploymentGroupInfo.AddMember("deploymentGroupId", _DeploymentGroupId)
@@ -3875,6 +3927,8 @@ func init() {
 	DeploymentGroupInfo_computePlatform = DeploymentGroupInfo.AddMember("computePlatform", ComputePlatform)
 
 	DeploymentGroupInfo_ecsServices = DeploymentGroupInfo.AddMember("ecsServices", _ECSServiceList)
+
+	DeploymentGroupInfo_ec2DeploymentOptions = DeploymentGroupInfo.AddMember("ec2DeploymentOptions", EC2DeploymentOptions)
 
 	DeploymentGroupInfo_terminationHookEnabled = DeploymentGroupInfo.AddMember("terminationHookEnabled", _Boolean)
 
@@ -4063,6 +4117,8 @@ func init() {
 	DeploymentInfo_relatedDeployments = DeploymentInfo.AddMember("relatedDeployments", RelatedDeployments)
 
 	DeploymentInfo_overrideAlarmConfiguration = DeploymentInfo.AddMember("overrideAlarmConfiguration", AlarmConfiguration)
+
+	DeploymentInfo_ec2DeploymentOptions = DeploymentInfo.AddMember("ec2DeploymentOptions", EC2DeploymentOptions)
 
 	DeploymentIsNotInReadyStateException_message = DeploymentIsNotInReadyStateException.AddMember("message", _Message)
 
@@ -4291,6 +4347,8 @@ func init() {
 	InvalidAutoRollbackConfigException_message = InvalidAutoRollbackConfigException.AddMember("message", _Message)
 
 	InvalidAutoScalingGroupException_message = InvalidAutoScalingGroupException.AddMember("message", _Message)
+
+	InvalidAutoScalingGroupProcessToSuspendException_message = InvalidAutoScalingGroupProcessToSuspendException.AddMember("message", _Message)
 
 	InvalidBlueGreenDeploymentConfigurationException_message = InvalidBlueGreenDeploymentConfigurationException.AddMember("message", _Message)
 
@@ -4572,6 +4630,8 @@ func init() {
 
 	CreateDeploymentGroupInput_tags = CreateDeploymentGroupInput.AddMember("tags", _TagList)
 
+	CreateDeploymentGroupInput_ec2DeploymentOptions = CreateDeploymentGroupInput.AddMember("ec2DeploymentOptions", EC2DeploymentOptions)
+
 	CreateDeploymentGroupInput_terminationHookEnabled = CreateDeploymentGroupInput.AddMember("terminationHookEnabled", _NullableBoolean)
 
 	CreateDeploymentGroupOutput_deploymentGroupId = CreateDeploymentGroupOutput.AddMember("deploymentGroupId", _DeploymentGroupId)
@@ -4599,6 +4659,8 @@ func init() {
 	CreateDeploymentInput_deploymentMode = CreateDeploymentInput.AddMember("deploymentMode", DeploymentMode)
 
 	CreateDeploymentInput_overrideAlarmConfiguration = CreateDeploymentInput.AddMember("overrideAlarmConfiguration", AlarmConfiguration)
+
+	CreateDeploymentInput_ec2DeploymentOptions = CreateDeploymentInput.AddMember("ec2DeploymentOptions", EC2DeploymentOptions)
 
 	CreateDeploymentOutput_deploymentId = CreateDeploymentOutput.AddMember("deploymentId", _DeploymentId)
 
@@ -4847,6 +4909,8 @@ func init() {
 	UpdateDeploymentGroupInput_ecsServices = UpdateDeploymentGroupInput.AddMember("ecsServices", _ECSServiceList)
 
 	UpdateDeploymentGroupInput_onPremisesTagSet = UpdateDeploymentGroupInput.AddMember("onPremisesTagSet", OnPremisesTagSet)
+
+	UpdateDeploymentGroupInput_ec2DeploymentOptions = UpdateDeploymentGroupInput.AddMember("ec2DeploymentOptions", EC2DeploymentOptions)
 
 	UpdateDeploymentGroupInput_terminationHookEnabled = UpdateDeploymentGroupInput.AddMember("terminationHookEnabled", _NullableBoolean)
 

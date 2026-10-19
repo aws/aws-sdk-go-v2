@@ -2541,6 +2541,76 @@ func TestCheckResponseSnapshot_CreatePromptVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateRetrievalInstruction(t *testing.T) {
+	want := &CreateRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+		LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRetrievalInstruction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRetrievalInstruction(context.Background(), &CreateRetrievalInstructionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Instruction: &types.RetrievalInstructionContent{
+			RetrievalGuidance: ptr.String("__RetrievalGuidance__"),
+			Persona:           ptr.String("__Persona__"),
+			AnswerFormat:      ptr.String("__AnswerFormat__"),
+			AnswerPolicy:      ptr.String("__AnswerPolicy__"),
+		},
+		Description:              ptr.String("__Description__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRetrievalInstruction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateRetrievalInstructionVersion(t *testing.T) {
+	want := &CreateRetrievalInstructionVersionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Version:                 ptr.String("__Version__"),
+		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:             ptr.String("__Description__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRetrievalInstructionVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRetrievalInstructionVersion(context.Background(), &CreateRetrievalInstructionVersionInput{
+		RetrievalInstructionId: ptr.String("__RetrievalInstructionId__"),
+		Description:            ptr.String("__Description__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRetrievalInstructionVersion.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateVpcConfiguration(t *testing.T) {
 	want := &CreateVpcConfigurationOutput{
 		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
@@ -2931,6 +3001,32 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRetrievalInstruction(t *testing.T) {
+	want := &DeleteRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Version:                 ptr.String("__Version__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRetrievalInstruction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRetrievalInstruction(context.Background(), &DeleteRetrievalInstructionInput{
+		RetrievalInstructionId:      ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionVersion: ptr.String("__RetrievalInstructionVersion__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRetrievalInstruction.response", err)
 	}
 }
 
@@ -4663,6 +4759,58 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetRetrievalInstruction(t *testing.T) {
+	want := &GetRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+		LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+		Instruction: &types.RetrievalInstructionContent{
+			RetrievalGuidance: ptr.String("__RetrievalGuidance__"),
+			Persona:           ptr.String("__Persona__"),
+			AnswerFormat:      ptr.String("__AnswerFormat__"),
+			AnswerPolicy:      ptr.String("__AnswerPolicy__"),
+		},
+		CreatedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:              ptr.String("__Description__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		LastTransitionStatusReasons: []types.RetrievalInstructionFailureReason{
+			{
+				FieldName: types.RetrievalInstructionFieldName("RETRIEVAL_GUIDANCE"),
+				Code:      types.RetrievalInstructionFailureReasonCode("CONTENT_REJECTED"),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				FieldName: types.RetrievalInstructionFieldName("RETRIEVAL_GUIDANCE"),
+				Code:      types.RetrievalInstructionFailureReasonCode("CONTENT_REJECTED"),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+		Version:       ptr.String("__Version__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRetrievalInstruction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRetrievalInstruction(context.Background(), &GetRetrievalInstructionInput{
+		RetrievalInstructionId:      ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionVersion: ptr.String("__RetrievalInstructionVersion__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRetrievalInstruction.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetVpcConfiguration(t *testing.T) {
 	want := &GetVpcConfigurationOutput{
 		VpcConfiguration: &types.VpcConfiguration{
@@ -5653,6 +5801,88 @@ func TestCheckResponseSnapshot_ListPrompts(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListPrompts.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRetrievalInstructionVersions(t *testing.T) {
+	want := &ListRetrievalInstructionVersionsOutput{
+		RetrievalInstructionVersionSummaries: []types.RetrievalInstructionVersionSummary{
+			{
+				Version:   ptr.String("__Version__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Version:   ptr.String("__Version__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRetrievalInstructionVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRetrievalInstructionVersions(context.Background(), &ListRetrievalInstructionVersionsInput{
+		RetrievalInstructionId: ptr.String("__RetrievalInstructionId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRetrievalInstructionVersions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRetrievalInstructions(t *testing.T) {
+	want := &ListRetrievalInstructionsOutput{
+		RetrievalInstructionSummaries: []types.RetrievalInstructionSummary{
+			{
+				RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+				RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+				Name:                    ptr.String("__Name__"),
+				Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+				LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:             ptr.String("__Description__"),
+			},
+			{
+				RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+				RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+				Name:                    ptr.String("__Name__"),
+				Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+				LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:             ptr.String("__Description__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRetrievalInstructions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRetrievalInstructions(context.Background(), &ListRetrievalInstructionsInput{
+		Status:     types.RetrievalInstructionStatus("ACTIVE"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRetrievalInstructions.response", err)
 	}
 }
 
@@ -8115,6 +8345,42 @@ func TestCheckResponseSnapshot_UpdatePrompt(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdatePrompt.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateRetrievalInstruction(t *testing.T) {
+	want := &UpdateRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+		LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRetrievalInstruction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRetrievalInstruction(context.Background(), &UpdateRetrievalInstructionInput{
+		RetrievalInstructionId: ptr.String("__RetrievalInstructionId__"),
+		Instruction: &types.RetrievalInstructionContent{
+			RetrievalGuidance: ptr.String("__RetrievalGuidance__"),
+			Persona:           ptr.String("__Persona__"),
+			AnswerFormat:      ptr.String("__AnswerFormat__"),
+			AnswerPolicy:      ptr.String("__AnswerPolicy__"),
+		},
+		Description: ptr.String("__Description__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRetrievalInstruction.response", err)
 	}
 }
 

@@ -425,6 +425,27 @@ func (ExtractionMode) Values() []ExtractionMode {
 	}
 }
 
+type FindingTargetType string
+
+// Enum values for FindingTargetType
+const (
+	FindingTargetTypeSpanId   FindingTargetType = "SPAN_ID"
+	FindingTargetTypeTraceId  FindingTargetType = "TRACE_ID"
+	FindingTargetTypeSpanName FindingTargetType = "SPAN_NAME"
+)
+
+// Values returns all known values for FindingTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingTargetType) Values() []FindingTargetType {
+	return []FindingTargetType{
+		"SPAN_ID",
+		"TRACE_ID",
+		"SPAN_NAME",
+	}
+}
+
 type HarnessBedrockApiFormat string
 
 // Enum values for HarnessBedrockApiFormat
@@ -721,6 +742,23 @@ func (InsightsFailureCategory) Values() []InsightsFailureCategory {
 		"coding-use-case-specific-failure-types-category-edge-case-oversights",
 		"coding-use-case-specific-failure-types-category-dependency-issues",
 		"other",
+	}
+}
+
+type InsightType string
+
+// Enum values for InsightType
+const (
+	InsightTypeFailure InsightType = "FAILURE"
+)
+
+// Values returns all known values for InsightType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightType) Values() []InsightType {
+	return []InsightType{
+		"FAILURE",
 	}
 }
 

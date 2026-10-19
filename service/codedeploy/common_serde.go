@@ -79,6 +79,17 @@ func serializeAutoScalingGroupNameList(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseList()
 }
 
+func serializeAutoScalingGroupProcessesToSuspendList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AutoScalingGroupProcess) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDeploymentConfigsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -612,6 +623,27 @@ func deserializeAutoScalingGroupNameList(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAutoScalingGroupProcessesToSuspendList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AutoScalingGroupProcess) error {
+	*v = make([]types.AutoScalingGroupProcess, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AutoScalingGroupProcess
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.AutoScalingGroupProcess(vv))
 		return nil
 	})
 }

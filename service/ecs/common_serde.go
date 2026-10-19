@@ -3,9 +3,31 @@
 package ecs
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	smithy "github.com/aws/smithy-go"
 )
+
+func serializeServiceConnectContainerConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ServiceConnectContainerConfiguration) {
+	switch vv := v.(type) {
+	case *types.ServiceConnectContainerConfigurationMemberLogLevel:
+		s.WriteUnion(schema, schemas.ServiceConnectContainerConfiguration_logLevel)
+		s.WriteString(schemas.ServiceConnectContainerConfiguration_logLevel, string(vv.Value))
+		s.CloseUnion()
+	}
+}
+
+func deserializeServiceConnectContainerConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ServiceConnectContainerConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ServiceConnectContainerConfiguration_logLevel:
+			vv := &types.ServiceConnectContainerConfigurationMemberLogLevel{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
 
 func serializeAcceleratorManufacturerSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AcceleratorManufacturer) {
 	if v == nil {
@@ -1079,6 +1101,17 @@ func serializeServiceConnectClientAliasList(s smithy.ShapeSerializer, schema *sm
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeServiceConnectContainerConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServiceConnectContainerConfiguration) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeServiceConnectContainerConfiguration(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -3374,6 +3407,27 @@ func deserializeServiceConnectClientAliasList(d smithy.ShapeDeserializer, s *smi
 
 		vv = types.ServiceConnectClientAlias{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeServiceConnectContainerConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ServiceConnectContainerConfiguration) error {
+	*v = make([]types.ServiceConnectContainerConfiguration, 0)
+	var vv types.ServiceConnectContainerConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ServiceConnectContainerConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeServiceConnectContainerConfiguration(d, s.ListMember(), &vv); err != nil {
 			return err
 		}
 

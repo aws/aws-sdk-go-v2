@@ -493,6 +493,14 @@ var _AgenticRetrieveActions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AgenticRetrieveActions_member *smithy.Schema
 
+var AgenticRetrieveAppliedInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveAppliedInstruction",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveAppliedInstruction_id *smithy.Schema
+
+var AgenticRetrieveAppliedInstruction_version *smithy.Schema
+
 var AgenticRetrieveBedrockGuardrailConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveBedrockGuardrailConfiguration",
@@ -594,6 +602,14 @@ var AgenticRetrieveGuardrailWarning_version *smithy.Schema
 var AgenticRetrieveGuardrailWarning_action *smithy.Schema
 
 var AgenticRetrieveGuardrailWarning_message *smithy.Schema
+
+var AgenticRetrieveInstructionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveInstructionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveInstructionConfiguration_retrievalInstructionId *smithy.Schema
+
+var AgenticRetrieveInstructionConfiguration_version *smithy.Schema
 
 var AgenticRetrieveMemoryConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -935,7 +951,7 @@ var AgenticRetrieveTraceEvent_attributes *smithy.Schema
 var AgenticRetrieveTraceEventAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveTraceEventAttributes",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgenticRetrieveTraceEventAttributes_step *smithy.Schema
 
 var AgenticRetrieveTraceEventAttributes_status *smithy.Schema
@@ -951,6 +967,8 @@ var AgenticRetrieveTraceEventAttributes_failures *smithy.Schema
 var AgenticRetrieveTraceEventAttributes_retrievalMetadata *smithy.Schema
 
 var AgenticRetrieveTraceEventAttributes_retrievalResponse *smithy.Schema
+
+var AgenticRetrieveTraceEventAttributes_appliedInstruction *smithy.Schema
 
 var AgenticRetrieveTraceResultItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -4398,6 +4416,16 @@ var _RetrievalFilterList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RetrievalFilterList_member *smithy.Schema
 
+var _RetrievalInstructionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "RetrievalInstructionId",
+}, smithy.ShapeTypeString, 0)
+
+var _RetrievalInstructionVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "RetrievalInstructionVersion",
+}, smithy.ShapeTypeString, 0)
+
 var RetrievalOverrides = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "RetrievalOverrides",
@@ -5190,7 +5218,7 @@ var VideoSegment_summary *smithy.Schema
 var AgenticRetrieveStreamRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveStreamRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgenticRetrieveStreamRequest_messages *smithy.Schema
 
 var AgenticRetrieveStreamRequest_retrievers *smithy.Schema
@@ -5204,6 +5232,8 @@ var AgenticRetrieveStreamRequest_nextToken *smithy.Schema
 var AgenticRetrieveStreamRequest_userContext *smithy.Schema
 
 var AgenticRetrieveStreamRequest_memoryConfiguration *smithy.Schema
+
+var AgenticRetrieveStreamRequest_retrievalInstructionConfiguration *smithy.Schema
 
 var AgenticRetrieveStreamRequest_generateResponse *smithy.Schema
 
@@ -6288,6 +6318,10 @@ func init() {
 
 	_AgenticRetrieveActions_member = _AgenticRetrieveActions.AddMember("member", AgenticRetrieveAction)
 
+	AgenticRetrieveAppliedInstruction_id = AgenticRetrieveAppliedInstruction.AddMember("id", _RetrievalInstructionId)
+
+	AgenticRetrieveAppliedInstruction_version = AgenticRetrieveAppliedInstruction.AddMember("version", _RetrievalInstructionVersion)
+
 	AgenticRetrieveBedrockGuardrailConfiguration_guardrailId = AgenticRetrieveBedrockGuardrailConfiguration.AddMember("guardrailId", smithyprelude.String)
 
 	AgenticRetrieveBedrockGuardrailConfiguration_guardrailVersion = AgenticRetrieveBedrockGuardrailConfiguration.AddMember("guardrailVersion", smithyprelude.String)
@@ -6373,6 +6407,10 @@ func init() {
 	AgenticRetrieveGuardrailWarning_action = AgenticRetrieveGuardrailWarning.AddMember("action", GuardrailAction)
 
 	AgenticRetrieveGuardrailWarning_message = AgenticRetrieveGuardrailWarning.AddMember("message", smithyprelude.String)
+
+	AgenticRetrieveInstructionConfiguration_retrievalInstructionId = AgenticRetrieveInstructionConfiguration.AddMember("retrievalInstructionId", _RetrievalInstructionId)
+
+	AgenticRetrieveInstructionConfiguration_version = AgenticRetrieveInstructionConfiguration.AddMember("version", _RetrievalInstructionVersion)
 
 	AgenticRetrieveMemorySessionBinding_actorId = AgenticRetrieveMemorySessionBinding.AddMember("actorId", _AgentCoreMemoryActorId)
 
@@ -6585,6 +6623,8 @@ func init() {
 	AgenticRetrieveTraceEventAttributes_retrievalMetadata = AgenticRetrieveTraceEventAttributes.AddMember("retrievalMetadata", _AgenticRetrieveSourceMetadataList)
 
 	AgenticRetrieveTraceEventAttributes_retrievalResponse = AgenticRetrieveTraceEventAttributes.AddMember("retrievalResponse", _AgenticRetrieveTraceResults)
+
+	AgenticRetrieveTraceEventAttributes_appliedInstruction = AgenticRetrieveTraceEventAttributes.AddMember("appliedInstruction", AgenticRetrieveAppliedInstruction)
 
 	AgenticRetrieveTraceEvent_id = AgenticRetrieveTraceEvent.AddMember("id", smithyprelude.String)
 
@@ -8425,6 +8465,8 @@ func init() {
 	AgenticRetrieveStreamRequest_userContext = AgenticRetrieveStreamRequest.AddMember("userContext", UserContext)
 
 	AgenticRetrieveStreamRequest_memoryConfiguration = AgenticRetrieveStreamRequest.AddMember("memoryConfiguration", AgenticRetrieveMemoryConfiguration)
+
+	AgenticRetrieveStreamRequest_retrievalInstructionConfiguration = AgenticRetrieveStreamRequest.AddMember("retrievalInstructionConfiguration", AgenticRetrieveInstructionConfiguration)
 
 	AgenticRetrieveStreamRequest_generateResponse = AgenticRetrieveStreamRequest.AddMember("generateResponse", smithyprelude.Boolean)
 

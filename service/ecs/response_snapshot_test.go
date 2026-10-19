@@ -1430,6 +1430,14 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
 						{
@@ -1707,6 +1715,14 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 						AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
 						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -2218,6 +2234,14 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 			AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
 			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{
@@ -3676,6 +3700,14 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
 						{
@@ -3953,6 +3985,14 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 						AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
 						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -9133,6 +9173,14 @@ func TestCheckResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 						Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 						IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 					},
+					ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
+					},
 				},
 				VolumeConfigurations: []types.ServiceVolumeConfiguration{
 					{
@@ -9714,6 +9762,14 @@ func TestCheckResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 					AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 						Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 						IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+					},
+					ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
+						&types.ServiceConnectContainerConfigurationMemberLogLevel{
+							Value: types.ServiceConnectContainerLogLevel("debug"),
+						},
 					},
 				},
 				VolumeConfigurations: []types.ServiceVolumeConfiguration{
@@ -10627,6 +10683,14 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
 							{
@@ -10904,6 +10968,14 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 							AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
 							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -11605,6 +11677,14 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
 							{
@@ -11882,6 +11962,14 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 							AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 								Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 								IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+							},
+							ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
+								&types.ServiceConnectContainerConfigurationMemberLogLevel{
+									Value: types.ServiceConnectContainerLogLevel("debug"),
+								},
 							},
 						},
 						ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -21183,6 +21271,14 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
 						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
 						{
@@ -21460,6 +21556,14 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 						AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 							Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 							IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+						},
+						ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
+							&types.ServiceConnectContainerConfigurationMemberLogLevel{
+								Value: types.ServiceConnectContainerLogLevel("debug"),
+							},
 						},
 					},
 					ServiceConnectResources: []types.ServiceConnectServiceResource{
@@ -21958,6 +22062,14 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 			AccessLogConfiguration: &types.ServiceConnectAccessLogConfiguration{
 				Format:                 types.ServiceConnectAccessLoggingFormat("TEXT"),
 				IncludeQueryParameters: types.ServiceConnectIncludeQueryParameters("DISABLED"),
+			},
+			ContainerConfigurations: []types.ServiceConnectContainerConfiguration{
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
+				&types.ServiceConnectContainerConfigurationMemberLogLevel{
+					Value: types.ServiceConnectContainerLogLevel("debug"),
+				},
 			},
 		},
 		VolumeConfigurations: []types.ServiceVolumeConfiguration{

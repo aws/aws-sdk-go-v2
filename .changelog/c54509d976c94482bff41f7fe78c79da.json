@@ -1,0 +1,8 @@
+{
+    "id": "c54509d9-76c9-4482-bff4-1f7fe78c79da",
+    "type": "feature",
+    "description": "Adds Retrieval Instructions for Amazon Bedrock Knowledge Bases. Create, get, update, delete, list, and version customer-authored instructions that guide how a knowledge base retrieves and answers, with content review before use.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

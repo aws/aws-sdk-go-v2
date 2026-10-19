@@ -87,6 +87,13 @@ type GetBatchEvaluationOutput struct {
 	// clusters with root causes and recommendations.
 	FailureAnalysisResult *types.FailureAnalysisResultContent
 
+	// The insights generated when the batch evaluation includes the
+	// Builtin.FailureAnalysis evaluator. Each insight groups related failures found
+	// across the evaluated sessions. An empty list means that no failures were found.
+	// If the analysis fails, this field is omitted and errorDetails describes the
+	// error.
+	InsightResults []types.InsightResult
+
 	// The list of insight analyses applied during the batch evaluation.
 	Insights []types.Insight
 

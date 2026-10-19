@@ -1,0 +1,8 @@
+{
+    "id": "64a4afbc-67e1-4746-8732-6a3cdb41e946",
+    "type": "feature",
+    "description": "Enable account endpoint generation for existing CN and GovCloud regions",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

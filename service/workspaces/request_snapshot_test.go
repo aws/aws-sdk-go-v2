@@ -2192,6 +2192,7 @@ func TestCheckRequestSnapshot_ImportCustomWorkspaceImage(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ImageValidationMode: types.ImageValidationMode("CUSTOMER_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5364,6 +5365,7 @@ func TestUpdateRequestSnapshot_ImportCustomWorkspaceImage(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ImageValidationMode: types.ImageValidationMode("CUSTOMER_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

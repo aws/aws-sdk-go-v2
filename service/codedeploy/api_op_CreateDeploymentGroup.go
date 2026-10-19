@@ -78,6 +78,10 @@ type CreateDeploymentGroupInput struct {
 	// to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *types.DeploymentStyle
 
+	// Options that control how CodeDeploy manages Amazon EC2 Auto Scaling groups
+	// during a deployment.
+	Ec2DeploymentOptions *types.EC2DeploymentOptions
+
 	// The Amazon EC2 tags on which to filter. The deployment group includes Amazon
 	// EC2 instances with any of the specified tags. Cannot be used in the same call as
 	// ec2TagSet.
@@ -186,6 +190,11 @@ func (v *CreateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DeploymentStyle != nil {
 		s.WriteStruct(schemas.CreateDeploymentGroupInput_deploymentStyle)
 		v.DeploymentStyle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ec2DeploymentOptions != nil {
+		s.WriteStruct(schemas.CreateDeploymentGroupInput_ec2DeploymentOptions)
+		v.Ec2DeploymentOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	serializeEC2TagFilterList(s, schemas.CreateDeploymentGroupInput_ec2TagFilters, v.Ec2TagFilters)

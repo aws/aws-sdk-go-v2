@@ -239,6 +239,17 @@ func serializeDeliveries(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 	s.CloseList()
 }
 
+func serializeDeliveryDestinationNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDeliveryDestinations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DeliveryDestination) {
 	if v == nil {
 		return
@@ -277,6 +288,17 @@ func serializeDeliverySourceConfigurationSchemas(s smithy.ShapeSerializer, schem
 }
 
 func serializeDeliverySourceConfigurationSupportedValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDeliverySourceNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
 	}
@@ -414,6 +436,17 @@ func serializeFilteredLogEvents(s smithy.ShapeSerializer, schema *smithy.Schema,
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFilterResourceArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -1514,6 +1547,27 @@ func deserializeDeliveries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 	})
 }
 
+func deserializeDeliveryDestinationNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDeliveryDestinations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DeliveryDestination) error {
 	*v = make([]types.DeliveryDestination, 0)
 	var vv types.DeliveryDestination
@@ -1580,6 +1634,27 @@ func deserializeDeliverySourceConfigurationSchemas(d smithy.ShapeDeserializer, s
 }
 
 func deserializeDeliverySourceConfigurationSupportedValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDeliverySourceNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
@@ -1828,6 +1903,27 @@ func deserializeFilteredLogEvents(d smithy.ShapeDeserializer, s *smithy.Schema, 
 
 		vv = types.FilteredLogEvent{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFilterResourceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

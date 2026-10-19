@@ -159,6 +159,7 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -960,6 +961,7 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -2513,6 +2515,7 @@ func TestCheckResponseSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3184,6 +3187,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3262,6 +3266,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3340,6 +3345,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3477,6 +3483,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3553,6 +3560,7 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3645,6 +3653,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
 						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
+					LogGroupDeletionProtection: types.DeletionProtection("ENABLED"),
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{

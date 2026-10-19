@@ -788,6 +788,82 @@ func (m *smithyRpcv2cbor_deserializeOpListWorkspaceInstances) HandleDeserialize(
 	return out, metadata, nil
 }
 
+type smithyRpcv2cbor_deserializeOpModifyVolume struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpModifyVolume) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpModifyVolume) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		if err != nil {
+			// Transport-level failure with no HTTP response to close.
+			return out, metadata, err
+		}
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	// Close the response body on return, including when an interceptor
+	// that runs after OperationDeserializer surfaces an error (after
+	// transmit or before deserialization). Registering this before the
+	// error check below is what covers those interceptor aborts. Event
+	// streams close their own body in the event stream deserializer.
+	defer func() { smithyhttp.CloseResponseBody(ctx, resp, false, err) }()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorModifyVolume(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &ModifyVolumeOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_ModifyVolumeOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpTagResource struct {
 }
 
@@ -1657,6 +1733,58 @@ func deserializeCBOR_ValidationExceptionReason(v smithycbor.Value) (types.Valida
 	return types.ValidationExceptionReason(av), nil
 }
 
+func deserializeCBOR_VolumeModificationRateExceededException(v smithycbor.Value) (*types.VolumeModificationRateExceededException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.VolumeModificationRateExceededException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+
+		if key == "ResourceId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ResourceId = ptr.String(dv)
+		}
+
+		if key == "ResourceType" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ResourceType = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_VolumeTypeEnum(v smithycbor.Value) (types.VolumeTypeEnum, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.VolumeTypeEnum(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.VolumeTypeEnum(av), nil
+}
+
 func deserializeCBOR_WorkspaceInstance(v smithycbor.Value) (*types.WorkspaceInstance, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -2013,6 +2141,72 @@ func deserializeCBOR_ListWorkspaceInstancesOutput(v smithycbor.Value) (*ListWork
 				return nil, err
 			}
 			ds.NextToken = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ModifyVolumeOutput(v smithycbor.Value) (*ModifyVolumeOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &ModifyVolumeOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "VolumeId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.VolumeId = ptr.String(dv)
+		}
+
+		if key == "TargetSize" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TargetSize = ptr.Int32(dv)
+		}
+
+		if key == "TargetVolumeType" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_VolumeTypeEnum(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TargetVolumeType = dv
+		}
+
+		if key == "TargetIops" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TargetIops = ptr.Int32(dv)
+		}
+
+		if key == "TargetThroughput" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TargetThroughput = ptr.Int32(dv)
 		}
 	}
 	return ds, nil
@@ -2905,6 +3099,115 @@ func rpc2_deserializeOpErrorListWorkspaceInstances(resp *smithyhttp.Response) er
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#ValidationException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	default:
+
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
+func rpc2_deserializeOpErrorModifyVolume(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "AccessDeniedException":
+		verr, err := deserializeCBOR_AccessDeniedException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#AccessDeniedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "ConflictException":
+		verr, err := deserializeCBOR_ConflictException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#ConflictException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "InternalServerException":
+		verr, err := deserializeCBOR_InternalServerException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#InternalServerException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "ResourceNotFoundException":
+		verr, err := deserializeCBOR_ResourceNotFoundException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#ResourceNotFoundException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "ServiceQuotaExceededException":
+		verr, err := deserializeCBOR_ServiceQuotaExceededException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#ServiceQuotaExceededException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "ThrottlingException":
+		verr, err := deserializeCBOR_ThrottlingException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#ThrottlingException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "ValidationException":
+		verr, err := deserializeCBOR_ValidationException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#ValidationException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "VolumeModificationRateExceededException":
+		verr, err := deserializeCBOR_VolumeModificationRateExceededException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.workspacesinstances#VolumeModificationRateExceededException: %w", err),
 				Snapshot: payload,
 			}
 		}

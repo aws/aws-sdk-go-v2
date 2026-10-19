@@ -1475,6 +1475,99 @@ func (RerankingMetadataSelectionMode) Values() []RerankingMetadataSelectionMode 
 	}
 }
 
+type RetrievalInstructionFailureReasonCode string
+
+// Enum values for RetrievalInstructionFailureReasonCode
+const (
+	RetrievalInstructionFailureReasonCodeContentRejected RetrievalInstructionFailureReasonCode = "CONTENT_REJECTED"
+	RetrievalInstructionFailureReasonCodeClientError     RetrievalInstructionFailureReasonCode = "CLIENT_ERROR"
+	RetrievalInstructionFailureReasonCodeInternalError   RetrievalInstructionFailureReasonCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for RetrievalInstructionFailureReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalInstructionFailureReasonCode) Values() []RetrievalInstructionFailureReasonCode {
+	return []RetrievalInstructionFailureReasonCode{
+		"CONTENT_REJECTED",
+		"CLIENT_ERROR",
+		"INTERNAL_ERROR",
+	}
+}
+
+type RetrievalInstructionFieldName string
+
+// Enum values for RetrievalInstructionFieldName
+const (
+	RetrievalInstructionFieldNameRetrievalGuidance RetrievalInstructionFieldName = "RETRIEVAL_GUIDANCE"
+	RetrievalInstructionFieldNamePersona           RetrievalInstructionFieldName = "PERSONA"
+	RetrievalInstructionFieldNameAnswerFormat      RetrievalInstructionFieldName = "ANSWER_FORMAT"
+	RetrievalInstructionFieldNameAnswerPolicy      RetrievalInstructionFieldName = "ANSWER_POLICY"
+)
+
+// Values returns all known values for RetrievalInstructionFieldName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalInstructionFieldName) Values() []RetrievalInstructionFieldName {
+	return []RetrievalInstructionFieldName{
+		"RETRIEVAL_GUIDANCE",
+		"PERSONA",
+		"ANSWER_FORMAT",
+		"ANSWER_POLICY",
+	}
+}
+
+type RetrievalInstructionLastTransitionStatus string
+
+// Enum values for RetrievalInstructionLastTransitionStatus
+const (
+	RetrievalInstructionLastTransitionStatusCreating         RetrievalInstructionLastTransitionStatus = "CREATING"
+	RetrievalInstructionLastTransitionStatusUpdating         RetrievalInstructionLastTransitionStatus = "UPDATING"
+	RetrievalInstructionLastTransitionStatusCreateSuccessful RetrievalInstructionLastTransitionStatus = "CREATE_SUCCESSFUL"
+	RetrievalInstructionLastTransitionStatusCreateFailed     RetrievalInstructionLastTransitionStatus = "CREATE_FAILED"
+	RetrievalInstructionLastTransitionStatusUpdateSuccessful RetrievalInstructionLastTransitionStatus = "UPDATE_SUCCESSFUL"
+	RetrievalInstructionLastTransitionStatusUpdateFailed     RetrievalInstructionLastTransitionStatus = "UPDATE_FAILED"
+)
+
+// Values returns all known values for RetrievalInstructionLastTransitionStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalInstructionLastTransitionStatus) Values() []RetrievalInstructionLastTransitionStatus {
+	return []RetrievalInstructionLastTransitionStatus{
+		"CREATING",
+		"UPDATING",
+		"CREATE_SUCCESSFUL",
+		"CREATE_FAILED",
+		"UPDATE_SUCCESSFUL",
+		"UPDATE_FAILED",
+	}
+}
+
+type RetrievalInstructionStatus string
+
+// Enum values for RetrievalInstructionStatus
+const (
+	RetrievalInstructionStatusActive   RetrievalInstructionStatus = "ACTIVE"
+	RetrievalInstructionStatusInactive RetrievalInstructionStatus = "INACTIVE"
+)
+
+// Values returns all known values for RetrievalInstructionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetrievalInstructionStatus) Values() []RetrievalInstructionStatus {
+	return []RetrievalInstructionStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type SalesforceAuthType string
 
 // Enum values for SalesforceAuthType

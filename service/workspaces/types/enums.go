@@ -842,6 +842,25 @@ func (ImageType) Values() []ImageType {
 	}
 }
 
+type ImageValidationMode string
+
+// Enum values for ImageValidationMode
+const (
+	ImageValidationModeCustomerManaged ImageValidationMode = "CUSTOMER_MANAGED"
+	ImageValidationModeServiceManaged  ImageValidationMode = "SERVICE_MANAGED"
+)
+
+// Values returns all known values for ImageValidationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageValidationMode) Values() []ImageValidationMode {
+	return []ImageValidationMode{
+		"CUSTOMER_MANAGED",
+		"SERVICE_MANAGED",
+	}
+}
+
 type InternetFallbackProtocol string
 
 // Enum values for InternetFallbackProtocol

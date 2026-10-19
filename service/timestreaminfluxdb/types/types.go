@@ -991,6 +991,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	// Default: 30m
 	RetentionCheckInterval *Duration
 
+	// The time-based trigger that controls how often the ingester creates snapshots.
+	// This value is also used on query nodes as the bucket rotation interval for the
+	// replica buffer.
+	SnapshotDuration *Duration
+
+	// The maximum size of the active snapshot bucket before it is rotated for
+	// snapshotting.
+	SnapshotSize PercentOrAbsoluteLong
+
 	// Specifies the number of snapshotted WAL files to retain in the object store.
 	// Flushing the WAL files does not clear the WAL files immediately; they are
 	// deleted when the number of snapshotted WAL files exceeds this number.
@@ -1007,6 +1016,16 @@ type InfluxDBv3EnterpriseParameters struct {
 	//
 	// Default: 1000
 	TableIndexCacheMaxEntries *int32
+
+	// Specifies whether to migrate the cluster from the Parquet storage engine to
+	// PachaTree. This action cannot be reversed. To create a new cluster on Parquet,
+	// set this to false.
+	UpgradePachaTree *bool
+
+	// The maximum size, in bytes, of the in-memory WAL buffer before a flush is
+	// triggered regardless of the flush interval. Increase this value if WAL files are
+	// flushed before the interval elapses.
+	WalBufferSize *int64
 
 	// Specifies the maximum number of write requests that can be buffered before a
 	// flush must be executed and succeed.

@@ -1809,6 +1809,26 @@ func (ServiceConnectAccessLoggingFormat) Values() []ServiceConnectAccessLoggingF
 	}
 }
 
+type ServiceConnectContainerLogLevel string
+
+// Enum values for ServiceConnectContainerLogLevel
+const (
+	ServiceConnectContainerLogLevelDebug ServiceConnectContainerLogLevel = "debug"
+	ServiceConnectContainerLogLevelInfo  ServiceConnectContainerLogLevel = "info"
+)
+
+// Values returns all known values for ServiceConnectContainerLogLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceConnectContainerLogLevel) Values() []ServiceConnectContainerLogLevel {
+	return []ServiceConnectContainerLogLevel{
+		"debug",
+		"info",
+	}
+}
+
 type ServiceConnectIncludeQueryParameters string
 
 // Enum values for ServiceConnectIncludeQueryParameters

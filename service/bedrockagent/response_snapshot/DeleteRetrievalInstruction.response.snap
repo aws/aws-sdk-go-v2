@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"retrievalInstructionArn":"__RetrievalInstructionArn__","retrievalInstructionId":"__RetrievalInstructionId__","version":"__Version__"}

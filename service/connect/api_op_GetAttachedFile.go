@@ -53,6 +53,14 @@ type GetAttachedFileInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// Specifies how a browser handles the file at the pre-signed URL. The valid
+	// values are the following:
+	//
+	// INLINE Displays the file in the browser.
+	//
+	// ATTACHMENT Downloads the file. This is the default.
+	UrlContentDisposition types.ContentDisposition
+
 	// Optional override for the expiry of the pre-signed S3 URL in seconds. The
 	// default value is 300.
 	UrlExpiryInSeconds *int32
@@ -75,6 +83,9 @@ func (v *GetAttachedFileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.GetAttachedFileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UrlContentDisposition != "" {
+		s.WriteString(schemas.GetAttachedFileRequest_UrlContentDisposition, string(v.UrlContentDisposition))
 	}
 	if v.UrlExpiryInSeconds != nil {
 		s.WriteInt32(schemas.GetAttachedFileRequest_UrlExpiryInSeconds, *v.UrlExpiryInSeconds)

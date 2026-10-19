@@ -1705,6 +1705,45 @@ func serializeRedshiftQueryEngineStorageConfigurations(s smithy.ShapeSerializer,
 	s.CloseList()
 }
 
+func serializeRetrievalInstructionFailureReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RetrievalInstructionFailureReason) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRetrievalInstructionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RetrievalInstructionSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRetrievalInstructionVersionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RetrievalInstructionVersionSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeS3Prefixes(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -2933,6 +2972,72 @@ func deserializeRedshiftQueryEngineStorageConfigurations(d smithy.ShapeDeseriali
 		}
 
 		vv = types.RedshiftQueryEngineStorageConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRetrievalInstructionFailureReasons(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RetrievalInstructionFailureReason) error {
+	*v = make([]types.RetrievalInstructionFailureReason, 0)
+	var vv types.RetrievalInstructionFailureReason
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RetrievalInstructionFailureReason
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RetrievalInstructionFailureReason{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRetrievalInstructionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RetrievalInstructionSummary) error {
+	*v = make([]types.RetrievalInstructionSummary, 0)
+	var vv types.RetrievalInstructionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RetrievalInstructionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RetrievalInstructionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRetrievalInstructionVersionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RetrievalInstructionVersionSummary) error {
+	*v = make([]types.RetrievalInstructionVersionSummary, 0)
+	var vv types.RetrievalInstructionVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RetrievalInstructionVersionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RetrievalInstructionVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

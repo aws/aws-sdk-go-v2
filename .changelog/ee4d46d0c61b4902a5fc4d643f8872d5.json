@@ -1,0 +1,8 @@
+{
+    "id": "ee4d46d0-c61b-4902-a5fc-4d643f8872d5",
+    "type": "feature",
+    "description": "Documentation update release for AWS service",
+    "modules": [
+        "service/databrew"
+    ]
+}

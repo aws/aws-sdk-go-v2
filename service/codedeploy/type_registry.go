@@ -191,6 +191,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.InvalidAutoScalingGroupException,
 			New:    func() any { return &types.InvalidAutoScalingGroupException{} },
 		},
+		"com.amazonaws.codedeploy#InvalidAutoScalingGroupProcessToSuspendException": {
+			Schema: schemas.InvalidAutoScalingGroupProcessToSuspendException,
+			New:    func() any { return &types.InvalidAutoScalingGroupProcessToSuspendException{} },
+		},
 		"com.amazonaws.codedeploy#InvalidBlueGreenDeploymentConfigurationException": {
 			Schema: schemas.InvalidBlueGreenDeploymentConfigurationException,
 			New:    func() any { return &types.InvalidBlueGreenDeploymentConfigurationException{} },

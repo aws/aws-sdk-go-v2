@@ -566,6 +566,56 @@ func (m *smithyRpcv2cbor_serializeOpListWorkspaceInstances) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpModifyVolume struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpModifyVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpModifyVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*ModifyVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/EUCMIFrontendAPIService/operation/ModifyVolume"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ModifyVolumeInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpTagResource struct {
 }
 
@@ -2246,6 +2296,53 @@ func serializeCBOR_ListWorkspaceInstancesInput(v *ListWorkspaceInstancesInput) (
 			return nil, err
 		}
 		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ModifyVolumeInput(v *ModifyVolumeInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.VolumeId != nil {
+		ser, err := serializeCBOR_String(*v.VolumeId)
+		if err != nil {
+			return nil, err
+		}
+		vm["VolumeId"] = ser
+	}
+	if v.SizeInGB != nil {
+		ser, err := serializeCBOR_Int32(*v.SizeInGB)
+		if err != nil {
+			return nil, err
+		}
+		vm["SizeInGB"] = ser
+	}
+	if len(v.VolumeType) > 0 {
+		ser, err := serializeCBOR_VolumeTypeEnum(v.VolumeType)
+		if err != nil {
+			return nil, err
+		}
+		vm["VolumeType"] = ser
+	}
+	if v.Iops != nil {
+		ser, err := serializeCBOR_Int32(*v.Iops)
+		if err != nil {
+			return nil, err
+		}
+		vm["Iops"] = ser
+	}
+	if v.Throughput != nil {
+		ser, err := serializeCBOR_Int32(*v.Throughput)
+		if err != nil {
+			return nil, err
+		}
+		vm["Throughput"] = ser
+	}
+	if v.ClientToken != nil {
+		ser, err := serializeCBOR_String(*v.ClientToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["ClientToken"] = ser
 	}
 	return vm, nil
 }

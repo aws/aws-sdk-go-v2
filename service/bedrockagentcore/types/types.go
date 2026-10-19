@@ -2382,6 +2382,9 @@ type HarnessGatewayOutboundAuthMemberNone struct {
 func (*HarnessGatewayOutboundAuthMemberNone) isHarnessGatewayOutboundAuth() {}
 
 // OAuth 2.0 authentication via AgentCore Identity.
+//
+// The AUTHORIZATION_CODE grant type is not supported for outbound authentication
+// from a harness to an AgentCore Gateway, even when defaultReturnUrl is specified.
 type HarnessGatewayOutboundAuthMemberOauth struct {
 	Value OAuthCredentialProvider
 
@@ -3210,6 +3213,71 @@ type Insight struct {
 	//
 	// This member is required.
 	InsightId *string
+
+	noSmithyDocumentSerde
+}
+
+// An insight that groups related failures found across the sessions in a batch
+// evaluation.
+type InsightResult struct {
+
+	// The timestamp when the insight was generated.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A description of the failure pattern that the insight represents.
+	//
+	// This member is required.
+	Description *string
+
+	// A generated label for the insight. The name is not an identifier and can differ
+	// between batch evaluations.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of insight. FAILURE indicates a group of related failures.
+	//
+	// This member is required.
+	Type InsightType
+
+	// The number of distinct sessions affected by the insight.
+	AffectedSessionCount *int32
+
+	// The root causes identified for the insight.
+	RootCauses []InsightRootCause
+
+	// A sample of up to 10 sessions affected by the insight. Returned only when the
+	// insight has no root causes. Otherwise, sample sessions are returned for each
+	// root cause.
+	SampleSessions []SampleSession
+
+	noSmithyDocumentSerde
+}
+
+// A root cause that contributes to an insight.
+type InsightRootCause struct {
+
+	// An explanation of how the root cause leads to the failures in the insight.
+	//
+	// This member is required.
+	Explanation *string
+
+	// A generated label for the root cause.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of distinct sessions affected by the root cause. A session can be
+	// affected by more than one root cause of the same insight.
+	AffectedSessionCount *int32
+
+	// A sample of up to 10 sessions affected by the root cause.
+	SampleSessions []SampleSession
+
+	// A suggested change to the agent that addresses the root cause.
+	SuggestedFix *string
 
 	noSmithyDocumentSerde
 }
@@ -5137,6 +5205,25 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+// A session affected by an insight or root cause. Use the session ID to find the
+// per-session evaluation results in CloudWatch Logs.
+type SampleSession struct {
+
+	// The unique identifier of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The failures found in the session that belong to the insight or root cause, up
+	// to 10.
+	Findings []SessionFinding
+
+	// The latest timestamp observed for the session in the batch evaluation input.
+	LastSeenAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Arguments for a screenshot action.
 type ScreenshotArguments struct {
 
@@ -5232,6 +5319,30 @@ type SessionFilterConfig struct {
 	// The start time of the time range. Only sessions with activity at or after this
 	// timestamp are included.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A failure found in a session.
+type SessionFinding struct {
+
+	// A description of the failure.
+	//
+	// This member is required.
+	Description *string
+
+	// The category of the failure.
+	Category *string
+
+	// The confidence that the finding is a failure, from 0 to 1.
+	Confidence *float64
+
+	// The identifier or name of the location in the session where the failure was
+	// found, interpreted according to targetType .
+	TargetId *string
+
+	// The type of location that targetId refers to.
+	TargetType FindingTargetType
 
 	noSmithyDocumentSerde
 }

@@ -48,9 +48,9 @@ type RetrieveMemoryRecordsInput struct {
 	// 20.
 	MaxResults *int32
 
-	// The namespace prefix to filter memory records by. Searches for memory records
-	// in namespaces that start with the provided prefix. Either namespace or
-	// namespacePath is required.
+	// The exact namespace to filter memory records by. Searches for memory records
+	// that matches the provided namespace value. Either namespace or namespacePath is
+	// required.
 	Namespace *string
 
 	// Use namespacePath for hierarchical retrievals. Return all memory records where

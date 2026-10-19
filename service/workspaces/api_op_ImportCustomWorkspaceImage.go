@@ -75,6 +75,9 @@ type ImportCustomWorkspaceImageInput struct {
 	// This member is required.
 	Protocol types.CustomImageProtocol
 
+	// The image validation mode for the WorkSpace image import.
+	ImageValidationMode types.ImageValidationMode
+
 	// The resource tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	Tags []types.Tag
 
@@ -98,6 +101,9 @@ func (v *ImportCustomWorkspaceImageInput) SerializeMembers(s smithy.ShapeSeriali
 		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_ImageName, *v.ImageName)
 	}
 	serializeImageSourceIdentifier(s, schemas.ImportCustomWorkspaceImageRequest_ImageSource, v.ImageSource)
+	if v.ImageValidationMode != "" {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_ImageValidationMode, string(v.ImageValidationMode))
+	}
 	if v.InfrastructureConfigurationArn != nil {
 		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_InfrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
 	}

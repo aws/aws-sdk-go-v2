@@ -4046,6 +4046,11 @@ func awsRestjson1_serializeDocumentDestinationLogsConfiguration(v *types.Destina
 		}
 	}
 
+	if len(v.LogGroupDeletionProtection) > 0 {
+		ok := object.Key("LogGroupDeletionProtection")
+		ok.String(string(v.LogGroupDeletionProtection))
+	}
+
 	if v.LogGroupNameConfiguration != nil {
 		ok := object.Key("LogGroupNameConfiguration")
 		if err := awsRestjson1_serializeDocumentLogGroupNameConfiguration(v.LogGroupNameConfiguration, ok); err != nil {

@@ -7389,6 +7389,31 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 				sv.DatasetId = ptr.String(jtv)
 			}
 
+		case "directSendEnforcementStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DirectSendEnforcementStatus to be of type string, got %T instead", value)
+				}
+				sv.DirectSendEnforcementStatus = ptr.String(jtv)
+			}
+
+		case "directSendEnforcementStatusExpiresAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DirectSendEnforcementStatusExpiresAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DirectSendEnforcementStatusExpiresAt to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "eventDestinations":
 			if err := awsRestjson1_deserializeDocumentWhatsAppBusinessAccountEventDestinations(&sv.EventDestinations, value); err != nil {
 				return err
@@ -7570,6 +7595,31 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 					return fmt.Errorf("expected WhatsAppDatasetId to be of type string, got %T instead", value)
 				}
 				sv.DatasetId = ptr.String(jtv)
+			}
+
+		case "directSendEnforcementStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DirectSendEnforcementStatus to be of type string, got %T instead", value)
+				}
+				sv.DirectSendEnforcementStatus = ptr.String(jtv)
+			}
+
+		case "directSendEnforcementStatusExpiresAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DirectSendEnforcementStatusExpiresAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DirectSendEnforcementStatusExpiresAt to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "eventDestinations":
@@ -8702,6 +8752,15 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 
 	for key, value := range shape {
 		switch key {
+		case "correctCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetaTemplateCategory to be of type string, got %T instead", value)
+				}
+				sv.CorrectCategory = ptr.String(jtv)
+			}
+
 		case "metaTemplateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8745,6 +8804,15 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 					return fmt.Errorf("expected MetaTemplateQualityScore to be of type string, got %T instead", value)
 				}
 				sv.TemplateQualityScore = ptr.String(jtv)
+			}
+
+		case "templateSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetaTemplateSource to be of type string, got %T instead", value)
+				}
+				sv.TemplateSource = ptr.String(jtv)
 			}
 
 		case "templateStatus":

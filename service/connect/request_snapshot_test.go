@@ -7416,6 +7416,7 @@ func TestCheckRequestSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -25961,6 +25962,7 @@ func TestUpdateRequestSnapshot_GetAttachedFile(t *testing.T) {
 		FileId:                ptr.String("__FileId__"),
 		UrlExpiryInSeconds:    ptr.Int32(1),
 		AssociatedResourceArn: ptr.String("__AssociatedResourceArn__"),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

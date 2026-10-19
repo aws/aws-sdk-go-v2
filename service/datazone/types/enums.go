@@ -255,6 +255,12 @@ const (
 	ConnectionTypeVpc           ConnectionType = "VPC"
 	// A Git connection type.
 	ConnectionTypeGit ConnectionType = "GIT"
+	// A generic Iceberg REST catalog connection type.
+	ConnectionTypeIcebergrestcatalog ConnectionType = "ICEBERGRESTCATALOG"
+	// A Snowflake Horizon (Iceberg REST) catalog connection type.
+	ConnectionTypeSnowflakeicebergrestcatalog ConnectionType = "SNOWFLAKEICEBERGRESTCATALOG"
+	// A Databricks Unity Catalog (Iceberg REST) connection type.
+	ConnectionTypeDatabricksicebergrestcatalog ConnectionType = "DATABRICKSICEBERGRESTCATALOG"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -287,6 +293,9 @@ func (ConnectionType) Values() []ConnectionType {
 		"MLFLOW",
 		"VPC",
 		"GIT",
+		"ICEBERGRESTCATALOG",
+		"SNOWFLAKEICEBERGRESTCATALOG",
+		"DATABRICKSICEBERGRESTCATALOG",
 	}
 }
 
@@ -881,6 +890,12 @@ const (
 	GlueConnectionTypeSqlserver  GlueConnectionType = "SQLSERVER"
 	GlueConnectionTypeTeradata   GlueConnectionType = "TERADATA"
 	GlueConnectionTypeVertica    GlueConnectionType = "VERTICA"
+	// A generic Iceberg REST catalog connection type.
+	GlueConnectionTypeIcebergrestcatalog GlueConnectionType = "ICEBERGRESTCATALOG"
+	// A Snowflake Horizon (Iceberg REST) catalog connection type.
+	GlueConnectionTypeSnowflakeicebergrestcatalog GlueConnectionType = "SNOWFLAKEICEBERGRESTCATALOG"
+	// A Databricks Unity Catalog (Iceberg REST) connection type.
+	GlueConnectionTypeDatabricksicebergrestcatalog GlueConnectionType = "DATABRICKSICEBERGRESTCATALOG"
 )
 
 // Values returns all known values for GlueConnectionType. Note that this can be
@@ -902,6 +917,9 @@ func (GlueConnectionType) Values() []GlueConnectionType {
 		"SQLSERVER",
 		"TERADATA",
 		"VERTICA",
+		"ICEBERGRESTCATALOG",
+		"SNOWFLAKEICEBERGRESTCATALOG",
+		"DATABRICKSICEBERGRESTCATALOG",
 	}
 }
 

@@ -564,6 +564,12 @@ func TestUpdateResponseSnapshot_BatchGetDeploymentGroups(t *testing.T) {
 						ClusterName: ptr.String("__ClusterName__"),
 					},
 				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
+					},
+				},
 				TerminationHookEnabled: true,
 			},
 			{
@@ -826,6 +832,12 @@ func TestUpdateResponseSnapshot_BatchGetDeploymentGroups(t *testing.T) {
 					{
 						ServiceName: ptr.String("__ServiceName__"),
 						ClusterName: ptr.String("__ClusterName__"),
+					},
+				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
 					},
 				},
 				TerminationHookEnabled: true,
@@ -1550,6 +1562,12 @@ func TestUpdateResponseSnapshot_BatchGetDeployments(t *testing.T) {
 						},
 					},
 				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
+					},
+				},
 			},
 			{
 				ApplicationName:      ptr.String("__ApplicationName__"),
@@ -1786,6 +1804,12 @@ func TestUpdateResponseSnapshot_BatchGetDeployments(t *testing.T) {
 						{
 							Name: ptr.String("__Name__"),
 						},
+					},
+				},
+				Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+					AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+						types.AutoScalingGroupProcess("Terminate"),
+						types.AutoScalingGroupProcess("Terminate"),
 					},
 				},
 			},
@@ -2463,6 +2487,12 @@ func TestUpdateResponseSnapshot_GetDeployment(t *testing.T) {
 					},
 				},
 			},
+			Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+				AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+					types.AutoScalingGroupProcess("Terminate"),
+					types.AutoScalingGroupProcess("Terminate"),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.CodeDeploy_20141006)
@@ -2799,6 +2829,12 @@ func TestUpdateResponseSnapshot_GetDeploymentGroup(t *testing.T) {
 				{
 					ServiceName: ptr.String("__ServiceName__"),
 					ClusterName: ptr.String("__ClusterName__"),
+				},
+			},
+			Ec2DeploymentOptions: &types.EC2DeploymentOptions{
+				AutoScalingGroupProcessesToSuspend: []types.AutoScalingGroupProcess{
+					types.AutoScalingGroupProcess("Terminate"),
+					types.AutoScalingGroupProcess("Terminate"),
 				},
 			},
 			TerminationHookEnabled: true,
@@ -4802,6 +4838,31 @@ func TestUpdateResponseSnapshot_Error_InvalidAutoScalingGroupException(t *testin
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidAutoScalingGroupException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_InvalidAutoScalingGroupProcessToSuspendException(t *testing.T) {
+	want := &types.InvalidAutoScalingGroupProcessToSuspendException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.CodeDeploy_20141006)
+	opSchema := smithy.NewOperationSchema(schemas.CreateDeployment, schemas.InvalidAutoScalingGroupProcessToSuspendException, schemas.InvalidAutoScalingGroupProcessToSuspendException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("InvalidAutoScalingGroupProcessToSuspendException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -44,6 +44,29 @@ func (AutoRollbackEvent) Values() []AutoRollbackEvent {
 	}
 }
 
+type AutoScalingGroupProcess string
+
+// Enum values for AutoScalingGroupProcess
+const (
+	AutoScalingGroupProcessTerminate        AutoScalingGroupProcess = "Terminate"
+	AutoScalingGroupProcessAzRebalance      AutoScalingGroupProcess = "AZRebalance"
+	AutoScalingGroupProcessInstanceRefresh  AutoScalingGroupProcess = "InstanceRefresh"
+	AutoScalingGroupProcessScheduledActions AutoScalingGroupProcess = "ScheduledActions"
+)
+
+// Values returns all known values for AutoScalingGroupProcess. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoScalingGroupProcess) Values() []AutoScalingGroupProcess {
+	return []AutoScalingGroupProcess{
+		"Terminate",
+		"AZRebalance",
+		"InstanceRefresh",
+		"ScheduledActions",
+	}
+}
+
 type BundleType string
 
 // Enum values for BundleType

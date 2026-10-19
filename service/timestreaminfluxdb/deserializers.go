@@ -5792,6 +5792,16 @@ func awsAwsjson10_deserializeDocumentInfluxDBv3EnterpriseParameters(v **types.In
 				return err
 			}
 
+		case "snapshotDuration":
+			if err := awsAwsjson10_deserializeDocumentDuration(&sv.SnapshotDuration, value); err != nil {
+				return err
+			}
+
+		case "snapshotSize":
+			if err := awsAwsjson10_deserializeDocumentPercentOrAbsoluteLong(&sv.SnapshotSize, value); err != nil {
+				return err
+			}
+
 		case "snapshottedWalFilesToKeep":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5829,6 +5839,28 @@ func awsAwsjson10_deserializeDocumentInfluxDBv3EnterpriseParameters(v **types.In
 					return err
 				}
 				sv.TableIndexCacheMaxEntries = ptr.Int32(int32(i64))
+			}
+
+		case "upgradePachaTree":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UpgradePachaTree = ptr.Bool(jtv)
+			}
+
+		case "walBufferSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WalBufferSize = ptr.Int64(i64)
 			}
 
 		case "walMaxWriteBufferSize":

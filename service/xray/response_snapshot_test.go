@@ -4228,6 +4228,9 @@ func TestCheckResponseSnapshot_UpdateTraceSegmentDestination(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.UpdateTraceSegmentDestination(context.Background(), &UpdateTraceSegmentDestinationInput{
 		Destination: types.TraceSegmentDestination("XRay"),
+		CloudWatchLogsConfiguration: &types.CloudWatchLogsConfiguration{
+			SpansLogGroupKmsKeyId: ptr.String("__SpansLogGroupKmsKeyId__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

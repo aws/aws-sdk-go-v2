@@ -13524,6 +13524,17 @@ type ServiceConnectConfiguration struct {
 	// serviceConnectConfiguration .
 	AccessLogConfiguration *ServiceConnectAccessLogConfiguration
 
+	// The settings for the Service Connect proxy container that Amazon ECS adds to
+	// each task in this service. Each object in the list sets exactly one setting, and
+	// each setting can appear only once in the list.
+	//
+	// Your changes to these settings apply only to tasks that Amazon ECS launches
+	// after you update the service. Your running tasks keep their existing settings
+	// until Amazon ECS replaces them. If you update the serviceConnectConfiguration
+	// of your service and don't include containerConfigurations , the proxy container
+	// settings return to their defaults.
+	ContainerConfigurations []ServiceConnectContainerConfiguration
+
 	// The log configuration for the container. This parameter maps to LogConfig in
 	// the docker container create command and the --log-driver option to docker run.
 	//
@@ -13599,6 +13610,7 @@ func (v *ServiceConnectConfiguration) SerializeMembers(s smithy.ShapeSerializer)
 		v.AccessLogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeServiceConnectContainerConfigurations(s, schemas.ServiceConnectConfiguration_containerConfigurations, v.ContainerConfigurations)
 	s.WriteBool(schemas.ServiceConnectConfiguration_enabled, v.Enabled)
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.ServiceConnectConfiguration_logConfiguration)
@@ -13616,6 +13628,8 @@ func (v *ServiceConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.ServiceConnectConfiguration_accessLogConfiguration:
 			v.AccessLogConfiguration = &ServiceConnectAccessLogConfiguration{}
 			return v.AccessLogConfiguration.Deserialize(d)
+		case schemas.ServiceConnectConfiguration_containerConfigurations:
+			return deserializeServiceConnectContainerConfigurations(d, schemas.ServiceConnectConfiguration_containerConfigurations, &v.ContainerConfigurations)
 		case schemas.ServiceConnectConfiguration_enabled:
 			return d.ReadBool(schemas.ServiceConnectConfiguration_enabled, &v.Enabled)
 		case schemas.ServiceConnectConfiguration_logConfiguration:
@@ -13629,6 +13643,40 @@ func (v *ServiceConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 		}
 		return nil
 	})
+}
+
+// Contains a configuration setting for the Service Connect proxy container, such
+// as the log level. Specify exactly one member in each object.
+//
+// The following types satisfy this interface:
+//
+//	ServiceConnectContainerConfigurationMemberLogLevel
+type ServiceConnectContainerConfiguration interface {
+	isServiceConnectContainerConfiguration()
+}
+
+// The log level of the Service Connect proxy container. Set the log level to debug
+// to collect more detailed proxy logs when you troubleshoot connectivity issues
+// between services, and set it back to info when you finish. Debug logging
+// increases the volume of logs that the proxy container writes. If you don't
+// specify a log level, the default is info .
+type ServiceConnectContainerConfigurationMemberLogLevel struct {
+	Value ServiceConnectContainerLogLevel
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConnectContainerConfigurationMemberLogLevel) isServiceConnectContainerConfiguration() {}
+func (v *ServiceConnectContainerConfigurationMemberLogLevel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.ServiceConnectContainerConfiguration_logLevel, string(v.Value))
+}
+func (v *ServiceConnectContainerConfigurationMemberLogLevel) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.ServiceConnectContainerConfiguration_logLevel, &s); err != nil {
+		return err
+	}
+	v.Value = ServiceConnectContainerLogLevel(s)
+	return nil
 }
 
 // The Service Connect service object configuration. For more information, see [Service Connect] in
@@ -18388,3 +18436,14 @@ func (v *VpcLatticeConfiguration) Deserialize(d smithy.ShapeDeserializer) error 
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isServiceConnectContainerConfiguration() {}

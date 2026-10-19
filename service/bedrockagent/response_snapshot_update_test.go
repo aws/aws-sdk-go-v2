@@ -1651,6 +1651,64 @@ func TestUpdateResponseSnapshot_CreatePromptVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateRetrievalInstruction(t *testing.T) {
+	want := &CreateRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+		LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRetrievalInstruction, schemas.CreateRetrievalInstructionResponse, schemas.CreateRetrievalInstructionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateRetrievalInstruction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateRetrievalInstructionVersion(t *testing.T) {
+	want := &CreateRetrievalInstructionVersionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Version:                 ptr.String("__Version__"),
+		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:             ptr.String("__Description__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRetrievalInstructionVersion, schemas.CreateRetrievalInstructionVersionResponse, schemas.CreateRetrievalInstructionVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateRetrievalInstructionVersion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateVpcConfiguration(t *testing.T) {
 	want := &CreateVpcConfigurationOutput{
 		VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
@@ -2003,6 +2061,32 @@ func TestUpdateResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteResourcePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteRetrievalInstruction(t *testing.T) {
+	want := &DeleteRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Version:                 ptr.String("__Version__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteRetrievalInstruction, schemas.DeleteRetrievalInstructionResponse, schemas.DeleteRetrievalInstructionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteRetrievalInstruction.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3711,6 +3795,58 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetRetrievalInstruction(t *testing.T) {
+	want := &GetRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+		LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+		Instruction: &types.RetrievalInstructionContent{
+			RetrievalGuidance: ptr.String("__RetrievalGuidance__"),
+			Persona:           ptr.String("__Persona__"),
+			AnswerFormat:      ptr.String("__AnswerFormat__"),
+			AnswerPolicy:      ptr.String("__AnswerPolicy__"),
+		},
+		CreatedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:              ptr.String("__Description__"),
+		CustomerEncryptionKeyArn: ptr.String("__CustomerEncryptionKeyArn__"),
+		LastTransitionStatusReasons: []types.RetrievalInstructionFailureReason{
+			{
+				FieldName: types.RetrievalInstructionFieldName("RETRIEVAL_GUIDANCE"),
+				Code:      types.RetrievalInstructionFailureReasonCode("CONTENT_REJECTED"),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				FieldName: types.RetrievalInstructionFieldName("RETRIEVAL_GUIDANCE"),
+				Code:      types.RetrievalInstructionFailureReasonCode("CONTENT_REJECTED"),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+		Version:       ptr.String("__Version__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.GetRetrievalInstruction, schemas.GetRetrievalInstructionResponse, schemas.GetRetrievalInstructionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetRetrievalInstruction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetVpcConfiguration(t *testing.T) {
 	want := &GetVpcConfigurationOutput{
 		VpcConfiguration: &types.VpcConfiguration{
@@ -4505,6 +4641,86 @@ func TestUpdateResponseSnapshot_ListPrompts(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListPrompts.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRetrievalInstructionVersions(t *testing.T) {
+	want := &ListRetrievalInstructionVersionsOutput{
+		RetrievalInstructionVersionSummaries: []types.RetrievalInstructionVersionSummary{
+			{
+				Version:   ptr.String("__Version__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Version:   ptr.String("__Version__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.ListRetrievalInstructionVersions, schemas.ListRetrievalInstructionVersionsResponse, schemas.ListRetrievalInstructionVersionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRetrievalInstructionVersions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRetrievalInstructions(t *testing.T) {
+	want := &ListRetrievalInstructionsOutput{
+		RetrievalInstructionSummaries: []types.RetrievalInstructionSummary{
+			{
+				RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+				RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+				Name:                    ptr.String("__Name__"),
+				Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+				LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:             ptr.String("__Description__"),
+			},
+			{
+				RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+				RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+				Name:                    ptr.String("__Name__"),
+				Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+				LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:             ptr.String("__Description__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.ListRetrievalInstructions, schemas.ListRetrievalInstructionsResponse, schemas.ListRetrievalInstructionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRetrievalInstructions.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6057,6 +6273,36 @@ func TestUpdateResponseSnapshot_UpdatePrompt(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdatePrompt.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateRetrievalInstruction(t *testing.T) {
+	want := &UpdateRetrievalInstructionOutput{
+		RetrievalInstructionId:  ptr.String("__RetrievalInstructionId__"),
+		RetrievalInstructionArn: ptr.String("__RetrievalInstructionArn__"),
+		Name:                    ptr.String("__Name__"),
+		Status:                  types.RetrievalInstructionStatus("ACTIVE"),
+		LastTransitionStatus:    types.RetrievalInstructionLastTransitionStatus("CREATING"),
+		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateRetrievalInstruction, schemas.UpdateRetrievalInstructionResponse, schemas.UpdateRetrievalInstructionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateRetrievalInstruction.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

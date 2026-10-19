@@ -1,0 +1,8 @@
+{
+    "id": "7eecc544-52fd-4740-9791-2516e3c74893",
+    "type": "feature",
+    "description": "Adds optional imageValidationMode enum to ImportCustomWorkspaceImageRequest. This allows customers to opt-in to having prevalidation run in the service account instead of customer account.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

@@ -4431,7 +4431,7 @@ var TimeUnit_HOURS *smithy.Schema
 var TLSSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "TLSSecurityPolicy",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var TLSSecurityPolicy_POLICY_MIN_TLS_1_0_2019_07 *smithy.Schema
 
 var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 *smithy.Schema
@@ -4439,6 +4439,8 @@ var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_2019_07 *smithy.Schema
 var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10 *smithy.Schema
 
 var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08 *smithy.Schema
+
+var TLSSecurityPolicy_POLICY_MIN_TLS_1_2_FIPS_PQ_2026_10 *smithy.Schema
 
 var _TotalNumberOfStages = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -7612,6 +7614,8 @@ func init() {
 	TLSSecurityPolicy_POLICY_MIN_TLS_1_2_PFS_2023_10 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_2_PFS_2023_10", smithyprelude.Unit)
 
 	TLSSecurityPolicy_POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08", smithyprelude.Unit)
+
+	TLSSecurityPolicy_POLICY_MIN_TLS_1_2_FIPS_PQ_2026_10 = TLSSecurityPolicy.AddMember("POLICY_MIN_TLS_1_2_FIPS_PQ_2026_10", smithyprelude.Unit)
 
 	DomainEndpointOptions_EnforceHTTPS = DomainEndpointOptions.AddMember("EnforceHTTPS", _Boolean)
 

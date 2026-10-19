@@ -9,6 +9,42 @@ import (
 	"time"
 )
 
+// Settings that change the content of the notifications and events that an alarm
+// sends when its state changes. These settings apply to the alarm's actions,
+// whichever state triggers them.
+type ActionConfiguration struct {
+
+	// Settings for including the alarm's tags in its action notifications and
+	// state-change events.
+	AlarmTagsPropagation *AlarmTagsPropagation
+
+	noSmithyDocumentSerde
+}
+
+func (v *ActionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmTagsPropagation != nil {
+		s.WriteStruct(schemas.ActionConfiguration_AlarmTagsPropagation)
+		v.AlarmTagsPropagation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ActionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionConfiguration_AlarmTagsPropagation:
+			v.AlarmTagsPropagation = &AlarmTagsPropagation{}
+			return v.AlarmTagsPropagation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents an individual contributor to a multi-timeseries alarm, containing
 // information about a specific time series and its contribution to the alarm's
 // state.
@@ -307,6 +343,76 @@ func (v *AlarmPromQLCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Includes the alarm's tags in the notifications that the alarm sends to Amazon
+// SNS topics and Lambda functions. The tags are also included in the alarm's
+// state-change events in Amazon EventBridge. Other types of alarm actions don't
+// receive the tags.
+//
+// By default, the alarm's tags aren't included.
+//
+// Use this to route or filter notifications and events by tag, such as by team or
+// environment. You can also use it to read the alarm's tags without looking them
+// up separately.
+//
+// To limit which tags are included, specify either IncludedTagKeys or
+// ExcludedTagKeys . You can't specify both. If you specify neither, all of the
+// alarm's tags are included. This includes tags that you add to the alarm later.
+type AlarmTagsPropagation struct {
+
+	// Set to true to include the alarm's tags. Set to false to stop including them.
+	//
+	// When this is true , you must have the cloudwatch:ListTagsForResource permission
+	// on the alarm to create or update it.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The tag keys to exclude. All of the alarm's tags except those with these keys
+	// are included.
+	//
+	// You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.
+	//
+	// You can't specify both IncludedTagKeys and ExcludedTagKeys .
+	ExcludedTagKeys []string
+
+	// The tag keys to include. Only the alarm's tags with these keys are included.
+	//
+	// You can specify 1 to 50 tag keys. Each tag key must be 1 to 128 characters long.
+	//
+	// You can't specify both IncludedTagKeys and ExcludedTagKeys .
+	IncludedTagKeys []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AlarmTagsPropagation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmTagsPropagation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmTagsPropagation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.AlarmTagsPropagation_Enabled, *v.Enabled)
+	}
+	serializeAlarmTagsPropagationTagKeys(s, schemas.AlarmTagsPropagation_ExcludedTagKeys, v.ExcludedTagKeys)
+	serializeAlarmTagsPropagationTagKeys(s, schemas.AlarmTagsPropagation_IncludedTagKeys, v.IncludedTagKeys)
+}
+func (v *AlarmTagsPropagation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmTagsPropagation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmTagsPropagation_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.AlarmTagsPropagation_Enabled, v.Enabled)
+		case schemas.AlarmTagsPropagation_ExcludedTagKeys:
+			return deserializeAlarmTagsPropagationTagKeys(d, schemas.AlarmTagsPropagation_ExcludedTagKeys, &v.ExcludedTagKeys)
+		case schemas.AlarmTagsPropagation_IncludedTagKeys:
+			return deserializeAlarmTagsPropagationTagKeys(d, schemas.AlarmTagsPropagation_IncludedTagKeys, &v.IncludedTagKeys)
+		}
+		return nil
+	})
+}
+
 // An anomaly detection model associated with a particular CloudWatch metric,
 // statistic, or metric math expression. You can use the model to display a band of
 // expected, normal values when the metric is graphed.
@@ -500,6 +606,11 @@ func (v *AnomalyDetectorConfiguration) Deserialize(d smithy.ShapeDeserializer) e
 // The details about a composite alarm.
 type CompositeAlarm struct {
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *ActionConfiguration
+
 	// Indicates whether actions should be executed during any changes to the alarm
 	// state.
 	ActionsEnabled *bool
@@ -591,6 +702,11 @@ func (v *CompositeAlarm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompositeAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.CompositeAlarm_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.CompositeAlarm_ActionsEnabled, *v.ActionsEnabled)
 	}
@@ -646,6 +762,9 @@ func (v *CompositeAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *CompositeAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompositeAlarm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CompositeAlarm_ActionConfiguration:
+			v.ActionConfiguration = &ActionConfiguration{}
+			return v.ActionConfiguration.Deserialize(d)
 		case schemas.CompositeAlarm_ActionsEnabled:
 			v.ActionsEnabled = new(bool)
 			return d.ReadBool(schemas.CompositeAlarm_ActionsEnabled, v.ActionsEnabled)
@@ -1563,6 +1682,11 @@ func (v *LabelOptions) Deserialize(d smithy.ShapeDeserializer) error {
 // The details about a log alarm.
 type LogAlarm struct {
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *ActionConfiguration
+
 	// The number of log lines from the most recent scheduled query execution that are
 	// included in alarm action notifications. Valid range is 0 through 50. A value of
 	// 0 means no log lines are included.
@@ -1674,6 +1798,11 @@ func (v *LogAlarm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.LogAlarm_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionLogLineCount != nil {
 		s.WriteInt32(schemas.LogAlarm_ActionLogLineCount, *v.ActionLogLineCount)
 	}
@@ -1745,6 +1874,9 @@ func (v *LogAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *LogAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogAlarm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.LogAlarm_ActionConfiguration:
+			v.ActionConfiguration = &ActionConfiguration{}
+			return v.ActionConfiguration.Deserialize(d)
 		case schemas.LogAlarm_ActionLogLineCount:
 			v.ActionLogLineCount = new(int32)
 			return d.ReadInt32(schemas.LogAlarm_ActionLogLineCount, v.ActionLogLineCount)
@@ -2086,6 +2218,11 @@ func (v *Metric) Deserialize(d smithy.ShapeDeserializer) error {
 // The details about a metric alarm.
 type MetricAlarm struct {
 
+	// Settings that change the content of the notifications and events that the alarm
+	// sends when its state changes. These settings apply to the alarm's actions,
+	// whichever state triggers them.
+	ActionConfiguration *ActionConfiguration
+
 	// Indicates whether actions should be executed during any changes to the alarm
 	// state.
 	ActionsEnabled *bool
@@ -2240,6 +2377,11 @@ func (v *MetricAlarm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConfiguration != nil {
+		s.WriteStruct(schemas.MetricAlarm_ActionConfiguration)
+		v.ActionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.MetricAlarm_ActionsEnabled, *v.ActionsEnabled)
 	}
@@ -2331,6 +2473,9 @@ func (v *MetricAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MetricAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricAlarm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MetricAlarm_ActionConfiguration:
+			v.ActionConfiguration = &ActionConfiguration{}
+			return v.ActionConfiguration.Deserialize(d)
 		case schemas.MetricAlarm_ActionsEnabled:
 			v.ActionsEnabled = new(bool)
 			return d.ReadBool(schemas.MetricAlarm_ActionsEnabled, v.ActionsEnabled)

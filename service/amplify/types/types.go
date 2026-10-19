@@ -1311,7 +1311,7 @@ type DomainAssociation struct {
 	// PENDING_DEPLOYMENT Indicates that the subdomain or certificate changes are
 	// being propagated.
 	//
-	// AWAITING_APP_CNAME Amplify is waiting for CNAME records corresponding to
+	// AWAITING_APP_CNAME  Amplify is waiting for CNAME records corresponding to
 	// subdomains to be propagated. If your custom domain is on Route 53, Amplify
 	// handles this for you automatically. For more information about custom domains,
 	// see [Setting up custom domains]in the Amplify Hosting User Guide.

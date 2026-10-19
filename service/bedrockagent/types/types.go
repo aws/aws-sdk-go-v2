@@ -12506,6 +12506,310 @@ func (v *RetrievalFlowNodeServiceConfigurationMemberS3) Deserialize(d smithy.Sha
 	return v.Value.Deserialize(d)
 }
 
+// The instruction content, as a set of named fields. Every field is optional; at
+// least one must be present. Service-side validation enforces per-field and
+// aggregate size limits.
+type RetrievalInstructionContent struct {
+
+	// How the answer is structured, including how sources are cited.
+	AnswerFormat *string
+
+	// Whether and how to answer: how strongly an answer must be supported, and what
+	// to do with questions outside scope.
+	AnswerPolicy *string
+
+	// Who the assistant is: identity, tone and language.
+	Persona *string
+
+	// How to interpret and decompose the question, and what to prioritise when
+	// searching.
+	RetrievalGuidance *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RetrievalInstructionContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalInstructionContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrievalInstructionContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnswerFormat != nil {
+		s.WriteString(schemas.RetrievalInstructionContent_answerFormat, *v.AnswerFormat)
+	}
+	if v.AnswerPolicy != nil {
+		s.WriteString(schemas.RetrievalInstructionContent_answerPolicy, *v.AnswerPolicy)
+	}
+	if v.Persona != nil {
+		s.WriteString(schemas.RetrievalInstructionContent_persona, *v.Persona)
+	}
+	if v.RetrievalGuidance != nil {
+		s.WriteString(schemas.RetrievalInstructionContent_retrievalGuidance, *v.RetrievalGuidance)
+	}
+}
+func (v *RetrievalInstructionContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrievalInstructionContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrievalInstructionContent_answerFormat:
+			v.AnswerFormat = new(string)
+			return d.ReadString(schemas.RetrievalInstructionContent_answerFormat, v.AnswerFormat)
+		case schemas.RetrievalInstructionContent_answerPolicy:
+			v.AnswerPolicy = new(string)
+			return d.ReadString(schemas.RetrievalInstructionContent_answerPolicy, v.AnswerPolicy)
+		case schemas.RetrievalInstructionContent_persona:
+			v.Persona = new(string)
+			return d.ReadString(schemas.RetrievalInstructionContent_persona, v.Persona)
+		case schemas.RetrievalInstructionContent_retrievalGuidance:
+			v.RetrievalGuidance = new(string)
+			return d.ReadString(schemas.RetrievalInstructionContent_retrievalGuidance, v.RetrievalGuidance)
+		}
+		return nil
+	})
+}
+
+// One reason the most recent create or update did not succeed. code drives
+// programmatic branching (fix the text, fix the configuration, or retry); message
+// carries the specific cause.
+type RetrievalInstructionFailureReason struct {
+
+	// Stable, machine-readable classification by fault attribution. Valid values:
+	//
+	//   - CONTENT_REJECTED – The review rejected the named field's content; revise
+	//   the text and resubmit.
+	//
+	//   - CLIENT_ERROR – The review could not run for a customer-side reason, for
+	//   example the customer managed AWS KMS key could not be used; fix the
+	//   configuration and resubmit.
+	//
+	//   - INTERNAL_ERROR – The review could not complete due to a service fault;
+	//   retry the create or update.
+	//
+	// New values may be added over time; your client should tolerate values it does
+	// not recognize and treat them as a failure.
+	//
+	// This member is required.
+	Code RetrievalInstructionFailureReasonCode
+
+	// Human-readable explanation of the specific cause. Never contains the customer's
+	// own text.
+	//
+	// This member is required.
+	Message *string
+
+	// The instruction field this entry is about. Present on review rejections of a
+	// specific field; absent when the failure applies to the whole review, because a
+	// client-side execution failure or a service fault has no single field.
+	FieldName RetrievalInstructionFieldName
+
+	noSmithyDocumentSerde
+}
+
+func (v *RetrievalInstructionFailureReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalInstructionFailureReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrievalInstructionFailureReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.RetrievalInstructionFailureReason_code, string(v.Code))
+	}
+	if v.FieldName != "" {
+		s.WriteString(schemas.RetrievalInstructionFailureReason_fieldName, string(v.FieldName))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RetrievalInstructionFailureReason_message, *v.Message)
+	}
+}
+func (v *RetrievalInstructionFailureReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrievalInstructionFailureReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrievalInstructionFailureReason_code:
+			var ev string
+			if err := d.ReadString(schemas.RetrievalInstructionFailureReason_code, &ev); err != nil {
+				return err
+			}
+			v.Code = RetrievalInstructionFailureReasonCode(ev)
+			return nil
+		case schemas.RetrievalInstructionFailureReason_fieldName:
+			var ev string
+			if err := d.ReadString(schemas.RetrievalInstructionFailureReason_fieldName, &ev); err != nil {
+				return err
+			}
+			v.FieldName = RetrievalInstructionFieldName(ev)
+			return nil
+		case schemas.RetrievalInstructionFailureReason_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RetrievalInstructionFailureReason_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// A summary of a retrieval instruction, without the content.
+type RetrievalInstructionSummary struct {
+
+	// When you created the retrieval instruction.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The outcome or in-progress state of the most recent create or update of the
+	// retrieval instruction.
+	//
+	// This member is required.
+	LastTransitionStatus RetrievalInstructionLastTransitionStatus
+
+	// The name of the retrieval instruction.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the retrieval instruction.
+	//
+	// This member is required.
+	RetrievalInstructionArn *string
+
+	// The identifier of the retrieval instruction.
+	//
+	// This member is required.
+	RetrievalInstructionId *string
+
+	// Whether the instruction can be used. Only ACTIVE is resolvable at retrieval
+	// time.
+	//
+	// This member is required.
+	Status RetrievalInstructionStatus
+
+	// When the retrieval instruction was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the retrieval instruction.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RetrievalInstructionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalInstructionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrievalInstructionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RetrievalInstructionSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RetrievalInstructionSummary_description, *v.Description)
+	}
+	if v.LastTransitionStatus != "" {
+		s.WriteString(schemas.RetrievalInstructionSummary_lastTransitionStatus, string(v.LastTransitionStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RetrievalInstructionSummary_name, *v.Name)
+	}
+	if v.RetrievalInstructionArn != nil {
+		s.WriteString(schemas.RetrievalInstructionSummary_retrievalInstructionArn, *v.RetrievalInstructionArn)
+	}
+	if v.RetrievalInstructionId != nil {
+		s.WriteString(schemas.RetrievalInstructionSummary_retrievalInstructionId, *v.RetrievalInstructionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RetrievalInstructionSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RetrievalInstructionSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RetrievalInstructionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrievalInstructionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrievalInstructionSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RetrievalInstructionSummary_createdAt, v.CreatedAt)
+		case schemas.RetrievalInstructionSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RetrievalInstructionSummary_description, v.Description)
+		case schemas.RetrievalInstructionSummary_lastTransitionStatus:
+			var ev string
+			if err := d.ReadString(schemas.RetrievalInstructionSummary_lastTransitionStatus, &ev); err != nil {
+				return err
+			}
+			v.LastTransitionStatus = RetrievalInstructionLastTransitionStatus(ev)
+			return nil
+		case schemas.RetrievalInstructionSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RetrievalInstructionSummary_name, v.Name)
+		case schemas.RetrievalInstructionSummary_retrievalInstructionArn:
+			v.RetrievalInstructionArn = new(string)
+			return d.ReadString(schemas.RetrievalInstructionSummary_retrievalInstructionArn, v.RetrievalInstructionArn)
+		case schemas.RetrievalInstructionSummary_retrievalInstructionId:
+			v.RetrievalInstructionId = new(string)
+			return d.ReadString(schemas.RetrievalInstructionSummary_retrievalInstructionId, v.RetrievalInstructionId)
+		case schemas.RetrievalInstructionSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.RetrievalInstructionSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RetrievalInstructionStatus(ev)
+			return nil
+		case schemas.RetrievalInstructionSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RetrievalInstructionSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// A summary of one numbered version of a retrieval instruction, without the
+// content.
+type RetrievalInstructionVersionSummary struct {
+
+	// When this version was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The version number.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RetrievalInstructionVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalInstructionVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrievalInstructionVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RetrievalInstructionVersionSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.RetrievalInstructionVersionSummary_version, *v.Version)
+	}
+}
+func (v *RetrievalInstructionVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrievalInstructionVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrievalInstructionVersionSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RetrievalInstructionVersionSummary_createdAt, v.CreatedAt)
+		case schemas.RetrievalInstructionVersionSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.RetrievalInstructionVersionSummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Contains information about the content to ingest into a knowledge base
 // connected to an Amazon S3 data source.
 type S3Content struct {

@@ -206,6 +206,30 @@ func TestCheckSnapshot_CreatePromptVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRetrievalInstruction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRetrievalInstructionVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRetrievalInstructionVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRetrievalInstructionVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVpcConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVpcConfiguration(context.Background(), nil, func(o *Options) {
@@ -355,6 +379,18 @@ func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRetrievalInstruction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +614,18 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRetrievalInstruction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetVpcConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetVpcConfiguration(context.Background(), nil, func(o *Options) {
@@ -763,6 +811,30 @@ func TestCheckSnapshot_ListPrompts(t *testing.T) {
 	_, err := svc.ListPrompts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPrompts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRetrievalInstructions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRetrievalInstructions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRetrievalInstructions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRetrievalInstructionVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRetrievalInstructionVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRetrievalInstructionVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -998,6 +1070,18 @@ func TestCheckSnapshot_UpdatePrompt(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRetrievalInstruction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ValidateFlowDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ValidateFlowDefinition(context.Background(), nil, func(o *Options) {
@@ -1146,6 +1230,30 @@ func TestUpdateSnapshot_CreatePromptVersion(t *testing.T) {
 	_, err := svc.CreatePromptVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreatePromptVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRetrievalInstruction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRetrievalInstructionVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRetrievalInstructionVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRetrievalInstructionVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1302,6 +1410,18 @@ func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRetrievalInstruction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1525,6 +1645,18 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRetrievalInstruction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetVpcConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetVpcConfiguration(context.Background(), nil, func(o *Options) {
@@ -1710,6 +1842,30 @@ func TestUpdateSnapshot_ListPrompts(t *testing.T) {
 	_, err := svc.ListPrompts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPrompts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRetrievalInstructions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRetrievalInstructions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRetrievalInstructions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRetrievalInstructionVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRetrievalInstructionVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRetrievalInstructionVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1938,6 +2094,18 @@ func TestUpdateSnapshot_UpdatePrompt(t *testing.T) {
 	_, err := svc.UpdatePrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRetrievalInstruction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRetrievalInstruction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRetrievalInstruction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

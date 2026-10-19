@@ -1,0 +1,8 @@
+{
+    "id": "0b506e91-54f7-4668-9a67-bdb5e6ef9633",
+    "type": "feature",
+    "description": "Adds support for suspending Amazon EC2 Auto Scaling processes during CodeDeploy EC2 in-place deployments. Use ec2DeploymentOptions to choose which processes are suspended and resumed.",
+    "modules": [
+        "service/codedeploy"
+    ]
+}
