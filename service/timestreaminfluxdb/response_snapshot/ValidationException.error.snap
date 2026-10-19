@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.CreateDbBackup
+
+{"__type":"ValidationException","message":"__Message__","reason":"FIELD_VALIDATION_FAILED"}

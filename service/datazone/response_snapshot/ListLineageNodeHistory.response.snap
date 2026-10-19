@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","nodes":[{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","eventTimestamp":946684800,"id":"__Id__","name":"__Name__","sourceIdentifier":"__SourceIdentifier__","typeName":"__TypeName__","typeRevision":"__TypeRevision__","updatedAt":946684800,"updatedBy":"__UpdatedBy__"},{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","eventTimestamp":946684800,"id":"__Id__","name":"__Name__","sourceIdentifier":"__SourceIdentifier__","typeName":"__TypeName__","typeRevision":"__TypeRevision__","updatedAt":946684800,"updatedBy":"__UpdatedBy__"}]}

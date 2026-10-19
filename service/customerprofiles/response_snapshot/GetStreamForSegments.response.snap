@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AssociatedAt":946684800,"AssociatedSegments":[{"Message":"__Message__","SegmentName":"__SegmentName__","Status":"STARTING"},{"Message":"__Message__","SegmentName":"__SegmentName__","Status":"STARTING"}],"DestinationArn":"__DestinationArn__","DestinationRoleArn":"__DestinationRoleArn__","DisassociatedAt":946684800,"DomainName":"__DomainName__","FailureReason":"__FailureReason__","State":"RUNNING"}

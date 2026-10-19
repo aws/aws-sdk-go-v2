@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Results":[{"S3ResultItem":{"BackupResourceArn":"__BackupResourceArn__","BackupVaultName":"__BackupVaultName__","CreationTime":946684800,"ETag":"__ETag__","ObjectKey":"__ObjectKey__","ObjectSize":1,"SourceResourceArn":"__SourceResourceArn__","VersionId":"__VersionId__"}},{"S3ResultItem":{"BackupResourceArn":"__BackupResourceArn__","BackupVaultName":"__BackupVaultName__","CreationTime":946684800,"ETag":"__ETag__","ObjectKey":"__ObjectKey__","ObjectSize":1,"SourceResourceArn":"__SourceResourceArn__","VersionId":"__VersionId__"}}]}

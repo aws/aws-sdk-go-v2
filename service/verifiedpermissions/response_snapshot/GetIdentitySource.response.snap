@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.GetIdentitySource
+
+{"configuration":{"cognitoUserPoolConfiguration":{"clientIds":["__Member__","__Member__"],"groupConfiguration":{"groupEntityType":"__GroupEntityType__"},"issuer":"__Issuer__","userPoolArn":"__UserPoolArn__"}},"createdDate":"2000-01-01T00:00:00Z","details":{"clientIds":["__Member__","__Member__"],"discoveryUrl":"__DiscoveryUrl__","openIdIssuer":"COGNITO","userPoolArn":"__UserPoolArn__"},"identitySourceId":"__IdentitySourceId__","lastUpdatedDate":"2000-01-01T00:00:00Z","policyStoreId":"__PolicyStoreId__","principalEntityType":"__PrincipalEntityType__"}

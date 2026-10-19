@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSupport_20130415.GetAttachmentUploadLinks
+
+{"nextIndex":1,"partSizeBytes":1,"totalParts":1,"uploadId":"__UploadId__","uploadUrls":[{"expiryDate":"__ExpiryDate__","partIndex":1,"url":"__Url__"},{"expiryDate":"__ExpiryDate__","partIndex":1,"url":"__Url__"}]}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.ListDocumentMetadataHistory
+
+{"Author":"__Author__","DocumentVersion":"__DocumentVersion__","Metadata":{"ReviewerResponse":[{"Comment":[{"Content":"__Content__","Type":"Comment"},{"Content":"__Content__","Type":"Comment"}],"CreateTime":946684800,"ReviewStatus":"APPROVED","Reviewer":"__Reviewer__","UpdatedTime":946684800},{"Comment":[{"Content":"__Content__","Type":"Comment"},{"Content":"__Content__","Type":"Comment"}],"CreateTime":946684800,"ReviewStatus":"APPROVED","Reviewer":"__Reviewer__","UpdatedTime":946684800}]},"Name":"__Name__","NextToken":"__NextToken__"}

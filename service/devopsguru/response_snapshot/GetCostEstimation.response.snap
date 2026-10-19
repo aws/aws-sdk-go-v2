@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Costs":[{"Cost":1,"Count":1,"State":"ACTIVE","Type":"__Type__","UnitCost":1},{"Cost":1,"Count":1,"State":"ACTIVE","Type":"__Type__","UnitCost":1}],"NextToken":"__NextToken__","ResourceCollection":{"CloudFormation":{"StackNames":["__Member__","__Member__"]},"Tags":[{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]},{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]}]},"Status":"ONGOING","TimeRange":{"EndTime":946684800,"StartTime":946684800},"TotalCost":1}

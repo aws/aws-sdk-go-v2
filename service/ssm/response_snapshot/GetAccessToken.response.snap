@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetAccessToken
+
+{"AccessRequestStatus":"Approved","Credentials":{"AccessKeyId":"__AccessKeyId__","ExpirationTime":946684800,"SecretAccessKey":"__SecretAccessKey__","SessionToken":"__SessionToken__"}}

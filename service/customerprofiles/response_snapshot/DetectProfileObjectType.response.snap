@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DetectedProfileObjectTypes":[{"Fields":{"key0":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"}},"Keys":{"key0":[{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]},{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]}]},"SourceLastUpdatedTimestampFormat":"__SourceLastUpdatedTimestampFormat__"},{"Fields":{"key0":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"}},"Keys":{"key0":[{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]},{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]}]},"SourceLastUpdatedTimestampFormat":"__SourceLastUpdatedTimestampFormat__"}]}

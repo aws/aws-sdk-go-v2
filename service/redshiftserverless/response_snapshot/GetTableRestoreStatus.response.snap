@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.GetTableRestoreStatus
+
+{"tableRestoreStatus":{"message":"__Message__","namespaceName":"__NamespaceName__","newTableName":"__NewTableName__","progressInMegaBytes":1,"recoveryPointId":"__RecoveryPointId__","requestTime":946684800,"snapshotName":"__SnapshotName__","sourceDatabaseName":"__SourceDatabaseName__","sourceSchemaName":"__SourceSchemaName__","sourceTableName":"__SourceTableName__","status":"__Status__","tableRestoreRequestId":"__TableRestoreRequestId__","targetDatabaseName":"__TargetDatabaseName__","targetSchemaName":"__TargetSchemaName__","totalDataInMegaBytes":1,"workgroupName":"__WorkgroupName__"}}

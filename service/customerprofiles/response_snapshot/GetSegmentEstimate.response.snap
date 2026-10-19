@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DomainName":"__DomainName__","Estimate":"__Estimate__","EstimateId":"__EstimateId__","Message":"__Message__","Status":"RUNNING","StatusCode":200}

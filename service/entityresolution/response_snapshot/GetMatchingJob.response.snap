@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"endTime":946684800,"errorDetails":{"errorMessage":"__ErrorMessage__"},"jobId":"__JobId__","metrics":{"deleteRecordsProcessed":1,"inputRecords":1,"matchIDs":1,"recordsNotProcessed":1,"totalRecordsProcessed":1},"outputSourceConfig":[{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"},{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"}],"startTime":946684800,"status":"RUNNING"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","id":"__Id__","tags":{"key0":"__Value__"}}

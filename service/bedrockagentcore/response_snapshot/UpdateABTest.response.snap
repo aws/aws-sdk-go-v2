@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"abTestArn":"__AbTestArn__","abTestId":"__AbTestId__","executionStatus":"PAUSED","status":"CREATING","updatedAt":946684800}

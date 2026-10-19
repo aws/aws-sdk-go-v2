@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","policy":"__Policy__","token":"__Token__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeSessions
+
+{"NextToken":"__NextToken__","Sessions":[{"AccessType":"Standard","Details":"__Details__","DocumentName":"__DocumentName__","EndDate":946684800,"MaxSessionDuration":"__MaxSessionDuration__","OutputUrl":{"CloudWatchOutputUrl":"__CloudWatchOutputUrl__","S3OutputUrl":"__S3OutputUrl__"},"Owner":"__Owner__","Reason":"__Reason__","SessionId":"__SessionId__","StartDate":946684800,"Status":"Connected","Target":"__Target__"},{"AccessType":"Standard","Details":"__Details__","DocumentName":"__DocumentName__","EndDate":946684800,"MaxSessionDuration":"__MaxSessionDuration__","OutputUrl":{"CloudWatchOutputUrl":"__CloudWatchOutputUrl__","S3OutputUrl":"__S3OutputUrl__"},"Owner":"__Owner__","Reason":"__Reason__","SessionId":"__SessionId__","StartDate":946684800,"Status":"Connected","Target":"__Target__"}]}

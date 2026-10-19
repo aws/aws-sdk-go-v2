@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.GetQueue
+
+{"queue":{"arn":"__Arn__","clusterId":"__ClusterId__","computeNodeGroupConfigurations":[{"computeNodeGroupId":"__ComputeNodeGroupId__"},{"computeNodeGroupId":"__ComputeNodeGroupId__"}],"createdAt":"2000-01-01T00:00:00Z","errorInfo":[{"code":"__Code__","message":"__Message__"},{"code":"__Code__","message":"__Message__"}],"id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","slurmConfiguration":{"slurmCustomSettings":[{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"},{"parameterName":"__ParameterName__","parameterValue":"__ParameterValue__"}]},"status":"CREATING"}}

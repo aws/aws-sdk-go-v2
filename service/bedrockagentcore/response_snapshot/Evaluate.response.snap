@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"evaluationResults":[{"context":{"spanContext":{"sessionId":"__SessionId__","spanId":"__SpanId__","traceId":"__TraceId__"}},"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","evaluatorArn":"__EvaluatorArn__","evaluatorId":"__EvaluatorId__","evaluatorName":"__EvaluatorName__","explanation":"__Explanation__","ignoredReferenceInputFields":["__Member__","__Member__"],"label":"__Label__","tokenUsage":{"inputTokens":1,"outputTokens":1,"totalTokens":1},"value":1},{"context":{"spanContext":{"sessionId":"__SessionId__","spanId":"__SpanId__","traceId":"__TraceId__"}},"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","evaluatorArn":"__EvaluatorArn__","evaluatorId":"__EvaluatorId__","evaluatorName":"__EvaluatorName__","explanation":"__Explanation__","ignoredReferenceInputFields":["__Member__","__Member__"],"label":"__Label__","tokenUsage":{"inputTokens":1,"outputTokens":1,"totalTokens":1},"value":1}]}

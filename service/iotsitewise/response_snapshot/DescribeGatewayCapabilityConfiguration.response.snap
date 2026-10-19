@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"capabilityConfiguration":"__CapabilityConfiguration__","capabilityNamespace":"__CapabilityNamespace__","capabilitySyncStatus":"IN_SYNC","gatewayId":"__GatewayId__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LastUplinkReceivedAt":"__LastUplinkReceivedAt__","LoRaWAN":{"DataRate":1,"DevEui":"__DevEui__","FPort":1,"Frequency":1,"Gateways":[{"GatewayEui":"__GatewayEui__","Rssi":1,"Snr":1},{"GatewayEui":"__GatewayEui__","Rssi":1,"Snr":1}],"PublicGateways":[{"DlAllowed":true,"Id":"__Id__","ProviderNetId":"__ProviderNetId__","RfRegion":"__RfRegion__","Rssi":1,"Snr":1},{"DlAllowed":true,"Id":"__Id__","ProviderNetId":"__ProviderNetId__","RfRegion":"__RfRegion__","Rssi":1,"Snr":1}],"Timestamp":"__Timestamp__"},"Sidewalk":{"BatteryLevel":"normal","DeviceState":"Provisioned","Event":"discovered","Rssi":1},"WirelessDeviceId":"__WirelessDeviceId__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ResourceIdPreference":{"ResourceIdType":"LONG_ID","Resources":["FILE_SYSTEM","FILE_SYSTEM"]}}

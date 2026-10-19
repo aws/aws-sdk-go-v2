@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"AccountAssociationId":"__AccountAssociationId__","ManagedThingAssociationStatus":"PRE_ASSOCIATED","ManagedThingId":"__ManagedThingId__"},{"AccountAssociationId":"__AccountAssociationId__","ManagedThingAssociationStatus":"PRE_ASSOCIATED","ManagedThingId":"__ManagedThingId__"}],"NextToken":"__NextToken__"}

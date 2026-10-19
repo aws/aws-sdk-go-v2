@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"metricsSummary":{"categoriesWithMostFindings":[{"categoryName":"__CategoryName__","findingNumber":1},{"categoryName":"__CategoryName__","findingNumber":1}],"date":946684800,"openFindings":{"critical":1,"high":1,"info":1,"low":1,"medium":1},"scansWithMostOpenCriticalFindings":[{"findingNumber":1,"scanName":"__ScanName__"},{"findingNumber":1,"scanName":"__ScanName__"}],"scansWithMostOpenFindings":[{"findingNumber":1,"scanName":"__ScanName__"},{"findingNumber":1,"scanName":"__ScanName__"}]}}

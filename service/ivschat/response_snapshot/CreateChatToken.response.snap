@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"sessionExpirationTime":"2000-01-01T00:00:00Z","token":"__Token__","tokenExpirationTime":"2000-01-01T00:00:00Z"}

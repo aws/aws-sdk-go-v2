@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ManagedThingId":"__ManagedThingId__","MetaData":{"key0":"__Value__"}}

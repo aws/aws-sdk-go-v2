@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.AcceptPage
+
+{"__type":"ResourceNotFoundException","Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.UpdateCustomDomainAssociation
+
+{"customDomainCertificateArn":"__CustomDomainCertificateArn__","customDomainCertificateExpiryTime":"2000-01-01T00:00:00Z","customDomainName":"__CustomDomainName__","workgroupName":"__WorkgroupName__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MappedResourceConfigurationList":[{"ARN":"__ARN__","Type":"__Type__"},{"ARN":"__ARN__","Type":"__Type__"}],"NextToken":"__NextToken__"}

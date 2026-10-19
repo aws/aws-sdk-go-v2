@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.BatchExecuteStatement
+
+{"ClusterIdentifier":"__ClusterIdentifier__","CreatedAt":946684800,"Database":"__Database__","DbGroups":["__Member__","__Member__"],"DbUser":"__DbUser__","HasResultSet":true,"Id":"__Id__","RedshiftPid":1,"SecretArn":"__SecretArn__","SessionId":"__SessionId__","Status":"SUBMITTED","WorkgroupName":"__WorkgroupName__"}

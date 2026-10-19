@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"idNamespaceSummaries":[{"createdAt":946684800,"description":"__Description__","idMappingWorkflowProperties":[{"idMappingType":"PROVIDER"},{"idMappingType":"PROVIDER"}],"idNamespaceArn":"__IdNamespaceArn__","idNamespaceName":"__IdNamespaceName__","type":"SOURCE","updatedAt":946684800},{"createdAt":946684800,"description":"__Description__","idMappingWorkflowProperties":[{"idMappingType":"PROVIDER"},{"idMappingType":"PROVIDER"}],"idNamespaceArn":"__IdNamespaceArn__","idNamespaceName":"__IdNamespaceName__","type":"SOURCE","updatedAt":946684800}],"nextToken":"__NextToken__"}

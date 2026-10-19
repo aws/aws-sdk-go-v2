@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreatedAt":946684800,"DestinationDetails":{"Message":"__Message__","Status":"HEALTHY","UnhealthySince":946684800,"Uri":"__Uri__"},"DomainName":"__DomainName__","EventStreamArn":"__EventStreamArn__","State":"RUNNING","StoppedSince":946684800,"Tags":{"key0":"__Value__"}}

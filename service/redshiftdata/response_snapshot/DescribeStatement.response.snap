@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.DescribeStatement
+
+{"ClusterIdentifier":"__ClusterIdentifier__","CreatedAt":946684800,"Database":"__Database__","DbUser":"__DbUser__","Duration":1,"Error":"__Error__","ExecutionMode":"TRANSACTION","HasResultSet":true,"Id":"__Id__","QueryParameters":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"QueryString":"__QueryString__","RedshiftPid":1,"RedshiftQueryId":1,"ResultFormat":"JSON","ResultRows":1,"ResultSize":1,"SecretArn":"__SecretArn__","SessionId":"__SessionId__","Status":"SUBMITTED","SubStatements":[{"CreatedAt":946684800,"Duration":1,"Error":"__Error__","HasResultSet":true,"Id":"__Id__","QueryString":"__QueryString__","RedshiftQueryId":1,"ResultRows":1,"ResultSize":1,"Status":"SUBMITTED","UpdatedAt":946684800},{"CreatedAt":946684800,"Duration":1,"Error":"__Error__","HasResultSet":true,"Id":"__Id__","QueryString":"__QueryString__","RedshiftQueryId":1,"ResultRows":1,"ResultSize":1,"Status":"SUBMITTED","UpdatedAt":946684800}],"UpdatedAt":946684800,"WorkgroupName":"__WorkgroupName__"}

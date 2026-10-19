@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"devices":[{"deviceArn":"__DeviceArn__","deviceName":"__DeviceName__","deviceStatus":"ONLINE","deviceType":"QPU","providerName":"__ProviderName__"},{"deviceArn":"__DeviceArn__","deviceName":"__DeviceName__","deviceStatus":"ONLINE","deviceType":"QPU","providerName":"__ProviderName__"}],"nextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errorMessage":"__ErrorMessage__","errorType":"__ErrorType__","outputConfiguration":{"s3Object":{"s3Uri":"__S3Uri__","version":"__Version__"}},"status":"Created"}

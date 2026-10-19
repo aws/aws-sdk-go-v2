@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Attributes":{"AppflowIntegration":{"ConnectorProfileName":"__ConnectorProfileName__","RoleArn":"__RoleArn__","SourceConnectorType":"Salesforce"}},"ErrorDescription":"__ErrorDescription__","LastUpdatedAt":946684800,"Metrics":{"AppflowIntegration":{"RecordsProcessed":1,"StepsCompleted":1,"TotalSteps":1}},"StartDate":946684800,"Status":"NOT_STARTED","WorkflowId":"__WorkflowId__","WorkflowType":"APPFLOW_INTEGRATION"}

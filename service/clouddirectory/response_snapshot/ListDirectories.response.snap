@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Directories":[{"CreationDateTime":946684800,"DirectoryArn":"__DirectoryArn__","Name":"__Name__","State":"ENABLED"},{"CreationDateTime":946684800,"DirectoryArn":"__DirectoryArn__","Name":"__Name__","State":"ENABLED"}],"NextToken":"__NextToken__"}

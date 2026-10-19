@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobRunAttempts":[{"applicationId":"__ApplicationId__","arn":"__Arn__","attempt":1,"createdAt":946684800,"createdBy":"__CreatedBy__","executionRole":"__ExecutionRole__","id":"__Id__","jobCreatedAt":946684800,"mode":"BATCH","name":"__Name__","releaseLabel":"__ReleaseLabel__","state":"SUBMITTED","stateDetails":"__StateDetails__","type":"__Type__","updatedAt":946684800},{"applicationId":"__ApplicationId__","arn":"__Arn__","attempt":1,"createdAt":946684800,"createdBy":"__CreatedBy__","executionRole":"__ExecutionRole__","id":"__Id__","jobCreatedAt":946684800,"mode":"BATCH","name":"__Name__","releaseLabel":"__ReleaseLabel__","state":"SUBMITTED","stateDetails":"__StateDetails__","type":"__Type__","updatedAt":946684800}],"nextToken":"__NextToken__"}

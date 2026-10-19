@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountAssociationId":"__AccountAssociationId__","Arn":"__Arn__","ConnectorAssociationId":"__ConnectorAssociationId__","ControllerId":"__ControllerId__","DiscoveryType":"ZWAVE","FinishedAt":946684800,"Id":"__Id__","StartedAt":946684800,"Status":"RUNNING","Tags":{"key0":"__Value__"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","subscriptions":[{"qos":1,"topicFilter":"__TopicFilter__"},{"qos":1,"topicFilter":"__TopicFilter__"}]}

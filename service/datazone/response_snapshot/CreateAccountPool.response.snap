@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accountSource":{"accounts":[{"awsAccountId":"__AwsAccountId__","awsAccountName":"__AwsAccountName__","supportedRegions":["__Member__","__Member__"]},{"awsAccountId":"__AwsAccountId__","awsAccountName":"__AwsAccountName__","supportedRegions":["__Member__","__Member__"]}]},"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","domainUnitId":"__DomainUnitId__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","resolutionStrategy":"MANUAL","updatedBy":"__UpdatedBy__"}

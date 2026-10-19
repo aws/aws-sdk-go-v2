@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"resourceId":{"codeArtifactId":"__ResourceIdMemberCodeArtifactId__"},"runId":"__RunId__","scanName":"__ScanName__","scanNameArn":"__ScanNameArn__","scanState":"InProgress"}

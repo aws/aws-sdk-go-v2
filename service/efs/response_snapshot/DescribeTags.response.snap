@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Marker":"__Marker__","NextMarker":"__NextMarker__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

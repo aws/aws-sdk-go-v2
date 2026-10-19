@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"libraries":[{"creationTime":"2000-01-01T00:00:00Z","libraryArn":"__LibraryArn__","libraryName":"__LibraryName__"},{"creationTime":"2000-01-01T00:00:00Z","libraryArn":"__LibraryArn__","libraryName":"__LibraryName__"}],"nextToken":"__NextToken__"}

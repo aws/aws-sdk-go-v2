@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"connectorOperations":[{"connectorOperationArn":"__ConnectorOperationArn__","connectorOperationState":"PENDING","connectorOperationType":"UPDATE_WORKER_SETTING","creationTime":"2000-01-01T00:00:00Z","endTime":"2000-01-01T00:00:00Z"},{"connectorOperationArn":"__ConnectorOperationArn__","connectorOperationState":"PENDING","connectorOperationType":"UPDATE_WORKER_SETTING","creationTime":"2000-01-01T00:00:00Z","endTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

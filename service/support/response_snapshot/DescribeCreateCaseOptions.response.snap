@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSupport_20130415.DescribeCreateCaseOptions
+
+{"communicationTypes":[{"datesWithoutSupport":[{"endDateTime":"__EndDateTime__","startDateTime":"__StartDateTime__"},{"endDateTime":"__EndDateTime__","startDateTime":"__StartDateTime__"}],"supportedHours":[{"endTime":"__EndTime__","startTime":"__StartTime__"},{"endTime":"__EndTime__","startTime":"__StartTime__"}],"type":"__Type__"},{"datesWithoutSupport":[{"endDateTime":"__EndDateTime__","startDateTime":"__StartDateTime__"},{"endDateTime":"__EndDateTime__","startDateTime":"__StartDateTime__"}],"supportedHours":[{"endTime":"__EndTime__","startTime":"__StartTime__"},{"endTime":"__EndTime__","startTime":"__StartTime__"}],"type":"__Type__"}],"languageAvailability":"__LanguageAvailability__"}
