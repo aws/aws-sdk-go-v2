@@ -4,6 +4,8 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,29 @@ type AddCommunicationToCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCommunicationToCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCommunicationToCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCommunicationToCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentSetId != nil {
+		s.WriteString(schemas.AddCommunicationToCaseRequest_attachmentSetId, *v.AttachmentSetId)
+	}
+	if v.CaseId != nil {
+		s.WriteString(schemas.AddCommunicationToCaseRequest_caseId, *v.CaseId)
+	}
+	serializeCcEmailAddressList(s, schemas.AddCommunicationToCaseRequest_ccEmailAddresses, v.CcEmailAddresses)
+	if v.CommunicationBody != nil {
+		s.WriteString(schemas.AddCommunicationToCaseRequest_communicationBody, *v.CommunicationBody)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.AddCommunicationToCaseRequest_dryRun, *v.DryRun)
+	}
+	serializeUploadIds(s, schemas.AddCommunicationToCaseRequest_uploadIds, v.UploadIds)
+}
+
 // The result of the AddCommunicationToCase operation.
 type AddCommunicationToCaseOutput struct {
 
@@ -107,13 +132,31 @@ type AddCommunicationToCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCommunicationToCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCommunicationToCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCommunicationToCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Result != false {
+		s.WriteBool(schemas.AddCommunicationToCaseResponse_result, v.Result)
+	}
+}
+func (v *AddCommunicationToCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddCommunicationToCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddCommunicationToCaseResponse_result:
+			return d.ReadBool(schemas.AddCommunicationToCaseResponse_result, &v.Result)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddCommunicationToCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCommunicationToCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCommunicationToCase, schemas.AddCommunicationToCaseRequest, schemas.AddCommunicationToCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddCommunicationToCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCommunicationToCase, schemas.AddCommunicationToCaseRequest, schemas.AddCommunicationToCaseResponse), output: &AddCommunicationToCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,27 @@ type ListBulkImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBulkImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBulkImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBulkImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != "" {
+		s.WriteString(schemas.ListBulkImportJobsRequest_filter, string(v.Filter))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBulkImportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBulkImportJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListBulkImportJobsRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type ListBulkImportJobsOutput struct {
 
 	// One or more job summaries to list.
@@ -63,13 +86,35 @@ type ListBulkImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBulkImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBulkImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBulkImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobSummaries(s, schemas.ListBulkImportJobsResponse_jobSummaries, v.JobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBulkImportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBulkImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBulkImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBulkImportJobsResponse_jobSummaries:
+			return deserializeJobSummaries(d, schemas.ListBulkImportJobsResponse_jobSummaries, &v.JobSummaries)
+		case schemas.ListBulkImportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBulkImportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBulkImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBulkImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBulkImportJobs, schemas.ListBulkImportJobsRequest, schemas.ListBulkImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBulkImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBulkImportJobs, schemas.ListBulkImportJobsRequest, schemas.ListBulkImportJobsResponse), output: &ListBulkImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

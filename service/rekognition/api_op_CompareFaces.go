@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -124,6 +126,31 @@ type CompareFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompareFacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompareFacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompareFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualityFilter != "" {
+		s.WriteString(schemas.CompareFacesRequest_QualityFilter, string(v.QualityFilter))
+	}
+	if v.SimilarityThreshold != nil {
+		s.WriteFloat32(schemas.CompareFacesRequest_SimilarityThreshold, *v.SimilarityThreshold)
+	}
+	if v.SourceImage != nil {
+		s.WriteStruct(schemas.CompareFacesRequest_SourceImage)
+		v.SourceImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetImage != nil {
+		s.WriteStruct(schemas.CompareFacesRequest_TargetImage)
+		v.TargetImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CompareFacesOutput struct {
 
 	// An array of faces in the target image that match the source image face. Each
@@ -174,13 +201,60 @@ type CompareFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompareFacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompareFacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompareFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompareFacesMatchList(s, schemas.CompareFacesResponse_FaceMatches, v.FaceMatches)
+	if v.SourceImageFace != nil {
+		s.WriteStruct(schemas.CompareFacesResponse_SourceImageFace)
+		v.SourceImageFace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceImageOrientationCorrection != "" {
+		s.WriteString(schemas.CompareFacesResponse_SourceImageOrientationCorrection, string(v.SourceImageOrientationCorrection))
+	}
+	if v.TargetImageOrientationCorrection != "" {
+		s.WriteString(schemas.CompareFacesResponse_TargetImageOrientationCorrection, string(v.TargetImageOrientationCorrection))
+	}
+	serializeCompareFacesUnmatchList(s, schemas.CompareFacesResponse_UnmatchedFaces, v.UnmatchedFaces)
+}
+func (v *CompareFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompareFacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompareFacesResponse_FaceMatches:
+			return deserializeCompareFacesMatchList(d, schemas.CompareFacesResponse_FaceMatches, &v.FaceMatches)
+		case schemas.CompareFacesResponse_SourceImageFace:
+			v.SourceImageFace = &types.ComparedSourceImageFace{}
+			return v.SourceImageFace.Deserialize(d)
+		case schemas.CompareFacesResponse_SourceImageOrientationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.CompareFacesResponse_SourceImageOrientationCorrection, &ev); err != nil {
+				return err
+			}
+			v.SourceImageOrientationCorrection = types.OrientationCorrection(ev)
+			return nil
+		case schemas.CompareFacesResponse_TargetImageOrientationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.CompareFacesResponse_TargetImageOrientationCorrection, &ev); err != nil {
+				return err
+			}
+			v.TargetImageOrientationCorrection = types.OrientationCorrection(ev)
+			return nil
+		case schemas.CompareFacesResponse_UnmatchedFaces:
+			return deserializeCompareFacesUnmatchList(d, schemas.CompareFacesResponse_UnmatchedFaces, &v.UnmatchedFaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompareFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCompareFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompareFaces, schemas.CompareFacesRequest, schemas.CompareFacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCompareFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompareFaces, schemas.CompareFacesRequest, schemas.CompareFacesResponse), output: &CompareFacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

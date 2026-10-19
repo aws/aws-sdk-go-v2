@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,48 @@ type ListManagedThingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedThingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedThingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedThingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorDestinationIdFilter != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_ConnectorDestinationIdFilter, *v.ConnectorDestinationIdFilter)
+	}
+	if v.ConnectorDeviceIdFilter != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_ConnectorDeviceIdFilter, *v.ConnectorDeviceIdFilter)
+	}
+	if v.ConnectorPolicyIdFilter != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_ConnectorPolicyIdFilter, *v.ConnectorPolicyIdFilter)
+	}
+	if v.CredentialLockerFilter != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_CredentialLockerFilter, *v.CredentialLockerFilter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedThingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_NextToken, *v.NextToken)
+	}
+	if v.OwnerFilter != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_OwnerFilter, *v.OwnerFilter)
+	}
+	if v.ParentControllerIdentifierFilter != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_ParentControllerIdentifierFilter, *v.ParentControllerIdentifierFilter)
+	}
+	if v.ProvisioningStatusFilter != "" {
+		s.WriteString(schemas.ListManagedThingsRequest_ProvisioningStatusFilter, string(v.ProvisioningStatusFilter))
+	}
+	if v.RoleFilter != "" {
+		s.WriteString(schemas.ListManagedThingsRequest_RoleFilter, string(v.RoleFilter))
+	}
+	if v.SerialNumberFilter != nil {
+		s.WriteString(schemas.ListManagedThingsRequest_SerialNumberFilter, *v.SerialNumberFilter)
+	}
+}
+
 type ListManagedThingsOutput struct {
 
 	// The list of managed things.
@@ -83,13 +127,35 @@ type ListManagedThingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedThingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedThingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedThingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedThingListDefinition(s, schemas.ListManagedThingsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedThingsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedThingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedThingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedThingsResponse_Items:
+			return deserializeManagedThingListDefinition(d, schemas.ListManagedThingsResponse_Items, &v.Items)
+		case schemas.ListManagedThingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedThingsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedThingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedThings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedThings, schemas.ListManagedThingsRequest, schemas.ListManagedThingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedThings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedThings, schemas.ListManagedThingsRequest, schemas.ListManagedThingsResponse), output: &ListManagedThingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

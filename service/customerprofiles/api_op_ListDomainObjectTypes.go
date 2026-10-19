@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListDomainObjectTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainObjectTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainObjectTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainObjectTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListDomainObjectTypesRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDomainObjectTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainObjectTypesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDomainObjectTypesOutput struct {
 
 	// The list of domain object types.
@@ -55,13 +75,35 @@ type ListDomainObjectTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainObjectTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainObjectTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainObjectTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainObjectTypesList(s, schemas.ListDomainObjectTypesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainObjectTypesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDomainObjectTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainObjectTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainObjectTypesResponse_Items:
+			return deserializeDomainObjectTypesList(d, schemas.ListDomainObjectTypesResponse_Items, &v.Items)
+		case schemas.ListDomainObjectTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDomainObjectTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainObjectTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainObjectTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainObjectTypes, schemas.ListDomainObjectTypesRequest, schemas.ListDomainObjectTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainObjectTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainObjectTypes, schemas.ListDomainObjectTypesRequest, schemas.ListDomainObjectTypesResponse), output: &ListDomainObjectTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

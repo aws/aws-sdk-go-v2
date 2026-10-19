@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListAssociationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociationVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociationVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociationVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.ListAssociationVersionsRequest_AssociationId, *v.AssociationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociationVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociationVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAssociationVersionsOutput struct {
 
 	// Information about all versions of the association for the specified association
@@ -58,13 +78,35 @@ type ListAssociationVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociationVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociationVersionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociationVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociationVersionList(s, schemas.ListAssociationVersionsResult_AssociationVersions, v.AssociationVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociationVersionsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssociationVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociationVersionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociationVersionsResult_AssociationVersions:
+			return deserializeAssociationVersionList(d, schemas.ListAssociationVersionsResult_AssociationVersions, &v.AssociationVersions)
+		case schemas.ListAssociationVersionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociationVersionsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssociationVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociationVersions, schemas.ListAssociationVersionsRequest, schemas.ListAssociationVersionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssociationVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociationVersions, schemas.ListAssociationVersionsRequest, schemas.ListAssociationVersionsResult), output: &ListAssociationVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

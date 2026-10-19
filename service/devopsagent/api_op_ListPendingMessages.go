@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,21 @@ type ListPendingMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPendingMessagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPendingMessagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPendingMessagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListPendingMessagesRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ListPendingMessagesRequest_executionId, *v.ExecutionId)
+	}
+}
+
 // Response structure containing a list of pending messages
 type ListPendingMessagesOutput struct {
 
@@ -75,13 +92,47 @@ type ListPendingMessagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPendingMessagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPendingMessagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPendingMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListPendingMessagesResponse_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListPendingMessagesResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ListPendingMessagesResponse_executionId, *v.ExecutionId)
+	}
+	serializePendingMessages(s, schemas.ListPendingMessagesResponse_messages, v.Messages)
+}
+func (v *ListPendingMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPendingMessagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPendingMessagesResponse_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.ListPendingMessagesResponse_agentSpaceId, v.AgentSpaceId)
+		case schemas.ListPendingMessagesResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListPendingMessagesResponse_createdAt, v.CreatedAt)
+		case schemas.ListPendingMessagesResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.ListPendingMessagesResponse_executionId, v.ExecutionId)
+		case schemas.ListPendingMessagesResponse_messages:
+			return deserializePendingMessages(d, schemas.ListPendingMessagesResponse_messages, &v.Messages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPendingMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPendingMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPendingMessages, schemas.ListPendingMessagesRequest, schemas.ListPendingMessagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPendingMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPendingMessages, schemas.ListPendingMessagesRequest, schemas.ListPendingMessagesResponse), output: &ListPendingMessagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

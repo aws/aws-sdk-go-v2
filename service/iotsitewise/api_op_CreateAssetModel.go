@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -126,6 +128,37 @@ type CreateAssetModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetModelCompositeModelDefinitions(s, schemas.CreateAssetModelRequest_assetModelCompositeModels, v.AssetModelCompositeModels)
+	if v.AssetModelDescription != nil {
+		s.WriteString(schemas.CreateAssetModelRequest_assetModelDescription, *v.AssetModelDescription)
+	}
+	if v.AssetModelExternalId != nil {
+		s.WriteString(schemas.CreateAssetModelRequest_assetModelExternalId, *v.AssetModelExternalId)
+	}
+	serializeAssetModelHierarchyDefinitions(s, schemas.CreateAssetModelRequest_assetModelHierarchies, v.AssetModelHierarchies)
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.CreateAssetModelRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelName != nil {
+		s.WriteString(schemas.CreateAssetModelRequest_assetModelName, *v.AssetModelName)
+	}
+	serializeAssetModelPropertyDefinitions(s, schemas.CreateAssetModelRequest_assetModelProperties, v.AssetModelProperties)
+	if v.AssetModelType != "" {
+		s.WriteString(schemas.CreateAssetModelRequest_assetModelType, string(v.AssetModelType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAssetModelRequest_clientToken, *v.ClientToken)
+	}
+	serializeTagMap(s, schemas.CreateAssetModelRequest_tags, v.Tags)
+}
+
 type CreateAssetModelOutput struct {
 
 	// The [ARN] of the asset model, which has the following format.
@@ -155,13 +188,46 @@ type CreateAssetModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelArn != nil {
+		s.WriteString(schemas.CreateAssetModelResponse_assetModelArn, *v.AssetModelArn)
+	}
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.CreateAssetModelResponse_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelStatus != nil {
+		s.WriteStruct(schemas.CreateAssetModelResponse_assetModelStatus)
+		v.AssetModelStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAssetModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssetModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssetModelResponse_assetModelArn:
+			v.AssetModelArn = new(string)
+			return d.ReadString(schemas.CreateAssetModelResponse_assetModelArn, v.AssetModelArn)
+		case schemas.CreateAssetModelResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.CreateAssetModelResponse_assetModelId, v.AssetModelId)
+		case schemas.CreateAssetModelResponse_assetModelStatus:
+			v.AssetModelStatus = &types.AssetModelStatus{}
+			return v.AssetModelStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetModel, schemas.CreateAssetModelRequest, schemas.CreateAssetModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetModel, schemas.CreateAssetModelRequest, schemas.CreateAssetModelResponse), output: &CreateAssetModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package geomaps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/geomaps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geomaps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,31 @@ type GetTileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTileAdditionalFeatureList(s, schemas.GetTileRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.Key != nil {
+		s.WriteString(schemas.GetTileRequest_Key, *v.Key)
+	}
+	if v.Tileset != nil {
+		s.WriteString(schemas.GetTileRequest_Tileset, *v.Tileset)
+	}
+	if v.X != nil {
+		s.WriteString(schemas.GetTileRequest_X, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteString(schemas.GetTileRequest_Y, *v.Y)
+	}
+	if v.Z != nil {
+		s.WriteString(schemas.GetTileRequest_Z, *v.Z)
+	}
+}
+
 type GetTileOutput struct {
 
 	// The pricing bucket for which the request is charged at.
@@ -97,13 +124,55 @@ type GetTileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.GetTileResponse_Blob, v.Blob)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.GetTileResponse_CacheControl, *v.CacheControl)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetTileResponse_ContentType, *v.ContentType)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.GetTileResponse_ETag, *v.ETag)
+	}
+	if v.PricingBucket != nil {
+		s.WriteString(schemas.GetTileResponse_PricingBucket, *v.PricingBucket)
+	}
+}
+func (v *GetTileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTileResponse_Blob:
+			return d.ReadBlob(schemas.GetTileResponse_Blob, &v.Blob)
+		case schemas.GetTileResponse_CacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.GetTileResponse_CacheControl, v.CacheControl)
+		case schemas.GetTileResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetTileResponse_ContentType, v.ContentType)
+		case schemas.GetTileResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.GetTileResponse_ETag, v.ETag)
+		case schemas.GetTileResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.GetTileResponse_PricingBucket, v.PricingBucket)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTile, schemas.GetTileRequest, schemas.GetTileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTile, schemas.GetTileRequest, schemas.GetTileResponse), output: &GetTileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

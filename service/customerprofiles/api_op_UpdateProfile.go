@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -126,6 +128,104 @@ type UpdateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountNumber != nil {
+		s.WriteString(schemas.UpdateProfileRequest_AccountNumber, *v.AccountNumber)
+	}
+	if v.AdditionalInformation != nil {
+		s.WriteString(schemas.UpdateProfileRequest_AdditionalInformation, *v.AdditionalInformation)
+	}
+	if v.Address != nil {
+		s.WriteStruct(schemas.UpdateProfileRequest_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUpdateAttributes(s, schemas.UpdateProfileRequest_Attributes, v.Attributes)
+	if v.BillingAddress != nil {
+		s.WriteStruct(schemas.UpdateProfileRequest_BillingAddress)
+		v.BillingAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BirthDate != nil {
+		s.WriteString(schemas.UpdateProfileRequest_BirthDate, *v.BirthDate)
+	}
+	if v.BusinessEmailAddress != nil {
+		s.WriteString(schemas.UpdateProfileRequest_BusinessEmailAddress, *v.BusinessEmailAddress)
+	}
+	if v.BusinessName != nil {
+		s.WriteString(schemas.UpdateProfileRequest_BusinessName, *v.BusinessName)
+	}
+	if v.BusinessPhoneNumber != nil {
+		s.WriteString(schemas.UpdateProfileRequest_BusinessPhoneNumber, *v.BusinessPhoneNumber)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateProfileRequest_DomainName, *v.DomainName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.UpdateProfileRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.EngagementPreferences != nil {
+		s.WriteStruct(schemas.UpdateProfileRequest_EngagementPreferences)
+		v.EngagementPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.UpdateProfileRequest_FirstName, *v.FirstName)
+	}
+	if v.Gender != "" {
+		s.WriteString(schemas.UpdateProfileRequest_Gender, string(v.Gender))
+	}
+	if v.GenderString != nil {
+		s.WriteString(schemas.UpdateProfileRequest_GenderString, *v.GenderString)
+	}
+	if v.HomePhoneNumber != nil {
+		s.WriteString(schemas.UpdateProfileRequest_HomePhoneNumber, *v.HomePhoneNumber)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.UpdateProfileRequest_LastName, *v.LastName)
+	}
+	if v.MailingAddress != nil {
+		s.WriteStruct(schemas.UpdateProfileRequest_MailingAddress)
+		v.MailingAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MiddleName != nil {
+		s.WriteString(schemas.UpdateProfileRequest_MiddleName, *v.MiddleName)
+	}
+	if v.MobilePhoneNumber != nil {
+		s.WriteString(schemas.UpdateProfileRequest_MobilePhoneNumber, *v.MobilePhoneNumber)
+	}
+	if v.PartyType != "" {
+		s.WriteString(schemas.UpdateProfileRequest_PartyType, string(v.PartyType))
+	}
+	if v.PartyTypeString != nil {
+		s.WriteString(schemas.UpdateProfileRequest_PartyTypeString, *v.PartyTypeString)
+	}
+	if v.PersonalEmailAddress != nil {
+		s.WriteString(schemas.UpdateProfileRequest_PersonalEmailAddress, *v.PersonalEmailAddress)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.UpdateProfileRequest_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.UpdateProfileRequest_ProfileId, *v.ProfileId)
+	}
+	if v.ProfileType != "" {
+		s.WriteString(schemas.UpdateProfileRequest_ProfileType, string(v.ProfileType))
+	}
+	if v.ShippingAddress != nil {
+		s.WriteStruct(schemas.UpdateProfileRequest_ShippingAddress)
+		v.ShippingAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateProfileOutput struct {
 
 	// The unique identifier of a customer profile.
@@ -139,13 +239,32 @@ type UpdateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.UpdateProfileResponse_ProfileId, *v.ProfileId)
+	}
+}
+func (v *UpdateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfileResponse_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_ProfileId, v.ProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileRequest, schemas.UpdateProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileRequest, schemas.UpdateProfileResponse), output: &UpdateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

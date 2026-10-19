@@ -4,6 +4,8 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type DeleteWirelessGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWirelessGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWirelessGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWirelessGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteWirelessGatewayRequest_Id, *v.Id)
+	}
+}
+
 type DeleteWirelessGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +65,26 @@ type DeleteWirelessGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWirelessGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWirelessGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWirelessGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWirelessGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWirelessGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWirelessGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWirelessGateway, schemas.DeleteWirelessGatewayRequest, schemas.DeleteWirelessGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWirelessGateway, schemas.DeleteWirelessGatewayRequest, schemas.DeleteWirelessGatewayResponse), output: &DeleteWirelessGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

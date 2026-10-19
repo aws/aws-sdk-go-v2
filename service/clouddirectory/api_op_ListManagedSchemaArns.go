@@ -5,6 +5,8 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListManagedSchemaArnsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedSchemaArnsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedSchemaArnsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedSchemaArnsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedSchemaArnsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedSchemaArnsRequest_NextToken, *v.NextToken)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.ListManagedSchemaArnsRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type ListManagedSchemaArnsOutput struct {
 
 	// The pagination token.
@@ -55,13 +75,35 @@ type ListManagedSchemaArnsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedSchemaArnsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedSchemaArnsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedSchemaArnsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedSchemaArnsResponse_NextToken, *v.NextToken)
+	}
+	serializeArns(s, schemas.ListManagedSchemaArnsResponse_SchemaArns, v.SchemaArns)
+}
+func (v *ListManagedSchemaArnsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedSchemaArnsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedSchemaArnsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedSchemaArnsResponse_NextToken, v.NextToken)
+		case schemas.ListManagedSchemaArnsResponse_SchemaArns:
+			return deserializeArns(d, schemas.ListManagedSchemaArnsResponse_SchemaArns, &v.SchemaArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedSchemaArns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedSchemaArns, schemas.ListManagedSchemaArnsRequest, schemas.ListManagedSchemaArnsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedSchemaArns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedSchemaArns, schemas.ListManagedSchemaArnsRequest, schemas.ListManagedSchemaArnsResponse), output: &ListManagedSchemaArnsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

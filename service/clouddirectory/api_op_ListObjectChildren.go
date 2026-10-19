@@ -5,7 +5,9 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,32 @@ type ListObjectChildrenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectChildrenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectChildrenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectChildrenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsistencyLevel != "" {
+		s.WriteString(schemas.ListObjectChildrenRequest_ConsistencyLevel, string(v.ConsistencyLevel))
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.ListObjectChildrenRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListObjectChildrenRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectChildrenRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.ListObjectChildrenRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListObjectChildrenOutput struct {
 
 	// Children structure, which is a map with key as the LinkName and ObjectIdentifier
@@ -69,13 +97,35 @@ type ListObjectChildrenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectChildrenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectChildrenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectChildrenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkNameToObjectIdentifierMap(s, schemas.ListObjectChildrenResponse_Children, v.Children)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectChildrenResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListObjectChildrenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListObjectChildrenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListObjectChildrenResponse_Children:
+			return deserializeLinkNameToObjectIdentifierMap(d, schemas.ListObjectChildrenResponse_Children, &v.Children)
+		case schemas.ListObjectChildrenResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListObjectChildrenResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListObjectChildrenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectChildren{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectChildren, schemas.ListObjectChildrenRequest, schemas.ListObjectChildrenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectChildren{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectChildren, schemas.ListObjectChildrenRequest, schemas.ListObjectChildrenResponse), output: &ListObjectChildrenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

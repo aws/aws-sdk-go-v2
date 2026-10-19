@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,28 @@ type CreateFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFacetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFacetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFacetAttributeList(s, schemas.CreateFacetRequest_Attributes, v.Attributes)
+	if v.FacetStyle != "" {
+		s.WriteString(schemas.CreateFacetRequest_FacetStyle, string(v.FacetStyle))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFacetRequest_Name, *v.Name)
+	}
+	if v.ObjectType != "" {
+		s.WriteString(schemas.CreateFacetRequest_ObjectType, string(v.ObjectType))
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.CreateFacetRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type CreateFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +94,26 @@ type CreateFacetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFacetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFacetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFacetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateFacetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFacetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFacet, schemas.CreateFacetRequest, schemas.CreateFacetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFacet, schemas.CreateFacetRequest, schemas.CreateFacetResponse), output: &CreateFacetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

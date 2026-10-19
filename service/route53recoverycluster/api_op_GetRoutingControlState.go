@@ -4,7 +4,9 @@ package route53recoverycluster
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycluster/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycluster/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,18 @@ type GetRoutingControlStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoutingControlStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoutingControlStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoutingControlStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoutingControlArn != nil {
+		s.WriteString(schemas.GetRoutingControlStateRequest_RoutingControlArn, *v.RoutingControlArn)
+	}
+}
+
 type GetRoutingControlStateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the response.
@@ -84,13 +98,48 @@ type GetRoutingControlStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoutingControlStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoutingControlStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoutingControlStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoutingControlArn != nil {
+		s.WriteString(schemas.GetRoutingControlStateResponse_RoutingControlArn, *v.RoutingControlArn)
+	}
+	if v.RoutingControlName != nil {
+		s.WriteString(schemas.GetRoutingControlStateResponse_RoutingControlName, *v.RoutingControlName)
+	}
+	if v.RoutingControlState != "" {
+		s.WriteString(schemas.GetRoutingControlStateResponse_RoutingControlState, string(v.RoutingControlState))
+	}
+}
+func (v *GetRoutingControlStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRoutingControlStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRoutingControlStateResponse_RoutingControlArn:
+			v.RoutingControlArn = new(string)
+			return d.ReadString(schemas.GetRoutingControlStateResponse_RoutingControlArn, v.RoutingControlArn)
+		case schemas.GetRoutingControlStateResponse_RoutingControlName:
+			v.RoutingControlName = new(string)
+			return d.ReadString(schemas.GetRoutingControlStateResponse_RoutingControlName, v.RoutingControlName)
+		case schemas.GetRoutingControlStateResponse_RoutingControlState:
+			var ev string
+			if err := d.ReadString(schemas.GetRoutingControlStateResponse_RoutingControlState, &ev); err != nil {
+				return err
+			}
+			v.RoutingControlState = types.RoutingControlState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRoutingControlStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRoutingControlState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoutingControlState, schemas.GetRoutingControlStateRequest, schemas.GetRoutingControlStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRoutingControlState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoutingControlState, schemas.GetRoutingControlStateRequest, schemas.GetRoutingControlStateResponse), output: &GetRoutingControlStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

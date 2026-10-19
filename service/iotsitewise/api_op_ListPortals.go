@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListPortalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPortalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPortalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPortalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPortalsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPortalsOutput struct {
 
 	// The token for the next set of results, or null if there are no additional
@@ -54,13 +71,35 @@ type ListPortalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPortalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPortalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPortalsResponse_nextToken, *v.NextToken)
+	}
+	serializePortalSummaries(s, schemas.ListPortalsResponse_portalSummaries, v.PortalSummaries)
+}
+func (v *ListPortalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPortalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPortalsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPortalsResponse_nextToken, v.NextToken)
+		case schemas.ListPortalsResponse_portalSummaries:
+			return deserializePortalSummaries(d, schemas.ListPortalsResponse_portalSummaries, &v.PortalSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPortalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPortals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortals, schemas.ListPortalsRequest, schemas.ListPortalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPortals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortals, schemas.ListPortalsRequest, schemas.ListPortalsResponse), output: &ListPortalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connecthealth
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type CreateSubscriptionInput struct {
 	DomainId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateSubscriptionInput_domainId, *v.DomainId)
+	}
 }
 
 type CreateSubscriptionOutput struct {
@@ -79,13 +93,78 @@ type CreateSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriptionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivatedAt != nil {
+		s.WriteTime(schemas.CreateSubscriptionOutput_activatedAt, *v.ActivatedAt)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSubscriptionOutput_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateSubscriptionOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DeactivatedAt != nil {
+		s.WriteTime(schemas.CreateSubscriptionOutput_deactivatedAt, *v.DeactivatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateSubscriptionOutput_domainId, *v.DomainId)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.CreateSubscriptionOutput_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateSubscriptionOutput_status, string(v.Status))
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.CreateSubscriptionOutput_subscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *CreateSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubscriptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSubscriptionOutput_activatedAt:
+			v.ActivatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateSubscriptionOutput_activatedAt, v.ActivatedAt)
+		case schemas.CreateSubscriptionOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSubscriptionOutput_arn, v.Arn)
+		case schemas.CreateSubscriptionOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateSubscriptionOutput_createdAt, v.CreatedAt)
+		case schemas.CreateSubscriptionOutput_deactivatedAt:
+			v.DeactivatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateSubscriptionOutput_deactivatedAt, v.DeactivatedAt)
+		case schemas.CreateSubscriptionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateSubscriptionOutput_domainId, v.DomainId)
+		case schemas.CreateSubscriptionOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateSubscriptionOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CreateSubscriptionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateSubscriptionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionStatus(ev)
+			return nil
+		case schemas.CreateSubscriptionOutput_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.CreateSubscriptionOutput_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscription, schemas.CreateSubscriptionInput, schemas.CreateSubscriptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscription, schemas.CreateSubscriptionInput, schemas.CreateSubscriptionOutput), output: &CreateSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

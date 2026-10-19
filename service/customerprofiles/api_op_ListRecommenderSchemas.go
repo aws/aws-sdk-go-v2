@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListRecommenderSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommenderSchemasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommenderSchemasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommenderSchemasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListRecommenderSchemasRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommenderSchemasRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommenderSchemasRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecommenderSchemasOutput struct {
 
 	// A token to retrieve the next page of results. Null if there are no more results
@@ -58,13 +78,35 @@ type ListRecommenderSchemasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommenderSchemasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommenderSchemasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommenderSchemasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommenderSchemasResponse_NextToken, *v.NextToken)
+	}
+	serializeRecommenderSchemaSummaryList(s, schemas.ListRecommenderSchemasResponse_RecommenderSchemas, v.RecommenderSchemas)
+}
+func (v *ListRecommenderSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommenderSchemasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommenderSchemasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommenderSchemasResponse_NextToken, v.NextToken)
+		case schemas.ListRecommenderSchemasResponse_RecommenderSchemas:
+			return deserializeRecommenderSchemaSummaryList(d, schemas.ListRecommenderSchemasResponse_RecommenderSchemas, &v.RecommenderSchemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommenderSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommenderSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommenderSchemas, schemas.ListRecommenderSchemasRequest, schemas.ListRecommenderSchemasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommenderSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommenderSchemas, schemas.ListRecommenderSchemasRequest, schemas.ListRecommenderSchemasResponse), output: &ListRecommenderSchemasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

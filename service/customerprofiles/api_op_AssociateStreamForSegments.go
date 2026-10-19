@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type AssociateStreamForSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateStreamForSegmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateStreamForSegmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateStreamForSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.AssociateStreamForSegmentsRequest_DestinationArn, *v.DestinationArn)
+	}
+	if v.DestinationRoleArn != nil {
+		s.WriteString(schemas.AssociateStreamForSegmentsRequest_DestinationRoleArn, *v.DestinationRoleArn)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.AssociateStreamForSegmentsRequest_DomainName, *v.DomainName)
+	}
+}
+
 type AssociateStreamForSegmentsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +84,26 @@ type AssociateStreamForSegmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateStreamForSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateStreamForSegmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateStreamForSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateStreamForSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateStreamForSegmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateStreamForSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateStreamForSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateStreamForSegments, schemas.AssociateStreamForSegmentsRequest, schemas.AssociateStreamForSegmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateStreamForSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateStreamForSegments, schemas.AssociateStreamForSegmentsRequest, schemas.AssociateStreamForSegmentsResponse), output: &AssociateStreamForSegmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

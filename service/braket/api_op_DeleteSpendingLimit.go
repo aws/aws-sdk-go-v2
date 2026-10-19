@@ -4,6 +4,8 @@ package braket
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteSpendingLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSpendingLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSpendingLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSpendingLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpendingLimitArn != nil {
+		s.WriteString(schemas.DeleteSpendingLimitRequest_spendingLimitArn, *v.SpendingLimitArn)
+	}
+}
+
 type DeleteSpendingLimitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteSpendingLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSpendingLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSpendingLimitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSpendingLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSpendingLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSpendingLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSpendingLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSpendingLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSpendingLimit, schemas.DeleteSpendingLimitRequest, schemas.DeleteSpendingLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSpendingLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSpendingLimit, schemas.DeleteSpendingLimitRequest, schemas.DeleteSpendingLimitResponse), output: &DeleteSpendingLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

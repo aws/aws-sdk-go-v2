@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,30 @@ type CreateDatasetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.DestinationS3Uri != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_destinationS3Uri, *v.DestinationS3Uri)
+	}
+	if v.ErrorReportLocation != nil {
+		s.WriteStruct(schemas.CreateDatasetExportJobRequest_errorReportLocation)
+		v.ErrorReportLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProcessingInput(s, schemas.CreateDatasetExportJobRequest_input, v.Input)
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response for create dataset export job request.
 type CreateDatasetExportJobOutput struct {
 
@@ -78,13 +104,38 @@ type CreateDatasetExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateDatasetExportJobResponse_jobId, *v.JobId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateDatasetExportJobResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *CreateDatasetExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetExportJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateDatasetExportJobResponse_jobId, v.JobId)
+		case schemas.CreateDatasetExportJobResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.CreateDatasetExportJobResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDatasetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetExportJob, schemas.CreateDatasetExportJobRequest, schemas.CreateDatasetExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDatasetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetExportJob, schemas.CreateDatasetExportJobRequest, schemas.CreateDatasetExportJobResponse), output: &CreateDatasetExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

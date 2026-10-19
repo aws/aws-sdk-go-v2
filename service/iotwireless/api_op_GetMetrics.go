@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,16 @@ type GetMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSummaryMetricQueries(s, schemas.GetMetricsRequest_SummaryMetricQueries, v.SummaryMetricQueries)
+}
+
 type GetMetricsOutput struct {
 
 	// The list of summary metrics that were retrieved.
@@ -43,13 +55,29 @@ type GetMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSummaryMetricQueryResults(s, schemas.GetMetricsResponse_SummaryMetricQueryResults, v.SummaryMetricQueryResults)
+}
+func (v *GetMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetricsResponse_SummaryMetricQueryResults:
+			return deserializeSummaryMetricQueryResults(d, schemas.GetMetricsResponse_SummaryMetricQueryResults, &v.SummaryMetricQueryResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetrics, schemas.GetMetricsRequest, schemas.GetMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetrics, schemas.GetMetricsRequest, schemas.GetMetricsResponse), output: &GetMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,24 @@ type RevokeSubscriptionInput struct {
 	RetainPermissions *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *RevokeSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.RevokeSubscriptionInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.RevokeSubscriptionInput_identifier, *v.Identifier)
+	}
+	if v.RetainPermissions != nil {
+		s.WriteBool(schemas.RevokeSubscriptionInput_retainPermissions, *v.RetainPermissions)
+	}
 }
 
 type RevokeSubscriptionOutput struct {
@@ -102,13 +122,95 @@ type RevokeSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeSubscriptionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RevokeSubscriptionOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.RevokeSubscriptionOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.RevokeSubscriptionOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RevokeSubscriptionOutput_id, *v.Id)
+	}
+	if v.RetainPermissions != nil {
+		s.WriteBool(schemas.RevokeSubscriptionOutput_retainPermissions, *v.RetainPermissions)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RevokeSubscriptionOutput_status, string(v.Status))
+	}
+	if v.SubscribedListing != nil {
+		s.WriteStruct(schemas.RevokeSubscriptionOutput_subscribedListing)
+		v.SubscribedListing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSubscribedPrincipal(s, schemas.RevokeSubscriptionOutput_subscribedPrincipal, v.SubscribedPrincipal)
+	if v.SubscriptionRequestId != nil {
+		s.WriteString(schemas.RevokeSubscriptionOutput_subscriptionRequestId, *v.SubscriptionRequestId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RevokeSubscriptionOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.RevokeSubscriptionOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *RevokeSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeSubscriptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeSubscriptionOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RevokeSubscriptionOutput_createdAt, v.CreatedAt)
+		case schemas.RevokeSubscriptionOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.RevokeSubscriptionOutput_createdBy, v.CreatedBy)
+		case schemas.RevokeSubscriptionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.RevokeSubscriptionOutput_domainId, v.DomainId)
+		case schemas.RevokeSubscriptionOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RevokeSubscriptionOutput_id, v.Id)
+		case schemas.RevokeSubscriptionOutput_retainPermissions:
+			v.RetainPermissions = new(bool)
+			return d.ReadBool(schemas.RevokeSubscriptionOutput_retainPermissions, v.RetainPermissions)
+		case schemas.RevokeSubscriptionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.RevokeSubscriptionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionStatus(ev)
+			return nil
+		case schemas.RevokeSubscriptionOutput_subscribedListing:
+			v.SubscribedListing = &types.SubscribedListing{}
+			return v.SubscribedListing.Deserialize(d)
+		case schemas.RevokeSubscriptionOutput_subscribedPrincipal:
+			return deserializeSubscribedPrincipal(d, schemas.RevokeSubscriptionOutput_subscribedPrincipal, &v.SubscribedPrincipal)
+		case schemas.RevokeSubscriptionOutput_subscriptionRequestId:
+			v.SubscriptionRequestId = new(string)
+			return d.ReadString(schemas.RevokeSubscriptionOutput_subscriptionRequestId, v.SubscriptionRequestId)
+		case schemas.RevokeSubscriptionOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RevokeSubscriptionOutput_updatedAt, v.UpdatedAt)
+		case schemas.RevokeSubscriptionOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.RevokeSubscriptionOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSubscription, schemas.RevokeSubscriptionInput, schemas.RevokeSubscriptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSubscription, schemas.RevokeSubscriptionInput, schemas.RevokeSubscriptionOutput), output: &RevokeSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

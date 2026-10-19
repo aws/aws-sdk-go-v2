@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,37 @@ type UpdateDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachmentsSourceList(s, schemas.UpdateDocumentRequest_Attachments, v.Attachments)
+	if v.Content != nil {
+		s.WriteString(schemas.UpdateDocumentRequest_Content, *v.Content)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateDocumentRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DocumentFormat != "" {
+		s.WriteString(schemas.UpdateDocumentRequest_DocumentFormat, string(v.DocumentFormat))
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.UpdateDocumentRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDocumentRequest_Name, *v.Name)
+	}
+	if v.TargetType != nil {
+		s.WriteString(schemas.UpdateDocumentRequest_TargetType, *v.TargetType)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.UpdateDocumentRequest_VersionName, *v.VersionName)
+	}
+}
+
 type UpdateDocumentOutput struct {
 
 	// A description of the document that was updated.
@@ -80,13 +113,34 @@ type UpdateDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDocumentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentDescription != nil {
+		s.WriteStruct(schemas.UpdateDocumentResult_DocumentDescription)
+		v.DocumentDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDocumentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDocumentResult_DocumentDescription:
+			v.DocumentDescription = &types.DocumentDescription{}
+			return v.DocumentDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDocument, schemas.UpdateDocumentRequest, schemas.UpdateDocumentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDocument, schemas.UpdateDocumentRequest, schemas.UpdateDocumentResult), output: &UpdateDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

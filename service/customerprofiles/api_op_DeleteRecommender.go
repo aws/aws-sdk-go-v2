@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommenderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommenderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteRecommenderRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderName != nil {
+		s.WriteString(schemas.DeleteRecommenderRequest_RecommenderName, *v.RecommenderName)
+	}
+}
+
 type DeleteRecommenderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteRecommenderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommenderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommenderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecommenderResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecommenderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommender, schemas.DeleteRecommenderRequest, schemas.DeleteRecommenderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommender, schemas.DeleteRecommenderRequest, schemas.DeleteRecommenderResponse), output: &DeleteRecommenderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

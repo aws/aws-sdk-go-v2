@@ -5,7 +5,9 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,40 @@ type ListPreviewRotationShiftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPreviewRotationShiftsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPreviewRotationShiftsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPreviewRotationShiftsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListPreviewRotationShiftsRequest_EndTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPreviewRotationShiftsRequest_MaxResults, *v.MaxResults)
+	}
+	serializeRotationPreviewMemberList(s, schemas.ListPreviewRotationShiftsRequest_Members, v.Members)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPreviewRotationShiftsRequest_NextToken, *v.NextToken)
+	}
+	serializeOverrideList(s, schemas.ListPreviewRotationShiftsRequest_Overrides, v.Overrides)
+	if v.Recurrence != nil {
+		s.WriteStruct(schemas.ListPreviewRotationShiftsRequest_Recurrence)
+		v.Recurrence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RotationStartTime != nil {
+		s.WriteTime(schemas.ListPreviewRotationShiftsRequest_RotationStartTime, *v.RotationStartTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListPreviewRotationShiftsRequest_StartTime, *v.StartTime)
+	}
+	if v.TimeZoneId != nil {
+		s.WriteString(schemas.ListPreviewRotationShiftsRequest_TimeZoneId, *v.TimeZoneId)
+	}
+}
+
 type ListPreviewRotationShiftsOutput struct {
 
 	// The token for the next set of items to return. This token is used to get the
@@ -90,13 +126,35 @@ type ListPreviewRotationShiftsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPreviewRotationShiftsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPreviewRotationShiftsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPreviewRotationShiftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPreviewRotationShiftsResult_NextToken, *v.NextToken)
+	}
+	serializeRotationShifts(s, schemas.ListPreviewRotationShiftsResult_RotationShifts, v.RotationShifts)
+}
+func (v *ListPreviewRotationShiftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPreviewRotationShiftsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPreviewRotationShiftsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPreviewRotationShiftsResult_NextToken, v.NextToken)
+		case schemas.ListPreviewRotationShiftsResult_RotationShifts:
+			return deserializeRotationShifts(d, schemas.ListPreviewRotationShiftsResult_RotationShifts, &v.RotationShifts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPreviewRotationShiftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPreviewRotationShifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPreviewRotationShifts, schemas.ListPreviewRotationShiftsRequest, schemas.ListPreviewRotationShiftsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPreviewRotationShifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPreviewRotationShifts, schemas.ListPreviewRotationShiftsRequest, schemas.ListPreviewRotationShiftsResult), output: &ListPreviewRotationShiftsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

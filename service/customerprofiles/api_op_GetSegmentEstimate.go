@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetSegmentEstimateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetSegmentEstimateRequest_DomainName, *v.DomainName)
+	}
+	if v.EstimateId != nil {
+		s.WriteString(schemas.GetSegmentEstimateRequest_EstimateId, *v.EstimateId)
+	}
+}
+
 type GetSegmentEstimateOutput struct {
 
 	// The unique name of the domain.
@@ -65,13 +82,65 @@ type GetSegmentEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentEstimateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentEstimateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentEstimateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetSegmentEstimateResponse_DomainName, *v.DomainName)
+	}
+	if v.Estimate != nil {
+		s.WriteString(schemas.GetSegmentEstimateResponse_Estimate, *v.Estimate)
+	}
+	if v.EstimateId != nil {
+		s.WriteString(schemas.GetSegmentEstimateResponse_EstimateId, *v.EstimateId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetSegmentEstimateResponse_Message, *v.Message)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSegmentEstimateResponse_Status, string(v.Status))
+	}
+	if v.StatusCode != 0 {
+		s.WriteInt32(schemas.GetSegmentEstimateResponse_StatusCode, v.StatusCode)
+	}
+}
+func (v *GetSegmentEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSegmentEstimateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSegmentEstimateResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetSegmentEstimateResponse_DomainName, v.DomainName)
+		case schemas.GetSegmentEstimateResponse_Estimate:
+			v.Estimate = new(string)
+			return d.ReadString(schemas.GetSegmentEstimateResponse_Estimate, v.Estimate)
+		case schemas.GetSegmentEstimateResponse_EstimateId:
+			v.EstimateId = new(string)
+			return d.ReadString(schemas.GetSegmentEstimateResponse_EstimateId, v.EstimateId)
+		case schemas.GetSegmentEstimateResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetSegmentEstimateResponse_Message, v.Message)
+		case schemas.GetSegmentEstimateResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSegmentEstimateResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EstimateStatus(ev)
+			return nil
+		case schemas.GetSegmentEstimateResponse_StatusCode:
+			return d.ReadInt32(schemas.GetSegmentEstimateResponse_StatusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSegmentEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegmentEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentEstimate, schemas.GetSegmentEstimateRequest, schemas.GetSegmentEstimateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSegmentEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentEstimate, schemas.GetSegmentEstimateRequest, schemas.GetSegmentEstimateResponse), output: &GetSegmentEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

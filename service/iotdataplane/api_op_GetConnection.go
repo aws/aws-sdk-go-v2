@@ -4,6 +4,8 @@ package iotdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type GetConnectionInput struct {
 	IncludeSocketInformation bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetConnectionRequest_clientId, *v.ClientId)
+	}
+	if v.IncludeSocketInformation != false {
+		s.WriteBool(schemas.GetConnectionRequest_includeSocketInformation, v.IncludeSocketInformation)
+	}
 }
 
 type GetConnectionOutput struct {
@@ -118,13 +135,102 @@ type GetConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CleanSession != false {
+		s.WriteBool(schemas.GetConnectionResponse_cleanSession, v.CleanSession)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetConnectionResponse_clientId, *v.ClientId)
+	}
+	if v.Connected != false {
+		s.WriteBool(schemas.GetConnectionResponse_connected, v.Connected)
+	}
+	if v.ConnectedSince != 0 {
+		s.WriteInt64(schemas.GetConnectionResponse_connectedSince, v.ConnectedSince)
+	}
+	if v.DisconnectReason != nil {
+		s.WriteString(schemas.GetConnectionResponse_disconnectReason, *v.DisconnectReason)
+	}
+	if v.DisconnectedSince != 0 {
+		s.WriteInt64(schemas.GetConnectionResponse_disconnectedSince, v.DisconnectedSince)
+	}
+	if v.KeepAliveDuration != 0 {
+		s.WriteInt32(schemas.GetConnectionResponse_keepAliveDuration, v.KeepAliveDuration)
+	}
+	if v.SessionExpiry != 0 {
+		s.WriteInt64(schemas.GetConnectionResponse_sessionExpiry, v.SessionExpiry)
+	}
+	if v.SourceIp != nil {
+		s.WriteString(schemas.GetConnectionResponse_sourceIp, *v.SourceIp)
+	}
+	if v.SourcePort != 0 {
+		s.WriteInt32(schemas.GetConnectionResponse_sourcePort, v.SourcePort)
+	}
+	if v.TargetIp != nil {
+		s.WriteString(schemas.GetConnectionResponse_targetIp, *v.TargetIp)
+	}
+	if v.TargetPort != 0 {
+		s.WriteInt32(schemas.GetConnectionResponse_targetPort, v.TargetPort)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.GetConnectionResponse_thingName, *v.ThingName)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.GetConnectionResponse_vpcEndpointId, *v.VpcEndpointId)
+	}
+}
+func (v *GetConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectionResponse_cleanSession:
+			return d.ReadBool(schemas.GetConnectionResponse_cleanSession, &v.CleanSession)
+		case schemas.GetConnectionResponse_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_clientId, v.ClientId)
+		case schemas.GetConnectionResponse_connected:
+			return d.ReadBool(schemas.GetConnectionResponse_connected, &v.Connected)
+		case schemas.GetConnectionResponse_connectedSince:
+			return d.ReadInt64(schemas.GetConnectionResponse_connectedSince, &v.ConnectedSince)
+		case schemas.GetConnectionResponse_disconnectReason:
+			v.DisconnectReason = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_disconnectReason, v.DisconnectReason)
+		case schemas.GetConnectionResponse_disconnectedSince:
+			return d.ReadInt64(schemas.GetConnectionResponse_disconnectedSince, &v.DisconnectedSince)
+		case schemas.GetConnectionResponse_keepAliveDuration:
+			return d.ReadInt32(schemas.GetConnectionResponse_keepAliveDuration, &v.KeepAliveDuration)
+		case schemas.GetConnectionResponse_sessionExpiry:
+			return d.ReadInt64(schemas.GetConnectionResponse_sessionExpiry, &v.SessionExpiry)
+		case schemas.GetConnectionResponse_sourceIp:
+			v.SourceIp = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_sourceIp, v.SourceIp)
+		case schemas.GetConnectionResponse_sourcePort:
+			return d.ReadInt32(schemas.GetConnectionResponse_sourcePort, &v.SourcePort)
+		case schemas.GetConnectionResponse_targetIp:
+			v.TargetIp = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_targetIp, v.TargetIp)
+		case schemas.GetConnectionResponse_targetPort:
+			return d.ReadInt32(schemas.GetConnectionResponse_targetPort, &v.TargetPort)
+		case schemas.GetConnectionResponse_thingName:
+			v.ThingName = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_thingName, v.ThingName)
+		case schemas.GetConnectionResponse_vpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_vpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnection, schemas.GetConnectionRequest, schemas.GetConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnection, schemas.GetConnectionRequest, schemas.GetConnectionResponse), output: &GetConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

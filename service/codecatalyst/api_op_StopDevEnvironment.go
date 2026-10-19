@@ -4,7 +4,9 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type StopDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDevEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDevEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopDevEnvironmentRequest_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StopDevEnvironmentRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.StopDevEnvironmentRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type StopDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the Dev Environment.
@@ -73,13 +93,54 @@ type StopDevEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDevEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDevEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDevEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopDevEnvironmentResponse_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StopDevEnvironmentResponse_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.StopDevEnvironmentResponse_spaceName, *v.SpaceName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopDevEnvironmentResponse_status, string(v.Status))
+	}
+}
+func (v *StopDevEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDevEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDevEnvironmentResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StopDevEnvironmentResponse_id, v.Id)
+		case schemas.StopDevEnvironmentResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.StopDevEnvironmentResponse_projectName, v.ProjectName)
+		case schemas.StopDevEnvironmentResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.StopDevEnvironmentResponse_spaceName, v.SpaceName)
+		case schemas.StopDevEnvironmentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StopDevEnvironmentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DevEnvironmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDevEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDevEnvironment, schemas.StopDevEnvironmentRequest, schemas.StopDevEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDevEnvironment, schemas.StopDevEnvironmentRequest, schemas.StopDevEnvironmentResponse), output: &StopDevEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

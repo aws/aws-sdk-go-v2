@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,37 @@ type StartSegmentDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSegmentDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSegmentDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSegmentDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSegmentDetectionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.StartSegmentDetectionRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartSegmentDetectionRequest_JobTag, *v.JobTag)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartSegmentDetectionRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSegmentTypes(s, schemas.StartSegmentDetectionRequest_SegmentTypes, v.SegmentTypes)
+	if v.Video != nil {
+		s.WriteStruct(schemas.StartSegmentDetectionRequest_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartSegmentDetectionOutput struct {
 
 	// Unique identifier for the segment detection job. The JobId is returned from
@@ -95,13 +128,32 @@ type StartSegmentDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSegmentDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSegmentDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSegmentDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartSegmentDetectionResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartSegmentDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSegmentDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSegmentDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartSegmentDetectionResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSegmentDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSegmentDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSegmentDetection, schemas.StartSegmentDetectionRequest, schemas.StartSegmentDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSegmentDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSegmentDetection, schemas.StartSegmentDetectionRequest, schemas.StartSegmentDetectionResponse), output: &StartSegmentDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

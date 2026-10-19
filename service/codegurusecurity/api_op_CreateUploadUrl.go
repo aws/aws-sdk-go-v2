@@ -4,6 +4,8 @@ package codegurusecurity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type CreateUploadUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUploadUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUploadUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUploadUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanName != nil {
+		s.WriteString(schemas.CreateUploadUrlRequest_scanName, *v.ScanName)
+	}
+}
+
 type CreateUploadUrlOutput struct {
 
 	// The identifier for the uploaded code resource. Pass this to CreateScan to use
@@ -66,13 +80,41 @@ type CreateUploadUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUploadUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUploadUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUploadUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeArtifactId != nil {
+		s.WriteString(schemas.CreateUploadUrlResponse_codeArtifactId, *v.CodeArtifactId)
+	}
+	serializeRequestHeaderMap(s, schemas.CreateUploadUrlResponse_requestHeaders, v.RequestHeaders)
+	if v.S3Url != nil {
+		s.WriteString(schemas.CreateUploadUrlResponse_s3Url, *v.S3Url)
+	}
+}
+func (v *CreateUploadUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUploadUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUploadUrlResponse_codeArtifactId:
+			v.CodeArtifactId = new(string)
+			return d.ReadString(schemas.CreateUploadUrlResponse_codeArtifactId, v.CodeArtifactId)
+		case schemas.CreateUploadUrlResponse_requestHeaders:
+			return deserializeRequestHeaderMap(d, schemas.CreateUploadUrlResponse_requestHeaders, &v.RequestHeaders)
+		case schemas.CreateUploadUrlResponse_s3Url:
+			v.S3Url = new(string)
+			return d.ReadString(schemas.CreateUploadUrlResponse_s3Url, v.S3Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUploadUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUploadUrl, schemas.CreateUploadUrlRequest, schemas.CreateUploadUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUploadUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUploadUrl, schemas.CreateUploadUrlRequest, schemas.CreateUploadUrlResponse), output: &CreateUploadUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

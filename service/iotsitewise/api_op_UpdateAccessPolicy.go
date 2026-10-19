@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,34 @@ type UpdateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyId != nil {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_accessPolicyId, *v.AccessPolicyId)
+	}
+	if v.AccessPolicyIdentity != nil {
+		s.WriteStruct(schemas.UpdateAccessPolicyRequest_accessPolicyIdentity)
+		v.AccessPolicyIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccessPolicyPermission != "" {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_accessPolicyPermission, string(v.AccessPolicyPermission))
+	}
+	if v.AccessPolicyResource != nil {
+		s.WriteStruct(schemas.UpdateAccessPolicyRequest_accessPolicyResource)
+		v.AccessPolicyResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type UpdateAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,13 +104,26 @@ type UpdateAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessPolicy, schemas.UpdateAccessPolicyRequest, schemas.UpdateAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessPolicy, schemas.UpdateAccessPolicyRequest, schemas.UpdateAccessPolicyResponse), output: &UpdateAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

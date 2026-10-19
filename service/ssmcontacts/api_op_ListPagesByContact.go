@@ -5,7 +5,9 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListPagesByContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPagesByContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPagesByContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPagesByContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ListPagesByContactRequest_ContactId, *v.ContactId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPagesByContactRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPagesByContactRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPagesByContactOutput struct {
 
 	// The list of engagements to a contact's contact channel.
@@ -59,13 +79,35 @@ type ListPagesByContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPagesByContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPagesByContactResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPagesByContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPagesByContactResult_NextToken, *v.NextToken)
+	}
+	serializePagesList(s, schemas.ListPagesByContactResult_Pages, v.Pages)
+}
+func (v *ListPagesByContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPagesByContactResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPagesByContactResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPagesByContactResult_NextToken, v.NextToken)
+		case schemas.ListPagesByContactResult_Pages:
+			return deserializePagesList(d, schemas.ListPagesByContactResult_Pages, &v.Pages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPagesByContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPagesByContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPagesByContact, schemas.ListPagesByContactRequest, schemas.ListPagesByContactResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPagesByContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPagesByContact, schemas.ListPagesByContactRequest, schemas.ListPagesByContactResult), output: &ListPagesByContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

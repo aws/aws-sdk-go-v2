@@ -4,7 +4,9 @@ package waf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,30 @@ type CreateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.CreateWebACLRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.DefaultAction != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_DefaultAction)
+		v.DefaultAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateWebACLRequest_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWebACLRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateWebACLRequest_Tags, v.Tags)
+}
+
 type CreateWebACLOutput struct {
 
 	// The ChangeToken that you used to submit the CreateWebACL request. You can also
@@ -112,13 +138,40 @@ type CreateWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.CreateWebACLResponse_ChangeToken, *v.ChangeToken)
+	}
+	if v.WebACL != nil {
+		s.WriteStruct(schemas.CreateWebACLResponse_WebACL)
+		v.WebACL.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWebACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWebACLResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.CreateWebACLResponse_ChangeToken, v.ChangeToken)
+		case schemas.CreateWebACLResponse_WebACL:
+			v.WebACL = &types.WebACL{}
+			return v.WebACL.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACL, schemas.CreateWebACLRequest, schemas.CreateWebACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACL, schemas.CreateWebACLRequest, schemas.CreateWebACLResponse), output: &CreateWebACLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

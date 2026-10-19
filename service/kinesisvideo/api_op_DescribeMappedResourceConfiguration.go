@@ -5,7 +5,9 @@ package kinesisvideo
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type DescribeMappedResourceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMappedResourceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMappedResourceConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMappedResourceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeMappedResourceConfigurationInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMappedResourceConfigurationInput_NextToken, *v.NextToken)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DescribeMappedResourceConfigurationInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.DescribeMappedResourceConfigurationInput_StreamName, *v.StreamName)
+	}
+}
+
 type DescribeMappedResourceConfigurationOutput struct {
 
 	// A structure that encapsulates, or contains, the media storage configuration
@@ -59,13 +82,35 @@ type DescribeMappedResourceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMappedResourceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMappedResourceConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMappedResourceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMappedResourceConfigurationList(s, schemas.DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList, v.MappedResourceConfigurationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMappedResourceConfigurationOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeMappedResourceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMappedResourceConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList:
+			return deserializeMappedResourceConfigurationList(d, schemas.DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList, &v.MappedResourceConfigurationList)
+		case schemas.DescribeMappedResourceConfigurationOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMappedResourceConfigurationOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMappedResourceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMappedResourceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMappedResourceConfiguration, schemas.DescribeMappedResourceConfigurationInput, schemas.DescribeMappedResourceConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMappedResourceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMappedResourceConfiguration, schemas.DescribeMappedResourceConfigurationInput, schemas.DescribeMappedResourceConfigurationOutput), output: &DescribeMappedResourceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

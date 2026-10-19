@@ -5,6 +5,8 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListRuleBasedMatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRuleBasedMatchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRuleBasedMatchesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRuleBasedMatchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListRuleBasedMatchesRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRuleBasedMatchesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRuleBasedMatchesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRuleBasedMatchesOutput struct {
 
 	// The list of MatchIds for the given domain.
@@ -54,13 +74,35 @@ type ListRuleBasedMatchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRuleBasedMatchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRuleBasedMatchesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRuleBasedMatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMatchIdList(s, schemas.ListRuleBasedMatchesResponse_MatchIds, v.MatchIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRuleBasedMatchesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListRuleBasedMatchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRuleBasedMatchesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRuleBasedMatchesResponse_MatchIds:
+			return deserializeMatchIdList(d, schemas.ListRuleBasedMatchesResponse_MatchIds, &v.MatchIds)
+		case schemas.ListRuleBasedMatchesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRuleBasedMatchesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRuleBasedMatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRuleBasedMatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleBasedMatches, schemas.ListRuleBasedMatchesRequest, schemas.ListRuleBasedMatchesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRuleBasedMatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleBasedMatches, schemas.ListRuleBasedMatchesRequest, schemas.ListRuleBasedMatchesResponse), output: &ListRuleBasedMatchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

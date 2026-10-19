@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetIntegrationInput struct {
 	Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetIntegrationRequest_DomainName, *v.DomainName)
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.GetIntegrationRequest_Uri, *v.Uri)
+	}
 }
 
 type GetIntegrationOutput struct {
@@ -103,13 +120,93 @@ type GetIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetIntegrationResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetIntegrationResponse_DomainName, *v.DomainName)
+	}
+	serializeEventTriggerNames(s, schemas.GetIntegrationResponse_EventTriggerNames, v.EventTriggerNames)
+	if v.IsUnstructured != nil {
+		s.WriteBool(schemas.GetIntegrationResponse_IsUnstructured, *v.IsUnstructured)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetIntegrationResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.GetIntegrationResponse_ObjectTypeName, *v.ObjectTypeName)
+	}
+	serializeObjectTypeNames(s, schemas.GetIntegrationResponse_ObjectTypeNames, v.ObjectTypeNames)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetIntegrationResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetIntegrationResponse_Scope, string(v.Scope))
+	}
+	serializeTagMap(s, schemas.GetIntegrationResponse_Tags, v.Tags)
+	if v.Uri != nil {
+		s.WriteString(schemas.GetIntegrationResponse_Uri, *v.Uri)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetIntegrationResponse_WorkflowId, *v.WorkflowId)
+	}
+}
+func (v *GetIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntegrationResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetIntegrationResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetIntegrationResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetIntegrationResponse_DomainName, v.DomainName)
+		case schemas.GetIntegrationResponse_EventTriggerNames:
+			return deserializeEventTriggerNames(d, schemas.GetIntegrationResponse_EventTriggerNames, &v.EventTriggerNames)
+		case schemas.GetIntegrationResponse_IsUnstructured:
+			v.IsUnstructured = new(bool)
+			return d.ReadBool(schemas.GetIntegrationResponse_IsUnstructured, v.IsUnstructured)
+		case schemas.GetIntegrationResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetIntegrationResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetIntegrationResponse_ObjectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.GetIntegrationResponse_ObjectTypeName, v.ObjectTypeName)
+		case schemas.GetIntegrationResponse_ObjectTypeNames:
+			return deserializeObjectTypeNames(d, schemas.GetIntegrationResponse_ObjectTypeNames, &v.ObjectTypeNames)
+		case schemas.GetIntegrationResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetIntegrationResponse_RoleArn, v.RoleArn)
+		case schemas.GetIntegrationResponse_Scope:
+			var ev string
+			if err := d.ReadString(schemas.GetIntegrationResponse_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = types.Scope(ev)
+			return nil
+		case schemas.GetIntegrationResponse_Tags:
+			return deserializeTagMap(d, schemas.GetIntegrationResponse_Tags, &v.Tags)
+		case schemas.GetIntegrationResponse_Uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.GetIntegrationResponse_Uri, v.Uri)
+		case schemas.GetIntegrationResponse_WorkflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.GetIntegrationResponse_WorkflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationRequest, schemas.GetIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationRequest, schemas.GetIntegrationResponse), output: &GetIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

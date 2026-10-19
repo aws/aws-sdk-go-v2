@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ListProjectPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProjectPoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectPoliciesRequest_NextToken, *v.NextToken)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.ListProjectPoliciesRequest_ProjectArn, *v.ProjectArn)
+	}
+}
+
 type ListProjectPoliciesOutput struct {
 
 	// If the response is truncated, Amazon Rekognition returns this token that you
@@ -68,13 +88,35 @@ type ListProjectPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectPoliciesResponse_NextToken, *v.NextToken)
+	}
+	serializeProjectPolicies(s, schemas.ListProjectPoliciesResponse_ProjectPolicies, v.ProjectPolicies)
+}
+func (v *ListProjectPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProjectPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProjectPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProjectPoliciesResponse_NextToken, v.NextToken)
+		case schemas.ListProjectPoliciesResponse_ProjectPolicies:
+			return deserializeProjectPolicies(d, schemas.ListProjectPoliciesResponse_ProjectPolicies, &v.ProjectPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProjectPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProjectPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectPolicies, schemas.ListProjectPoliciesRequest, schemas.ListProjectPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProjectPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectPolicies, schemas.ListProjectPoliciesRequest, schemas.ListProjectPoliciesResponse), output: &ListProjectPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -37,6 +39,18 @@ type GetFeedInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFeedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFeedRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetFeedRequest_id, *v.Id)
+	}
 }
 
 type GetFeedOutput struct {
@@ -90,13 +104,77 @@ type GetFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFeedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFeedResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFeedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRoleArn != nil {
+		s.WriteString(schemas.GetFeedResponse_accessRoleArn, *v.AccessRoleArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFeedResponse_arn, *v.Arn)
+	}
+	if v.Association != nil {
+		s.WriteStruct(schemas.GetFeedResponse_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.GetFeedResponse_dataEndpoints, v.DataEndpoints)
+	if v.Id != nil {
+		s.WriteString(schemas.GetFeedResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFeedResponse_name, *v.Name)
+	}
+	serializeGetOutputList(s, schemas.GetFeedResponse_outputs, v.Outputs)
+	if v.Status != "" {
+		s.WriteString(schemas.GetFeedResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetFeedResponse_tags, v.Tags)
+}
+func (v *GetFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFeedResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFeedResponse_accessRoleArn:
+			v.AccessRoleArn = new(string)
+			return d.ReadString(schemas.GetFeedResponse_accessRoleArn, v.AccessRoleArn)
+		case schemas.GetFeedResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFeedResponse_arn, v.Arn)
+		case schemas.GetFeedResponse_association:
+			v.Association = &types.FeedAssociation{}
+			return v.Association.Deserialize(d)
+		case schemas.GetFeedResponse_dataEndpoints:
+			return deserializeStringList(d, schemas.GetFeedResponse_dataEndpoints, &v.DataEndpoints)
+		case schemas.GetFeedResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFeedResponse_id, v.Id)
+		case schemas.GetFeedResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFeedResponse_name, v.Name)
+		case schemas.GetFeedResponse_outputs:
+			return deserializeGetOutputList(d, schemas.GetFeedResponse_outputs, &v.Outputs)
+		case schemas.GetFeedResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFeedResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FeedStatus(ev)
+			return nil
+		case schemas.GetFeedResponse_tags:
+			return deserializeTagMap(d, schemas.GetFeedResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeed, schemas.GetFeedRequest, schemas.GetFeedResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeed, schemas.GetFeedRequest, schemas.GetFeedResponse), output: &GetFeedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

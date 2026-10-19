@@ -4,7 +4,9 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,43 @@ type CreateDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDevEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDevEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateDevEnvironmentRequest_alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDevEnvironmentRequest_clientToken, *v.ClientToken)
+	}
+	serializeIdeConfigurationList(s, schemas.CreateDevEnvironmentRequest_ides, v.Ides)
+	if v.InactivityTimeoutMinutes != 0 {
+		s.WriteInt32(schemas.CreateDevEnvironmentRequest_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.CreateDevEnvironmentRequest_instanceType, string(v.InstanceType))
+	}
+	if v.PersistentStorage != nil {
+		s.WriteStruct(schemas.CreateDevEnvironmentRequest_persistentStorage)
+		v.PersistentStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.CreateDevEnvironmentRequest_projectName, *v.ProjectName)
+	}
+	serializeRepositoriesInput(s, schemas.CreateDevEnvironmentRequest_repositories, v.Repositories)
+	if v.SpaceName != nil {
+		s.WriteString(schemas.CreateDevEnvironmentRequest_spaceName, *v.SpaceName)
+	}
+	if v.VpcConnectionName != nil {
+		s.WriteString(schemas.CreateDevEnvironmentRequest_vpcConnectionName, *v.VpcConnectionName)
+	}
+}
+
 type CreateDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the Dev Environment.
@@ -116,13 +155,50 @@ type CreateDevEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDevEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDevEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDevEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDevEnvironmentResponse_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.CreateDevEnvironmentResponse_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.CreateDevEnvironmentResponse_spaceName, *v.SpaceName)
+	}
+	if v.VpcConnectionName != nil {
+		s.WriteString(schemas.CreateDevEnvironmentResponse_vpcConnectionName, *v.VpcConnectionName)
+	}
+}
+func (v *CreateDevEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDevEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDevEnvironmentResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDevEnvironmentResponse_id, v.Id)
+		case schemas.CreateDevEnvironmentResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.CreateDevEnvironmentResponse_projectName, v.ProjectName)
+		case schemas.CreateDevEnvironmentResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.CreateDevEnvironmentResponse_spaceName, v.SpaceName)
+		case schemas.CreateDevEnvironmentResponse_vpcConnectionName:
+			v.VpcConnectionName = new(string)
+			return d.ReadString(schemas.CreateDevEnvironmentResponse_vpcConnectionName, v.VpcConnectionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDevEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevEnvironment, schemas.CreateDevEnvironmentRequest, schemas.CreateDevEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevEnvironment, schemas.CreateDevEnvironmentRequest, schemas.CreateDevEnvironmentResponse), output: &CreateDevEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

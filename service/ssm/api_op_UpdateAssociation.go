@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -253,6 +255,75 @@ type UpdateAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAssociationRequest_AlarmConfiguration)
+		v.AlarmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplyOnlyAtCronInterval != false {
+		s.WriteBool(schemas.UpdateAssociationRequest_ApplyOnlyAtCronInterval, v.ApplyOnlyAtCronInterval)
+	}
+	if v.AssociationDispatchAssumeRole != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_AssociationDispatchAssumeRole, *v.AssociationDispatchAssumeRole)
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_AssociationId, *v.AssociationId)
+	}
+	if v.AssociationName != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_AssociationName, *v.AssociationName)
+	}
+	if v.AssociationVersion != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_AssociationVersion, *v.AssociationVersion)
+	}
+	if v.AutomationTargetParameterName != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_AutomationTargetParameterName, *v.AutomationTargetParameterName)
+	}
+	serializeCalendarNameOrARNList(s, schemas.UpdateAssociationRequest_CalendarNames, v.CalendarNames)
+	if v.ComplianceSeverity != "" {
+		s.WriteString(schemas.UpdateAssociationRequest_ComplianceSeverity, string(v.ComplianceSeverity))
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Duration != nil {
+		s.WriteInt32(schemas.UpdateAssociationRequest_Duration, *v.Duration)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_MaxConcurrency, *v.MaxConcurrency)
+	}
+	if v.MaxErrors != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_MaxErrors, *v.MaxErrors)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_Name, *v.Name)
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.UpdateAssociationRequest_OutputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParameters(s, schemas.UpdateAssociationRequest_Parameters, v.Parameters)
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.UpdateAssociationRequest_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleOffset != nil {
+		s.WriteInt32(schemas.UpdateAssociationRequest_ScheduleOffset, *v.ScheduleOffset)
+	}
+	if v.SyncCompliance != "" {
+		s.WriteString(schemas.UpdateAssociationRequest_SyncCompliance, string(v.SyncCompliance))
+	}
+	serializeTargetLocations(s, schemas.UpdateAssociationRequest_TargetLocations, v.TargetLocations)
+	serializeTargetMaps(s, schemas.UpdateAssociationRequest_TargetMaps, v.TargetMaps)
+	serializeTargets(s, schemas.UpdateAssociationRequest_Targets, v.Targets)
+}
+
 type UpdateAssociationOutput struct {
 
 	// The description of the association that was updated.
@@ -264,13 +335,34 @@ type UpdateAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationDescription != nil {
+		s.WriteStruct(schemas.UpdateAssociationResult_AssociationDescription)
+		v.AssociationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssociationResult_AssociationDescription:
+			v.AssociationDescription = &types.AssociationDescription{}
+			return v.AssociationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssociation, schemas.UpdateAssociationRequest, schemas.UpdateAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssociation, schemas.UpdateAssociationRequest, schemas.UpdateAssociationResult), output: &UpdateAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,38 @@ type ListOutgoingTypedLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutgoingTypedLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutgoingTypedLinksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutgoingTypedLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsistencyLevel != "" {
+		s.WriteString(schemas.ListOutgoingTypedLinksRequest_ConsistencyLevel, string(v.ConsistencyLevel))
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.ListOutgoingTypedLinksRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	serializeTypedLinkAttributeRangeList(s, schemas.ListOutgoingTypedLinksRequest_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterTypedLink != nil {
+		s.WriteStruct(schemas.ListOutgoingTypedLinksRequest_FilterTypedLink)
+		v.FilterTypedLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOutgoingTypedLinksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutgoingTypedLinksRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.ListOutgoingTypedLinksRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListOutgoingTypedLinksOutput struct {
 
 	// The pagination token.
@@ -76,13 +110,35 @@ type ListOutgoingTypedLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutgoingTypedLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutgoingTypedLinksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutgoingTypedLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutgoingTypedLinksResponse_NextToken, *v.NextToken)
+	}
+	serializeTypedLinkSpecifierList(s, schemas.ListOutgoingTypedLinksResponse_TypedLinkSpecifiers, v.TypedLinkSpecifiers)
+}
+func (v *ListOutgoingTypedLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOutgoingTypedLinksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOutgoingTypedLinksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOutgoingTypedLinksResponse_NextToken, v.NextToken)
+		case schemas.ListOutgoingTypedLinksResponse_TypedLinkSpecifiers:
+			return deserializeTypedLinkSpecifierList(d, schemas.ListOutgoingTypedLinksResponse_TypedLinkSpecifiers, &v.TypedLinkSpecifiers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOutgoingTypedLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOutgoingTypedLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutgoingTypedLinks, schemas.ListOutgoingTypedLinksRequest, schemas.ListOutgoingTypedLinksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOutgoingTypedLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutgoingTypedLinks, schemas.ListOutgoingTypedLinksRequest, schemas.ListOutgoingTypedLinksResponse), output: &ListOutgoingTypedLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

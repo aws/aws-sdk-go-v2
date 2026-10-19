@@ -5,7 +5,9 @@ package ssoadmin
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListApplicationAccessScopesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationAccessScopesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationAccessScopesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationAccessScopesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.ListApplicationAccessScopesRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApplicationAccessScopesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationAccessScopesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListApplicationAccessScopesOutput struct {
 
 	// An array list of access scopes and their authorized targets that are associated
@@ -71,13 +91,35 @@ type ListApplicationAccessScopesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationAccessScopesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationAccessScopesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationAccessScopesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationAccessScopesResponse_NextToken, *v.NextToken)
+	}
+	serializeScopes(s, schemas.ListApplicationAccessScopesResponse_Scopes, v.Scopes)
+}
+func (v *ListApplicationAccessScopesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationAccessScopesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationAccessScopesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationAccessScopesResponse_NextToken, v.NextToken)
+		case schemas.ListApplicationAccessScopesResponse_Scopes:
+			return deserializeScopes(d, schemas.ListApplicationAccessScopesResponse_Scopes, &v.Scopes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationAccessScopesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationAccessScopes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAccessScopes, schemas.ListApplicationAccessScopesRequest, schemas.ListApplicationAccessScopesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationAccessScopes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAccessScopes, schemas.ListApplicationAccessScopesRequest, schemas.ListApplicationAccessScopesResponse), output: &ListApplicationAccessScopesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

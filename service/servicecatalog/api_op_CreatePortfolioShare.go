@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -96,6 +98,35 @@ type CreatePortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePortfolioShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePortfolioShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePortfolioShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.CreatePortfolioShareInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.CreatePortfolioShareInput_AccountId, *v.AccountId)
+	}
+	if v.OrganizationNode != nil {
+		s.WriteStruct(schemas.CreatePortfolioShareInput_OrganizationNode)
+		v.OrganizationNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.CreatePortfolioShareInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.SharePrincipals != false {
+		s.WriteBool(schemas.CreatePortfolioShareInput_SharePrincipals, v.SharePrincipals)
+	}
+	if v.ShareTagOptions != false {
+		s.WriteBool(schemas.CreatePortfolioShareInput_ShareTagOptions, v.ShareTagOptions)
+	}
+}
+
 type CreatePortfolioShareOutput struct {
 
 	// The portfolio shares a unique identifier that only returns if the portfolio is
@@ -108,13 +139,32 @@ type CreatePortfolioShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePortfolioShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePortfolioShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePortfolioShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortfolioShareToken != nil {
+		s.WriteString(schemas.CreatePortfolioShareOutput_PortfolioShareToken, *v.PortfolioShareToken)
+	}
+}
+func (v *CreatePortfolioShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePortfolioShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePortfolioShareOutput_PortfolioShareToken:
+			v.PortfolioShareToken = new(string)
+			return d.ReadString(schemas.CreatePortfolioShareOutput_PortfolioShareToken, v.PortfolioShareToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePortfolioShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortfolioShare, schemas.CreatePortfolioShareInput, schemas.CreatePortfolioShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePortfolioShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortfolioShare, schemas.CreatePortfolioShareInput, schemas.CreatePortfolioShareOutput), output: &CreatePortfolioShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package chatbot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,31 @@ type CreateCustomActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.CreateCustomActionRequest_ActionName, *v.ActionName)
+	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.CreateCustomActionRequest_AliasName, *v.AliasName)
+	}
+	serializeCustomActionAttachmentList(s, schemas.CreateCustomActionRequest_Attachments, v.Attachments)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCustomActionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.CreateCustomActionRequest_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCustomActionRequest_Tags, v.Tags)
+}
+
 type CreateCustomActionOutput struct {
 
 	// The fully defined ARN of the custom action.
@@ -76,13 +103,32 @@ type CreateCustomActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomActionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomActionArn != nil {
+		s.WriteString(schemas.CreateCustomActionResult_CustomActionArn, *v.CustomActionArn)
+	}
+}
+func (v *CreateCustomActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomActionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomActionResult_CustomActionArn:
+			v.CustomActionArn = new(string)
+			return d.ReadString(schemas.CreateCustomActionResult_CustomActionArn, v.CustomActionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomAction, schemas.CreateCustomActionRequest, schemas.CreateCustomActionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomAction, schemas.CreateCustomActionRequest, schemas.CreateCustomActionResult), output: &CreateCustomActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

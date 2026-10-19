@@ -5,7 +5,9 @@ package iotdeviceadvisor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListSuiteRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuiteRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuiteRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuiteRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSuiteRunsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuiteRunsRequest_nextToken, *v.NextToken)
+	}
+	if v.SuiteDefinitionId != nil {
+		s.WriteString(schemas.ListSuiteRunsRequest_suiteDefinitionId, *v.SuiteDefinitionId)
+	}
+	if v.SuiteDefinitionVersion != nil {
+		s.WriteString(schemas.ListSuiteRunsRequest_suiteDefinitionVersion, *v.SuiteDefinitionVersion)
+	}
+}
+
 type ListSuiteRunsOutput struct {
 
 	// A token to retrieve the next set of results.
@@ -64,13 +87,35 @@ type ListSuiteRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuiteRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuiteRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuiteRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuiteRunsResponse_nextToken, *v.NextToken)
+	}
+	serializeSuiteRunsList(s, schemas.ListSuiteRunsResponse_suiteRunsList, v.SuiteRunsList)
+}
+func (v *ListSuiteRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSuiteRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSuiteRunsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSuiteRunsResponse_nextToken, v.NextToken)
+		case schemas.ListSuiteRunsResponse_suiteRunsList:
+			return deserializeSuiteRunsList(d, schemas.ListSuiteRunsResponse_suiteRunsList, &v.SuiteRunsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSuiteRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSuiteRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuiteRuns, schemas.ListSuiteRunsRequest, schemas.ListSuiteRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSuiteRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuiteRuns, schemas.ListSuiteRunsRequest, schemas.ListSuiteRunsResponse), output: &ListSuiteRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

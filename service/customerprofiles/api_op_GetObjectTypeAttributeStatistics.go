@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,24 @@ type GetObjectTypeAttributeStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetObjectTypeAttributeStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetObjectTypeAttributeStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetObjectTypeAttributeStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.GetObjectTypeAttributeStatisticsRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetObjectTypeAttributeStatisticsRequest_DomainName, *v.DomainName)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.GetObjectTypeAttributeStatisticsRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+}
+
 type GetObjectTypeAttributeStatisticsOutput struct {
 
 	// Time when this statistics was calculated.
@@ -76,13 +96,40 @@ type GetObjectTypeAttributeStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetObjectTypeAttributeStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetObjectTypeAttributeStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetObjectTypeAttributeStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatedAt != nil {
+		s.WriteTime(schemas.GetObjectTypeAttributeStatisticsResponse_CalculatedAt, *v.CalculatedAt)
+	}
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.GetObjectTypeAttributeStatisticsResponse_Statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetObjectTypeAttributeStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetObjectTypeAttributeStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetObjectTypeAttributeStatisticsResponse_CalculatedAt:
+			v.CalculatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetObjectTypeAttributeStatisticsResponse_CalculatedAt, v.CalculatedAt)
+		case schemas.GetObjectTypeAttributeStatisticsResponse_Statistics:
+			v.Statistics = &types.GetObjectTypeAttributeStatisticsStats{}
+			return v.Statistics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetObjectTypeAttributeStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetObjectTypeAttributeStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObjectTypeAttributeStatistics, schemas.GetObjectTypeAttributeStatisticsRequest, schemas.GetObjectTypeAttributeStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetObjectTypeAttributeStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObjectTypeAttributeStatistics, schemas.GetObjectTypeAttributeStatisticsRequest, schemas.GetObjectTypeAttributeStatisticsResponse), output: &GetObjectTypeAttributeStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

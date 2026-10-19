@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -109,6 +111,36 @@ type CopyProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyProjectVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyProjectVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyProjectVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationProjectArn != nil {
+		s.WriteString(schemas.CopyProjectVersionRequest_DestinationProjectArn, *v.DestinationProjectArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopyProjectVersionRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CopyProjectVersionRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceProjectArn != nil {
+		s.WriteString(schemas.CopyProjectVersionRequest_SourceProjectArn, *v.SourceProjectArn)
+	}
+	if v.SourceProjectVersionArn != nil {
+		s.WriteString(schemas.CopyProjectVersionRequest_SourceProjectVersionArn, *v.SourceProjectVersionArn)
+	}
+	serializeTagMap(s, schemas.CopyProjectVersionRequest_Tags, v.Tags)
+	if v.VersionName != nil {
+		s.WriteString(schemas.CopyProjectVersionRequest_VersionName, *v.VersionName)
+	}
+}
+
 type CopyProjectVersionOutput struct {
 
 	// The ARN of the copied model version in the destination project.
@@ -120,13 +152,32 @@ type CopyProjectVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyProjectVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyProjectVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyProjectVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectVersionArn != nil {
+		s.WriteString(schemas.CopyProjectVersionResponse_ProjectVersionArn, *v.ProjectVersionArn)
+	}
+}
+func (v *CopyProjectVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyProjectVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyProjectVersionResponse_ProjectVersionArn:
+			v.ProjectVersionArn = new(string)
+			return d.ReadString(schemas.CopyProjectVersionResponse_ProjectVersionArn, v.ProjectVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyProjectVersion, schemas.CopyProjectVersionRequest, schemas.CopyProjectVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopyProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyProjectVersion, schemas.CopyProjectVersionRequest, schemas.CopyProjectVersionResponse), output: &CopyProjectVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

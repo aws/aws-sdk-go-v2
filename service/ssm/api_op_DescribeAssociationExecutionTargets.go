@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,28 @@ type DescribeAssociationExecutionTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssociationExecutionTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssociationExecutionTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssociationExecutionTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DescribeAssociationExecutionTargetsRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.DescribeAssociationExecutionTargetsRequest_ExecutionId, *v.ExecutionId)
+	}
+	serializeAssociationExecutionTargetsFilterList(s, schemas.DescribeAssociationExecutionTargetsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAssociationExecutionTargetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAssociationExecutionTargetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAssociationExecutionTargetsOutput struct {
 
 	// Information about the execution.
@@ -72,13 +96,35 @@ type DescribeAssociationExecutionTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssociationExecutionTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssociationExecutionTargetsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssociationExecutionTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociationExecutionTargetsList(s, schemas.DescribeAssociationExecutionTargetsResult_AssociationExecutionTargets, v.AssociationExecutionTargets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAssociationExecutionTargetsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAssociationExecutionTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssociationExecutionTargetsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssociationExecutionTargetsResult_AssociationExecutionTargets:
+			return deserializeAssociationExecutionTargetsList(d, schemas.DescribeAssociationExecutionTargetsResult_AssociationExecutionTargets, &v.AssociationExecutionTargets)
+		case schemas.DescribeAssociationExecutionTargetsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAssociationExecutionTargetsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssociationExecutionTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAssociationExecutionTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssociationExecutionTargets, schemas.DescribeAssociationExecutionTargetsRequest, schemas.DescribeAssociationExecutionTargetsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAssociationExecutionTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssociationExecutionTargets, schemas.DescribeAssociationExecutionTargetsRequest, schemas.DescribeAssociationExecutionTargetsResult), output: &DescribeAssociationExecutionTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

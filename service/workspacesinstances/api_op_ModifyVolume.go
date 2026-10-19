@@ -5,7 +5,9 @@ package workspacesinstances
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,33 @@ type ModifyVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ModifyVolumeRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.ModifyVolumeRequest_Iops, *v.Iops)
+	}
+	if v.SizeInGB != nil {
+		s.WriteInt32(schemas.ModifyVolumeRequest_SizeInGB, *v.SizeInGB)
+	}
+	if v.Throughput != nil {
+		s.WriteInt32(schemas.ModifyVolumeRequest_Throughput, *v.Throughput)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.ModifyVolumeRequest_VolumeId, *v.VolumeId)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.ModifyVolumeRequest_VolumeType, string(v.VolumeType))
+	}
+}
+
 // Contains the target configuration of the volume after the modification,
 // including the size, volume type, IOPS, and throughput where applicable.
 type ModifyVolumeOutput struct {
@@ -101,13 +130,60 @@ type ModifyVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetIops != nil {
+		s.WriteInt32(schemas.ModifyVolumeResponse_TargetIops, *v.TargetIops)
+	}
+	if v.TargetSize != nil {
+		s.WriteInt32(schemas.ModifyVolumeResponse_TargetSize, *v.TargetSize)
+	}
+	if v.TargetThroughput != nil {
+		s.WriteInt32(schemas.ModifyVolumeResponse_TargetThroughput, *v.TargetThroughput)
+	}
+	if v.TargetVolumeType != "" {
+		s.WriteString(schemas.ModifyVolumeResponse_TargetVolumeType, string(v.TargetVolumeType))
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.ModifyVolumeResponse_VolumeId, *v.VolumeId)
+	}
+}
+func (v *ModifyVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyVolumeResponse_TargetIops:
+			v.TargetIops = new(int32)
+			return d.ReadInt32(schemas.ModifyVolumeResponse_TargetIops, v.TargetIops)
+		case schemas.ModifyVolumeResponse_TargetSize:
+			v.TargetSize = new(int32)
+			return d.ReadInt32(schemas.ModifyVolumeResponse_TargetSize, v.TargetSize)
+		case schemas.ModifyVolumeResponse_TargetThroughput:
+			v.TargetThroughput = new(int32)
+			return d.ReadInt32(schemas.ModifyVolumeResponse_TargetThroughput, v.TargetThroughput)
+		case schemas.ModifyVolumeResponse_TargetVolumeType:
+			var ev string
+			if err := d.ReadString(schemas.ModifyVolumeResponse_TargetVolumeType, &ev); err != nil {
+				return err
+			}
+			v.TargetVolumeType = types.VolumeTypeEnum(ev)
+			return nil
+		case schemas.ModifyVolumeResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.ModifyVolumeResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpModifyVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyVolume, schemas.ModifyVolumeRequest, schemas.ModifyVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpModifyVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyVolume, schemas.ModifyVolumeRequest, schemas.ModifyVolumeResponse), output: &ModifyVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

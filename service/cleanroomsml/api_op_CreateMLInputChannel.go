@@ -4,7 +4,9 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,42 @@ type CreateMLInputChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLInputChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLInputChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLInputChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredModelAlgorithmAssociationArnList(s, schemas.CreateMLInputChannelRequest_configuredModelAlgorithmAssociations, v.ConfiguredModelAlgorithmAssociations)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMLInputChannelRequest_description, *v.Description)
+	}
+	if v.InputChannel != nil {
+		s.WriteStruct(schemas.CreateMLInputChannelRequest_inputChannel)
+		v.InputChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateMLInputChannelRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.CreateMLInputChannelRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMLInputChannelRequest_name, *v.Name)
+	}
+	if v.PayerConfiguration != nil {
+		s.WriteStruct(schemas.CreateMLInputChannelRequest_payerConfiguration)
+		v.PayerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetentionInDays != nil {
+		s.WriteInt32(schemas.CreateMLInputChannelRequest_retentionInDays, *v.RetentionInDays)
+	}
+	serializeTagMap(s, schemas.CreateMLInputChannelRequest_tags, v.Tags)
+}
+
 type CreateMLInputChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the ML input channel.
@@ -110,13 +148,32 @@ type CreateMLInputChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLInputChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLInputChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLInputChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MlInputChannelArn != nil {
+		s.WriteString(schemas.CreateMLInputChannelResponse_mlInputChannelArn, *v.MlInputChannelArn)
+	}
+}
+func (v *CreateMLInputChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMLInputChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMLInputChannelResponse_mlInputChannelArn:
+			v.MlInputChannelArn = new(string)
+			return d.ReadString(schemas.CreateMLInputChannelResponse_mlInputChannelArn, v.MlInputChannelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMLInputChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMLInputChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLInputChannel, schemas.CreateMLInputChannelRequest, schemas.CreateMLInputChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMLInputChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLInputChannel, schemas.CreateMLInputChannelRequest, schemas.CreateMLInputChannelResponse), output: &CreateMLInputChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

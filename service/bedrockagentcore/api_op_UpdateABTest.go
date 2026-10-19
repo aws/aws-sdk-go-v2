@@ -5,7 +5,9 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,40 @@ type UpdateABTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateABTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateABTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbTestId != nil {
+		s.WriteString(schemas.UpdateABTestRequest_abTestId, *v.AbTestId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateABTestRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateABTestRequest_description, *v.Description)
+	}
+	serializeABTestEvaluationConfig(s, schemas.UpdateABTestRequest_evaluationConfig, v.EvaluationConfig)
+	if v.ExecutionStatus != "" {
+		s.WriteString(schemas.UpdateABTestRequest_executionStatus, string(v.ExecutionStatus))
+	}
+	if v.GatewayFilter != nil {
+		s.WriteStruct(schemas.UpdateABTestRequest_gatewayFilter)
+		v.GatewayFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateABTestRequest_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateABTestRequest_roleArn, *v.RoleArn)
+	}
+	serializeVariantList(s, schemas.UpdateABTestRequest_variants, v.Variants)
+}
+
 type UpdateABTestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated A/B test.
@@ -96,13 +132,64 @@ type UpdateABTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateABTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateABTestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateABTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbTestArn != nil {
+		s.WriteString(schemas.UpdateABTestResponse_abTestArn, *v.AbTestArn)
+	}
+	if v.AbTestId != nil {
+		s.WriteString(schemas.UpdateABTestResponse_abTestId, *v.AbTestId)
+	}
+	if v.ExecutionStatus != "" {
+		s.WriteString(schemas.UpdateABTestResponse_executionStatus, string(v.ExecutionStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateABTestResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateABTestResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateABTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateABTestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateABTestResponse_abTestArn:
+			v.AbTestArn = new(string)
+			return d.ReadString(schemas.UpdateABTestResponse_abTestArn, v.AbTestArn)
+		case schemas.UpdateABTestResponse_abTestId:
+			v.AbTestId = new(string)
+			return d.ReadString(schemas.UpdateABTestResponse_abTestId, v.AbTestId)
+		case schemas.UpdateABTestResponse_executionStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateABTestResponse_executionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExecutionStatus = types.ABTestExecutionStatus(ev)
+			return nil
+		case schemas.UpdateABTestResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateABTestResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ABTestStatus(ev)
+			return nil
+		case schemas.UpdateABTestResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateABTestResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateABTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateABTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateABTest, schemas.UpdateABTestRequest, schemas.UpdateABTestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateABTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateABTest, schemas.UpdateABTestRequest, schemas.UpdateABTestResponse), output: &UpdateABTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListConnectorDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorDestinationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorDestinationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudConnectorId != nil {
+		s.WriteString(schemas.ListConnectorDestinationsRequest_CloudConnectorId, *v.CloudConnectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConnectorDestinationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorDestinationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConnectorDestinationsOutput struct {
 
 	// The list of connector destinations that match the specified criteria.
@@ -54,13 +74,35 @@ type ListConnectorDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorDestinationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorDestinationListDefinition(s, schemas.ListConnectorDestinationsResponse_ConnectorDestinationList, v.ConnectorDestinationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorDestinationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectorDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectorDestinationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectorDestinationsResponse_ConnectorDestinationList:
+			return deserializeConnectorDestinationListDefinition(d, schemas.ListConnectorDestinationsResponse_ConnectorDestinationList, &v.ConnectorDestinationList)
+		case schemas.ListConnectorDestinationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectorDestinationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectorDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorDestinations, schemas.ListConnectorDestinationsRequest, schemas.ListConnectorDestinationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectorDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorDestinations, schemas.ListConnectorDestinationsRequest, schemas.ListConnectorDestinationsResponse), output: &ListConnectorDestinationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

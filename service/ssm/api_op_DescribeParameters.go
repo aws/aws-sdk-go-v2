@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,26 @@ type DescribeParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeParametersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParametersFilterList(s, schemas.DescribeParametersRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeParametersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeParametersRequest_NextToken, *v.NextToken)
+	}
+	serializeParameterStringFilterList(s, schemas.DescribeParametersRequest_ParameterFilters, v.ParameterFilters)
+	if v.Shared != nil {
+		s.WriteBool(schemas.DescribeParametersRequest_Shared, *v.Shared)
+	}
+}
+
 type DescribeParametersOutput struct {
 
 	// The token to use when requesting the next set of items.
@@ -94,13 +116,35 @@ type DescribeParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeParametersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeParametersResult_NextToken, *v.NextToken)
+	}
+	serializeParameterMetadataList(s, schemas.DescribeParametersResult_Parameters, v.Parameters)
+}
+func (v *DescribeParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeParametersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeParametersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeParametersResult_NextToken, v.NextToken)
+		case schemas.DescribeParametersResult_Parameters:
+			return deserializeParameterMetadataList(d, schemas.DescribeParametersResult_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeParameters, schemas.DescribeParametersRequest, schemas.DescribeParametersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeParameters, schemas.DescribeParametersRequest, schemas.DescribeParametersResult), output: &DescribeParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

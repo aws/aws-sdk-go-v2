@@ -4,7 +4,9 @@ package controlcatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,18 @@ type GetControlInput struct {
 	ControlArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlArn != nil {
+		s.WriteString(schemas.GetControlRequest_ControlArn, *v.ControlArn)
+	}
 }
 
 type GetControlOutput struct {
@@ -143,13 +157,108 @@ type GetControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetControlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlAliases(s, schemas.GetControlResponse_Aliases, v.Aliases)
+	if v.Arn != nil {
+		s.WriteString(schemas.GetControlResponse_Arn, *v.Arn)
+	}
+	if v.Behavior != "" {
+		s.WriteString(schemas.GetControlResponse_Behavior, string(v.Behavior))
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.GetControlResponse_CreateTime, *v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetControlResponse_Description, *v.Description)
+	}
+	serializeGovernedProviders(s, schemas.GetControlResponse_GovernedProviders, v.GovernedProviders)
+	serializeGovernedResources(s, schemas.GetControlResponse_GovernedResources, v.GovernedResources)
+	if v.Implementation != nil {
+		s.WriteStruct(schemas.GetControlResponse_Implementation)
+		v.Implementation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetControlResponse_Name, *v.Name)
+	}
+	if v.ParameterRequirementSummary != "" {
+		s.WriteString(schemas.GetControlResponse_ParameterRequirementSummary, string(v.ParameterRequirementSummary))
+	}
+	serializeControlParameters(s, schemas.GetControlResponse_Parameters, v.Parameters)
+	if v.RegionConfiguration != nil {
+		s.WriteStruct(schemas.GetControlResponse_RegionConfiguration)
+		v.RegionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.GetControlResponse_Severity, string(v.Severity))
+	}
+}
+func (v *GetControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetControlResponse_Aliases:
+			return deserializeControlAliases(d, schemas.GetControlResponse_Aliases, &v.Aliases)
+		case schemas.GetControlResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetControlResponse_Arn, v.Arn)
+		case schemas.GetControlResponse_Behavior:
+			var ev string
+			if err := d.ReadString(schemas.GetControlResponse_Behavior, &ev); err != nil {
+				return err
+			}
+			v.Behavior = types.ControlBehavior(ev)
+			return nil
+		case schemas.GetControlResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetControlResponse_CreateTime, v.CreateTime)
+		case schemas.GetControlResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetControlResponse_Description, v.Description)
+		case schemas.GetControlResponse_GovernedProviders:
+			return deserializeGovernedProviders(d, schemas.GetControlResponse_GovernedProviders, &v.GovernedProviders)
+		case schemas.GetControlResponse_GovernedResources:
+			return deserializeGovernedResources(d, schemas.GetControlResponse_GovernedResources, &v.GovernedResources)
+		case schemas.GetControlResponse_Implementation:
+			v.Implementation = &types.ImplementationDetails{}
+			return v.Implementation.Deserialize(d)
+		case schemas.GetControlResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetControlResponse_Name, v.Name)
+		case schemas.GetControlResponse_ParameterRequirementSummary:
+			var ev string
+			if err := d.ReadString(schemas.GetControlResponse_ParameterRequirementSummary, &ev); err != nil {
+				return err
+			}
+			v.ParameterRequirementSummary = types.ParameterRequirementSummary(ev)
+			return nil
+		case schemas.GetControlResponse_Parameters:
+			return deserializeControlParameters(d, schemas.GetControlResponse_Parameters, &v.Parameters)
+		case schemas.GetControlResponse_RegionConfiguration:
+			v.RegionConfiguration = &types.RegionConfiguration{}
+			return v.RegionConfiguration.Deserialize(d)
+		case schemas.GetControlResponse_Severity:
+			var ev string
+			if err := d.ReadString(schemas.GetControlResponse_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = types.ControlSeverity(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetControl, schemas.GetControlRequest, schemas.GetControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetControl, schemas.GetControlRequest, schemas.GetControlResponse), output: &GetControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

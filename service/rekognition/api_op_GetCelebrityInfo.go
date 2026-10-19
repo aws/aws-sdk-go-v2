@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type GetCelebrityInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCelebrityInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCelebrityInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCelebrityInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetCelebrityInfoRequest_Id, *v.Id)
+	}
+}
+
 type GetCelebrityInfoOutput struct {
 
 	// Retrieves the known gender for the celebrity.
@@ -61,13 +75,43 @@ type GetCelebrityInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCelebrityInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCelebrityInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCelebrityInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnownGender != nil {
+		s.WriteStruct(schemas.GetCelebrityInfoResponse_KnownGender)
+		v.KnownGender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCelebrityInfoResponse_Name, *v.Name)
+	}
+	serializeUrls(s, schemas.GetCelebrityInfoResponse_Urls, v.Urls)
+}
+func (v *GetCelebrityInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCelebrityInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCelebrityInfoResponse_KnownGender:
+			v.KnownGender = &types.KnownGender{}
+			return v.KnownGender.Deserialize(d)
+		case schemas.GetCelebrityInfoResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCelebrityInfoResponse_Name, v.Name)
+		case schemas.GetCelebrityInfoResponse_Urls:
+			return deserializeUrls(d, schemas.GetCelebrityInfoResponse_Urls, &v.Urls)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCelebrityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCelebrityInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCelebrityInfo, schemas.GetCelebrityInfoRequest, schemas.GetCelebrityInfoResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCelebrityInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCelebrityInfo, schemas.GetCelebrityInfoRequest, schemas.GetCelebrityInfoResponse), output: &GetCelebrityInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

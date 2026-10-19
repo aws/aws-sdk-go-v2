@@ -4,6 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetManagedThingMetaDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingMetaDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingMetaDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingMetaDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetManagedThingMetaDataRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetManagedThingMetaDataOutput struct {
 
 	// The managed thing id.
@@ -52,13 +66,35 @@ type GetManagedThingMetaDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedThingMetaDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedThingMetaDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedThingMetaDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.GetManagedThingMetaDataResponse_ManagedThingId, *v.ManagedThingId)
+	}
+	serializeMetaData(s, schemas.GetManagedThingMetaDataResponse_MetaData, v.MetaData)
+}
+func (v *GetManagedThingMetaDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedThingMetaDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedThingMetaDataResponse_ManagedThingId:
+			v.ManagedThingId = new(string)
+			return d.ReadString(schemas.GetManagedThingMetaDataResponse_ManagedThingId, v.ManagedThingId)
+		case schemas.GetManagedThingMetaDataResponse_MetaData:
+			return deserializeMetaData(d, schemas.GetManagedThingMetaDataResponse_MetaData, &v.MetaData)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedThingMetaDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThingMetaData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingMetaData, schemas.GetManagedThingMetaDataRequest, schemas.GetManagedThingMetaDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThingMetaData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingMetaData, schemas.GetManagedThingMetaDataRequest, schemas.GetManagedThingMetaDataResponse), output: &GetManagedThingMetaDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

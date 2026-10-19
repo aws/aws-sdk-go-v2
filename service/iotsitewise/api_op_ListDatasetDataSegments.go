@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,30 @@ type ListDatasetDataSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetDataSegmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetDataSegmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetDataSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentsRequest_datasetId, *v.DatasetId)
+	}
+	if v.DatasetVersion != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentsRequest_datasetVersion, *v.DatasetVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetDataSegmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentsRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type ListDatasetDataSegmentsOutput struct {
 
 	// A list that summarizes each data segment.
@@ -68,13 +94,35 @@ type ListDatasetDataSegmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetDataSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetDataSegmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetDataSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSegmentSummaries(s, schemas.ListDatasetDataSegmentsResponse_dataSegments, v.DataSegments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetDataSegmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetDataSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetDataSegmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetDataSegmentsResponse_dataSegments:
+			return deserializeDataSegmentSummaries(d, schemas.ListDatasetDataSegmentsResponse_dataSegments, &v.DataSegments)
+		case schemas.ListDatasetDataSegmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetDataSegmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetDataSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasetDataSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetDataSegments, schemas.ListDatasetDataSegmentsRequest, schemas.ListDatasetDataSegmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasetDataSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetDataSegments, schemas.ListDatasetDataSegmentsRequest, schemas.ListDatasetDataSegmentsResponse), output: &ListDatasetDataSegmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

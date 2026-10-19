@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,33 @@ type TerminateProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateProvisionedProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateProvisionedProductInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateProvisionedProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.TerminateProvisionedProductInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.IgnoreErrors != false {
+		s.WriteBool(schemas.TerminateProvisionedProductInput_IgnoreErrors, v.IgnoreErrors)
+	}
+	if v.ProvisionedProductId != nil {
+		s.WriteString(schemas.TerminateProvisionedProductInput_ProvisionedProductId, *v.ProvisionedProductId)
+	}
+	if v.ProvisionedProductName != nil {
+		s.WriteString(schemas.TerminateProvisionedProductInput_ProvisionedProductName, *v.ProvisionedProductName)
+	}
+	if v.RetainPhysicalResources != false {
+		s.WriteBool(schemas.TerminateProvisionedProductInput_RetainPhysicalResources, v.RetainPhysicalResources)
+	}
+	if v.TerminateToken != nil {
+		s.WriteString(schemas.TerminateProvisionedProductInput_TerminateToken, *v.TerminateToken)
+	}
+}
+
 type TerminateProvisionedProductOutput struct {
 
 	// Information about the result of this request.
@@ -79,13 +108,34 @@ type TerminateProvisionedProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateProvisionedProductOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateProvisionedProductOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateProvisionedProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordDetail != nil {
+		s.WriteStruct(schemas.TerminateProvisionedProductOutput_RecordDetail)
+		v.RecordDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TerminateProvisionedProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateProvisionedProductOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateProvisionedProductOutput_RecordDetail:
+			v.RecordDetail = &types.RecordDetail{}
+			return v.RecordDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateProvisionedProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateProvisionedProduct, schemas.TerminateProvisionedProductInput, schemas.TerminateProvisionedProductOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateProvisionedProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateProvisionedProduct, schemas.TerminateProvisionedProductInput, schemas.TerminateProvisionedProductOutput), output: &TerminateProvisionedProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

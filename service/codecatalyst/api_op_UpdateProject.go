@@ -4,6 +4,8 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateProjectRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProjectRequest_name, *v.Name)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.UpdateProjectRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type UpdateProjectOutput struct {
 
 	// The description of the project.
@@ -61,13 +81,50 @@ type UpdateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateProjectResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateProjectResponse_displayName, *v.DisplayName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProjectResponse_name, *v.Name)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.UpdateProjectResponse_spaceName, *v.SpaceName)
+	}
+}
+func (v *UpdateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProjectResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateProjectResponse_description, v.Description)
+		case schemas.UpdateProjectResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateProjectResponse_displayName, v.DisplayName)
+		case schemas.UpdateProjectResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateProjectResponse_name, v.Name)
+		case schemas.UpdateProjectResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.UpdateProjectResponse_spaceName, v.SpaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResponse), output: &UpdateProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StartCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartCampaignRequest_id, *v.Id)
+	}
+}
+
 type StartCampaignOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type StartCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCampaign, schemas.StartCampaignRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCampaign, schemas.StartCampaignRequest, nil), output: &StartCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

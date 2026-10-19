@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,32 @@ type UpdateRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecommenderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommenderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRecommenderRequest_Description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateRecommenderRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderConfig != nil {
+		s.WriteStruct(schemas.UpdateRecommenderRequest_RecommenderConfig)
+		v.RecommenderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecommenderName != nil {
+		s.WriteString(schemas.UpdateRecommenderRequest_RecommenderName, *v.RecommenderName)
+	}
+	if v.RecommenderVersionName != nil {
+		s.WriteString(schemas.UpdateRecommenderRequest_RecommenderVersionName, *v.RecommenderVersionName)
+	}
+}
+
 type UpdateRecommenderOutput struct {
 
 	// The name of the recommender that was updated.
@@ -64,13 +92,32 @@ type UpdateRecommenderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecommenderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommenderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderName != nil {
+		s.WriteString(schemas.UpdateRecommenderResponse_RecommenderName, *v.RecommenderName)
+	}
+}
+func (v *UpdateRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecommenderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecommenderResponse_RecommenderName:
+			v.RecommenderName = new(string)
+			return d.ReadString(schemas.UpdateRecommenderResponse_RecommenderName, v.RecommenderName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecommenderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecommender, schemas.UpdateRecommenderRequest, schemas.UpdateRecommenderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecommender, schemas.UpdateRecommenderRequest, schemas.UpdateRecommenderResponse), output: &UpdateRecommenderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

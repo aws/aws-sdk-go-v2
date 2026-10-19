@@ -4,6 +4,8 @@ package kinesisvideoarchivedmedia
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 )
@@ -72,6 +74,22 @@ type GetMediaForFragmentListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaForFragmentListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaForFragmentListInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaForFragmentListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFragmentNumberList(s, schemas.GetMediaForFragmentListInput_Fragments, v.Fragments)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.GetMediaForFragmentListInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.GetMediaForFragmentListInput_StreamName, *v.StreamName)
+	}
+}
+
 type GetMediaForFragmentListOutput struct {
 
 	// The content type of the requested media.
@@ -108,13 +126,40 @@ type GetMediaForFragmentListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaForFragmentListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaForFragmentListOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaForFragmentListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetMediaForFragmentListOutput_ContentType, *v.ContentType)
+	}
+}
+func (v *GetMediaForFragmentListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMediaForFragmentListOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMediaForFragmentListOutput_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetMediaForFragmentListOutput_ContentType, v.ContentType)
+		}
+		return nil
+	})
+}
+func (v *GetMediaForFragmentListOutput) GetPayloadStream() io.Reader { return v.Payload }
+
+var _ smithy.StreamingInput = (*GetMediaForFragmentListOutput)(nil)
+
+func (v *GetMediaForFragmentListOutput) SetPayloadStream(r io.ReadCloser) { v.Payload = r }
+
+var _ smithy.StreamingOutput = (*GetMediaForFragmentListOutput)(nil)
+
 func (c *Client) addOperationGetMediaForFragmentListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMediaForFragmentList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaForFragmentList, schemas.GetMediaForFragmentListInput, schemas.GetMediaForFragmentListOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMediaForFragmentList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaForFragmentList, schemas.GetMediaForFragmentListInput, schemas.GetMediaForFragmentListOutput), output: &GetMediaForFragmentListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

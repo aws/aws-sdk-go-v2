@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type DescribeRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecordInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DescribeRecordInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeRecordInput_Id, *v.Id)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.DescribeRecordInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.DescribeRecordInput_PageToken, *v.PageToken)
+	}
+}
+
 type DescribeRecordOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -76,13 +99,43 @@ type DescribeRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecordOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.DescribeRecordOutput_NextPageToken, *v.NextPageToken)
+	}
+	if v.RecordDetail != nil {
+		s.WriteStruct(schemas.DescribeRecordOutput_RecordDetail)
+		v.RecordDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecordOutputs(s, schemas.DescribeRecordOutput_RecordOutputs, v.RecordOutputs)
+}
+func (v *DescribeRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecordOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecordOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.DescribeRecordOutput_NextPageToken, v.NextPageToken)
+		case schemas.DescribeRecordOutput_RecordDetail:
+			v.RecordDetail = &types.RecordDetail{}
+			return v.RecordDetail.Deserialize(d)
+		case schemas.DescribeRecordOutput_RecordOutputs:
+			return deserializeRecordOutputs(d, schemas.DescribeRecordOutput_RecordOutputs, &v.RecordOutputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecord, schemas.DescribeRecordInput, schemas.DescribeRecordOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecord, schemas.DescribeRecordInput, schemas.DescribeRecordOutput), output: &DescribeRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

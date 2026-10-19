@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type UpdateScheduledQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledQueryArn != nil {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_ScheduledQueryArn, *v.ScheduledQueryArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_State, string(v.State))
+	}
+}
+
 type UpdateScheduledQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type UpdateScheduledQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateScheduledQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScheduledQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateScheduledQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledQuery, schemas.UpdateScheduledQueryRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateScheduledQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledQuery, schemas.UpdateScheduledQueryRequest, nil), output: &UpdateScheduledQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

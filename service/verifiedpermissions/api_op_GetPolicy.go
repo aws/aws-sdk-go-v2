@@ -4,7 +4,9 @@ package verifiedpermissions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,21 @@ type GetPolicyInput struct {
 	PolicyStoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetPolicyInput_policyId, *v.PolicyId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.GetPolicyInput_policyStoreId, *v.PolicyStoreId)
+	}
 }
 
 type GetPolicyOutput struct {
@@ -119,13 +136,98 @@ type GetPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionIdentifierList(s, schemas.GetPolicyOutput_actions, v.Actions)
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetPolicyOutput_createdDate, *v.CreatedDate)
+	}
+	serializePolicyDefinitionDetail(s, schemas.GetPolicyOutput_definition, v.Definition)
+	if v.Effect != "" {
+		s.WriteString(schemas.GetPolicyOutput_effect, string(v.Effect))
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.GetPolicyOutput_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPolicyOutput_name, *v.Name)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetPolicyOutput_policyId, *v.PolicyId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.GetPolicyOutput_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.GetPolicyOutput_policyType, string(v.PolicyType))
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.GetPolicyOutput_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.GetPolicyOutput_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyOutput_actions:
+			return deserializeActionIdentifierList(d, schemas.GetPolicyOutput_actions, &v.Actions)
+		case schemas.GetPolicyOutput_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyOutput_createdDate, v.CreatedDate)
+		case schemas.GetPolicyOutput_definition:
+			return deserializePolicyDefinitionDetail(d, schemas.GetPolicyOutput_definition, &v.Definition)
+		case schemas.GetPolicyOutput_effect:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicyOutput_effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = types.PolicyEffect(ev)
+			return nil
+		case schemas.GetPolicyOutput_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyOutput_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.GetPolicyOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPolicyOutput_name, v.Name)
+		case schemas.GetPolicyOutput_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.GetPolicyOutput_policyId, v.PolicyId)
+		case schemas.GetPolicyOutput_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.GetPolicyOutput_policyStoreId, v.PolicyStoreId)
+		case schemas.GetPolicyOutput_policyType:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicyOutput_policyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = types.PolicyType(ev)
+			return nil
+		case schemas.GetPolicyOutput_principal:
+			v.Principal = &types.EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		case schemas.GetPolicyOutput_resource:
+			v.Resource = &types.EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyInput, schemas.GetPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyInput, schemas.GetPolicyOutput), output: &GetPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

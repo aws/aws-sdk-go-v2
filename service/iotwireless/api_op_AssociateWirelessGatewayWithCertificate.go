@@ -4,6 +4,8 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type AssociateWirelessGatewayWithCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWirelessGatewayWithCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWirelessGatewayWithCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWirelessGatewayWithCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AssociateWirelessGatewayWithCertificateRequest_Id, *v.Id)
+	}
+	if v.IotCertificateId != nil {
+		s.WriteString(schemas.AssociateWirelessGatewayWithCertificateRequest_IotCertificateId, *v.IotCertificateId)
+	}
+}
+
 type AssociateWirelessGatewayWithCertificateOutput struct {
 
 	// The ID of the certificate associated with the wireless gateway.
@@ -49,13 +66,32 @@ type AssociateWirelessGatewayWithCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWirelessGatewayWithCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWirelessGatewayWithCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWirelessGatewayWithCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IotCertificateId != nil {
+		s.WriteString(schemas.AssociateWirelessGatewayWithCertificateResponse_IotCertificateId, *v.IotCertificateId)
+	}
+}
+func (v *AssociateWirelessGatewayWithCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateWirelessGatewayWithCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateWirelessGatewayWithCertificateResponse_IotCertificateId:
+			v.IotCertificateId = new(string)
+			return d.ReadString(schemas.AssociateWirelessGatewayWithCertificateResponse_IotCertificateId, v.IotCertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateWirelessGatewayWithCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWirelessGatewayWithCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWirelessGatewayWithCertificate, schemas.AssociateWirelessGatewayWithCertificateRequest, schemas.AssociateWirelessGatewayWithCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateWirelessGatewayWithCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWirelessGatewayWithCertificate, schemas.AssociateWirelessGatewayWithCertificateRequest, schemas.AssociateWirelessGatewayWithCertificateResponse), output: &AssociateWirelessGatewayWithCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

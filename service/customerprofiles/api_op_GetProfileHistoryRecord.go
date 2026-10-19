@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,24 @@ type GetProfileHistoryRecordInput struct {
 	ProfileId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProfileHistoryRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileHistoryRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileHistoryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordRequest_DomainName, *v.DomainName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordRequest_Id, *v.Id)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordRequest_ProfileId, *v.ProfileId)
+	}
 }
 
 type GetProfileHistoryRecordOutput struct {
@@ -87,13 +107,78 @@ type GetProfileHistoryRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileHistoryRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileHistoryRecordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileHistoryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.GetProfileHistoryRecordResponse_ActionType, string(v.ActionType))
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordResponse_Content, *v.Content)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetProfileHistoryRecordResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetProfileHistoryRecordResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordResponse_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.PerformedBy != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordResponse_PerformedBy, *v.PerformedBy)
+	}
+	if v.ProfileObjectUniqueKey != nil {
+		s.WriteString(schemas.GetProfileHistoryRecordResponse_ProfileObjectUniqueKey, *v.ProfileObjectUniqueKey)
+	}
+}
+func (v *GetProfileHistoryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileHistoryRecordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileHistoryRecordResponse_ActionType:
+			var ev string
+			if err := d.ReadString(schemas.GetProfileHistoryRecordResponse_ActionType, &ev); err != nil {
+				return err
+			}
+			v.ActionType = types.ActionType(ev)
+			return nil
+		case schemas.GetProfileHistoryRecordResponse_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.GetProfileHistoryRecordResponse_Content, v.Content)
+		case schemas.GetProfileHistoryRecordResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProfileHistoryRecordResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetProfileHistoryRecordResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetProfileHistoryRecordResponse_Id, v.Id)
+		case schemas.GetProfileHistoryRecordResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProfileHistoryRecordResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetProfileHistoryRecordResponse_ObjectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.GetProfileHistoryRecordResponse_ObjectTypeName, v.ObjectTypeName)
+		case schemas.GetProfileHistoryRecordResponse_PerformedBy:
+			v.PerformedBy = new(string)
+			return d.ReadString(schemas.GetProfileHistoryRecordResponse_PerformedBy, v.PerformedBy)
+		case schemas.GetProfileHistoryRecordResponse_ProfileObjectUniqueKey:
+			v.ProfileObjectUniqueKey = new(string)
+			return d.ReadString(schemas.GetProfileHistoryRecordResponse_ProfileObjectUniqueKey, v.ProfileObjectUniqueKey)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileHistoryRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfileHistoryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileHistoryRecord, schemas.GetProfileHistoryRecordRequest, schemas.GetProfileHistoryRecordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfileHistoryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileHistoryRecord, schemas.GetProfileHistoryRecordRequest, schemas.GetProfileHistoryRecordResponse), output: &GetProfileHistoryRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

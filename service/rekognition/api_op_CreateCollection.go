@@ -4,6 +4,8 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,19 @@ type CreateCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.CreateCollectionRequest_CollectionId, *v.CollectionId)
+	}
+	serializeTagMap(s, schemas.CreateCollectionRequest_Tags, v.Tags)
+}
+
 type CreateCollectionOutput struct {
 
 	// Amazon Resource Name (ARN) of the collection. You can use this to manage
@@ -70,13 +85,44 @@ type CreateCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionArn != nil {
+		s.WriteString(schemas.CreateCollectionResponse_CollectionArn, *v.CollectionArn)
+	}
+	if v.FaceModelVersion != nil {
+		s.WriteString(schemas.CreateCollectionResponse_FaceModelVersion, *v.FaceModelVersion)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.CreateCollectionResponse_StatusCode, *v.StatusCode)
+	}
+}
+func (v *CreateCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollectionResponse_CollectionArn:
+			v.CollectionArn = new(string)
+			return d.ReadString(schemas.CreateCollectionResponse_CollectionArn, v.CollectionArn)
+		case schemas.CreateCollectionResponse_FaceModelVersion:
+			v.FaceModelVersion = new(string)
+			return d.ReadString(schemas.CreateCollectionResponse_FaceModelVersion, v.FaceModelVersion)
+		case schemas.CreateCollectionResponse_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.CreateCollectionResponse_StatusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollection, schemas.CreateCollectionRequest, schemas.CreateCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollection, schemas.CreateCollectionRequest, schemas.CreateCollectionResponse), output: &CreateCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type UpdateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CronExpression != nil {
+		s.WriteString(schemas.UpdateScheduleRequest_CronExpression, *v.CronExpression)
+	}
+	serializeJobNameList(s, schemas.UpdateScheduleRequest_JobNames, v.JobNames)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateScheduleRequest_Name, *v.Name)
+	}
+}
+
 type UpdateScheduleOutput struct {
 
 	// The name of the schedule that was updated.
@@ -57,13 +75,32 @@ type UpdateScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateScheduleResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScheduleResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateScheduleResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchedule, schemas.UpdateScheduleRequest, schemas.UpdateScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchedule, schemas.UpdateScheduleRequest, schemas.UpdateScheduleResponse), output: &UpdateScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

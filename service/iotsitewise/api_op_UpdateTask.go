@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,25 @@ type UpdateTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTaskRequest_description, *v.Description)
+	}
+	serializeTaskConfiguration(s, schemas.UpdateTaskRequest_taskConfiguration, v.TaskConfiguration)
+	if v.TaskName != nil {
+		s.WriteString(schemas.UpdateTaskRequest_taskName, *v.TaskName)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.UpdateTaskRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for UpdateTask operation.
 type UpdateTaskOutput struct {
 
@@ -69,13 +90,40 @@ type UpdateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.UpdateTaskResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateTaskResponse_version, *v.Version)
+	}
+}
+func (v *UpdateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTaskResponse_status:
+			v.Status = &types.ResourceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.UpdateTaskResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.UpdateTaskResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTask, schemas.UpdateTaskRequest, schemas.UpdateTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTask, schemas.UpdateTaskRequest, schemas.UpdateTaskResponse), output: &UpdateTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

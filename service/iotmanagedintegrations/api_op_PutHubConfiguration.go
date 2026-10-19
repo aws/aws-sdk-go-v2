@@ -4,6 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type PutHubConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutHubConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutHubConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutHubConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubTokenTimerExpirySettingInSeconds != nil {
+		s.WriteInt64(schemas.PutHubConfigurationRequest_HubTokenTimerExpirySettingInSeconds, *v.HubTokenTimerExpirySettingInSeconds)
+	}
+}
+
 type PutHubConfigurationOutput struct {
 
 	// A user-defined integer value that represents the hub token timer expiry setting
@@ -46,13 +60,32 @@ type PutHubConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutHubConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutHubConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutHubConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubTokenTimerExpirySettingInSeconds != nil {
+		s.WriteInt64(schemas.PutHubConfigurationResponse_HubTokenTimerExpirySettingInSeconds, *v.HubTokenTimerExpirySettingInSeconds)
+	}
+}
+func (v *PutHubConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutHubConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutHubConfigurationResponse_HubTokenTimerExpirySettingInSeconds:
+			v.HubTokenTimerExpirySettingInSeconds = new(int64)
+			return d.ReadInt64(schemas.PutHubConfigurationResponse_HubTokenTimerExpirySettingInSeconds, v.HubTokenTimerExpirySettingInSeconds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutHubConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutHubConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutHubConfiguration, schemas.PutHubConfigurationRequest, schemas.PutHubConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutHubConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutHubConfiguration, schemas.PutHubConfigurationRequest, schemas.PutHubConfigurationResponse), output: &PutHubConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

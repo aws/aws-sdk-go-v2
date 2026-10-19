@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -85,6 +87,40 @@ type GetAssetPropertyValueHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetPropertyValueHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetPropertyValueHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetPropertyValueHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetAssetPropertyValueHistoryRequest_assetId, *v.AssetId)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.GetAssetPropertyValueHistoryRequest_endDate, *v.EndDate)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAssetPropertyValueHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAssetPropertyValueHistoryRequest_nextToken, *v.NextToken)
+	}
+	if v.PropertyAlias != nil {
+		s.WriteString(schemas.GetAssetPropertyValueHistoryRequest_propertyAlias, *v.PropertyAlias)
+	}
+	if v.PropertyId != nil {
+		s.WriteString(schemas.GetAssetPropertyValueHistoryRequest_propertyId, *v.PropertyId)
+	}
+	serializeQualities(s, schemas.GetAssetPropertyValueHistoryRequest_qualities, v.Qualities)
+	if v.StartDate != nil {
+		s.WriteTime(schemas.GetAssetPropertyValueHistoryRequest_startDate, *v.StartDate)
+	}
+	if v.TimeOrdering != "" {
+		s.WriteString(schemas.GetAssetPropertyValueHistoryRequest_timeOrdering, string(v.TimeOrdering))
+	}
+}
+
 type GetAssetPropertyValueHistoryOutput struct {
 
 	// The asset property's value history.
@@ -102,13 +138,35 @@ type GetAssetPropertyValueHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetPropertyValueHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetPropertyValueHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetPropertyValueHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetPropertyValueHistory(s, schemas.GetAssetPropertyValueHistoryResponse_assetPropertyValueHistory, v.AssetPropertyValueHistory)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAssetPropertyValueHistoryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetAssetPropertyValueHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetPropertyValueHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetPropertyValueHistoryResponse_assetPropertyValueHistory:
+			return deserializeAssetPropertyValueHistory(d, schemas.GetAssetPropertyValueHistoryResponse_assetPropertyValueHistory, &v.AssetPropertyValueHistory)
+		case schemas.GetAssetPropertyValueHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAssetPropertyValueHistoryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetPropertyValueHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetPropertyValueHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyValueHistory, schemas.GetAssetPropertyValueHistoryRequest, schemas.GetAssetPropertyValueHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetPropertyValueHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyValueHistory, schemas.GetAssetPropertyValueHistoryRequest, schemas.GetAssetPropertyValueHistoryResponse), output: &GetAssetPropertyValueHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

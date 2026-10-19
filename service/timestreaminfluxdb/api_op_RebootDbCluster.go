@@ -4,7 +4,9 @@ package timestreaminfluxdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type RebootDbClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDbClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDbClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterId != nil {
+		s.WriteString(schemas.RebootDbClusterInput_dbClusterId, *v.DbClusterId)
+	}
+	serializeDbInstanceIdList(s, schemas.RebootDbClusterInput_instanceIds, v.InstanceIds)
+}
+
 type RebootDbClusterOutput struct {
 
 	// The status of the DB Cluster.
@@ -49,13 +64,36 @@ type RebootDbClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDbClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDbClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDbClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterStatus != "" {
+		s.WriteString(schemas.RebootDbClusterOutput_dbClusterStatus, string(v.DbClusterStatus))
+	}
+}
+func (v *RebootDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootDbClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootDbClusterOutput_dbClusterStatus:
+			var ev string
+			if err := d.ReadString(schemas.RebootDbClusterOutput_dbClusterStatus, &ev); err != nil {
+				return err
+			}
+			v.DbClusterStatus = types.ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRebootDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbCluster, schemas.RebootDbClusterInput, schemas.RebootDbClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRebootDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbCluster, schemas.RebootDbClusterInput, schemas.RebootDbClusterOutput), output: &RebootDbClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

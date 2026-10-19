@@ -4,6 +4,8 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteTrustedTokenIssuerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrustedTokenIssuerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrustedTokenIssuerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrustedTokenIssuerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustedTokenIssuerArn != nil {
+		s.WriteString(schemas.DeleteTrustedTokenIssuerRequest_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
+	}
+}
+
 type DeleteTrustedTokenIssuerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteTrustedTokenIssuerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrustedTokenIssuerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrustedTokenIssuerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrustedTokenIssuerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrustedTokenIssuerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTrustedTokenIssuerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrustedTokenIssuerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTrustedTokenIssuer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrustedTokenIssuer, schemas.DeleteTrustedTokenIssuerRequest, schemas.DeleteTrustedTokenIssuerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTrustedTokenIssuer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrustedTokenIssuer, schemas.DeleteTrustedTokenIssuerRequest, schemas.DeleteTrustedTokenIssuerResponse), output: &DeleteTrustedTokenIssuerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

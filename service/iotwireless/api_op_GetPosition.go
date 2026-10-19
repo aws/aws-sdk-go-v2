@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type GetPositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.GetPositionRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetPositionRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type GetPositionOutput struct {
 
 	// The accuracy of the estimated position in meters. An empty value indicates that
@@ -75,13 +92,69 @@ type GetPositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPositionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPositionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteStruct(schemas.GetPositionResponse_Accuracy)
+		v.Accuracy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePositionCoordinate(s, schemas.GetPositionResponse_Position, v.Position)
+	if v.SolverProvider != "" {
+		s.WriteString(schemas.GetPositionResponse_SolverProvider, string(v.SolverProvider))
+	}
+	if v.SolverType != "" {
+		s.WriteString(schemas.GetPositionResponse_SolverType, string(v.SolverType))
+	}
+	if v.SolverVersion != nil {
+		s.WriteString(schemas.GetPositionResponse_SolverVersion, *v.SolverVersion)
+	}
+	if v.Timestamp != nil {
+		s.WriteString(schemas.GetPositionResponse_Timestamp, *v.Timestamp)
+	}
+}
+func (v *GetPositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPositionResponse_Accuracy:
+			v.Accuracy = &types.Accuracy{}
+			return v.Accuracy.Deserialize(d)
+		case schemas.GetPositionResponse_Position:
+			return deserializePositionCoordinate(d, schemas.GetPositionResponse_Position, &v.Position)
+		case schemas.GetPositionResponse_SolverProvider:
+			var ev string
+			if err := d.ReadString(schemas.GetPositionResponse_SolverProvider, &ev); err != nil {
+				return err
+			}
+			v.SolverProvider = types.PositionSolverProvider(ev)
+			return nil
+		case schemas.GetPositionResponse_SolverType:
+			var ev string
+			if err := d.ReadString(schemas.GetPositionResponse_SolverType, &ev); err != nil {
+				return err
+			}
+			v.SolverType = types.PositionSolverType(ev)
+			return nil
+		case schemas.GetPositionResponse_SolverVersion:
+			v.SolverVersion = new(string)
+			return d.ReadString(schemas.GetPositionResponse_SolverVersion, v.SolverVersion)
+		case schemas.GetPositionResponse_Timestamp:
+			v.Timestamp = new(string)
+			return d.ReadString(schemas.GetPositionResponse_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPosition, schemas.GetPositionRequest, schemas.GetPositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPosition, schemas.GetPositionRequest, schemas.GetPositionResponse), output: &GetPositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

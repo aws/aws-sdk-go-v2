@@ -4,6 +4,8 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteCampaignEntryLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCampaignEntryLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCampaignEntryLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCampaignEntryLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteCampaignEntryLimitsRequest_id, *v.Id)
+	}
+}
+
 type DeleteCampaignEntryLimitsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteCampaignEntryLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCampaignEntryLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCampaignEntryLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCampaignEntryLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCampaignEntryLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCampaignEntryLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignEntryLimits, schemas.DeleteCampaignEntryLimitsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCampaignEntryLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignEntryLimits, schemas.DeleteCampaignEntryLimitsRequest, nil), output: &DeleteCampaignEntryLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTableRestoreStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTableRestoreStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTableRestoreStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTableRestoreStatusRequest_maxResults, *v.MaxResults)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.ListTableRestoreStatusRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTableRestoreStatusRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.ListTableRestoreStatusRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type ListTableRestoreStatusOutput struct {
 
 	// If your initial ListTableRestoreStatus operation returns a nextToken , you can
@@ -63,13 +86,35 @@ type ListTableRestoreStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTableRestoreStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTableRestoreStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTableRestoreStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTableRestoreStatusResponse_nextToken, *v.NextToken)
+	}
+	serializeTableRestoreStatusList(s, schemas.ListTableRestoreStatusResponse_tableRestoreStatuses, v.TableRestoreStatuses)
+}
+func (v *ListTableRestoreStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTableRestoreStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTableRestoreStatusResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTableRestoreStatusResponse_nextToken, v.NextToken)
+		case schemas.ListTableRestoreStatusResponse_tableRestoreStatuses:
+			return deserializeTableRestoreStatusList(d, schemas.ListTableRestoreStatusResponse_tableRestoreStatuses, &v.TableRestoreStatuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTableRestoreStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTableRestoreStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableRestoreStatus, schemas.ListTableRestoreStatusRequest, schemas.ListTableRestoreStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTableRestoreStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableRestoreStatus, schemas.ListTableRestoreStatusRequest, schemas.ListTableRestoreStatusResponse), output: &ListTableRestoreStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

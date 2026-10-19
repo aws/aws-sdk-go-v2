@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,27 @@ type GetCelebrityRecognitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCelebrityRecognitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCelebrityRecognitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCelebrityRecognitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetCelebrityRecognitionRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCelebrityRecognitionRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCelebrityRecognitionRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetCelebrityRecognitionRequest_SortBy, string(v.SortBy))
+	}
+}
+
 type GetCelebrityRecognitionOutput struct {
 
 	// Array of celebrities recognized in the video.
@@ -138,13 +161,79 @@ type GetCelebrityRecognitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCelebrityRecognitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCelebrityRecognitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCelebrityRecognitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCelebrityRecognitions(s, schemas.GetCelebrityRecognitionResponse_Celebrities, v.Celebrities)
+	if v.JobId != nil {
+		s.WriteString(schemas.GetCelebrityRecognitionResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetCelebrityRecognitionResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetCelebrityRecognitionResponse_JobTag, *v.JobTag)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCelebrityRecognitionResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetCelebrityRecognitionResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetCelebrityRecognitionResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoMetadata != nil {
+		s.WriteStruct(schemas.GetCelebrityRecognitionResponse_VideoMetadata)
+		v.VideoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCelebrityRecognitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCelebrityRecognitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCelebrityRecognitionResponse_Celebrities:
+			return deserializeCelebrityRecognitions(d, schemas.GetCelebrityRecognitionResponse_Celebrities, &v.Celebrities)
+		case schemas.GetCelebrityRecognitionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetCelebrityRecognitionResponse_JobId, v.JobId)
+		case schemas.GetCelebrityRecognitionResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetCelebrityRecognitionResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetCelebrityRecognitionResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetCelebrityRecognitionResponse_JobTag, v.JobTag)
+		case schemas.GetCelebrityRecognitionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCelebrityRecognitionResponse_NextToken, v.NextToken)
+		case schemas.GetCelebrityRecognitionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetCelebrityRecognitionResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetCelebrityRecognitionResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetCelebrityRecognitionResponse_VideoMetadata:
+			v.VideoMetadata = &types.VideoMetadata{}
+			return v.VideoMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCelebrityRecognition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCelebrityRecognition, schemas.GetCelebrityRecognitionRequest, schemas.GetCelebrityRecognitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCelebrityRecognition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCelebrityRecognition, schemas.GetCelebrityRecognitionRequest, schemas.GetCelebrityRecognitionResponse), output: &GetCelebrityRecognitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

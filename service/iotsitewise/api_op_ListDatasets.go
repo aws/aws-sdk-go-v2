@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,30 @@ type ListDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetType != "" {
+		s.WriteString(schemas.ListDatasetsRequest_datasetType, string(v.DatasetType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetsRequest_nextToken, *v.NextToken)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ListDatasetsRequest_sourceType, string(v.SourceType))
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListDatasetsRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type ListDatasetsOutput struct {
 
 	// A list that summarizes the dataset response.
@@ -70,13 +96,41 @@ type ListDatasetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetSummaries(s, schemas.ListDatasetsResponse_datasetSummaries, v.DatasetSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetsResponse_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListDatasetsResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *ListDatasetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetsResponse_datasetSummaries:
+			return deserializeDatasetSummaries(d, schemas.ListDatasetsResponse_datasetSummaries, &v.DatasetSummaries)
+		case schemas.ListDatasetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetsResponse_nextToken, v.NextToken)
+		case schemas.ListDatasetsResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.ListDatasetsResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasets, schemas.ListDatasetsRequest, schemas.ListDatasetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasets, schemas.ListDatasetsRequest, schemas.ListDatasetsResponse), output: &ListDatasetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

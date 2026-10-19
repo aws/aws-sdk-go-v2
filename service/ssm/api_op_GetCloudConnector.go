@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetCloudConnectorInput struct {
 	CloudConnectorId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCloudConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudConnectorId != nil {
+		s.WriteString(schemas.GetCloudConnectorRequest_CloudConnectorId, *v.CloudConnectorId)
+	}
 }
 
 type GetCloudConnectorOutput struct {
@@ -68,13 +82,71 @@ type GetCloudConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudConnectorResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudConnectorArn != nil {
+		s.WriteString(schemas.GetCloudConnectorResult_CloudConnectorArn, *v.CloudConnectorArn)
+	}
+	if v.ConfigConnectorArn != nil {
+		s.WriteString(schemas.GetCloudConnectorResult_ConfigConnectorArn, *v.ConfigConnectorArn)
+	}
+	serializeCloudConnectorConfiguration(s, schemas.GetCloudConnectorResult_Configuration, v.Configuration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCloudConnectorResult_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetCloudConnectorResult_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetCloudConnectorResult_DisplayName, *v.DisplayName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetCloudConnectorResult_RoleArn, *v.RoleArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetCloudConnectorResult_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetCloudConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCloudConnectorResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCloudConnectorResult_CloudConnectorArn:
+			v.CloudConnectorArn = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResult_CloudConnectorArn, v.CloudConnectorArn)
+		case schemas.GetCloudConnectorResult_ConfigConnectorArn:
+			v.ConfigConnectorArn = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResult_ConfigConnectorArn, v.ConfigConnectorArn)
+		case schemas.GetCloudConnectorResult_Configuration:
+			return deserializeCloudConnectorConfiguration(d, schemas.GetCloudConnectorResult_Configuration, &v.Configuration)
+		case schemas.GetCloudConnectorResult_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCloudConnectorResult_CreatedAt, v.CreatedAt)
+		case schemas.GetCloudConnectorResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResult_Description, v.Description)
+		case schemas.GetCloudConnectorResult_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResult_DisplayName, v.DisplayName)
+		case schemas.GetCloudConnectorResult_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetCloudConnectorResult_RoleArn, v.RoleArn)
+		case schemas.GetCloudConnectorResult_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCloudConnectorResult_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCloudConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCloudConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudConnector, schemas.GetCloudConnectorRequest, schemas.GetCloudConnectorResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCloudConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudConnector, schemas.GetCloudConnectorRequest, schemas.GetCloudConnectorResult), output: &GetCloudConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

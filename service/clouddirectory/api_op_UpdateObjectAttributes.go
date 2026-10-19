@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdateObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateObjectAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateObjectAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateObjectAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeObjectAttributeUpdateList(s, schemas.UpdateObjectAttributesRequest_AttributeUpdates, v.AttributeUpdates)
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.UpdateObjectAttributesRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.UpdateObjectAttributesRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateObjectAttributesOutput struct {
 
 	// The ObjectIdentifier of the updated object.
@@ -56,13 +76,32 @@ type UpdateObjectAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateObjectAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateObjectAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateObjectAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.UpdateObjectAttributesResponse_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+}
+func (v *UpdateObjectAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateObjectAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateObjectAttributesResponse_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.UpdateObjectAttributesResponse_ObjectIdentifier, v.ObjectIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateObjectAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateObjectAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateObjectAttributes, schemas.UpdateObjectAttributesRequest, schemas.UpdateObjectAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateObjectAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateObjectAttributes, schemas.UpdateObjectAttributesRequest, schemas.UpdateObjectAttributesResponse), output: &UpdateObjectAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

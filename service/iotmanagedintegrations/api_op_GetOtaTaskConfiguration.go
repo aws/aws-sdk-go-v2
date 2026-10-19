@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetOtaTaskConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOtaTaskConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOtaTaskConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOtaTaskConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetOtaTaskConfigurationRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetOtaTaskConfigurationOutput struct {
 
 	// The timestamp value of when the over-the-air (OTA) task configuration was
@@ -59,13 +73,58 @@ type GetOtaTaskConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOtaTaskConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOtaTaskConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOtaTaskConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetOtaTaskConfigurationResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetOtaTaskConfigurationResponse_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetOtaTaskConfigurationResponse_Name, *v.Name)
+	}
+	if v.PushConfig != nil {
+		s.WriteStruct(schemas.GetOtaTaskConfigurationResponse_PushConfig)
+		v.PushConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskConfigurationId != nil {
+		s.WriteString(schemas.GetOtaTaskConfigurationResponse_TaskConfigurationId, *v.TaskConfigurationId)
+	}
+}
+func (v *GetOtaTaskConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOtaTaskConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOtaTaskConfigurationResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetOtaTaskConfigurationResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetOtaTaskConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetOtaTaskConfigurationResponse_Description, v.Description)
+		case schemas.GetOtaTaskConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetOtaTaskConfigurationResponse_Name, v.Name)
+		case schemas.GetOtaTaskConfigurationResponse_PushConfig:
+			v.PushConfig = &types.PushConfig{}
+			return v.PushConfig.Deserialize(d)
+		case schemas.GetOtaTaskConfigurationResponse_TaskConfigurationId:
+			v.TaskConfigurationId = new(string)
+			return d.ReadString(schemas.GetOtaTaskConfigurationResponse_TaskConfigurationId, v.TaskConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOtaTaskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOtaTaskConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOtaTaskConfiguration, schemas.GetOtaTaskConfigurationRequest, schemas.GetOtaTaskConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOtaTaskConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOtaTaskConfiguration, schemas.GetOtaTaskConfigurationRequest, schemas.GetOtaTaskConfigurationResponse), output: &GetOtaTaskConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

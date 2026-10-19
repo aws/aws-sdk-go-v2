@@ -5,7 +5,9 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListManagedWorkgroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedWorkgroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedWorkgroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedWorkgroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedWorkgroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedWorkgroupsRequest_nextToken, *v.NextToken)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.ListManagedWorkgroupsRequest_sourceArn, *v.SourceArn)
+	}
+}
+
 type ListManagedWorkgroupsOutput struct {
 
 	// The returned array of managed workgroups.
@@ -60,13 +80,35 @@ type ListManagedWorkgroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedWorkgroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedWorkgroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedWorkgroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedWorkgroups(s, schemas.ListManagedWorkgroupsResponse_managedWorkgroups, v.ManagedWorkgroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedWorkgroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedWorkgroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedWorkgroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedWorkgroupsResponse_managedWorkgroups:
+			return deserializeManagedWorkgroups(d, schemas.ListManagedWorkgroupsResponse_managedWorkgroups, &v.ManagedWorkgroups)
+		case schemas.ListManagedWorkgroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedWorkgroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedWorkgroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListManagedWorkgroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedWorkgroups, schemas.ListManagedWorkgroupsRequest, schemas.ListManagedWorkgroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListManagedWorkgroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedWorkgroups, schemas.ListManagedWorkgroupsRequest, schemas.ListManagedWorkgroupsResponse), output: &ListManagedWorkgroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

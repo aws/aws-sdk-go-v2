@@ -4,7 +4,9 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,36 @@ type UpdateMatchingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMatchingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMatchingWorkflowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMatchingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateMatchingWorkflowInput_description, *v.Description)
+	}
+	if v.IncrementalRunConfig != nil {
+		s.WriteStruct(schemas.UpdateMatchingWorkflowInput_incrementalRunConfig)
+		v.IncrementalRunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
+	serializeOutputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
+	if v.ResolutionTechniques != nil {
+		s.WriteStruct(schemas.UpdateMatchingWorkflowInput_resolutionTechniques)
+		v.ResolutionTechniques.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateMatchingWorkflowInput_roleArn, *v.RoleArn)
+	}
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.UpdateMatchingWorkflowInput_workflowName, *v.WorkflowName)
+	}
+}
+
 type UpdateMatchingWorkflowOutput struct {
 
 	// A list of InputSource objects, which have the fields InputSourceARN and
@@ -114,13 +146,66 @@ type UpdateMatchingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMatchingWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMatchingWorkflowOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMatchingWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateMatchingWorkflowOutput_description, *v.Description)
+	}
+	if v.IncrementalRunConfig != nil {
+		s.WriteStruct(schemas.UpdateMatchingWorkflowOutput_incrementalRunConfig)
+		v.IncrementalRunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputSourceConfig(s, schemas.UpdateMatchingWorkflowOutput_inputSourceConfig, v.InputSourceConfig)
+	serializeOutputSourceConfig(s, schemas.UpdateMatchingWorkflowOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.ResolutionTechniques != nil {
+		s.WriteStruct(schemas.UpdateMatchingWorkflowOutput_resolutionTechniques)
+		v.ResolutionTechniques.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateMatchingWorkflowOutput_roleArn, *v.RoleArn)
+	}
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.UpdateMatchingWorkflowOutput_workflowName, *v.WorkflowName)
+	}
+}
+func (v *UpdateMatchingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMatchingWorkflowOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMatchingWorkflowOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateMatchingWorkflowOutput_description, v.Description)
+		case schemas.UpdateMatchingWorkflowOutput_incrementalRunConfig:
+			v.IncrementalRunConfig = &types.IncrementalRunConfig{}
+			return v.IncrementalRunConfig.Deserialize(d)
+		case schemas.UpdateMatchingWorkflowOutput_inputSourceConfig:
+			return deserializeInputSourceConfig(d, schemas.UpdateMatchingWorkflowOutput_inputSourceConfig, &v.InputSourceConfig)
+		case schemas.UpdateMatchingWorkflowOutput_outputSourceConfig:
+			return deserializeOutputSourceConfig(d, schemas.UpdateMatchingWorkflowOutput_outputSourceConfig, &v.OutputSourceConfig)
+		case schemas.UpdateMatchingWorkflowOutput_resolutionTechniques:
+			v.ResolutionTechniques = &types.ResolutionTechniques{}
+			return v.ResolutionTechniques.Deserialize(d)
+		case schemas.UpdateMatchingWorkflowOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateMatchingWorkflowOutput_roleArn, v.RoleArn)
+		case schemas.UpdateMatchingWorkflowOutput_workflowName:
+			v.WorkflowName = new(string)
+			return d.ReadString(schemas.UpdateMatchingWorkflowOutput_workflowName, v.WorkflowName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMatchingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMatchingWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMatchingWorkflow, schemas.UpdateMatchingWorkflowInput, schemas.UpdateMatchingWorkflowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMatchingWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMatchingWorkflow, schemas.UpdateMatchingWorkflowInput, schemas.UpdateMatchingWorkflowOutput), output: &UpdateMatchingWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

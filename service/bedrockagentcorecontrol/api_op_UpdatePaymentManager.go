@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,34 @@ type UpdatePaymentManagerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePaymentManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePaymentManagerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePaymentManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizerConfiguration(s, schemas.UpdatePaymentManagerRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.UpdatePaymentManagerRequest_authorizerType, string(v.AuthorizerType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePaymentManagerRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePaymentManagerRequest_description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.UpdatePaymentManagerRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.UpdatePaymentManagerRequest_paymentManagerId, *v.PaymentManagerId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdatePaymentManagerRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdatePaymentManagerOutput struct {
 
 	// The type of authorizer for the updated payment manager.
@@ -114,13 +144,90 @@ type UpdatePaymentManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePaymentManagerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePaymentManagerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePaymentManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.UpdatePaymentManagerResponse_authorizerType, string(v.AuthorizerType))
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.UpdatePaymentManagerResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdatePaymentManagerResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePaymentManagerResponse_name, *v.Name)
+	}
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.UpdatePaymentManagerResponse_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.UpdatePaymentManagerResponse_paymentManagerId, *v.PaymentManagerId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdatePaymentManagerResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdatePaymentManagerResponse_status, string(v.Status))
+	}
+	if v.WorkloadIdentityDetails != nil {
+		s.WriteStruct(schemas.UpdatePaymentManagerResponse_workloadIdentityDetails)
+		v.WorkloadIdentityDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePaymentManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePaymentManagerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePaymentManagerResponse_authorizerType:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePaymentManagerResponse_authorizerType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizerType = types.PaymentsAuthorizerType(ev)
+			return nil
+		case schemas.UpdatePaymentManagerResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.UpdatePaymentManagerResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.UpdatePaymentManagerResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdatePaymentManagerResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdatePaymentManagerResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePaymentManagerResponse_name, v.Name)
+		case schemas.UpdatePaymentManagerResponse_paymentManagerArn:
+			v.PaymentManagerArn = new(string)
+			return d.ReadString(schemas.UpdatePaymentManagerResponse_paymentManagerArn, v.PaymentManagerArn)
+		case schemas.UpdatePaymentManagerResponse_paymentManagerId:
+			v.PaymentManagerId = new(string)
+			return d.ReadString(schemas.UpdatePaymentManagerResponse_paymentManagerId, v.PaymentManagerId)
+		case schemas.UpdatePaymentManagerResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdatePaymentManagerResponse_roleArn, v.RoleArn)
+		case schemas.UpdatePaymentManagerResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePaymentManagerResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentManagerStatus(ev)
+			return nil
+		case schemas.UpdatePaymentManagerResponse_workloadIdentityDetails:
+			v.WorkloadIdentityDetails = &types.WorkloadIdentityDetails{}
+			return v.WorkloadIdentityDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePaymentManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePaymentManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePaymentManager, schemas.UpdatePaymentManagerRequest, schemas.UpdatePaymentManagerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePaymentManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePaymentManager, schemas.UpdatePaymentManagerRequest, schemas.UpdatePaymentManagerResponse), output: &UpdatePaymentManagerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

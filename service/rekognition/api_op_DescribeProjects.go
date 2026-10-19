@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,23 @@ type DescribeProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProjectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomizationFeatures(s, schemas.DescribeProjectsRequest_Features, v.Features)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeProjectsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProjectsRequest_NextToken, *v.NextToken)
+	}
+	serializeProjectNames(s, schemas.DescribeProjectsRequest_ProjectNames, v.ProjectNames)
+}
+
 type DescribeProjectsOutput struct {
 
 	// If the previous response was incomplete (because there is more results to
@@ -69,13 +88,35 @@ type DescribeProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProjectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProjectsResponse_NextToken, *v.NextToken)
+	}
+	serializeProjectDescriptions(s, schemas.DescribeProjectsResponse_ProjectDescriptions, v.ProjectDescriptions)
+}
+func (v *DescribeProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProjectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProjectsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeProjectsResponse_NextToken, v.NextToken)
+		case schemas.DescribeProjectsResponse_ProjectDescriptions:
+			return deserializeProjectDescriptions(d, schemas.DescribeProjectsResponse_ProjectDescriptions, &v.ProjectDescriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProjects, schemas.DescribeProjectsRequest, schemas.DescribeProjectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProjects, schemas.DescribeProjectsRequest, schemas.DescribeProjectsResponse), output: &DescribeProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

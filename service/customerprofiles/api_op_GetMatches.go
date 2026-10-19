@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -84,6 +86,24 @@ type GetMatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMatchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMatchesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMatchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetMatchesRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetMatchesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMatchesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetMatchesOutput struct {
 
 	// The timestamp this version of Match Result generated.
@@ -104,13 +124,47 @@ type GetMatchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMatchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMatchesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchGenerationDate != nil {
+		s.WriteTime(schemas.GetMatchesResponse_MatchGenerationDate, *v.MatchGenerationDate)
+	}
+	serializeMatchesList(s, schemas.GetMatchesResponse_Matches, v.Matches)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMatchesResponse_NextToken, *v.NextToken)
+	}
+	if v.PotentialMatches != nil {
+		s.WriteInt32(schemas.GetMatchesResponse_PotentialMatches, *v.PotentialMatches)
+	}
+}
+func (v *GetMatchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMatchesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMatchesResponse_MatchGenerationDate:
+			v.MatchGenerationDate = new(time.Time)
+			return d.ReadTime(schemas.GetMatchesResponse_MatchGenerationDate, v.MatchGenerationDate)
+		case schemas.GetMatchesResponse_Matches:
+			return deserializeMatchesList(d, schemas.GetMatchesResponse_Matches, &v.Matches)
+		case schemas.GetMatchesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetMatchesResponse_NextToken, v.NextToken)
+		case schemas.GetMatchesResponse_PotentialMatches:
+			v.PotentialMatches = new(int32)
+			return d.ReadInt32(schemas.GetMatchesResponse_PotentialMatches, v.PotentialMatches)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatches, schemas.GetMatchesRequest, schemas.GetMatchesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatches, schemas.GetMatchesRequest, schemas.GetMatchesResponse), output: &GetMatchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListABTestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListABTestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListABTestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListABTestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListABTestsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListABTestsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListABTestsOutput struct {
 
 	// The list of A/B test summaries.
@@ -59,13 +76,35 @@ type ListABTestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListABTestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListABTestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListABTestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeABTestSummaryList(s, schemas.ListABTestsResponse_abTests, v.AbTests)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListABTestsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListABTestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListABTestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListABTestsResponse_abTests:
+			return deserializeABTestSummaryList(d, schemas.ListABTestsResponse_abTests, &v.AbTests)
+		case schemas.ListABTestsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListABTestsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListABTestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListABTests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListABTests, schemas.ListABTestsRequest, schemas.ListABTestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListABTests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListABTests, schemas.ListABTestsRequest, schemas.ListABTestsResponse), output: &ListABTestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

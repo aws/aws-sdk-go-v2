@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListWorkloadIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadIdentitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadIdentitiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadIdentitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListWorkloadIdentitiesOutput struct {
 
 	// The list of workload identities.
@@ -52,13 +69,35 @@ type ListWorkloadIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadIdentitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadIdentitiesResponse_nextToken, *v.NextToken)
+	}
+	serializeWorkloadIdentityList(s, schemas.ListWorkloadIdentitiesResponse_workloadIdentities, v.WorkloadIdentities)
+}
+func (v *ListWorkloadIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadIdentitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadIdentitiesResponse_nextToken, v.NextToken)
+		case schemas.ListWorkloadIdentitiesResponse_workloadIdentities:
+			return deserializeWorkloadIdentityList(d, schemas.ListWorkloadIdentitiesResponse_workloadIdentities, &v.WorkloadIdentities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkloadIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadIdentities, schemas.ListWorkloadIdentitiesRequest, schemas.ListWorkloadIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkloadIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadIdentities, schemas.ListWorkloadIdentitiesRequest, schemas.ListWorkloadIdentitiesResponse), output: &ListWorkloadIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

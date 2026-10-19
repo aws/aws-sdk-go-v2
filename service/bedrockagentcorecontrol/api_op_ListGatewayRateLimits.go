@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListGatewayRateLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayRateLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayRateLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayRateLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.ListGatewayRateLimitsRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGatewayRateLimitsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayRateLimitsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListGatewayRateLimitsOutput struct {
 
 	// The list of rate limits for the gateway.
@@ -63,13 +83,35 @@ type ListGatewayRateLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayRateLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayRateLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayRateLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayRateLimitsResponse_nextToken, *v.NextToken)
+	}
+	serializeGatewayRateLimits(s, schemas.ListGatewayRateLimitsResponse_rateLimits, v.RateLimits)
+}
+func (v *ListGatewayRateLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewayRateLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewayRateLimitsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewayRateLimitsResponse_nextToken, v.NextToken)
+		case schemas.ListGatewayRateLimitsResponse_rateLimits:
+			return deserializeGatewayRateLimits(d, schemas.ListGatewayRateLimitsResponse_rateLimits, &v.RateLimits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGatewayRateLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGatewayRateLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayRateLimits, schemas.ListGatewayRateLimitsRequest, schemas.ListGatewayRateLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGatewayRateLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayRateLimits, schemas.ListGatewayRateLimitsRequest, schemas.ListGatewayRateLimitsResponse), output: &ListGatewayRateLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

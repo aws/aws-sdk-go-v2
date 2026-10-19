@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,36 @@ type NotifyProvisionProductEngineWorkflowResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyProvisionProductEngineWorkflowResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyProvisionProductEngineWorkflowResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyProvisionProductEngineWorkflowResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.NotifyProvisionProductEngineWorkflowResultInput_FailureReason, *v.FailureReason)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.NotifyProvisionProductEngineWorkflowResultInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	serializeRecordOutputs(s, schemas.NotifyProvisionProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	if v.RecordId != nil {
+		s.WriteString(schemas.NotifyProvisionProductEngineWorkflowResultInput_RecordId, *v.RecordId)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteStruct(schemas.NotifyProvisionProductEngineWorkflowResultInput_ResourceIdentifier)
+		v.ResourceIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotifyProvisionProductEngineWorkflowResultInput_Status, string(v.Status))
+	}
+	if v.WorkflowToken != nil {
+		s.WriteString(schemas.NotifyProvisionProductEngineWorkflowResultInput_WorkflowToken, *v.WorkflowToken)
+	}
+}
+
 type NotifyProvisionProductEngineWorkflowResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +100,26 @@ type NotifyProvisionProductEngineWorkflowResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyProvisionProductEngineWorkflowResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyProvisionProductEngineWorkflowResultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyProvisionProductEngineWorkflowResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NotifyProvisionProductEngineWorkflowResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyProvisionProductEngineWorkflowResultOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyProvisionProductEngineWorkflowResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyProvisionProductEngineWorkflowResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyProvisionProductEngineWorkflowResult, schemas.NotifyProvisionProductEngineWorkflowResultInput, schemas.NotifyProvisionProductEngineWorkflowResultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNotifyProvisionProductEngineWorkflowResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyProvisionProductEngineWorkflowResult, schemas.NotifyProvisionProductEngineWorkflowResultInput, schemas.NotifyProvisionProductEngineWorkflowResultOutput), output: &NotifyProvisionProductEngineWorkflowResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

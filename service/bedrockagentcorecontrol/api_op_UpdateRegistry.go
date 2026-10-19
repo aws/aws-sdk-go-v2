@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,36 @@ type UpdateRegistryInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegistryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryRequest_approvalConfiguration)
+		v.ApprovalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthorizerConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryRequest_authorizerConfiguration)
+		v.AuthorizerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteStruct(schemas.UpdateRegistryRequest_description)
+		v.Description.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRegistryRequest_name, *v.Name)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.UpdateRegistryRequest_registryId, *v.RegistryId)
+	}
 }
 
 type UpdateRegistryOutput struct {
@@ -116,13 +148,99 @@ type UpdateRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegistryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegistryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryResponse_approvalConfiguration)
+		v.ApprovalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAuthorizerConfiguration(s, schemas.UpdateRegistryResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.UpdateRegistryResponse_authorizerType, string(v.AuthorizerType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateRegistryResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRegistryResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRegistryResponse_name, *v.Name)
+	}
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.UpdateRegistryResponse_registryArn, *v.RegistryArn)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.UpdateRegistryResponse_registryId, *v.RegistryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateRegistryResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateRegistryResponse_statusReason, *v.StatusReason)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateRegistryResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRegistryResponse_approvalConfiguration:
+			v.ApprovalConfiguration = &types.ApprovalConfiguration{}
+			return v.ApprovalConfiguration.Deserialize(d)
+		case schemas.UpdateRegistryResponse_authorizerConfiguration:
+			return deserializeAuthorizerConfiguration(d, schemas.UpdateRegistryResponse_authorizerConfiguration, &v.AuthorizerConfiguration)
+		case schemas.UpdateRegistryResponse_authorizerType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRegistryResponse_authorizerType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizerType = types.RegistryAuthorizerType(ev)
+			return nil
+		case schemas.UpdateRegistryResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRegistryResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateRegistryResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateRegistryResponse_description, v.Description)
+		case schemas.UpdateRegistryResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateRegistryResponse_name, v.Name)
+		case schemas.UpdateRegistryResponse_registryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.UpdateRegistryResponse_registryArn, v.RegistryArn)
+		case schemas.UpdateRegistryResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.UpdateRegistryResponse_registryId, v.RegistryId)
+		case schemas.UpdateRegistryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRegistryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegistryStatus(ev)
+			return nil
+		case schemas.UpdateRegistryResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateRegistryResponse_statusReason, v.StatusReason)
+		case schemas.UpdateRegistryResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRegistryResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistry, schemas.UpdateRegistryRequest, schemas.UpdateRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistry, schemas.UpdateRegistryRequest, schemas.UpdateRegistryResponse), output: &UpdateRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

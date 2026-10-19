@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,45 @@ type CreateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDatasetRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetConfig != nil {
+		s.WriteStruct(schemas.CreateDatasetRequest_datasetConfig)
+		v.DatasetConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetDescription != nil {
+		s.WriteString(schemas.CreateDatasetRequest_datasetDescription, *v.DatasetDescription)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.CreateDatasetRequest_datasetId, *v.DatasetId)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.CreateDatasetRequest_datasetName, *v.DatasetName)
+	}
+	if v.DatasetSource != nil {
+		s.WriteStruct(schemas.CreateDatasetRequest_datasetSource)
+		v.DatasetSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.CreateDatasetRequest_datasetType, string(v.DatasetType))
+	}
+	serializeMetadata(s, schemas.CreateDatasetRequest_metadata, v.Metadata)
+	serializeTagMap(s, schemas.CreateDatasetRequest_tags, v.Tags)
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateDatasetRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type CreateDatasetOutput struct {
 
 	// The [ARN] of the dataset. The format is
@@ -104,13 +145,46 @@ type CreateDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CreateDatasetResponse_datasetArn, *v.DatasetArn)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.CreateDatasetResponse_datasetId, *v.DatasetId)
+	}
+	if v.DatasetStatus != nil {
+		s.WriteStruct(schemas.CreateDatasetResponse_datasetStatus)
+		v.DatasetStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.CreateDatasetResponse_datasetArn, v.DatasetArn)
+		case schemas.CreateDatasetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.CreateDatasetResponse_datasetId, v.DatasetId)
+		case schemas.CreateDatasetResponse_datasetStatus:
+			v.DatasetStatus = &types.DatasetStatus{}
+			return v.DatasetStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse), output: &CreateDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

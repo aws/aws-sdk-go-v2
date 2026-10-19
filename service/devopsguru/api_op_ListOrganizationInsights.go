@@ -5,7 +5,9 @@ package devopsguru
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,28 @@ type ListOrganizationInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrganizationInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrganizationInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListInsightsAccountIdList(s, schemas.ListOrganizationInsightsRequest_AccountIds, v.AccountIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOrganizationInsightsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrganizationInsightsRequest_NextToken, *v.NextToken)
+	}
+	serializeListInsightsOrganizationalUnitIdList(s, schemas.ListOrganizationInsightsRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	if v.StatusFilter != nil {
+		s.WriteStruct(schemas.ListOrganizationInsightsRequest_StatusFilter)
+		v.StatusFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListOrganizationInsightsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -69,13 +93,38 @@ type ListOrganizationInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrganizationInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrganizationInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrganizationInsightsResponse_NextToken, *v.NextToken)
+	}
+	serializeProactiveOrganizationInsights(s, schemas.ListOrganizationInsightsResponse_ProactiveInsights, v.ProactiveInsights)
+	serializeReactiveOrganizationInsights(s, schemas.ListOrganizationInsightsResponse_ReactiveInsights, v.ReactiveInsights)
+}
+func (v *ListOrganizationInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOrganizationInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOrganizationInsightsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOrganizationInsightsResponse_NextToken, v.NextToken)
+		case schemas.ListOrganizationInsightsResponse_ProactiveInsights:
+			return deserializeProactiveOrganizationInsights(d, schemas.ListOrganizationInsightsResponse_ProactiveInsights, &v.ProactiveInsights)
+		case schemas.ListOrganizationInsightsResponse_ReactiveInsights:
+			return deserializeReactiveOrganizationInsights(d, schemas.ListOrganizationInsightsResponse_ReactiveInsights, &v.ReactiveInsights)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOrganizationInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrganizationInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationInsights, schemas.ListOrganizationInsightsRequest, schemas.ListOrganizationInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrganizationInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationInsights, schemas.ListOrganizationInsightsRequest, schemas.ListOrganizationInsightsResponse), output: &ListOrganizationInsightsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

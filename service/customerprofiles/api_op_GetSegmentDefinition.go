@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetSegmentDefinitionInput struct {
 	SegmentDefinitionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSegmentDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetSegmentDefinitionRequest_DomainName, *v.DomainName)
+	}
+	if v.SegmentDefinitionName != nil {
+		s.WriteString(schemas.GetSegmentDefinitionRequest_SegmentDefinitionName, *v.SegmentDefinitionName)
+	}
 }
 
 type GetSegmentDefinitionOutput struct {
@@ -84,13 +101,91 @@ type GetSegmentDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSegmentDefinitionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSegmentDefinitionResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetSegmentDefinitionResponse_DisplayName, *v.DisplayName)
+	}
+	if v.SegmentDefinitionArn != nil {
+		s.WriteString(schemas.GetSegmentDefinitionResponse_SegmentDefinitionArn, *v.SegmentDefinitionArn)
+	}
+	if v.SegmentDefinitionName != nil {
+		s.WriteString(schemas.GetSegmentDefinitionResponse_SegmentDefinitionName, *v.SegmentDefinitionName)
+	}
+	if v.SegmentGroups != nil {
+		s.WriteStruct(schemas.GetSegmentDefinitionResponse_SegmentGroups)
+		v.SegmentGroups.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentSort != nil {
+		s.WriteStruct(schemas.GetSegmentDefinitionResponse_SegmentSort)
+		v.SegmentSort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentSqlQuery != nil {
+		s.WriteString(schemas.GetSegmentDefinitionResponse_SegmentSqlQuery, *v.SegmentSqlQuery)
+	}
+	if v.SegmentType != "" {
+		s.WriteString(schemas.GetSegmentDefinitionResponse_SegmentType, string(v.SegmentType))
+	}
+	serializeTagMap(s, schemas.GetSegmentDefinitionResponse_Tags, v.Tags)
+}
+func (v *GetSegmentDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSegmentDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSegmentDefinitionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSegmentDefinitionResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetSegmentDefinitionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSegmentDefinitionResponse_Description, v.Description)
+		case schemas.GetSegmentDefinitionResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetSegmentDefinitionResponse_DisplayName, v.DisplayName)
+		case schemas.GetSegmentDefinitionResponse_SegmentDefinitionArn:
+			v.SegmentDefinitionArn = new(string)
+			return d.ReadString(schemas.GetSegmentDefinitionResponse_SegmentDefinitionArn, v.SegmentDefinitionArn)
+		case schemas.GetSegmentDefinitionResponse_SegmentDefinitionName:
+			v.SegmentDefinitionName = new(string)
+			return d.ReadString(schemas.GetSegmentDefinitionResponse_SegmentDefinitionName, v.SegmentDefinitionName)
+		case schemas.GetSegmentDefinitionResponse_SegmentGroups:
+			v.SegmentGroups = &types.SegmentGroup{}
+			return v.SegmentGroups.Deserialize(d)
+		case schemas.GetSegmentDefinitionResponse_SegmentSort:
+			v.SegmentSort = &types.SegmentSort{}
+			return v.SegmentSort.Deserialize(d)
+		case schemas.GetSegmentDefinitionResponse_SegmentSqlQuery:
+			v.SegmentSqlQuery = new(string)
+			return d.ReadString(schemas.GetSegmentDefinitionResponse_SegmentSqlQuery, v.SegmentSqlQuery)
+		case schemas.GetSegmentDefinitionResponse_SegmentType:
+			var ev string
+			if err := d.ReadString(schemas.GetSegmentDefinitionResponse_SegmentType, &ev); err != nil {
+				return err
+			}
+			v.SegmentType = types.SegmentType(ev)
+			return nil
+		case schemas.GetSegmentDefinitionResponse_Tags:
+			return deserializeTagMap(d, schemas.GetSegmentDefinitionResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSegmentDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegmentDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentDefinition, schemas.GetSegmentDefinitionRequest, schemas.GetSegmentDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSegmentDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentDefinition, schemas.GetSegmentDefinitionRequest, schemas.GetSegmentDefinitionResponse), output: &GetSegmentDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

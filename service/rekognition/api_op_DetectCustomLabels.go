@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,29 @@ type DetectCustomLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectCustomLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectCustomLabelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectCustomLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Image != nil {
+		s.WriteStruct(schemas.DetectCustomLabelsRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DetectCustomLabelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.DetectCustomLabelsRequest_MinConfidence, *v.MinConfidence)
+	}
+	if v.ProjectVersionArn != nil {
+		s.WriteString(schemas.DetectCustomLabelsRequest_ProjectVersionArn, *v.ProjectVersionArn)
+	}
+}
+
 type DetectCustomLabelsOutput struct {
 
 	// An array of custom labels detected in the input image.
@@ -133,13 +158,29 @@ type DetectCustomLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectCustomLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectCustomLabelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectCustomLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomLabels(s, schemas.DetectCustomLabelsResponse_CustomLabels, v.CustomLabels)
+}
+func (v *DetectCustomLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectCustomLabelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectCustomLabelsResponse_CustomLabels:
+			return deserializeCustomLabels(d, schemas.DetectCustomLabelsResponse_CustomLabels, &v.CustomLabels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectCustomLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectCustomLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectCustomLabels, schemas.DetectCustomLabelsRequest, schemas.DetectCustomLabelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectCustomLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectCustomLabels, schemas.DetectCustomLabelsRequest, schemas.DetectCustomLabelsResponse), output: &DetectCustomLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

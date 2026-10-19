@@ -4,6 +4,8 @@ package gameliftstreams
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,19 @@ type AssociateApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateApplicationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentifiers(s, schemas.AssociateApplicationsInput_ApplicationIdentifiers, v.ApplicationIdentifiers)
+	if v.Identifier != nil {
+		s.WriteString(schemas.AssociateApplicationsInput_Identifier, *v.Identifier)
+	}
+}
+
 type AssociateApplicationsOutput struct {
 
 	// A set of applications that are associated to the stream group.
@@ -85,13 +100,35 @@ type AssociateApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateApplicationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArnList(s, schemas.AssociateApplicationsOutput_ApplicationArns, v.ApplicationArns)
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociateApplicationsOutput_Arn, *v.Arn)
+	}
+}
+func (v *AssociateApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateApplicationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateApplicationsOutput_ApplicationArns:
+			return deserializeArnList(d, schemas.AssociateApplicationsOutput_ApplicationArns, &v.ApplicationArns)
+		case schemas.AssociateApplicationsOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociateApplicationsOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApplications, schemas.AssociateApplicationsInput, schemas.AssociateApplicationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApplications, schemas.AssociateApplicationsInput, schemas.AssociateApplicationsOutput), output: &AssociateApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

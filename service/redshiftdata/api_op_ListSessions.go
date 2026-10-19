@@ -5,7 +5,9 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,39 @@ type ListSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ListSessionsRequest_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.ListSessionsRequest_Database, *v.Database)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListSessionsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionsRequest_NextToken, *v.NextToken)
+	}
+	if v.RoleLevel != nil {
+		s.WriteBool(schemas.ListSessionsRequest_RoleLevel, *v.RoleLevel)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ListSessionsRequest_SessionId, *v.SessionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListSessionsRequest_Status, string(v.Status))
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.ListSessionsRequest_WorkgroupName, *v.WorkgroupName)
+	}
+}
+
 type ListSessionsOutput struct {
 
 	// The sessions that match the request.
@@ -107,13 +142,35 @@ type ListSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionsResponse_NextToken, *v.NextToken)
+	}
+	serializeSessionList(s, schemas.ListSessionsResponse_Sessions, v.Sessions)
+}
+func (v *ListSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSessionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSessionsResponse_NextToken, v.NextToken)
+		case schemas.ListSessionsResponse_Sessions:
+			return deserializeSessionList(d, schemas.ListSessionsResponse_Sessions, &v.Sessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse), output: &ListSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

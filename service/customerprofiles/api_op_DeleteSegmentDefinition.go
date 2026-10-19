@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteSegmentDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSegmentDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSegmentDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSegmentDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteSegmentDefinitionRequest_DomainName, *v.DomainName)
+	}
+	if v.SegmentDefinitionName != nil {
+		s.WriteString(schemas.DeleteSegmentDefinitionRequest_SegmentDefinitionName, *v.SegmentDefinitionName)
+	}
+}
+
 type DeleteSegmentDefinitionOutput struct {
 
 	// A message that indicates the delete request is done.
@@ -49,13 +66,32 @@ type DeleteSegmentDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSegmentDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSegmentDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSegmentDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteSegmentDefinitionResponse_Message, *v.Message)
+	}
+}
+func (v *DeleteSegmentDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSegmentDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSegmentDefinitionResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteSegmentDefinitionResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSegmentDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSegmentDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSegmentDefinition, schemas.DeleteSegmentDefinitionRequest, schemas.DeleteSegmentDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSegmentDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSegmentDefinition, schemas.DeleteSegmentDefinitionRequest, schemas.DeleteSegmentDefinitionResponse), output: &DeleteSegmentDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

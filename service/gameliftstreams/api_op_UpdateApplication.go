@@ -4,7 +4,9 @@ package gameliftstreams
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -81,6 +83,25 @@ type UpdateApplicationInput struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationLogOutputUri != nil {
+		s.WriteString(schemas.UpdateApplicationInput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
+	}
+	serializeFilePaths(s, schemas.UpdateApplicationInput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApplicationInput_Description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateApplicationInput_Identifier, *v.Identifier)
+	}
 }
 
 type UpdateApplicationOutput struct {
@@ -191,13 +212,111 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationLogOutputUri != nil {
+		s.WriteString(schemas.UpdateApplicationOutput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
+	}
+	serializeFilePaths(s, schemas.UpdateApplicationOutput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.ApplicationSourceUri != nil {
+		s.WriteString(schemas.UpdateApplicationOutput_ApplicationSourceUri, *v.ApplicationSourceUri)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateApplicationOutput_Arn, *v.Arn)
+	}
+	serializeArnList(s, schemas.UpdateApplicationOutput_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateApplicationOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApplicationOutput_Description, *v.Description)
+	}
+	if v.ExecutablePath != nil {
+		s.WriteString(schemas.UpdateApplicationOutput_ExecutablePath, *v.ExecutablePath)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateApplicationOutput_Id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateApplicationOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeReplicationStatuses(s, schemas.UpdateApplicationOutput_ReplicationStatuses, v.ReplicationStatuses)
+	if v.RuntimeEnvironment != nil {
+		s.WriteStruct(schemas.UpdateApplicationOutput_RuntimeEnvironment)
+		v.RuntimeEnvironment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateApplicationOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.UpdateApplicationOutput_StatusReason, string(v.StatusReason))
+	}
+}
+func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationOutput_ApplicationLogOutputUri:
+			v.ApplicationLogOutputUri = new(string)
+			return d.ReadString(schemas.UpdateApplicationOutput_ApplicationLogOutputUri, v.ApplicationLogOutputUri)
+		case schemas.UpdateApplicationOutput_ApplicationLogPaths:
+			return deserializeFilePaths(d, schemas.UpdateApplicationOutput_ApplicationLogPaths, &v.ApplicationLogPaths)
+		case schemas.UpdateApplicationOutput_ApplicationSourceUri:
+			v.ApplicationSourceUri = new(string)
+			return d.ReadString(schemas.UpdateApplicationOutput_ApplicationSourceUri, v.ApplicationSourceUri)
+		case schemas.UpdateApplicationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateApplicationOutput_Arn, v.Arn)
+		case schemas.UpdateApplicationOutput_AssociatedStreamGroups:
+			return deserializeArnList(d, schemas.UpdateApplicationOutput_AssociatedStreamGroups, &v.AssociatedStreamGroups)
+		case schemas.UpdateApplicationOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateApplicationOutput_CreatedAt, v.CreatedAt)
+		case schemas.UpdateApplicationOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateApplicationOutput_Description, v.Description)
+		case schemas.UpdateApplicationOutput_ExecutablePath:
+			v.ExecutablePath = new(string)
+			return d.ReadString(schemas.UpdateApplicationOutput_ExecutablePath, v.ExecutablePath)
+		case schemas.UpdateApplicationOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateApplicationOutput_Id, v.Id)
+		case schemas.UpdateApplicationOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateApplicationOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateApplicationOutput_ReplicationStatuses:
+			return deserializeReplicationStatuses(d, schemas.UpdateApplicationOutput_ReplicationStatuses, &v.ReplicationStatuses)
+		case schemas.UpdateApplicationOutput_RuntimeEnvironment:
+			v.RuntimeEnvironment = &types.RuntimeEnvironment{}
+			return v.RuntimeEnvironment.Deserialize(d)
+		case schemas.UpdateApplicationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateApplicationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApplicationStatus(ev)
+			return nil
+		case schemas.UpdateApplicationOutput_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.UpdateApplicationOutput_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = types.ApplicationStatusReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationInput, schemas.UpdateApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationInput, schemas.UpdateApplicationOutput), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

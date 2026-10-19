@@ -4,6 +4,8 @@ package elementalinference
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type PutFeedPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFeedPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFeedPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFeedPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PutFeedPolicyRequest_id, *v.Id)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutFeedPolicyRequest_policy, *v.Policy)
+	}
+}
+
 type PutFeedPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type PutFeedPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFeedPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFeedPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFeedPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutFeedPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFeedPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFeedPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFeedPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFeedPolicy, schemas.PutFeedPolicyRequest, schemas.PutFeedPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFeedPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFeedPolicy, schemas.PutFeedPolicyRequest, schemas.PutFeedPolicyResponse), output: &PutFeedPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

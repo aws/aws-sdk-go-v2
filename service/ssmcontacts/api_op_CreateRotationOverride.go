@@ -4,6 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,28 @@ type CreateRotationOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRotationOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRotationOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRotationOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CreateRotationOverrideRequest_EndTime, *v.EndTime)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateRotationOverrideRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	serializeRotationOverrideContactsArnList(s, schemas.CreateRotationOverrideRequest_NewContactIds, v.NewContactIds)
+	if v.RotationId != nil {
+		s.WriteString(schemas.CreateRotationOverrideRequest_RotationId, *v.RotationId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CreateRotationOverrideRequest_StartTime, *v.StartTime)
+	}
+}
+
 type CreateRotationOverrideOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created rotation override.
@@ -70,13 +94,32 @@ type CreateRotationOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRotationOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRotationOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRotationOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RotationOverrideId != nil {
+		s.WriteString(schemas.CreateRotationOverrideResult_RotationOverrideId, *v.RotationOverrideId)
+	}
+}
+func (v *CreateRotationOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRotationOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRotationOverrideResult_RotationOverrideId:
+			v.RotationOverrideId = new(string)
+			return d.ReadString(schemas.CreateRotationOverrideResult_RotationOverrideId, v.RotationOverrideId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRotationOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRotationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRotationOverride, schemas.CreateRotationOverrideRequest, schemas.CreateRotationOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRotationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRotationOverride, schemas.CreateRotationOverrideRequest, schemas.CreateRotationOverrideResult), output: &CreateRotationOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

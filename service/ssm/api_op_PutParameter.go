@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -284,6 +286,46 @@ type PutParameterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutParameterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutParameterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedPattern != nil {
+		s.WriteString(schemas.PutParameterRequest_AllowedPattern, *v.AllowedPattern)
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.PutParameterRequest_DataType, *v.DataType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutParameterRequest_Description, *v.Description)
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.PutParameterRequest_KeyId, *v.KeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutParameterRequest_Name, *v.Name)
+	}
+	if v.Overwrite != nil {
+		s.WriteBool(schemas.PutParameterRequest_Overwrite, *v.Overwrite)
+	}
+	if v.Policies != nil {
+		s.WriteString(schemas.PutParameterRequest_Policies, *v.Policies)
+	}
+	serializeTagList(s, schemas.PutParameterRequest_Tags, v.Tags)
+	if v.Tier != "" {
+		s.WriteString(schemas.PutParameterRequest_Tier, string(v.Tier))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PutParameterRequest_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PutParameterRequest_Value, *v.Value)
+	}
+}
+
 type PutParameterOutput struct {
 
 	// The tier assigned to the parameter.
@@ -303,13 +345,41 @@ type PutParameterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutParameterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutParameterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutParameterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tier != "" {
+		s.WriteString(schemas.PutParameterResult_Tier, string(v.Tier))
+	}
+	if v.Version != 0 {
+		s.WriteInt64(schemas.PutParameterResult_Version, v.Version)
+	}
+}
+func (v *PutParameterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutParameterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutParameterResult_Tier:
+			var ev string
+			if err := d.ReadString(schemas.PutParameterResult_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = types.ParameterTier(ev)
+			return nil
+		case schemas.PutParameterResult_Version:
+			return d.ReadInt64(schemas.PutParameterResult_Version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutParameter, schemas.PutParameterRequest, schemas.PutParameterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutParameter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutParameter, schemas.PutParameterRequest, schemas.PutParameterResult), output: &PutParameterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type StartProjectSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProjectSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProjectSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProjectSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssumeControl != false {
+		s.WriteBool(schemas.StartProjectSessionRequest_AssumeControl, v.AssumeControl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartProjectSessionRequest_Name, *v.Name)
+	}
+}
+
 type StartProjectSessionOutput struct {
 
 	// The name of the project to be acted upon.
@@ -54,13 +71,38 @@ type StartProjectSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProjectSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProjectSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProjectSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSessionId != nil {
+		s.WriteString(schemas.StartProjectSessionResponse_ClientSessionId, *v.ClientSessionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartProjectSessionResponse_Name, *v.Name)
+	}
+}
+func (v *StartProjectSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProjectSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProjectSessionResponse_ClientSessionId:
+			v.ClientSessionId = new(string)
+			return d.ReadString(schemas.StartProjectSessionResponse_ClientSessionId, v.ClientSessionId)
+		case schemas.StartProjectSessionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartProjectSessionResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProjectSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartProjectSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProjectSession, schemas.StartProjectSessionRequest, schemas.StartProjectSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartProjectSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProjectSession, schemas.StartProjectSessionRequest, schemas.StartProjectSessionResponse), output: &StartProjectSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

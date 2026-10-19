@@ -5,7 +5,9 @@ package codestarnotifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type ListNotificationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListNotificationRulesFilters(s, schemas.ListNotificationRulesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotificationRulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListNotificationRulesOutput struct {
 
 	// An enumeration token that can be used in a request to return the next batch of
@@ -61,13 +79,35 @@ type ListNotificationRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationRulesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationRulesResult_NextToken, *v.NextToken)
+	}
+	serializeNotificationRuleBatch(s, schemas.ListNotificationRulesResult_NotificationRules, v.NotificationRules)
+}
+func (v *ListNotificationRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotificationRulesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotificationRulesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotificationRulesResult_NextToken, v.NextToken)
+		case schemas.ListNotificationRulesResult_NotificationRules:
+			return deserializeNotificationRuleBatch(d, schemas.ListNotificationRulesResult_NotificationRules, &v.NotificationRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotificationRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNotificationRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationRules, schemas.ListNotificationRulesRequest, schemas.ListNotificationRulesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNotificationRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationRules, schemas.ListNotificationRulesRequest, schemas.ListNotificationRulesResult), output: &ListNotificationRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

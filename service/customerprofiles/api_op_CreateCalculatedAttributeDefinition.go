@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -79,6 +81,49 @@ type CreateCalculatedAttributeDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCalculatedAttributeDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCalculatedAttributeDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeDetails != nil {
+		s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionRequest_AttributeDetails)
+		v.AttributeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CalculatedAttributeName != nil {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionRequest_CalculatedAttributeName, *v.CalculatedAttributeName)
+	}
+	if v.Conditions != nil {
+		s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionRequest_Conditions)
+		v.Conditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionRequest_DomainName, *v.DomainName)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionRequest_Statistic, string(v.Statistic))
+	}
+	serializeTagMap(s, schemas.CreateCalculatedAttributeDefinitionRequest_Tags, v.Tags)
+	if v.UseHistoricalData != nil {
+		s.WriteBool(schemas.CreateCalculatedAttributeDefinitionRequest_UseHistoricalData, *v.UseHistoricalData)
+	}
+}
+
 type CreateCalculatedAttributeDefinitionOutput struct {
 
 	// Mathematical expression and a list of attribute items specified in that
@@ -132,13 +177,117 @@ type CreateCalculatedAttributeDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCalculatedAttributeDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCalculatedAttributeDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeDetails != nil {
+		s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionResponse_AttributeDetails)
+		v.AttributeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CalculatedAttributeName != nil {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionResponse_CalculatedAttributeName, *v.CalculatedAttributeName)
+	}
+	if v.Conditions != nil {
+		s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionResponse_Conditions)
+		v.Conditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateCalculatedAttributeDefinitionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionResponse_DisplayName, *v.DisplayName)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionResponse_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.CreateCalculatedAttributeDefinitionResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Readiness != nil {
+		s.WriteStruct(schemas.CreateCalculatedAttributeDefinitionResponse_Readiness)
+		v.Readiness.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionResponse_Statistic, string(v.Statistic))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateCalculatedAttributeDefinitionResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateCalculatedAttributeDefinitionResponse_Tags, v.Tags)
+	if v.UseHistoricalData != nil {
+		s.WriteBool(schemas.CreateCalculatedAttributeDefinitionResponse_UseHistoricalData, *v.UseHistoricalData)
+	}
+}
+func (v *CreateCalculatedAttributeDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCalculatedAttributeDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCalculatedAttributeDefinitionResponse_AttributeDetails:
+			v.AttributeDetails = &types.AttributeDetails{}
+			return v.AttributeDetails.Deserialize(d)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_CalculatedAttributeName:
+			v.CalculatedAttributeName = new(string)
+			return d.ReadString(schemas.CreateCalculatedAttributeDefinitionResponse_CalculatedAttributeName, v.CalculatedAttributeName)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_Conditions:
+			v.Conditions = &types.Conditions{}
+			return v.Conditions.Deserialize(d)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateCalculatedAttributeDefinitionResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateCalculatedAttributeDefinitionResponse_Description, v.Description)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateCalculatedAttributeDefinitionResponse_DisplayName, v.DisplayName)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_Filter:
+			v.Filter = &types.Filter{}
+			return v.Filter.Deserialize(d)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateCalculatedAttributeDefinitionResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_Readiness:
+			v.Readiness = &types.Readiness{}
+			return v.Readiness.Deserialize(d)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_Statistic:
+			var ev string
+			if err := d.ReadString(schemas.CreateCalculatedAttributeDefinitionResponse_Statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = types.Statistic(ev)
+			return nil
+		case schemas.CreateCalculatedAttributeDefinitionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCalculatedAttributeDefinitionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReadinessStatus(ev)
+			return nil
+		case schemas.CreateCalculatedAttributeDefinitionResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateCalculatedAttributeDefinitionResponse_Tags, &v.Tags)
+		case schemas.CreateCalculatedAttributeDefinitionResponse_UseHistoricalData:
+			v.UseHistoricalData = new(bool)
+			return d.ReadBool(schemas.CreateCalculatedAttributeDefinitionResponse_UseHistoricalData, v.UseHistoricalData)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCalculatedAttributeDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCalculatedAttributeDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCalculatedAttributeDefinition, schemas.CreateCalculatedAttributeDefinitionRequest, schemas.CreateCalculatedAttributeDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCalculatedAttributeDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCalculatedAttributeDefinition, schemas.CreateCalculatedAttributeDefinitionRequest, schemas.CreateCalculatedAttributeDefinitionResponse), output: &CreateCalculatedAttributeDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

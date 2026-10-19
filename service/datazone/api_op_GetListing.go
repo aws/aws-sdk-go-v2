@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,24 @@ type GetListingInput struct {
 	ListingRevision *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetListingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetListingInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetListingInput_identifier, *v.Identifier)
+	}
+	if v.ListingRevision != nil {
+		s.WriteString(schemas.GetListingInput_listingRevision, *v.ListingRevision)
+	}
 }
 
 type GetListingOutput struct {
@@ -91,13 +111,93 @@ type GetListingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetListingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetListingOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetListingOutput_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetListingOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetListingOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetListingOutput_id, *v.Id)
+	}
+	serializeListingItem(s, schemas.GetListingOutput_item, v.Item)
+	if v.ListingRevision != nil {
+		s.WriteString(schemas.GetListingOutput_listingRevision, *v.ListingRevision)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetListingOutput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetListingOutput_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetListingOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetListingOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetListingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetListingOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetListingOutput_createdAt, v.CreatedAt)
+		case schemas.GetListingOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetListingOutput_createdBy, v.CreatedBy)
+		case schemas.GetListingOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetListingOutput_description, v.Description)
+		case schemas.GetListingOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetListingOutput_domainId, v.DomainId)
+		case schemas.GetListingOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetListingOutput_id, v.Id)
+		case schemas.GetListingOutput_item:
+			return deserializeListingItem(d, schemas.GetListingOutput_item, &v.Item)
+		case schemas.GetListingOutput_listingRevision:
+			v.ListingRevision = new(string)
+			return d.ReadString(schemas.GetListingOutput_listingRevision, v.ListingRevision)
+		case schemas.GetListingOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetListingOutput_name, v.Name)
+		case schemas.GetListingOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetListingOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ListingStatus(ev)
+			return nil
+		case schemas.GetListingOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetListingOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetListingOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetListingOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput), output: &GetListingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

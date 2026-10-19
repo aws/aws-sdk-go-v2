@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -27,6 +29,46 @@ type EventTypeSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventTypeSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventTypeSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventTypeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTypeId != nil {
+		s.WriteString(schemas.EventTypeSummary_EventTypeId, *v.EventTypeId)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.EventTypeSummary_EventTypeName, *v.EventTypeName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.EventTypeSummary_ResourceType, *v.ResourceType)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.EventTypeSummary_ServiceName, *v.ServiceName)
+	}
+}
+func (v *EventTypeSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventTypeSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventTypeSummary_EventTypeId:
+			v.EventTypeId = new(string)
+			return d.ReadString(schemas.EventTypeSummary_EventTypeId, v.EventTypeId)
+		case schemas.EventTypeSummary_EventTypeName:
+			v.EventTypeName = new(string)
+			return d.ReadString(schemas.EventTypeSummary_EventTypeName, v.EventTypeName)
+		case schemas.EventTypeSummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.EventTypeSummary_ResourceType, v.ResourceType)
+		case schemas.EventTypeSummary_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.EventTypeSummary_ServiceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 // Information about a filter to apply to the list of returned event types. You
 // can filter by resource type or service name.
 type ListEventTypesFilter struct {
@@ -43,6 +85,38 @@ type ListEventTypesFilter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListEventTypesFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventTypesFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventTypesFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ListEventTypesFilter_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ListEventTypesFilter_Value, *v.Value)
+	}
+}
+func (v *ListEventTypesFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventTypesFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventTypesFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.ListEventTypesFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ListEventTypesFilterName(ev)
+			return nil
+		case schemas.ListEventTypesFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ListEventTypesFilter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about a filter to apply to the list of returned notification rules.
@@ -63,6 +137,38 @@ type ListNotificationRulesFilter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListNotificationRulesFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationRulesFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationRulesFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ListNotificationRulesFilter_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ListNotificationRulesFilter_Value, *v.Value)
+	}
+}
+func (v *ListNotificationRulesFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotificationRulesFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotificationRulesFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.ListNotificationRulesFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ListNotificationRulesFilterName(ev)
+			return nil
+		case schemas.ListNotificationRulesFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ListNotificationRulesFilter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about a filter to apply to the list of returned targets. You can
@@ -87,6 +193,38 @@ type ListTargetsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ListTargetsFilter_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ListTargetsFilter_Value, *v.Value)
+	}
+}
+func (v *ListTargetsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetsFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.ListTargetsFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ListTargetsFilterName(ev)
+			return nil
+		case schemas.ListTargetsFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ListTargetsFilter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Information about a specified notification rule.
 type NotificationRuleSummary struct {
 
@@ -97,6 +235,34 @@ type NotificationRuleSummary struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationRuleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationRuleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NotificationRuleSummary_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.NotificationRuleSummary_Id, *v.Id)
+	}
+}
+func (v *NotificationRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationRuleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationRuleSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NotificationRuleSummary_Arn, v.Arn)
+		case schemas.NotificationRuleSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NotificationRuleSummary_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // Information about the Amazon Q Developer in chat applications topics or Amazon
@@ -122,6 +288,34 @@ type Target struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Target) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Target)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetAddress != nil {
+		s.WriteString(schemas.Target_TargetAddress, *v.TargetAddress)
+	}
+	if v.TargetType != nil {
+		s.WriteString(schemas.Target_TargetType, *v.TargetType)
+	}
+}
+func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Target, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Target_TargetAddress:
+			v.TargetAddress = new(string)
+			return d.ReadString(schemas.Target_TargetAddress, v.TargetAddress)
+		case schemas.Target_TargetType:
+			v.TargetType = new(string)
+			return d.ReadString(schemas.Target_TargetType, v.TargetType)
+		}
+		return nil
+	})
+}
+
 // Information about the targets specified for a notification rule.
 type TargetSummary struct {
 
@@ -144,6 +338,44 @@ type TargetSummary struct {
 	TargetType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetAddress != nil {
+		s.WriteString(schemas.TargetSummary_TargetAddress, *v.TargetAddress)
+	}
+	if v.TargetStatus != "" {
+		s.WriteString(schemas.TargetSummary_TargetStatus, string(v.TargetStatus))
+	}
+	if v.TargetType != nil {
+		s.WriteString(schemas.TargetSummary_TargetType, *v.TargetType)
+	}
+}
+func (v *TargetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetSummary_TargetAddress:
+			v.TargetAddress = new(string)
+			return d.ReadString(schemas.TargetSummary_TargetAddress, v.TargetAddress)
+		case schemas.TargetSummary_TargetStatus:
+			var ev string
+			if err := d.ReadString(schemas.TargetSummary_TargetStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetStatus = TargetStatus(ev)
+			return nil
+		case schemas.TargetSummary_TargetType:
+			v.TargetType = new(string)
+			return d.ReadString(schemas.TargetSummary_TargetType, v.TargetType)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

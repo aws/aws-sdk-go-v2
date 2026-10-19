@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type GetWorkflowStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetWorkflowStepsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetWorkflowStepsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetWorkflowStepsRequest_NextToken, *v.NextToken)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetWorkflowStepsRequest_WorkflowId, *v.WorkflowId)
+	}
+}
+
 type GetWorkflowStepsOutput struct {
 
 	// List containing workflow step details.
@@ -66,13 +89,51 @@ type GetWorkflowStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkflowStepsList(s, schemas.GetWorkflowStepsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetWorkflowStepsResponse_NextToken, *v.NextToken)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetWorkflowStepsResponse_WorkflowId, *v.WorkflowId)
+	}
+	if v.WorkflowType != "" {
+		s.WriteString(schemas.GetWorkflowStepsResponse_WorkflowType, string(v.WorkflowType))
+	}
+}
+func (v *GetWorkflowStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowStepsResponse_Items:
+			return deserializeWorkflowStepsList(d, schemas.GetWorkflowStepsResponse_Items, &v.Items)
+		case schemas.GetWorkflowStepsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetWorkflowStepsResponse_NextToken, v.NextToken)
+		case schemas.GetWorkflowStepsResponse_WorkflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepsResponse_WorkflowId, v.WorkflowId)
+		case schemas.GetWorkflowStepsResponse_WorkflowType:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowStepsResponse_WorkflowType, &ev); err != nil {
+				return err
+			}
+			v.WorkflowType = types.WorkflowType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflowSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowSteps, schemas.GetWorkflowStepsRequest, schemas.GetWorkflowStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflowSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowSteps, schemas.GetWorkflowStepsRequest, schemas.GetWorkflowStepsResponse), output: &GetWorkflowStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

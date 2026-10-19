@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListPolicyEngineSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyEngineSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyEngineSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyEngineSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyEngineSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyEngineSummariesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPolicyEngineSummariesOutput struct {
 
 	// An array of policy engine summary objects that exist in the account. Each
@@ -65,13 +82,35 @@ type ListPolicyEngineSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyEngineSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyEngineSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyEngineSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyEngineSummariesResponse_nextToken, *v.NextToken)
+	}
+	serializePolicyEngineSummaryList(s, schemas.ListPolicyEngineSummariesResponse_policyEngines, v.PolicyEngines)
+}
+func (v *ListPolicyEngineSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyEngineSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyEngineSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyEngineSummariesResponse_nextToken, v.NextToken)
+		case schemas.ListPolicyEngineSummariesResponse_policyEngines:
+			return deserializePolicyEngineSummaryList(d, schemas.ListPolicyEngineSummariesResponse_policyEngines, &v.PolicyEngines)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyEngineSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyEngineSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyEngineSummaries, schemas.ListPolicyEngineSummariesRequest, schemas.ListPolicyEngineSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyEngineSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyEngineSummaries, schemas.ListPolicyEngineSummariesRequest, schemas.ListPolicyEngineSummariesResponse), output: &ListPolicyEngineSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotjobsdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,22 @@ type StartNextPendingJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNextPendingJobExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNextPendingJobExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNextPendingJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetailsMap(s, schemas.StartNextPendingJobExecutionRequest_statusDetails, v.StatusDetails)
+	if v.StepTimeoutInMinutes != nil {
+		s.WriteInt64(schemas.StartNextPendingJobExecutionRequest_stepTimeoutInMinutes, *v.StepTimeoutInMinutes)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.StartNextPendingJobExecutionRequest_thingName, *v.ThingName)
+	}
+}
+
 type StartNextPendingJobExecutionOutput struct {
 
 	// A JobExecution object.
@@ -68,13 +86,34 @@ type StartNextPendingJobExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNextPendingJobExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNextPendingJobExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNextPendingJobExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Execution != nil {
+		s.WriteStruct(schemas.StartNextPendingJobExecutionResponse_execution)
+		v.Execution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartNextPendingJobExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNextPendingJobExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNextPendingJobExecutionResponse_execution:
+			v.Execution = &types.JobExecution{}
+			return v.Execution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNextPendingJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNextPendingJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNextPendingJobExecution, schemas.StartNextPendingJobExecutionRequest, schemas.StartNextPendingJobExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNextPendingJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNextPendingJobExecution, schemas.StartNextPendingJobExecutionRequest, schemas.StartNextPendingJobExecutionResponse), output: &StartNextPendingJobExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.DeleteSchemaRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type DeleteSchemaOutput struct {
 
 	// The input ARN that is returned as part of the response. For more information,
@@ -47,13 +61,32 @@ type DeleteSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.DeleteSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+}
+func (v *DeleteSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.DeleteSchemaResponse_SchemaArn, v.SchemaArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchema, schemas.DeleteSchemaRequest, schemas.DeleteSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchema, schemas.DeleteSchemaRequest, schemas.DeleteSchemaResponse), output: &DeleteSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

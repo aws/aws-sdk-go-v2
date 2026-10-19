@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,39 @@ type StartMediaAnalysisJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMediaAnalysisJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMediaAnalysisJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMediaAnalysisJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartMediaAnalysisJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.StartMediaAnalysisJobRequest_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartMediaAnalysisJobRequest_JobName, *v.JobName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.StartMediaAnalysisJobRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.OperationsConfig != nil {
+		s.WriteStruct(schemas.StartMediaAnalysisJobRequest_OperationsConfig)
+		v.OperationsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.StartMediaAnalysisJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartMediaAnalysisJobOutput struct {
 
 	// Identifier for the created job.
@@ -82,13 +117,32 @@ type StartMediaAnalysisJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMediaAnalysisJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMediaAnalysisJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMediaAnalysisJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartMediaAnalysisJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartMediaAnalysisJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMediaAnalysisJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMediaAnalysisJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartMediaAnalysisJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMediaAnalysisJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMediaAnalysisJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMediaAnalysisJob, schemas.StartMediaAnalysisJobRequest, schemas.StartMediaAnalysisJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMediaAnalysisJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMediaAnalysisJob, schemas.StartMediaAnalysisJobRequest, schemas.StartMediaAnalysisJobResponse), output: &StartMediaAnalysisJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,25 @@ type UpdateFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFacetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFacetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFacetAttributeUpdateList(s, schemas.UpdateFacetRequest_AttributeUpdates, v.AttributeUpdates)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFacetRequest_Name, *v.Name)
+	}
+	if v.ObjectType != "" {
+		s.WriteString(schemas.UpdateFacetRequest_ObjectType, string(v.ObjectType))
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.UpdateFacetRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type UpdateFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +82,26 @@ type UpdateFacetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFacetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFacetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFacetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFacetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFacetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFacet, schemas.UpdateFacetRequest, schemas.UpdateFacetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFacet, schemas.UpdateFacetRequest, schemas.UpdateFacetResponse), output: &UpdateFacetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

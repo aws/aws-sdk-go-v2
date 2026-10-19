@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,24 @@ type DescribeDatasetInput struct {
 	WorkspaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_datasetId, *v.DatasetId)
+	}
+	if v.DatasetVersion != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_datasetVersion, *v.DatasetVersion)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_workspaceName, *v.WorkspaceName)
+	}
 }
 
 type DescribeDatasetOutput struct {
@@ -115,13 +135,119 @@ type DescribeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_datasetArn, *v.DatasetArn)
+	}
+	if v.DatasetConfig != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_datasetConfig)
+		v.DatasetConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetCreationDate != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_datasetCreationDate, *v.DatasetCreationDate)
+	}
+	if v.DatasetDescription != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_datasetDescription, *v.DatasetDescription)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_datasetId, *v.DatasetId)
+	}
+	if v.DatasetLastUpdateDate != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_datasetLastUpdateDate, *v.DatasetLastUpdateDate)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_datasetName, *v.DatasetName)
+	}
+	if v.DatasetSource != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_datasetSource)
+		v.DatasetSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetStatus != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_datasetStatus)
+		v.DatasetStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.DescribeDatasetResponse_datasetType, string(v.DatasetType))
+	}
+	if v.DatasetVersion != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_datasetVersion, *v.DatasetVersion)
+	}
+	if v.EnrichmentStatus != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_enrichmentStatus)
+		v.EnrichmentStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetadata(s, schemas.DescribeDatasetResponse_metadata, v.Metadata)
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *DescribeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_datasetArn, v.DatasetArn)
+		case schemas.DescribeDatasetResponse_datasetConfig:
+			v.DatasetConfig = &types.DatasetConfig{}
+			return v.DatasetConfig.Deserialize(d)
+		case schemas.DescribeDatasetResponse_datasetCreationDate:
+			v.DatasetCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_datasetCreationDate, v.DatasetCreationDate)
+		case schemas.DescribeDatasetResponse_datasetDescription:
+			v.DatasetDescription = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_datasetDescription, v.DatasetDescription)
+		case schemas.DescribeDatasetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_datasetId, v.DatasetId)
+		case schemas.DescribeDatasetResponse_datasetLastUpdateDate:
+			v.DatasetLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_datasetLastUpdateDate, v.DatasetLastUpdateDate)
+		case schemas.DescribeDatasetResponse_datasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_datasetName, v.DatasetName)
+		case schemas.DescribeDatasetResponse_datasetSource:
+			v.DatasetSource = &types.DatasetSource{}
+			return v.DatasetSource.Deserialize(d)
+		case schemas.DescribeDatasetResponse_datasetStatus:
+			v.DatasetStatus = &types.DatasetStatus{}
+			return v.DatasetStatus.Deserialize(d)
+		case schemas.DescribeDatasetResponse_datasetType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_datasetType, &ev); err != nil {
+				return err
+			}
+			v.DatasetType = types.DatasetTypeEnum(ev)
+			return nil
+		case schemas.DescribeDatasetResponse_datasetVersion:
+			v.DatasetVersion = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_datasetVersion, v.DatasetVersion)
+		case schemas.DescribeDatasetResponse_enrichmentStatus:
+			v.EnrichmentStatus = &types.DatasetEnrichment{}
+			return v.EnrichmentStatus.Deserialize(d)
+		case schemas.DescribeDatasetResponse_metadata:
+			return deserializeMetadata(d, schemas.DescribeDatasetResponse_metadata, &v.Metadata)
+		case schemas.DescribeDatasetResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse), output: &DescribeDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type CreateIntegrationWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateIntegrationWorkflowRequest_DomainName, *v.DomainName)
+	}
+	if v.IntegrationConfig != nil {
+		s.WriteStruct(schemas.CreateIntegrationWorkflowRequest_IntegrationConfig)
+		v.IntegrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.CreateIntegrationWorkflowRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateIntegrationWorkflowRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagMap(s, schemas.CreateIntegrationWorkflowRequest_Tags, v.Tags)
+	if v.WorkflowType != "" {
+		s.WriteString(schemas.CreateIntegrationWorkflowRequest_WorkflowType, string(v.WorkflowType))
+	}
+}
+
 type CreateIntegrationWorkflowOutput struct {
 
 	// A message indicating create request was received.
@@ -79,13 +108,38 @@ type CreateIntegrationWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateIntegrationWorkflowResponse_Message, *v.Message)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.CreateIntegrationWorkflowResponse_WorkflowId, *v.WorkflowId)
+	}
+}
+func (v *CreateIntegrationWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIntegrationWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIntegrationWorkflowResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateIntegrationWorkflowResponse_Message, v.Message)
+		case schemas.CreateIntegrationWorkflowResponse_WorkflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.CreateIntegrationWorkflowResponse_WorkflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntegrationWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIntegrationWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationWorkflow, schemas.CreateIntegrationWorkflowRequest, schemas.CreateIntegrationWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIntegrationWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationWorkflow, schemas.CreateIntegrationWorkflowRequest, schemas.CreateIntegrationWorkflowResponse), output: &CreateIntegrationWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

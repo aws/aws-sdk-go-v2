@@ -5,7 +5,9 @@ package controlcatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,26 @@ type ListCommonControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommonControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommonControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommonControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommonControlFilter != nil {
+		s.WriteStruct(schemas.ListCommonControlsRequest_CommonControlFilter)
+		v.CommonControlFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCommonControlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommonControlsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCommonControlsOutput struct {
 
 	// The list of common controls that the ListCommonControls API returns.
@@ -63,13 +85,35 @@ type ListCommonControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommonControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommonControlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommonControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommonControlSummaryList(s, schemas.ListCommonControlsResponse_CommonControls, v.CommonControls)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommonControlsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCommonControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCommonControlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCommonControlsResponse_CommonControls:
+			return deserializeCommonControlSummaryList(d, schemas.ListCommonControlsResponse_CommonControls, &v.CommonControls)
+		case schemas.ListCommonControlsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCommonControlsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCommonControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCommonControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommonControls, schemas.ListCommonControlsRequest, schemas.ListCommonControlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCommonControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommonControls, schemas.ListCommonControlsRequest, schemas.ListCommonControlsResponse), output: &ListCommonControlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

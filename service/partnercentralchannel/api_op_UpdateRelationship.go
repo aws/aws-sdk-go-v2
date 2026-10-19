@@ -4,7 +4,9 @@ package partnercentralchannel
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type UpdateRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelationshipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelationshipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.UpdateRelationshipRequest_catalog, *v.Catalog)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateRelationshipRequest_displayName, *v.DisplayName)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateRelationshipRequest_identifier, *v.Identifier)
+	}
+	if v.ProgramManagementAccountIdentifier != nil {
+		s.WriteString(schemas.UpdateRelationshipRequest_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
+	}
+	serializeSupportPlan(s, schemas.UpdateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
+	if v.Revision != nil {
+		s.WriteString(schemas.UpdateRelationshipRequest_revision, *v.Revision)
+	}
+}
+
 type UpdateRelationshipOutput struct {
 
 	// Details of the updated relationship.
@@ -65,13 +92,34 @@ type UpdateRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelationshipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelationshipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelationshipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationshipDetail != nil {
+		s.WriteStruct(schemas.UpdateRelationshipResponse_relationshipDetail)
+		v.RelationshipDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRelationshipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRelationshipResponse_relationshipDetail:
+			v.RelationshipDetail = &types.UpdateRelationshipDetail{}
+			return v.RelationshipDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRelationship{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationship, schemas.UpdateRelationshipRequest, schemas.UpdateRelationshipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateRelationship{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationship, schemas.UpdateRelationshipRequest, schemas.UpdateRelationshipResponse), output: &UpdateRelationshipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,44 @@ type CreateWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWirelessDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWirelessDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateWirelessDeviceRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWirelessDeviceRequest_Description, *v.Description)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.CreateWirelessDeviceRequest_DestinationName, *v.DestinationName)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.CreateWirelessDeviceRequest_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWirelessDeviceRequest_Name, *v.Name)
+	}
+	if v.Positioning != "" {
+		s.WriteString(schemas.CreateWirelessDeviceRequest_Positioning, string(v.Positioning))
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.CreateWirelessDeviceRequest_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateWirelessDeviceRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateWirelessDeviceRequest_Type, string(v.Type))
+	}
+}
+
 type CreateWirelessDeviceOutput struct {
 
 	// The Amazon Resource Name of the new resource.
@@ -87,13 +127,38 @@ type CreateWirelessDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWirelessDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWirelessDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateWirelessDeviceResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWirelessDeviceResponse_Id, *v.Id)
+	}
+}
+func (v *CreateWirelessDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWirelessDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWirelessDeviceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateWirelessDeviceResponse_Arn, v.Arn)
+		case schemas.CreateWirelessDeviceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWirelessDeviceResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWirelessDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessDevice, schemas.CreateWirelessDeviceRequest, schemas.CreateWirelessDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWirelessDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessDevice, schemas.CreateWirelessDeviceRequest, schemas.CreateWirelessDeviceResponse), output: &CreateWirelessDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

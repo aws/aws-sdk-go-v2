@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type DeletePaymentInstrumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentInstrumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentInstrumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentInstrumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.DeletePaymentInstrumentRequest_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	if v.PaymentInstrumentId != nil {
+		s.WriteString(schemas.DeletePaymentInstrumentRequest_paymentInstrumentId, *v.PaymentInstrumentId)
+	}
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.DeletePaymentInstrumentRequest_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DeletePaymentInstrumentRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for deleting a payment instrument.
 type DeletePaymentInstrumentOutput struct {
 
@@ -64,13 +87,36 @@ type DeletePaymentInstrumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentInstrumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentInstrumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentInstrumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePaymentInstrumentResponse_status, string(v.Status))
+	}
+}
+func (v *DeletePaymentInstrumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePaymentInstrumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePaymentInstrumentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePaymentInstrumentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentInstrumentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePaymentInstrumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePaymentInstrument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentInstrument, schemas.DeletePaymentInstrumentRequest, schemas.DeletePaymentInstrumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePaymentInstrument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentInstrument, schemas.DeletePaymentInstrumentRequest, schemas.DeletePaymentInstrumentResponse), output: &DeletePaymentInstrumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

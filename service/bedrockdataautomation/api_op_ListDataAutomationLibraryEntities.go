@@ -5,7 +5,9 @@ package bedrockdataautomation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListDataAutomationLibraryEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataAutomationLibraryEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataAutomationLibraryEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataAutomationLibraryEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityType != "" {
+		s.WriteString(schemas.ListDataAutomationLibraryEntitiesRequest_entityType, string(v.EntityType))
+	}
+	if v.LibraryArn != nil {
+		s.WriteString(schemas.ListDataAutomationLibraryEntitiesRequest_libraryArn, *v.LibraryArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataAutomationLibraryEntitiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataAutomationLibraryEntitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // List DataAutomationLibraryEntities Response
 type ListDataAutomationLibraryEntitiesOutput struct {
 
@@ -62,13 +85,35 @@ type ListDataAutomationLibraryEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataAutomationLibraryEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataAutomationLibraryEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataAutomationLibraryEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataAutomationLibraryEntitySummaries(s, schemas.ListDataAutomationLibraryEntitiesResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataAutomationLibraryEntitiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataAutomationLibraryEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataAutomationLibraryEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataAutomationLibraryEntitiesResponse_entities:
+			return deserializeDataAutomationLibraryEntitySummaries(d, schemas.ListDataAutomationLibraryEntitiesResponse_entities, &v.Entities)
+		case schemas.ListDataAutomationLibraryEntitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataAutomationLibraryEntitiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataAutomationLibraryEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataAutomationLibraryEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAutomationLibraryEntities, schemas.ListDataAutomationLibraryEntitiesRequest, schemas.ListDataAutomationLibraryEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataAutomationLibraryEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAutomationLibraryEntities, schemas.ListDataAutomationLibraryEntitiesRequest, schemas.ListDataAutomationLibraryEntitiesResponse), output: &ListDataAutomationLibraryEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

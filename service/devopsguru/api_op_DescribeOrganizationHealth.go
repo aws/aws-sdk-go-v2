@@ -4,6 +4,8 @@ package devopsguru
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,17 @@ type DescribeOrganizationHealthInput struct {
 	OrganizationalUnitIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeOrganizationHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.DescribeOrganizationHealthRequest_AccountIds, v.AccountIds)
+	serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationHealthRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
 }
 
 type DescribeOrganizationHealthOutput struct {
@@ -67,13 +80,41 @@ type DescribeOrganizationHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationHealthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.DescribeOrganizationHealthResponse_MetricsAnalyzed, v.MetricsAnalyzed)
+	s.WriteInt32(schemas.DescribeOrganizationHealthResponse_OpenProactiveInsights, v.OpenProactiveInsights)
+	s.WriteInt32(schemas.DescribeOrganizationHealthResponse_OpenReactiveInsights, v.OpenReactiveInsights)
+	if v.ResourceHours != nil {
+		s.WriteInt64(schemas.DescribeOrganizationHealthResponse_ResourceHours, *v.ResourceHours)
+	}
+}
+func (v *DescribeOrganizationHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationHealthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationHealthResponse_MetricsAnalyzed:
+			return d.ReadInt32(schemas.DescribeOrganizationHealthResponse_MetricsAnalyzed, &v.MetricsAnalyzed)
+		case schemas.DescribeOrganizationHealthResponse_OpenProactiveInsights:
+			return d.ReadInt32(schemas.DescribeOrganizationHealthResponse_OpenProactiveInsights, &v.OpenProactiveInsights)
+		case schemas.DescribeOrganizationHealthResponse_OpenReactiveInsights:
+			return d.ReadInt32(schemas.DescribeOrganizationHealthResponse_OpenReactiveInsights, &v.OpenReactiveInsights)
+		case schemas.DescribeOrganizationHealthResponse_ResourceHours:
+			v.ResourceHours = new(int64)
+			return d.ReadInt64(schemas.DescribeOrganizationHealthResponse_ResourceHours, v.ResourceHours)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationHealth, schemas.DescribeOrganizationHealthRequest, schemas.DescribeOrganizationHealthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationHealth, schemas.DescribeOrganizationHealthRequest, schemas.DescribeOrganizationHealthResponse), output: &DescribeOrganizationHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

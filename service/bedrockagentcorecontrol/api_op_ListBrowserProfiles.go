@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListBrowserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrowserProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrowserProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrowserProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBrowserProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListBrowserProfilesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrowserProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBrowserProfilesOutput struct {
 
 	// The list of browser profile summaries.
@@ -55,13 +75,35 @@ type ListBrowserProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrowserProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrowserProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrowserProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrowserProfilesResponse_nextToken, *v.NextToken)
+	}
+	serializeBrowserProfileSummaries(s, schemas.ListBrowserProfilesResponse_profileSummaries, v.ProfileSummaries)
+}
+func (v *ListBrowserProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBrowserProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBrowserProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBrowserProfilesResponse_nextToken, v.NextToken)
+		case schemas.ListBrowserProfilesResponse_profileSummaries:
+			return deserializeBrowserProfileSummaries(d, schemas.ListBrowserProfilesResponse_profileSummaries, &v.ProfileSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBrowserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBrowserProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrowserProfiles, schemas.ListBrowserProfilesRequest, schemas.ListBrowserProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBrowserProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrowserProfiles, schemas.ListBrowserProfilesRequest, schemas.ListBrowserProfilesResponse), output: &ListBrowserProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

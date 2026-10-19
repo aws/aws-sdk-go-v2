@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,30 @@ type CreateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_clientToken, *v.ClientToken)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateWorkspaceRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	if v.WorkspaceDescription != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_workspaceDescription, *v.WorkspaceDescription)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type CreateWorkspaceOutput struct {
 
 	// The ARN of the workspace.
@@ -84,13 +110,46 @@ type CreateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceArn != nil {
+		s.WriteString(schemas.CreateWorkspaceResponse_workspaceArn, *v.WorkspaceArn)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateWorkspaceResponse_workspaceName, *v.WorkspaceName)
+	}
+	if v.WorkspaceStatus != nil {
+		s.WriteStruct(schemas.CreateWorkspaceResponse_workspaceStatus)
+		v.WorkspaceStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceResponse_workspaceArn:
+			v.WorkspaceArn = new(string)
+			return d.ReadString(schemas.CreateWorkspaceResponse_workspaceArn, v.WorkspaceArn)
+		case schemas.CreateWorkspaceResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.CreateWorkspaceResponse_workspaceName, v.WorkspaceName)
+		case schemas.CreateWorkspaceResponse_workspaceStatus:
+			v.WorkspaceStatus = &types.WorkspaceStatus{}
+			return v.WorkspaceStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse), output: &CreateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

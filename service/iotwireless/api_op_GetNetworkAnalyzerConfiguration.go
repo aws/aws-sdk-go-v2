@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetNetworkAnalyzerConfigurationInput struct {
 	ConfigurationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetNetworkAnalyzerConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkAnalyzerConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkAnalyzerConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.GetNetworkAnalyzerConfigurationRequest_ConfigurationName, *v.ConfigurationName)
+	}
 }
 
 type GetNetworkAnalyzerConfigurationOutput struct {
@@ -66,13 +80,61 @@ type GetNetworkAnalyzerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkAnalyzerConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkAnalyzerConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkAnalyzerConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetNetworkAnalyzerConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetNetworkAnalyzerConfigurationResponse_Description, *v.Description)
+	}
+	serializeNetworkAnalyzerMulticastGroupList(s, schemas.GetNetworkAnalyzerConfigurationResponse_MulticastGroups, v.MulticastGroups)
+	if v.Name != nil {
+		s.WriteString(schemas.GetNetworkAnalyzerConfigurationResponse_Name, *v.Name)
+	}
+	if v.TraceContent != nil {
+		s.WriteStruct(schemas.GetNetworkAnalyzerConfigurationResponse_TraceContent)
+		v.TraceContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWirelessDeviceList(s, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessDevices, v.WirelessDevices)
+	serializeWirelessGatewayList(s, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessGateways, v.WirelessGateways)
+}
+func (v *GetNetworkAnalyzerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkAnalyzerConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkAnalyzerConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetNetworkAnalyzerConfigurationResponse_Arn, v.Arn)
+		case schemas.GetNetworkAnalyzerConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetNetworkAnalyzerConfigurationResponse_Description, v.Description)
+		case schemas.GetNetworkAnalyzerConfigurationResponse_MulticastGroups:
+			return deserializeNetworkAnalyzerMulticastGroupList(d, schemas.GetNetworkAnalyzerConfigurationResponse_MulticastGroups, &v.MulticastGroups)
+		case schemas.GetNetworkAnalyzerConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetNetworkAnalyzerConfigurationResponse_Name, v.Name)
+		case schemas.GetNetworkAnalyzerConfigurationResponse_TraceContent:
+			v.TraceContent = &types.TraceContent{}
+			return v.TraceContent.Deserialize(d)
+		case schemas.GetNetworkAnalyzerConfigurationResponse_WirelessDevices:
+			return deserializeWirelessDeviceList(d, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessDevices, &v.WirelessDevices)
+		case schemas.GetNetworkAnalyzerConfigurationResponse_WirelessGateways:
+			return deserializeWirelessGatewayList(d, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessGateways, &v.WirelessGateways)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkAnalyzerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkAnalyzerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkAnalyzerConfiguration, schemas.GetNetworkAnalyzerConfigurationRequest, schemas.GetNetworkAnalyzerConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkAnalyzerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkAnalyzerConfiguration, schemas.GetNetworkAnalyzerConfigurationRequest, schemas.GetNetworkAnalyzerConfigurationResponse), output: &GetNetworkAnalyzerConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

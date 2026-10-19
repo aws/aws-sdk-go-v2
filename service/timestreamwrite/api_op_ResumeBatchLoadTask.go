@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ResumeBatchLoadTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeBatchLoadTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeBatchLoadTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeBatchLoadTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.ResumeBatchLoadTaskRequest_TaskId, *v.TaskId)
+	}
+}
+
 type ResumeBatchLoadTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type ResumeBatchLoadTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeBatchLoadTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeBatchLoadTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeBatchLoadTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResumeBatchLoadTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResumeBatchLoadTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResumeBatchLoadTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpResumeBatchLoadTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeBatchLoadTask, schemas.ResumeBatchLoadTaskRequest, schemas.ResumeBatchLoadTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpResumeBatchLoadTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeBatchLoadTask, schemas.ResumeBatchLoadTaskRequest, schemas.ResumeBatchLoadTaskResponse), output: &ResumeBatchLoadTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

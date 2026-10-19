@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -65,6 +67,44 @@ type GetPositionEstimateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPositionEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPositionEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPositionEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedConfiguration != nil {
+		s.WriteStruct(schemas.GetPositionEstimateRequest_AdvancedConfiguration)
+		v.AdvancedConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CellTowers != nil {
+		s.WriteStruct(schemas.GetPositionEstimateRequest_CellTowers)
+		v.CellTowers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Gnss != nil {
+		s.WriteStruct(schemas.GetPositionEstimateRequest_Gnss)
+		v.Gnss.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GnssMultiFrame != nil {
+		s.WriteStruct(schemas.GetPositionEstimateRequest_GnssMultiFrame)
+		v.GnssMultiFrame.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ip != nil {
+		s.WriteStruct(schemas.GetPositionEstimateRequest_Ip)
+		v.Ip.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.GetPositionEstimateRequest_Timestamp, *v.Timestamp)
+	}
+	serializeWiFiAccessPoints(s, schemas.GetPositionEstimateRequest_WiFiAccessPoints, v.WiFiAccessPoints)
+}
+
 type GetPositionEstimateOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
@@ -83,13 +123,31 @@ type GetPositionEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPositionEstimateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPositionEstimateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPositionEstimateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeoJsonPayload != nil {
+		s.WriteBlob(schemas.GetPositionEstimateResponse_GeoJsonPayload, v.GeoJsonPayload)
+	}
+}
+func (v *GetPositionEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPositionEstimateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPositionEstimateResponse_GeoJsonPayload:
+			return d.ReadBlob(schemas.GetPositionEstimateResponse_GeoJsonPayload, &v.GeoJsonPayload)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPositionEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPositionEstimate, schemas.GetPositionEstimateRequest, schemas.GetPositionEstimateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPositionEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPositionEstimate, schemas.GetPositionEstimateRequest, schemas.GetPositionEstimateResponse), output: &GetPositionEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

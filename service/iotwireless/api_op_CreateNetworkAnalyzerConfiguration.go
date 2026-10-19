@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,33 @@ type CreateNetworkAnalyzerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkAnalyzerConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkAnalyzerConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkAnalyzerConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateNetworkAnalyzerConfigurationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNetworkAnalyzerConfigurationRequest_Description, *v.Description)
+	}
+	serializeNetworkAnalyzerMulticastGroupList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_MulticastGroups, v.MulticastGroups)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNetworkAnalyzerConfigurationRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_Tags, v.Tags)
+	if v.TraceContent != nil {
+		s.WriteStruct(schemas.CreateNetworkAnalyzerConfigurationRequest_TraceContent)
+		v.TraceContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWirelessDeviceList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_WirelessDevices, v.WirelessDevices)
+	serializeWirelessGatewayList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_WirelessGateways, v.WirelessGateways)
+}
+
 type CreateNetworkAnalyzerConfigurationOutput struct {
 
 	// The Amazon Resource Name of the new resource.
@@ -82,13 +111,38 @@ type CreateNetworkAnalyzerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkAnalyzerConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkAnalyzerConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkAnalyzerConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateNetworkAnalyzerConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNetworkAnalyzerConfigurationResponse_Name, *v.Name)
+	}
+}
+func (v *CreateNetworkAnalyzerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNetworkAnalyzerConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNetworkAnalyzerConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateNetworkAnalyzerConfigurationResponse_Arn, v.Arn)
+		case schemas.CreateNetworkAnalyzerConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateNetworkAnalyzerConfigurationResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNetworkAnalyzerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNetworkAnalyzerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetworkAnalyzerConfiguration, schemas.CreateNetworkAnalyzerConfigurationRequest, schemas.CreateNetworkAnalyzerConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNetworkAnalyzerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetworkAnalyzerConfiguration, schemas.CreateNetworkAnalyzerConfigurationRequest, schemas.CreateNetworkAnalyzerConfigurationResponse), output: &CreateNetworkAnalyzerConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

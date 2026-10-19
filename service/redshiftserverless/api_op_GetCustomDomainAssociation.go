@@ -4,6 +4,8 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetCustomDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomDomainAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomDomainAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.GetCustomDomainAssociationRequest_customDomainName, *v.CustomDomainName)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.GetCustomDomainAssociationRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type GetCustomDomainAssociationOutput struct {
 
 	// The custom domain name’s certificate Amazon resource name (ARN).
@@ -59,13 +76,50 @@ type GetCustomDomainAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomDomainAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomDomainAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomDomainAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainCertificateArn != nil {
+		s.WriteString(schemas.GetCustomDomainAssociationResponse_customDomainCertificateArn, *v.CustomDomainCertificateArn)
+	}
+	if v.CustomDomainCertificateExpiryTime != nil {
+		s.WriteTime(schemas.GetCustomDomainAssociationResponse_customDomainCertificateExpiryTime, *v.CustomDomainCertificateExpiryTime)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.GetCustomDomainAssociationResponse_customDomainName, *v.CustomDomainName)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.GetCustomDomainAssociationResponse_workgroupName, *v.WorkgroupName)
+	}
+}
+func (v *GetCustomDomainAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomDomainAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomDomainAssociationResponse_customDomainCertificateArn:
+			v.CustomDomainCertificateArn = new(string)
+			return d.ReadString(schemas.GetCustomDomainAssociationResponse_customDomainCertificateArn, v.CustomDomainCertificateArn)
+		case schemas.GetCustomDomainAssociationResponse_customDomainCertificateExpiryTime:
+			v.CustomDomainCertificateExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.GetCustomDomainAssociationResponse_customDomainCertificateExpiryTime, v.CustomDomainCertificateExpiryTime)
+		case schemas.GetCustomDomainAssociationResponse_customDomainName:
+			v.CustomDomainName = new(string)
+			return d.ReadString(schemas.GetCustomDomainAssociationResponse_customDomainName, v.CustomDomainName)
+		case schemas.GetCustomDomainAssociationResponse_workgroupName:
+			v.WorkgroupName = new(string)
+			return d.ReadString(schemas.GetCustomDomainAssociationResponse_workgroupName, v.WorkgroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCustomDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomDomainAssociation, schemas.GetCustomDomainAssociationRequest, schemas.GetCustomDomainAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCustomDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomDomainAssociation, schemas.GetCustomDomainAssociationRequest, schemas.GetCustomDomainAssociationResponse), output: &GetCustomDomainAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

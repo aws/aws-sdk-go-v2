@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,48 @@ type SendConnectorEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendConnectorEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendConnectorEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendConnectorEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorDeviceId != nil {
+		s.WriteString(schemas.SendConnectorEventRequest_ConnectorDeviceId, *v.ConnectorDeviceId)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.SendConnectorEventRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.DeviceDiscoveryId != nil {
+		s.WriteString(schemas.SendConnectorEventRequest_DeviceDiscoveryId, *v.DeviceDiscoveryId)
+	}
+	serializeDevices(s, schemas.SendConnectorEventRequest_Devices, v.Devices)
+	if v.MatterEndpoint != nil {
+		s.WriteStruct(schemas.SendConnectorEventRequest_MatterEndpoint)
+		v.MatterEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.SendConnectorEventRequest_Message, *v.Message)
+	}
+	if v.Operation != "" {
+		s.WriteString(schemas.SendConnectorEventRequest_Operation, string(v.Operation))
+	}
+	if v.OperationVersion != nil {
+		s.WriteString(schemas.SendConnectorEventRequest_OperationVersion, *v.OperationVersion)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.SendConnectorEventRequest_StatusCode, *v.StatusCode)
+	}
+	if v.TraceId != nil {
+		s.WriteString(schemas.SendConnectorEventRequest_TraceId, *v.TraceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.SendConnectorEventRequest_UserId, *v.UserId)
+	}
+}
+
 type SendConnectorEventOutput struct {
 
 	// The id of the connector between the third-party cloud provider and IoT managed
@@ -103,13 +147,32 @@ type SendConnectorEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendConnectorEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendConnectorEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendConnectorEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.SendConnectorEventResponse_ConnectorId, *v.ConnectorId)
+	}
+}
+func (v *SendConnectorEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendConnectorEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendConnectorEventResponse_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.SendConnectorEventResponse_ConnectorId, v.ConnectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendConnectorEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendConnectorEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendConnectorEvent, schemas.SendConnectorEventRequest, schemas.SendConnectorEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendConnectorEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendConnectorEvent, schemas.SendConnectorEventRequest, schemas.SendConnectorEventResponse), output: &SendConnectorEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package waf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,21 @@ type DeleteRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteRuleRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.DeleteRuleRequest_RuleId, *v.RuleId)
+	}
+}
+
 type DeleteRuleOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRule request. You can also
@@ -72,13 +89,32 @@ type DeleteRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteRuleResponse_ChangeToken, *v.ChangeToken)
+	}
+}
+func (v *DeleteRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRuleResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.DeleteRuleResponse_ChangeToken, v.ChangeToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRule, schemas.DeleteRuleRequest, schemas.DeleteRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRule, schemas.DeleteRuleRequest, schemas.DeleteRuleResponse), output: &DeleteRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

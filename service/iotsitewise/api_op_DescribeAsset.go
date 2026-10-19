@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,6 +47,21 @@ type DescribeAssetInput struct {
 	ExcludeProperties bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.DescribeAssetRequest_assetId, *v.AssetId)
+	}
+	if v.ExcludeProperties != false {
+		s.WriteBool(schemas.DescribeAssetRequest_excludeProperties, v.ExcludeProperties)
+	}
 }
 
 type DescribeAssetOutput struct {
@@ -120,13 +137,94 @@ type DescribeAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetArn != nil {
+		s.WriteString(schemas.DescribeAssetResponse_assetArn, *v.AssetArn)
+	}
+	serializeAssetCompositeModelSummaries(s, schemas.DescribeAssetResponse_assetCompositeModelSummaries, v.AssetCompositeModelSummaries)
+	serializeAssetCompositeModels(s, schemas.DescribeAssetResponse_assetCompositeModels, v.AssetCompositeModels)
+	if v.AssetCreationDate != nil {
+		s.WriteTime(schemas.DescribeAssetResponse_assetCreationDate, *v.AssetCreationDate)
+	}
+	if v.AssetDescription != nil {
+		s.WriteString(schemas.DescribeAssetResponse_assetDescription, *v.AssetDescription)
+	}
+	if v.AssetExternalId != nil {
+		s.WriteString(schemas.DescribeAssetResponse_assetExternalId, *v.AssetExternalId)
+	}
+	serializeAssetHierarchies(s, schemas.DescribeAssetResponse_assetHierarchies, v.AssetHierarchies)
+	if v.AssetId != nil {
+		s.WriteString(schemas.DescribeAssetResponse_assetId, *v.AssetId)
+	}
+	if v.AssetLastUpdateDate != nil {
+		s.WriteTime(schemas.DescribeAssetResponse_assetLastUpdateDate, *v.AssetLastUpdateDate)
+	}
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DescribeAssetResponse_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetName != nil {
+		s.WriteString(schemas.DescribeAssetResponse_assetName, *v.AssetName)
+	}
+	serializeAssetProperties(s, schemas.DescribeAssetResponse_assetProperties, v.AssetProperties)
+	if v.AssetStatus != nil {
+		s.WriteStruct(schemas.DescribeAssetResponse_assetStatus)
+		v.AssetStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetResponse_assetArn:
+			v.AssetArn = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_assetArn, v.AssetArn)
+		case schemas.DescribeAssetResponse_assetCompositeModelSummaries:
+			return deserializeAssetCompositeModelSummaries(d, schemas.DescribeAssetResponse_assetCompositeModelSummaries, &v.AssetCompositeModelSummaries)
+		case schemas.DescribeAssetResponse_assetCompositeModels:
+			return deserializeAssetCompositeModels(d, schemas.DescribeAssetResponse_assetCompositeModels, &v.AssetCompositeModels)
+		case schemas.DescribeAssetResponse_assetCreationDate:
+			v.AssetCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAssetResponse_assetCreationDate, v.AssetCreationDate)
+		case schemas.DescribeAssetResponse_assetDescription:
+			v.AssetDescription = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_assetDescription, v.AssetDescription)
+		case schemas.DescribeAssetResponse_assetExternalId:
+			v.AssetExternalId = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_assetExternalId, v.AssetExternalId)
+		case schemas.DescribeAssetResponse_assetHierarchies:
+			return deserializeAssetHierarchies(d, schemas.DescribeAssetResponse_assetHierarchies, &v.AssetHierarchies)
+		case schemas.DescribeAssetResponse_assetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_assetId, v.AssetId)
+		case schemas.DescribeAssetResponse_assetLastUpdateDate:
+			v.AssetLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAssetResponse_assetLastUpdateDate, v.AssetLastUpdateDate)
+		case schemas.DescribeAssetResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_assetModelId, v.AssetModelId)
+		case schemas.DescribeAssetResponse_assetName:
+			v.AssetName = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_assetName, v.AssetName)
+		case schemas.DescribeAssetResponse_assetProperties:
+			return deserializeAssetProperties(d, schemas.DescribeAssetResponse_assetProperties, &v.AssetProperties)
+		case schemas.DescribeAssetResponse_assetStatus:
+			v.AssetStatus = &types.AssetStatus{}
+			return v.AssetStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAsset, schemas.DescribeAssetRequest, schemas.DescribeAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAsset, schemas.DescribeAssetRequest, schemas.DescribeAssetResponse), output: &DescribeAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

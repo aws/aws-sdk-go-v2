@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,25 @@ type DescribeInstancePatchStatesForPatchGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancePatchStatesForPatchGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancePatchStatesForPatchGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancePatchStatesForPatchGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstancePatchStateFilterList(s, schemas.DescribeInstancePatchStatesForPatchGroupRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeInstancePatchStatesForPatchGroupRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancePatchStatesForPatchGroupRequest_NextToken, *v.NextToken)
+	}
+	if v.PatchGroup != nil {
+		s.WriteString(schemas.DescribeInstancePatchStatesForPatchGroupRequest_PatchGroup, *v.PatchGroup)
+	}
+}
+
 type DescribeInstancePatchStatesForPatchGroupOutput struct {
 
 	// The high-level patch state for the requested managed nodes.
@@ -68,13 +89,35 @@ type DescribeInstancePatchStatesForPatchGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancePatchStatesForPatchGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancePatchStatesForPatchGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancePatchStatesForPatchGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstancePatchStatesList(s, schemas.DescribeInstancePatchStatesForPatchGroupResult_InstancePatchStates, v.InstancePatchStates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancePatchStatesForPatchGroupResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeInstancePatchStatesForPatchGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstancePatchStatesForPatchGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstancePatchStatesForPatchGroupResult_InstancePatchStates:
+			return deserializeInstancePatchStatesList(d, schemas.DescribeInstancePatchStatesForPatchGroupResult_InstancePatchStates, &v.InstancePatchStates)
+		case schemas.DescribeInstancePatchStatesForPatchGroupResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInstancePatchStatesForPatchGroupResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstancePatchStatesForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstancePatchStatesForPatchGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstancePatchStatesForPatchGroup, schemas.DescribeInstancePatchStatesForPatchGroupRequest, schemas.DescribeInstancePatchStatesForPatchGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInstancePatchStatesForPatchGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstancePatchStatesForPatchGroup, schemas.DescribeInstancePatchStatesForPatchGroupRequest, schemas.DescribeInstancePatchStatesForPatchGroupResult), output: &DescribeInstancePatchStatesForPatchGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

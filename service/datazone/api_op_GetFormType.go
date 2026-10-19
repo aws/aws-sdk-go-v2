@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,24 @@ type GetFormTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFormTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFormTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFormTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetFormTypeInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.FormTypeIdentifier != nil {
+		s.WriteString(schemas.GetFormTypeInput_formTypeIdentifier, *v.FormTypeIdentifier)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.GetFormTypeInput_revision, *v.Revision)
+	}
+}
+
 type GetFormTypeOutput struct {
 
 	// The ID of the Amazon DataZone domain in which this metadata form type exists.
@@ -126,13 +146,96 @@ type GetFormTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFormTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFormTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFormTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetFormTypeOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetFormTypeOutput_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFormTypeOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetFormTypeOutput_domainId, *v.DomainId)
+	}
+	serializeImportList(s, schemas.GetFormTypeOutput_imports, v.Imports)
+	serializeModel(s, schemas.GetFormTypeOutput_model, v.Model)
+	if v.Name != nil {
+		s.WriteString(schemas.GetFormTypeOutput_name, *v.Name)
+	}
+	if v.OriginDomainId != nil {
+		s.WriteString(schemas.GetFormTypeOutput_originDomainId, *v.OriginDomainId)
+	}
+	if v.OriginProjectId != nil {
+		s.WriteString(schemas.GetFormTypeOutput_originProjectId, *v.OriginProjectId)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.GetFormTypeOutput_owningProjectId, *v.OwningProjectId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.GetFormTypeOutput_revision, *v.Revision)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFormTypeOutput_status, string(v.Status))
+	}
+}
+func (v *GetFormTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFormTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFormTypeOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFormTypeOutput_createdAt, v.CreatedAt)
+		case schemas.GetFormTypeOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_createdBy, v.CreatedBy)
+		case schemas.GetFormTypeOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_description, v.Description)
+		case schemas.GetFormTypeOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_domainId, v.DomainId)
+		case schemas.GetFormTypeOutput_imports:
+			return deserializeImportList(d, schemas.GetFormTypeOutput_imports, &v.Imports)
+		case schemas.GetFormTypeOutput_model:
+			return deserializeModel(d, schemas.GetFormTypeOutput_model, &v.Model)
+		case schemas.GetFormTypeOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_name, v.Name)
+		case schemas.GetFormTypeOutput_originDomainId:
+			v.OriginDomainId = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_originDomainId, v.OriginDomainId)
+		case schemas.GetFormTypeOutput_originProjectId:
+			v.OriginProjectId = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_originProjectId, v.OriginProjectId)
+		case schemas.GetFormTypeOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_owningProjectId, v.OwningProjectId)
+		case schemas.GetFormTypeOutput_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.GetFormTypeOutput_revision, v.Revision)
+		case schemas.GetFormTypeOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFormTypeOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FormTypeStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFormTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFormType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFormType, schemas.GetFormTypeInput, schemas.GetFormTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFormType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFormType, schemas.GetFormTypeInput, schemas.GetFormTypeOutput), output: &GetFormTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

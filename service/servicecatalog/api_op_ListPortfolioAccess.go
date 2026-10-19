@@ -5,6 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type ListPortfolioAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortfolioAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPortfolioAccessInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPortfolioAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListPortfolioAccessInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.OrganizationParentId != nil {
+		s.WriteString(schemas.ListPortfolioAccessInput_OrganizationParentId, *v.OrganizationParentId)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListPortfolioAccessInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListPortfolioAccessInput_PageToken, *v.PageToken)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.ListPortfolioAccessInput_PortfolioId, *v.PortfolioId)
+	}
+}
+
 type ListPortfolioAccessOutput struct {
 
 	// Information about the Amazon Web Services accounts with access to the portfolio.
@@ -71,13 +97,35 @@ type ListPortfolioAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPortfolioAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPortfolioAccessOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPortfolioAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.ListPortfolioAccessOutput_AccountIds, v.AccountIds)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListPortfolioAccessOutput_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *ListPortfolioAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPortfolioAccessOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPortfolioAccessOutput_AccountIds:
+			return deserializeAccountIds(d, schemas.ListPortfolioAccessOutput_AccountIds, &v.AccountIds)
+		case schemas.ListPortfolioAccessOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListPortfolioAccessOutput_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPortfolioAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPortfolioAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfolioAccess, schemas.ListPortfolioAccessInput, schemas.ListPortfolioAccessOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPortfolioAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfolioAccess, schemas.ListPortfolioAccessInput, schemas.ListPortfolioAccessOutput), output: &ListPortfolioAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

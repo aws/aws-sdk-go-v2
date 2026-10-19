@@ -5,7 +5,9 @@ package efs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -196,6 +198,40 @@ type CreateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneName != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_AvailabilityZoneName, *v.AvailabilityZoneName)
+	}
+	if v.Backup != nil {
+		s.WriteBool(schemas.CreateFileSystemRequest_Backup, *v.Backup)
+	}
+	if v.CreationToken != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_CreationToken, *v.CreationToken)
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.CreateFileSystemRequest_Encrypted, *v.Encrypted)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.PerformanceMode != "" {
+		s.WriteString(schemas.CreateFileSystemRequest_PerformanceMode, string(v.PerformanceMode))
+	}
+	if v.ProvisionedThroughputInMibps != nil {
+		s.WriteFloat64(schemas.CreateFileSystemRequest_ProvisionedThroughputInMibps, *v.ProvisionedThroughputInMibps)
+	}
+	serializeTags(s, schemas.CreateFileSystemRequest_Tags, v.Tags)
+	if v.ThroughputMode != "" {
+		s.WriteString(schemas.CreateFileSystemRequest_ThroughputMode, string(v.ThroughputMode))
+	}
+}
+
 // A description of the file system.
 type CreateFileSystemOutput struct {
 
@@ -303,13 +339,144 @@ type CreateFileSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.FileSystemDescription_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.AvailabilityZoneName != nil {
+		s.WriteString(schemas.FileSystemDescription_AvailabilityZoneName, *v.AvailabilityZoneName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FileSystemDescription_CreationTime, *v.CreationTime)
+	}
+	if v.CreationToken != nil {
+		s.WriteString(schemas.FileSystemDescription_CreationToken, *v.CreationToken)
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.FileSystemDescription_Encrypted, *v.Encrypted)
+	}
+	if v.FileSystemArn != nil {
+		s.WriteString(schemas.FileSystemDescription_FileSystemArn, *v.FileSystemArn)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.FileSystemDescription_FileSystemId, *v.FileSystemId)
+	}
+	if v.FileSystemProtection != nil {
+		s.WriteStruct(schemas.FileSystemDescription_FileSystemProtection)
+		v.FileSystemProtection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.FileSystemDescription_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LifeCycleState != "" {
+		s.WriteString(schemas.FileSystemDescription_LifeCycleState, string(v.LifeCycleState))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FileSystemDescription_Name, *v.Name)
+	}
+	s.WriteInt32(schemas.FileSystemDescription_NumberOfMountTargets, v.NumberOfMountTargets)
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FileSystemDescription_OwnerId, *v.OwnerId)
+	}
+	if v.PerformanceMode != "" {
+		s.WriteString(schemas.FileSystemDescription_PerformanceMode, string(v.PerformanceMode))
+	}
+	if v.ProvisionedThroughputInMibps != nil {
+		s.WriteFloat64(schemas.FileSystemDescription_ProvisionedThroughputInMibps, *v.ProvisionedThroughputInMibps)
+	}
+	if v.SizeInBytes != nil {
+		s.WriteStruct(schemas.FileSystemDescription_SizeInBytes)
+		v.SizeInBytes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	if v.ThroughputMode != "" {
+		s.WriteString(schemas.FileSystemDescription_ThroughputMode, string(v.ThroughputMode))
+	}
+}
+func (v *CreateFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemDescription_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.FileSystemDescription_AvailabilityZoneName:
+			v.AvailabilityZoneName = new(string)
+			return d.ReadString(schemas.FileSystemDescription_AvailabilityZoneName, v.AvailabilityZoneName)
+		case schemas.FileSystemDescription_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FileSystemDescription_CreationTime, v.CreationTime)
+		case schemas.FileSystemDescription_CreationToken:
+			v.CreationToken = new(string)
+			return d.ReadString(schemas.FileSystemDescription_CreationToken, v.CreationToken)
+		case schemas.FileSystemDescription_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.FileSystemDescription_Encrypted, v.Encrypted)
+		case schemas.FileSystemDescription_FileSystemArn:
+			v.FileSystemArn = new(string)
+			return d.ReadString(schemas.FileSystemDescription_FileSystemArn, v.FileSystemArn)
+		case schemas.FileSystemDescription_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_FileSystemId, v.FileSystemId)
+		case schemas.FileSystemDescription_FileSystemProtection:
+			v.FileSystemProtection = &types.FileSystemProtectionDescription{}
+			return v.FileSystemProtection.Deserialize(d)
+		case schemas.FileSystemDescription_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_KmsKeyId, v.KmsKeyId)
+		case schemas.FileSystemDescription_LifeCycleState:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemDescription_LifeCycleState, &ev); err != nil {
+				return err
+			}
+			v.LifeCycleState = types.LifeCycleState(ev)
+			return nil
+		case schemas.FileSystemDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FileSystemDescription_Name, v.Name)
+		case schemas.FileSystemDescription_NumberOfMountTargets:
+			return d.ReadInt32(schemas.FileSystemDescription_NumberOfMountTargets, &v.NumberOfMountTargets)
+		case schemas.FileSystemDescription_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_OwnerId, v.OwnerId)
+		case schemas.FileSystemDescription_PerformanceMode:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemDescription_PerformanceMode, &ev); err != nil {
+				return err
+			}
+			v.PerformanceMode = types.PerformanceMode(ev)
+			return nil
+		case schemas.FileSystemDescription_ProvisionedThroughputInMibps:
+			v.ProvisionedThroughputInMibps = new(float64)
+			return d.ReadFloat64(schemas.FileSystemDescription_ProvisionedThroughputInMibps, v.ProvisionedThroughputInMibps)
+		case schemas.FileSystemDescription_SizeInBytes:
+			v.SizeInBytes = &types.FileSystemSize{}
+			return v.SizeInBytes.Deserialize(d)
+		case schemas.FileSystemDescription_Tags:
+			return deserializeTags(d, schemas.FileSystemDescription_Tags, &v.Tags)
+		case schemas.FileSystemDescription_ThroughputMode:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemDescription_ThroughputMode, &ev); err != nil {
+				return err
+			}
+			v.ThroughputMode = types.ThroughputMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystem, schemas.CreateFileSystemRequest, schemas.FileSystemDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystem, schemas.CreateFileSystemRequest, schemas.FileSystemDescription), output: &CreateFileSystemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

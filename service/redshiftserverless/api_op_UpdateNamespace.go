@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,51 @@ type UpdateNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminPasswordSecretKmsKeyId != nil {
+		s.WriteString(schemas.UpdateNamespaceRequest_adminPasswordSecretKmsKeyId, *v.AdminPasswordSecretKmsKeyId)
+	}
+	if v.AdminUserPassword != nil {
+		s.WriteString(schemas.UpdateNamespaceRequest_adminUserPassword, *v.AdminUserPassword)
+	}
+	if v.AdminUsername != nil {
+		s.WriteString(schemas.UpdateNamespaceRequest_adminUsername, *v.AdminUsername)
+	}
+	if v.DefaultIamRoleArn != nil {
+		s.WriteString(schemas.UpdateNamespaceRequest_defaultIamRoleArn, *v.DefaultIamRoleArn)
+	}
+	serializeIamRoleArnList(s, schemas.UpdateNamespaceRequest_iamRoles, v.IamRoles)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateNamespaceRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LogDestinationType != "" {
+		s.WriteString(schemas.UpdateNamespaceRequest_logDestinationType, string(v.LogDestinationType))
+	}
+	serializeLogExportList(s, schemas.UpdateNamespaceRequest_logExports, v.LogExports)
+	if v.ManageAdminPassword != nil {
+		s.WriteBool(schemas.UpdateNamespaceRequest_manageAdminPassword, *v.ManageAdminPassword)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.UpdateNamespaceRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.S3TableAction != "" {
+		s.WriteString(schemas.UpdateNamespaceRequest_s3TableAction, string(v.S3TableAction))
+	}
+	if v.S3TableGranularity != "" {
+		s.WriteString(schemas.UpdateNamespaceRequest_s3TableGranularity, string(v.S3TableGranularity))
+	}
+	if v.S3TableKmsKeyId != nil {
+		s.WriteString(schemas.UpdateNamespaceRequest_s3TableKmsKeyId, *v.S3TableKmsKeyId)
+	}
+	serializeS3TableNameList(s, schemas.UpdateNamespaceRequest_s3TableNames, v.S3TableNames)
+}
+
 type UpdateNamespaceOutput struct {
 
 	// A list of tag instances.
@@ -135,13 +182,34 @@ type UpdateNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Namespace != nil {
+		s.WriteStruct(schemas.UpdateNamespaceResponse_namespace)
+		v.Namespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNamespaceResponse_namespace:
+			v.Namespace = &types.Namespace{}
+			return v.Namespace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNamespace, schemas.UpdateNamespaceRequest, schemas.UpdateNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNamespace, schemas.UpdateNamespaceRequest, schemas.UpdateNamespaceResponse), output: &UpdateNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

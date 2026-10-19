@@ -5,7 +5,9 @@ package bedrockdataautomation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,43 @@ type InvokeDataAutomationLibraryIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeDataAutomationLibraryIngestionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeDataAutomationLibraryIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_entityType, string(v.EntityType))
+	}
+	if v.InputConfiguration != nil {
+		s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest_inputConfiguration)
+		v.InputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LibraryArn != nil {
+		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_libraryArn, *v.LibraryArn)
+	}
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest_notificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OperationType != "" {
+		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_operationType, string(v.OperationType))
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.InvokeDataAutomationLibraryIngestionJobRequest_tags, v.Tags)
+}
+
 // Invoke DataAutomationLibraryIngestionJob Response
 type InvokeDataAutomationLibraryIngestionJobOutput struct {
 
@@ -77,13 +116,32 @@ type InvokeDataAutomationLibraryIngestionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeDataAutomationLibraryIngestionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeDataAutomationLibraryIngestionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *InvokeDataAutomationLibraryIngestionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeDataAutomationLibraryIngestionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeDataAutomationLibraryIngestionJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.InvokeDataAutomationLibraryIngestionJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeDataAutomationLibraryIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeDataAutomationLibraryIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeDataAutomationLibraryIngestionJob, schemas.InvokeDataAutomationLibraryIngestionJobRequest, schemas.InvokeDataAutomationLibraryIngestionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeDataAutomationLibraryIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeDataAutomationLibraryIngestionJob, schemas.InvokeDataAutomationLibraryIngestionJobRequest, schemas.InvokeDataAutomationLibraryIngestionJobResponse), output: &InvokeDataAutomationLibraryIngestionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

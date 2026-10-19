@@ -4,7 +4,9 @@ package wafregional
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ListSizeConstraintSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSizeConstraintSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSizeConstraintSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSizeConstraintSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListSizeConstraintSetsRequest_Limit, v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListSizeConstraintSetsRequest_NextMarker, *v.NextMarker)
+	}
+}
+
 type ListSizeConstraintSetsOutput struct {
 
 	// If you have more SizeConstraintSet objects than the number that you specified
@@ -70,13 +87,35 @@ type ListSizeConstraintSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSizeConstraintSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSizeConstraintSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSizeConstraintSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListSizeConstraintSetsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeSizeConstraintSetSummaries(s, schemas.ListSizeConstraintSetsResponse_SizeConstraintSets, v.SizeConstraintSets)
+}
+func (v *ListSizeConstraintSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSizeConstraintSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSizeConstraintSetsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListSizeConstraintSetsResponse_NextMarker, v.NextMarker)
+		case schemas.ListSizeConstraintSetsResponse_SizeConstraintSets:
+			return deserializeSizeConstraintSetSummaries(d, schemas.ListSizeConstraintSetsResponse_SizeConstraintSets, &v.SizeConstraintSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSizeConstraintSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSizeConstraintSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSizeConstraintSets, schemas.ListSizeConstraintSetsRequest, schemas.ListSizeConstraintSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSizeConstraintSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSizeConstraintSets, schemas.ListSizeConstraintSetsRequest, schemas.ListSizeConstraintSetsResponse), output: &ListSizeConstraintSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -81,6 +83,70 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ApplicationSummary_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ApplicationSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ApplicationSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ApplicationSummary_Id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ApplicationSummary_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.RuntimeEnvironment != nil {
+		s.WriteStruct(schemas.ApplicationSummary_RuntimeEnvironment)
+		v.RuntimeEnvironment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ApplicationSummary_Status, string(v.Status))
+	}
+}
+func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Arn, v.Arn)
+		case schemas.ApplicationSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ApplicationSummary_CreatedAt, v.CreatedAt)
+		case schemas.ApplicationSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Description, v.Description)
+		case schemas.ApplicationSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Id, v.Id)
+		case schemas.ApplicationSummary_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ApplicationSummary_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ApplicationSummary_RuntimeEnvironment:
+			v.RuntimeEnvironment = &RuntimeEnvironment{}
+			return v.RuntimeEnvironment.Deserialize(d)
+		case schemas.ApplicationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApplicationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents the default Amazon GameLift Streams application that a stream group
 // hosts.
 type DefaultApplication struct {
@@ -98,6 +164,34 @@ type DefaultApplication struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefaultApplication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultApplication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultApplication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DefaultApplication_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DefaultApplication_Id, *v.Id)
+	}
+}
+func (v *DefaultApplication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultApplication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultApplication_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DefaultApplication_Arn, v.Arn)
+		case schemas.DefaultApplication_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DefaultApplication_Id, v.Id)
+		}
+		return nil
+	})
+}
+
 // The virtual monitor settings for a stream session, including the resolution. If
 // not specified, the stream session uses the default resolution of 1920 × 1080.
 type DisplayConfiguration struct {
@@ -107,6 +201,30 @@ type DisplayConfiguration struct {
 	Resolution *Resolution
 
 	noSmithyDocumentSerde
+}
+
+func (v *DisplayConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisplayConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisplayConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resolution != nil {
+		s.WriteStruct(schemas.DisplayConfiguration_Resolution)
+		v.Resolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisplayConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisplayConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisplayConfiguration_Resolution:
+			v.Resolution = &Resolution{}
+			return v.Resolution.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides details about the stream session's exported files.
@@ -137,6 +255,44 @@ type ExportFilesMetadata struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportFilesMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportFilesMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportFilesMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputUri != nil {
+		s.WriteString(schemas.ExportFilesMetadata_OutputUri, *v.OutputUri)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExportFilesMetadata_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ExportFilesMetadata_StatusReason, *v.StatusReason)
+	}
+}
+func (v *ExportFilesMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportFilesMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportFilesMetadata_OutputUri:
+			v.OutputUri = new(string)
+			return d.ReadString(schemas.ExportFilesMetadata_OutputUri, v.OutputUri)
+		case schemas.ExportFilesMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.ExportFilesMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExportFilesStatus(ev)
+			return nil
+		case schemas.ExportFilesMetadata_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ExportFilesMetadata_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // Configuration settings that define a stream group's stream capacity for a
@@ -200,6 +356,60 @@ type LocationConfiguration struct {
 	VpcTransitConfiguration *VpcTransitConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *LocationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlwaysOnCapacity != nil {
+		s.WriteInt32(schemas.LocationConfiguration_AlwaysOnCapacity, *v.AlwaysOnCapacity)
+	}
+	if v.LocationName != nil {
+		s.WriteString(schemas.LocationConfiguration_LocationName, *v.LocationName)
+	}
+	if v.MaximumCapacity != nil {
+		s.WriteInt32(schemas.LocationConfiguration_MaximumCapacity, *v.MaximumCapacity)
+	}
+	if v.OnDemandCapacity != nil {
+		s.WriteInt32(schemas.LocationConfiguration_OnDemandCapacity, *v.OnDemandCapacity)
+	}
+	if v.TargetIdleCapacity != nil {
+		s.WriteInt32(schemas.LocationConfiguration_TargetIdleCapacity, *v.TargetIdleCapacity)
+	}
+	if v.VpcTransitConfiguration != nil {
+		s.WriteStruct(schemas.LocationConfiguration_VpcTransitConfiguration)
+		v.VpcTransitConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LocationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationConfiguration_AlwaysOnCapacity:
+			v.AlwaysOnCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationConfiguration_AlwaysOnCapacity, v.AlwaysOnCapacity)
+		case schemas.LocationConfiguration_LocationName:
+			v.LocationName = new(string)
+			return d.ReadString(schemas.LocationConfiguration_LocationName, v.LocationName)
+		case schemas.LocationConfiguration_MaximumCapacity:
+			v.MaximumCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationConfiguration_MaximumCapacity, v.MaximumCapacity)
+		case schemas.LocationConfiguration_OnDemandCapacity:
+			v.OnDemandCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationConfiguration_OnDemandCapacity, v.OnDemandCapacity)
+		case schemas.LocationConfiguration_TargetIdleCapacity:
+			v.TargetIdleCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationConfiguration_TargetIdleCapacity, v.TargetIdleCapacity)
+		case schemas.LocationConfiguration_VpcTransitConfiguration:
+			v.VpcTransitConfiguration = &VpcTransitConfiguration{}
+			return v.VpcTransitConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents a location and its corresponding stream capacity and status.
@@ -292,6 +502,94 @@ type LocationState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LocationState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedCapacity != nil {
+		s.WriteInt32(schemas.LocationState_AllocatedCapacity, *v.AllocatedCapacity)
+	}
+	if v.AlwaysOnCapacity != nil {
+		s.WriteInt32(schemas.LocationState_AlwaysOnCapacity, *v.AlwaysOnCapacity)
+	}
+	if v.IdleCapacity != nil {
+		s.WriteInt32(schemas.LocationState_IdleCapacity, *v.IdleCapacity)
+	}
+	if v.InternalVpcIpv4CidrBlock != nil {
+		s.WriteString(schemas.LocationState_InternalVpcIpv4CidrBlock, *v.InternalVpcIpv4CidrBlock)
+	}
+	if v.LocationName != nil {
+		s.WriteString(schemas.LocationState_LocationName, *v.LocationName)
+	}
+	if v.MaximumCapacity != nil {
+		s.WriteInt32(schemas.LocationState_MaximumCapacity, *v.MaximumCapacity)
+	}
+	if v.OnDemandCapacity != nil {
+		s.WriteInt32(schemas.LocationState_OnDemandCapacity, *v.OnDemandCapacity)
+	}
+	if v.RequestedCapacity != nil {
+		s.WriteInt32(schemas.LocationState_RequestedCapacity, *v.RequestedCapacity)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LocationState_Status, string(v.Status))
+	}
+	if v.TargetIdleCapacity != nil {
+		s.WriteInt32(schemas.LocationState_TargetIdleCapacity, *v.TargetIdleCapacity)
+	}
+	if v.VpcTransitConfiguration != nil {
+		s.WriteStruct(schemas.LocationState_VpcTransitConfiguration)
+		v.VpcTransitConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LocationState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationState_AllocatedCapacity:
+			v.AllocatedCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationState_AllocatedCapacity, v.AllocatedCapacity)
+		case schemas.LocationState_AlwaysOnCapacity:
+			v.AlwaysOnCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationState_AlwaysOnCapacity, v.AlwaysOnCapacity)
+		case schemas.LocationState_IdleCapacity:
+			v.IdleCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationState_IdleCapacity, v.IdleCapacity)
+		case schemas.LocationState_InternalVpcIpv4CidrBlock:
+			v.InternalVpcIpv4CidrBlock = new(string)
+			return d.ReadString(schemas.LocationState_InternalVpcIpv4CidrBlock, v.InternalVpcIpv4CidrBlock)
+		case schemas.LocationState_LocationName:
+			v.LocationName = new(string)
+			return d.ReadString(schemas.LocationState_LocationName, v.LocationName)
+		case schemas.LocationState_MaximumCapacity:
+			v.MaximumCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationState_MaximumCapacity, v.MaximumCapacity)
+		case schemas.LocationState_OnDemandCapacity:
+			v.OnDemandCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationState_OnDemandCapacity, v.OnDemandCapacity)
+		case schemas.LocationState_RequestedCapacity:
+			v.RequestedCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationState_RequestedCapacity, v.RequestedCapacity)
+		case schemas.LocationState_Status:
+			var ev string
+			if err := d.ReadString(schemas.LocationState_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StreamGroupLocationStatus(ev)
+			return nil
+		case schemas.LocationState_TargetIdleCapacity:
+			v.TargetIdleCapacity = new(int32)
+			return d.ReadInt32(schemas.LocationState_TargetIdleCapacity, v.TargetIdleCapacity)
+		case schemas.LocationState_VpcTransitConfiguration:
+			v.VpcTransitConfiguration = &VpcTransitConfigurationResponse{}
+			return v.VpcTransitConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration settings for sharing the stream session's performance stats with
 // the client
 type PerformanceStatsConfiguration struct {
@@ -301,6 +599,28 @@ type PerformanceStatsConfiguration struct {
 	SharedWithClient *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *PerformanceStatsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceStatsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceStatsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SharedWithClient != nil {
+		s.WriteBool(schemas.PerformanceStatsConfiguration_SharedWithClient, *v.SharedWithClient)
+	}
+}
+func (v *PerformanceStatsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceStatsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceStatsConfiguration_SharedWithClient:
+			v.SharedWithClient = new(bool)
+			return d.ReadBool(schemas.PerformanceStatsConfiguration_SharedWithClient, v.SharedWithClient)
+		}
+		return nil
+	})
 }
 
 // Represents the status of the replication of an application to a location. An
@@ -321,6 +641,38 @@ type ReplicationStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.ReplicationStatus_Location, *v.Location)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReplicationStatus_Status, string(v.Status))
+	}
+}
+func (v *ReplicationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationStatus_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ReplicationStatus_Location, v.Location)
+		case schemas.ReplicationStatus_Status:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationStatus_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplicationStatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the width and height dimensions, in pixels, that define the resolution
 // of the stream session's virtual monitor. The total number of pixels (width ×
 // height) must not exceed 2,073,600 (equivalent to 1920 × 1080).
@@ -339,6 +691,34 @@ type Resolution struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resolution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resolution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resolution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.Resolution_Height, *v.Height)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.Resolution_Width, *v.Width)
+	}
+}
+func (v *Resolution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resolution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resolution_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.Resolution_Height, v.Height)
+		case schemas.Resolution_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.Resolution_Width, v.Width)
+		}
+		return nil
+	})
 }
 
 // Configuration settings that identify the operating system for an application
@@ -375,6 +755,38 @@ type RuntimeEnvironment struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuntimeEnvironment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeEnvironment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeEnvironment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.RuntimeEnvironment_Type, string(v.Type))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.RuntimeEnvironment_Version, *v.Version)
+	}
+}
+func (v *RuntimeEnvironment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeEnvironment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeEnvironment_Type:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeEnvironment_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RuntimeEnvironmentType(ev)
+			return nil
+		case schemas.RuntimeEnvironment_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.RuntimeEnvironment_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Describes a shader cache associated with an Amazon GameLift Streams application.
@@ -431,6 +843,59 @@ type ShaderCacheSummary struct {
 	StorageBytes *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ShaderCacheSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShaderCacheSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShaderCacheSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.ShaderCacheSummary_ApplicationArn, *v.ApplicationArn)
+	}
+	serializeArnList(s, schemas.ShaderCacheSummary_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	if v.Identifier != nil {
+		s.WriteString(schemas.ShaderCacheSummary_Identifier, *v.Identifier)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ShaderCacheSummary_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ShaderCacheSummary_Status, string(v.Status))
+	}
+	if v.StorageBytes != nil {
+		s.WriteInt64(schemas.ShaderCacheSummary_StorageBytes, *v.StorageBytes)
+	}
+}
+func (v *ShaderCacheSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShaderCacheSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShaderCacheSummary_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.ShaderCacheSummary_ApplicationArn, v.ApplicationArn)
+		case schemas.ShaderCacheSummary_AssociatedStreamGroups:
+			return deserializeArnList(d, schemas.ShaderCacheSummary_AssociatedStreamGroups, &v.AssociatedStreamGroups)
+		case schemas.ShaderCacheSummary_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ShaderCacheSummary_Identifier, v.Identifier)
+		case schemas.ShaderCacheSummary_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ShaderCacheSummary_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ShaderCacheSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ShaderCacheSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ShaderCacheStatus(ev)
+			return nil
+		case schemas.ShaderCacheSummary_StorageBytes:
+			v.StorageBytes = new(int64)
+			return d.ReadInt64(schemas.ShaderCacheSummary_StorageBytes, v.StorageBytes)
+		}
+		return nil
+	})
 }
 
 // Describes a Amazon GameLift Streams stream group resource for hosting content
@@ -709,6 +1174,86 @@ type StreamGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StreamGroupSummary_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StreamGroupSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DefaultApplication != nil {
+		s.WriteStruct(schemas.StreamGroupSummary_DefaultApplication)
+		v.DefaultApplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StreamGroupSummary_Description, *v.Description)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.StreamGroupSummary_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StreamGroupSummary_Id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.StreamGroupSummary_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StreamGroupSummary_Status, string(v.Status))
+	}
+	if v.StreamClass != "" {
+		s.WriteString(schemas.StreamGroupSummary_StreamClass, string(v.StreamClass))
+	}
+}
+func (v *StreamGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamGroupSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StreamGroupSummary_Arn, v.Arn)
+		case schemas.StreamGroupSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StreamGroupSummary_CreatedAt, v.CreatedAt)
+		case schemas.StreamGroupSummary_DefaultApplication:
+			v.DefaultApplication = &DefaultApplication{}
+			return v.DefaultApplication.Deserialize(d)
+		case schemas.StreamGroupSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StreamGroupSummary_Description, v.Description)
+		case schemas.StreamGroupSummary_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.StreamGroupSummary_ExpiresAt, v.ExpiresAt)
+		case schemas.StreamGroupSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StreamGroupSummary_Id, v.Id)
+		case schemas.StreamGroupSummary_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StreamGroupSummary_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.StreamGroupSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.StreamGroupSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StreamGroupStatus(ev)
+			return nil
+		case schemas.StreamGroupSummary_StreamClass:
+			var ev string
+			if err := d.ReadString(schemas.StreamGroupSummary_StreamClass, &ev); err != nil {
+				return err
+			}
+			v.StreamClass = StreamClass(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes an Amazon GameLift Streams stream session. To retrieve additional
 // details for the stream session, call [GetStreamSession].
 //
@@ -834,6 +1379,102 @@ type StreamSessionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamSessionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamSessionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamSessionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.StreamSessionSummary_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.StreamSessionSummary_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StreamSessionSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExportFilesMetadata != nil {
+		s.WriteStruct(schemas.StreamSessionSummary_ExportFilesMetadata)
+		v.ExportFilesMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.StreamSessionSummary_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.StreamSessionSummary_Location, *v.Location)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.StreamSessionSummary_Protocol, string(v.Protocol))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StreamSessionSummary_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StreamSessionSummary_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.StreamSessionSummary_StatusReason, string(v.StatusReason))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.StreamSessionSummary_UserId, *v.UserId)
+	}
+}
+func (v *StreamSessionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamSessionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamSessionSummary_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.StreamSessionSummary_ApplicationArn, v.ApplicationArn)
+		case schemas.StreamSessionSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StreamSessionSummary_Arn, v.Arn)
+		case schemas.StreamSessionSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StreamSessionSummary_CreatedAt, v.CreatedAt)
+		case schemas.StreamSessionSummary_ExportFilesMetadata:
+			v.ExportFilesMetadata = &ExportFilesMetadata{}
+			return v.ExportFilesMetadata.Deserialize(d)
+		case schemas.StreamSessionSummary_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StreamSessionSummary_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.StreamSessionSummary_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.StreamSessionSummary_Location, v.Location)
+		case schemas.StreamSessionSummary_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.StreamSessionSummary_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.StreamSessionSummary_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.StreamSessionSummary_RoleArn, v.RoleArn)
+		case schemas.StreamSessionSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.StreamSessionSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StreamSessionStatus(ev)
+			return nil
+		case schemas.StreamSessionSummary_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.StreamSessionSummary_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = StreamSessionStatusReason(ev)
+			return nil
+		case schemas.StreamSessionSummary_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.StreamSessionSummary_UserId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // Describes a stream URL. This is a summary view that omits the full
 // configuration, such as launch arguments and display settings. To retrieve the
 // complete configuration, call [GetStreamUrl].
@@ -932,6 +1573,108 @@ type StreamUrlSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamUrlSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamUrlSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamUrlSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.StreamUrlSummary_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.StreamUrlSummary_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StreamUrlSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StreamUrlSummary_Description, *v.Description)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.StreamUrlSummary_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.RemainingUses != nil {
+		s.WriteInt32(schemas.StreamUrlSummary_RemainingUses, *v.RemainingUses)
+	}
+	if v.SessionLengthSeconds != nil {
+		s.WriteInt32(schemas.StreamUrlSummary_SessionLengthSeconds, *v.SessionLengthSeconds)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StreamUrlSummary_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.StreamUrlSummary_StatusReason, string(v.StatusReason))
+	}
+	if v.StreamGroupArn != nil {
+		s.WriteString(schemas.StreamUrlSummary_StreamGroupArn, *v.StreamGroupArn)
+	}
+	if v.StreamUrl != nil {
+		s.WriteString(schemas.StreamUrlSummary_StreamUrl, *v.StreamUrl)
+	}
+	if v.StreamUrlId != nil {
+		s.WriteString(schemas.StreamUrlSummary_StreamUrlId, *v.StreamUrlId)
+	}
+	if v.UsageLimit != nil {
+		s.WriteInt32(schemas.StreamUrlSummary_UsageLimit, *v.UsageLimit)
+	}
+}
+func (v *StreamUrlSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamUrlSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamUrlSummary_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.StreamUrlSummary_ApplicationArn, v.ApplicationArn)
+		case schemas.StreamUrlSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StreamUrlSummary_Arn, v.Arn)
+		case schemas.StreamUrlSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StreamUrlSummary_CreatedAt, v.CreatedAt)
+		case schemas.StreamUrlSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StreamUrlSummary_Description, v.Description)
+		case schemas.StreamUrlSummary_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.StreamUrlSummary_ExpiresAt, v.ExpiresAt)
+		case schemas.StreamUrlSummary_RemainingUses:
+			v.RemainingUses = new(int32)
+			return d.ReadInt32(schemas.StreamUrlSummary_RemainingUses, v.RemainingUses)
+		case schemas.StreamUrlSummary_SessionLengthSeconds:
+			v.SessionLengthSeconds = new(int32)
+			return d.ReadInt32(schemas.StreamUrlSummary_SessionLengthSeconds, v.SessionLengthSeconds)
+		case schemas.StreamUrlSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.StreamUrlSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StreamUrlStatus(ev)
+			return nil
+		case schemas.StreamUrlSummary_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.StreamUrlSummary_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = StreamUrlStatusReason(ev)
+			return nil
+		case schemas.StreamUrlSummary_StreamGroupArn:
+			v.StreamGroupArn = new(string)
+			return d.ReadString(schemas.StreamUrlSummary_StreamGroupArn, v.StreamGroupArn)
+		case schemas.StreamUrlSummary_StreamUrl:
+			v.StreamUrl = new(string)
+			return d.ReadString(schemas.StreamUrlSummary_StreamUrl, v.StreamUrl)
+		case schemas.StreamUrlSummary_StreamUrlId:
+			v.StreamUrlId = new(string)
+			return d.ReadString(schemas.StreamUrlSummary_StreamUrlId, v.StreamUrlId)
+		case schemas.StreamUrlSummary_UsageLimit:
+			v.UsageLimit = new(int32)
+			return d.ReadInt32(schemas.StreamUrlSummary_UsageLimit, v.UsageLimit)
+		}
+		return nil
+	})
+}
+
 // Configuration for connecting a stream group location to resources in your
 // Amazon VPC using AWS Transit Gateway. When you specify a VPC transit
 // configuration, Amazon GameLift Streams creates a Transit Gateway and shares it
@@ -958,6 +1701,31 @@ type VpcTransitConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcTransitConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcTransitConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcTransitConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpv4CidrBlockList(s, schemas.VpcTransitConfiguration_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcTransitConfiguration_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcTransitConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcTransitConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcTransitConfiguration_Ipv4CidrBlocks:
+			return deserializeIpv4CidrBlockList(d, schemas.VpcTransitConfiguration_Ipv4CidrBlocks, &v.Ipv4CidrBlocks)
+		case schemas.VpcTransitConfiguration_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcTransitConfiguration_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // The VPC transit configuration details for a stream group location, including
 // the Transit Gateway information needed to complete the VPC attachment setup.
 type VpcTransitConfigurationResponse struct {
@@ -978,6 +1746,43 @@ type VpcTransitConfigurationResponse struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcTransitConfigurationResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcTransitConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcTransitConfigurationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpv4CidrBlockList(s, schemas.VpcTransitConfigurationResponse_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	if v.TransitGatewayId != nil {
+		s.WriteString(schemas.VpcTransitConfigurationResponse_TransitGatewayId, *v.TransitGatewayId)
+	}
+	if v.TransitGatewayResourceShareArn != nil {
+		s.WriteString(schemas.VpcTransitConfigurationResponse_TransitGatewayResourceShareArn, *v.TransitGatewayResourceShareArn)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcTransitConfigurationResponse_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcTransitConfigurationResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcTransitConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcTransitConfigurationResponse_Ipv4CidrBlocks:
+			return deserializeIpv4CidrBlockList(d, schemas.VpcTransitConfigurationResponse_Ipv4CidrBlocks, &v.Ipv4CidrBlocks)
+		case schemas.VpcTransitConfigurationResponse_TransitGatewayId:
+			v.TransitGatewayId = new(string)
+			return d.ReadString(schemas.VpcTransitConfigurationResponse_TransitGatewayId, v.TransitGatewayId)
+		case schemas.VpcTransitConfigurationResponse_TransitGatewayResourceShareArn:
+			v.TransitGatewayResourceShareArn = new(string)
+			return d.ReadString(schemas.VpcTransitConfigurationResponse_TransitGatewayResourceShareArn, v.TransitGatewayResourceShareArn)
+		case schemas.VpcTransitConfigurationResponse_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcTransitConfigurationResponse_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

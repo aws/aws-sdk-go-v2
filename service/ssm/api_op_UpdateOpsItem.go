@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -127,6 +129,55 @@ type UpdateOpsItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpsItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpsItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpsItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualEndTime != nil {
+		s.WriteTime(schemas.UpdateOpsItemRequest_ActualEndTime, *v.ActualEndTime)
+	}
+	if v.ActualStartTime != nil {
+		s.WriteTime(schemas.UpdateOpsItemRequest_ActualStartTime, *v.ActualStartTime)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.UpdateOpsItemRequest_Category, *v.Category)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateOpsItemRequest_Description, *v.Description)
+	}
+	serializeOpsItemNotifications(s, schemas.UpdateOpsItemRequest_Notifications, v.Notifications)
+	serializeOpsItemOperationalData(s, schemas.UpdateOpsItemRequest_OperationalData, v.OperationalData)
+	serializeOpsItemOpsDataKeysList(s, schemas.UpdateOpsItemRequest_OperationalDataToDelete, v.OperationalDataToDelete)
+	if v.OpsItemArn != nil {
+		s.WriteString(schemas.UpdateOpsItemRequest_OpsItemArn, *v.OpsItemArn)
+	}
+	if v.OpsItemId != nil {
+		s.WriteString(schemas.UpdateOpsItemRequest_OpsItemId, *v.OpsItemId)
+	}
+	if v.PlannedEndTime != nil {
+		s.WriteTime(schemas.UpdateOpsItemRequest_PlannedEndTime, *v.PlannedEndTime)
+	}
+	if v.PlannedStartTime != nil {
+		s.WriteTime(schemas.UpdateOpsItemRequest_PlannedStartTime, *v.PlannedStartTime)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateOpsItemRequest_Priority, *v.Priority)
+	}
+	serializeRelatedOpsItems(s, schemas.UpdateOpsItemRequest_RelatedOpsItems, v.RelatedOpsItems)
+	if v.Severity != nil {
+		s.WriteString(schemas.UpdateOpsItemRequest_Severity, *v.Severity)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateOpsItemRequest_Status, string(v.Status))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateOpsItemRequest_Title, *v.Title)
+	}
+}
+
 type UpdateOpsItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -134,13 +185,26 @@ type UpdateOpsItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpsItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpsItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpsItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateOpsItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpsItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOpsItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateOpsItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOpsItem, schemas.UpdateOpsItemRequest, schemas.UpdateOpsItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateOpsItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOpsItem, schemas.UpdateOpsItemRequest, schemas.UpdateOpsItemResponse), output: &UpdateOpsItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

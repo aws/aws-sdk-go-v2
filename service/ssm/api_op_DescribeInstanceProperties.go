@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type DescribeInstancePropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancePropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancePropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancePropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstancePropertyStringFilterList(s, schemas.DescribeInstancePropertiesRequest_FiltersWithOperator, v.FiltersWithOperator)
+	serializeInstancePropertyFilterList(s, schemas.DescribeInstancePropertiesRequest_InstancePropertyFilterList, v.InstancePropertyFilterList)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeInstancePropertiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancePropertiesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeInstancePropertiesOutput struct {
 
 	// Properties for the managed instances.
@@ -60,13 +79,35 @@ type DescribeInstancePropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancePropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancePropertiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancePropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceProperties(s, schemas.DescribeInstancePropertiesResult_InstanceProperties, v.InstanceProperties)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancePropertiesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeInstancePropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstancePropertiesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstancePropertiesResult_InstanceProperties:
+			return deserializeInstanceProperties(d, schemas.DescribeInstancePropertiesResult_InstanceProperties, &v.InstanceProperties)
+		case schemas.DescribeInstancePropertiesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInstancePropertiesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstancePropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstanceProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceProperties, schemas.DescribeInstancePropertiesRequest, schemas.DescribeInstancePropertiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInstanceProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceProperties, schemas.DescribeInstancePropertiesRequest, schemas.DescribeInstancePropertiesResult), output: &DescribeInstancePropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

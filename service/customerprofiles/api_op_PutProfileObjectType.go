@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -93,6 +95,48 @@ type PutProfileObjectTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProfileObjectTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProfileObjectTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProfileObjectTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowProfileCreation != false {
+		s.WriteBool(schemas.PutProfileObjectTypeRequest_AllowProfileCreation, v.AllowProfileCreation)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutProfileObjectTypeRequest_Description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.PutProfileObjectTypeRequest_DomainName, *v.DomainName)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.PutProfileObjectTypeRequest_EncryptionKey, *v.EncryptionKey)
+	}
+	if v.ExpirationDays != nil {
+		s.WriteInt32(schemas.PutProfileObjectTypeRequest_ExpirationDays, *v.ExpirationDays)
+	}
+	serializeFieldMap(s, schemas.PutProfileObjectTypeRequest_Fields, v.Fields)
+	serializeKeyMap(s, schemas.PutProfileObjectTypeRequest_Keys, v.Keys)
+	if v.MaxProfileObjectCount != nil {
+		s.WriteInt32(schemas.PutProfileObjectTypeRequest_MaxProfileObjectCount, *v.MaxProfileObjectCount)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.PutProfileObjectTypeRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.SourceLastUpdatedTimestampFormat != nil {
+		s.WriteString(schemas.PutProfileObjectTypeRequest_SourceLastUpdatedTimestampFormat, *v.SourceLastUpdatedTimestampFormat)
+	}
+	if v.SourcePriority != nil {
+		s.WriteInt32(schemas.PutProfileObjectTypeRequest_SourcePriority, *v.SourcePriority)
+	}
+	serializeTagMap(s, schemas.PutProfileObjectTypeRequest_Tags, v.Tags)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.PutProfileObjectTypeRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type PutProfileObjectTypeOutput struct {
 
 	// Description of the profile object type.
@@ -161,13 +205,106 @@ type PutProfileObjectTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProfileObjectTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProfileObjectTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProfileObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowProfileCreation != false {
+		s.WriteBool(schemas.PutProfileObjectTypeResponse_AllowProfileCreation, v.AllowProfileCreation)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PutProfileObjectTypeResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutProfileObjectTypeResponse_Description, *v.Description)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.PutProfileObjectTypeResponse_EncryptionKey, *v.EncryptionKey)
+	}
+	if v.ExpirationDays != nil {
+		s.WriteInt32(schemas.PutProfileObjectTypeResponse_ExpirationDays, *v.ExpirationDays)
+	}
+	serializeFieldMap(s, schemas.PutProfileObjectTypeResponse_Fields, v.Fields)
+	serializeKeyMap(s, schemas.PutProfileObjectTypeResponse_Keys, v.Keys)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.PutProfileObjectTypeResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MaxAvailableProfileObjectCount != nil {
+		s.WriteInt32(schemas.PutProfileObjectTypeResponse_MaxAvailableProfileObjectCount, *v.MaxAvailableProfileObjectCount)
+	}
+	if v.MaxProfileObjectCount != nil {
+		s.WriteInt32(schemas.PutProfileObjectTypeResponse_MaxProfileObjectCount, *v.MaxProfileObjectCount)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.PutProfileObjectTypeResponse_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.SourceLastUpdatedTimestampFormat != nil {
+		s.WriteString(schemas.PutProfileObjectTypeResponse_SourceLastUpdatedTimestampFormat, *v.SourceLastUpdatedTimestampFormat)
+	}
+	if v.SourcePriority != nil {
+		s.WriteInt32(schemas.PutProfileObjectTypeResponse_SourcePriority, *v.SourcePriority)
+	}
+	serializeTagMap(s, schemas.PutProfileObjectTypeResponse_Tags, v.Tags)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.PutProfileObjectTypeResponse_TemplateId, *v.TemplateId)
+	}
+}
+func (v *PutProfileObjectTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProfileObjectTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProfileObjectTypeResponse_AllowProfileCreation:
+			return d.ReadBool(schemas.PutProfileObjectTypeResponse_AllowProfileCreation, &v.AllowProfileCreation)
+		case schemas.PutProfileObjectTypeResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutProfileObjectTypeResponse_CreatedAt, v.CreatedAt)
+		case schemas.PutProfileObjectTypeResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutProfileObjectTypeResponse_Description, v.Description)
+		case schemas.PutProfileObjectTypeResponse_EncryptionKey:
+			v.EncryptionKey = new(string)
+			return d.ReadString(schemas.PutProfileObjectTypeResponse_EncryptionKey, v.EncryptionKey)
+		case schemas.PutProfileObjectTypeResponse_ExpirationDays:
+			v.ExpirationDays = new(int32)
+			return d.ReadInt32(schemas.PutProfileObjectTypeResponse_ExpirationDays, v.ExpirationDays)
+		case schemas.PutProfileObjectTypeResponse_Fields:
+			return deserializeFieldMap(d, schemas.PutProfileObjectTypeResponse_Fields, &v.Fields)
+		case schemas.PutProfileObjectTypeResponse_Keys:
+			return deserializeKeyMap(d, schemas.PutProfileObjectTypeResponse_Keys, &v.Keys)
+		case schemas.PutProfileObjectTypeResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutProfileObjectTypeResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.PutProfileObjectTypeResponse_MaxAvailableProfileObjectCount:
+			v.MaxAvailableProfileObjectCount = new(int32)
+			return d.ReadInt32(schemas.PutProfileObjectTypeResponse_MaxAvailableProfileObjectCount, v.MaxAvailableProfileObjectCount)
+		case schemas.PutProfileObjectTypeResponse_MaxProfileObjectCount:
+			v.MaxProfileObjectCount = new(int32)
+			return d.ReadInt32(schemas.PutProfileObjectTypeResponse_MaxProfileObjectCount, v.MaxProfileObjectCount)
+		case schemas.PutProfileObjectTypeResponse_ObjectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.PutProfileObjectTypeResponse_ObjectTypeName, v.ObjectTypeName)
+		case schemas.PutProfileObjectTypeResponse_SourceLastUpdatedTimestampFormat:
+			v.SourceLastUpdatedTimestampFormat = new(string)
+			return d.ReadString(schemas.PutProfileObjectTypeResponse_SourceLastUpdatedTimestampFormat, v.SourceLastUpdatedTimestampFormat)
+		case schemas.PutProfileObjectTypeResponse_SourcePriority:
+			v.SourcePriority = new(int32)
+			return d.ReadInt32(schemas.PutProfileObjectTypeResponse_SourcePriority, v.SourcePriority)
+		case schemas.PutProfileObjectTypeResponse_Tags:
+			return deserializeTagMap(d, schemas.PutProfileObjectTypeResponse_Tags, &v.Tags)
+		case schemas.PutProfileObjectTypeResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.PutProfileObjectTypeResponse_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProfileObjectTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutProfileObjectType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProfileObjectType, schemas.PutProfileObjectTypeRequest, schemas.PutProfileObjectTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutProfileObjectType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProfileObjectType, schemas.PutProfileObjectTypeRequest, schemas.PutProfileObjectTypeResponse), output: &PutProfileObjectTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

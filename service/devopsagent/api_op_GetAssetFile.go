@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type GetAssetFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.GetAssetFileRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetAssetFileRequest_assetId, *v.AssetId)
+	}
+	if v.AssetVersion != nil {
+		s.WriteInt32(schemas.GetAssetFileRequest_assetVersion, *v.AssetVersion)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.GetAssetFileRequest_path, *v.Path)
+	}
+}
+
 // Response structure for getting an asset file
 type GetAssetFileOutput struct {
 
@@ -65,13 +88,34 @@ type GetAssetFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.File != nil {
+		s.WriteStruct(schemas.GetAssetFileResponse_file)
+		v.File.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssetFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetFileResponse_file:
+			v.File = &types.AssetFile{}
+			return v.File.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetFile, schemas.GetAssetFileRequest, schemas.GetAssetFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetFile, schemas.GetAssetFileRequest, schemas.GetAssetFileResponse), output: &GetAssetFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

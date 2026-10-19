@@ -4,6 +4,8 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DisassociateBudgetFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBudgetFromResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateBudgetFromResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBudgetFromResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BudgetName != nil {
+		s.WriteString(schemas.DisassociateBudgetFromResourceInput_BudgetName, *v.BudgetName)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DisassociateBudgetFromResourceInput_ResourceId, *v.ResourceId)
+	}
+}
+
 type DisassociateBudgetFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DisassociateBudgetFromResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBudgetFromResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateBudgetFromResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBudgetFromResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateBudgetFromResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateBudgetFromResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateBudgetFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateBudgetFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBudgetFromResource, schemas.DisassociateBudgetFromResourceInput, schemas.DisassociateBudgetFromResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateBudgetFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBudgetFromResource, schemas.DisassociateBudgetFromResourceInput, schemas.DisassociateBudgetFromResourceOutput), output: &DisassociateBudgetFromResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

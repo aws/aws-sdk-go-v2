@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,33 @@ type GetSimilarProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSimilarProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSimilarProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSimilarProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetSimilarProfilesRequest_DomainName, *v.DomainName)
+	}
+	if v.MatchType != "" {
+		s.WriteString(schemas.GetSimilarProfilesRequest_MatchType, string(v.MatchType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSimilarProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSimilarProfilesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchKey != nil {
+		s.WriteString(schemas.GetSimilarProfilesRequest_SearchKey, *v.SearchKey)
+	}
+	if v.SearchValue != nil {
+		s.WriteString(schemas.GetSimilarProfilesRequest_SearchValue, *v.SearchValue)
+	}
+}
+
 type GetSimilarProfilesOutput struct {
 
 	// It only has value when the MatchType is ML_BASED_MATCHING .A number between 0
@@ -93,13 +122,63 @@ type GetSimilarProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSimilarProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSimilarProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSimilarProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfidenceScore != nil {
+		s.WriteFloat64(schemas.GetSimilarProfilesResponse_ConfidenceScore, *v.ConfidenceScore)
+	}
+	if v.MatchId != nil {
+		s.WriteString(schemas.GetSimilarProfilesResponse_MatchId, *v.MatchId)
+	}
+	if v.MatchType != "" {
+		s.WriteString(schemas.GetSimilarProfilesResponse_MatchType, string(v.MatchType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSimilarProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeProfileIdList(s, schemas.GetSimilarProfilesResponse_ProfileIds, v.ProfileIds)
+	if v.RuleLevel != nil {
+		s.WriteInt32(schemas.GetSimilarProfilesResponse_RuleLevel, *v.RuleLevel)
+	}
+}
+func (v *GetSimilarProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSimilarProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSimilarProfilesResponse_ConfidenceScore:
+			v.ConfidenceScore = new(float64)
+			return d.ReadFloat64(schemas.GetSimilarProfilesResponse_ConfidenceScore, v.ConfidenceScore)
+		case schemas.GetSimilarProfilesResponse_MatchId:
+			v.MatchId = new(string)
+			return d.ReadString(schemas.GetSimilarProfilesResponse_MatchId, v.MatchId)
+		case schemas.GetSimilarProfilesResponse_MatchType:
+			var ev string
+			if err := d.ReadString(schemas.GetSimilarProfilesResponse_MatchType, &ev); err != nil {
+				return err
+			}
+			v.MatchType = types.MatchType(ev)
+			return nil
+		case schemas.GetSimilarProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSimilarProfilesResponse_NextToken, v.NextToken)
+		case schemas.GetSimilarProfilesResponse_ProfileIds:
+			return deserializeProfileIdList(d, schemas.GetSimilarProfilesResponse_ProfileIds, &v.ProfileIds)
+		case schemas.GetSimilarProfilesResponse_RuleLevel:
+			v.RuleLevel = new(int32)
+			return d.ReadInt32(schemas.GetSimilarProfilesResponse_RuleLevel, v.RuleLevel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSimilarProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSimilarProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSimilarProfiles, schemas.GetSimilarProfilesRequest, schemas.GetSimilarProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSimilarProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSimilarProfiles, schemas.GetSimilarProfilesRequest, schemas.GetSimilarProfilesResponse), output: &GetSimilarProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

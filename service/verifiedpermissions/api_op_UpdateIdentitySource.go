@@ -4,7 +4,9 @@ package verifiedpermissions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -70,6 +72,25 @@ type UpdateIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentitySourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentitySourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentitySourceId != nil {
+		s.WriteString(schemas.UpdateIdentitySourceInput_identitySourceId, *v.IdentitySourceId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.UpdateIdentitySourceInput_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.PrincipalEntityType != nil {
+		s.WriteString(schemas.UpdateIdentitySourceInput_principalEntityType, *v.PrincipalEntityType)
+	}
+	serializeUpdateConfiguration(s, schemas.UpdateIdentitySourceInput_updateConfiguration, v.UpdateConfiguration)
+}
+
 type UpdateIdentitySourceOutput struct {
 
 	// The date and time that the updated identity source was originally created.
@@ -98,13 +119,50 @@ type UpdateIdentitySourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentitySourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentitySourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentitySourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.UpdateIdentitySourceOutput_createdDate, *v.CreatedDate)
+	}
+	if v.IdentitySourceId != nil {
+		s.WriteString(schemas.UpdateIdentitySourceOutput_identitySourceId, *v.IdentitySourceId)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.UpdateIdentitySourceOutput_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.UpdateIdentitySourceOutput_policyStoreId, *v.PolicyStoreId)
+	}
+}
+func (v *UpdateIdentitySourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIdentitySourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIdentitySourceOutput_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateIdentitySourceOutput_createdDate, v.CreatedDate)
+		case schemas.UpdateIdentitySourceOutput_identitySourceId:
+			v.IdentitySourceId = new(string)
+			return d.ReadString(schemas.UpdateIdentitySourceOutput_identitySourceId, v.IdentitySourceId)
+		case schemas.UpdateIdentitySourceOutput_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateIdentitySourceOutput_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.UpdateIdentitySourceOutput_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.UpdateIdentitySourceOutput_policyStoreId, v.PolicyStoreId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdentitySourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateIdentitySource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentitySource, schemas.UpdateIdentitySourceInput, schemas.UpdateIdentitySourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateIdentitySource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentitySource, schemas.UpdateIdentitySourceInput, schemas.UpdateIdentitySourceOutput), output: &UpdateIdentitySourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

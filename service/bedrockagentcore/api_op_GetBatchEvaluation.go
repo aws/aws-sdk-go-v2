@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetBatchEvaluationInput struct {
 	BatchEvaluationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBatchEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchEvaluationId != nil {
+		s.WriteString(schemas.GetBatchEvaluationRequest_batchEvaluationId, *v.BatchEvaluationId)
+	}
 }
 
 type GetBatchEvaluationOutput struct {
@@ -116,13 +130,128 @@ type GetBatchEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBatchEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchEvaluationArn != nil {
+		s.WriteString(schemas.GetBatchEvaluationResponse_batchEvaluationArn, *v.BatchEvaluationArn)
+	}
+	if v.BatchEvaluationId != nil {
+		s.WriteString(schemas.GetBatchEvaluationResponse_batchEvaluationId, *v.BatchEvaluationId)
+	}
+	if v.BatchEvaluationName != nil {
+		s.WriteString(schemas.GetBatchEvaluationResponse_batchEvaluationName, *v.BatchEvaluationName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBatchEvaluationResponse_createdAt, *v.CreatedAt)
+	}
+	serializeDataSourceConfig(s, schemas.GetBatchEvaluationResponse_dataSourceConfig, v.DataSourceConfig)
+	if v.Description != nil {
+		s.WriteString(schemas.GetBatchEvaluationResponse_description, *v.Description)
+	}
+	serializeErrorDetailsList(s, schemas.GetBatchEvaluationResponse_errorDetails, v.ErrorDetails)
+	if v.EvaluationResults != nil {
+		s.WriteStruct(schemas.GetBatchEvaluationResponse_evaluationResults)
+		v.EvaluationResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEvaluatorList(s, schemas.GetBatchEvaluationResponse_evaluators, v.Evaluators)
+	if v.ExecutionSummaryResult != nil {
+		s.WriteStruct(schemas.GetBatchEvaluationResponse_executionSummaryResult)
+		v.ExecutionSummaryResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureAnalysisResult != nil {
+		s.WriteStruct(schemas.GetBatchEvaluationResponse_failureAnalysisResult)
+		v.FailureAnalysisResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInsightResultList(s, schemas.GetBatchEvaluationResponse_insightResults, v.InsightResults)
+	serializeInsightList(s, schemas.GetBatchEvaluationResponse_insights, v.Insights)
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetBatchEvaluationResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	serializeOutputConfig(s, schemas.GetBatchEvaluationResponse_outputConfig, v.OutputConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.GetBatchEvaluationResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetBatchEvaluationResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UserIntentResult != nil {
+		s.WriteStruct(schemas.GetBatchEvaluationResponse_userIntentResult)
+		v.UserIntentResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBatchEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBatchEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBatchEvaluationResponse_batchEvaluationArn:
+			v.BatchEvaluationArn = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationArn, v.BatchEvaluationArn)
+		case schemas.GetBatchEvaluationResponse_batchEvaluationId:
+			v.BatchEvaluationId = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationId, v.BatchEvaluationId)
+		case schemas.GetBatchEvaluationResponse_batchEvaluationName:
+			v.BatchEvaluationName = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationName, v.BatchEvaluationName)
+		case schemas.GetBatchEvaluationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchEvaluationResponse_createdAt, v.CreatedAt)
+		case schemas.GetBatchEvaluationResponse_dataSourceConfig:
+			return deserializeDataSourceConfig(d, schemas.GetBatchEvaluationResponse_dataSourceConfig, &v.DataSourceConfig)
+		case schemas.GetBatchEvaluationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_description, v.Description)
+		case schemas.GetBatchEvaluationResponse_errorDetails:
+			return deserializeErrorDetailsList(d, schemas.GetBatchEvaluationResponse_errorDetails, &v.ErrorDetails)
+		case schemas.GetBatchEvaluationResponse_evaluationResults:
+			v.EvaluationResults = &types.EvaluationJobResults{}
+			return v.EvaluationResults.Deserialize(d)
+		case schemas.GetBatchEvaluationResponse_evaluators:
+			return deserializeEvaluatorList(d, schemas.GetBatchEvaluationResponse_evaluators, &v.Evaluators)
+		case schemas.GetBatchEvaluationResponse_executionSummaryResult:
+			v.ExecutionSummaryResult = &types.ExecutionSummaryClusteringResultContent{}
+			return v.ExecutionSummaryResult.Deserialize(d)
+		case schemas.GetBatchEvaluationResponse_failureAnalysisResult:
+			v.FailureAnalysisResult = &types.FailureAnalysisResultContent{}
+			return v.FailureAnalysisResult.Deserialize(d)
+		case schemas.GetBatchEvaluationResponse_insightResults:
+			return deserializeInsightResultList(d, schemas.GetBatchEvaluationResponse_insightResults, &v.InsightResults)
+		case schemas.GetBatchEvaluationResponse_insights:
+			return deserializeInsightList(d, schemas.GetBatchEvaluationResponse_insights, &v.Insights)
+		case schemas.GetBatchEvaluationResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetBatchEvaluationResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetBatchEvaluationResponse_outputConfig:
+			return deserializeOutputConfig(d, schemas.GetBatchEvaluationResponse_outputConfig, &v.OutputConfig)
+		case schemas.GetBatchEvaluationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBatchEvaluationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BatchEvaluationStatus(ev)
+			return nil
+		case schemas.GetBatchEvaluationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchEvaluationResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetBatchEvaluationResponse_userIntentResult:
+			v.UserIntentResult = &types.UserIntentClusteringResultContent{}
+			return v.UserIntentResult.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBatchEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchEvaluation, schemas.GetBatchEvaluationRequest, schemas.GetBatchEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBatchEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchEvaluation, schemas.GetBatchEvaluationRequest, schemas.GetBatchEvaluationResponse), output: &GetBatchEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

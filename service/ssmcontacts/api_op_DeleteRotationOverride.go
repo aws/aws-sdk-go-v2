@@ -4,6 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteRotationOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRotationOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRotationOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRotationOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RotationId != nil {
+		s.WriteString(schemas.DeleteRotationOverrideRequest_RotationId, *v.RotationId)
+	}
+	if v.RotationOverrideId != nil {
+		s.WriteString(schemas.DeleteRotationOverrideRequest_RotationOverrideId, *v.RotationOverrideId)
+	}
+}
+
 type DeleteRotationOverrideOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteRotationOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRotationOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRotationOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRotationOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRotationOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRotationOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRotationOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRotationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRotationOverride, schemas.DeleteRotationOverrideRequest, schemas.DeleteRotationOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRotationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRotationOverride, schemas.DeleteRotationOverrideRequest, schemas.DeleteRotationOverrideResult), output: &DeleteRotationOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

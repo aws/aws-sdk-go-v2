@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListCalculatedAttributeDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCalculatedAttributeDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCalculatedAttributeDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCalculatedAttributeDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListCalculatedAttributeDefinitionsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCalculatedAttributeDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCalculatedAttributeDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCalculatedAttributeDefinitionsOutput struct {
 
 	// The list of calculated attribute definitions.
@@ -56,13 +76,35 @@ type ListCalculatedAttributeDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCalculatedAttributeDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCalculatedAttributeDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCalculatedAttributeDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCalculatedAttributeDefinitionsList(s, schemas.ListCalculatedAttributeDefinitionsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCalculatedAttributeDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCalculatedAttributeDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCalculatedAttributeDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCalculatedAttributeDefinitionsResponse_Items:
+			return deserializeCalculatedAttributeDefinitionsList(d, schemas.ListCalculatedAttributeDefinitionsResponse_Items, &v.Items)
+		case schemas.ListCalculatedAttributeDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCalculatedAttributeDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCalculatedAttributeDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCalculatedAttributeDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCalculatedAttributeDefinitions, schemas.ListCalculatedAttributeDefinitionsRequest, schemas.ListCalculatedAttributeDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCalculatedAttributeDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCalculatedAttributeDefinitions, schemas.ListCalculatedAttributeDefinitionsRequest, schemas.ListCalculatedAttributeDefinitionsResponse), output: &ListCalculatedAttributeDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

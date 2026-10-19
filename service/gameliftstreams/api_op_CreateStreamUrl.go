@@ -5,7 +5,9 @@ package gameliftstreams
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -144,6 +146,50 @@ type CreateStreamUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamUrlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentVariables(s, schemas.CreateStreamUrlInput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	serializeGameLaunchArgList(s, schemas.CreateStreamUrlInput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.ApplicationIdentifier != nil {
+		s.WriteString(schemas.CreateStreamUrlInput_ApplicationIdentifier, *v.ApplicationIdentifier)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateStreamUrlInput_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStreamUrlInput_Description, *v.Description)
+	}
+	if v.DisplayConfiguration != nil {
+		s.WriteStruct(schemas.CreateStreamUrlInput_DisplayConfiguration)
+		v.DisplayConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CreateStreamUrlInput_Identifier, *v.Identifier)
+	}
+	serializeLocationList(s, schemas.CreateStreamUrlInput_Locations, v.Locations)
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateStreamUrlInput_Protocol, string(v.Protocol))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateStreamUrlInput_RoleArn, *v.RoleArn)
+	}
+	if v.SessionLengthSeconds != nil {
+		s.WriteInt32(schemas.CreateStreamUrlInput_SessionLengthSeconds, *v.SessionLengthSeconds)
+	}
+	if v.UrlExpiresAfterMinutes != nil {
+		s.WriteInt32(schemas.CreateStreamUrlInput_UrlExpiresAfterMinutes, *v.UrlExpiresAfterMinutes)
+	}
+	if v.UsageLimit != nil {
+		s.WriteInt32(schemas.CreateStreamUrlInput_UsageLimit, *v.UsageLimit)
+	}
+}
+
 type CreateStreamUrlOutput struct {
 
 	// The [Amazon Resource Name (ARN)] that uniquely identifies the stream URL across all Amazon Web Services
@@ -270,13 +316,145 @@ type CreateStreamUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamUrlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentVariables(s, schemas.CreateStreamUrlOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	serializeGameLaunchArgList(s, schemas.CreateStreamUrlOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.CreateStreamUrlOutput_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateStreamUrlOutput_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateStreamUrlOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStreamUrlOutput_Description, *v.Description)
+	}
+	if v.DisplayConfiguration != nil {
+		s.WriteStruct(schemas.CreateStreamUrlOutput_DisplayConfiguration)
+		v.DisplayConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.CreateStreamUrlOutput_ExpiresAt, *v.ExpiresAt)
+	}
+	serializeLocationList(s, schemas.CreateStreamUrlOutput_Locations, v.Locations)
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateStreamUrlOutput_Protocol, string(v.Protocol))
+	}
+	if v.RemainingUses != nil {
+		s.WriteInt32(schemas.CreateStreamUrlOutput_RemainingUses, *v.RemainingUses)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateStreamUrlOutput_RoleArn, *v.RoleArn)
+	}
+	if v.SessionLengthSeconds != nil {
+		s.WriteInt32(schemas.CreateStreamUrlOutput_SessionLengthSeconds, *v.SessionLengthSeconds)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateStreamUrlOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.CreateStreamUrlOutput_StatusReason, string(v.StatusReason))
+	}
+	if v.StreamGroupArn != nil {
+		s.WriteString(schemas.CreateStreamUrlOutput_StreamGroupArn, *v.StreamGroupArn)
+	}
+	if v.StreamUrl != nil {
+		s.WriteString(schemas.CreateStreamUrlOutput_StreamUrl, *v.StreamUrl)
+	}
+	if v.StreamUrlId != nil {
+		s.WriteString(schemas.CreateStreamUrlOutput_StreamUrlId, *v.StreamUrlId)
+	}
+	if v.UsageLimit != nil {
+		s.WriteInt32(schemas.CreateStreamUrlOutput_UsageLimit, *v.UsageLimit)
+	}
+}
+func (v *CreateStreamUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamUrlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamUrlOutput_AdditionalEnvironmentVariables:
+			return deserializeEnvironmentVariables(d, schemas.CreateStreamUrlOutput_AdditionalEnvironmentVariables, &v.AdditionalEnvironmentVariables)
+		case schemas.CreateStreamUrlOutput_AdditionalLaunchArgs:
+			return deserializeGameLaunchArgList(d, schemas.CreateStreamUrlOutput_AdditionalLaunchArgs, &v.AdditionalLaunchArgs)
+		case schemas.CreateStreamUrlOutput_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.CreateStreamUrlOutput_ApplicationArn, v.ApplicationArn)
+		case schemas.CreateStreamUrlOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateStreamUrlOutput_Arn, v.Arn)
+		case schemas.CreateStreamUrlOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamUrlOutput_CreatedAt, v.CreatedAt)
+		case schemas.CreateStreamUrlOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateStreamUrlOutput_Description, v.Description)
+		case schemas.CreateStreamUrlOutput_DisplayConfiguration:
+			v.DisplayConfiguration = &types.DisplayConfiguration{}
+			return v.DisplayConfiguration.Deserialize(d)
+		case schemas.CreateStreamUrlOutput_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamUrlOutput_ExpiresAt, v.ExpiresAt)
+		case schemas.CreateStreamUrlOutput_Locations:
+			return deserializeLocationList(d, schemas.CreateStreamUrlOutput_Locations, &v.Locations)
+		case schemas.CreateStreamUrlOutput_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamUrlOutput_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.Protocol(ev)
+			return nil
+		case schemas.CreateStreamUrlOutput_RemainingUses:
+			v.RemainingUses = new(int32)
+			return d.ReadInt32(schemas.CreateStreamUrlOutput_RemainingUses, v.RemainingUses)
+		case schemas.CreateStreamUrlOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateStreamUrlOutput_RoleArn, v.RoleArn)
+		case schemas.CreateStreamUrlOutput_SessionLengthSeconds:
+			v.SessionLengthSeconds = new(int32)
+			return d.ReadInt32(schemas.CreateStreamUrlOutput_SessionLengthSeconds, v.SessionLengthSeconds)
+		case schemas.CreateStreamUrlOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamUrlOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamUrlStatus(ev)
+			return nil
+		case schemas.CreateStreamUrlOutput_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamUrlOutput_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = types.StreamUrlStatusReason(ev)
+			return nil
+		case schemas.CreateStreamUrlOutput_StreamGroupArn:
+			v.StreamGroupArn = new(string)
+			return d.ReadString(schemas.CreateStreamUrlOutput_StreamGroupArn, v.StreamGroupArn)
+		case schemas.CreateStreamUrlOutput_StreamUrl:
+			v.StreamUrl = new(string)
+			return d.ReadString(schemas.CreateStreamUrlOutput_StreamUrl, v.StreamUrl)
+		case schemas.CreateStreamUrlOutput_StreamUrlId:
+			v.StreamUrlId = new(string)
+			return d.ReadString(schemas.CreateStreamUrlOutput_StreamUrlId, v.StreamUrlId)
+		case schemas.CreateStreamUrlOutput_UsageLimit:
+			v.UsageLimit = new(int32)
+			return d.ReadInt32(schemas.CreateStreamUrlOutput_UsageLimit, v.UsageLimit)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStreamUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamUrl, schemas.CreateStreamUrlInput, schemas.CreateStreamUrlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStreamUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamUrl, schemas.CreateStreamUrlInput, schemas.CreateStreamUrlOutput), output: &CreateStreamUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

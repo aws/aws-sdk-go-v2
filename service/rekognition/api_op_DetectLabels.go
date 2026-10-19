@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -179,6 +181,32 @@ type DetectLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectLabelsFeatureList(s, schemas.DetectLabelsRequest_Features, v.Features)
+	if v.Image != nil {
+		s.WriteStruct(schemas.DetectLabelsRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxLabels != nil {
+		s.WriteInt32(schemas.DetectLabelsRequest_MaxLabels, *v.MaxLabels)
+	}
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.DetectLabelsRequest_MinConfidence, *v.MinConfidence)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.DetectLabelsRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetectLabelsOutput struct {
 
 	// Information about the properties of the input image, such as brightness,
@@ -212,13 +240,53 @@ type DetectLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectLabelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageProperties != nil {
+		s.WriteStruct(schemas.DetectLabelsResponse_ImageProperties)
+		v.ImageProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelModelVersion != nil {
+		s.WriteString(schemas.DetectLabelsResponse_LabelModelVersion, *v.LabelModelVersion)
+	}
+	serializeLabels(s, schemas.DetectLabelsResponse_Labels, v.Labels)
+	if v.OrientationCorrection != "" {
+		s.WriteString(schemas.DetectLabelsResponse_OrientationCorrection, string(v.OrientationCorrection))
+	}
+}
+func (v *DetectLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectLabelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectLabelsResponse_ImageProperties:
+			v.ImageProperties = &types.DetectLabelsImageProperties{}
+			return v.ImageProperties.Deserialize(d)
+		case schemas.DetectLabelsResponse_LabelModelVersion:
+			v.LabelModelVersion = new(string)
+			return d.ReadString(schemas.DetectLabelsResponse_LabelModelVersion, v.LabelModelVersion)
+		case schemas.DetectLabelsResponse_Labels:
+			return deserializeLabels(d, schemas.DetectLabelsResponse_Labels, &v.Labels)
+		case schemas.DetectLabelsResponse_OrientationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.DetectLabelsResponse_OrientationCorrection, &ev); err != nil {
+				return err
+			}
+			v.OrientationCorrection = types.OrientationCorrection(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectLabels, schemas.DetectLabelsRequest, schemas.DetectLabelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectLabels, schemas.DetectLabelsRequest, schemas.DetectLabelsResponse), output: &DetectLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

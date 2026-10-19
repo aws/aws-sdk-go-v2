@@ -4,6 +4,8 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,30 @@ type CreateSourceRepositoryBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSourceRepositoryBranchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSourceRepositoryBranchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSourceRepositoryBranchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeadCommitId != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_headCommitId, *v.HeadCommitId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_name, *v.Name)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_projectName, *v.ProjectName)
+	}
+	if v.SourceRepositoryName != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_sourceRepositoryName, *v.SourceRepositoryName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type CreateSourceRepositoryBranchOutput struct {
 
 	// The commit ID of the tip of the newly created branch.
@@ -79,13 +105,50 @@ type CreateSourceRepositoryBranchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSourceRepositoryBranchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSourceRepositoryBranchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSourceRepositoryBranchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeadCommitId != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchResponse_headCommitId, *v.HeadCommitId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.CreateSourceRepositoryBranchResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchResponse_name, *v.Name)
+	}
+	if v.Ref != nil {
+		s.WriteString(schemas.CreateSourceRepositoryBranchResponse_ref, *v.Ref)
+	}
+}
+func (v *CreateSourceRepositoryBranchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSourceRepositoryBranchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSourceRepositoryBranchResponse_headCommitId:
+			v.HeadCommitId = new(string)
+			return d.ReadString(schemas.CreateSourceRepositoryBranchResponse_headCommitId, v.HeadCommitId)
+		case schemas.CreateSourceRepositoryBranchResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateSourceRepositoryBranchResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.CreateSourceRepositoryBranchResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSourceRepositoryBranchResponse_name, v.Name)
+		case schemas.CreateSourceRepositoryBranchResponse_ref:
+			v.Ref = new(string)
+			return d.ReadString(schemas.CreateSourceRepositoryBranchResponse_ref, v.Ref)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSourceRepositoryBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSourceRepositoryBranch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceRepositoryBranch, schemas.CreateSourceRepositoryBranchRequest, schemas.CreateSourceRepositoryBranchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSourceRepositoryBranch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceRepositoryBranch, schemas.CreateSourceRepositoryBranchRequest, schemas.CreateSourceRepositoryBranchResponse), output: &CreateSourceRepositoryBranchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

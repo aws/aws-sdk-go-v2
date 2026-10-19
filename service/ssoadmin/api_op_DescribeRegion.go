@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,21 @@ type DescribeRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribeRegionRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DescribeRegionRequest_RegionName, *v.RegionName)
+	}
+}
+
 type DescribeRegionOutput struct {
 
 	// The timestamp when the Region was added to the IAM Identity Center instance.
@@ -85,13 +102,53 @@ type DescribeRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddedDate != nil {
+		s.WriteTime(schemas.DescribeRegionResponse_AddedDate, *v.AddedDate)
+	}
+	if v.IsPrimaryRegion != false {
+		s.WriteBool(schemas.DescribeRegionResponse_IsPrimaryRegion, v.IsPrimaryRegion)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DescribeRegionResponse_RegionName, *v.RegionName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeRegionResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegionResponse_AddedDate:
+			v.AddedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRegionResponse_AddedDate, v.AddedDate)
+		case schemas.DescribeRegionResponse_IsPrimaryRegion:
+			return d.ReadBool(schemas.DescribeRegionResponse_IsPrimaryRegion, &v.IsPrimaryRegion)
+		case schemas.DescribeRegionResponse_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.DescribeRegionResponse_RegionName, v.RegionName)
+		case schemas.DescribeRegionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRegionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RegionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegion, schemas.DescribeRegionRequest, schemas.DescribeRegionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegion, schemas.DescribeRegionRequest, schemas.DescribeRegionResponse), output: &DescribeRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

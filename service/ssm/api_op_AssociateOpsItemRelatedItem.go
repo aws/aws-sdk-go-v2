@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type AssociateOpsItemRelatedItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateOpsItemRelatedItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateOpsItemRelatedItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateOpsItemRelatedItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationType != nil {
+		s.WriteString(schemas.AssociateOpsItemRelatedItemRequest_AssociationType, *v.AssociationType)
+	}
+	if v.OpsItemId != nil {
+		s.WriteString(schemas.AssociateOpsItemRelatedItemRequest_OpsItemId, *v.OpsItemId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.AssociateOpsItemRelatedItemRequest_ResourceType, *v.ResourceType)
+	}
+	if v.ResourceUri != nil {
+		s.WriteString(schemas.AssociateOpsItemRelatedItemRequest_ResourceUri, *v.ResourceUri)
+	}
+}
+
 type AssociateOpsItemRelatedItemOutput struct {
 
 	// The association ID.
@@ -69,13 +92,32 @@ type AssociateOpsItemRelatedItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateOpsItemRelatedItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateOpsItemRelatedItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateOpsItemRelatedItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.AssociateOpsItemRelatedItemResponse_AssociationId, *v.AssociationId)
+	}
+}
+func (v *AssociateOpsItemRelatedItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateOpsItemRelatedItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateOpsItemRelatedItemResponse_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.AssociateOpsItemRelatedItemResponse_AssociationId, v.AssociationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateOpsItemRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateOpsItemRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOpsItemRelatedItem, schemas.AssociateOpsItemRelatedItemRequest, schemas.AssociateOpsItemRelatedItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateOpsItemRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOpsItemRelatedItem, schemas.AssociateOpsItemRelatedItemRequest, schemas.AssociateOpsItemRelatedItemResponse), output: &AssociateOpsItemRelatedItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

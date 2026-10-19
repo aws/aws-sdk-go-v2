@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoUpdate != "" {
+		s.WriteString(schemas.CreateProjectRequest_AutoUpdate, string(v.AutoUpdate))
+	}
+	if v.Feature != "" {
+		s.WriteString(schemas.CreateProjectRequest_Feature, string(v.Feature))
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.CreateProjectRequest_ProjectName, *v.ProjectName)
+	}
+	serializeTagMap(s, schemas.CreateProjectRequest_Tags, v.Tags)
+}
+
 type CreateProjectOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new project. You can use the ARN to
@@ -64,13 +85,32 @@ type CreateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.CreateProjectResponse_ProjectArn, *v.ProjectArn)
+	}
+}
+func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProjectResponse_ProjectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.CreateProjectResponse_ProjectArn, v.ProjectArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResponse), output: &CreateProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

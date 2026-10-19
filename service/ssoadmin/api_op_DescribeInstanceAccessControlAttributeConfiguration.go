@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DescribeInstanceAccessControlAttributeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceAccessControlAttributeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceAccessControlAttributeConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceAccessControlAttributeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribeInstanceAccessControlAttributeConfigurationRequest_InstanceArn, *v.InstanceArn)
+	}
+}
+
 type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 
 	// Gets the list of IAM Identity Center identity store attributes that have been
@@ -57,13 +71,50 @@ type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceAccessControlAttributeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceAccessControlAttributeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceAccessControlAttributeConfiguration != nil {
+		s.WriteStruct(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_InstanceAccessControlAttributeConfiguration)
+		v.InstanceAccessControlAttributeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_StatusReason, *v.StatusReason)
+	}
+}
+func (v *DescribeInstanceAccessControlAttributeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstanceAccessControlAttributeConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_InstanceAccessControlAttributeConfiguration:
+			v.InstanceAccessControlAttributeConfiguration = &types.InstanceAccessControlAttributeConfiguration{}
+			return v.InstanceAccessControlAttributeConfiguration.Deserialize(d)
+		case schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InstanceAccessControlAttributeConfigurationStatus(ev)
+			return nil
+		case schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstanceAccessControlAttributeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceAccessControlAttributeConfiguration, schemas.DescribeInstanceAccessControlAttributeConfigurationRequest, schemas.DescribeInstanceAccessControlAttributeConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInstanceAccessControlAttributeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceAccessControlAttributeConfiguration, schemas.DescribeInstanceAccessControlAttributeConfigurationRequest, schemas.DescribeInstanceAccessControlAttributeConfigurationResponse), output: &DescribeInstanceAccessControlAttributeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

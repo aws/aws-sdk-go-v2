@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,6 +40,18 @@ type DescribePortalInput struct {
 	PortalId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalId != nil {
+		s.WriteString(schemas.DescribePortalRequest_portalId, *v.PortalId)
+	}
 }
 
 type DescribePortalOutput struct {
@@ -136,13 +150,139 @@ type DescribePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alarms != nil {
+		s.WriteStruct(schemas.DescribePortalResponse_alarms)
+		v.Alarms.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationSenderEmail != nil {
+		s.WriteString(schemas.DescribePortalResponse_notificationSenderEmail, *v.NotificationSenderEmail)
+	}
+	if v.PortalArn != nil {
+		s.WriteString(schemas.DescribePortalResponse_portalArn, *v.PortalArn)
+	}
+	if v.PortalAuthMode != "" {
+		s.WriteString(schemas.DescribePortalResponse_portalAuthMode, string(v.PortalAuthMode))
+	}
+	if v.PortalClientId != nil {
+		s.WriteString(schemas.DescribePortalResponse_portalClientId, *v.PortalClientId)
+	}
+	if v.PortalContactEmail != nil {
+		s.WriteString(schemas.DescribePortalResponse_portalContactEmail, *v.PortalContactEmail)
+	}
+	if v.PortalCreationDate != nil {
+		s.WriteTime(schemas.DescribePortalResponse_portalCreationDate, *v.PortalCreationDate)
+	}
+	if v.PortalDescription != nil {
+		s.WriteString(schemas.DescribePortalResponse_portalDescription, *v.PortalDescription)
+	}
+	if v.PortalId != nil {
+		s.WriteString(schemas.DescribePortalResponse_portalId, *v.PortalId)
+	}
+	if v.PortalLastUpdateDate != nil {
+		s.WriteTime(schemas.DescribePortalResponse_portalLastUpdateDate, *v.PortalLastUpdateDate)
+	}
+	if v.PortalLogoImageLocation != nil {
+		s.WriteStruct(schemas.DescribePortalResponse_portalLogoImageLocation)
+		v.PortalLogoImageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalName != nil {
+		s.WriteString(schemas.DescribePortalResponse_portalName, *v.PortalName)
+	}
+	if v.PortalStartUrl != nil {
+		s.WriteString(schemas.DescribePortalResponse_portalStartUrl, *v.PortalStartUrl)
+	}
+	if v.PortalStatus != nil {
+		s.WriteStruct(schemas.DescribePortalResponse_portalStatus)
+		v.PortalStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalType != "" {
+		s.WriteString(schemas.DescribePortalResponse_portalType, string(v.PortalType))
+	}
+	serializePortalTypeConfiguration(s, schemas.DescribePortalResponse_portalTypeConfiguration, v.PortalTypeConfiguration)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribePortalResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *DescribePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePortalResponse_alarms:
+			v.Alarms = &types.Alarms{}
+			return v.Alarms.Deserialize(d)
+		case schemas.DescribePortalResponse_notificationSenderEmail:
+			v.NotificationSenderEmail = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_notificationSenderEmail, v.NotificationSenderEmail)
+		case schemas.DescribePortalResponse_portalArn:
+			v.PortalArn = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_portalArn, v.PortalArn)
+		case schemas.DescribePortalResponse_portalAuthMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribePortalResponse_portalAuthMode, &ev); err != nil {
+				return err
+			}
+			v.PortalAuthMode = types.AuthMode(ev)
+			return nil
+		case schemas.DescribePortalResponse_portalClientId:
+			v.PortalClientId = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_portalClientId, v.PortalClientId)
+		case schemas.DescribePortalResponse_portalContactEmail:
+			v.PortalContactEmail = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_portalContactEmail, v.PortalContactEmail)
+		case schemas.DescribePortalResponse_portalCreationDate:
+			v.PortalCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribePortalResponse_portalCreationDate, v.PortalCreationDate)
+		case schemas.DescribePortalResponse_portalDescription:
+			v.PortalDescription = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_portalDescription, v.PortalDescription)
+		case schemas.DescribePortalResponse_portalId:
+			v.PortalId = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_portalId, v.PortalId)
+		case schemas.DescribePortalResponse_portalLastUpdateDate:
+			v.PortalLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribePortalResponse_portalLastUpdateDate, v.PortalLastUpdateDate)
+		case schemas.DescribePortalResponse_portalLogoImageLocation:
+			v.PortalLogoImageLocation = &types.ImageLocation{}
+			return v.PortalLogoImageLocation.Deserialize(d)
+		case schemas.DescribePortalResponse_portalName:
+			v.PortalName = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_portalName, v.PortalName)
+		case schemas.DescribePortalResponse_portalStartUrl:
+			v.PortalStartUrl = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_portalStartUrl, v.PortalStartUrl)
+		case schemas.DescribePortalResponse_portalStatus:
+			v.PortalStatus = &types.PortalStatus{}
+			return v.PortalStatus.Deserialize(d)
+		case schemas.DescribePortalResponse_portalType:
+			var ev string
+			if err := d.ReadString(schemas.DescribePortalResponse_portalType, &ev); err != nil {
+				return err
+			}
+			v.PortalType = types.PortalType(ev)
+			return nil
+		case schemas.DescribePortalResponse_portalTypeConfiguration:
+			return deserializePortalTypeConfiguration(d, schemas.DescribePortalResponse_portalTypeConfiguration, &v.PortalTypeConfiguration)
+		case schemas.DescribePortalResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribePortalResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortal, schemas.DescribePortalRequest, schemas.DescribePortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortal, schemas.DescribePortalRequest, schemas.DescribePortalResponse), output: &DescribePortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type ListQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteString(schemas.ListQueriesRequest_filter, *v.Filter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueriesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueriesRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListQueriesRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Contains the response for the ListQueries operation.
 type ListQueriesOutput struct {
 
@@ -65,13 +88,35 @@ type ListQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueriesResponse_nextToken, *v.NextToken)
+	}
+	serializeQuerySummaryList(s, schemas.ListQueriesResponse_queries, v.Queries)
+}
+func (v *ListQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueriesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueriesResponse_nextToken, v.NextToken)
+		case schemas.ListQueriesResponse_queries:
+			return deserializeQuerySummaryList(d, schemas.ListQueriesResponse_queries, &v.Queries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesRequest, schemas.ListQueriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesRequest, schemas.ListQueriesResponse), output: &ListQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

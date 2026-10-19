@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type ListTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTasksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTasksRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListTasksRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for ListTasks operation.
 type ListTasksOutput struct {
 
@@ -62,13 +82,35 @@ type ListTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTasksResponse_nextToken, *v.NextToken)
+	}
+	serializeTaskSummaries(s, schemas.ListTasksResponse_taskSummaries, v.TaskSummaries)
+}
+func (v *ListTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTasksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTasksResponse_nextToken, v.NextToken)
+		case schemas.ListTasksResponse_taskSummaries:
+			return deserializeTaskSummaries(d, schemas.ListTasksResponse_taskSummaries, &v.TaskSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTasks, schemas.ListTasksRequest, schemas.ListTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTasks, schemas.ListTasksRequest, schemas.ListTasksResponse), output: &ListTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

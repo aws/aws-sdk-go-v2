@@ -4,7 +4,9 @@ package connectcampaigns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,31 @@ type UpdateCampaignDialerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignDialerConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignDialerConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignDialerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDialerConfig(s, schemas.UpdateCampaignDialerConfigRequest_dialerConfig, v.DialerConfig)
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCampaignDialerConfigRequest_id, *v.Id)
+	}
+}
+func (v *UpdateCampaignDialerConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCampaignDialerConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCampaignDialerConfigRequest_dialerConfig:
+			return deserializeDialerConfig(d, schemas.UpdateCampaignDialerConfigRequest_dialerConfig, &v.DialerConfig)
+		case schemas.UpdateCampaignDialerConfigRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateCampaignDialerConfigRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type UpdateCampaignDialerConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +74,26 @@ type UpdateCampaignDialerConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignDialerConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignDialerConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCampaignDialerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCampaignDialerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCampaignDialerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignDialerConfig, schemas.UpdateCampaignDialerConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCampaignDialerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaignDialerConfig, schemas.UpdateCampaignDialerConfigRequest, nil), output: &UpdateCampaignDialerConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,20 @@ type BatchUpdateMemoryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateMemoryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateMemoryRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemoryId != nil {
+		s.WriteString(schemas.BatchUpdateMemoryRecordsInput_memoryId, *v.MemoryId)
+	}
+	serializeRecordExpirySpecification(s, schemas.BatchUpdateMemoryRecordsInput_recordExpirySpecification, v.RecordExpirySpecification)
+	serializeMemoryRecordsUpdateInputList(s, schemas.BatchUpdateMemoryRecordsInput_records, v.Records)
+}
+
 type BatchUpdateMemoryRecordsOutput struct {
 
 	// A list of memory records that failed to be updated, including error details for
@@ -79,13 +95,32 @@ type BatchUpdateMemoryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateMemoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateMemoryRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateMemoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemoryRecordsOutputList(s, schemas.BatchUpdateMemoryRecordsOutput_failedRecords, v.FailedRecords)
+	serializeMemoryRecordsOutputList(s, schemas.BatchUpdateMemoryRecordsOutput_successfulRecords, v.SuccessfulRecords)
+}
+func (v *BatchUpdateMemoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateMemoryRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateMemoryRecordsOutput_failedRecords:
+			return deserializeMemoryRecordsOutputList(d, schemas.BatchUpdateMemoryRecordsOutput_failedRecords, &v.FailedRecords)
+		case schemas.BatchUpdateMemoryRecordsOutput_successfulRecords:
+			return deserializeMemoryRecordsOutputList(d, schemas.BatchUpdateMemoryRecordsOutput_successfulRecords, &v.SuccessfulRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateMemoryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemoryRecords, schemas.BatchUpdateMemoryRecordsInput, schemas.BatchUpdateMemoryRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemoryRecords, schemas.BatchUpdateMemoryRecordsInput, schemas.BatchUpdateMemoryRecordsOutput), output: &BatchUpdateMemoryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package wafregional
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type GetRateBasedRuleManagedKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRateBasedRuleManagedKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRateBasedRuleManagedKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRateBasedRuleManagedKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetRateBasedRuleManagedKeysRequest_NextMarker, *v.NextMarker)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetRateBasedRuleManagedKeysRequest_RuleId, *v.RuleId)
+	}
+}
+
 type GetRateBasedRuleManagedKeysOutput struct {
 
 	// An array of IP addresses that currently are blocked by the specified RateBasedRule.
@@ -64,13 +81,35 @@ type GetRateBasedRuleManagedKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRateBasedRuleManagedKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRateBasedRuleManagedKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRateBasedRuleManagedKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedKeys(s, schemas.GetRateBasedRuleManagedKeysResponse_ManagedKeys, v.ManagedKeys)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetRateBasedRuleManagedKeysResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *GetRateBasedRuleManagedKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRateBasedRuleManagedKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRateBasedRuleManagedKeysResponse_ManagedKeys:
+			return deserializeManagedKeys(d, schemas.GetRateBasedRuleManagedKeysResponse_ManagedKeys, &v.ManagedKeys)
+		case schemas.GetRateBasedRuleManagedKeysResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.GetRateBasedRuleManagedKeysResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRateBasedRuleManagedKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRateBasedRuleManagedKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRateBasedRuleManagedKeys, schemas.GetRateBasedRuleManagedKeysRequest, schemas.GetRateBasedRuleManagedKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRateBasedRuleManagedKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRateBasedRuleManagedKeys, schemas.GetRateBasedRuleManagedKeysRequest, schemas.GetRateBasedRuleManagedKeysResponse), output: &GetRateBasedRuleManagedKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

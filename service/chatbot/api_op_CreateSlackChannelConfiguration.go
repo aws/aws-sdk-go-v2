@@ -4,7 +4,9 @@ package chatbot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,39 @@ type CreateSlackChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSlackChannelConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSlackChannelConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSlackChannelConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_ConfigurationName, *v.ConfigurationName)
+	}
+	serializeGuardrailPolicyArnList(s, schemas.CreateSlackChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.LoggingLevel != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_LoggingLevel, *v.LoggingLevel)
+	}
+	if v.SlackChannelId != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_SlackChannelId, *v.SlackChannelId)
+	}
+	if v.SlackChannelName != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_SlackChannelName, *v.SlackChannelName)
+	}
+	if v.SlackTeamId != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_SlackTeamId, *v.SlackTeamId)
+	}
+	serializeSnsTopicArnList(s, schemas.CreateSlackChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	serializeTags(s, schemas.CreateSlackChannelConfigurationRequest_Tags, v.Tags)
+	if v.UserAuthorizationRequired != nil {
+		s.WriteBool(schemas.CreateSlackChannelConfigurationRequest_UserAuthorizationRequired, *v.UserAuthorizationRequired)
+	}
+}
+
 type CreateSlackChannelConfigurationOutput struct {
 
 	// The configuration for a Slack channel configured with AWS Chatbot.
@@ -90,13 +125,34 @@ type CreateSlackChannelConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSlackChannelConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSlackChannelConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSlackChannelConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelConfiguration != nil {
+		s.WriteStruct(schemas.CreateSlackChannelConfigurationResult_ChannelConfiguration)
+		v.ChannelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSlackChannelConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSlackChannelConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSlackChannelConfigurationResult_ChannelConfiguration:
+			v.ChannelConfiguration = &types.SlackChannelConfiguration{}
+			return v.ChannelConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSlackChannelConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSlackChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlackChannelConfiguration, schemas.CreateSlackChannelConfigurationRequest, schemas.CreateSlackChannelConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSlackChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlackChannelConfiguration, schemas.CreateSlackChannelConfigurationRequest, schemas.CreateSlackChannelConfigurationResult), output: &CreateSlackChannelConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,51 @@ type CreateOtaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOtaTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOtaTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOtaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateOtaTaskRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateOtaTaskRequest_Description, *v.Description)
+	}
+	if v.OtaMechanism != "" {
+		s.WriteString(schemas.CreateOtaTaskRequest_OtaMechanism, string(v.OtaMechanism))
+	}
+	if v.OtaSchedulingConfig != nil {
+		s.WriteStruct(schemas.CreateOtaTaskRequest_OtaSchedulingConfig)
+		v.OtaSchedulingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OtaTargetQueryString != nil {
+		s.WriteString(schemas.CreateOtaTaskRequest_OtaTargetQueryString, *v.OtaTargetQueryString)
+	}
+	if v.OtaTaskExecutionRetryConfig != nil {
+		s.WriteStruct(schemas.CreateOtaTaskRequest_OtaTaskExecutionRetryConfig)
+		v.OtaTaskExecutionRetryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OtaType != "" {
+		s.WriteString(schemas.CreateOtaTaskRequest_OtaType, string(v.OtaType))
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateOtaTaskRequest_Protocol, string(v.Protocol))
+	}
+	if v.S3Url != nil {
+		s.WriteString(schemas.CreateOtaTaskRequest_S3Url, *v.S3Url)
+	}
+	serializeTagsMap(s, schemas.CreateOtaTaskRequest_Tags, v.Tags)
+	serializeTarget(s, schemas.CreateOtaTaskRequest_Target, v.Target)
+	if v.TaskConfigurationId != nil {
+		s.WriteString(schemas.CreateOtaTaskRequest_TaskConfigurationId, *v.TaskConfigurationId)
+	}
+}
+
 type CreateOtaTaskOutput struct {
 
 	// A description of the over-the-air (OTA) task.
@@ -89,13 +136,44 @@ type CreateOtaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOtaTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOtaTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOtaTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateOtaTaskResponse_Description, *v.Description)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.CreateOtaTaskResponse_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CreateOtaTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *CreateOtaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOtaTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOtaTaskResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateOtaTaskResponse_Description, v.Description)
+		case schemas.CreateOtaTaskResponse_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.CreateOtaTaskResponse_TaskArn, v.TaskArn)
+		case schemas.CreateOtaTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CreateOtaTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOtaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOtaTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOtaTask, schemas.CreateOtaTaskRequest, schemas.CreateOtaTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOtaTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOtaTask, schemas.CreateOtaTaskRequest, schemas.CreateOtaTaskResponse), output: &CreateOtaTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

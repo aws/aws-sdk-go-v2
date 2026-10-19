@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,29 @@ type ListConfigurationBundleVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationBundleVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationBundleVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationBundleVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.ListConfigurationBundleVersionsRequest_bundleId, *v.BundleId)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListConfigurationBundleVersionsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationBundleVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationBundleVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListConfigurationBundleVersionsOutput struct {
 
 	// The list of configuration bundle version summaries.
@@ -69,13 +94,35 @@ type ListConfigurationBundleVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationBundleVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationBundleVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationBundleVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationBundleVersionsResponse_nextToken, *v.NextToken)
+	}
+	serializeConfigurationBundleVersionSummaryList(s, schemas.ListConfigurationBundleVersionsResponse_versions, v.Versions)
+}
+func (v *ListConfigurationBundleVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationBundleVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationBundleVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationBundleVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListConfigurationBundleVersionsResponse_versions:
+			return deserializeConfigurationBundleVersionSummaryList(d, schemas.ListConfigurationBundleVersionsResponse_versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationBundleVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationBundleVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationBundleVersions, schemas.ListConfigurationBundleVersionsRequest, schemas.ListConfigurationBundleVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationBundleVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationBundleVersions, schemas.ListConfigurationBundleVersionsRequest, schemas.ListConfigurationBundleVersionsResponse), output: &ListConfigurationBundleVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

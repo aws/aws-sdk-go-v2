@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,30 @@ type GetContentModerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentModerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentModerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentModerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateBy != "" {
+		s.WriteString(schemas.GetContentModerationRequest_AggregateBy, string(v.AggregateBy))
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetContentModerationRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetContentModerationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetContentModerationRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetContentModerationRequest_SortBy, string(v.SortBy))
+	}
+}
+
 type GetContentModerationOutput struct {
 
 	// Information about the paramters used when getting a response. Includes
@@ -144,13 +170,93 @@ type GetContentModerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentModerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentModerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentModerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GetRequestMetadata != nil {
+		s.WriteStruct(schemas.GetContentModerationResponse_GetRequestMetadata)
+		v.GetRequestMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetContentModerationResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetContentModerationResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetContentModerationResponse_JobTag, *v.JobTag)
+	}
+	serializeContentModerationDetections(s, schemas.GetContentModerationResponse_ModerationLabels, v.ModerationLabels)
+	if v.ModerationModelVersion != nil {
+		s.WriteString(schemas.GetContentModerationResponse_ModerationModelVersion, *v.ModerationModelVersion)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetContentModerationResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetContentModerationResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetContentModerationResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoMetadata != nil {
+		s.WriteStruct(schemas.GetContentModerationResponse_VideoMetadata)
+		v.VideoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetContentModerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentModerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentModerationResponse_GetRequestMetadata:
+			v.GetRequestMetadata = &types.GetContentModerationRequestMetadata{}
+			return v.GetRequestMetadata.Deserialize(d)
+		case schemas.GetContentModerationResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetContentModerationResponse_JobId, v.JobId)
+		case schemas.GetContentModerationResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetContentModerationResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetContentModerationResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetContentModerationResponse_JobTag, v.JobTag)
+		case schemas.GetContentModerationResponse_ModerationLabels:
+			return deserializeContentModerationDetections(d, schemas.GetContentModerationResponse_ModerationLabels, &v.ModerationLabels)
+		case schemas.GetContentModerationResponse_ModerationModelVersion:
+			v.ModerationModelVersion = new(string)
+			return d.ReadString(schemas.GetContentModerationResponse_ModerationModelVersion, v.ModerationModelVersion)
+		case schemas.GetContentModerationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetContentModerationResponse_NextToken, v.NextToken)
+		case schemas.GetContentModerationResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetContentModerationResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetContentModerationResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetContentModerationResponse_VideoMetadata:
+			v.VideoMetadata = &types.VideoMetadata{}
+			return v.VideoMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContentModerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContentModeration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentModeration, schemas.GetContentModerationRequest, schemas.GetContentModerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetContentModeration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentModeration, schemas.GetContentModerationRequest, schemas.GetContentModerationResponse), output: &GetContentModerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

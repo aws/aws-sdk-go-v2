@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,21 @@ type DescribeAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetPropertyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetPropertyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetPropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.DescribeAssetPropertyRequest_assetId, *v.AssetId)
+	}
+	if v.PropertyId != nil {
+		s.WriteString(schemas.DescribeAssetPropertyRequest_propertyId, *v.PropertyId)
+	}
+}
+
 type DescribeAssetPropertyOutput struct {
 
 	// The ID of the asset, in UUID format.
@@ -99,13 +116,66 @@ type DescribeAssetPropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetPropertyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetPropertyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetPropertyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetExternalId != nil {
+		s.WriteString(schemas.DescribeAssetPropertyResponse_assetExternalId, *v.AssetExternalId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.DescribeAssetPropertyResponse_assetId, *v.AssetId)
+	}
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DescribeAssetPropertyResponse_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetName != nil {
+		s.WriteString(schemas.DescribeAssetPropertyResponse_assetName, *v.AssetName)
+	}
+	if v.AssetProperty != nil {
+		s.WriteStruct(schemas.DescribeAssetPropertyResponse_assetProperty)
+		v.AssetProperty.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompositeModel != nil {
+		s.WriteStruct(schemas.DescribeAssetPropertyResponse_compositeModel)
+		v.CompositeModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAssetPropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetPropertyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetPropertyResponse_assetExternalId:
+			v.AssetExternalId = new(string)
+			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetExternalId, v.AssetExternalId)
+		case schemas.DescribeAssetPropertyResponse_assetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetId, v.AssetId)
+		case schemas.DescribeAssetPropertyResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetModelId, v.AssetModelId)
+		case schemas.DescribeAssetPropertyResponse_assetName:
+			v.AssetName = new(string)
+			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetName, v.AssetName)
+		case schemas.DescribeAssetPropertyResponse_assetProperty:
+			v.AssetProperty = &types.Property{}
+			return v.AssetProperty.Deserialize(d)
+		case schemas.DescribeAssetPropertyResponse_compositeModel:
+			v.CompositeModel = &types.CompositeModelProperty{}
+			return v.CompositeModel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetProperty, schemas.DescribeAssetPropertyRequest, schemas.DescribeAssetPropertyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetProperty, schemas.DescribeAssetPropertyRequest, schemas.DescribeAssetPropertyResponse), output: &DescribeAssetPropertyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

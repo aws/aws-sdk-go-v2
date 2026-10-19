@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -159,6 +161,69 @@ type SendCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCommandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCommandRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmConfiguration != nil {
+		s.WriteStruct(schemas.SendCommandRequest_AlarmConfiguration)
+		v.AlarmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchOutputConfig != nil {
+		s.WriteStruct(schemas.SendCommandRequest_CloudWatchOutputConfig)
+		v.CloudWatchOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.SendCommandRequest_Comment, *v.Comment)
+	}
+	if v.DocumentHash != nil {
+		s.WriteString(schemas.SendCommandRequest_DocumentHash, *v.DocumentHash)
+	}
+	if v.DocumentHashType != "" {
+		s.WriteString(schemas.SendCommandRequest_DocumentHashType, string(v.DocumentHashType))
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.SendCommandRequest_DocumentName, *v.DocumentName)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.SendCommandRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	serializeInstanceIdList(s, schemas.SendCommandRequest_InstanceIds, v.InstanceIds)
+	if v.MaxConcurrency != nil {
+		s.WriteString(schemas.SendCommandRequest_MaxConcurrency, *v.MaxConcurrency)
+	}
+	if v.MaxErrors != nil {
+		s.WriteString(schemas.SendCommandRequest_MaxErrors, *v.MaxErrors)
+	}
+	if v.NotificationConfig != nil {
+		s.WriteStruct(schemas.SendCommandRequest_NotificationConfig)
+		v.NotificationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputS3BucketName != nil {
+		s.WriteString(schemas.SendCommandRequest_OutputS3BucketName, *v.OutputS3BucketName)
+	}
+	if v.OutputS3KeyPrefix != nil {
+		s.WriteString(schemas.SendCommandRequest_OutputS3KeyPrefix, *v.OutputS3KeyPrefix)
+	}
+	if v.OutputS3Region != nil {
+		s.WriteString(schemas.SendCommandRequest_OutputS3Region, *v.OutputS3Region)
+	}
+	serializeParameters(s, schemas.SendCommandRequest_Parameters, v.Parameters)
+	if v.ServiceRoleArn != nil {
+		s.WriteString(schemas.SendCommandRequest_ServiceRoleArn, *v.ServiceRoleArn)
+	}
+	serializeTargets(s, schemas.SendCommandRequest_Targets, v.Targets)
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.SendCommandRequest_TimeoutSeconds, *v.TimeoutSeconds)
+	}
+}
+
 type SendCommandOutput struct {
 
 	// The request as it was received by Systems Manager. Also provides the command ID
@@ -171,13 +236,34 @@ type SendCommandOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCommandOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCommandResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCommandOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Command != nil {
+		s.WriteStruct(schemas.SendCommandResult_Command)
+		v.Command.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SendCommandOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendCommandResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendCommandResult_Command:
+			v.Command = &types.Command{}
+			return v.Command.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCommand, schemas.SendCommandRequest, schemas.SendCommandResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSendCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCommand, schemas.SendCommandRequest, schemas.SendCommandResult), output: &SendCommandOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

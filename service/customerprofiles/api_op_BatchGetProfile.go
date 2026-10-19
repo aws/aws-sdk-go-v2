@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type BatchGetProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.BatchGetProfileRequest_DomainName, *v.DomainName)
+	}
+	serializeBatchGetProfileIdList(s, schemas.BatchGetProfileRequest_ProfileIds, v.ProfileIds)
+}
+
 type BatchGetProfileOutput struct {
 
 	// For information about the errors that are common to all actions, see [Common Errors].
@@ -55,13 +70,32 @@ type BatchGetProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetProfileErrorList(s, schemas.BatchGetProfileResponse_Errors, v.Errors)
+	serializeProfileList(s, schemas.BatchGetProfileResponse_Profiles, v.Profiles)
+}
+func (v *BatchGetProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetProfileResponse_Errors:
+			return deserializeBatchGetProfileErrorList(d, schemas.BatchGetProfileResponse_Errors, &v.Errors)
+		case schemas.BatchGetProfileResponse_Profiles:
+			return deserializeProfileList(d, schemas.BatchGetProfileResponse_Profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetProfile, schemas.BatchGetProfileRequest, schemas.BatchGetProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetProfile, schemas.BatchGetProfileRequest, schemas.BatchGetProfileResponse), output: &BatchGetProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

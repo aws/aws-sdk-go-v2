@@ -5,6 +5,8 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,34 @@ type ListDatasetEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetEntriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetEntriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetEntriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetLabels(s, schemas.ListDatasetEntriesRequest_ContainsLabels, v.ContainsLabels)
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.ListDatasetEntriesRequest_DatasetArn, *v.DatasetArn)
+	}
+	if v.HasErrors != nil {
+		s.WriteBool(schemas.ListDatasetEntriesRequest_HasErrors, *v.HasErrors)
+	}
+	if v.Labeled != nil {
+		s.WriteBool(schemas.ListDatasetEntriesRequest_Labeled, *v.Labeled)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetEntriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetEntriesRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceRefContains != nil {
+		s.WriteString(schemas.ListDatasetEntriesRequest_SourceRefContains, *v.SourceRefContains)
+	}
+}
+
 type ListDatasetEntriesOutput struct {
 
 	//  A list of entries (images) in the dataset.
@@ -99,13 +129,35 @@ type ListDatasetEntriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetEntriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetEntriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetEntriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetEntries(s, schemas.ListDatasetEntriesResponse_DatasetEntries, v.DatasetEntries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetEntriesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetEntriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetEntriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetEntriesResponse_DatasetEntries:
+			return deserializeDatasetEntries(d, schemas.ListDatasetEntriesResponse_DatasetEntries, &v.DatasetEntries)
+		case schemas.ListDatasetEntriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetEntriesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasetEntries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetEntries, schemas.ListDatasetEntriesRequest, schemas.ListDatasetEntriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatasetEntries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetEntries, schemas.ListDatasetEntriesRequest, schemas.ListDatasetEntriesResponse), output: &ListDatasetEntriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

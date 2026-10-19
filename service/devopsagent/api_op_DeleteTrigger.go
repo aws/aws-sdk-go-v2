@@ -5,6 +5,8 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type DeleteTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.DeleteTriggerRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.TriggerId != nil {
+		s.WriteString(schemas.DeleteTriggerRequest_triggerId, *v.TriggerId)
+	}
+}
+
 // Response structure for deleting a Trigger
 type DeleteTriggerOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -49,13 +66,26 @@ type DeleteTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrigger, schemas.DeleteTriggerRequest, schemas.DeleteTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrigger, schemas.DeleteTriggerRequest, schemas.DeleteTriggerResponse), output: &DeleteTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

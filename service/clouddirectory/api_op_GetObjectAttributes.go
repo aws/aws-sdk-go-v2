@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,32 @@ type GetObjectAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetObjectAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetObjectAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetObjectAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeNameList(s, schemas.GetObjectAttributesRequest_AttributeNames, v.AttributeNames)
+	if v.ConsistencyLevel != "" {
+		s.WriteString(schemas.GetObjectAttributesRequest_ConsistencyLevel, string(v.ConsistencyLevel))
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.GetObjectAttributesRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.GetObjectAttributesRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaFacet != nil {
+		s.WriteStruct(schemas.GetObjectAttributesRequest_SchemaFacet)
+		v.SchemaFacet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetObjectAttributesOutput struct {
 
 	// The attributes that are associated with the object.
@@ -64,13 +92,29 @@ type GetObjectAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetObjectAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetObjectAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetObjectAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeKeyAndValueList(s, schemas.GetObjectAttributesResponse_Attributes, v.Attributes)
+}
+func (v *GetObjectAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetObjectAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetObjectAttributesResponse_Attributes:
+			return deserializeAttributeKeyAndValueList(d, schemas.GetObjectAttributesResponse_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetObjectAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetObjectAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObjectAttributes, schemas.GetObjectAttributesRequest, schemas.GetObjectAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetObjectAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObjectAttributes, schemas.GetObjectAttributesRequest, schemas.GetObjectAttributesResponse), output: &GetObjectAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

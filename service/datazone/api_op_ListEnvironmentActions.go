@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type ListEnvironmentActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentActionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListEnvironmentActionsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.ListEnvironmentActionsInput_environmentIdentifier, *v.EnvironmentIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentActionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentActionsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnvironmentActionsOutput struct {
 
 	// The results of ListEnvironmentActions .
@@ -75,13 +98,35 @@ type ListEnvironmentActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentActionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListEnvironmentActionSummaries(s, schemas.ListEnvironmentActionsOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentActionsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnvironmentActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentActionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentActionsOutput_items:
+			return deserializeListEnvironmentActionSummaries(d, schemas.ListEnvironmentActionsOutput_items, &v.Items)
+		case schemas.ListEnvironmentActionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentActionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnvironmentActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentActions, schemas.ListEnvironmentActionsInput, schemas.ListEnvironmentActionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnvironmentActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentActions, schemas.ListEnvironmentActionsInput, schemas.ListEnvironmentActionsOutput), output: &ListEnvironmentActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

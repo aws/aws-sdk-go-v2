@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,24 @@ type GetSegmentDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetSegmentDetectionRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSegmentDetectionRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSegmentDetectionRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetSegmentDetectionOutput struct {
 
 	// An array of objects. There can be multiple audio streams. Each AudioMetadata
@@ -133,13 +153,80 @@ type GetSegmentDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudioMetadataList(s, schemas.GetSegmentDetectionResponse_AudioMetadata, v.AudioMetadata)
+	if v.JobId != nil {
+		s.WriteString(schemas.GetSegmentDetectionResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetSegmentDetectionResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetSegmentDetectionResponse_JobTag, *v.JobTag)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSegmentDetectionResponse_NextToken, *v.NextToken)
+	}
+	serializeSegmentDetections(s, schemas.GetSegmentDetectionResponse_Segments, v.Segments)
+	serializeSegmentTypesInfo(s, schemas.GetSegmentDetectionResponse_SelectedSegmentTypes, v.SelectedSegmentTypes)
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetSegmentDetectionResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetSegmentDetectionResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVideoMetadataList(s, schemas.GetSegmentDetectionResponse_VideoMetadata, v.VideoMetadata)
+}
+func (v *GetSegmentDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSegmentDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSegmentDetectionResponse_AudioMetadata:
+			return deserializeAudioMetadataList(d, schemas.GetSegmentDetectionResponse_AudioMetadata, &v.AudioMetadata)
+		case schemas.GetSegmentDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetSegmentDetectionResponse_JobId, v.JobId)
+		case schemas.GetSegmentDetectionResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSegmentDetectionResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetSegmentDetectionResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetSegmentDetectionResponse_JobTag, v.JobTag)
+		case schemas.GetSegmentDetectionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSegmentDetectionResponse_NextToken, v.NextToken)
+		case schemas.GetSegmentDetectionResponse_Segments:
+			return deserializeSegmentDetections(d, schemas.GetSegmentDetectionResponse_Segments, &v.Segments)
+		case schemas.GetSegmentDetectionResponse_SelectedSegmentTypes:
+			return deserializeSegmentTypesInfo(d, schemas.GetSegmentDetectionResponse_SelectedSegmentTypes, &v.SelectedSegmentTypes)
+		case schemas.GetSegmentDetectionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetSegmentDetectionResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetSegmentDetectionResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetSegmentDetectionResponse_VideoMetadata:
+			return deserializeVideoMetadataList(d, schemas.GetSegmentDetectionResponse_VideoMetadata, &v.VideoMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSegmentDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSegmentDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentDetection, schemas.GetSegmentDetectionRequest, schemas.GetSegmentDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSegmentDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentDetection, schemas.GetSegmentDetectionRequest, schemas.GetSegmentDetectionResponse), output: &GetSegmentDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

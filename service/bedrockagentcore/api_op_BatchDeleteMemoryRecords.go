@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchDeleteMemoryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteMemoryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteMemoryRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemoryId != nil {
+		s.WriteString(schemas.BatchDeleteMemoryRecordsInput_memoryId, *v.MemoryId)
+	}
+	serializeMemoryRecordsDeleteInputList(s, schemas.BatchDeleteMemoryRecordsInput_records, v.Records)
+}
+
 type BatchDeleteMemoryRecordsOutput struct {
 
 	// A list of memory records that failed to be deleted, including error details for
@@ -60,13 +75,32 @@ type BatchDeleteMemoryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteMemoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteMemoryRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteMemoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemoryRecordsOutputList(s, schemas.BatchDeleteMemoryRecordsOutput_failedRecords, v.FailedRecords)
+	serializeMemoryRecordsOutputList(s, schemas.BatchDeleteMemoryRecordsOutput_successfulRecords, v.SuccessfulRecords)
+}
+func (v *BatchDeleteMemoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteMemoryRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteMemoryRecordsOutput_failedRecords:
+			return deserializeMemoryRecordsOutputList(d, schemas.BatchDeleteMemoryRecordsOutput_failedRecords, &v.FailedRecords)
+		case schemas.BatchDeleteMemoryRecordsOutput_successfulRecords:
+			return deserializeMemoryRecordsOutputList(d, schemas.BatchDeleteMemoryRecordsOutput_successfulRecords, &v.SuccessfulRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteMemoryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteMemoryRecords, schemas.BatchDeleteMemoryRecordsInput, schemas.BatchDeleteMemoryRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteMemoryRecords, schemas.BatchDeleteMemoryRecordsInput, schemas.BatchDeleteMemoryRecordsOutput), output: &BatchDeleteMemoryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

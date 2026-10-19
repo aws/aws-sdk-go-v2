@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,21 @@ type GetPolicySummaryInput struct {
 	PolicyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPolicySummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicySummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicySummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.GetPolicySummaryRequest_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetPolicySummaryRequest_policyId, *v.PolicyId)
+	}
 }
 
 type GetPolicySummaryOutput struct {
@@ -93,13 +110,82 @@ type GetPolicySummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicySummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicySummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicySummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetPolicySummaryResponse_createdAt, *v.CreatedAt)
+	}
+	if v.EnforcementMode != "" {
+		s.WriteString(schemas.GetPolicySummaryResponse_enforcementMode, string(v.EnforcementMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPolicySummaryResponse_name, *v.Name)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetPolicySummaryResponse_policyArn, *v.PolicyArn)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.GetPolicySummaryResponse_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetPolicySummaryResponse_policyId, *v.PolicyId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetPolicySummaryResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPolicySummaryResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetPolicySummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicySummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicySummaryResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPolicySummaryResponse_createdAt, v.CreatedAt)
+		case schemas.GetPolicySummaryResponse_enforcementMode:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicySummaryResponse_enforcementMode, &ev); err != nil {
+				return err
+			}
+			v.EnforcementMode = types.EnforcementMode(ev)
+			return nil
+		case schemas.GetPolicySummaryResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPolicySummaryResponse_name, v.Name)
+		case schemas.GetPolicySummaryResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.GetPolicySummaryResponse_policyArn, v.PolicyArn)
+		case schemas.GetPolicySummaryResponse_policyEngineId:
+			v.PolicyEngineId = new(string)
+			return d.ReadString(schemas.GetPolicySummaryResponse_policyEngineId, v.PolicyEngineId)
+		case schemas.GetPolicySummaryResponse_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.GetPolicySummaryResponse_policyId, v.PolicyId)
+		case schemas.GetPolicySummaryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicySummaryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PolicyStatus(ev)
+			return nil
+		case schemas.GetPolicySummaryResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPolicySummaryResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicySummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicySummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicySummary, schemas.GetPolicySummaryRequest, schemas.GetPolicySummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicySummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicySummary, schemas.GetPolicySummaryRequest, schemas.GetPolicySummaryResponse), output: &GetPolicySummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

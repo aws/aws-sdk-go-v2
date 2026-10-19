@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type GetPaymentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPaymentSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPaymentSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPaymentSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentName != nil {
+		s.WriteString(schemas.GetPaymentSessionRequest_agentName, *v.AgentName)
+	}
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.GetPaymentSessionRequest_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.PaymentSessionId != nil {
+		s.WriteString(schemas.GetPaymentSessionRequest_paymentSessionId, *v.PaymentSessionId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetPaymentSessionRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for getting a payment session.
 type GetPaymentSessionOutput struct {
 
@@ -60,13 +83,34 @@ type GetPaymentSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPaymentSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPaymentSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPaymentSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaymentSession != nil {
+		s.WriteStruct(schemas.GetPaymentSessionResponse_paymentSession)
+		v.PaymentSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPaymentSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPaymentSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPaymentSessionResponse_paymentSession:
+			v.PaymentSession = &types.PaymentSession{}
+			return v.PaymentSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPaymentSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPaymentSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentSession, schemas.GetPaymentSessionRequest, schemas.GetPaymentSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPaymentSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentSession, schemas.GetPaymentSessionRequest, schemas.GetPaymentSessionResponse), output: &GetPaymentSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

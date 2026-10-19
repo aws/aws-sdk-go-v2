@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,18 @@ type DescribeInstanceInput struct {
 	InstanceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribeInstanceRequest_InstanceArn, *v.InstanceArn)
+	}
 }
 
 type DescribeInstanceOutput struct {
@@ -104,13 +118,101 @@ type DescribeInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.DescribeInstanceResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.EncryptionConfigurationDetails != nil {
+		s.WriteStruct(schemas.DescribeInstanceResponse_EncryptionConfigurationDetails)
+		v.EncryptionConfigurationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityStoreArn != nil {
+		s.WriteString(schemas.DescribeInstanceResponse_IdentityStoreArn, *v.IdentityStoreArn)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.DescribeInstanceResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.DescribeInstanceResponse_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeInstanceResponse_Name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.DescribeInstanceResponse_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.PermissionSetsEnabled != nil {
+		s.WriteBool(schemas.DescribeInstanceResponse_PermissionSetsEnabled, *v.PermissionSetsEnabled)
+	}
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.DescribeInstanceResponse_PrimaryRegion, *v.PrimaryRegion)
+	}
+	serializeRegionMetadataList(s, schemas.DescribeInstanceResponse_Regions, v.Regions)
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeInstanceResponse_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeInstanceResponse_StatusReason, *v.StatusReason)
+	}
+}
+func (v *DescribeInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstanceResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeInstanceResponse_CreatedDate, v.CreatedDate)
+		case schemas.DescribeInstanceResponse_EncryptionConfigurationDetails:
+			v.EncryptionConfigurationDetails = &types.EncryptionConfigurationDetails{}
+			return v.EncryptionConfigurationDetails.Deserialize(d)
+		case schemas.DescribeInstanceResponse_IdentityStoreArn:
+			v.IdentityStoreArn = new(string)
+			return d.ReadString(schemas.DescribeInstanceResponse_IdentityStoreArn, v.IdentityStoreArn)
+		case schemas.DescribeInstanceResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.DescribeInstanceResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.DescribeInstanceResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.DescribeInstanceResponse_InstanceArn, v.InstanceArn)
+		case schemas.DescribeInstanceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeInstanceResponse_Name, v.Name)
+		case schemas.DescribeInstanceResponse_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.DescribeInstanceResponse_OwnerAccountId, v.OwnerAccountId)
+		case schemas.DescribeInstanceResponse_PermissionSetsEnabled:
+			v.PermissionSetsEnabled = new(bool)
+			return d.ReadBool(schemas.DescribeInstanceResponse_PermissionSetsEnabled, v.PermissionSetsEnabled)
+		case schemas.DescribeInstanceResponse_PrimaryRegion:
+			v.PrimaryRegion = new(string)
+			return d.ReadString(schemas.DescribeInstanceResponse_PrimaryRegion, v.PrimaryRegion)
+		case schemas.DescribeInstanceResponse_Regions:
+			return deserializeRegionMetadataList(d, schemas.DescribeInstanceResponse_Regions, &v.Regions)
+		case schemas.DescribeInstanceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInstanceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InstanceStatus(ev)
+			return nil
+		case schemas.DescribeInstanceResponse_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeInstanceResponse_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse), output: &DescribeInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

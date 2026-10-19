@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetProfileObjectTypeTemplateInput struct {
 	TemplateId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProfileObjectTypeTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileObjectTypeTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileObjectTypeTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateId != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateRequest_TemplateId, *v.TemplateId)
+	}
 }
 
 type GetProfileObjectTypeTemplateOutput struct {
@@ -72,13 +86,61 @@ type GetProfileObjectTypeTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileObjectTypeTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileObjectTypeTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileObjectTypeTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowProfileCreation != false {
+		s.WriteBool(schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation, v.AllowProfileCreation)
+	}
+	serializeFieldMap(s, schemas.GetProfileObjectTypeTemplateResponse_Fields, v.Fields)
+	serializeKeyMap(s, schemas.GetProfileObjectTypeTemplateResponse_Keys, v.Keys)
+	if v.SourceLastUpdatedTimestampFormat != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceLastUpdatedTimestampFormat, *v.SourceLastUpdatedTimestampFormat)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceName, *v.SourceName)
+	}
+	if v.SourceObject != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceObject, *v.SourceObject)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_TemplateId, *v.TemplateId)
+	}
+}
+func (v *GetProfileObjectTypeTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileObjectTypeTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation:
+			return d.ReadBool(schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation, &v.AllowProfileCreation)
+		case schemas.GetProfileObjectTypeTemplateResponse_Fields:
+			return deserializeFieldMap(d, schemas.GetProfileObjectTypeTemplateResponse_Fields, &v.Fields)
+		case schemas.GetProfileObjectTypeTemplateResponse_Keys:
+			return deserializeKeyMap(d, schemas.GetProfileObjectTypeTemplateResponse_Keys, &v.Keys)
+		case schemas.GetProfileObjectTypeTemplateResponse_SourceLastUpdatedTimestampFormat:
+			v.SourceLastUpdatedTimestampFormat = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_SourceLastUpdatedTimestampFormat, v.SourceLastUpdatedTimestampFormat)
+		case schemas.GetProfileObjectTypeTemplateResponse_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_SourceName, v.SourceName)
+		case schemas.GetProfileObjectTypeTemplateResponse_SourceObject:
+			v.SourceObject = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_SourceObject, v.SourceObject)
+		case schemas.GetProfileObjectTypeTemplateResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileObjectTypeTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfileObjectTypeTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileObjectTypeTemplate, schemas.GetProfileObjectTypeTemplateRequest, schemas.GetProfileObjectTypeTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfileObjectTypeTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileObjectTypeTemplate, schemas.GetProfileObjectTypeTemplateRequest, schemas.GetProfileObjectTypeTemplateResponse), output: &GetProfileObjectTypeTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

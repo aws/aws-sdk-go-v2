@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type ListResourceComplianceSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceComplianceSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceComplianceSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceComplianceSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceStringFilterList(s, schemas.ListResourceComplianceSummariesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceComplianceSummariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceComplianceSummariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResourceComplianceSummariesOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -59,13 +77,35 @@ type ListResourceComplianceSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceComplianceSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceComplianceSummariesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceComplianceSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceComplianceSummariesResult_NextToken, *v.NextToken)
+	}
+	serializeResourceComplianceSummaryItemList(s, schemas.ListResourceComplianceSummariesResult_ResourceComplianceSummaryItems, v.ResourceComplianceSummaryItems)
+}
+func (v *ListResourceComplianceSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceComplianceSummariesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceComplianceSummariesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceComplianceSummariesResult_NextToken, v.NextToken)
+		case schemas.ListResourceComplianceSummariesResult_ResourceComplianceSummaryItems:
+			return deserializeResourceComplianceSummaryItemList(d, schemas.ListResourceComplianceSummariesResult_ResourceComplianceSummaryItems, &v.ResourceComplianceSummaryItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceComplianceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceComplianceSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceComplianceSummaries, schemas.ListResourceComplianceSummariesRequest, schemas.ListResourceComplianceSummariesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceComplianceSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceComplianceSummaries, schemas.ListResourceComplianceSummariesRequest, schemas.ListResourceComplianceSummariesResult), output: &ListResourceComplianceSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

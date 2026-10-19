@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,27 @@ type MergeProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.MergeProfilesRequest_DomainName, *v.DomainName)
+	}
+	if v.FieldSourceProfileIds != nil {
+		s.WriteStruct(schemas.MergeProfilesRequest_FieldSourceProfileIds)
+		v.FieldSourceProfileIds.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MainProfileId != nil {
+		s.WriteString(schemas.MergeProfilesRequest_MainProfileId, *v.MainProfileId)
+	}
+	serializeProfileIdToBeMergedList(s, schemas.MergeProfilesRequest_ProfileIdsToBeMerged, v.ProfileIdsToBeMerged)
+}
+
 type MergeProfilesOutput struct {
 
 	// A message that indicates the merge request is complete.
@@ -90,13 +113,32 @@ type MergeProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MergeProfilesResponse_Message, *v.Message)
+	}
+}
+func (v *MergeProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeProfilesResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MergeProfilesResponse_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergeProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMergeProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeProfiles, schemas.MergeProfilesRequest, schemas.MergeProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMergeProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeProfiles, schemas.MergeProfilesRequest, schemas.MergeProfilesResponse), output: &MergeProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package kafkaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type RestartConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestartConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestartConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.RestartConnectorRequest_connectorArn, *v.ConnectorArn)
+	}
+	if v.OnlyFailedTasks != false {
+		s.WriteBool(schemas.RestartConnectorRequest_onlyFailedTasks, v.OnlyFailedTasks)
+	}
+}
+
 type RestartConnectorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connector.
@@ -57,13 +74,38 @@ type RestartConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestartConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestartConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.RestartConnectorResponse_connectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorOperationArn != nil {
+		s.WriteString(schemas.RestartConnectorResponse_connectorOperationArn, *v.ConnectorOperationArn)
+	}
+}
+func (v *RestartConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestartConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestartConnectorResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.RestartConnectorResponse_connectorArn, v.ConnectorArn)
+		case schemas.RestartConnectorResponse_connectorOperationArn:
+			v.ConnectorOperationArn = new(string)
+			return d.ReadString(schemas.RestartConnectorResponse_connectorOperationArn, v.ConnectorOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestartConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestartConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartConnector, schemas.RestartConnectorRequest, schemas.RestartConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestartConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartConnector, schemas.RestartConnectorRequest, schemas.RestartConnectorResponse), output: &RestartConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

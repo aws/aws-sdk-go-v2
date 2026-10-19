@@ -4,6 +4,8 @@ package cloudfrontkeyvaluestore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,26 @@ type PutKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IfMatch != nil {
+		s.WriteString(schemas.PutKeyRequest_IfMatch, *v.IfMatch)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.PutKeyRequest_Key, *v.Key)
+	}
+	if v.KvsARN != nil {
+		s.WriteString(schemas.PutKeyRequest_KvsARN, *v.KvsARN)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PutKeyRequest_Value, *v.Value)
+	}
+}
 func (in *PutKeyInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.KvsARN = in.KvsARN
@@ -80,13 +102,44 @@ type PutKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.PutKeyResponse_ETag, *v.ETag)
+	}
+	if v.ItemCount != nil {
+		s.WriteInt32(schemas.PutKeyResponse_ItemCount, *v.ItemCount)
+	}
+	if v.TotalSizeInBytes != nil {
+		s.WriteInt64(schemas.PutKeyResponse_TotalSizeInBytes, *v.TotalSizeInBytes)
+	}
+}
+func (v *PutKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutKeyResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.PutKeyResponse_ETag, v.ETag)
+		case schemas.PutKeyResponse_ItemCount:
+			v.ItemCount = new(int32)
+			return d.ReadInt32(schemas.PutKeyResponse_ItemCount, v.ItemCount)
+		case schemas.PutKeyResponse_TotalSizeInBytes:
+			v.TotalSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.PutKeyResponse_TotalSizeInBytes, v.TotalSizeInBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKey, schemas.PutKeyRequest, schemas.PutKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKey, schemas.PutKeyRequest, schemas.PutKeyResponse), output: &PutKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

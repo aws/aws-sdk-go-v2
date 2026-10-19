@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -35,6 +37,18 @@ type DescribeWorkspaceInput struct {
 	WorkspaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeWorkspaceRequest_workspaceName, *v.WorkspaceName)
+	}
 }
 
 type DescribeWorkspaceOutput struct {
@@ -76,13 +90,72 @@ type DescribeWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeWorkspaceResponse_createdAt, *v.CreatedAt)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeWorkspaceResponse_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeWorkspaceResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.WorkspaceArn != nil {
+		s.WriteString(schemas.DescribeWorkspaceResponse_workspaceArn, *v.WorkspaceArn)
+	}
+	if v.WorkspaceDescription != nil {
+		s.WriteString(schemas.DescribeWorkspaceResponse_workspaceDescription, *v.WorkspaceDescription)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeWorkspaceResponse_workspaceName, *v.WorkspaceName)
+	}
+	if v.WorkspaceStatus != nil {
+		s.WriteStruct(schemas.DescribeWorkspaceResponse_workspaceStatus)
+		v.WorkspaceStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeWorkspaceResponse_createdAt, v.CreatedAt)
+		case schemas.DescribeWorkspaceResponse_encryptionConfiguration:
+			v.EncryptionConfiguration = &types.WorkspaceEncryptionConfigurationInfo{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.DescribeWorkspaceResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeWorkspaceResponse_updatedAt, v.UpdatedAt)
+		case schemas.DescribeWorkspaceResponse_workspaceArn:
+			v.WorkspaceArn = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceResponse_workspaceArn, v.WorkspaceArn)
+		case schemas.DescribeWorkspaceResponse_workspaceDescription:
+			v.WorkspaceDescription = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceResponse_workspaceDescription, v.WorkspaceDescription)
+		case schemas.DescribeWorkspaceResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceResponse_workspaceName, v.WorkspaceName)
+		case schemas.DescribeWorkspaceResponse_workspaceStatus:
+			v.WorkspaceStatus = &types.WorkspaceStatus{}
+			return v.WorkspaceStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspace, schemas.DescribeWorkspaceRequest, schemas.DescribeWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspace, schemas.DescribeWorkspaceRequest, schemas.DescribeWorkspaceResponse), output: &DescribeWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

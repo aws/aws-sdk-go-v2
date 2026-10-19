@@ -4,7 +4,9 @@ package waf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type ListSqlInjectionMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSqlInjectionMatchSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSqlInjectionMatchSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSqlInjectionMatchSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListSqlInjectionMatchSetsRequest_Limit, v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListSqlInjectionMatchSetsRequest_NextMarker, *v.NextMarker)
+	}
+}
+
 // The response to a ListSqlInjectionMatchSets request.
 type ListSqlInjectionMatchSetsOutput struct {
 
@@ -73,13 +90,35 @@ type ListSqlInjectionMatchSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSqlInjectionMatchSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSqlInjectionMatchSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSqlInjectionMatchSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListSqlInjectionMatchSetsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeSqlInjectionMatchSetSummaries(s, schemas.ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets, v.SqlInjectionMatchSets)
+}
+func (v *ListSqlInjectionMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSqlInjectionMatchSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSqlInjectionMatchSetsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListSqlInjectionMatchSetsResponse_NextMarker, v.NextMarker)
+		case schemas.ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets:
+			return deserializeSqlInjectionMatchSetSummaries(d, schemas.ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets, &v.SqlInjectionMatchSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSqlInjectionMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSqlInjectionMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSqlInjectionMatchSets, schemas.ListSqlInjectionMatchSetsRequest, schemas.ListSqlInjectionMatchSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSqlInjectionMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSqlInjectionMatchSets, schemas.ListSqlInjectionMatchSetsRequest, schemas.ListSqlInjectionMatchSetsResponse), output: &ListSqlInjectionMatchSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

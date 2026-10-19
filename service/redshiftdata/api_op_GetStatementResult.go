@@ -5,7 +5,9 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type GetStatementResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatementResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatementResultRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatementResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetStatementResultRequest_Id, *v.Id)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetStatementResultRequest_NextToken, *v.NextToken)
+	}
+	if v.WaitTimeSeconds != nil {
+		s.WriteInt32(schemas.GetStatementResultRequest_WaitTimeSeconds, *v.WaitTimeSeconds)
+	}
+}
+
 type GetStatementResultOutput struct {
 
 	// The results of the SQL statement in JSON format.
@@ -87,13 +107,43 @@ type GetStatementResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatementResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatementResultResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatementResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnMetadataList(s, schemas.GetStatementResultResponse_ColumnMetadata, v.ColumnMetadata)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetStatementResultResponse_NextToken, *v.NextToken)
+	}
+	serializeSqlRecords(s, schemas.GetStatementResultResponse_Records, v.Records)
+	if v.TotalNumRows != 0 {
+		s.WriteInt64(schemas.GetStatementResultResponse_TotalNumRows, v.TotalNumRows)
+	}
+}
+func (v *GetStatementResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStatementResultResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStatementResultResponse_ColumnMetadata:
+			return deserializeColumnMetadataList(d, schemas.GetStatementResultResponse_ColumnMetadata, &v.ColumnMetadata)
+		case schemas.GetStatementResultResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetStatementResultResponse_NextToken, v.NextToken)
+		case schemas.GetStatementResultResponse_Records:
+			return deserializeSqlRecords(d, schemas.GetStatementResultResponse_Records, &v.Records)
+		case schemas.GetStatementResultResponse_TotalNumRows:
+			return d.ReadInt64(schemas.GetStatementResultResponse_TotalNumRows, &v.TotalNumRows)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStatementResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStatementResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResult, schemas.GetStatementResultRequest, schemas.GetStatementResultResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetStatementResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResult, schemas.GetStatementResultRequest, schemas.GetStatementResultResponse), output: &GetStatementResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

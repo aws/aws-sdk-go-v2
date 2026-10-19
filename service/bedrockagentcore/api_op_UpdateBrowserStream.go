@@ -5,7 +5,9 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,25 @@ type UpdateBrowserStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrowserStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrowserStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrowserStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserIdentifier != nil {
+		s.WriteString(schemas.UpdateBrowserStreamRequest_browserIdentifier, *v.BrowserIdentifier)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateBrowserStreamRequest_clientToken, *v.ClientToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.UpdateBrowserStreamRequest_sessionId, *v.SessionId)
+	}
+	serializeStreamUpdate(s, schemas.UpdateBrowserStreamRequest_streamUpdate, v.StreamUpdate)
+}
+
 type UpdateBrowserStreamOutput struct {
 
 	// The identifier of the browser.
@@ -83,13 +104,52 @@ type UpdateBrowserStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrowserStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrowserStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrowserStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserIdentifier != nil {
+		s.WriteString(schemas.UpdateBrowserStreamResponse_browserIdentifier, *v.BrowserIdentifier)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.UpdateBrowserStreamResponse_sessionId, *v.SessionId)
+	}
+	if v.Streams != nil {
+		s.WriteStruct(schemas.UpdateBrowserStreamResponse_streams)
+		v.Streams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateBrowserStreamResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateBrowserStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrowserStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrowserStreamResponse_browserIdentifier:
+			v.BrowserIdentifier = new(string)
+			return d.ReadString(schemas.UpdateBrowserStreamResponse_browserIdentifier, v.BrowserIdentifier)
+		case schemas.UpdateBrowserStreamResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.UpdateBrowserStreamResponse_sessionId, v.SessionId)
+		case schemas.UpdateBrowserStreamResponse_streams:
+			v.Streams = &types.BrowserSessionStream{}
+			return v.Streams.Deserialize(d)
+		case schemas.UpdateBrowserStreamResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateBrowserStreamResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrowserStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrowserStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrowserStream, schemas.UpdateBrowserStreamRequest, schemas.UpdateBrowserStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBrowserStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrowserStream, schemas.UpdateBrowserStreamRequest, schemas.UpdateBrowserStreamResponse), output: &UpdateBrowserStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

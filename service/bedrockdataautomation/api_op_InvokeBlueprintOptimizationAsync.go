@@ -4,7 +4,9 @@ package bedrockdataautomation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,35 @@ type InvokeBlueprintOptimizationAsyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeBlueprintOptimizationAsyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeBlueprintOptimizationAsyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blueprint != nil {
+		s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest_blueprint)
+		v.Blueprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataAutomationProfileArn != nil {
+		s.WriteString(schemas.InvokeBlueprintOptimizationAsyncRequest_dataAutomationProfileArn, *v.DataAutomationProfileArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBlueprintOptimizationSamples(s, schemas.InvokeBlueprintOptimizationAsyncRequest_samples, v.Samples)
+	serializeTagList(s, schemas.InvokeBlueprintOptimizationAsyncRequest_tags, v.Tags)
+}
+
 // Invoke Blueprint Optimization Async Response
 type InvokeBlueprintOptimizationAsyncOutput struct {
 
@@ -70,13 +101,32 @@ type InvokeBlueprintOptimizationAsyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeBlueprintOptimizationAsyncOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeBlueprintOptimizationAsyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationArn != nil {
+		s.WriteString(schemas.InvokeBlueprintOptimizationAsyncResponse_invocationArn, *v.InvocationArn)
+	}
+}
+func (v *InvokeBlueprintOptimizationAsyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeBlueprintOptimizationAsyncResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeBlueprintOptimizationAsyncResponse_invocationArn:
+			v.InvocationArn = new(string)
+			return d.ReadString(schemas.InvokeBlueprintOptimizationAsyncResponse_invocationArn, v.InvocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeBlueprintOptimizationAsyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeBlueprintOptimizationAsync{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeBlueprintOptimizationAsync, schemas.InvokeBlueprintOptimizationAsyncRequest, schemas.InvokeBlueprintOptimizationAsyncResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeBlueprintOptimizationAsync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeBlueprintOptimizationAsync, schemas.InvokeBlueprintOptimizationAsyncRequest, schemas.InvokeBlueprintOptimizationAsyncResponse), output: &InvokeBlueprintOptimizationAsyncOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

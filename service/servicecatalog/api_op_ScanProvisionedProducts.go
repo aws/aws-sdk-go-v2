@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,29 @@ type ScanProvisionedProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScanProvisionedProductsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanProvisionedProductsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanProvisionedProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ScanProvisionedProductsInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.AccessLevelFilter != nil {
+		s.WriteStruct(schemas.ScanProvisionedProductsInput_AccessLevelFilter)
+		v.AccessLevelFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ScanProvisionedProductsInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ScanProvisionedProductsInput_PageToken, *v.PageToken)
+	}
+}
+
 type ScanProvisionedProductsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -63,13 +88,35 @@ type ScanProvisionedProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScanProvisionedProductsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanProvisionedProductsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanProvisionedProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ScanProvisionedProductsOutput_NextPageToken, *v.NextPageToken)
+	}
+	serializeProvisionedProductDetails(s, schemas.ScanProvisionedProductsOutput_ProvisionedProducts, v.ProvisionedProducts)
+}
+func (v *ScanProvisionedProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanProvisionedProductsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanProvisionedProductsOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ScanProvisionedProductsOutput_NextPageToken, v.NextPageToken)
+		case schemas.ScanProvisionedProductsOutput_ProvisionedProducts:
+			return deserializeProvisionedProductDetails(d, schemas.ScanProvisionedProductsOutput_ProvisionedProducts, &v.ProvisionedProducts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationScanProvisionedProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpScanProvisionedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ScanProvisionedProducts, schemas.ScanProvisionedProductsInput, schemas.ScanProvisionedProductsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpScanProvisionedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ScanProvisionedProducts, schemas.ScanProvisionedProductsInput, schemas.ScanProvisionedProductsOutput), output: &ScanProvisionedProductsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

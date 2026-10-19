@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListWirelessDeviceImportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWirelessDeviceImportTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWirelessDeviceImportTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWirelessDeviceImportTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListWirelessDeviceImportTasksRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWirelessDeviceImportTasksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListWirelessDeviceImportTasksOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -53,13 +70,35 @@ type ListWirelessDeviceImportTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWirelessDeviceImportTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWirelessDeviceImportTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWirelessDeviceImportTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWirelessDeviceImportTasksResponse_NextToken, *v.NextToken)
+	}
+	serializeWirelessDeviceImportTaskList(s, schemas.ListWirelessDeviceImportTasksResponse_WirelessDeviceImportTaskList, v.WirelessDeviceImportTaskList)
+}
+func (v *ListWirelessDeviceImportTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWirelessDeviceImportTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWirelessDeviceImportTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWirelessDeviceImportTasksResponse_NextToken, v.NextToken)
+		case schemas.ListWirelessDeviceImportTasksResponse_WirelessDeviceImportTaskList:
+			return deserializeWirelessDeviceImportTaskList(d, schemas.ListWirelessDeviceImportTasksResponse_WirelessDeviceImportTaskList, &v.WirelessDeviceImportTaskList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWirelessDeviceImportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWirelessDeviceImportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWirelessDeviceImportTasks, schemas.ListWirelessDeviceImportTasksRequest, schemas.ListWirelessDeviceImportTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWirelessDeviceImportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWirelessDeviceImportTasks, schemas.ListWirelessDeviceImportTasksRequest, schemas.ListWirelessDeviceImportTasksResponse), output: &ListWirelessDeviceImportTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

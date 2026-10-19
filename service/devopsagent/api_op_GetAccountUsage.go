@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -29,6 +31,15 @@ func (c *Client) GetAccountUsage(ctx context.Context, params *GetAccountUsageInp
 
 type GetAccountUsageInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetAccountUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountUsageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetAccountUsageOutput struct {
@@ -64,13 +75,78 @@ type GetAccountUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountUsageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonthlyAccountEvaluationHours != nil {
+		s.WriteStruct(schemas.GetAccountUsageOutput_monthlyAccountEvaluationHours)
+		v.MonthlyAccountEvaluationHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonthlyAccountGraderHours != nil {
+		s.WriteStruct(schemas.GetAccountUsageOutput_monthlyAccountGraderHours)
+		v.MonthlyAccountGraderHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonthlyAccountInvestigationHours != nil {
+		s.WriteStruct(schemas.GetAccountUsageOutput_monthlyAccountInvestigationHours)
+		v.MonthlyAccountInvestigationHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonthlyAccountOnDemandHours != nil {
+		s.WriteStruct(schemas.GetAccountUsageOutput_monthlyAccountOnDemandHours)
+		v.MonthlyAccountOnDemandHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonthlyAccountSystemLearningHours != nil {
+		s.WriteStruct(schemas.GetAccountUsageOutput_monthlyAccountSystemLearningHours)
+		v.MonthlyAccountSystemLearningHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UsagePeriodEndTime != nil {
+		s.WriteTime(schemas.GetAccountUsageOutput_usagePeriodEndTime, *v.UsagePeriodEndTime)
+	}
+	if v.UsagePeriodStartTime != nil {
+		s.WriteTime(schemas.GetAccountUsageOutput_usagePeriodStartTime, *v.UsagePeriodStartTime)
+	}
+}
+func (v *GetAccountUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountUsageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountUsageOutput_monthlyAccountEvaluationHours:
+			v.MonthlyAccountEvaluationHours = &types.UsageMetric{}
+			return v.MonthlyAccountEvaluationHours.Deserialize(d)
+		case schemas.GetAccountUsageOutput_monthlyAccountGraderHours:
+			v.MonthlyAccountGraderHours = &types.UsageMetric{}
+			return v.MonthlyAccountGraderHours.Deserialize(d)
+		case schemas.GetAccountUsageOutput_monthlyAccountInvestigationHours:
+			v.MonthlyAccountInvestigationHours = &types.UsageMetric{}
+			return v.MonthlyAccountInvestigationHours.Deserialize(d)
+		case schemas.GetAccountUsageOutput_monthlyAccountOnDemandHours:
+			v.MonthlyAccountOnDemandHours = &types.UsageMetric{}
+			return v.MonthlyAccountOnDemandHours.Deserialize(d)
+		case schemas.GetAccountUsageOutput_monthlyAccountSystemLearningHours:
+			v.MonthlyAccountSystemLearningHours = &types.UsageMetric{}
+			return v.MonthlyAccountSystemLearningHours.Deserialize(d)
+		case schemas.GetAccountUsageOutput_usagePeriodEndTime:
+			v.UsagePeriodEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetAccountUsageOutput_usagePeriodEndTime, v.UsagePeriodEndTime)
+		case schemas.GetAccountUsageOutput_usagePeriodStartTime:
+			v.UsagePeriodStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetAccountUsageOutput_usagePeriodStartTime, v.UsagePeriodStartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountUsage, schemas.GetAccountUsageInput, schemas.GetAccountUsageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountUsage, schemas.GetAccountUsageInput, schemas.GetAccountUsageOutput), output: &GetAccountUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

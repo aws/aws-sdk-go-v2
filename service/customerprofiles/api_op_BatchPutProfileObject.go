@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type BatchPutProfileObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutProfileObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutProfileObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutProfileObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.BatchPutProfileObjectRequest_DomainName, *v.DomainName)
+	}
+	serializeBatchPutProfileObjectRequestItemList(s, schemas.BatchPutProfileObjectRequest_Items, v.Items)
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.BatchPutProfileObjectRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+}
+
 type BatchPutProfileObjectOutput struct {
 
 	// A list of items that failed to be added to the domain.
@@ -72,13 +90,32 @@ type BatchPutProfileObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutProfileObjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutProfileObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutProfileObjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPutProfileObjectErrorList(s, schemas.BatchPutProfileObjectResponse_Failed, v.Failed)
+	serializeBatchPutProfileObjectResponseList(s, schemas.BatchPutProfileObjectResponse_Successful, v.Successful)
+}
+func (v *BatchPutProfileObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutProfileObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutProfileObjectResponse_Failed:
+			return deserializeBatchPutProfileObjectErrorList(d, schemas.BatchPutProfileObjectResponse_Failed, &v.Failed)
+		case schemas.BatchPutProfileObjectResponse_Successful:
+			return deserializeBatchPutProfileObjectResponseList(d, schemas.BatchPutProfileObjectResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutProfileObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutProfileObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutProfileObject, schemas.BatchPutProfileObjectRequest, schemas.BatchPutProfileObjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutProfileObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutProfileObject, schemas.BatchPutProfileObjectRequest, schemas.BatchPutProfileObjectResponse), output: &BatchPutProfileObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

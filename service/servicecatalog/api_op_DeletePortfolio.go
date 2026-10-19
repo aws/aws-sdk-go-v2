@@ -4,6 +4,8 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeletePortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePortfolioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePortfolioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DeletePortfolioInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeletePortfolioInput_Id, *v.Id)
+	}
+}
+
 type DeletePortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type DeletePortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePortfolioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePortfolioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePortfolioOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortfolio, schemas.DeletePortfolioInput, schemas.DeletePortfolioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortfolio, schemas.DeletePortfolioInput, schemas.DeletePortfolioOutput), output: &DeletePortfolioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

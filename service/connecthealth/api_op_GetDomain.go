@@ -4,7 +4,9 @@ package connecthealth
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetDomainInput struct {
 	DomainId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetDomainInput_domainId, *v.DomainId)
+	}
 }
 
 type GetDomainOutput struct {
@@ -83,13 +97,91 @@ type GetDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDomainOutput_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDomainOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetDomainOutput_domainId, *v.DomainId)
+	}
+	if v.EncryptionContext != nil {
+		s.WriteStruct(schemas.GetDomainOutput_encryptionContext)
+		v.EncryptionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetDomainOutput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDomainOutput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDomainOutput_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetDomainOutput_tags, v.Tags)
+	if v.WebAppConfiguration != nil {
+		s.WriteStruct(schemas.GetDomainOutput_webAppConfiguration)
+		v.WebAppConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebAppUrl != nil {
+		s.WriteString(schemas.GetDomainOutput_webAppUrl, *v.WebAppUrl)
+	}
+}
+func (v *GetDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDomainOutput_arn, v.Arn)
+		case schemas.GetDomainOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainOutput_createdAt, v.CreatedAt)
+		case schemas.GetDomainOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetDomainOutput_domainId, v.DomainId)
+		case schemas.GetDomainOutput_encryptionContext:
+			v.EncryptionContext = &types.EncryptionContext{}
+			return v.EncryptionContext.Deserialize(d)
+		case schemas.GetDomainOutput_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetDomainOutput_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetDomainOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDomainOutput_name, v.Name)
+		case schemas.GetDomainOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDomainOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DomainStatus(ev)
+			return nil
+		case schemas.GetDomainOutput_tags:
+			return deserializeTagMap(d, schemas.GetDomainOutput_tags, &v.Tags)
+		case schemas.GetDomainOutput_webAppConfiguration:
+			v.WebAppConfiguration = &types.WebAppConfiguration{}
+			return v.WebAppConfiguration.Deserialize(d)
+		case schemas.GetDomainOutput_webAppUrl:
+			v.WebAppUrl = new(string)
+			return d.ReadString(schemas.GetDomainOutput_webAppUrl, v.WebAppUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomain, schemas.GetDomainInput, schemas.GetDomainOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomain, schemas.GetDomainInput, schemas.GetDomainOutput), output: &GetDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

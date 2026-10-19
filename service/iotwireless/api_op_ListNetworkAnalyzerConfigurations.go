@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListNetworkAnalyzerConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkAnalyzerConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkAnalyzerConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkAnalyzerConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListNetworkAnalyzerConfigurationsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkAnalyzerConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListNetworkAnalyzerConfigurationsOutput struct {
 
 	// The list of network analyzer configurations.
@@ -52,13 +69,35 @@ type ListNetworkAnalyzerConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkAnalyzerConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkAnalyzerConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkAnalyzerConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkAnalyzerConfigurationList(s, schemas.ListNetworkAnalyzerConfigurationsResponse_NetworkAnalyzerConfigurationList, v.NetworkAnalyzerConfigurationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkAnalyzerConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkAnalyzerConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkAnalyzerConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkAnalyzerConfigurationsResponse_NetworkAnalyzerConfigurationList:
+			return deserializeNetworkAnalyzerConfigurationList(d, schemas.ListNetworkAnalyzerConfigurationsResponse_NetworkAnalyzerConfigurationList, &v.NetworkAnalyzerConfigurationList)
+		case schemas.ListNetworkAnalyzerConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkAnalyzerConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkAnalyzerConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkAnalyzerConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkAnalyzerConfigurations, schemas.ListNetworkAnalyzerConfigurationsRequest, schemas.ListNetworkAnalyzerConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkAnalyzerConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkAnalyzerConfigurations, schemas.ListNetworkAnalyzerConfigurationsRequest, schemas.ListNetworkAnalyzerConfigurationsResponse), output: &ListNetworkAnalyzerConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

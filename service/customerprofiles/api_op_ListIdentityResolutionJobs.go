@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListIdentityResolutionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityResolutionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityResolutionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityResolutionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListIdentityResolutionJobsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentityResolutionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityResolutionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIdentityResolutionJobsOutput struct {
 
 	// A list of Identity Resolution Jobs.
@@ -56,13 +76,35 @@ type ListIdentityResolutionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityResolutionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityResolutionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityResolutionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityResolutionJobsList(s, schemas.ListIdentityResolutionJobsResponse_IdentityResolutionJobsList, v.IdentityResolutionJobsList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityResolutionJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentityResolutionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentityResolutionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentityResolutionJobsResponse_IdentityResolutionJobsList:
+			return deserializeIdentityResolutionJobsList(d, schemas.ListIdentityResolutionJobsResponse_IdentityResolutionJobsList, &v.IdentityResolutionJobsList)
+		case schemas.ListIdentityResolutionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentityResolutionJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentityResolutionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityResolutionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityResolutionJobs, schemas.ListIdentityResolutionJobsRequest, schemas.ListIdentityResolutionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdentityResolutionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityResolutionJobs, schemas.ListIdentityResolutionJobsRequest, schemas.ListIdentityResolutionJobsResponse), output: &ListIdentityResolutionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package directoryservicedata
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,34 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateUserRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateUserRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.CreateUserRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.GivenName != nil {
+		s.WriteString(schemas.CreateUserRequest_GivenName, *v.GivenName)
+	}
+	serializeAttributes(s, schemas.CreateUserRequest_OtherAttributes, v.OtherAttributes)
+	if v.SAMAccountName != nil {
+		s.WriteString(schemas.CreateUserRequest_SAMAccountName, *v.SAMAccountName)
+	}
+	if v.Surname != nil {
+		s.WriteString(schemas.CreateUserRequest_Surname, *v.Surname)
+	}
+}
+
 type CreateUserOutput struct {
 
 	//  The identifier (ID) of the directory where the address block is added.
@@ -91,13 +121,44 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateUserResult_DirectoryId, *v.DirectoryId)
+	}
+	if v.SAMAccountName != nil {
+		s.WriteString(schemas.CreateUserResult_SAMAccountName, *v.SAMAccountName)
+	}
+	if v.SID != nil {
+		s.WriteString(schemas.CreateUserResult_SID, *v.SID)
+	}
+}
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.CreateUserResult_DirectoryId, v.DirectoryId)
+		case schemas.CreateUserResult_SAMAccountName:
+			v.SAMAccountName = new(string)
+			return d.ReadString(schemas.CreateUserResult_SAMAccountName, v.SAMAccountName)
+		case schemas.CreateUserResult_SID:
+			v.SID = new(string)
+			return d.ReadString(schemas.CreateUserResult_SID, v.SID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResult), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

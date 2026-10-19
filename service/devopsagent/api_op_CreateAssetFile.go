@@ -6,7 +6,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/document"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +62,31 @@ type CreateAssetFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateAssetFileRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.CreateAssetFileRequest_assetId, *v.AssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAssetFileRequest_clientToken, *v.ClientToken)
+	}
+	serializeAssetFileBody(s, schemas.CreateAssetFileRequest_content, v.Content)
+	if v.Metadata != nil {
+		s.WriteDocument(schemas.CreateAssetFileRequest_metadata, &smithydocument.Opaque{Value: v.Metadata})
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.CreateAssetFileRequest_path, *v.Path)
+	}
+}
+
 // Response structure for creating an asset file
 type CreateAssetFileOutput struct {
 
@@ -73,13 +101,34 @@ type CreateAssetFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.File != nil {
+		s.WriteStruct(schemas.CreateAssetFileResponse_file)
+		v.File.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAssetFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssetFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssetFileResponse_file:
+			v.File = &types.AssetFile{}
+			return v.File.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssetFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssetFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetFile, schemas.CreateAssetFileRequest, schemas.CreateAssetFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssetFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetFile, schemas.CreateAssetFileRequest, schemas.CreateAssetFileResponse), output: &CreateAssetFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

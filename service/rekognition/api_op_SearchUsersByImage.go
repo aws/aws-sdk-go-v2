@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,32 @@ type SearchUsersByImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUsersByImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUsersByImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUsersByImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.SearchUsersByImageRequest_CollectionId, *v.CollectionId)
+	}
+	if v.Image != nil {
+		s.WriteStruct(schemas.SearchUsersByImageRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxUsers != nil {
+		s.WriteInt32(schemas.SearchUsersByImageRequest_MaxUsers, *v.MaxUsers)
+	}
+	if v.QualityFilter != "" {
+		s.WriteString(schemas.SearchUsersByImageRequest_QualityFilter, string(v.QualityFilter))
+	}
+	if v.UserMatchThreshold != nil {
+		s.WriteFloat32(schemas.SearchUsersByImageRequest_UserMatchThreshold, *v.UserMatchThreshold)
+	}
+}
+
 type SearchUsersByImageOutput struct {
 
 	// Version number of the face detection model associated with the input collection
@@ -113,13 +141,46 @@ type SearchUsersByImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUsersByImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUsersByImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUsersByImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceModelVersion != nil {
+		s.WriteString(schemas.SearchUsersByImageResponse_FaceModelVersion, *v.FaceModelVersion)
+	}
+	if v.SearchedFace != nil {
+		s.WriteStruct(schemas.SearchUsersByImageResponse_SearchedFace)
+		v.SearchedFace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUnsearchedFacesList(s, schemas.SearchUsersByImageResponse_UnsearchedFaces, v.UnsearchedFaces)
+	serializeUserMatchList(s, schemas.SearchUsersByImageResponse_UserMatches, v.UserMatches)
+}
+func (v *SearchUsersByImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchUsersByImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchUsersByImageResponse_FaceModelVersion:
+			v.FaceModelVersion = new(string)
+			return d.ReadString(schemas.SearchUsersByImageResponse_FaceModelVersion, v.FaceModelVersion)
+		case schemas.SearchUsersByImageResponse_SearchedFace:
+			v.SearchedFace = &types.SearchedFaceDetails{}
+			return v.SearchedFace.Deserialize(d)
+		case schemas.SearchUsersByImageResponse_UnsearchedFaces:
+			return deserializeUnsearchedFacesList(d, schemas.SearchUsersByImageResponse_UnsearchedFaces, &v.UnsearchedFaces)
+		case schemas.SearchUsersByImageResponse_UserMatches:
+			return deserializeUserMatchList(d, schemas.SearchUsersByImageResponse_UserMatches, &v.UserMatches)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchUsersByImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchUsersByImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUsersByImage, schemas.SearchUsersByImageRequest, schemas.SearchUsersByImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchUsersByImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUsersByImage, schemas.SearchUsersByImageRequest, schemas.SearchUsersByImageResponse), output: &SearchUsersByImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

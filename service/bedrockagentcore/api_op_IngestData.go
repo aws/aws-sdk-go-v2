@@ -5,7 +5,9 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,37 @@ type IngestDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IngestDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorId != nil {
+		s.WriteString(schemas.IngestDataInput_actorId, *v.ActorId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.IngestDataInput_clientToken, *v.ClientToken)
+	}
+	if v.ContentTimestamp != nil {
+		s.WriteTime(schemas.IngestDataInput_contentTimestamp, *v.ContentTimestamp)
+	}
+	if v.ExtractionConfig != nil {
+		s.WriteStruct(schemas.IngestDataInput_extractionConfig)
+		v.ExtractionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.IngestDataInput_memoryId, *v.MemoryId)
+	}
+	serializeMetadataMap(s, schemas.IngestDataInput_metadata, v.Metadata)
+	if v.SessionId != nil {
+		s.WriteString(schemas.IngestDataInput_sessionId, *v.SessionId)
+	}
+	serializeContentSource(s, schemas.IngestDataInput_source, v.Source)
+}
+
 type IngestDataOutput struct {
 
 	// The identifier of the session that the service ingested the content into. This
@@ -88,13 +121,32 @@ type IngestDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IngestDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.IngestDataOutput_sessionId, *v.SessionId)
+	}
+}
+func (v *IngestDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestDataOutput_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.IngestDataOutput_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIngestDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpIngestData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IngestData, schemas.IngestDataInput, schemas.IngestDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpIngestData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IngestData, schemas.IngestDataInput, schemas.IngestDataOutput), output: &IngestDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

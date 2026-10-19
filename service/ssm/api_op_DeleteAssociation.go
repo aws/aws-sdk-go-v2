@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DeleteAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DeleteAssociationRequest_AssociationId, *v.AssociationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteAssociationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteAssociationRequest_Name, *v.Name)
+	}
+}
+
 type DeleteAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +80,26 @@ type DeleteAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssociation, schemas.DeleteAssociationRequest, schemas.DeleteAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssociation, schemas.DeleteAssociationRequest, schemas.DeleteAssociationResult), output: &DeleteAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

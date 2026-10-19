@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -79,6 +81,35 @@ type UpdateScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.UpdateScheduledActionRequest_enabled, *v.Enabled)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.UpdateScheduledActionRequest_endTime, *v.EndTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateScheduledActionRequest_roleArn, *v.RoleArn)
+	}
+	serializeSchedule(s, schemas.UpdateScheduledActionRequest_schedule, v.Schedule)
+	if v.ScheduledActionDescription != nil {
+		s.WriteString(schemas.UpdateScheduledActionRequest_scheduledActionDescription, *v.ScheduledActionDescription)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.UpdateScheduledActionRequest_scheduledActionName, *v.ScheduledActionName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.UpdateScheduledActionRequest_startTime, *v.StartTime)
+	}
+	serializeTargetAction(s, schemas.UpdateScheduledActionRequest_targetAction, v.TargetAction)
+}
+
 type UpdateScheduledActionOutput struct {
 
 	// The ScheduledAction object that was updated.
@@ -90,13 +121,34 @@ type UpdateScheduledActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAction != nil {
+		s.WriteStruct(schemas.UpdateScheduledActionResponse_scheduledAction)
+		v.ScheduledAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateScheduledActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScheduledActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScheduledActionResponse_scheduledAction:
+			v.ScheduledAction = &types.ScheduledActionResponse{}
+			return v.ScheduledAction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledAction, schemas.UpdateScheduledActionRequest, schemas.UpdateScheduledActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledAction, schemas.UpdateScheduledActionRequest, schemas.UpdateScheduledActionResponse), output: &UpdateScheduledActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

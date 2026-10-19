@@ -4,6 +4,8 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteIdMappingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdMappingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdMappingWorkflowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdMappingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.DeleteIdMappingWorkflowInput_workflowName, *v.WorkflowName)
+	}
+}
+
 type DeleteIdMappingWorkflowOutput struct {
 
 	// A successful operation message.
@@ -47,13 +61,32 @@ type DeleteIdMappingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdMappingWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdMappingWorkflowOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdMappingWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DeleteIdMappingWorkflowOutput_message, *v.Message)
+	}
+}
+func (v *DeleteIdMappingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdMappingWorkflowOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIdMappingWorkflowOutput_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteIdMappingWorkflowOutput_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdMappingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIdMappingWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdMappingWorkflow, schemas.DeleteIdMappingWorkflowInput, schemas.DeleteIdMappingWorkflowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIdMappingWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdMappingWorkflow, schemas.DeleteIdMappingWorkflowInput, schemas.DeleteIdMappingWorkflowOutput), output: &DeleteIdMappingWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

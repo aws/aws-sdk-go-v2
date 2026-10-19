@@ -5,7 +5,9 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,35 @@ type RetrieveMemoryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveMemoryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveMemoryRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.RetrieveMemoryRecordsInput_maxResults, *v.MaxResults)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.RetrieveMemoryRecordsInput_memoryId, *v.MemoryId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.RetrieveMemoryRecordsInput_namespace, *v.Namespace)
+	}
+	if v.NamespacePath != nil {
+		s.WriteString(schemas.RetrieveMemoryRecordsInput_namespacePath, *v.NamespacePath)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.RetrieveMemoryRecordsInput_nextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.RetrieveMemoryRecordsInput_searchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RetrieveMemoryRecordsOutput struct {
 
 	// The list of memory record summaries that match the search criteria, ordered by
@@ -83,13 +114,35 @@ type RetrieveMemoryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveMemoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveMemoryRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveMemoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemoryRecordSummaryList(s, schemas.RetrieveMemoryRecordsOutput_memoryRecordSummaries, v.MemoryRecordSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.RetrieveMemoryRecordsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *RetrieveMemoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveMemoryRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveMemoryRecordsOutput_memoryRecordSummaries:
+			return deserializeMemoryRecordSummaryList(d, schemas.RetrieveMemoryRecordsOutput_memoryRecordSummaries, &v.MemoryRecordSummaries)
+		case schemas.RetrieveMemoryRecordsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.RetrieveMemoryRecordsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveMemoryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetrieveMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveMemoryRecords, schemas.RetrieveMemoryRecordsInput, schemas.RetrieveMemoryRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetrieveMemoryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveMemoryRecords, schemas.RetrieveMemoryRecordsInput, schemas.RetrieveMemoryRecordsOutput), output: &RetrieveMemoryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

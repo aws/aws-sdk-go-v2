@@ -5,7 +5,9 @@ package cloudfrontkeyvaluestore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type ListKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KvsARN != nil {
+		s.WriteString(schemas.ListKeysRequest_KvsARN, *v.KvsARN)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKeysRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeysRequest_NextToken, *v.NextToken)
+	}
+}
 func (in *ListKeysInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.KvsARN = in.KvsARN
@@ -64,13 +83,35 @@ type ListKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListKeysResponseList(s, schemas.ListKeysResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeysResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeysResponse_Items:
+			return deserializeListKeysResponseList(d, schemas.ListKeysResponse_Items, &v.Items)
+		case schemas.ListKeysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeysResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeys, schemas.ListKeysRequest, schemas.ListKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeys, schemas.ListKeysRequest, schemas.ListKeysResponse), output: &ListKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

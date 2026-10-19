@@ -4,7 +4,9 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,36 @@ type StartAudienceGenerationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAudienceGenerationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAudienceGenerationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAudienceGenerationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationId != nil {
+		s.WriteString(schemas.StartAudienceGenerationJobRequest_collaborationId, *v.CollaborationId)
+	}
+	if v.ConfiguredAudienceModelArn != nil {
+		s.WriteString(schemas.StartAudienceGenerationJobRequest_configuredAudienceModelArn, *v.ConfiguredAudienceModelArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartAudienceGenerationJobRequest_description, *v.Description)
+	}
+	if v.IncludeSeedInOutput != false {
+		s.WriteBool(schemas.StartAudienceGenerationJobRequest_includeSeedInOutput, v.IncludeSeedInOutput)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartAudienceGenerationJobRequest_name, *v.Name)
+	}
+	if v.SeedAudience != nil {
+		s.WriteStruct(schemas.StartAudienceGenerationJobRequest_seedAudience)
+		v.SeedAudience.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.StartAudienceGenerationJobRequest_tags, v.Tags)
+}
+
 type StartAudienceGenerationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the audience generation job.
@@ -97,13 +129,32 @@ type StartAudienceGenerationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAudienceGenerationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAudienceGenerationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAudienceGenerationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudienceGenerationJobArn != nil {
+		s.WriteString(schemas.StartAudienceGenerationJobResponse_audienceGenerationJobArn, *v.AudienceGenerationJobArn)
+	}
+}
+func (v *StartAudienceGenerationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAudienceGenerationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAudienceGenerationJobResponse_audienceGenerationJobArn:
+			v.AudienceGenerationJobArn = new(string)
+			return d.ReadString(schemas.StartAudienceGenerationJobResponse_audienceGenerationJobArn, v.AudienceGenerationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAudienceGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAudienceGenerationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAudienceGenerationJob, schemas.StartAudienceGenerationJobRequest, schemas.StartAudienceGenerationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAudienceGenerationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAudienceGenerationJob, schemas.StartAudienceGenerationJobRequest, schemas.StartAudienceGenerationJobResponse), output: &StartAudienceGenerationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package verifiedpermissions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,20 @@ type BatchIsAuthorizedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchIsAuthorizedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchIsAuthorizedInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchIsAuthorizedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitiesDefinition(s, schemas.BatchIsAuthorizedInput_entities, v.Entities)
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.BatchIsAuthorizedInput_policyStoreId, *v.PolicyStoreId)
+	}
+	serializeBatchIsAuthorizedInputList(s, schemas.BatchIsAuthorizedInput_requests, v.Requests)
+}
+
 type BatchIsAuthorizedOutput struct {
 
 	// A series of Allow or Deny decisions for each request, and the policies that
@@ -93,13 +109,29 @@ type BatchIsAuthorizedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchIsAuthorizedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchIsAuthorizedOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchIsAuthorizedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchIsAuthorizedOutputList(s, schemas.BatchIsAuthorizedOutput_results, v.Results)
+}
+func (v *BatchIsAuthorizedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchIsAuthorizedOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchIsAuthorizedOutput_results:
+			return deserializeBatchIsAuthorizedOutputList(d, schemas.BatchIsAuthorizedOutput_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchIsAuthorizedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchIsAuthorized{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchIsAuthorized, schemas.BatchIsAuthorizedInput, schemas.BatchIsAuthorizedOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchIsAuthorized{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchIsAuthorized, schemas.BatchIsAuthorizedInput, schemas.BatchIsAuthorizedOutput), output: &BatchIsAuthorizedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

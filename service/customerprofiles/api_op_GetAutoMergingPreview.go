@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,31 @@ type GetAutoMergingPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoMergingPreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoMergingPreviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoMergingPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictResolution != nil {
+		s.WriteStruct(schemas.GetAutoMergingPreviewRequest_ConflictResolution)
+		v.ConflictResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Consolidation != nil {
+		s.WriteStruct(schemas.GetAutoMergingPreviewRequest_Consolidation)
+		v.Consolidation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetAutoMergingPreviewRequest_DomainName, *v.DomainName)
+	}
+	if v.MinAllowedConfidenceScoreForMerging != nil {
+		s.WriteFloat64(schemas.GetAutoMergingPreviewRequest_MinAllowedConfidenceScoreForMerging, *v.MinAllowedConfidenceScoreForMerging)
+	}
+}
+
 type GetAutoMergingPreviewOutput struct {
 
 	// The unique name of the domain.
@@ -85,13 +112,47 @@ type GetAutoMergingPreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoMergingPreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoMergingPreviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoMergingPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetAutoMergingPreviewResponse_DomainName, *v.DomainName)
+	}
+	if v.NumberOfMatchesInSample != 0 {
+		s.WriteInt64(schemas.GetAutoMergingPreviewResponse_NumberOfMatchesInSample, v.NumberOfMatchesInSample)
+	}
+	if v.NumberOfProfilesInSample != 0 {
+		s.WriteInt64(schemas.GetAutoMergingPreviewResponse_NumberOfProfilesInSample, v.NumberOfProfilesInSample)
+	}
+	if v.NumberOfProfilesWillBeMerged != 0 {
+		s.WriteInt64(schemas.GetAutoMergingPreviewResponse_NumberOfProfilesWillBeMerged, v.NumberOfProfilesWillBeMerged)
+	}
+}
+func (v *GetAutoMergingPreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutoMergingPreviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutoMergingPreviewResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetAutoMergingPreviewResponse_DomainName, v.DomainName)
+		case schemas.GetAutoMergingPreviewResponse_NumberOfMatchesInSample:
+			return d.ReadInt64(schemas.GetAutoMergingPreviewResponse_NumberOfMatchesInSample, &v.NumberOfMatchesInSample)
+		case schemas.GetAutoMergingPreviewResponse_NumberOfProfilesInSample:
+			return d.ReadInt64(schemas.GetAutoMergingPreviewResponse_NumberOfProfilesInSample, &v.NumberOfProfilesInSample)
+		case schemas.GetAutoMergingPreviewResponse_NumberOfProfilesWillBeMerged:
+			return d.ReadInt64(schemas.GetAutoMergingPreviewResponse_NumberOfProfilesWillBeMerged, &v.NumberOfProfilesWillBeMerged)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutoMergingPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAutoMergingPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoMergingPreview, schemas.GetAutoMergingPreviewRequest, schemas.GetAutoMergingPreviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAutoMergingPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoMergingPreview, schemas.GetAutoMergingPreviewRequest, schemas.GetAutoMergingPreviewResponse), output: &GetAutoMergingPreviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

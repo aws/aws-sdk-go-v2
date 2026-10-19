@@ -4,6 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -32,6 +34,18 @@ type GetWorkloadIdentityInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkloadIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetWorkloadIdentityRequest_name, *v.Name)
+	}
 }
 
 type GetWorkloadIdentityOutput struct {
@@ -66,13 +80,53 @@ type GetWorkloadIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceOauth2ReturnUrlListType(s, schemas.GetWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls, v.AllowedResourceOauth2ReturnUrls)
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.GetWorkloadIdentityResponse_createdTime, *v.CreatedTime)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.GetWorkloadIdentityResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetWorkloadIdentityResponse_name, *v.Name)
+	}
+	if v.WorkloadIdentityArn != nil {
+		s.WriteString(schemas.GetWorkloadIdentityResponse_workloadIdentityArn, *v.WorkloadIdentityArn)
+	}
+}
+func (v *GetWorkloadIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkloadIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls:
+			return deserializeResourceOauth2ReturnUrlListType(d, schemas.GetWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls, &v.AllowedResourceOauth2ReturnUrls)
+		case schemas.GetWorkloadIdentityResponse_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkloadIdentityResponse_createdTime, v.CreatedTime)
+		case schemas.GetWorkloadIdentityResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkloadIdentityResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetWorkloadIdentityResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetWorkloadIdentityResponse_name, v.Name)
+		case schemas.GetWorkloadIdentityResponse_workloadIdentityArn:
+			v.WorkloadIdentityArn = new(string)
+			return d.ReadString(schemas.GetWorkloadIdentityResponse_workloadIdentityArn, v.WorkloadIdentityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkloadIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkloadIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadIdentity, schemas.GetWorkloadIdentityRequest, schemas.GetWorkloadIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkloadIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadIdentity, schemas.GetWorkloadIdentityRequest, schemas.GetWorkloadIdentityResponse), output: &GetWorkloadIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

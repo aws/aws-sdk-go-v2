@@ -4,7 +4,9 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,32 @@ type GetAttachmentUploadLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachmentUploadLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachmentUploadLinksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachmentUploadLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.GetAttachmentUploadLinksRequest_dryRun, *v.DryRun)
+	}
+	if v.FileName != nil {
+		s.WriteString(schemas.GetAttachmentUploadLinksRequest_fileName, *v.FileName)
+	}
+	if v.FileSizeBytes != nil {
+		s.WriteInt64(schemas.GetAttachmentUploadLinksRequest_fileSizeBytes, *v.FileSizeBytes)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.GetAttachmentUploadLinksRequest_uploadId, *v.UploadId)
+	}
+	if v.UploadRange != nil {
+		s.WriteStruct(schemas.GetAttachmentUploadLinksRequest_uploadRange)
+		v.UploadRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetAttachmentUploadLinksOutput struct {
 
 	// The size, in bytes, of each part. Split the file into parts of this size before
@@ -129,13 +157,49 @@ type GetAttachmentUploadLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachmentUploadLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachmentUploadLinksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachmentUploadLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextIndex != 0 {
+		s.WriteInt32(schemas.GetAttachmentUploadLinksResponse_nextIndex, v.NextIndex)
+	}
+	if v.PartSizeBytes != nil {
+		s.WriteInt64(schemas.GetAttachmentUploadLinksResponse_partSizeBytes, *v.PartSizeBytes)
+	}
+	s.WriteInt32(schemas.GetAttachmentUploadLinksResponse_totalParts, v.TotalParts)
+	if v.UploadId != nil {
+		s.WriteString(schemas.GetAttachmentUploadLinksResponse_uploadId, *v.UploadId)
+	}
+	serializeUploadUrlList(s, schemas.GetAttachmentUploadLinksResponse_uploadUrls, v.UploadUrls)
+}
+func (v *GetAttachmentUploadLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAttachmentUploadLinksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAttachmentUploadLinksResponse_nextIndex:
+			return d.ReadInt32(schemas.GetAttachmentUploadLinksResponse_nextIndex, &v.NextIndex)
+		case schemas.GetAttachmentUploadLinksResponse_partSizeBytes:
+			v.PartSizeBytes = new(int64)
+			return d.ReadInt64(schemas.GetAttachmentUploadLinksResponse_partSizeBytes, v.PartSizeBytes)
+		case schemas.GetAttachmentUploadLinksResponse_totalParts:
+			return d.ReadInt32(schemas.GetAttachmentUploadLinksResponse_totalParts, &v.TotalParts)
+		case schemas.GetAttachmentUploadLinksResponse_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.GetAttachmentUploadLinksResponse_uploadId, v.UploadId)
+		case schemas.GetAttachmentUploadLinksResponse_uploadUrls:
+			return deserializeUploadUrlList(d, schemas.GetAttachmentUploadLinksResponse_uploadUrls, &v.UploadUrls)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAttachmentUploadLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAttachmentUploadLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachmentUploadLinks, schemas.GetAttachmentUploadLinksRequest, schemas.GetAttachmentUploadLinksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAttachmentUploadLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachmentUploadLinks, schemas.GetAttachmentUploadLinksRequest, schemas.GetAttachmentUploadLinksResponse), output: &GetAttachmentUploadLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotwireless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListServiceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListServiceProfilesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceProfilesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListServiceProfilesOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -52,13 +69,35 @@ type ListServiceProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeServiceProfileList(s, schemas.ListServiceProfilesResponse_ServiceProfileList, v.ServiceProfileList)
+}
+func (v *ListServiceProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceProfilesResponse_NextToken, v.NextToken)
+		case schemas.ListServiceProfilesResponse_ServiceProfileList:
+			return deserializeServiceProfileList(d, schemas.ListServiceProfilesResponse_ServiceProfileList, &v.ServiceProfileList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceProfiles, schemas.ListServiceProfilesRequest, schemas.ListServiceProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceProfiles, schemas.ListServiceProfilesRequest, schemas.ListServiceProfilesResponse), output: &ListServiceProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

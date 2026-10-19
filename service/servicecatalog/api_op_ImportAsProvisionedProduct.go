@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,33 @@ type ImportAsProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAsProvisionedProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAsProvisionedProductInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAsProvisionedProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ImportAsProvisionedProductInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.ImportAsProvisionedProductInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.PhysicalId != nil {
+		s.WriteString(schemas.ImportAsProvisionedProductInput_PhysicalId, *v.PhysicalId)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.ImportAsProvisionedProductInput_ProductId, *v.ProductId)
+	}
+	if v.ProvisionedProductName != nil {
+		s.WriteString(schemas.ImportAsProvisionedProductInput_ProvisionedProductName, *v.ProvisionedProductName)
+	}
+	if v.ProvisioningArtifactId != nil {
+		s.WriteString(schemas.ImportAsProvisionedProductInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
+	}
+}
+
 type ImportAsProvisionedProductOutput struct {
 
 	// Information about a request operation.
@@ -105,13 +134,34 @@ type ImportAsProvisionedProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAsProvisionedProductOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAsProvisionedProductOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAsProvisionedProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordDetail != nil {
+		s.WriteStruct(schemas.ImportAsProvisionedProductOutput_RecordDetail)
+		v.RecordDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportAsProvisionedProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAsProvisionedProductOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAsProvisionedProductOutput_RecordDetail:
+			v.RecordDetail = &types.RecordDetail{}
+			return v.RecordDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportAsProvisionedProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportAsProvisionedProduct, schemas.ImportAsProvisionedProductInput, schemas.ImportAsProvisionedProductOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportAsProvisionedProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportAsProvisionedProduct, schemas.ImportAsProvisionedProductInput, schemas.ImportAsProvisionedProductOutput), output: &ImportAsProvisionedProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

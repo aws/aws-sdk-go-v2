@@ -5,6 +5,8 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,27 @@ type AssociateAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAssetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.AssociateAssetsRequest_assetId, *v.AssetId)
+	}
+	if v.ChildAssetId != nil {
+		s.WriteString(schemas.AssociateAssetsRequest_childAssetId, *v.ChildAssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateAssetsRequest_clientToken, *v.ClientToken)
+	}
+	if v.HierarchyId != nil {
+		s.WriteString(schemas.AssociateAssetsRequest_hierarchyId, *v.HierarchyId)
+	}
+}
+
 type AssociateAssetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -76,13 +99,26 @@ type AssociateAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAssets, schemas.AssociateAssetsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAssets, schemas.AssociateAssetsRequest, nil), output: &AssociateAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type BatchDisassociateServiceActionFromProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateServiceActionFromProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateServiceActionFromProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	serializeServiceActionAssociations(s, schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput_ServiceActionAssociations, v.ServiceActionAssociations)
+}
+
 type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
 
 	// An object that contains a list of errors, along with information to help you
@@ -55,13 +70,29 @@ type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateServiceActionFromProvisioningArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateServiceActionFromProvisioningArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedServiceActionAssociations(s, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput_FailedServiceActionAssociations, v.FailedServiceActionAssociations)
+}
+func (v *BatchDisassociateServiceActionFromProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput_FailedServiceActionAssociations:
+			return deserializeFailedServiceActionAssociations(d, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput_FailedServiceActionAssociations, &v.FailedServiceActionAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateServiceActionFromProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateServiceActionFromProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateServiceActionFromProvisioningArtifact, schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDisassociateServiceActionFromProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateServiceActionFromProvisioningArtifact, schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput), output: &BatchDisassociateServiceActionFromProvisioningArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

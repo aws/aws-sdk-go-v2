@@ -4,6 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteConsentPortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConsentPortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConsentPortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConsentPortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsentPortalIdentifier != nil {
+		s.WriteString(schemas.DeleteConsentPortalRequest_consentPortalIdentifier, *v.ConsentPortalIdentifier)
+	}
+}
+
 type DeleteConsentPortalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteConsentPortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConsentPortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConsentPortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConsentPortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConsentPortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConsentPortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConsentPortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConsentPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConsentPortal, schemas.DeleteConsentPortalRequest, schemas.DeleteConsentPortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConsentPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConsentPortal, schemas.DeleteConsentPortalRequest, schemas.DeleteConsentPortalResponse), output: &DeleteConsentPortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

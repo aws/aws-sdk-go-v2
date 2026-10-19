@@ -5,7 +5,9 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListTracksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTracksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTracksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTracksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTracksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTracksRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTracksOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
@@ -57,13 +74,35 @@ type ListTracksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTracksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTracksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTracksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTracksResponse_nextToken, *v.NextToken)
+	}
+	serializeTrackList(s, schemas.ListTracksResponse_tracks, v.Tracks)
+}
+func (v *ListTracksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTracksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTracksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTracksResponse_nextToken, v.NextToken)
+		case schemas.ListTracksResponse_tracks:
+			return deserializeTrackList(d, schemas.ListTracksResponse_tracks, &v.Tracks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTracksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTracks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTracks, schemas.ListTracksRequest, schemas.ListTracksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTracks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTracks, schemas.ListTracksRequest, schemas.ListTracksResponse), output: &ListTracksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
