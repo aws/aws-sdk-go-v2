@@ -1,3 +1,8 @@
+# v1.56.0 (2026-10-19)
+
+* **Feature**: Documentation update release for AWS service
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.55.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

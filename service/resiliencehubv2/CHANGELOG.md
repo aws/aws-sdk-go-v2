@@ -1,3 +1,7 @@
+# v1.13.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.13.0 (2026-10-13)
 
 * **Feature**: Adds support for DevOpsAgent integration where users can specify the agent space ARN at service level and launch investigations directly from Resilience Hub v2.

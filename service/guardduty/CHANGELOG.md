@@ -1,3 +1,8 @@
+# v1.101.0 (2026-10-19)
+
+* **Feature**: Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs
+* **Bug Fix**: Fix deserialization failure when `Observations.Text` lists contains a null value.
+
 # v1.100.0 (2026-10-14)
 
 * **Feature**: Releasing support for Custom Detection Rule Runtime Monitoring

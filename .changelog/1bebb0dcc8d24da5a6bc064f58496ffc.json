@@ -1,8 +1,0 @@
-{
-    "id": "1bebb0dc-c8d2-4da5-a6bc-064f58496ffc",
-    "type": "feature",
-    "description": "Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.",
-    "modules": [
-        "service/connect"
-    ]
-}

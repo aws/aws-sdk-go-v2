@@ -1,3 +1,7 @@
+# v1.86.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.86.0 (2026-10-14)
 
 * **Feature**: AWS Transfer Family now lets you store SFTP server host keys in AWS Secrets Manager in your own AWS account. This gives you greater control over your server identity and helps simplify server migrations and failover.

@@ -1,3 +1,7 @@
+# v1.85.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.85.0 (2026-10-13)
 
 * **Feature**: Adds and updates APIs to support criticality. This feature allows customers to create automation rules to assign criticality to resources matching a criteria. With this release, resources and exposure findings will include the criticality.

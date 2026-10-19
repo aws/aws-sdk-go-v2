@@ -1,3 +1,7 @@
+# v1.47.6 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.47.5 (2026-10-13)
 
 * No change notes available for this release.

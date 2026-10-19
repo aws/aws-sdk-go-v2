@@ -1,3 +1,7 @@
+# v1.10.1 (2026-10-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2026-10-14)
 
 * **Feature**: Support multi-attribute key conditions in `expression`. `KeyAnd` now accepts two or more conditions.

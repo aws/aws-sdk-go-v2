@@ -1,3 +1,7 @@
+# v1.30.0 (2026-10-19)
+
+* **Feature**: Adds four new parameters to the InfluxDBv3Enterprise parameter group for Amazon Timestream for InfluxDB. The new parameters are upgradePachaTree, walBufferSize, snapshotSize, and snapshotDuration.
+
 # v1.29.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

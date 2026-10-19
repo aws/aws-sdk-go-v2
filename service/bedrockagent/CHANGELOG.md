@@ -1,3 +1,8 @@
+# v1.69.0 (2026-10-19)
+
+* **Feature**: Adds Retrieval Instructions for Amazon Bedrock Knowledge Bases. Create, get, update, delete, list, and version customer-authored instructions that guide how a knowledge base retrieves and answers, with content review before use.
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.68.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

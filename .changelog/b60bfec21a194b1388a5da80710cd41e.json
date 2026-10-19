@@ -1,8 +1,0 @@
-{
-    "id": "b60bfec2-1a19-4b13-88a5-da80710cd41e",
-    "type": "feature",
-    "description": "Documentation update release for AWS service",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

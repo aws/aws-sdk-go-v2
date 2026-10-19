@@ -1,3 +1,8 @@
+# v1.82.0 (2026-10-19)
+
+* **Feature**: Adds optional imageValidationMode enum to ImportCustomWorkspaceImageRequest. This allows customers to opt-in to having prevalidation run in the service account instead of customer account.
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.81.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

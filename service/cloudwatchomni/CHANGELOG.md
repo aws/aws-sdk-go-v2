@@ -1,3 +1,7 @@
+# v1.1.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.1.0 (2026-10-12)
 
 * **Feature**: Adds support for updating agentCoreEvaluationRoleArn in UpdateSpace API

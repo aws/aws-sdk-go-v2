@@ -1,3 +1,7 @@
+# v1.22.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.22.0 (2026-10-14)
 
 * **Feature**: Features - Adds support for an optional payload to invoke the Lambda function with as part of the Custom action Lambda execution block

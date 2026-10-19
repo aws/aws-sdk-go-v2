@@ -1,8 +1,0 @@
-{
-    "id": "6b4797a6-4582-4cb4-be45-7111a2418c5d",
-    "type": "feature",
-    "description": "Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs",
-    "modules": [
-        "service/guardduty"
-    ]
-}

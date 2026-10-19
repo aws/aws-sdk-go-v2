@@ -1,8 +1,0 @@
-{
-    "id": "01bd4d1f-06db-49bd-8b8a-bdd7843aa65a",
-    "type": "feature",
-    "description": "Documentation update release for AWS service",
-    "modules": [
-        "service/codestarnotifications"
-    ]
-}

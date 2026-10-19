@@ -1,3 +1,7 @@
+# v1.8.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.8.0 (2026-10-13)
 
 * **Feature**: AWS Agent Registry is improving recently launched custom metadata schema feature to make shared attributes easier to manage.

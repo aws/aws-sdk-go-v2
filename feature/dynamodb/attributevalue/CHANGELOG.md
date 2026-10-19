@@ -1,3 +1,7 @@
+# v1.21.13 (2026-10-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.12 (2026-10-14)
 
 * **Bug Fix**: attributevalue marshal to AttributeValueMemberNULL with double pointer when outer pointer is not nil

@@ -1,3 +1,8 @@
+# v1.71.0 (2026-10-19)
+
+* **Feature**: Enable account endpoint generation for existing CN and GovCloud regions
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.70.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

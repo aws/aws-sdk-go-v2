@@ -1,3 +1,7 @@
+# v1.32.0 (2026-10-19)
+
+* **Feature**: Adding support for EKS Container Insights Telemetry Rules
+
 # v1.31.0 (2026-10-12)
 
 * **Feature**: Adding support for TransactionSearch telemetry rules.

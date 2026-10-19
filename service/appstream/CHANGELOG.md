@@ -1,3 +1,7 @@
+# v1.72.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.72.0 (2026-10-13)
 
 * **Feature**: Adds support for administrators to require users to re-authenticate OneDrive and Google Drive storage connectors when a streaming session is reused.

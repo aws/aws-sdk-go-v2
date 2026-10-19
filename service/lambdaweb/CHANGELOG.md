@@ -1,3 +1,7 @@
+# v1.2.2 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.2.1 (2026-10-13)
 
 * **Documentation**: Documentation update to include common use cases.

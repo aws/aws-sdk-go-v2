@@ -1,8 +1,0 @@
-{
-    "id": "2020554e-8aef-4cd6-9903-6e3098a5970c",
-    "type": "feature",
-    "description": "Amazon OpenSearch Service adds a new TLS security policy to support FIPS policy and post-quantum cryptography",
-    "modules": [
-        "service/opensearch"
-    ]
-}

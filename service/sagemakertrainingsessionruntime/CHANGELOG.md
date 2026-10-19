@@ -1,3 +1,7 @@
+# v1.0.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.0.0 (2026-10-12)
 
 * **Release**: New AWS service client module

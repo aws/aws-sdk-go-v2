@@ -1,8 +1,0 @@
-{
-    "id": "5b7ee142-79ea-4ca3-8205-1d1e694c6aeb",
-    "type": "feature",
-    "description": "Documentation update release for AWS service",
-    "modules": [
-        "service/amplify"
-    ]
-}

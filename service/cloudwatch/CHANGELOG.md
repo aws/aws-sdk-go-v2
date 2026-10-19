@@ -1,3 +1,8 @@
+# v1.74.0 (2026-10-19)
+
+* **Feature**: This release adds ActionConfiguration to PutMetricAlarm, PutCompositeAlarm and PutLogAlarm. It allows customers to include an alarm's tags in its notifications and alarm state change events
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.73.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

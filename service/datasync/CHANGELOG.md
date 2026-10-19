@@ -1,3 +1,7 @@
+# v1.68.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.68.0 (2026-10-13)
 
 * **Feature**: AWS DataSync Enhanced mode now supports FSx for OpenZFS, NFS 4.2, and object metadata controls

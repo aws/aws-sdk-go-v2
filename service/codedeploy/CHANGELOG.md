@@ -1,3 +1,8 @@
+# v1.46.0 (2026-10-19)
+
+* **Feature**: Adds support for suspending Amazon EC2 Auto Scaling processes during CodeDeploy EC2 in-place deployments. Use ec2DeploymentOptions to choose which processes are suspended and resumed.
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.45.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

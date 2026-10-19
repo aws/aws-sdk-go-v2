@@ -1,8 +1,0 @@
-{
-    "id": "485bb96d-9972-4944-b624-3d0a5d79ae87",
-    "type": "feature",
-    "description": "Documentation update release for AWS service",
-    "modules": [
-        "service/codeconnections"
-    ]
-}

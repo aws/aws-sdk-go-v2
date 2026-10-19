@@ -1,3 +1,70 @@
+# Release (2026-10-19)
+
+## General Highlights
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.4.17](feature/s3/transfermanager/CHANGELOG.md#v0417-2026-10-19)
+  * **Bug Fix**: Fix the concurrent reader panic when buffer len is smaller than capacity
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.49.0](service/amplify/CHANGELOG.md#v1490-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.69.0](service/bedrockagent/CHANGELOG.md#v1690-2026-10-19)
+  * **Feature**: Adds Retrieval Instructions for Amazon Bedrock Knowledge Bases. Create, get, update, delete, list, and version customer-authored instructions that guide how a knowledge base retrieves and answers, with content review before use.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.52.0](service/bedrockagentcore/CHANGELOG.md#v1520-2026-10-19)
+  * **Feature**: Adds the Builtin.FailureAnalysis evaluator for batch evaluations. GetBatchEvaluation now returns insightResults that group session failures into insights with root causes and suggested fixes.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.65.0](service/bedrockagentruntime/CHANGELOG.md#v1650-2026-10-19)
+  * **Feature**: Adds support for applying a Retrieval Instruction, optionally by version, to AgenticRetrieveStream requests for Amazon Bedrock Knowledge Bases, and reports the applied instruction and version on the trace.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.74.0](service/cloudwatch/CHANGELOG.md#v1740-2026-10-19)
+  * **Feature**: This release adds ActionConfiguration to PutMetricAlarm, PutCompositeAlarm and PutLogAlarm. It allows customers to include an alarm's tags in its notifications and alarm state change events
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.90.0](service/cloudwatchlogs/CHANGELOG.md#v1900-2026-10-19)
+  * **Feature**: Amazon CloudWatch Logs now supports filtering DescribeDeliverySources by resourceArns, DescribeDeliveryDestinations by names, and DescribeDeliveries by deliverySourceNames.
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.44.0](service/codecommit/CHANGELOG.md#v1440-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.21.0](service/codeconnections/CHANGELOG.md#v1210-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.46.0](service/codedeploy/CHANGELOG.md#v1460-2026-10-19)
+  * **Feature**: Adds support for suspending Amazon EC2 Auto Scaling processes during CodeDeploy EC2 in-place deployments. Use ec2DeploymentOptions to choose which processes are suspended and resumed.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.56.0](service/codepipeline/CHANGELOG.md#v1560-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.40.0](service/codestarnotifications/CHANGELOG.md#v1400-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.206.0](service/connect/CHANGELOG.md#v12060-2026-10-19)
+  * **Feature**: Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.38.0](service/controltower/CHANGELOG.md#v1380-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.48.0](service/databrew/CHANGELOG.md#v1480-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.79.0](service/datazone/CHANGELOG.md#v1790-2026-10-19)
+  * **Feature**: Adds SDK and CLI support for the Iceberg REST catalog connection types already available in Amazon SageMaker Unified Studio - ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, and DATABRICKSICEBERGRESTCATALOG.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.51.0](service/drs/CHANGELOG.md#v1510-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.71.0](service/dynamodb/CHANGELOG.md#v1710-2026-10-19)
+  * **Feature**: Enable account endpoint generation for existing CN and GovCloud regions
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.101.0](service/ecs/CHANGELOG.md#v11010-2026-10-19)
+  * **Feature**: Adds support for configurable envoy application log levels. Customers can now debug network connectivity issues with their task's sidecar envoys.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.52.0](service/emrcontainers/CHANGELOG.md#v1520-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.45.0](service/grafana/CHANGELOG.md#v1450-2026-10-19)
+  * **Feature**: Documentation update release for AWS service
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.101.0](service/guardduty/CHANGELOG.md#v11010-2026-10-19)
+  * **Feature**: Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs
+  * **Bug Fix**: Fix deserialization failure when `Observations.Text` lists contains a null value.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.32.0](service/observabilityadmin/CHANGELOG.md#v1320-2026-10-19)
+  * **Feature**: Adding support for EKS Container Insights Telemetry Rules
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.86.0](service/opensearch/CHANGELOG.md#v1860-2026-10-19)
+  * **Feature**: Amazon OpenSearch Service adds a new TLS security policy to support FIPS policy and post-quantum cryptography
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.22.0](service/socialmessaging/CHANGELOG.md#v1220-2026-10-19)
+  * **Feature**: Adding support for WhatsApp Direct Send.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.30.0](service/timestreaminfluxdb/CHANGELOG.md#v1300-2026-10-19)
+  * **Feature**: Adds four new parameters to the InfluxDBv3Enterprise parameter group for Amazon Timestream for InfluxDB. The new parameters are upgradePachaTree, walBufferSize, snapshotSize, and snapshotDuration.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.82.0](service/workspaces/CHANGELOG.md#v1820-2026-10-19)
+  * **Feature**: Adds optional imageValidationMode enum to ImportCustomWorkspaceImageRequest. This allows customers to opt-in to having prevalidation run in the service account instead of customer account.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.16.0](service/workspacesinstances/CHANGELOG.md#v1160-2026-10-19)
+  * **Feature**: ModifyVolume is a new public API for WorkSpaces Core Managed Instances. Customers can change the size, type, IOPS, or throughput of an existing managed volume online, with no stop required. Customers track progress by calling EC2 DescribeVolumesModifications directly.
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.46.0](service/xray/CHANGELOG.md#v1460-2026-10-19)
+  * **Feature**: Adds support for encrypting the Transaction Search spans log group with a customer managed AWS KMS key. Pass the key ARN in the new CloudWatchLogsConfiguration.SpansLogGroupKmsKeyId field of UpdateTraceSegmentDestination. X-Ray applies the key when it creates the log group.
+
 # Release (2026-10-14)
 
 ## General Highlights

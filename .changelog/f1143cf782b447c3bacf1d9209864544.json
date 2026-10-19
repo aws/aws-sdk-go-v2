@@ -1,8 +1,0 @@
-{
-    "id": "f1143cf7-82b4-47c3-bacf-1d9209864544",
-    "type": "feature",
-    "description": "Adding support for WhatsApp Direct Send.",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "e1cca9e7-6a50-4221-a7bb-357bdd47a851",
-    "type": "feature",
-    "description": "Adding support for EKS Container Insights Telemetry Rules",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

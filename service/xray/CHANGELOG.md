@@ -1,3 +1,8 @@
+# v1.46.0 (2026-10-19)
+
+* **Feature**: Adds support for encrypting the Transaction Search spans log group with a customer managed AWS KMS key. Pass the key ARN in the new CloudWatchLogsConfiguration.SpansLogGroupKmsKeyId field of UpdateTraceSegmentDestination. X-Ray applies the key when it creates the log group.
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.45.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

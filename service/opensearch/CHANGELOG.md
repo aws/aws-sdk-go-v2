@@ -1,3 +1,8 @@
+# v1.86.0 (2026-10-19)
+
+* **Feature**: Amazon OpenSearch Service adds a new TLS security policy to support FIPS policy and post-quantum cryptography
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.85.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

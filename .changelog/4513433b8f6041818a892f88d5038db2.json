@@ -1,8 +1,0 @@
-{
-    "id": "4513433b-8f60-4181-8a89-2f88d5038db2",
-    "type": "feature",
-    "description": "Adds four new parameters to the InfluxDBv3Enterprise parameter group for Amazon Timestream for InfluxDB. The new parameters are upgradePachaTree, walBufferSize, snapshotSize, and snapshotDuration.",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}

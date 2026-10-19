@@ -1,3 +1,8 @@
+# v1.206.0 (2026-10-19)
+
+* **Feature**: Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.205.0 (2026-10-13)
 
 * **Feature**: New APIs to support aliases and versions for ContactFlow.

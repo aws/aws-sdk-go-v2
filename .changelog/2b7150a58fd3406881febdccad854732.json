@@ -1,8 +1,0 @@
-{
-    "id": "2b7150a5-8fd3-4068-81fe-bdccad854732",
-    "type": "feature",
-    "description": "Documentation update release for AWS service",
-    "modules": [
-        "service/drs"
-    ]
-}

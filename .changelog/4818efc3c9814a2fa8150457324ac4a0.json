@@ -1,8 +1,0 @@
-{
-    "id": "4818efc3-c981-4a2f-a815-0457324ac4a0",
-    "type": "feature",
-    "description": "Documentation update release for AWS service",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

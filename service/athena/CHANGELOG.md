@@ -1,3 +1,7 @@
+# v1.66.5 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.66.4 (2026-10-09.2)
 
 * **Bug Fix**: Fix deserialization failure when `TableMetadata.Parameters` contains a null value.

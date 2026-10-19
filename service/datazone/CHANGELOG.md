@@ -1,3 +1,7 @@
+# v1.79.0 (2026-10-19)
+
+* **Feature**: Adds SDK and CLI support for the Iceberg REST catalog connection types already available in Amazon SageMaker Unified Studio - ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, and DATABRICKSICEBERGRESTCATALOG.
+
 # v1.78.1 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

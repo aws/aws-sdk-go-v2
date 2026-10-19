@@ -1,3 +1,7 @@
+# v1.171.1 (2026-10-19)
+
+* **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing
+
 # v1.171.0 (2026-10-13)
 
 * **Feature**: Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration
