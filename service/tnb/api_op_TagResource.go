@@ -12,6 +12,8 @@ import (
 // A tag is a label that you assign to an Amazon Web Services resource. Each tag
 // consists of a key and an optional value. You can use tags to search and filter
 // your resources or track your Amazon Web Services costs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -32,6 +34,8 @@ type TagResourceInput struct {
 	// Resource ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
@@ -39,6 +43,8 @@ type TagResourceInput struct {
 	// your resources or track your Amazon Web Services costs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

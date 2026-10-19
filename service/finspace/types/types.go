@@ -14,28 +14,40 @@ type AutoScalingConfiguration struct {
 	//  The metric your cluster will track in order to scale in and out. For example,
 	// CPU_UTILIZATION_PERCENTAGE is the average CPU usage across all the nodes in a
 	// cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingMetric AutoScalingMetric
 
 	// The highest number of nodes to scale. This value cannot be greater than 5.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxNodeCount *int32
 
 	// The desired value of the chosen autoScalingMetric . When the metric drops below
 	// this value, the cluster will scale in. When the metric goes above this value,
 	// the cluster will scale out. You can set the target value between 1 and 100
 	// percent.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MetricTarget *float64
 
 	// The lowest number of nodes to scale. This value must be at least 1 and less
 	// than the maxNodeCount . If the nodes in a cluster belong to multiple
 	// availability zones, then minNodeCount must be at least 3.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MinNodeCount *int32
 
 	// The duration in seconds that FinSpace will wait after a scale in event before
 	// initiating another scaling event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScaleInCooldownSeconds *float64
 
 	// The duration in seconds that FinSpace will wait after a scale out event before
 	// initiating another scaling event.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScaleOutCooldownSeconds *float64
 
 	noSmithyDocumentSerde
@@ -46,6 +58,8 @@ type AutoScalingConfiguration struct {
 type CapacityConfiguration struct {
 
 	// The number of instances running in a cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeCount *int32
 
 	// The type that determines the hardware of the host computer used for your
@@ -74,6 +88,8 @@ type CapacityConfiguration struct {
 	//
 	//   - kx.s.32xlarge – The node type with a configuration of 864 GiB memory and 128
 	//   vCPUs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeType *string
 
 	noSmithyDocumentSerde
@@ -89,15 +105,21 @@ type ChangeRequest struct {
 	//   - DELETE – Deletes files in a database.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangeType ChangeType
 
 	// Defines the path within the database directory.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbPath *string
 
 	// Defines the S3 path of the source file that is required to add or update files
 	// in a database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Path *string
 
 	noSmithyDocumentSerde
@@ -107,13 +129,19 @@ type ChangeRequest struct {
 type CodeConfiguration struct {
 
 	// A unique name for the S3 bucket.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// The full S3 path (excluding bucket) to the .zip file. This file contains the
 	// code that is loaded onto the cluster when it's started.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Key *string
 
 	// The version of an S3 object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3ObjectVersion *string
 
 	noSmithyDocumentSerde
@@ -126,11 +154,15 @@ type CustomDNSServer struct {
 	// The IP address of the DNS server.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomDNSServerIP *string
 
 	// The name of the DNS server.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomDNSServerName *string
 
 	noSmithyDocumentSerde
@@ -140,40 +172,64 @@ type CustomDNSServer struct {
 type Environment struct {
 
 	// The ID of the AWS account in which the FinSpace environment is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AwsAccountId *string
 
 	// The AWS account ID of the dedicated service account associated with your
 	// FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DedicatedServiceAccountId *string
 
 	// The description of the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The Amazon Resource Name (ARN) of your FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentArn *string
 
 	// The identifier of the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The sign-in URL for the web application of your FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentUrl *string
 
 	// The authentication mode for the environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationMode FederationMode
 
 	// Configuration information when authentication mode is FEDERATED.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationParameters *FederationParameters
 
 	// The KMS key id used to encrypt in the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The name of the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The URL of the integrated FinSpace notebook environment in your web application.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SageMakerStudioDomainUrl *string
 
 	// The current status of creation of the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status EnvironmentStatus
 
 	noSmithyDocumentSerde
@@ -184,9 +240,13 @@ type Environment struct {
 type ErrorInfo struct {
 
 	// Specifies the error message that appears if a flow fails.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// Specifies the type of error.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorType ErrorDetails
 
 	noSmithyDocumentSerde
@@ -197,6 +257,8 @@ type FederationParameters struct {
 
 	// The redirect or sign-in URL that should be entered into the SAML 2.0 compliant
 	// identity provider configuration (IdP).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationCallBackURL *string
 
 	// SAML attribute name and value. The name must always be Email and the value
@@ -204,19 +266,29 @@ type FederationParameters struct {
 	// example, name would be Email and value
 	// http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress . Please
 	// check your SAML 2.0 compliant identity provider (IdP) documentation for details.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttributeMap map[string]string
 
 	// Name of the identity provider (IdP).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationProviderName *string
 
 	// The Uniform Resource Name (URN). Also referred as Service Provider URN or
 	// Audience URI or Service Provider Entity ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationURN *string
 
 	// SAML 2.0 Metadata document from identity provider (IdP).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SamlMetadataDocument *string
 
 	// Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SamlMetadataURL *string
 
 	noSmithyDocumentSerde
@@ -228,11 +300,15 @@ type IcmpTypeCode struct {
 	//  The ICMP code. A value of -1 means all codes for the specified ICMP type.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Code int32
 
 	// The ICMP type. A value of -1 means all types.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type int32
 
 	noSmithyDocumentSerde
@@ -242,6 +318,8 @@ type IcmpTypeCode struct {
 type KxAttachedCluster struct {
 
 	// A unique name for the attached cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// The status of the attached cluster.
@@ -261,10 +339,14 @@ type KxAttachedCluster struct {
 	//   - DELETED – The cluster has been deleted.
 	//
 	//   - DELETE_FAILED – The cluster failed to delete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterStatus KxClusterStatus
 
 	// Specifies the type of cluster. The volume for TP and RDB cluster types will be
 	// used for TP logs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterType KxClusterType
 
 	noSmithyDocumentSerde
@@ -276,6 +358,8 @@ type KxCacheStorageConfiguration struct {
 	// The size of cache in Gigabytes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *int32
 
 	// The type of cache storage. The valid values are:
@@ -291,6 +375,8 @@ type KxCacheStorageConfiguration struct {
 	// increments of 6000 GB.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -302,19 +388,27 @@ type KxChangesetListEntry struct {
 	// Beginning time from which the changeset is active. The value is determined as
 	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveFromTimestamp *time.Time
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The timestamp at which the changeset was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// The timestamp at which the changeset was modified. The value is determined as
 	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	//  Status of the changeset.
@@ -326,6 +420,8 @@ type KxChangesetListEntry struct {
 	//   - Failed – Changeset creation has failed.
 	//
 	//   - Complete – Changeset creation has succeeded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status ChangesetStatus
 
 	noSmithyDocumentSerde
@@ -335,6 +431,8 @@ type KxChangesetListEntry struct {
 type KxCluster struct {
 
 	//  The availability zone identifiers for the requested regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	// The number of availability zones assigned per cluster. This can be one of the
@@ -343,12 +441,18 @@ type KxCluster struct {
 	//   - SINGLE – Assigns one availability zone per cluster.
 	//
 	//   - MULTI – Assigns all the availability zones per cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode KxAzMode
 
 	// A description of the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterDescription *string
 
 	// A unique name for the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// Specifies the type of KDB database that is being created. The following types
@@ -381,28 +485,40 @@ type KxCluster struct {
 	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
 	//   is readable by any RDB environment. It supports only single-node that is only
 	//   one kdb process.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterType KxClusterType
 
 	// The timestamp at which the cluster was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	//  An IAM role that defines a set of permissions associated with a cluster. These
 	// permissions are assumed when a cluster attempts to access another cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionRole *string
 
 	// Specifies a Q program that will be run at launch of a cluster. It is a relative
 	// path within .zip file that contains the custom code, which will be loaded on the
 	// cluster. It must include the file name itself. For example, somedir/init.q .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationScript *string
 
 	// The last time that the cluster was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// A version of the FinSpace managed kdb to run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReleaseLabel *string
 
 	// The status of a cluster.
@@ -422,12 +538,18 @@ type KxCluster struct {
 	//   - DELETED – The cluster has been deleted.
 	//
 	//   - DELETE_FAILED – The cluster failed to delete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status KxClusterStatus
 
 	// The error message when a failed state occurs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	//  A list of volumes attached to the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Volumes []Volume
 
 	noSmithyDocumentSerde
@@ -455,6 +577,8 @@ type KxClusterCodeDeploymentConfiguration struct {
 	//   running processes before starting up new ones with the updated configuration.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentStrategy KxClusterCodeDeploymentStrategy
 
 	noSmithyDocumentSerde
@@ -464,9 +588,13 @@ type KxClusterCodeDeploymentConfiguration struct {
 type KxCommandLineArgument struct {
 
 	// The name of the key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// The value of the key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -482,15 +610,21 @@ type KxDatabaseCacheConfiguration struct {
 	//   - CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CacheType *string
 
 	// Specifies the portions of database that will be loaded into the cache for
 	// access.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbPaths []string
 
 	//  The name of the dataview to be used for caching historical data on disk.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewName *string
 
 	noSmithyDocumentSerde
@@ -503,19 +637,29 @@ type KxDatabaseConfiguration struct {
 	// structure, S3 with the whole database is included by default.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// Configuration details for the disk cache used to increase performance reading
 	// from a kdb database mounted to the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CacheConfigurations []KxDatabaseCacheConfiguration
 
 	// A unique identifier of the changeset that is associated with the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	//  The configuration of the dataview to be used with specified cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewConfiguration *KxDataviewConfiguration
 
 	//  The name of the dataview to be used for caching historical data on disk.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewName *string
 
 	noSmithyDocumentSerde
@@ -527,14 +671,20 @@ type KxDatabaseListEntry struct {
 	// The timestamp at which the database was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// The name of the kdb database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// The last time that the database was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -544,14 +694,20 @@ type KxDatabaseListEntry struct {
 type KxDataviewActiveVersion struct {
 
 	//  The list of clusters that are currently using this dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttachedClusters []string
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	//  The timestamp at which the dataview version was active. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	//  The configuration that contains the database path of the data that you want to
@@ -559,9 +715,13 @@ type KxDataviewActiveVersion struct {
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentConfigurations []KxDataviewSegmentConfiguration
 
 	//  A unique identifier of the active version.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VersionId *string
 
 	noSmithyDocumentSerde
@@ -571,15 +731,23 @@ type KxDataviewActiveVersion struct {
 type KxDataviewConfiguration struct {
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	//  The unique identifier of the dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewName *string
 
 	//  The version of the dataview corresponding to a given changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewVersionId *string
 
 	//  The db path and volume configuration for the segmented database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentConfigurations []KxDataviewSegmentConfiguration
 
 	noSmithyDocumentSerde
@@ -589,46 +757,70 @@ type KxDataviewConfiguration struct {
 type KxDataviewListEntry struct {
 
 	//  The active changeset versions for the given dataview entry.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveVersions []KxDataviewActiveVersion
 
 	//  The option to specify whether you want to apply all the future additions and
 	// corrections automatically to the dataview when you ingest new changesets. The
 	// default value is false.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoUpdate bool
 
 	//  The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	// The number of availability zones you want to assign per volume. Currently,
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode KxAzMode
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	//  The timestamp at which the dataview list entry was created in FinSpace. The
 	// value is determined as epoch time in milliseconds. For example, the value for
 	// Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	//  A unique identifier of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	//  A unique identifier of the dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewName *string
 
 	//  A description for the dataview list entry.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The last time that the dataview list was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	//  Returns True if the dataview is created as writeable and False otherwise.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReadWrite bool
 
 	//  The configuration that contains the database path of the data that you want to
@@ -636,12 +828,18 @@ type KxDataviewListEntry struct {
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentConfigurations []KxDataviewSegmentConfiguration
 
 	//  The status of a given dataview entry.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status KxDataviewStatus
 
 	//  The error message when a failed state occurs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	noSmithyDocumentSerde
@@ -659,17 +857,23 @@ type KxDataviewSegmentConfiguration struct {
 	// for the segment. Each segment must have a unique database path for each volume.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DbPaths []string
 
 	//  The name of the volume where you want to add data.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeName *string
 
 	// Enables on-demand caching on the selected database path when a particular file
 	// or a column of the database is accessed. When on demand caching is True,
 	// dataviews perform minimal loading of files on the filesystem as needed. When it
 	// is set to False, everything is cached. The default value is False.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnDemand bool
 
 	noSmithyDocumentSerde
@@ -694,6 +898,8 @@ type KxDeploymentConfiguration struct {
 	//   commandLineArguments parameters.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentStrategy KxDeploymentStrategy
 
 	noSmithyDocumentSerde
@@ -704,46 +910,72 @@ type KxEnvironment struct {
 
 	// The identifier of the availability zones where subnets for the environment are
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneIds []string
 
 	// The unique identifier of the AWS account in which you create the kdb
 	// environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AwsAccountId *string
 
 	// The Amazon Resource Name (ARN) of the certificate authority:
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CertificateAuthorityArn *string
 
 	// The timestamp at which the kdb environment was created in FinSpace. The value
 	// is determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// A list of DNS server name and server IP. This is used to set up Route-53
 	// outbound resolvers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomDNSConfiguration []CustomDNSServer
 
 	// A unique identifier for the AWS environment infrastructure account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DedicatedServiceAccountId *string
 
 	// A description of the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The status of DNS configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DnsStatus DnsStatus
 
 	// The Amazon Resource Name (ARN) of your kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentArn *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// Specifies the error message that appears if a flow fails.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The unique identifier of the KMS key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The name of the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the environment creation.
@@ -766,18 +998,26 @@ type KxEnvironment struct {
 	//   - DELETED – Environment has been deleted.
 	//
 	//   - FAILED_DELETION – Environment deletion has failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status EnvironmentStatus
 
 	// The status of the network configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TgwStatus TgwStatus
 
 	// Specifies the transit gateway and network configuration to connect the kdb
 	// environment to an internal network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransitGatewayConfiguration *TransitGatewayConfiguration
 
 	// The timestamp at which the kdb environment was modified in FinSpace. The value
 	// is determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdateTimestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -791,9 +1031,13 @@ type KxNAS1Configuration struct {
 	//  The size of the network attached storage. For storage type SSD_1000 and SSD_250
 	// you can select the minimum size as 1200 GB or increments of 2400 GB. For storage
 	// type HDD_12 you can select the minimum size as 6000 GB or increments of 6000 GB.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *int32
 
 	//  The type of the network attached storage.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type KxNAS1Type
 
 	noSmithyDocumentSerde
@@ -804,14 +1048,20 @@ type KxNode struct {
 
 	// The identifier of the availability zones where subnets for the environment are
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	// The time when a particular node is started. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchTime *time.Time
 
 	// A unique identifier for the node.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeId *string
 
 	//  Specifies the status of the cluster nodes.
@@ -819,6 +1069,8 @@ type KxNode struct {
 	//   - RUNNING – The node is actively serving.
 	//
 	//   - PROVISIONING – The node is being prepared.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status KxNodeStatus
 
 	noSmithyDocumentSerde
@@ -830,16 +1082,22 @@ type KxNode struct {
 type KxSavedownStorageConfiguration struct {
 
 	// The size of temporary storage in gibibytes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *int32
 
 	// The type of writeable storage space for temporarily storing your savedown data.
 	// The valid values are:
 	//
 	//   - SDS01 – This type represents 3000 IOPS and io2 ebs volume type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type KxSavedownStorageType
 
 	//  The name of the kdb volume that you want to use as writeable save-down storage
 	// for clusters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeName *string
 
 	noSmithyDocumentSerde
@@ -849,14 +1107,20 @@ type KxSavedownStorageConfiguration struct {
 type KxScalingGroup struct {
 
 	// The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	//  The list of clusters currently active in a given scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Clusters []string
 
 	//  The timestamp at which the scaling group was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	//  The memory and CPU capabilities of the scaling group host on which FinSpace
@@ -890,20 +1154,30 @@ type KxScalingGroup struct {
 	//
 	//   - kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and
 	//   96 vCPUs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HostType *string
 
 	//  The last time that the scaling group was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// A unique identifier for the kdb scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupName *string
 
 	//  The status of scaling groups.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status KxScalingGroupStatus
 
 	//  The error message when a failed state occurs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	noSmithyDocumentSerde
@@ -916,23 +1190,33 @@ type KxScalingGroupConfiguration struct {
 	// scaling group for a kdb cluster to be successfully placed in a scaling group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MemoryReservation *int32
 
 	//  The number of kdb cluster nodes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NodeCount *int32
 
 	// A unique identifier for the kdb scaling group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupName *string
 
 	//  The number of vCPUs that you want to reserve for each node of this kdb cluster
 	// on the scaling group host.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Cpu *float64
 
 	//  An optional hard limit on the amount of memory a kdb cluster can use.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MemoryLimit *int32
 
 	noSmithyDocumentSerde
@@ -942,21 +1226,31 @@ type KxScalingGroupConfiguration struct {
 type KxUser struct {
 
 	// The timestamp at which the kdb user was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTimestamp *time.Time
 
 	// The IAM role ARN that is associated with the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// The timestamp at which the kdb user was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdateTimestamp *time.Time
 
 	//  The Amazon Resource Name (ARN) that identifies the user. For more information
 	// about ARNs and how to use ARNs in policies, see [IAM Identifiers]in the IAM User Guide.
 	//
 	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserArn *string
 
 	// A unique identifier for the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -966,23 +1260,33 @@ type KxUser struct {
 type KxVolume struct {
 
 	// The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneIds []string
 
 	// The number of availability zones you want to assign per volume. Currently,
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode KxAzMode
 
 	//  The timestamp at which the volume was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	//  A description of the volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The last time that the volume was updated in FinSpace. The value is determined
 	// as epoch time in milliseconds. For example, the value for Monday, November 1,
 	// 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// The status of volume.
@@ -1004,16 +1308,24 @@ type KxVolume struct {
 	//   - DELETE_FAILED – The system failed to delete the volume.
 	//
 	//   - DELETED – The volume is successfully deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status KxVolumeStatus
 
 	// The error message when a failed state occurs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	// A unique identifier for the volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeName *string
 
 	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType KxVolumeType
 
 	noSmithyDocumentSerde
@@ -1033,28 +1345,40 @@ type NetworkACLEntry struct {
 	// example, if you specify 100.68.0.18/18 , we modify it to 100.68.0.0/18 .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CidrBlock *string
 
 	//  The protocol number. A value of -1 means all the protocols.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Protocol *string
 
 	//  Indicates whether to allow or deny the traffic that matches the rule.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuleAction RuleAction
 
 	//  The rule number for the entry. For example 100. All the network ACL entries
 	// are processed in ascending order by rule number.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuleNumber *int32
 
 	//  Defines the ICMP protocol that consists of the ICMP type and code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IcmpTypeCode *IcmpTypeCode
 
 	//  The range of ports the rule applies to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PortRange *PortRange
 
 	noSmithyDocumentSerde
@@ -1066,11 +1390,15 @@ type PortRange struct {
 	//  The first port in the range.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	From int32
 
 	//  The last port in the range.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	To int32
 
 	noSmithyDocumentSerde
@@ -1082,16 +1410,22 @@ type SuperuserParameters struct {
 	// The email address of the superuser.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EmailAddress *string
 
 	// The first name of the superuser.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FirstName *string
 
 	// The last name of the superuser.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastName *string
 
 	noSmithyDocumentSerde
@@ -1105,6 +1439,8 @@ type SuperuserParameters struct {
 type TickerplantLogConfiguration struct {
 
 	//  The name of the volumes for tickerplant logs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TickerplantLogVolumes []string
 
 	noSmithyDocumentSerde
@@ -1120,16 +1456,22 @@ type TransitGatewayConfiguration struct {
 	// network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RoutableCIDRSpace *string
 
 	// The identifier of the transit gateway created by the customer to connect
 	// outbound traffics from kdb network to your internal network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransitGatewayID *string
 
 	//  The rules that define how you manage the outbound traffic from kdb network to
 	// your internal network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttachmentNetworkAclConfiguration []NetworkACLEntry
 
 	noSmithyDocumentSerde
@@ -1139,10 +1481,14 @@ type TransitGatewayConfiguration struct {
 type Volume struct {
 
 	// A unique identifier for the volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeName *string
 
 	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
@@ -1156,17 +1502,25 @@ type VpcConfiguration struct {
 	// type is available:
 	//
 	//   - IP_V4 – IP address version 4
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IpAddressType IPAddressType
 
 	// The unique identifier of the VPC security group applied to the VPC endpoint ENI
 	// for the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecurityGroupIds []string
 
 	// The identifier of the subnet that the Privatelink VPC endpoint uses to connect
 	// to the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SubnetIds []string
 
 	// The identifier of the VPC endpoint.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcId *string
 
 	noSmithyDocumentSerde

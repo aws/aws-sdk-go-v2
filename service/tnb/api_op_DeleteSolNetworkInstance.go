@@ -16,6 +16,8 @@ import (
 // To delete a network instance, the instance must be in a stopped or terminated
 // state. To terminate a network instance, see [TerminateSolNetworkInstance].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [TerminateSolNetworkInstance]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_TerminateSolNetworkInstance.html
 func (c *Client) DeleteSolNetworkInstance(ctx context.Context, params *DeleteSolNetworkInstanceInput, optFns ...func(*Options)) (*DeleteSolNetworkInstanceOutput, error) {
 	if params == nil {
@@ -37,6 +39,8 @@ type DeleteSolNetworkInstanceInput struct {
 	// Network instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	noSmithyDocumentSerde

@@ -13,6 +13,8 @@ import (
 // A network instance is a single network created in Amazon Web Services TNB that
 // can be deployed and on which life-cycle operations (like terminate, update, and
 // delete) can be performed.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolNetworkInstance(ctx context.Context, params *GetSolNetworkInstanceInput, optFns ...func(*Options)) (*GetSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkInstanceInput{}
@@ -33,6 +35,8 @@ type GetSolNetworkInstanceInput struct {
 	// ID of the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	noSmithyDocumentSerde
@@ -43,11 +47,15 @@ type GetSolNetworkInstanceOutput struct {
 	// Network instance ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Network instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The metadata of a network instance.
@@ -57,6 +65,8 @@ type GetSolNetworkInstanceOutput struct {
 	// delete) can be performed.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.GetSolNetworkInstanceMetadata
 
 	// Network instance description.
@@ -72,24 +82,34 @@ type GetSolNetworkInstanceOutput struct {
 	// Network service descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdId *string
 
 	// Network service descriptor info ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// Lifecycle management operation details on the network instance.
 	//
 	// Lifecycle management operations are deploy, update, or delete operations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LcmOpInfo *types.LcmOperationInfo
 
 	// Network instance state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsState types.NsState
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

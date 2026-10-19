@@ -13,6 +13,8 @@ import (
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
 // the function packages you want to deploy and the Amazon Web Services
 // infrastructure you want to deploy them on.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutSolNetworkPackageContent(ctx context.Context, params *PutSolNetworkPackageContentInput, optFns ...func(*Options)) (*PutSolNetworkPackageContentOutput, error) {
 	if params == nil {
 		params = &PutSolNetworkPackageContentInput{}
@@ -33,14 +35,20 @@ type PutSolNetworkPackageContentInput struct {
 	// Network package file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	File []byte
 
 	// Network service descriptor info ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// Network package content type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType types.PackageContentType
 
 	noSmithyDocumentSerde
@@ -51,21 +59,29 @@ type PutSolNetworkPackageContentOutput struct {
 	// Network package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Network package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Network package metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.PutSolNetworkPackageContentMetadata
 
 	// Network service descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdId *string
 
 	// Network service descriptor name.
@@ -81,6 +97,8 @@ type PutSolNetworkPackageContentOutput struct {
 	// Function package IDs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgIds []string
 
 	// Metadata pertaining to the operation's result.

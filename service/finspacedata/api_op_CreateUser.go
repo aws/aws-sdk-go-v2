@@ -11,7 +11,7 @@ import (
 
 // Creates a new user in FinSpace.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}
@@ -34,6 +34,8 @@ type CreateUserInput struct {
 	// created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EmailAddress *string
 
 	// The option to indicate the type of user. Use one of the following options to
@@ -46,6 +48,8 @@ type CreateUserInput struct {
 	//   assigned permissions by adding them to a permission group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type types.UserType
 
 	// The option to indicate whether the user can use the
@@ -55,20 +59,30 @@ type CreateUserInput struct {
 	//   - ENABLED – The user has permissions to use the APIs.
 	//
 	//   - DISABLED – The user does not have permissions to use any APIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccess types.ApiAccess
 
 	// The ARN identifier of an AWS user or role that is allowed to call the
 	// GetProgrammaticAccessCredentials API to obtain a credentials token for a
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccessPrincipalArn *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The first name of the user that you want to register.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FirstName *string
 
 	// The last name of the user that you want to register.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastName *string
 
 	noSmithyDocumentSerde
@@ -77,6 +91,8 @@ type CreateUserInput struct {
 type CreateUserOutput struct {
 
 	// The unique identifier for the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

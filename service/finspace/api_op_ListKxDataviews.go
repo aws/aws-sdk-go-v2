@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of all the dataviews in the database.
+//	Returns a list of all the dataviews in the database.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxDataviews(ctx context.Context, params *ListKxDataviewsInput, optFns ...func(*Options)) (*ListKxDataviewsOutput, error) {
 	if params == nil {
 		params = &ListKxDataviewsInput{}
@@ -30,18 +32,26 @@ type ListKxDataviewsInput struct {
 	//  The name of the database where the dataviews were created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment, for which you want to retrieve a
 	// list of dataviews.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	//  A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,9 +60,13 @@ type ListKxDataviewsInput struct {
 type ListKxDataviewsOutput struct {
 
 	//  The list of kdb dataviews that are currently active for the given database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KxDataviews []types.KxDataviewListEntry
 
 	//  A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 // Lists network function instances.
 //
 // A network function instance is a function in a function package .
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListSolFunctionInstances(ctx context.Context, params *ListSolFunctionInstancesInput, optFns ...func(*Options)) (*ListSolFunctionInstancesOutput, error) {
 	if params == nil {
 		params = &ListSolFunctionInstancesInput{}
@@ -33,6 +35,8 @@ type ListSolFunctionInstancesInput struct {
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +45,14 @@ type ListSolFunctionInstancesInput struct {
 type ListSolFunctionInstancesOutput struct {
 
 	// Network function instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FunctionInstances []types.ListSolFunctionInstanceInfo
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,7 +10,7 @@ import (
 
 // Denies access to the FinSpace web application and API for the specified user.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DisableUser(ctx context.Context, params *DisableUserInput, optFns ...func(*Options)) (*DisableUserOutput, error) {
 	if params == nil {
 		params = &DisableUserInput{}
@@ -31,9 +31,13 @@ type DisableUserInput struct {
 	// The unique identifier for the user that you want to deactivate.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type DisableUserInput struct {
 type DisableUserOutput struct {
 
 	// The unique identifier for the deactivated user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

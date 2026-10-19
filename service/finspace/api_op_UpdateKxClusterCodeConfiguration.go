@@ -14,6 +14,8 @@ import (
 // API you can update the code, the initialization script path, and the command
 // line arguments for a specific cluster. The configuration that you want to update
 // will override any existing configurations on the cluster.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateKxClusterCodeConfiguration(ctx context.Context, params *UpdateKxClusterCodeConfigurationInput, optFns ...func(*Options)) (*UpdateKxClusterCodeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateKxClusterCodeConfigurationInput{}
@@ -34,28 +36,40 @@ type UpdateKxClusterCodeConfigurationInput struct {
 	// The name of the cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// The structure of the customer code available within the running cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Code *types.CodeConfiguration
 
 	//  A unique identifier of the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// Specifies the key-value pairs to make them available inside the cluster.
 	//
 	// You cannot update this parameter for a NO_RESTART deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommandLineArguments []types.KxCommandLineArgument
 
 	//  The configuration that allows you to choose how you want to update the code on
 	// a cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentConfiguration *types.KxClusterCodeDeploymentConfiguration
 
 	// Specifies a Q program that will be run at launch of a cluster. It is a relative
@@ -63,6 +77,8 @@ type UpdateKxClusterCodeConfigurationInput struct {
 	// cluster. It must include the file name itself. For example, somedir/init.q .
 	//
 	// You cannot update this parameter for a NO_RESTART deployment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationScript *string
 
 	noSmithyDocumentSerde

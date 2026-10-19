@@ -18,6 +18,8 @@ import (
 // contains a network function (an ETSI standard telecommunication application) and
 // function package descriptor that uses the TOSCA standard to describe how the
 // network functions should run on your network.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolFunctionPackageDescriptor(ctx context.Context, params *GetSolFunctionPackageDescriptorInput, optFns ...func(*Options)) (*GetSolFunctionPackageDescriptorOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionPackageDescriptorInput{}
@@ -39,11 +41,15 @@ type GetSolFunctionPackageDescriptorInput struct {
 	// understand.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Accept types.DescriptorContentType
 
 	// ID of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	noSmithyDocumentSerde
@@ -52,6 +58,8 @@ type GetSolFunctionPackageDescriptorInput struct {
 type GetSolFunctionPackageDescriptorOutput struct {
 
 	// Indicates the media type of the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType types.DescriptorContentType
 
 	// Contents of the function package descriptor.

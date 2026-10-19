@@ -24,6 +24,8 @@ import (
 // This request creates an empty network package container with an ID. Once you
 // create a network package, you can upload the network package content using [PutSolNetworkPackageContent].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Network instances]: https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html
 // [PutSolNetworkPackageContent]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html
 func (c *Client) CreateSolNetworkPackage(ctx context.Context, params *CreateSolNetworkPackageInput, optFns ...func(*Options)) (*CreateSolNetworkPackageOutput, error) {
@@ -46,6 +48,8 @@ type CreateSolNetworkPackageInput struct {
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -56,31 +60,43 @@ type CreateSolNetworkPackageOutput struct {
 	// Network package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// ID of the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Onboarding state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOnboardingState types.NsdOnboardingState
 
 	// Operational state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOperationalState types.NsdOperationalState
 
 	// Usage state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdUsageState types.NsdUsageState
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 
 // Updates a FinSpace Dataset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, optFns ...func(*Options)) (*UpdateDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetInput{}
@@ -33,11 +33,15 @@ type UpdateDatasetInput struct {
 	// The unique identifier for the Dataset to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// A display title for the Dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetTitle *string
 
 	// The format in which the Dataset data is structured.
@@ -47,18 +51,28 @@ type UpdateDatasetInput struct {
 	//   - NON_TABULAR – Data is structured in a non-tabular format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Kind types.DatasetKind
 
 	// The unique resource identifier for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Alias *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A description for the Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetDescription *string
 
 	// Definition for a schema on a tabular Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SchemaDefinition *types.SchemaUnion
 
 	noSmithyDocumentSerde
@@ -68,6 +82,8 @@ type UpdateDatasetInput struct {
 type UpdateDatasetOutput struct {
 
 	// The unique identifier for updated Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Metadata pertaining to the operation's result.

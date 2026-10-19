@@ -13,6 +13,8 @@ import (
 // A network service descriptor is a .yaml file in a network package that uses the
 // TOSCA standard to describe the network functions you want to deploy and the
 // Amazon Web Services infrastructure you want to deploy the network functions on.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolNetworkPackageDescriptor(ctx context.Context, params *GetSolNetworkPackageDescriptorInput, optFns ...func(*Options)) (*GetSolNetworkPackageDescriptorOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkPackageDescriptorInput{}
@@ -33,6 +35,8 @@ type GetSolNetworkPackageDescriptorInput struct {
 	// ID of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	noSmithyDocumentSerde
@@ -41,6 +45,8 @@ type GetSolNetworkPackageDescriptorInput struct {
 type GetSolNetworkPackageDescriptorOutput struct {
 
 	// Indicates the media type of the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType types.DescriptorContentType
 
 	// Contents of the network service descriptor in the network package.

@@ -14,6 +14,8 @@ import (
 //
 // A network operation is any operation that is done to your network, such as
 // network instance instantiation or termination.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListSolNetworkOperations(ctx context.Context, params *ListSolNetworkOperationsInput, optFns ...func(*Options)) (*ListSolNetworkOperationsOutput, error) {
 	if params == nil {
 		params = &ListSolNetworkOperationsInput{}
@@ -35,10 +37,14 @@ type ListSolNetworkOperationsInput struct {
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Network instance id filter, to retrieve network operations associated to a
 	// network instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	noSmithyDocumentSerde
@@ -48,10 +54,14 @@ type ListSolNetworkOperationsOutput struct {
 
 	// Lists network operation occurrences. Lifecycle management operations are
 	// deploy, update, or delete operations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkOperations []types.ListSolNetworkOperationsInfo
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

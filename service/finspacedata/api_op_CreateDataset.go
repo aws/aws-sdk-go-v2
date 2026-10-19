@@ -11,7 +11,7 @@ import (
 
 // Creates a new FinSpace Dataset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -33,6 +33,8 @@ type CreateDatasetInput struct {
 	// Display title for a FinSpace Dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetTitle *string
 
 	// The format in which Dataset data is structured.
@@ -42,26 +44,40 @@ type CreateDatasetInput struct {
 	//   - NON_TABULAR – Data is structured in a non-tabular format.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Kind types.DatasetKind
 
 	// Permission group parameters for Dataset permissions.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupParams *types.PermissionGroupParams
 
 	// The unique resource identifier for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Alias *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// Description of a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetDescription *string
 
 	// Contact information for a Dataset owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerInfo *types.DatasetOwnerInfo
 
 	// Definition for a schema on a tabular Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SchemaDefinition *types.SchemaUnion
 
 	noSmithyDocumentSerde
@@ -71,6 +87,8 @@ type CreateDatasetInput struct {
 type CreateDatasetOutput struct {
 
 	// The unique identifier for the created Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Metadata pertaining to the operation's result.

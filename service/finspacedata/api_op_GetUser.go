@@ -10,7 +10,7 @@ import (
 
 // Retrieves details for a specific user.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...func(*Options)) (*GetUserOutput, error) {
 	if params == nil {
 		params = &GetUserInput{}
@@ -31,6 +31,8 @@ type GetUserInput struct {
 	// The unique identifier of the user to get data for.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -45,40 +47,60 @@ type GetUserOutput struct {
 	//   - ENABLED – The user has permissions to use the APIs.
 	//
 	//   - DISABLED – The user does not have permissions to use any APIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccess types.ApiAccess
 
 	// The ARN identifier of an AWS user or role that is allowed to call the
 	// GetProgrammaticAccessCredentials API to obtain a credentials token for a
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccessPrincipalArn *string
 
 	// The timestamp at which the user was created in FinSpace. The value is
 	// determined as epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The email address that is associated with the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EmailAddress *string
 
 	// The first name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FirstName *string
 
 	// Describes the last time the user was deactivated. The value is determined as
 	// epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDisabledTime int64
 
 	// Describes the last time the user was activated. The value is determined as
 	// epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastEnabledTime int64
 
 	// Describes the last time that the user logged into their account. The value is
 	// determined as epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastLoginTime int64
 
 	// Describes the last time the user details were updated. The value is determined
 	// as epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTime int64
 
 	// The last name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastName *string
 
 	// The current status of the user.
@@ -88,6 +110,8 @@ type GetUserOutput struct {
 	//   - ENABLED – The user is created and is currently active.
 	//
 	//   - DISABLED – The user is currently inactive.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.UserStatus
 
 	// Indicates the type of user.
@@ -97,9 +121,13 @@ type GetUserOutput struct {
 	//
 	//   - APP_USER – A user with specific permissions in FinSpace. The users are
 	//   assigned permissions by adding them to a permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type types.UserType
 
 	// The unique identifier for the user that is retrieved.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

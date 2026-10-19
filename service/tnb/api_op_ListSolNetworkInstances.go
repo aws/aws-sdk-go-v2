@@ -14,6 +14,8 @@ import (
 // A network instance is a single network created in Amazon Web Services TNB that
 // can be deployed and on which life-cycle operations (like terminate, update, and
 // delete) can be performed.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListSolNetworkInstances(ctx context.Context, params *ListSolNetworkInstancesInput, optFns ...func(*Options)) (*ListSolNetworkInstancesOutput, error) {
 	if params == nil {
 		params = &ListSolNetworkInstancesInput{}
@@ -35,6 +37,8 @@ type ListSolNetworkInstancesInput struct {
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,10 +47,14 @@ type ListSolNetworkInstancesInput struct {
 type ListSolNetworkInstancesOutput struct {
 
 	// Lists network instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkInstances []types.ListSolNetworkInstanceInfo
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

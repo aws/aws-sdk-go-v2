@@ -12,7 +12,7 @@ import (
 // a superuser can reset password for other users. Resetting the password
 // immediately invalidates the previous password associated with the user.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ResetUserPassword(ctx context.Context, params *ResetUserPasswordInput, optFns ...func(*Options)) (*ResetUserPasswordOutput, error) {
 	if params == nil {
 		params = &ResetUserPasswordInput{}
@@ -33,9 +33,13 @@ type ResetUserPasswordInput struct {
 	// The unique identifier of the user that a temporary password is requested for.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -45,9 +49,13 @@ type ResetUserPasswordOutput struct {
 
 	// A randomly generated temporary password for the requested user. This password
 	// expires in 7 days.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TemporaryPassword *string
 
 	// The unique identifier of the user that a new password is generated for.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

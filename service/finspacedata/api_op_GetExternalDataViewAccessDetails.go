@@ -16,7 +16,7 @@ import (
 //   - You must be a member of a FinSpace user group, where the dataset that you
 //     want to access has Read Dataset Data permissions.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetExternalDataViewAccessDetails(ctx context.Context, params *GetExternalDataViewAccessDetailsInput, optFns ...func(*Options)) (*GetExternalDataViewAccessDetailsOutput, error) {
 	if params == nil {
 		params = &GetExternalDataViewAccessDetailsInput{}
@@ -37,11 +37,15 @@ type GetExternalDataViewAccessDetailsInput struct {
 	// The unique identifier for the Dataview that you want to access.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViewId *string
 
 	// The unique identifier for the Dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	noSmithyDocumentSerde
@@ -50,9 +54,13 @@ type GetExternalDataViewAccessDetailsInput struct {
 type GetExternalDataViewAccessDetailsOutput struct {
 
 	// The credentials required to access the external Dataview from the S3 location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Credentials *types.AwsCredentials
 
 	// The location where the external Dataview is stored.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Location *types.S3Location
 
 	// Metadata pertaining to the operation's result.

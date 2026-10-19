@@ -9,6 +9,8 @@ import (
 
 // Retrieves a connection string for a user to connect to a kdb cluster. You must
 // call this API using the same role that you have defined while creating a user.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetKxConnectionString(ctx context.Context, params *GetKxConnectionStringInput, optFns ...func(*Options)) (*GetKxConnectionStringOutput, error) {
 	if params == nil {
 		params = &GetKxConnectionStringInput{}
@@ -29,11 +31,15 @@ type GetKxConnectionStringInput struct {
 	// A name of the kdb cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	//  The Amazon Resource Name (ARN) that identifies the user. For more information
@@ -42,6 +48,8 @@ type GetKxConnectionStringInput struct {
 	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserArn *string
 
 	noSmithyDocumentSerde
@@ -50,6 +58,8 @@ type GetKxConnectionStringInput struct {
 type GetKxConnectionStringOutput struct {
 
 	// The signed connection string that you can use to connect to clusters.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SignedConnectionString *string
 
 	// Metadata pertaining to the operation's result.

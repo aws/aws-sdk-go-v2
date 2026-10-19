@@ -9,6 +9,8 @@ import (
 )
 
 // Returns database information for the specified environment ID.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetKxDatabase(ctx context.Context, params *GetKxDatabaseInput, optFns ...func(*Options)) (*GetKxDatabaseOutput, error) {
 	if params == nil {
 		params = &GetKxDatabaseInput{}
@@ -29,11 +31,15 @@ type GetKxDatabaseInput struct {
 	// The name of the kdb database.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -44,35 +50,55 @@ type GetKxDatabaseOutput struct {
 	// The timestamp at which the database is created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// The ARN identifier of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseArn *string
 
 	// The name of the kdb database for which the information is retrieved.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A description of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastCompletedChangesetId *string
 
 	// The last time that the database was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// The total number of bytes in the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumBytes int64
 
 	// The total number of changesets in the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumChangesets int32
 
 	// The total number of files in the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NumFiles int32
 
 	// Metadata pertaining to the operation's result.

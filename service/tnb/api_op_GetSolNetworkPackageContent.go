@@ -13,6 +13,8 @@ import (
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
 // the function packages you want to deploy and the Amazon Web Services
 // infrastructure you want to deploy them on.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolNetworkPackageContent(ctx context.Context, params *GetSolNetworkPackageContentInput, optFns ...func(*Options)) (*GetSolNetworkPackageContentOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkPackageContentInput{}
@@ -33,11 +35,15 @@ type GetSolNetworkPackageContentInput struct {
 	// The format of the package you want to download from the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Accept types.PackageContentType
 
 	// ID of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	noSmithyDocumentSerde
@@ -46,6 +52,8 @@ type GetSolNetworkPackageContentInput struct {
 type GetSolNetworkPackageContentOutput struct {
 
 	// Indicates the media type of the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType types.PackageContentType
 
 	// Content of the network service descriptor in the network package.

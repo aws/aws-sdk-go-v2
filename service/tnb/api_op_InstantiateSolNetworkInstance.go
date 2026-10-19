@@ -17,6 +17,8 @@ import (
 // Before you can instantiate a network instance, you have to create a network
 // instance. For more information, see [CreateSolNetworkInstance].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [CreateSolNetworkInstance]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_CreateSolNetworkInstance.html
 func (c *Client) InstantiateSolNetworkInstance(ctx context.Context, params *InstantiateSolNetworkInstanceInput, optFns ...func(*Options)) (*InstantiateSolNetworkInstanceOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ type InstantiateSolNetworkInstanceInput struct {
 	// ID of the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	// Provides values for the configurable properties.
@@ -54,6 +58,8 @@ type InstantiateSolNetworkInstanceInput struct {
 	// only applied to the network operation that is created. These tags are not
 	// applied to the network instance. Use tags to search and filter your resources or
 	// track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -64,6 +70,8 @@ type InstantiateSolNetworkInstanceOutput struct {
 	// The identifier of the network operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsLcmOpOccId *string
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
@@ -71,6 +79,8 @@ type InstantiateSolNetworkInstanceOutput struct {
 	// only applied to the network operation that is created. These tags are not
 	// applied to the network instance. Use tags to search and filter your resources or
 	// track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

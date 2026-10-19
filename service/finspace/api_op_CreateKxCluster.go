@@ -11,6 +11,8 @@ import (
 )
 
 // Creates a new kdb cluster.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateKxCluster(ctx context.Context, params *CreateKxClusterInput, optFns ...func(*Options)) (*CreateKxClusterOutput, error) {
 	if params == nil {
 		params = &CreateKxClusterInput{}
@@ -36,11 +38,15 @@ type CreateKxClusterInput struct {
 	//   - MULTI – Assigns all the availability zones per cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode types.KxAzMode
 
 	// A unique name for the cluster that you want to create.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// Specifies the type of KDB database that is being created. The following types
@@ -75,83 +81,121 @@ type CreateKxClusterInput struct {
 	//   one kdb process.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterType types.KxClusterType
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The version of FinSpace managed kdb to run.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReleaseLabel *string
 
 	// Configuration details about the network where the Privatelink endpoint of the
 	// cluster resides.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcConfiguration *types.VpcConfiguration
 
 	// The configuration based on which FinSpace will scale in or scale out nodes in
 	// your cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingConfiguration *types.AutoScalingConfiguration
 
 	// The availability zone identifiers for the requested regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	// The configurations for a read only cache storage associated with a cluster.
 	// This cache will be stored as an FSx Lustre that reads from the S3 store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CacheStorageConfigurations []types.KxCacheStorageConfiguration
 
 	// A structure for the metadata of a cluster. It includes information like the
 	// CPUs needed, memory of instances, and number of instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CapacityConfiguration *types.CapacityConfiguration
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A description of the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterDescription *string
 
 	// The details of the custom code that you want to use inside a cluster when
 	// analyzing a data. It consists of the S3 source bucket, location, S3 object
 	// version, and the relative path from where the custom code is loaded into the
 	// cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Code *types.CodeConfiguration
 
 	// Defines the key-value pairs to make them available inside the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommandLineArguments []types.KxCommandLineArgument
 
 	// A list of databases that will be available for querying.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Databases []types.KxDatabaseConfiguration
 
 	// An IAM role that defines a set of permissions associated with a cluster. These
 	// permissions are assumed when a cluster attempts to access another cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionRole *string
 
 	// Specifies a Q program that will be run at launch of a cluster. It is a relative
 	// path within .zip file that contains the custom code, which will be loaded on the
 	// cluster. It must include the file name itself. For example, somedir/init.q .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationScript *string
 
 	// The size and type of the temporary storage that is used to hold data during the
 	// savedown process. This parameter is required when you choose clusterType as
 	// RDB. All the data written to this storage space is lost when the cluster node is
 	// restarted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SavedownStorageConfiguration *types.KxSavedownStorageConfiguration
 
 	// The structure that stores the configuration details of a scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupConfiguration *types.KxScalingGroupConfiguration
 
 	// A list of key-value pairs to label the cluster. You can add up to 50 tags to a
 	// cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	//  A configuration to store Tickerplant logs. It consists of a list of volumes
 	// that will be mounted to your cluster. For the cluster type Tickerplant , the
 	// location of the TP volume on the cluster will be available by using the global
 	// variable .aws.tp_log_path .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TickerplantLogConfiguration *types.TickerplantLogConfiguration
 
 	noSmithyDocumentSerde
@@ -161,9 +205,13 @@ type CreateKxClusterOutput struct {
 
 	// The configuration based on which FinSpace will scale in or scale out nodes in
 	// your cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoScalingConfiguration *types.AutoScalingConfiguration
 
 	//  The availability zone identifiers for the requested regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	// The number of availability zones you want to assign per cluster. This can be
@@ -172,20 +220,30 @@ type CreateKxClusterOutput struct {
 	//   - SINGLE – Assigns one availability zone per cluster.
 	//
 	//   - MULTI – Assigns all the availability zones per cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode types.KxAzMode
 
 	// The configurations for a read only cache storage associated with a cluster.
 	// This cache will be stored as an FSx Lustre that reads from the S3 store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CacheStorageConfigurations []types.KxCacheStorageConfiguration
 
 	// A structure for the metadata of a cluster. It includes information like the
 	// CPUs needed, memory of instances, and number of instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CapacityConfiguration *types.CapacityConfiguration
 
 	// A description of the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterDescription *string
 
 	// A unique name for the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// Specifies the type of KDB database that is being created. The following types
@@ -218,52 +276,76 @@ type CreateKxClusterOutput struct {
 	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
 	//   is readable by any RDB environment. It supports only single-node that is only
 	//   one kdb process.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterType types.KxClusterType
 
 	// The details of the custom code that you want to use inside a cluster when
 	// analyzing a data. It consists of the S3 source bucket, location, S3 object
 	// version, and the relative path from where the custom code is loaded into the
 	// cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Code *types.CodeConfiguration
 
 	// Defines the key-value pairs to make them available inside the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CommandLineArguments []types.KxCommandLineArgument
 
 	// The timestamp at which the cluster was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// A list of databases that will be available for querying.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Databases []types.KxDatabaseConfiguration
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	//  An IAM role that defines a set of permissions associated with a cluster. These
 	// permissions are assumed when a cluster attempts to access another cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExecutionRole *string
 
 	// Specifies a Q program that will be run at launch of a cluster. It is a relative
 	// path within .zip file that contains the custom code, which will be loaded on the
 	// cluster. It must include the file name itself. For example, somedir/init.q .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationScript *string
 
 	// The last time that the cluster was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// A version of the FinSpace managed kdb to run.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReleaseLabel *string
 
 	// The size and type of the temporary storage that is used to hold data during the
 	// savedown process. This parameter is required when you choose clusterType as
 	// RDB. All the data written to this storage space is lost when the cluster node is
 	// restarted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SavedownStorageConfiguration *types.KxSavedownStorageConfiguration
 
 	// The structure that stores the configuration details of a scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupConfiguration *types.KxScalingGroupConfiguration
 
 	// The status of cluster creation.
@@ -283,22 +365,32 @@ type CreateKxClusterOutput struct {
 	//   - DELETED – The cluster has been deleted.
 	//
 	//   - DELETE_FAILED – The cluster failed to delete.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.KxClusterStatus
 
 	// The error message when a failed state occurs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	//  A configuration to store the Tickerplant logs. It consists of a list of
 	// volumes that will be mounted to your cluster. For the cluster type Tickerplant ,
 	// the location of the TP volume on the cluster will be available by using the
 	// global variable .aws.tp_log_path .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TickerplantLogConfiguration *types.TickerplantLogConfiguration
 
 	//  A list of volumes mounted on the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Volumes []types.Volume
 
 	// Configuration details about the network where the Privatelink endpoint of the
 	// cluster resides.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VpcConfiguration *types.VpcConfiguration
 
 	// Metadata pertaining to the operation's result.

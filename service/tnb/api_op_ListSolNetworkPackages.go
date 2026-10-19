@@ -14,6 +14,8 @@ import (
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
 // the function packages you want to deploy and the Amazon Web Services
 // infrastructure you want to deploy them on.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListSolNetworkPackages(ctx context.Context, params *ListSolNetworkPackagesInput, optFns ...func(*Options)) (*ListSolNetworkPackagesOutput, error) {
 	if params == nil {
 		params = &ListSolNetworkPackagesInput{}
@@ -35,6 +37,8 @@ type ListSolNetworkPackagesInput struct {
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +51,14 @@ type ListSolNetworkPackagesOutput struct {
 	// Web Services infrastructure you want to deploy them on.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NetworkPackages []types.ListSolNetworkPackageInfo
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

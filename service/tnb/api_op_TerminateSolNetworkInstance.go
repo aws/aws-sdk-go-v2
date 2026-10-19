@@ -14,6 +14,8 @@ import (
 // delete) can be performed.
 //
 // You must terminate a network instance before you can delete it.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TerminateSolNetworkInstance(ctx context.Context, params *TerminateSolNetworkInstanceInput, optFns ...func(*Options)) (*TerminateSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &TerminateSolNetworkInstanceInput{}
@@ -34,6 +36,8 @@ type TerminateSolNetworkInstanceInput struct {
 	// ID of the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
@@ -41,6 +45,8 @@ type TerminateSolNetworkInstanceInput struct {
 	// only applied to the network operation that is created. These tags are not
 	// applied to the network instance. Use tags to search and filter your resources or
 	// track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -49,6 +55,8 @@ type TerminateSolNetworkInstanceInput struct {
 type TerminateSolNetworkInstanceOutput struct {
 
 	// The identifier of the network operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsLcmOpOccId *string
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
@@ -56,6 +64,8 @@ type TerminateSolNetworkInstanceOutput struct {
 	// only applied to the network operation that is created. These tags are not
 	// applied to the network instance. Use tags to search and filter your resources or
 	// track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

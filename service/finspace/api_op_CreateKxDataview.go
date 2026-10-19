@@ -15,6 +15,8 @@ import (
 // pre-warmed cache, ready for mounting on kdb clusters. Dataviews are only
 // available for clusters running on a scaling group. They are not supported on
 // dedicated clusters.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateKxDataview(ctx context.Context, params *CreateKxDataviewInput, optFns ...func(*Options)) (*CreateKxDataviewOutput, error) {
 	if params == nil {
 		params = &CreateKxDataviewInput{}
@@ -36,41 +38,59 @@ type CreateKxDataviewInput struct {
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode types.KxAzMode
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	//  The name of the database where you want to create a dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewName *string
 
 	// A unique identifier for the kdb environment, where you want to create the
 	// dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The option to specify whether you want to apply all the future additions and
 	// corrections automatically to the dataview, when you ingest new changesets. The
 	// default value is false.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoUpdate bool
 
 	//  The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	//  A unique identifier of the changeset that you want to use to ingest data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// A description of the dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	//  The option to specify whether you want to make the dataview writable to
@@ -89,6 +109,8 @@ type CreateKxDataviewInput struct {
 	//
 	//   - Once you create a dataview as writeable, you cannot change it to read-only.
 	//   So, you cannot update the readWrite parameter later.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReadWrite bool
 
 	//  The configuration that contains the database path of the data that you want to
@@ -96,10 +118,14 @@ type CreateKxDataviewInput struct {
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentConfigurations []types.KxDataviewSegmentConfiguration
 
 	//  A list of key-value pairs to label the dataview. You can add up to 50 tags to
 	// a dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -110,42 +136,64 @@ type CreateKxDataviewOutput struct {
 	// The option to select whether you want to apply all the future additions and
 	// corrections automatically to the dataview when you ingest new changesets. The
 	// default value is false.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoUpdate bool
 
 	//  The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	// The number of availability zones you want to assign per volume. Currently,
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode types.KxAzMode
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	//  The timestamp at which the dataview was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// The name of the database where you want to create a dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewName *string
 
 	// A description of the dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A unique identifier for the kdb environment, where you want to create the
 	// dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	//  The last time that the dataview was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// Returns True if the dataview is created as writeable and False otherwise.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ReadWrite bool
 
 	//  The configuration that contains the database path of the data that you want to
@@ -153,6 +201,8 @@ type CreateKxDataviewOutput struct {
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SegmentConfigurations []types.KxDataviewSegmentConfiguration
 
 	//  The status of dataview creation.
@@ -162,6 +212,8 @@ type CreateKxDataviewOutput struct {
 	//   - UPDATING – The dataview is in the process of being updated.
 	//
 	//   - ACTIVE – The dataview is active.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.KxDataviewStatus
 
 	// Metadata pertaining to the operation's result.

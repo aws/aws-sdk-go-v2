@@ -12,7 +12,7 @@ import (
 // Creates a group of permissions for various actions that a user can perform in
 // FinSpace.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreatePermissionGroup(ctx context.Context, params *CreatePermissionGroupInput, optFns ...func(*Options)) (*CreatePermissionGroupOutput, error) {
 	if params == nil {
 		params = &CreatePermissionGroupInput{}
@@ -57,17 +57,25 @@ type CreatePermissionGroupInput struct {
 	//   - GetTemporaryCredentials – Group members can get temporary API credentials.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationPermissions []types.ApplicationPermission
 
 	// The name of the permission group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A brief description for the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -76,6 +84,8 @@ type CreatePermissionGroupInput struct {
 type CreatePermissionGroupOutput struct {
 
 	// The unique identifier for the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	// Metadata pertaining to the operation's result.

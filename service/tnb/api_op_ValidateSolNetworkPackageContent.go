@@ -15,6 +15,8 @@ import (
 // the function packages you want to deploy and the Amazon Web Services
 // infrastructure you want to deploy them on.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [PutSolNetworkPackageContent]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html
 func (c *Client) ValidateSolNetworkPackageContent(ctx context.Context, params *ValidateSolNetworkPackageContentInput, optFns ...func(*Options)) (*ValidateSolNetworkPackageContentOutput, error) {
 	if params == nil {
@@ -36,14 +38,20 @@ type ValidateSolNetworkPackageContentInput struct {
 	// Network package file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	File []byte
 
 	// Network service descriptor file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// Network package content type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType types.PackageContentType
 
 	noSmithyDocumentSerde
@@ -54,21 +62,29 @@ type ValidateSolNetworkPackageContentOutput struct {
 	// Network package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Network package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Network package metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.ValidateSolNetworkPackageContentMetadata
 
 	// Network service descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdId *string
 
 	// Network service descriptor name.
@@ -84,6 +100,8 @@ type ValidateSolNetworkPackageContentOutput struct {
 	// Function package IDs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgIds []string
 
 	// Metadata pertaining to the operation's result.

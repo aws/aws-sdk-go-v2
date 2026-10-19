@@ -9,6 +9,8 @@ import (
 )
 
 // Deletes a kdb cluster.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteKxCluster(ctx context.Context, params *DeleteKxClusterInput, optFns ...func(*Options)) (*DeleteKxClusterOutput, error) {
 	if params == nil {
 		params = &DeleteKxClusterInput{}
@@ -29,14 +31,20 @@ type DeleteKxClusterInput struct {
 	// The name of the cluster that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

@@ -14,6 +14,8 @@ import (
 //
 // filesystem might be unavailable for a few minutes. You can retry any operations
 // after the update is complete.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateKxVolume(ctx context.Context, params *UpdateKxVolumeInput, optFns ...func(*Options)) (*UpdateKxVolumeOutput, error) {
 	if params == nil {
 		params = &UpdateKxVolumeInput{}
@@ -35,21 +37,31 @@ type UpdateKxVolumeInput struct {
 	// volume.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	//  A unique identifier for the volume.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	//  A description of the volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	//  Specifies the configuration for the Network attached storage (NAS_1) file
 	// system volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Nas1Configuration *types.KxNAS1Configuration
 
 	noSmithyDocumentSerde
@@ -58,34 +70,50 @@ type UpdateKxVolumeInput struct {
 type UpdateKxVolumeOutput struct {
 
 	//  Specifies the clusters that a volume is attached to.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AttachedClusters []types.KxAttachedCluster
 
 	// The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneIds []string
 
 	// The number of availability zones you want to assign per volume. Currently,
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AzMode types.KxAzMode
 
 	//  The timestamp at which the volume was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	//  The description for the volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A unique identifier for the kdb environment where you want to update the
 	// volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The last time that the volume was updated in FinSpace. The value is determined
 	// as epoch time in milliseconds. For example, the value for Monday, November 1,
 	// 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	//  Specifies the configuration for the Network attached storage (NAS_1) file
 	// system volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Nas1Configuration *types.KxNAS1Configuration
 
 	// The status of the volume.
@@ -107,19 +135,29 @@ type UpdateKxVolumeOutput struct {
 	//   - DELETE_FAILED – The system failed to delete the volume.
 	//
 	//   - DELETED – The volume is successfully deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.KxVolumeStatus
 
 	// The error message when a failed state occurs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	//  The ARN identifier of the volume.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeArn *string
 
 	// A unique identifier for the volume that you want to update.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeName *string
 
 	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType types.KxVolumeType
 
 	// Metadata pertaining to the operation's result.

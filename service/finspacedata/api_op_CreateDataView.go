@@ -11,7 +11,7 @@ import (
 
 // Creates a Dataview for a Dataset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateDataView(ctx context.Context, params *CreateDataViewInput, optFns ...func(*Options)) (*CreateDataViewOutput, error) {
 	if params == nil {
 		params = &CreateDataViewInput{}
@@ -33,28 +33,42 @@ type CreateDataViewInput struct {
 	// The unique Dataset identifier that is used to create a Dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Options that define the destination type for the Dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DestinationTypeParams *types.DataViewDestinationTypeParams
 
 	// Beginning time to use for the Dataview. The value is determined as epoch time
 	// in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AsOfTimestamp *int64
 
 	// Flag to indicate Dataview should be updated automatically.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoUpdate bool
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// Ordered set of column names used to partition data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PartitionColumns []string
 
 	// Columns to be used for sorting the data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SortColumns []string
 
 	noSmithyDocumentSerde
@@ -64,9 +78,13 @@ type CreateDataViewInput struct {
 type CreateDataViewOutput struct {
 
 	// The unique identifier for the created Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViewId *string
 
 	// The unique identifier of the Dataset used for the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,6 +11,8 @@ import (
 //	Deletes the specified dataview. Before deleting a dataview, make sure that it
 //
 // is not in use by any cluster.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteKxDataview(ctx context.Context, params *DeleteKxDataviewInput, optFns ...func(*Options)) (*DeleteKxDataviewOutput, error) {
 	if params == nil {
 		params = &DeleteKxDataviewInput{}
@@ -31,22 +33,30 @@ type DeleteKxDataviewInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The name of the database whose dataview you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// The name of the dataview that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataviewName *string
 
 	// A unique identifier for the kdb environment, from where you want to delete the
 	// dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde

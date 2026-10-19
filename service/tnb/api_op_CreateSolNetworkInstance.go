@@ -18,6 +18,8 @@ import (
 // Once you create a network instance, you can instantiate it. To instantiate a
 // network, see [InstantiateSolNetworkInstance].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [InstantiateSolNetworkInstance]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html
 // [Network instances]: https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html
 func (c *Client) CreateSolNetworkInstance(ctx context.Context, params *CreateSolNetworkInstanceInput, optFns ...func(*Options)) (*CreateSolNetworkInstanceOutput, error) {
@@ -45,6 +47,8 @@ type CreateSolNetworkInstanceInput struct {
 	// ID for network service descriptor.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// Network instance description.
@@ -53,6 +57,8 @@ type CreateSolNetworkInstanceInput struct {
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -63,11 +69,15 @@ type CreateSolNetworkInstanceOutput struct {
 	// Network instance ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Network instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Network instance name.
@@ -78,11 +88,15 @@ type CreateSolNetworkInstanceOutput struct {
 	// Network service descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

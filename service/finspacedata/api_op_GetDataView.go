@@ -10,7 +10,7 @@ import (
 
 // Gets information about a Dataview.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDataView(ctx context.Context, params *GetDataViewInput, optFns ...func(*Options)) (*GetDataViewOutput, error) {
 	if params == nil {
 		params = &GetDataViewInput{}
@@ -33,11 +33,15 @@ type GetDataViewInput struct {
 	// The unique identifier for the Dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViewId *string
 
 	// The unique identifier for the Dataset used in the Dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	noSmithyDocumentSerde
@@ -50,40 +54,62 @@ type GetDataViewOutput struct {
 	// Time range to use for the Dataview. The value is determined as epoch time in
 	// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AsOfTimestamp *int64
 
 	// Flag to indicate Dataview should be updated automatically.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoUpdate bool
 
 	// The timestamp at which the Dataview was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The ARN identifier of the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViewArn *string
 
 	// The unique identifier for the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViewId *string
 
 	// The unique identifier for the Dataset used in the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Options that define the destination type for the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DestinationTypeParams *types.DataViewDestinationTypeParams
 
 	// Information about an error that occurred for the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorInfo *types.DataViewErrorInfo
 
 	// The last time that a Dataview was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTime int64
 
 	// Ordered set of column names used to partition data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PartitionColumns []string
 
 	// Columns to be used for sorting the data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SortColumns []string
 
 	// The status of a Dataview creation.
@@ -103,6 +129,8 @@ type GetDataViewOutput struct {
 	//   - PENDING – Dataview creation is pending.
 	//
 	//   - FAILED_CLEANUP_FAILED – Dataview creation failed and resource cleanup failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.DataViewStatus
 
 	// Metadata pertaining to the operation's result.

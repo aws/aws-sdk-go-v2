@@ -11,7 +11,7 @@ import (
 
 // Lists all of the active Datasets that a user has access to.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}
@@ -31,9 +31,13 @@ func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, op
 type ListDatasetsInput struct {
 
 	// The maximum number of results per page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,9 +47,13 @@ type ListDatasetsInput struct {
 type ListDatasetsOutput struct {
 
 	// List of Datasets.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Datasets []types.Dataset
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

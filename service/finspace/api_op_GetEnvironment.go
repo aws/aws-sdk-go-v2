@@ -10,7 +10,7 @@ import (
 
 // Returns the FinSpace environment object.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentInput{}
@@ -31,6 +31,8 @@ type GetEnvironmentInput struct {
 	// The identifier of the FinSpace environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -39,6 +41,8 @@ type GetEnvironmentInput struct {
 type GetEnvironmentOutput struct {
 
 	// The name of the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment *types.Environment
 
 	// Metadata pertaining to the operation's result.

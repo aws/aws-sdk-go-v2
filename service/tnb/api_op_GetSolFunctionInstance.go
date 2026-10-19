@@ -13,6 +13,8 @@ import (
 // package.
 //
 // A network function instance is a function in a function package .
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolFunctionInstance(ctx context.Context, params *GetSolFunctionInstanceInput, optFns ...func(*Options)) (*GetSolFunctionInstanceOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionInstanceInput{}
@@ -33,6 +35,8 @@ type GetSolFunctionInstanceInput struct {
 	// ID of the network function.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfInstanceId *string
 
 	noSmithyDocumentSerde
@@ -43,16 +47,22 @@ type GetSolFunctionInstanceOutput struct {
 	// Network function instance ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Network function instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Network function instantiation state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstantiationState types.VnfInstantiationState
 
 	// The metadata of a network function instance.
@@ -60,31 +70,43 @@ type GetSolFunctionInstanceOutput struct {
 	// A network function instance is a function in a function package .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.GetSolFunctionInstanceMetadata
 
 	// Network instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	// Function package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	// Function package descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfdId *string
 
 	// Information about the network function.
 	//
 	// A network function instance is a function in a function package .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstantiatedVnfInfo *types.GetSolVnfInfo
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Network function product name.

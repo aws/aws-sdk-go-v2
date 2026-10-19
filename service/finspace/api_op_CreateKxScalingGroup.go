@@ -11,6 +11,8 @@ import (
 )
 
 // Creates a new scaling group.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateKxScalingGroup(ctx context.Context, params *CreateKxScalingGroupInput, optFns ...func(*Options)) (*CreateKxScalingGroupOutput, error) {
 	if params == nil {
 		params = &CreateKxScalingGroupInput{}
@@ -31,17 +33,23 @@ type CreateKxScalingGroupInput struct {
 	// The identifier of the availability zones.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A unique identifier for the kdb environment, where you want to create the
 	// scaling group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	//  The memory and CPU capabilities of the scaling group host on which FinSpace
@@ -77,15 +85,21 @@ type CreateKxScalingGroupInput struct {
 	//   96 vCPUs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HostType *string
 
 	// A unique identifier for the kdb scaling group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupName *string
 
 	//  A list of key-value pairs to label the scaling group. You can add up to 50
 	// tags to a scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -94,27 +108,39 @@ type CreateKxScalingGroupInput struct {
 type CreateKxScalingGroupOutput struct {
 
 	// The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	//  The timestamp at which the scaling group was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// A unique identifier for the kdb environment, where you create the scaling
 	// group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	//  The memory and CPU capabilities of the scaling group host on which FinSpace
 	// Managed kdb clusters will be placed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HostType *string
 
 	//  The last time that the scaling group was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// A unique identifier for the kdb scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupName *string
 
 	// The status of scaling group.
@@ -134,6 +160,8 @@ type CreateKxScalingGroupOutput struct {
 	//   - DELETE_FAILED – The system failed to delete the scaling group.
 	//
 	//   - DELETED – The scaling group is successfully deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.KxScalingGroupStatus
 
 	// Metadata pertaining to the operation's result.

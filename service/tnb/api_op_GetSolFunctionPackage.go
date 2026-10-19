@@ -15,6 +15,8 @@ import (
 // contains a network function (an ETSI standard telecommunication application) and
 // function package descriptor that uses the TOSCA standard to describe how the
 // network functions should run on your network..
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolFunctionPackage(ctx context.Context, params *GetSolFunctionPackageInput, optFns ...func(*Options)) (*GetSolFunctionPackageOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionPackageInput{}
@@ -35,6 +37,8 @@ type GetSolFunctionPackageInput struct {
 	// ID of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	noSmithyDocumentSerde
@@ -45,26 +49,36 @@ type GetSolFunctionPackageOutput struct {
 	// Function package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Function package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Function package onboarding state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnboardingState types.OnboardingState
 
 	// Function package operational state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperationalState types.OperationalState
 
 	// Function package usage state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UsageState types.UsageState
 
 	// Metadata related to the function package.
@@ -73,11 +87,15 @@ type GetSolFunctionPackageOutput struct {
 	// contains a network function (an ETSI standard telecommunication application) and
 	// function package descriptor that uses the TOSCA standard to describe how the
 	// network functions should run on your network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.GetSolFunctionPackageMetadata
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Network function product name.

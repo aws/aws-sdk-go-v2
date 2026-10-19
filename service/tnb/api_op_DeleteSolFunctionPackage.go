@@ -17,6 +17,8 @@ import (
 // To delete a function package, the package must be in a disabled state. To
 // disable a function package, see [UpdateSolFunctionPackage].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [UpdateSolFunctionPackage]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolFunctionPackage.html
 func (c *Client) DeleteSolFunctionPackage(ctx context.Context, params *DeleteSolFunctionPackageInput, optFns ...func(*Options)) (*DeleteSolFunctionPackageOutput, error) {
 	if params == nil {
@@ -38,6 +40,8 @@ type DeleteSolFunctionPackageInput struct {
 	// ID of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	noSmithyDocumentSerde

@@ -14,6 +14,8 @@ import (
 // contains a network function (an ETSI standard telecommunication application) and
 // function package descriptor that uses the TOSCA standard to describe how the
 // network functions should run on your network.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutSolFunctionPackageContent(ctx context.Context, params *PutSolFunctionPackageContentInput, optFns ...func(*Options)) (*PutSolFunctionPackageContentOutput, error) {
 	if params == nil {
 		params = &PutSolFunctionPackageContentInput{}
@@ -34,14 +36,20 @@ type PutSolFunctionPackageContentInput struct {
 	// Function package file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	File []byte
 
 	// Function package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	// Function package content type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType types.PackageContentType
 
 	noSmithyDocumentSerde
@@ -52,11 +60,15 @@ type PutSolFunctionPackageContentOutput struct {
 	// Function package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Function package metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.PutSolFunctionPackageContentMetadata
 
 	// Function product name.
@@ -72,6 +84,8 @@ type PutSolFunctionPackageContentOutput struct {
 	// Function package descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfdId *string
 
 	// Function package descriptor version.

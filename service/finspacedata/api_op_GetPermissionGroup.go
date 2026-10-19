@@ -10,7 +10,7 @@ import (
 
 // Retrieves the details of a specific permission group.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetPermissionGroup(ctx context.Context, params *GetPermissionGroupInput, optFns ...func(*Options)) (*GetPermissionGroupOutput, error) {
 	if params == nil {
 		params = &GetPermissionGroupInput{}
@@ -31,6 +31,8 @@ type GetPermissionGroupInput struct {
 	// The unique identifier for the permission group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	noSmithyDocumentSerde
@@ -39,6 +41,8 @@ type GetPermissionGroupInput struct {
 type GetPermissionGroupOutput struct {
 
 	// The structure for a permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroup *types.PermissionGroup
 
 	// Metadata pertaining to the operation's result.

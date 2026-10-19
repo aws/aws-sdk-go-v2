@@ -16,6 +16,8 @@ import (
 // function package descriptor that uses the TOSCA standard to describe how the
 // network functions should run on your network.
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [PutSolFunctionPackageContent]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html
 func (c *Client) ValidateSolFunctionPackageContent(ctx context.Context, params *ValidateSolFunctionPackageContentInput, optFns ...func(*Options)) (*ValidateSolFunctionPackageContentOutput, error) {
 	if params == nil {
@@ -37,14 +39,20 @@ type ValidateSolFunctionPackageContentInput struct {
 	// Function package file.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	File []byte
 
 	// Function package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	// Function package content type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ContentType types.PackageContentType
 
 	noSmithyDocumentSerde
@@ -55,11 +63,15 @@ type ValidateSolFunctionPackageContentOutput struct {
 	// Function package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Function package metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.ValidateSolFunctionPackageContentMetadata
 
 	// Network function product name.
@@ -75,6 +87,8 @@ type ValidateSolFunctionPackageContentOutput struct {
 	// Function package descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfdId *string
 
 	// Function package descriptor version.
