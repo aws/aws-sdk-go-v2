@@ -5472,6 +5472,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines how often the catalog synchronizes across cluster nodes.</p>\n         <p>Default: 10s</p>"
                     }
+                },
+                "upgradePachaTree": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to migrate the cluster from the Parquet storage engine to PachaTree. This action cannot be reversed. To create a new cluster on Parquet, set this to false.</p>"
+                    }
+                },
+                "walBufferSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size, in bytes, of the in-memory WAL buffer before a flush is triggered regardless of the flush interval. Increase this value if WAL files are flushed before the interval elapses.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1073741824
+                        }
+                    }
+                },
+                "snapshotSize": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of the active snapshot bucket before it is rotated for snapshotting.</p>"
+                    }
+                },
+                "snapshotDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time-based trigger that controls how often the ingester creates snapshots. This value is also used on query nodes as the bucket rotation interval for the replica buffer.</p>"
+                    }
                 }
             },
             "traits": {

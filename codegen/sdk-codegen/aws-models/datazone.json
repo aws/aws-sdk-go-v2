@@ -4074,6 +4074,27 @@
                         "smithy.api#documentation": "<p>A Git connection type.</p>",
                         "smithy.api#enumValue": "GIT"
                     }
+                },
+                "ICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generic Iceberg REST catalog connection type.</p>",
+                        "smithy.api#enumValue": "ICEBERGRESTCATALOG"
+                    }
+                },
+                "SNOWFLAKEICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Snowflake Horizon (Iceberg REST) catalog connection type.</p>",
+                        "smithy.api#enumValue": "SNOWFLAKEICEBERGRESTCATALOG"
+                    }
+                },
+                "DATABRICKSICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Databricks Unity Catalog (Iceberg REST) connection type.</p>",
+                        "smithy.api#enumValue": "DATABRICKSICEBERGRESTCATALOG"
+                    }
                 }
             }
         },
@@ -23899,6 +23920,27 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VERTICA"
+                    }
+                },
+                "ICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generic Iceberg REST catalog connection type.</p>",
+                        "smithy.api#enumValue": "ICEBERGRESTCATALOG"
+                    }
+                },
+                "SNOWFLAKEICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Snowflake Horizon (Iceberg REST) catalog connection type.</p>",
+                        "smithy.api#enumValue": "SNOWFLAKEICEBERGRESTCATALOG"
+                    }
+                },
+                "DATABRICKSICEBERGRESTCATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Databricks Unity Catalog (Iceberg REST) connection type.</p>",
+                        "smithy.api#enumValue": "DATABRICKSICEBERGRESTCATALOG"
                     }
                 }
             }

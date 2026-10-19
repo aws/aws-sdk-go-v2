@@ -919,6 +919,18 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#DirectSendEnforcementStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#DirectSendEnforcementStatusExpiresAt": {
+            "type": "timestamp"
+        },
         "com.amazonaws.socialmessaging#DisassociateWhatsAppBusinessAccount": {
             "type": "operation",
             "input": {
@@ -2028,6 +2040,18 @@
                         "smithy.api#documentation": "<p>The onboarding status for the Marketing Messages API. This value is fetched from Meta and indicates whether the WhatsApp Business Account is onboarded for Meta's Marketing Messages API.</p>"
                     }
                 },
+                "directSendEnforcementStatus": {
+                    "target": "com.amazonaws.socialmessaging#DirectSendEnforcementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Direct Send enforcement status for the WhatsApp Business Account. Enforcement applies when an account repeatedly sends messages in a category that does not match the content. This field is not present when no enforcement is active.</p>"
+                    }
+                },
+                "directSendEnforcementStatusExpiresAt": {
+                    "target": "com.amazonaws.socialmessaging#DirectSendEnforcementStatusExpiresAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the current Direct Send enforcement is expected to lift. This field is not present for permanent enforcement or when no enforcement is active.</p>"
+                    }
+                },
                 "datasetId": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppDatasetId",
                     "traits": {
@@ -2250,6 +2274,18 @@
                     "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountMarketingMessagesOnboardingStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The onboarding status for the Marketing Messages API. This value is fetched from Meta and indicates whether the WhatsApp Business Account is onboarded for Meta's Marketing Messages API.</p>"
+                    }
+                },
+                "directSendEnforcementStatus": {
+                    "target": "com.amazonaws.socialmessaging#DirectSendEnforcementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Direct Send enforcement status for the WhatsApp Business Account. Enforcement applies when an account repeatedly sends messages in a category that does not match the content. This field is not present when no enforcement is active.</p>"
+                    }
+                },
+                "directSendEnforcementStatusExpiresAt": {
+                    "target": "com.amazonaws.socialmessaging#DirectSendEnforcementStatusExpiresAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the current Direct Send enforcement is expected to lift. This field is not present for permanent enforcement or when no enforcement is active.</p>"
                     }
                 },
                 "datasetId": {
@@ -3627,6 +3663,15 @@
             }
         },
         "com.amazonaws.socialmessaging#MetaTemplateQualityScore": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#MetaTemplateSource": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -5461,6 +5506,18 @@
                     "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
                     "traits": {
                         "smithy.api#documentation": "<p>The category of the template (for example, UTILITY or MARKETING).</p>"
+                    }
+                },
+                "templateSource": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the template. A value of AUTO_GENERATED indicates that the template was created automatically from a message that you sent. This field is not present for templates that you created manually.</p>"
+                    }
+                },
+                "correctCategory": {
+                    "target": "com.amazonaws.socialmessaging#MetaTemplateCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category that the template content actually belongs to, when it differs from the template's current category. This field is present only when the template has been flagged as miscategorized.</p>"
                     }
                 }
             },

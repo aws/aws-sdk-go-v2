@@ -6509,6 +6509,23 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#ImageValidationMode": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED"
+                    }
+                },
+                "SERVICE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_MANAGED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#ImportClientBranding": {
             "type": "operation",
             "input": {
@@ -6725,6 +6742,12 @@
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The resource tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>"
+                    }
+                },
+                "ImageValidationMode": {
+                    "target": "com.amazonaws.workspaces#ImageValidationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image validation mode for the WorkSpace image import.</p>"
                     }
                 }
             },

@@ -1502,7 +1502,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#DeviceProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code>&lt;&gt;^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "LoRaWAN": {
@@ -1881,7 +1881,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#ServiceProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code>&lt;&gt;^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "LoRaWAN": {
@@ -1978,7 +1978,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code>&lt;&gt;^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -2090,7 +2090,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The name of the new resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code>&lt;&gt;^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -15333,7 +15333,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new name of the resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The new name of the resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code>&lt;&gt;^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {
@@ -15420,7 +15420,7 @@
                 "Name": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new name of the resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code><>^#~$</code>\n            </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The new name of the resource.</p>\n         <note>\n            <p>The following special characters aren't accepted: <code>&lt;&gt;^#~$</code>\n            </p>\n         </note>"
                     }
                 },
                 "Description": {

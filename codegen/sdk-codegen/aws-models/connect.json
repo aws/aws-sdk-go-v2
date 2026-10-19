@@ -11059,6 +11059,23 @@
                 "smithy.api#documentation": "<p>Optional attributes used to populate the content of an outbound web notification, such as recommender\n   configuration for personalized content.</p>"
             }
         },
+        "com.amazonaws.connect#ContentDisposition": {
+            "type": "enum",
+            "members": {
+                "INLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INLINE"
+                    }
+                },
+                "ATTACHMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#ContentType": {
             "type": "string",
             "traits": {
@@ -30034,6 +30051,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "DRAFTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFTING"
+                    }
                 }
             }
         },
@@ -30470,6 +30493,13 @@
                         "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
                         "smithy.api#httpQuery": "associatedResourceArn",
                         "smithy.api#required": {}
+                    }
+                },
+                "UrlContentDisposition": {
+                    "target": "com.amazonaws.connect#ContentDisposition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how a browser handles the file at the pre-signed URL. The valid values are the\n   following:</p>\n         <dl>\n            <dt>INLINE</dt>\n            <dd>\n               <p>Displays the file in the browser.</p>\n            </dd>\n            <dt>ATTACHMENT</dt>\n            <dd>\n               <p>Downloads the file. This is the default.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#httpQuery": "urlContentDisposition"
                     }
                 }
             },

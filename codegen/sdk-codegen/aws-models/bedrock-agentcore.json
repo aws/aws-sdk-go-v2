@@ -3196,6 +3196,9 @@
         "com.amazonaws.bedrockagentcore#ConfigurationBundleArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::BedrockAgentCore::ConfigurationBundle"
+                },
                 "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:configuration-bundle/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
             }
         },
@@ -6360,6 +6363,51 @@
                 "smithy.api#documentation": "<p>A value used in filter comparisons, supporting different data types.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#FindingDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#FindingTargetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#FindingTargetType": {
+            "type": "enum",
+            "members": {
+                "SPAN_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPAN_ID"
+                    }
+                },
+                "TRACE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRACE_ID"
+                    }
+                },
+                "SPAN_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPAN_NAME"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of location in a session that a finding points to: a span ID, a trace ID, or a span name.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#GatewayArn": {
             "type": "string",
             "traits": {
@@ -6792,6 +6840,12 @@
                     "target": "com.amazonaws.bedrockagentcore#EvaluationJobResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The aggregated evaluation results, including session completion counts and evaluator score summaries.</p>"
+                    }
+                },
+                "insightResults": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insights generated when the batch evaluation includes the <code>Builtin.FailureAnalysis</code> evaluator. Each insight groups related failures found across the evaluated sessions. An empty list means that no failures were found. If the analysis fails, this field is omitted and <code>errorDetails</code> describes the error.</p>"
                     }
                 },
                 "failureAnalysisResult": {
@@ -8681,7 +8735,7 @@
                 "oauth": {
                     "target": "com.amazonaws.bedrockagentcore#OAuthCredentialProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>OAuth 2.0 authentication via AgentCore Identity.</p>"
+                        "smithy.api#documentation": "<p>OAuth 2.0 authentication via AgentCore Identity.</p> <p>The <code>AUTHORIZATION_CODE</code> grant type is not supported for outbound authentication from a harness to an AgentCore Gateway, even when <code>defaultReturnUrl</code> is specified.</p>"
                     }
                 }
             },
@@ -10262,6 +10316,16 @@
                 "smithy.api#documentation": "<p>A reference to an insight analysis to run against sessions during batch evaluation. Insights provide deeper analysis beyond individual evaluator scores, including failure detection, user intent clustering, and execution summarization.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#InsightDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentcore#InsightId": {
             "type": "string",
             "traits": {
@@ -10279,6 +10343,161 @@
                     "min": 0,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InsightName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InsightResult": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of insight. <code>FAILURE</code> indicates a group of related failures.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated label for the insight. The name is not an identifier and can differ between batch evaluations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the failure pattern that the insight represents.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the insight was generated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "affectedSessionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of distinct sessions affected by the insight.</p>"
+                    }
+                },
+                "sampleSessions": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightSampleSessionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sample of up to 10 sessions affected by the insight. Returned only when the insight has no root causes. Otherwise, sample sessions are returned for each root cause.</p>"
+                    }
+                },
+                "rootCauses": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightRootCauseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The root causes identified for the insight.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An insight that groups related failures found across the sessions in a batch evaluation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InsightResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#InsightResult"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InsightRootCause": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#RootCauseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated label for the root cause.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "explanation": {
+                    "target": "com.amazonaws.bedrockagentcore#RootCauseExplanation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An explanation of how the root cause leads to the failures in the insight.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "affectedSessionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of distinct sessions affected by the root cause. A session can be affected by more than one root cause of the same insight.</p>"
+                    }
+                },
+                "suggestedFix": {
+                    "target": "com.amazonaws.bedrockagentcore#SuggestedFix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A suggested change to the agent that addresses the root cause.</p>"
+                    }
+                },
+                "sampleSessions": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightSampleSessionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sample of up to 10 sessions affected by the root cause.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A root cause that contributes to an insight.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InsightRootCauseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#InsightRootCause"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InsightSampleSessionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#SampleSession"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InsightType": {
+            "type": "enum",
+            "members": {
+                "FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of insight.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#InsightsFailureCategory": {
@@ -12664,7 +12883,7 @@
                 "namespace": {
                     "target": "com.amazonaws.bedrockagentcore#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace prefix to filter memory records by. Returns all memory records in namespaces that start with the provided prefix. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
+                        "smithy.api#documentation": "<p>The exact namespace to filter memory records by. Returns all memory records that matches the provided namespace. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
                     }
                 },
                 "namespacePath": {
@@ -16542,7 +16761,7 @@
                 "namespace": {
                     "target": "com.amazonaws.bedrockagentcore#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace prefix to filter memory records by. Searches for memory records in namespaces that start with the provided prefix. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
+                        "smithy.api#documentation": "<p>The exact namespace to filter memory records by. Searches for memory records that matches the provided namespace value. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
                     }
                 },
                 "namespacePath": {
@@ -16728,6 +16947,26 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#RootCauseExplanation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#RootCauseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentcore#RuntimeClientError": {
             "type": "structure",
             "members": {
@@ -16828,6 +17067,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Amazon S3 location configuration of a resource.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#SampleSession": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastSeenAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest timestamp observed for the session in the batch evaluation input.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "findings": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionFindingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failures found in the session that belong to the insight or root cause, up to 10.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A session affected by an insight or root cause. Use the session ID to find the per-session evaluation results in CloudWatch Logs.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#SaveBrowserSessionProfile": {
@@ -17330,6 +17597,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A time range filter for selecting sessions. Specifies the start and end times to narrow down which sessions are included.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#SessionFinding": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "com.amazonaws.bedrockagentcore#FindingTargetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier or name of the location in the session where the failure was found, interpreted according to <code>targetType</code>.</p>"
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.bedrockagentcore#FindingTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of location that <code>targetId</code> refers to.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcore#FindingDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "category": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the failure.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "confidence": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence that the finding is a failure, from 0 to 1.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A failure found in a session.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#SessionFindingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#SessionFinding"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.bedrockagentcore#SessionId": {
@@ -19041,6 +19367,16 @@
                 "smithy.api#documentation": "<p>Returned when you attempt a wallet operation against a Coinbase Marketplace connector whose account does not hold an active Marketplace subscription and is not within the legacy exception period. Subscribe to the Marketplace listing before you retry the operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.bedrockagentcore#SuggestedFix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentcore#SystemPromptConfig": {

@@ -11122,7 +11122,7 @@
         "com.amazonaws.drs#StrictDRSARN": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Strict ARN type for Recovery Plan resources.\nOnly allows safe characters in the resource portion — rejects HTML/script\ninjection characters (<, >, \", ', etc.) per AWS API input validation standards.\nResource portion allows: [A-Za-z0-9_/.-] which covers all DRS recovery plan\nresource identifiers (plan-xxx, st-xxx, exec-xxx, step-xxx).",
+                "smithy.api#documentation": "Strict ARN type for Recovery Plan resources.\nOnly allows safe characters in the resource portion — rejects HTML/script\ninjection characters (&lt;, &gt;, \", ', etc.) per AWS API input validation standards.\nResource portion allows: [A-Za-z0-9_/.-] which covers all DRS recovery plan\nresource identifiers (plan-xxx, st-xxx, exec-xxx, step-xxx).",
                 "smithy.api#length": {
                     "min": 20,
                     "max": 2048

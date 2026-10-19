@@ -3196,6 +3196,18 @@
                 "smithy.api#pattern": "^[\\w-]*$"
             }
         },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestinationNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#DeliveryDestinationPolicy": {
             "type": "string",
             "traits": {
@@ -3470,6 +3482,18 @@
                 "smithy.api#pattern": "^[\\w-]*$"
             }
         },
+        "com.amazonaws.cloudwatchlogs#DeliverySourceNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#DeliverySourceName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#DeliverySourceStatus": {
             "type": "enum",
             "members": {
@@ -3728,6 +3752,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optionally specify the maximum number of deliveries to return in the response.</p>"
                     }
+                },
+                "deliverySourceNames": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySourceNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of delivery source names that filters the results to deliveries associated with\n      any specified delivery source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3794,6 +3824,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optionally specify the maximum number of delivery destinations to return in the\n      response.</p>"
                     }
+                },
+                "names": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of delivery destination names that filters the results to delivery destinations\n      with any specified name.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3859,6 +3895,12 @@
                     "target": "com.amazonaws.cloudwatchlogs#DescribeLimit",
                     "traits": {
                         "smithy.api#documentation": "<p>Optionally specify the maximum number of delivery sources to return in the\n      response.</p>"
+                    }
+                },
+                "resourceArns": {
+                    "target": "com.amazonaws.cloudwatchlogs#FilterResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) that filters the results to delivery sources\n      associated with any specified ARN.</p>"
                     }
                 }
             },
@@ -6139,6 +6181,18 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#FilterResourceArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         },
@@ -13425,7 +13479,7 @@
                 "logType": {
                     "target": "com.amazonaws.cloudwatchlogs#LogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Web Services Amplify, the valid values are <code>ACCESS_LOGS</code> and\n            <code>WAF_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Application Load Balancer, the valid values are <code>ALB_ACCESS_LOGS</code>,\n            <code>ALB_CONNECTION_LOGS</code>, and <code>ALB_HEALTH_CHECK_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Memory, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Payments, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code>, and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code>, and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For query execution logs from CloudWatch Logs Insights, the valid value is\n            <code>INSIGHTS_QUERY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For DevOps Agent, the valid value is <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Auto Mode, the valid values are <code>AUTO_MODE_BLOCK_STORAGE_LOGS</code>,\n            <code>AUTO_MODE_COMPUTE_LOGS</code>, <code>AUTO_MODE_IPAM_LOGS</code>, and\n            <code>AUTO_MODE_LOAD_BALANCING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Capability Logs, the valid values are <code>EKS_CAPABILITY_ACK_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATION_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATIONSET_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_COMMITSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_SERVER_LOGS</code>, and\n            <code>EKS_CAPABILITY_KRO_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Elemental Inference, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,\n            <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code>,\n            <code>PCS_JOBCOMP_LOGS</code>, and <code>PCS_SCHEDULER_AUDIT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q in Connect AI agents, the valid value is\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Quick, the valid values are <code>AGENT_HOURS_LOGS</code>,\n            <code>AGENT_METADATA_LOGS</code>, <code>CHAT_LOGS</code>, <code>DLP_LOGS</code>,\n            <code>FEEDBACK_LOGS</code>, <code>INDEX_USAGE_LOGS</code>, and\n            <code>KB_FILE_SYNC_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Route 53 Global Resolver, the valid value is\n            <code>GLOBAL_RESOLVER_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon S3, the valid value is\n            <code>S3_SERVER_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub CSPM, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Shield Advanced, the valid value is\n            <code>FLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Defines the type of log that the source is sending.</p>\n         <ul>\n            <li>\n               <p>For Amazon Web Services Amplify, the valid values are <code>ACCESS_LOGS</code> and\n            <code>WAF_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Application Load Balancer, the valid values are <code>ALB_ACCESS_LOGS</code>,\n            <code>ALB_CONNECTION_LOGS</code>, and <code>ALB_HEALTH_CHECK_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Gateway, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Identity, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Memory, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Payments, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Runtime, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code>, and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock AgentCore Tools, the valid values are\n            <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code>, and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Bedrock Knowledge Bases, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>\n            </li>\n            <li>\n               <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For query execution logs from CloudWatch Logs Insights, the valid value is\n            <code>INSIGHTS_QUERY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For DevOps Agent, the valid value is <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Auto Mode, the valid values are <code>AUTO_MODE_BLOCK_STORAGE_LOGS</code>,\n            <code>AUTO_MODE_COMPUTE_LOGS</code>, <code>AUTO_MODE_IPAM_LOGS</code>, and\n            <code>AUTO_MODE_LOAD_BALANCING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EKS Capability Logs, the valid values are <code>EKS_CAPABILITY_ACK_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATION_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_APPLICATIONSET_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_COMMITSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS</code>,\n            <code>EKS_CAPABILITY_ARGOCD_SERVER_LOGS</code>, and\n            <code>EKS_CAPABILITY_KRO_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Elemental Inference, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and\n            <code>INGRESS_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Elemental MediaTailor, the valid values are <code>AD_DECISION_SERVER_LOGS</code>,\n            <code>MANIFEST_SERVICE_LOGS</code>, and <code>TRANSCODE_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon ECS, the valid value is <code>ACTION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Entity Resolution, the valid value is <code>WORKFLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon EventBridge Event Bus (Custom), the valid values are <code>INFO_LOGS</code> and\n            <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For IAM Identity Center, the valid value is\n          <code>ERROR_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,\n            <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code>,\n            <code>PCS_JOBCOMP_LOGS</code>, <code>PCS_SCHEDULER_AUDIT_LOGS</code>, and\n            <code>PCS_SCALING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and\n            <code>SYNC_JOB_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Q in Connect AI agents, the valid value is\n            <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Quick, the valid values are <code>AGENT_HOURS_LOGS</code>,\n            <code>AGENT_METADATA_LOGS</code>, <code>CHAT_LOGS</code>, <code>DLP_LOGS</code>,\n            <code>FEEDBACK_LOGS</code>, <code>INDEX_USAGE_LOGS</code>, and\n            <code>KB_FILE_SYNC_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Route 53 Global Resolver, the valid value is\n            <code>GLOBAL_RESOLVER_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services RTB Fabric, the valid value is\n            <code>APPLICATION_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon S3, the valid value is\n            <code>S3_SERVER_ACCESS_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Security Hub CSPM, the valid value is\n            <code>SECURITY_FINDING_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon SES mail manager, the valid values are\n            <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon Web Services Shield Advanced, the valid value is\n            <code>FLOW_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon VPC Route Server, the valid value is\n          <code>EVENT_LOGS</code>.</p>\n            </li>\n            <li>\n               <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,\n            <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,\n            <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and\n            <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14082,7 +14136,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a resource policy allowing other Amazon Web Services services to put\n      log events to this account, such as Amazon Route 53. This API has the following\n      restrictions:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Supported actions</b> - Policy only supports\n            <code>logs:PutLogEvents</code> and <code>logs:CreateLogStream </code> actions</p>\n            </li>\n            <li>\n               <p>\n                  <b>Supported principals</b> - Policy only applies when\n          operations are invoked by Amazon Web Services service principals (not IAM\n          users, roles, or cross-account principals</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy limits</b> - An account can have a maximum of 10\n          policies without resourceARN and one per LogGroup resourceARN</p>\n            </li>\n         </ul>\n         <important>\n            <p>Resource policies with actions invoked by non-Amazon Web Services service principals\n        (such as IAM users, roles, or other Amazon Web Services accounts) will not be\n        enforced. For access control involving these principals, use the IAM\n        policies.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates or updates a resource policy allowing other Amazon Web Services services to put\n      log events to this account, such as Amazon Route 53. This API has the following\n      restrictions:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Supported actions</b> - Policy only supports\n            <code>logs:PutLogEvents</code> and <code>logs:CreateLogStream </code> actions</p>\n            </li>\n            <li>\n               <p>\n                  <b>Supported principals</b> - Policy only applies when\n          operations are invoked by Amazon Web Services service principals (not IAM\n          users, roles, or cross-account principals)</p>\n            </li>\n            <li>\n               <p>\n                  <b>Policy limits</b> - An account can have a maximum of 10\n          policies without resourceARN and one per LogGroup resourceARN</p>\n            </li>\n         </ul>\n         <important>\n            <p>Resource policies with actions invoked by non-Amazon Web Services service principals\n        (such as IAM users, roles, or other Amazon Web Services accounts) will not be\n        enforced. For access control involving these principals, use the IAM\n        policies.</p>\n         </important>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutResourcePolicyRequest": {
