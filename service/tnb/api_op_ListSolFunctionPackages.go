@@ -15,6 +15,8 @@ import (
 // contains a network function (an ETSI standard telecommunication application) and
 // function package descriptor that uses the TOSCA standard to describe how the
 // network functions should run on your network.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListSolFunctionPackages(ctx context.Context, params *ListSolFunctionPackagesInput, optFns ...func(*Options)) (*ListSolFunctionPackagesOutput, error) {
 	if params == nil {
 		params = &ListSolFunctionPackagesInput{}
@@ -36,6 +38,8 @@ type ListSolFunctionPackagesInput struct {
 	MaxResults *int32
 
 	// The token for the next page of results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,10 +53,14 @@ type ListSolFunctionPackagesOutput struct {
 	// TOSCA standard to describe how the network functions should run on your network.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FunctionPackages []types.ListSolFunctionPackageInfo
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

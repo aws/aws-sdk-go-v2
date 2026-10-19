@@ -12,6 +12,8 @@ import (
 //
 // cluster or a dataview. When a volume is deleted, any data on the volume is lost.
 // This action is irreversible.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteKxVolume(ctx context.Context, params *DeleteKxVolumeInput, optFns ...func(*Options)) (*DeleteKxVolumeOutput, error) {
 	if params == nil {
 		params = &DeleteKxVolumeInput{}
@@ -33,14 +35,20 @@ type DeleteKxVolumeInput struct {
 	// volume.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	//  The name of the volume that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

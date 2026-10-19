@@ -11,7 +11,7 @@ import (
 
 // Lists all available permission groups in FinSpace.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListPermissionGroups(ctx context.Context, params *ListPermissionGroupsInput, optFns ...func(*Options)) (*ListPermissionGroupsOutput, error) {
 	if params == nil {
 		params = &ListPermissionGroupsInput{}
@@ -32,9 +32,13 @@ type ListPermissionGroupsInput struct {
 	// The maximum number of results per page.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,9 +47,13 @@ type ListPermissionGroupsInput struct {
 type ListPermissionGroupsOutput struct {
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of all the permission groups.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroups []types.PermissionGroup
 
 	// Metadata pertaining to the operation's result.

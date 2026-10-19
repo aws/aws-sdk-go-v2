@@ -11,6 +11,8 @@ import (
 //	Deletes the specified scaling group. This action is irreversible. You cannot
 //
 // delete a scaling group until all the clusters running on it have been deleted.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteKxScalingGroup(ctx context.Context, params *DeleteKxScalingGroupInput, optFns ...func(*Options)) (*DeleteKxScalingGroupOutput, error) {
 	if params == nil {
 		params = &DeleteKxScalingGroupInput{}
@@ -32,14 +34,20 @@ type DeleteKxScalingGroupInput struct {
 	// dataview.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A unique identifier for the kdb scaling group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

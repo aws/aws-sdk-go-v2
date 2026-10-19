@@ -10,6 +10,8 @@ import (
 )
 
 // Returns a list of kdb environments created in an account.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxEnvironments(ctx context.Context, params *ListKxEnvironmentsInput, optFns ...func(*Options)) (*ListKxEnvironmentsOutput, error) {
 	if params == nil {
 		params = &ListKxEnvironmentsInput{}
@@ -28,9 +30,13 @@ func (c *Client) ListKxEnvironments(ctx context.Context, params *ListKxEnvironme
 type ListKxEnvironmentsInput struct {
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -39,9 +45,13 @@ type ListKxEnvironmentsInput struct {
 type ListKxEnvironmentsOutput struct {
 
 	// A list of environments in an account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environments []types.KxEnvironment
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

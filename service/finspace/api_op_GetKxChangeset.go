@@ -10,6 +10,8 @@ import (
 )
 
 // Returns information about a kdb changeset.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetKxChangeset(ctx context.Context, params *GetKxChangesetInput, optFns ...func(*Options)) (*GetKxChangesetOutput, error) {
 	if params == nil {
 		params = &GetKxChangesetInput{}
@@ -30,16 +32,22 @@ type GetKxChangesetInput struct {
 	// A unique identifier of the changeset for which you want to retrieve data.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The name of the kdb database.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -50,32 +58,48 @@ type GetKxChangesetOutput struct {
 	// Beginning time from which the changeset is active. The value is determined as
 	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveFromTimestamp *time.Time
 
 	// A list of change request objects that are run in order.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangeRequests []types.ChangeRequest
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The timestamp at which the changeset was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// The name of the kdb database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// Provides details in the event of a failed flow, including the error type and
 	// the related error message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorInfo *types.ErrorInfo
 
 	// The timestamp at which the changeset was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// Status of the changeset creation process.
@@ -87,6 +111,8 @@ type GetKxChangesetOutput struct {
 	//   - Failed – Changeset creation has failed.
 	//
 	//   - Complete – Changeset creation has succeeded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.ChangesetStatus
 
 	// Metadata pertaining to the operation's result.

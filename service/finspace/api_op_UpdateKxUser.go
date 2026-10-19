@@ -10,6 +10,8 @@ import (
 
 // Updates the user details. You can only update the IAM role associated with a
 // user.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateKxUser(ctx context.Context, params *UpdateKxUserInput, optFns ...func(*Options)) (*UpdateKxUserOutput, error) {
 	if params == nil {
 		params = &UpdateKxUserInput{}
@@ -30,19 +32,27 @@ type UpdateKxUserInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The IAM role ARN that is associated with the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// A unique identifier for the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,18 +61,26 @@ type UpdateKxUserInput struct {
 type UpdateKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The IAM role ARN that is associated with the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	//  The Amazon Resource Name (ARN) that identifies the user. For more information
 	// about ARNs and how to use ARNs in policies, see [IAM Identifiers]in the IAM User Guide.
 	//
 	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserArn *string
 
 	// A unique identifier for the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	// Metadata pertaining to the operation's result.

@@ -10,7 +10,7 @@ import (
 
 // Create a new FinSpace environment.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -31,6 +31,8 @@ type CreateEnvironmentInput struct {
 	// The name of the FinSpace environment to be created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The list of Amazon Resource Names (ARN) of the data bundles to install.
@@ -41,9 +43,13 @@ type CreateEnvironmentInput struct {
 	//
 	//   - arn:aws:finspace:${Region}::data-bundle/taq (default) - Contains trades and
 	//   quotes data in addition to sample Capital Markets data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataBundles []string
 
 	// The description of the FinSpace environment to be created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Authentication mode for the environment.
@@ -53,18 +59,28 @@ type CreateEnvironmentInput struct {
 	//
 	//   - LOCAL - Users access FinSpace via email and password managed within the
 	//   FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationMode types.FederationMode
 
 	// Configuration information when authentication mode is FEDERATED.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationParameters *types.FederationParameters
 
 	// The KMS key id to encrypt your data in the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// Configuration information for the superuser.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SuperuserParameters *types.SuperuserParameters
 
 	// Add tags to your FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -73,12 +89,18 @@ type CreateEnvironmentInput struct {
 type CreateEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the FinSpace environment that you created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentArn *string
 
 	// The unique identifier for FinSpace environment that you created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The sign-in URL for the web application of the FinSpace environment you created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentUrl *string
 
 	// Metadata pertaining to the operation's result.

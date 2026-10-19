@@ -10,7 +10,7 @@ import (
 
 // Lists all the permission groups that are associated with a specific user.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListPermissionGroupsByUser(ctx context.Context, params *ListPermissionGroupsByUserInput, optFns ...func(*Options)) (*ListPermissionGroupsByUserOutput, error) {
 	if params == nil {
 		params = &ListPermissionGroupsByUserInput{}
@@ -31,14 +31,20 @@ type ListPermissionGroupsByUserInput struct {
 	// The maximum number of results per page.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The unique identifier for the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,9 +53,13 @@ type ListPermissionGroupsByUserInput struct {
 type ListPermissionGroupsByUserOutput struct {
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of returned permission groups.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroups []types.PermissionGroupByUser
 
 	// Metadata pertaining to the operation's result.

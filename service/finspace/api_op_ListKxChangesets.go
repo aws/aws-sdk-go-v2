@@ -10,6 +10,8 @@ import (
 )
 
 // Returns a list of all the changesets for a database.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxChangesets(ctx context.Context, params *ListKxChangesetsInput, optFns ...func(*Options)) (*ListKxChangesetsOutput, error) {
 	if params == nil {
 		params = &ListKxChangesetsInput{}
@@ -30,17 +32,25 @@ type ListKxChangesetsInput struct {
 	// The name of the kdb database.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,9 +59,13 @@ type ListKxChangesetsInput struct {
 type ListKxChangesetsOutput struct {
 
 	// A list of changesets for a database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KxChangesets []types.KxChangesetListEntry
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,6 +13,8 @@ import (
 //
 // A network operation is any operation that is done to your network, such as
 // network instance instantiation or termination.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolNetworkOperation(ctx context.Context, params *GetSolNetworkOperationInput, optFns ...func(*Options)) (*GetSolNetworkOperationOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkOperationInput{}
@@ -33,6 +35,8 @@ type GetSolNetworkOperationInput struct {
 	// The identifier of the network operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsLcmOpOccId *string
 
 	noSmithyDocumentSerde
@@ -43,36 +47,56 @@ type GetSolNetworkOperationOutput struct {
 	// Network operation ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Error related to this specific network operation occurrence.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Error *types.ProblemDetails
 
 	// ID of this network operation occurrence.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Type of the operation represented by this occurrence.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LcmOperationType types.LcmOperationType
 
 	// Metadata of this network operation occurrence.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.GetSolNetworkOperationMetadata
 
 	// ID of the network operation instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	// The state of the network operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperationState types.NsLcmOperationState
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// All tasks associated with this operation occurrence.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tasks []types.GetSolNetworkOperationTaskDetails
 
 	// Type of the update. Only present if the network operation lcmOperationType is
 	// UPDATE .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdateType types.UpdateSolNetworkType
 
 	// Metadata pertaining to the operation's result.

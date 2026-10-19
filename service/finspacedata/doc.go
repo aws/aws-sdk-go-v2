@@ -4,4 +4,6 @@
 // for FinSpace Public API.
 //
 //	The FinSpace APIs let you take actions inside the FinSpace.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package finspacedata

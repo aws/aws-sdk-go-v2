@@ -10,7 +10,7 @@ import (
 
 // Updates a FinSpace Changeset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateChangeset(ctx context.Context, params *UpdateChangesetInput, optFns ...func(*Options)) (*UpdateChangesetOutput, error) {
 	if params == nil {
 		params = &UpdateChangesetInput{}
@@ -32,12 +32,16 @@ type UpdateChangesetInput struct {
 	// The unique identifier for the Changeset to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The unique identifier for the FinSpace Dataset in which the Changeset is
 	// created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Options that define the structure of the source file(s) including the format
@@ -70,6 +74,8 @@ type UpdateChangesetInput struct {
 	// [Supported Data Types and File Formats]: https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FormatParams map[string]string
 
 	// Options that define the location of the data being ingested ( s3SourcePath ) and
@@ -90,9 +96,13 @@ type UpdateChangesetInput struct {
 	// [Loading data from an Amazon S3 Bucket using the FinSpace API]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceParams map[string]string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -102,10 +112,14 @@ type UpdateChangesetInput struct {
 type UpdateChangesetOutput struct {
 
 	// The unique identifier for the Changeset to update.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The unique identifier for the FinSpace Dataset in which the Changeset is
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Metadata pertaining to the operation's result.

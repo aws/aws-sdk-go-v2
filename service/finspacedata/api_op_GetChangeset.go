@@ -10,7 +10,7 @@ import (
 
 // Get information about a Changeset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetChangeset(ctx context.Context, params *GetChangesetInput, optFns ...func(*Options)) (*GetChangesetOutput, error) {
 	if params == nil {
 		params = &GetChangesetInput{}
@@ -32,11 +32,15 @@ type GetChangesetInput struct {
 	// The unique identifier of the Changeset for which to get data.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The unique identifier for the FinSpace Dataset where the Changeset is created.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	noSmithyDocumentSerde
@@ -48,11 +52,15 @@ type GetChangesetOutput struct {
 	// Beginning time from which the Changeset is active. The value is determined as
 	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveFromTimestamp *int64
 
 	// Time until which the Changeset is active. The value is determined as epoch time
 	// in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveUntilTimestamp *int64
 
 	// Type that indicates how a Changeset is applied to a Dataset.
@@ -65,38 +73,60 @@ type GetChangesetOutput struct {
 	//
 	//   - MODIFY – Changeset is considered as a replacement to a specific prior
 	//   ingested Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangeType types.ChangeType
 
 	// The ARN identifier of the Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetArn *string
 
 	// The unique identifier for a Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The timestamp at which the Changeset was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The unique identifier for the FinSpace Dataset where the Changeset is created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// The structure with error messages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorInfo *types.ChangesetErrorInfo
 
 	// Structure of the source file(s).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FormatParams map[string]string
 
 	// Options that define the location of the data being ingested.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceParams map[string]string
 
 	// The status of Changeset creation operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.IngestionStatus
 
 	// The unique identifier of the updated Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedByChangesetId *string
 
 	// The unique identifier of the Changeset that is being updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatesChangesetId *string
 
 	// Metadata pertaining to the operation's result.

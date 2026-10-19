@@ -14,6 +14,8 @@ import (
 // contains a network function (an ETSI standard telecommunication application) and
 // function package descriptor that uses the TOSCA standard to describe how the
 // network functions should run on your network.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateSolFunctionPackage(ctx context.Context, params *UpdateSolFunctionPackageInput, optFns ...func(*Options)) (*UpdateSolFunctionPackageOutput, error) {
 	if params == nil {
 		params = &UpdateSolFunctionPackageInput{}
@@ -34,11 +36,15 @@ type UpdateSolFunctionPackageInput struct {
 	// Operational state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperationalState types.OperationalState
 
 	// ID of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	noSmithyDocumentSerde
@@ -49,6 +55,8 @@ type UpdateSolFunctionPackageOutput struct {
 	// Operational state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperationalState types.OperationalState
 
 	// Metadata pertaining to the operation's result.

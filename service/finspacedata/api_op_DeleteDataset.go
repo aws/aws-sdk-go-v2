@@ -10,7 +10,7 @@ import (
 
 // Deletes a FinSpace Dataset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}
@@ -32,9 +32,13 @@ type DeleteDatasetInput struct {
 	// The unique identifier of the Dataset to be deleted.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -44,6 +48,8 @@ type DeleteDatasetInput struct {
 type DeleteDatasetOutput struct {
 
 	// The unique identifier for the deleted Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Metadata pertaining to the operation's result.

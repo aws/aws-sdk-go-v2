@@ -21,6 +21,8 @@ import (
 // upload the actual CSAR zip file into that empty container. To upload function
 // package content, see [PutSolFunctionPackageContent].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [Function packages]: https://docs.aws.amazon.com/tnb/latest/ug/function-packages.html
 // [PutSolFunctionPackageContent]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolFunctionPackageContent.html
 func (c *Client) CreateSolFunctionPackage(ctx context.Context, params *CreateSolFunctionPackageInput, optFns ...func(*Options)) (*CreateSolFunctionPackageOutput, error) {
@@ -43,6 +45,8 @@ type CreateSolFunctionPackageInput struct {
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -53,31 +57,43 @@ type CreateSolFunctionPackageOutput struct {
 	// Function package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// ID of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Onboarding state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnboardingState types.OnboardingState
 
 	// Operational state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperationalState types.OperationalState
 
 	// Usage state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UsageState types.UsageState
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

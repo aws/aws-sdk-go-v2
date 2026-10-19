@@ -17,6 +17,8 @@ import (
 // A network service descriptor is a .yaml file in a network package that uses the
 // TOSCA standard to describe the network functions you want to deploy and the
 // Amazon Web Services infrastructure you want to deploy the network functions on.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateSolNetworkPackage(ctx context.Context, params *UpdateSolNetworkPackageInput, optFns ...func(*Options)) (*UpdateSolNetworkPackageOutput, error) {
 	if params == nil {
 		params = &UpdateSolNetworkPackageInput{}
@@ -37,11 +39,15 @@ type UpdateSolNetworkPackageInput struct {
 	// ID of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// Operational state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOperationalState types.NsdOperationalState
 
 	noSmithyDocumentSerde
@@ -52,6 +58,8 @@ type UpdateSolNetworkPackageOutput struct {
 	// Operational state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOperationalState types.NsdOperationalState
 
 	// Metadata pertaining to the operation's result.

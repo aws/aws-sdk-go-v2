@@ -11,6 +11,8 @@ import (
 // Deletes the specified database and all of its associated data. This action is
 // irreversible. You must copy any data out of the database before deleting it if
 // the data is to be retained.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteKxDatabase(ctx context.Context, params *DeleteKxDatabaseInput, optFns ...func(*Options)) (*DeleteKxDatabaseOutput, error) {
 	if params == nil {
 		params = &DeleteKxDatabaseInput{}
@@ -31,16 +33,22 @@ type DeleteKxDatabaseInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The name of the kdb database that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde

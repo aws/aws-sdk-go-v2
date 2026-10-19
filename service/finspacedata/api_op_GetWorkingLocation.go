@@ -11,7 +11,7 @@ import (
 // A temporary Amazon S3 location, where you can copy your files from a source
 // location to stage or use as a scratch space in FinSpace notebook.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetWorkingLocation(ctx context.Context, params *GetWorkingLocationInput, optFns ...func(*Options)) (*GetWorkingLocationOutput, error) {
 	if params == nil {
 		params = &GetWorkingLocationInput{}
@@ -36,6 +36,8 @@ type GetWorkingLocationInput struct {
 	//
 	//   - INGESTION – Use the Amazon S3 location as a staging location to copy your
 	//   data content and then use the location with the Changeset creation operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LocationType types.LocationType
 
 	noSmithyDocumentSerde
@@ -44,12 +46,18 @@ type GetWorkingLocationInput struct {
 type GetWorkingLocationOutput struct {
 
 	// Returns the Amazon S3 bucket name for the working location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Bucket *string
 
 	// Returns the Amazon S3 Path for the working location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Path *string
 
 	// Returns the Amazon S3 URI for the working location.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3Uri *string
 
 	// Metadata pertaining to the operation's result.

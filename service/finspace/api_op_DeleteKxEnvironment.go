@@ -10,6 +10,8 @@ import (
 
 // Deletes the kdb environment. This action is irreversible. Deleting a kdb
 // environment will remove all the associated data and any services running in it.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteKxEnvironment(ctx context.Context, params *DeleteKxEnvironmentInput, optFns ...func(*Options)) (*DeleteKxEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteKxEnvironmentInput{}
@@ -30,9 +32,13 @@ type DeleteKxEnvironmentInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

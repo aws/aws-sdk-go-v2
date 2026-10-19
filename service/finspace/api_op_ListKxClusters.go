@@ -9,6 +9,8 @@ import (
 )
 
 // Returns a list of clusters.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxClusters(ctx context.Context, params *ListKxClustersInput, optFns ...func(*Options)) (*ListKxClustersOutput, error) {
 	if params == nil {
 		params = &ListKxClustersInput{}
@@ -29,6 +31,8 @@ type ListKxClustersInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// Specifies the type of KDB database that is being created. The following types
@@ -61,12 +65,18 @@ type ListKxClustersInput struct {
 	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
 	//   is readable by any RDB environment. It supports only single-node that is only
 	//   one kdb process.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterType types.KxClusterType
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -75,9 +85,13 @@ type ListKxClustersInput struct {
 type ListKxClustersOutput struct {
 
 	// Lists the cluster details.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KxClusterSummaries []types.KxCluster
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

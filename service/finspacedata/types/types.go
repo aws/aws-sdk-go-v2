@@ -10,15 +10,23 @@ import (
 type AwsCredentials struct {
 
 	//  The unique identifier for the security credentials.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AccessKeyId *string
 
 	//  The Epoch time when the current credentials expire.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Expiration int64
 
 	//  The secret access key that can be used to sign requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecretAccessKey *string
 
 	//  The token that users must pass to use the credentials.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionToken *string
 
 	noSmithyDocumentSerde
@@ -46,9 +54,13 @@ type ChangesetErrorInfo struct {
 	//   - CANCELLED – Cancelled.
 	//
 	//   - USER_RECOVERABLE – A user recoverable error has occurred.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCategory ErrorCategory
 
 	// The text of the error message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
@@ -60,11 +72,15 @@ type ChangesetSummary struct {
 	// Beginning time from which the Changeset is active. The value is determined as
 	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveFromTimestamp *int64
 
 	// Time until which the Changeset is active. The value is determined as epoch time
 	// in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveUntilTimestamp *int64
 
 	// Type that indicates how a Changeset is applied to a Dataset.
@@ -77,30 +93,46 @@ type ChangesetSummary struct {
 	//
 	//   - MODIFY – Changeset is considered as a replacement to a specific prior
 	//   ingested Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangeType ChangeType
 
 	// The ARN identifier of the Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetArn *string
 
 	// The unique identifier for a Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The timestamp at which the Changeset was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The unique identifier for the FinSpace Dataset in which the Changeset is
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// The structure with error messages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorInfo *ChangesetErrorInfo
 
 	// Options that define the structure of the source file(s).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FormatParams map[string]string
 
 	// Options that define the location of the data being ingested.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SourceParams map[string]string
 
 	// Status of the Changeset ingestion.
@@ -114,12 +146,18 @@ type ChangesetSummary struct {
 	//   - RUNNING – Changeset creation is running.
 	//
 	//   - STOP_REQUESTED – User requested Changeset creation to stop.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status IngestionStatus
 
 	// The unique identifier of the updated Changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedByChangesetId *string
 
 	// The unique identifier of the Changeset that is updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatesChangesetId *string
 
 	noSmithyDocumentSerde
@@ -129,9 +167,13 @@ type ChangesetSummary struct {
 type ColumnDefinition struct {
 
 	// Description for a column.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ColumnDescription *string
 
 	// The name of a column.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ColumnName *string
 
 	// Data type of a column.
@@ -159,6 +201,8 @@ type ColumnDefinition struct {
 	// BOOLEAN – A boolean data type.
 	//
 	// BINARY – A binary data type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataType ColumnDataType
 
 	noSmithyDocumentSerde
@@ -168,12 +212,18 @@ type ColumnDefinition struct {
 type Credentials struct {
 
 	// The access key identifier.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AccessKeyId *string
 
 	// The access key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecretAccessKey *string
 
 	// The session token.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionToken *string
 
 	noSmithyDocumentSerde
@@ -183,23 +233,35 @@ type Credentials struct {
 type Dataset struct {
 
 	// The unique resource identifier for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Alias *string
 
 	// The timestamp at which the Dataset was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The ARN identifier of the Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetArn *string
 
 	// Description for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetDescription *string
 
 	// An identifier for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Display title for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetTitle *string
 
 	// The format in which Dataset data is structured.
@@ -207,17 +269,25 @@ type Dataset struct {
 	//   - TABULAR – Data is structured in a tabular format.
 	//
 	//   - NON_TABULAR – Data is structured in a non-tabular format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Kind DatasetKind
 
 	// The last time that the Dataset was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTime int64
 
 	// Contact information for a Dataset owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnerInfo *DatasetOwnerInfo
 
 	// Definition for a schema on a tabular Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SchemaDefinition *SchemaUnion
 
 	noSmithyDocumentSerde
@@ -227,12 +297,18 @@ type Dataset struct {
 type DatasetOwnerInfo struct {
 
 	// Email address for the Dataset owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Email *string
 
 	// The name of the Dataset owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// Phone number for the Dataset owner.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PhoneNumber *string
 
 	noSmithyDocumentSerde
@@ -248,6 +324,8 @@ type DataViewDestinationTypeParams struct {
 	//   - S3 – S3 destination type.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DestinationType *string
 
 	// Dataview export file format.
@@ -255,6 +333,8 @@ type DataViewDestinationTypeParams struct {
 	//   - PARQUET – Parquet export file format.
 	//
 	//   - DELIMITED_TEXT – Delimited text export file format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3DestinationExportFileFormat ExportFileFormat
 
 	// Format Options for S3 Destination type.
@@ -263,6 +343,8 @@ type DataViewDestinationTypeParams struct {
 	// s3DestinationExportFileFormatOptions
 	//
 	//     { "header": "true", "delimiter": ",", "compression": "gzip" }
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	S3DestinationExportFileFormatOptions map[string]string
 
 	noSmithyDocumentSerde
@@ -290,9 +372,13 @@ type DataViewErrorInfo struct {
 	//   - CANCELLED – Cancelled.
 	//
 	//   - USER_RECOVERABLE – A user recoverable error has occurred.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorCategory ErrorCategory
 
 	// The text of the error message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
@@ -304,40 +390,62 @@ type DataViewSummary struct {
 	// Time range to use for the Dataview. The value is determined as epoch time in
 	// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AsOfTimestamp *int64
 
 	// The flag to indicate Dataview should be updated automatically.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutoUpdate bool
 
 	// The timestamp at which the Dataview was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The ARN identifier of the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViewArn *string
 
 	// The unique identifier for the Dataview.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViewId *string
 
 	// Th unique identifier for the Dataview Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Information about the Dataview destination.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DestinationTypeProperties *DataViewDestinationTypeParams
 
 	// The structure with error messages.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorInfo *DataViewErrorInfo
 
 	// The last time that a Dataview was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTime int64
 
 	// Ordered set of column names used to partition data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PartitionColumns []string
 
 	// Columns to be used for sorting the data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SortColumns []string
 
 	// The status of a Dataview creation.
@@ -357,6 +465,8 @@ type DataViewSummary struct {
 	//   - PENDING – Dataview creation is pending.
 	//
 	//   - FAILED_CLEANUP_FAILED – Dataview creation failed and resource cleanup failed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status DataViewStatus
 
 	noSmithyDocumentSerde
@@ -390,17 +500,25 @@ type PermissionGroup struct {
 	//   - AccessNotebooks – Group members will have access to FinSpace notebooks.
 	//
 	//   - GetTemporaryCredentials – Group members can get temporary API credentials.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationPermissions []ApplicationPermission
 
 	// The timestamp at which the group was created in FinSpace. The value is
 	// determined as epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	//  A brief description for the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Describes the last time the permission group was updated. The value is
 	// determined as epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTime int64
 
 	// Indicates the status of the user within a permission group.
@@ -412,12 +530,18 @@ type PermissionGroup struct {
 	//
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MembershipStatus PermissionGroupMembershipStatus
 
 	// The name of the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	//  The unique identifier for the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	noSmithyDocumentSerde
@@ -435,12 +559,18 @@ type PermissionGroupByUser struct {
 	//
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MembershipStatus PermissionGroupMembershipStatus
 
 	// The name of the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The unique identifier for the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	noSmithyDocumentSerde
@@ -456,9 +586,13 @@ type PermissionGroupByUser struct {
 type PermissionGroupParams struct {
 
 	// List of resource permissions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetPermissions []ResourcePermission
 
 	// The unique identifier for the PermissionGroup .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	noSmithyDocumentSerde
@@ -490,6 +624,8 @@ type PermissionGroupParams struct {
 type ResourcePermission struct {
 
 	// Permission for a resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Permission *string
 
 	noSmithyDocumentSerde
@@ -501,11 +637,15 @@ type S3Location struct {
 	//  The name of the S3 bucket.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Bucket *string
 
 	//  The path of the folder, within the S3 bucket that contains the Dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	noSmithyDocumentSerde
@@ -515,9 +655,13 @@ type S3Location struct {
 type SchemaDefinition struct {
 
 	// List of column definitions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Columns []ColumnDefinition
 
 	// List of column names used for primary key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrimaryKeyColumns []string
 
 	noSmithyDocumentSerde
@@ -527,6 +671,8 @@ type SchemaDefinition struct {
 type SchemaUnion struct {
 
 	// The configuration for a schema on a tabular Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TabularSchemaConfig *SchemaDefinition
 
 	noSmithyDocumentSerde
@@ -542,41 +688,61 @@ type User struct {
 	//   - ENABLED – The user has permissions to use the APIs.
 	//
 	//   - DISABLED – The user does not have permissions to use any APIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccess ApiAccess
 
 	// The ARN identifier of an AWS user or role that is allowed to call the
 	// GetProgrammaticAccessCredentials API to obtain a credentials token for a
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccessPrincipalArn *string
 
 	// The timestamp at which the user was created in FinSpace. The value is
 	// determined as epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The email address of the user. The email address serves as a uniquer identifier
 	// for each user and cannot be changed after it's created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EmailAddress *string
 
 	// The first name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FirstName *string
 
 	// Describes the last time the user was deactivated. The value is determined as
 	// epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastDisabledTime int64
 
 	//  Describes the last time the user was activated. The value is determined as
 	// epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastEnabledTime int64
 
 	// Describes the last time that the user logged into their account. The value is
 	// determined as epoch time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastLoginTime int64
 
 	// Describes the last time the user was updated. The value is determined as epoch
 	// time in milliseconds.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTime int64
 
 	//  The last name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastName *string
 
 	// The current status of the user.
@@ -586,6 +752,8 @@ type User struct {
 	//   - ENABLED – The user is created and is currently active.
 	//
 	//   - DISABLED – The user is currently inactive.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status UserStatus
 
 	//  Indicates the type of user.
@@ -595,9 +763,13 @@ type User struct {
 	//
 	//   - APP_USER – A user with specific permissions in FinSpace. The users are
 	//   assigned permissions by adding them to a permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type UserType
 
 	// The unique identifier for the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -611,19 +783,29 @@ type UserByPermissionGroup struct {
 	//   - ENABLED – The user has permissions to use the API operations.
 	//
 	//   - DISABLED – The user does not have permissions to use any API operations.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccess ApiAccess
 
 	// The IAM ARN identifier that is attached to FinSpace API calls.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccessPrincipalArn *string
 
 	// The email address of the user. The email address serves as a unique identifier
 	// for each user and cannot be changed after it's created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EmailAddress *string
 
 	// The first name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FirstName *string
 
 	// The last name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastName *string
 
 	// Indicates the status of the user within a permission group.
@@ -635,6 +817,8 @@ type UserByPermissionGroup struct {
 	//
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MembershipStatus PermissionGroupMembershipStatus
 
 	// The current status of the user.
@@ -644,6 +828,8 @@ type UserByPermissionGroup struct {
 	//   - ENABLED – The user is created and is currently active.
 	//
 	//   - DISABLED – The user is currently inactive.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status UserStatus
 
 	//  Indicates the type of user.
@@ -653,9 +839,13 @@ type UserByPermissionGroup struct {
 	//
 	//   - APP_USER – A user with specific permissions in FinSpace. The users are
 	//   assigned permissions by adding them to a permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type UserType
 
 	// The unique identifier for the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	noSmithyDocumentSerde

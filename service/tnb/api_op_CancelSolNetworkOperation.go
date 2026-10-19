@@ -11,6 +11,8 @@ import (
 //
 // A network operation is any operation that is done to your network, such as
 // network instance instantiation or termination.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CancelSolNetworkOperation(ctx context.Context, params *CancelSolNetworkOperationInput, optFns ...func(*Options)) (*CancelSolNetworkOperationOutput, error) {
 	if params == nil {
 		params = &CancelSolNetworkOperationInput{}
@@ -31,6 +33,8 @@ type CancelSolNetworkOperationInput struct {
 	// The identifier of the network operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsLcmOpOccId *string
 
 	noSmithyDocumentSerde

@@ -12,9 +12,13 @@ import (
 type ErrorInfo struct {
 
 	// Error cause.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Cause *string
 
 	// Error details.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Details *string
 
 	noSmithyDocumentSerde
@@ -27,6 +31,8 @@ type ErrorInfo struct {
 type FunctionArtifactMeta struct {
 
 	// Lists of function package overrides.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Overrides []ToscaOverride
 
 	noSmithyDocumentSerde
@@ -69,6 +75,8 @@ type GetSolFunctionPackageMetadata struct {
 	LastModified *time.Time
 
 	// Metadata related to the function package descriptor of the function package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Vnfd *FunctionArtifactMeta
 
 	noSmithyDocumentSerde
@@ -82,6 +90,8 @@ type GetSolFunctionPackageMetadata struct {
 type GetSolInstantiatedVnfInfo struct {
 
 	// State of the network function.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfState VnfOperationalState
 
 	noSmithyDocumentSerde
@@ -125,16 +135,22 @@ type GetSolNetworkOperationMetadata struct {
 
 	// Metadata related to the network operation occurrence for network instantiation.
 	// This is populated only if the lcmOperationType is INSTANTIATE .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstantiateMetadata *InstantiateMetadata
 
 	// Metadata related to the network operation occurrence for network function
 	// updates in a network instance. This is populated only if the lcmOperationType is
 	// UPDATE and the updateType is MODIFY_VNF_INFORMATION .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ModifyVnfInfoMetadata *ModifyVnfInfoMetadata
 
 	// Metadata related to the network operation occurrence for network instance
 	// updates. This is populated only if the lcmOperationType is UPDATE and the
 	// updateType is UPDATE_NS .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdateNsMetadata *UpdateNsMetadata
 
 	noSmithyDocumentSerde
@@ -147,12 +163,16 @@ type GetSolNetworkOperationMetadata struct {
 type GetSolNetworkOperationTaskDetails struct {
 
 	// Context for the network operation task.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TaskContext map[string]string
 
 	// Task end time.
 	TaskEndTime *time.Time
 
 	// Task error details.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TaskErrorDetails *ErrorInfo
 
 	// Task name.
@@ -162,6 +182,8 @@ type GetSolNetworkOperationTaskDetails struct {
 	TaskStartTime *time.Time
 
 	// Task status.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TaskStatus TaskStatus
 
 	noSmithyDocumentSerde
@@ -186,6 +208,8 @@ type GetSolNetworkPackageMetadata struct {
 
 	// Metadata related to the onboarded network service descriptor in the network
 	// package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Nsd *NetworkArtifactMeta
 
 	noSmithyDocumentSerde
@@ -199,6 +223,8 @@ type GetSolNetworkPackageMetadata struct {
 type GetSolVnfcResourceInfo struct {
 
 	// The metadata of the network function compute.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *GetSolVnfcResourceInfoMetadata
 
 	noSmithyDocumentSerde
@@ -229,9 +255,13 @@ type GetSolVnfcResourceInfoMetadata struct {
 type GetSolVnfInfo struct {
 
 	// State of the network function instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfState VnfOperationalState
 
 	// Compute info used by the network function instance.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfcResourceInfo []GetSolVnfcResourceInfo
 
 	noSmithyDocumentSerde
@@ -244,6 +274,8 @@ type InstantiateMetadata struct {
 	// The network service descriptor used for instantiating the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// The configurable properties used during instantiation.
@@ -260,6 +292,8 @@ type LcmOperationInfo struct {
 	// The identifier of the network operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsLcmOpOccId *string
 
 	noSmithyDocumentSerde
@@ -273,31 +307,43 @@ type ListSolFunctionInstanceInfo struct {
 	// Network function instance ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Network function instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Network function instance instantiation state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstantiationState VnfInstantiationState
 
 	// Network function instance metadata.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *ListSolFunctionInstanceMetadata
 
 	// Network instance ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	// Function package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgId *string
 
 	// Information about a network function.
@@ -305,6 +351,8 @@ type ListSolFunctionInstanceInfo struct {
 	// A network instance is a single network created in Amazon Web Services TNB that
 	// can be deployed and on which life-cycle operations (like terminate, update, and
 	// delete) can be performed.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InstantiatedVnfInfo *GetSolInstantiatedVnfInfo
 
 	// Function package name.
@@ -342,29 +390,41 @@ type ListSolFunctionPackageInfo struct {
 	// Function package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// ID of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Onboarding state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OnboardingState OnboardingState
 
 	// Operational state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperationalState OperationalState
 
 	// Usage state of the function package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UsageState UsageState
 
 	// The metadata of the function package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *ListSolFunctionPackageMetadata
 
 	// The product name for the network function.
@@ -413,16 +473,22 @@ type ListSolNetworkInstanceInfo struct {
 	// Network instance ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// ID of the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The metadata of the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *ListSolNetworkInstanceMetadata
 
 	// Human-readable description of the network instance.
@@ -438,16 +504,22 @@ type ListSolNetworkInstanceInfo struct {
 	// The state of the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsState NsState
 
 	// ID of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdId *string
 
 	// ID of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	noSmithyDocumentSerde
@@ -479,36 +551,52 @@ type ListSolNetworkOperationsInfo struct {
 	// Network operation ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// ID of this network operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Type of lifecycle management network operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LcmOperationType LcmOperationType
 
 	// ID of the network instance related to this operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsInstanceId *string
 
 	// The state of the network operation.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OperationState NsLcmOperationState
 
 	// Error related to this specific network operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Error *ProblemDetails
 
 	// Metadata related to this network operation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *ListSolNetworkOperationsMetadata
 
 	// Type of the update. Only present if the network operation lcmOperationType is
 	// UPDATE .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdateType UpdateSolNetworkType
 
 	noSmithyDocumentSerde
@@ -533,11 +621,15 @@ type ListSolNetworkOperationsMetadata struct {
 	// The network service descriptor id used for the operation.
 	//
 	// Only present if the updateType is UPDATE_NS .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// The network function id used for the operation.
 	//
 	// Only present if the updateType is MODIFY_VNF_INFO .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfInstanceId *string
 
 	noSmithyDocumentSerde
@@ -553,31 +645,43 @@ type ListSolNetworkPackageInfo struct {
 	// Network package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// ID of the individual network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// The metadata of the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *ListSolNetworkPackageMetadata
 
 	// Onboarding state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOnboardingState NsdOnboardingState
 
 	// Operational state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOperationalState NsdOperationalState
 
 	// Usage state of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdUsageState NsdUsageState
 
 	// Designer of the onboarded network service descriptor in the network package.
@@ -597,6 +701,8 @@ type ListSolNetworkPackageInfo struct {
 
 	// Identifies the function package for the function package descriptor referenced
 	// by the onboarded network package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgIds []string
 
 	noSmithyDocumentSerde
@@ -634,6 +740,8 @@ type ModifyVnfInfoMetadata struct {
 	// The network function instance that was updated in the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfInstanceId *string
 
 	noSmithyDocumentSerde
@@ -646,6 +754,8 @@ type ModifyVnfInfoMetadata struct {
 type NetworkArtifactMeta struct {
 
 	// Lists network package overrides.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Overrides []ToscaOverride
 
 	noSmithyDocumentSerde
@@ -677,6 +787,8 @@ type PutSolFunctionPackageContentMetadata struct {
 	//
 	// Artifacts are the contents of the package descriptor file and the state of the
 	// package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Vnfd *FunctionArtifactMeta
 
 	noSmithyDocumentSerde
@@ -693,6 +805,8 @@ type PutSolNetworkPackageContentMetadata struct {
 	//
 	// Artifacts are the contents of the package descriptor file and the state of the
 	// package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Nsd *NetworkArtifactMeta
 
 	noSmithyDocumentSerde
@@ -717,6 +831,8 @@ type UpdateNsMetadata struct {
 	// The network service descriptor used for updating the network instance.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// The configurable properties used during update.
@@ -742,6 +858,8 @@ type UpdateSolNetworkModify struct {
 	// A network function instance is a function in a function package .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfInstanceId *string
 
 	noSmithyDocumentSerde
@@ -754,6 +872,8 @@ type UpdateSolNetworkServiceData struct {
 	// ID of the network service descriptor.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	// Values for the configurable properties declared in the network service
@@ -775,6 +895,8 @@ type ValidateSolFunctionPackageContentMetadata struct {
 	//
 	// Artifacts are the contents of the package descriptor file and the state of the
 	// package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Vnfd *FunctionArtifactMeta
 
 	noSmithyDocumentSerde
@@ -791,6 +913,8 @@ type ValidateSolNetworkPackageContentMetadata struct {
 	//
 	// Artifacts are the contents of the package descriptor file and the state of the
 	// package.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Nsd *NetworkArtifactMeta
 
 	noSmithyDocumentSerde

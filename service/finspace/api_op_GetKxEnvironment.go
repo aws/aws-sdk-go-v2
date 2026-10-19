@@ -10,6 +10,8 @@ import (
 )
 
 // Retrieves all the information for the specified kdb environment.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetKxEnvironment(ctx context.Context, params *GetKxEnvironmentInput, optFns ...func(*Options)) (*GetKxEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetKxEnvironmentInput{}
@@ -30,6 +32,8 @@ type GetKxEnvironmentInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -39,58 +43,92 @@ type GetKxEnvironmentOutput struct {
 
 	// The identifier of the availability zones where subnets for the environment are
 	// created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneIds []string
 
 	// The unique identifier of the AWS account that is used to create the kdb
 	// environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AwsAccountId *string
 
 	// The Amazon Resource Name (ARN) of the certificate authority of the kdb
 	// environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CertificateAuthorityArn *string
 
 	// The timestamp at which the kdb environment was created in FinSpace.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// A list of DNS server name and server IP. This is used to set up Route-53
 	// outbound resolvers.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CustomDNSConfiguration []types.CustomDNSServer
 
 	// A unique identifier for the AWS environment infrastructure account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DedicatedServiceAccountId *string
 
 	// A description for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The status of DNS configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DnsStatus types.DnsStatus
 
 	// The ARN identifier of the environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentArn *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// Specifies the error message that appears if a flow fails.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorMessage *string
 
 	// The KMS key ID to encrypt your data in the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The name of the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.EnvironmentStatus
 
 	// The status of the network configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TgwStatus types.TgwStatus
 
 	// The structure of the transit gateway and network configuration that is used to
 	// connect the kdb environment to an internal network.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TransitGatewayConfiguration *types.TransitGatewayConfiguration
 
 	// The timestamp at which the kdb environment was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdateTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

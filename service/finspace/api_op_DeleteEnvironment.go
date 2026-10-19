@@ -9,7 +9,7 @@ import (
 
 // Delete an FinSpace environment.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentInput{}
@@ -30,6 +30,8 @@ type DeleteEnvironmentInput struct {
 	// The identifier for the FinSpace environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde

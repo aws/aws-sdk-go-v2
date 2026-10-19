@@ -8,4 +8,6 @@
 // service that helps you deploy and manage telecom networks. AWS TNB helps you
 // with the lifecycle management of your telecommunication network functions
 // throughout planning, deployment, and post-deployment activities.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package tnb

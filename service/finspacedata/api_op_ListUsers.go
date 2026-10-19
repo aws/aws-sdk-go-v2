@@ -11,7 +11,7 @@ import (
 
 // Lists all available users in FinSpace.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}
@@ -32,9 +32,13 @@ type ListUsersInput struct {
 	// The maximum number of results per page.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,9 +47,13 @@ type ListUsersInput struct {
 type ListUsersOutput struct {
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of all the users.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Users []types.User
 
 	// Metadata pertaining to the operation's result.

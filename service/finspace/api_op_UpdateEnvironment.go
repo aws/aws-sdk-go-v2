@@ -10,7 +10,7 @@ import (
 
 // Update your FinSpace environment.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentInput{}
@@ -31,9 +31,13 @@ type UpdateEnvironmentInput struct {
 	// The identifier of the FinSpace environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The description of the environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Authentication mode for the environment.
@@ -43,12 +47,18 @@ type UpdateEnvironmentInput struct {
 	//
 	//   - LOCAL - Users access FinSpace via email and password managed within the
 	//   FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationMode types.FederationMode
 
 	// Configuration information when authentication mode is FEDERATED.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FederationParameters *types.FederationParameters
 
 	// The name of the environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -57,6 +67,8 @@ type UpdateEnvironmentInput struct {
 type UpdateEnvironmentOutput struct {
 
 	// Returns the FinSpace environment object.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Environment *types.Environment
 
 	// Metadata pertaining to the operation's result.

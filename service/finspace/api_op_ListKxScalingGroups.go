@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of scaling groups in a kdb environment.
+//	Returns a list of scaling groups in a kdb environment.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxScalingGroups(ctx context.Context, params *ListKxScalingGroupsInput, optFns ...func(*Options)) (*ListKxScalingGroupsOutput, error) {
 	if params == nil {
 		params = &ListKxScalingGroupsInput{}
@@ -31,12 +33,18 @@ type ListKxScalingGroupsInput struct {
 	// list of scaling groups.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	//  A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,9 +53,13 @@ type ListKxScalingGroupsInput struct {
 type ListKxScalingGroupsOutput struct {
 
 	//  A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	//  A list of scaling groups available in a kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroups []types.KxScalingGroup
 
 	// Metadata pertaining to the operation's result.

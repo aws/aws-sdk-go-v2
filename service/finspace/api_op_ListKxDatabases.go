@@ -10,6 +10,8 @@ import (
 )
 
 // Returns a list of all the databases in the kdb environment.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxDatabases(ctx context.Context, params *ListKxDatabasesInput, optFns ...func(*Options)) (*ListKxDatabasesOutput, error) {
 	if params == nil {
 		params = &ListKxDatabasesInput{}
@@ -30,12 +32,18 @@ type ListKxDatabasesInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,9 +52,13 @@ type ListKxDatabasesInput struct {
 type ListKxDatabasesOutput struct {
 
 	// A list of databases in the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KxDatabases []types.KxDatabaseListEntry
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

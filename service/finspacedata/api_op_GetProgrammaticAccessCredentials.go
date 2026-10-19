@@ -11,7 +11,7 @@ import (
 // Request programmatic credentials to use with FinSpace SDK. For more
 // information, see [Step 2. Access credentials programmatically using IAM access key id and secret access key].
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 //
 // [Step 2. Access credentials programmatically using IAM access key id and secret access key]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#accessing-credentials
 func (c *Client) GetProgrammaticAccessCredentials(ctx context.Context, params *GetProgrammaticAccessCredentialsInput, optFns ...func(*Options)) (*GetProgrammaticAccessCredentialsOutput, error) {
@@ -35,9 +35,13 @@ type GetProgrammaticAccessCredentialsInput struct {
 	// The FinSpace environment identifier.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The time duration in which the credentials remain valid.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DurationInMinutes *int64
 
 	noSmithyDocumentSerde
@@ -47,9 +51,13 @@ type GetProgrammaticAccessCredentialsInput struct {
 type GetProgrammaticAccessCredentialsOutput struct {
 
 	// Returns the programmatic credentials.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Credentials *types.Credentials
 
 	// Returns the duration in which the credentials will remain valid.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DurationInMinutes *int64
 
 	// Metadata pertaining to the operation's result.

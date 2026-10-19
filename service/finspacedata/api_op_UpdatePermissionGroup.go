@@ -12,7 +12,7 @@ import (
 // Modifies the details of a permission group. You cannot modify a
 // permissionGroupID .
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdatePermissionGroup(ctx context.Context, params *UpdatePermissionGroupInput, optFns ...func(*Options)) (*UpdatePermissionGroupOutput, error) {
 	if params == nil {
 		params = &UpdatePermissionGroupInput{}
@@ -33,6 +33,8 @@ type UpdatePermissionGroupInput struct {
 	// The unique identifier for the permission group to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	// The permissions that are granted to a specific group for accessing the FinSpace
@@ -60,15 +62,23 @@ type UpdatePermissionGroupInput struct {
 	//   - AccessNotebooks – Group members will have access to FinSpace notebooks.
 	//
 	//   - GetTemporaryCredentials – Group members can get temporary API credentials.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApplicationPermissions []types.ApplicationPermission
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A brief description for the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The name of the permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -77,6 +87,8 @@ type UpdatePermissionGroupInput struct {
 type UpdatePermissionGroupOutput struct {
 
 	// The unique identifier for the updated permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	// Metadata pertaining to the operation's result.

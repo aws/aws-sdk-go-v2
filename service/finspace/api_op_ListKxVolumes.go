@@ -8,7 +8,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Lists all the volumes in a kdb environment.
+//	Lists all the volumes in a kdb environment.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxVolumes(ctx context.Context, params *ListKxVolumesInput, optFns ...func(*Options)) (*ListKxVolumesOutput, error) {
 	if params == nil {
 		params = &ListKxVolumesInput{}
@@ -30,16 +32,24 @@ type ListKxVolumesInput struct {
 	// volume.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeType types.KxVolumeType
 
 	noSmithyDocumentSerde
@@ -48,9 +58,13 @@ type ListKxVolumesInput struct {
 type ListKxVolumesOutput struct {
 
 	//  A summary of volumes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KxVolumeSummaries []types.KxVolume
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

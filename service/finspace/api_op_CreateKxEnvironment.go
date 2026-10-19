@@ -11,6 +11,8 @@ import (
 )
 
 // Creates a managed kdb environment for the account.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateKxEnvironment(ctx context.Context, params *CreateKxEnvironmentInput, optFns ...func(*Options)) (*CreateKxEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateKxEnvironmentInput{}
@@ -31,21 +33,31 @@ type CreateKxEnvironmentInput struct {
 	// The KMS key ID to encrypt your data in the FinSpace environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The name of the kdb environment that you want to create.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A description for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A list of key-value pairs to label the kdb environment. You can add up to 50
 	// tags to your kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -54,24 +66,38 @@ type CreateKxEnvironmentInput struct {
 type CreateKxEnvironmentOutput struct {
 
 	// The timestamp at which the kdb environment was created in FinSpace.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreationTimestamp *time.Time
 
 	// A description for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The ARN identifier of the environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentArn *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The KMS key ID to encrypt your data in the FinSpace environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KmsKeyId *string
 
 	// The name of the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The status of the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.EnvironmentStatus
 
 	// Metadata pertaining to the operation's result.

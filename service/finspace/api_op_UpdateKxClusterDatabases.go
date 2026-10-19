@@ -15,6 +15,8 @@ import (
 //
 // Using this API you can point a cluster to a different changeset and modify a
 // list of partitions being cached.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateKxClusterDatabases(ctx context.Context, params *UpdateKxClusterDatabasesInput, optFns ...func(*Options)) (*UpdateKxClusterDatabasesOutput, error) {
 	if params == nil {
 		params = &UpdateKxClusterDatabasesInput{}
@@ -35,23 +37,33 @@ type UpdateKxClusterDatabasesInput struct {
 	// A unique name for the cluster that you want to modify.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	//  The structure of databases mounted on the cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Databases []types.KxDatabaseConfiguration
 
 	// The unique identifier of a kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	//  The configuration that allows you to choose how you want to update the
 	// databases on a cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DeploymentConfiguration *types.KxDeploymentConfiguration
 
 	noSmithyDocumentSerde

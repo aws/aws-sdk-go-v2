@@ -9,7 +9,9 @@ import (
 	"time"
 )
 
-// Retrieves details of a scaling group.
+//	Retrieves details of a scaling group.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetKxScalingGroup(ctx context.Context, params *GetKxScalingGroupInput, optFns ...func(*Options)) (*GetKxScalingGroupOutput, error) {
 	if params == nil {
 		params = &GetKxScalingGroupInput{}
@@ -30,11 +32,15 @@ type GetKxScalingGroupInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A unique identifier for the kdb scaling group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupName *string
 
 	noSmithyDocumentSerde
@@ -43,15 +49,21 @@ type GetKxScalingGroupInput struct {
 type GetKxScalingGroupOutput struct {
 
 	// The identifier of the availability zones.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AvailabilityZoneId *string
 
 	//  The list of Managed kdb clusters that are currently active in the given
 	// scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Clusters []string
 
 	//  The timestamp at which the scaling group was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	//  The memory and CPU capabilities of the scaling group host on which FinSpace
@@ -85,17 +97,25 @@ type GetKxScalingGroupOutput struct {
 	//
 	//   - kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and
 	//   96 vCPUs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HostType *string
 
 	//  The last time that the scaling group was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	//  The ARN identifier for the scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupArn *string
 
 	// A unique identifier for the kdb scaling group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScalingGroupName *string
 
 	// The status of scaling group.
@@ -115,9 +135,13 @@ type GetKxScalingGroupOutput struct {
 	//   - DELETE_FAILED – The system failed to delete the scaling group.
 	//
 	//   - DELETED – The scaling group is successfully deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.KxScalingGroupStatus
 
 	//  The error message when a failed state occurs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.

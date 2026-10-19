@@ -9,6 +9,8 @@ import (
 )
 
 // Creates a user in FinSpace kdb environment with an associated IAM role.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateKxUser(ctx context.Context, params *CreateKxUserInput, optFns ...func(*Options)) (*CreateKxUserOutput, error) {
 	if params == nil {
 		params = &CreateKxUserInput{}
@@ -29,23 +31,33 @@ type CreateKxUserInput struct {
 	// A unique identifier for the kdb environment where you want to create a user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The IAM role ARN that will be associated with the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	// A unique identifier for the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A list of key-value pairs to label the user. You can add up to 50 tags to a
 	// user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -54,18 +66,26 @@ type CreateKxUserInput struct {
 type CreateKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The IAM role ARN that will be associated with the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	//  The Amazon Resource Name (ARN) that identifies the user. For more information
 	// about ARNs and how to use ARNs in policies, see [IAM Identifiers]in the IAM User Guide.
 	//
 	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserArn *string
 
 	// A unique identifier for the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	// Metadata pertaining to the operation's result.

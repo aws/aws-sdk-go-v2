@@ -10,7 +10,7 @@ import (
 
 // Returns information about a Dataset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetDataset(ctx context.Context, params *GetDatasetInput, optFns ...func(*Options)) (*GetDatasetOutput, error) {
 	if params == nil {
 		params = &GetDatasetInput{}
@@ -32,6 +32,8 @@ type GetDatasetInput struct {
 	// The unique identifier for a Dataset.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	noSmithyDocumentSerde
@@ -41,23 +43,35 @@ type GetDatasetInput struct {
 type GetDatasetOutput struct {
 
 	// The unique resource identifier for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Alias *string
 
 	// The timestamp at which the Dataset was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreateTime int64
 
 	// The ARN identifier of the Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetArn *string
 
 	// A description of the Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetDescription *string
 
 	// The unique identifier for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// Display title for a Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetTitle *string
 
 	// The format in which Dataset data is structured.
@@ -65,14 +79,20 @@ type GetDatasetOutput struct {
 	//   - TABULAR – Data is structured in a tabular format.
 	//
 	//   - NON_TABULAR – Data is structured in a non-tabular format.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Kind types.DatasetKind
 
 	// The last time that the Dataset was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTime int64
 
 	// Definition for a schema on a tabular Dataset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SchemaDefinition *types.SchemaUnion
 
 	// Status of the Dataset creation.
@@ -84,6 +104,8 @@ type GetDatasetOutput struct {
 	//   - SUCCESS – Dataset creation has succeeded.
 	//
 	//   - RUNNING – Dataset creation is running.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.DatasetStatus
 
 	// Metadata pertaining to the operation's result.

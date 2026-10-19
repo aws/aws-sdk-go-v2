@@ -13,6 +13,8 @@ import (
 //	Creates a changeset for a kdb database. A changeset allows you to add and
 //
 // delete existing files by using an ordered list of change requests.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateKxChangeset(ctx context.Context, params *CreateKxChangesetInput, optFns ...func(*Options)) (*CreateKxChangesetOutput, error) {
 	if params == nil {
 		params = &CreateKxChangesetInput{}
@@ -74,21 +76,29 @@ type CreateKxChangesetInput struct {
 	//   "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangeRequests []types.ChangeRequest
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The name of the kdb database.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier of the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
@@ -97,29 +107,43 @@ type CreateKxChangesetInput struct {
 type CreateKxChangesetOutput struct {
 
 	// A list of change requests.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangeRequests []types.ChangeRequest
 
 	// A unique identifier for the changeset.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ChangesetId *string
 
 	// The timestamp at which the changeset was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// The name of the kdb database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The details of the error that you receive when creating a changeset. It
 	// consists of the type of error and the error message.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ErrorInfo *types.ErrorInfo
 
 	// The timestamp at which the changeset was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// Status of the changeset creation process.
@@ -131,6 +155,8 @@ type CreateKxChangesetOutput struct {
 	//   - Failed – Changeset creation has failed.
 	//
 	//   - Complete – Changeset creation has succeeded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Status types.ChangesetStatus
 
 	// Metadata pertaining to the operation's result.

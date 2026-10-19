@@ -9,6 +9,8 @@ import (
 )
 
 // Lists all the users in a kdb environment.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxUsers(ctx context.Context, params *ListKxUsersInput, optFns ...func(*Options)) (*ListKxUsersOutput, error) {
 	if params == nil {
 		params = &ListKxUsersInput{}
@@ -29,12 +31,18 @@ type ListKxUsersInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -43,9 +51,13 @@ type ListKxUsersInput struct {
 type ListKxUsersOutput struct {
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of users in a kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Users []types.KxUser
 
 	// Metadata pertaining to the operation's result.

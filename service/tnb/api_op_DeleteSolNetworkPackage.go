@@ -16,6 +16,8 @@ import (
 // To delete a network package, the package must be in a disable state. To disable
 // a network package, see [UpdateSolNetworkPackage].
 //
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
+//
 // [UpdateSolNetworkPackage]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_UpdateSolNetworkPackage.html
 func (c *Client) DeleteSolNetworkPackage(ctx context.Context, params *DeleteSolNetworkPackageInput, optFns ...func(*Options)) (*DeleteSolNetworkPackageOutput, error) {
 	if params == nil {
@@ -37,6 +39,8 @@ type DeleteSolNetworkPackageInput struct {
 	// ID of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	noSmithyDocumentSerde

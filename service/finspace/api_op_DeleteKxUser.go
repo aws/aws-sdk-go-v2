@@ -9,6 +9,8 @@ import (
 )
 
 // Deletes a user in the specified kdb environment.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteKxUser(ctx context.Context, params *DeleteKxUserInput, optFns ...func(*Options)) (*DeleteKxUserOutput, error) {
 	if params == nil {
 		params = &DeleteKxUserInput{}
@@ -29,14 +31,20 @@ type DeleteKxUserInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A unique identifier for the user that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

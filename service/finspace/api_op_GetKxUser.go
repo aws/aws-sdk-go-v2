@@ -8,6 +8,8 @@ import (
 )
 
 // Retrieves information about the specified kdb user.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetKxUser(ctx context.Context, params *GetKxUserInput, optFns ...func(*Options)) (*GetKxUserOutput, error) {
 	if params == nil {
 		params = &GetKxUserInput{}
@@ -28,11 +30,15 @@ type GetKxUserInput struct {
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A unique identifier for the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -41,18 +47,26 @@ type GetKxUserInput struct {
 type GetKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The IAM role ARN that is associated with the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IamRole *string
 
 	//  The Amazon Resource Name (ARN) that identifies the user. For more information
 	// about ARNs and how to use ARNs in policies, see [IAM Identifiers]in the IAM User Guide.
 	//
 	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserArn *string
 
 	// A unique identifier for the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserName *string
 
 	// Metadata pertaining to the operation's result.

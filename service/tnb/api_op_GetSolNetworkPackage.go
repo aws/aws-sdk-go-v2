@@ -13,6 +13,8 @@ import (
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
 // the function packages you want to deploy and the Amazon Web Services
 // infrastructure you want to deploy them on.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetSolNetworkPackage(ctx context.Context, params *GetSolNetworkPackageInput, optFns ...func(*Options)) (*GetSolNetworkPackageOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkPackageInput{}
@@ -33,6 +35,8 @@ type GetSolNetworkPackageInput struct {
 	// ID of the network service descriptor in the network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdInfoId *string
 
 	noSmithyDocumentSerde
@@ -43,11 +47,15 @@ type GetSolNetworkPackageOutput struct {
 	// Network package ARN.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Network package ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Id *string
 
 	// Metadata associated with a network package.
@@ -57,11 +65,15 @@ type GetSolNetworkPackageOutput struct {
 	// infrastructure you want to deploy them on.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Metadata *types.GetSolNetworkPackageMetadata
 
 	// Network service descriptor ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdId *string
 
 	// Network service descriptor name.
@@ -72,16 +84,22 @@ type GetSolNetworkPackageOutput struct {
 	// Network service descriptor onboarding state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOnboardingState types.NsdOnboardingState
 
 	// Network service descriptor operational state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdOperationalState types.NsdOperationalState
 
 	// Network service descriptor usage state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NsdUsageState types.NsdUsageState
 
 	// Network service descriptor version.
@@ -93,11 +111,15 @@ type GetSolNetworkPackageOutput struct {
 	// by the onboarded network package.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VnfPkgIds []string
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
 	// consists of a key and an optional value. You can use tags to search and filter
 	// your resources or track your Amazon Web Services costs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

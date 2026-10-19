@@ -10,6 +10,8 @@ import (
 )
 
 // Creates a new kdb database in the environment.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateKxDatabase(ctx context.Context, params *CreateKxDatabaseInput, optFns ...func(*Options)) (*CreateKxDatabaseOutput, error) {
 	if params == nil {
 		params = &CreateKxDatabaseInput{}
@@ -30,23 +32,33 @@ type CreateKxDatabaseInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The name of the kdb database.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A description of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A list of key-value pairs to label the kdb database. You can add up to 50 tags
 	// to your kdb database
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -57,23 +69,35 @@ type CreateKxDatabaseOutput struct {
 	// The timestamp at which the database is created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedTimestamp *time.Time
 
 	// The ARN identifier of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseArn *string
 
 	// The name of the kdb database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A description of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The last time that the database was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

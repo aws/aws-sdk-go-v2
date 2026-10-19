@@ -11,7 +11,7 @@ import (
 
 // Lists the FinSpace Changesets for a Dataset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListChangesets(ctx context.Context, params *ListChangesetsInput, optFns ...func(*Options)) (*ListChangesetsOutput, error) {
 	if params == nil {
 		params = &ListChangesetsInput{}
@@ -33,12 +33,18 @@ type ListChangesetsInput struct {
 	// The unique identifier for the FinSpace Dataset to which the Changeset belongs.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// The maximum number of results per page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,9 +55,13 @@ type ListChangesetsInput struct {
 type ListChangesetsOutput struct {
 
 	// List of Changesets found.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Changesets []types.ChangesetSummary
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

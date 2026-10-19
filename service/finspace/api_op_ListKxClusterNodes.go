@@ -10,6 +10,8 @@ import (
 )
 
 // Lists all the nodes in a kdb cluster.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListKxClusterNodes(ctx context.Context, params *ListKxClusterNodesInput, optFns ...func(*Options)) (*ListKxClusterNodesOutput, error) {
 	if params == nil {
 		params = &ListKxClusterNodesInput{}
@@ -30,17 +32,25 @@ type ListKxClusterNodesInput struct {
 	// A unique name for the cluster.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClusterName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The maximum number of results to return in this request.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,9 +59,13 @@ type ListKxClusterNodesInput struct {
 type ListKxClusterNodesOutput struct {
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A list of nodes associated with the cluster.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Nodes []types.KxNode
 
 	// Metadata pertaining to the operation's result.

@@ -10,7 +10,7 @@ import (
 
 //	Allows the specified user to access the FinSpace web application and API.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) EnableUser(ctx context.Context, params *EnableUserInput, optFns ...func(*Options)) (*EnableUserOutput, error) {
 	if params == nil {
 		params = &EnableUserInput{}
@@ -31,9 +31,13 @@ type EnableUserInput struct {
 	// The unique identifier for the user that you want to activate.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type EnableUserInput struct {
 type EnableUserOutput struct {
 
 	// The unique identifier for the active user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

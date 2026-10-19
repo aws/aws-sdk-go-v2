@@ -11,7 +11,7 @@ import (
 
 // Lists all available Dataviews for a Dataset.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListDataViews(ctx context.Context, params *ListDataViewsInput, optFns ...func(*Options)) (*ListDataViewsOutput, error) {
 	if params == nil {
 		params = &ListDataViewsInput{}
@@ -33,12 +33,18 @@ type ListDataViewsInput struct {
 	// The unique identifier of the Dataset for which to retrieve Dataviews.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatasetId *string
 
 	// The maximum number of results per page.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,9 +53,13 @@ type ListDataViewsInput struct {
 type ListDataViewsOutput struct {
 
 	// A list of Dataviews.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DataViews []types.DataViewSummary
 
 	// A token that indicates where a results page should begin.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

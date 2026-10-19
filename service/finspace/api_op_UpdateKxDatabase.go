@@ -10,6 +10,8 @@ import (
 )
 
 // Updates information for the given kdb database.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateKxDatabase(ctx context.Context, params *UpdateKxDatabaseInput, optFns ...func(*Options)) (*UpdateKxDatabaseOutput, error) {
 	if params == nil {
 		params = &UpdateKxDatabaseInput{}
@@ -30,19 +32,27 @@ type UpdateKxDatabaseInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The name of the kdb database.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A unique identifier for the kdb environment.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// A description of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -51,17 +61,25 @@ type UpdateKxDatabaseInput struct {
 type UpdateKxDatabaseOutput struct {
 
 	// The name of the kdb database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DatabaseName *string
 
 	// A description of the database.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A unique identifier for the kdb environment.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EnvironmentId *string
 
 	// The last time that the database was modified. The value is determined as epoch
 	// time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastModifiedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.

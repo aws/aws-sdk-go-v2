@@ -12,7 +12,7 @@ import (
 // Modifies the details of the specified user. You cannot update the userId for a
 // user.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}
@@ -33,6 +33,8 @@ type UpdateUserInput struct {
 	// The unique identifier for the user that you want to update.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// The option to indicate whether the user can use the
@@ -42,20 +44,30 @@ type UpdateUserInput struct {
 	//   - ENABLED – The user has permissions to use the APIs.
 	//
 	//   - DISABLED – The user does not have permissions to use any APIs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccess types.ApiAccess
 
 	// The ARN identifier of an AWS user or role that is allowed to call the
 	// GetProgrammaticAccessCredentials API to obtain a credentials token for a
 	// specific FinSpace user. This must be an IAM role within your FinSpace account.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ApiAccessPrincipalArn *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The first name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FirstName *string
 
 	// The last name of the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LastName *string
 
 	// The option to indicate the type of user.
@@ -65,6 +77,8 @@ type UpdateUserInput struct {
 	//
 	//   - APP_USER – A user with specific permissions in FinSpace. The users are
 	//   assigned permissions by adding them to a permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type types.UserType
 
 	noSmithyDocumentSerde
@@ -73,6 +87,8 @@ type UpdateUserInput struct {
 type UpdateUserOutput struct {
 
 	// The unique identifier of the updated user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 // Adds a user to a permission group to grant permissions for actions a user can
 // perform in FinSpace.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) AssociateUserToPermissionGroup(ctx context.Context, params *AssociateUserToPermissionGroupInput, optFns ...func(*Options)) (*AssociateUserToPermissionGroupOutput, error) {
 	if params == nil {
 		params = &AssociateUserToPermissionGroupInput{}
@@ -32,14 +32,20 @@ type AssociateUserToPermissionGroupInput struct {
 	// The unique identifier for the permission group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	// The unique identifier for the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -48,6 +54,8 @@ type AssociateUserToPermissionGroupInput struct {
 type AssociateUserToPermissionGroupOutput struct {
 
 	// The returned status code of the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode int32
 
 	// Metadata pertaining to the operation's result.

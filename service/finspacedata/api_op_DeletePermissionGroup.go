@@ -10,7 +10,7 @@ import (
 
 // Deletes a permission group. This action is irreversible.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeletePermissionGroup(ctx context.Context, params *DeletePermissionGroupInput, optFns ...func(*Options)) (*DeletePermissionGroupOutput, error) {
 	if params == nil {
 		params = &DeletePermissionGroupInput{}
@@ -31,9 +31,13 @@ type DeletePermissionGroupInput struct {
 	// The unique identifier for the permission group that you want to delete.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -42,6 +46,8 @@ type DeletePermissionGroupInput struct {
 type DeletePermissionGroupOutput struct {
 
 	// The unique identifier for the deleted permission group.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	// Metadata pertaining to the operation's result.

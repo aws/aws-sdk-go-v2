@@ -10,7 +10,7 @@ import (
 
 // Removes a user from a permission group.
 //
-// Deprecated: This method will be discontinued.
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DisassociateUserFromPermissionGroup(ctx context.Context, params *DisassociateUserFromPermissionGroupInput, optFns ...func(*Options)) (*DisassociateUserFromPermissionGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateUserFromPermissionGroupInput{}
@@ -31,14 +31,20 @@ type DisassociateUserFromPermissionGroupInput struct {
 	// The unique identifier for the permission group.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PermissionGroupId *string
 
 	// The unique identifier for the user.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserId *string
 
 	// A token that ensures idempotency. This token expires in 10 minutes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -47,6 +53,8 @@ type DisassociateUserFromPermissionGroupInput struct {
 type DisassociateUserFromPermissionGroupOutput struct {
 
 	// The returned status code of the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode int32
 
 	// Metadata pertaining to the operation's result.
