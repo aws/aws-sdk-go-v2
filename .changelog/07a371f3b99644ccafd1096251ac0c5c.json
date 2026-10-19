@@ -1,0 +1,8 @@
+{
+    "id": "07a371f3-b996-44cc-afd1-096251ac0c5c",
+    "type": "bugfix",
+    "description": "EventBridge endpoint tests to only assert host + scheme",
+    "modules": [
+        "service/eventbridge"
+    ]
+}
