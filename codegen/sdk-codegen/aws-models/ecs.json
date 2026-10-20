@@ -225,15 +225,33 @@
                 "PUBLIC": {
                     "target": "smithy.api#Unit",
                     "traits": {
+                        "smithy.api#documentation": "<p>The resource is publicly accessible from the internet.</p>",
                         "smithy.api#enumValue": "PUBLIC"
                     }
                 },
                 "PRIVATE": {
                     "target": "smithy.api#Unit",
                     "traits": {
+                        "smithy.api#documentation": "<p>The resource is private and reachable only from within the VPC.</p>",
                         "smithy.api#enumValue": "PRIVATE"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether a resource is publicly accessible from the internet or private to a VPC.</p>"
+            }
+        },
+        "com.amazonaws.ecs#AccessTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#AccessType"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of access types.</p> <p>Valid values:</p> <ul> <li> <p> <code>PUBLIC</code> - The ingress path is publicly accessible.</p> </li> <li> <p> <code>PRIVATE</code> - The ingress path is only accessible privately.</p> </li> </ul>",
+                "smithy.api#length": {
+                    "max": 2
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.ecs#AdvancedConfiguration": {
@@ -399,6 +417,12 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#DaemonTaskDefinitionResource"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayResource"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayRouteResource"
                 },
                 {
                     "target": "com.amazonaws.ecs#ServiceDeploymentResource"
@@ -581,6 +605,11 @@
                     "ecs:daemon-task-definition": {
                         "type": "ARN",
                         "documentation": "Filters access by the ARN of an Amazon ECS daemon task definition",
+                        "relativeDocumentation": "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"
+                    },
+                    "ecs:gateway": {
+                        "type": "ARN",
+                        "documentation": "Filters access by the ARN of an Amazon ECS gateway",
                         "relativeDocumentation": "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"
                     }
                 },
@@ -1773,6 +1802,118 @@
                         "smithy.api#enumValue": "DISABLED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ecs#AssociateGatewayWithCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#AssociateGatewayWithClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#AssociateGatewayWithClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to associate an Amazon ECS gateway with a cluster",
+                    "relativeDocumentation": "API_AssociateGatewayWithCluster.html",
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Associates a gateway with an Amazon ECS cluster. After a cluster is associated with a gateway, services in that cluster can use the gateway for ingress. No changes take effect until you update a service in the cluster to use the gateway. A single cluster can be associated with up to 5 gateways.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To associate a gateway with a cluster",
+                        "documentation": "This example associates the gateway named my-gateway with the cluster named my-cluster so that services in the cluster can use the gateway for ingress.",
+                        "input": {
+                            "gateway": "my-gateway",
+                            "cluster": "my-cluster"
+                        },
+                        "output": {
+                            "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                            "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                            "status": "ACTIVE"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#AssociateGatewayWithClusterRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the gateway to associate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the cluster to associate the gateway with.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#AssociateGatewayWithClusterResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayClusterAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the association. A new association is <code>ACTIVE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ecs#Attachment": {
@@ -4709,6 +4850,178 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#CreateGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#CreateGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#CreateGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys",
+                    "ecs:enable-ecs-managed-tags",
+                    "ecs:propagate-tags"
+                ],
+                "aws.iam#iamAction": {
+                    "createsResources": [
+                        "gateway"
+                    ],
+                    "documentation": "Grants permission to create an Amazon ECS gateway",
+                    "relativeDocumentation": "API_CreateGateway.html",
+                    "requiredActions": [
+                        "iam:PassRole"
+                    ],
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a gateway. A gateway defines and dynamically manages ingress paths for your Amazon ECS services, handling traffic routing and infrastructure across multiple services while optimizing infrastructure usage. <code>CreateGateway</code> is a synchronous operation and the gateway is returned with a status of <code>ACTIVE</code>. The load balancers and other infrastructure that a gateway manages aren't created until a service in an associated cluster begins using the gateway.</p> <p>To use this operation, you must have the <code>iam:PassRole</code> permission for the infrastructure role that you specify in <code>infrastructureRoleArn</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a gateway",
+                        "documentation": "This example creates a gateway named my-gateway that uses internet-facing Application Load Balancers with host-based routing in the specified subnets.",
+                        "input": {
+                            "name": "my-gateway",
+                            "infrastructureRoleArn": "arn:aws:iam::123456789012:role/ecsInfrastructureRole",
+                            "configuration": {
+                                "hostSharedAlb": {
+                                    "networkConfiguration": {
+                                        "subnets": [
+                                            "subnet-0123456789abcdef0",
+                                            "subnet-0fedcba9876543210"
+                                        ],
+                                        "ipAddressType": "ipv4"
+                                    },
+                                    "scheme": "internet-facing",
+                                    "protocol": "HTTPS",
+                                    "port": 443,
+                                    "maxAlbCount": 10,
+                                    "httpDesync": "defensive"
+                                }
+                            },
+                            "tags": [
+                                {
+                                    "key": "team",
+                                    "value": "web"
+                                }
+                            ],
+                            "propagateTags": "GATEWAY"
+                        },
+                        "output": {
+                            "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                            "name": "my-gateway",
+                            "status": "ACTIVE"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#CreateGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the gateway. The name must be unique within your account and can be up to 255 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "infrastructureRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the gateway assumes to create and manage infrastructure on your behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable deletion protection for the gateway. When enabled, the gateway can't be deleted, and the gateway propagates this setting to the load balancers it manages. The default is <code>true</code>.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.ecs#GatewayConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type-specific configuration for the gateway. Exactly one configuration variant must be set, and it determines the gateway type. For example, <code>hostSharedAlb</code> configures a gateway that uses Application Load Balancers with host-based routing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to the gateway to help you categorize and organize it. Each tag consists of a key and an optional value. Depending on <code>propagateTags</code>, these tags can be applied to the infrastructure the gateway manages.</p>"
+                    }
+                },
+                "propagateTags": {
+                    "target": "com.amazonaws.ecs#PropagateGatewayTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the gateway to the infrastructure that the gateway manages. The default is <code>GATEWAY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#CreateGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the gateway.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway. A newly created gateway is always <code>ACTIVE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#CreateManagedInstancesProviderConfiguration": {
             "type": "structure",
             "members": {
@@ -5195,6 +5508,12 @@
                     "target": "com.amazonaws.ecs#VpcLatticeConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC Lattice configuration for the service being created.</p>"
+                    }
+                },
+                "gatewayConnectors": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway connectors that attach the service to a gateway ingress path. You can specify at most one gateway connector.</p>"
                     }
                 },
                 "monitoring": {
@@ -7652,6 +7971,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#DeleteGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DeleteGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DeleteGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an Amazon ECS gateway",
+                    "relativeDocumentation": "API_DeleteGateway.html",
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes a gateway. Before you can delete a gateway, deletion protection must be disabled and the gateway must not have any cluster associations that are in the <code>ACTIVE</code> or <code>DISASSOCIATING</code> state. If associations exist, the operation fails; disassociate all clusters first. <code>DeleteGateway</code> is a synchronous operation. After you delete a gateway, subsequent requests for it return a <code>GatewayNotFoundException</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a gateway",
+                        "documentation": "This example deletes the gateway named my-gateway. Deletion protection must be disabled and the gateway must not be associated with any clusters.",
+                        "input": {
+                            "gateway": "my-gateway"
+                        },
+                        "output": {
+                            "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                            "name": "my-gateway",
+                            "status": "DELETED"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#DeleteGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the gateway to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DeleteGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted gateway.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deleted gateway.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway. After a successful delete, the status is <code>DELETED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#DeleteService": {
             "type": "operation",
             "input": {
@@ -10101,6 +10520,448 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#DescribeGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe an Amazon ECS gateway",
+                    "relativeDocumentation": "API_DescribeGateway.html",
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Describes a gateway, including its configuration, status, and the type-specific infrastructure settings that it uses.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a gateway",
+                        "documentation": "This example describes the gateway named my-gateway.",
+                        "input": {
+                            "gateway": "my-gateway"
+                        },
+                        "output": {
+                            "gateway": {
+                                "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                                "name": "my-gateway",
+                                "status": "ACTIVE",
+                                "infrastructureRoleArn": "arn:aws:iam::123456789012:role/ecsInfrastructureRole",
+                                "deletionProtection": true,
+                                "configuration": {
+                                    "hostSharedAlb": {
+                                        "networkConfiguration": {
+                                            "subnets": [
+                                                "subnet-0123456789abcdef0",
+                                                "subnet-0fedcba9876543210"
+                                            ],
+                                            "ipAddressType": "ipv4"
+                                        },
+                                        "scheme": "internet-facing",
+                                        "protocol": "HTTPS",
+                                        "port": 443,
+                                        "httpDesync": "defensive",
+                                        "maxAlbCount": 10,
+                                        "currentAlbCount": 1
+                                    }
+                                },
+                                "accessType": "PUBLIC",
+                                "propagateTags": "GATEWAY",
+                                "tags": [
+                                    {
+                                        "key": "team",
+                                        "value": "web"
+                                    }
+                                ],
+                                "createdAt": "2026-10-20T12:00:00.000Z",
+                                "updatedAt": "2026-10-20T12:00:00.000Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayAlbConfiguration": {
+            "type": "structure",
+            "members": {
+                "networkConfiguration": {
+                    "target": "com.amazonaws.ecs#GatewayElbNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "scheme": {
+                    "target": "com.amazonaws.ecs#GatewayElbScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the load balancers the gateway manages are <code>internet-facing</code> or <code>internal</code>.</p>"
+                    }
+                },
+                "accessLogs": {
+                    "target": "com.amazonaws.ecs#GatewayElbAccessLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access log configuration for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "webACLArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the WAF web ACL associated with the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that the load balancer listener uses is 443. The gateway supports only HTTPS at port 443.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.ecs#GatewayAlbProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol for the load balancer listener is <code>HTTPS</code>. No other protocol is supported.</p>"
+                    }
+                },
+                "maxAlbCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Application Load Balancers that the gateway manages.</p>"
+                    }
+                },
+                "currentAlbCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current number of Application Load Balancers that the gateway has allocated.</p>"
+                    }
+                },
+                "httpDesync": {
+                    "target": "com.amazonaws.ecs#GatewayAlbDesyncMitigationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desync mitigation mode for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "testTrafficRules": {
+                    "target": "com.amazonaws.ecs#GatewayAlbTestTrafficRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules that route test traffic for progressive deployments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a gateway that uses shared Application Load Balancers, as returned by <code>DescribeGateway</code>. This includes the current number of load balancers in addition to the configured settings.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayConfiguration": {
+            "type": "union",
+            "members": {
+                "hostSharedAlb": {
+                    "target": "com.amazonaws.ecs#DescribeGatewayAlbConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a host-based, shared Application Load Balancer gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type-specific configuration for a gateway that is returned by <code>DescribeGateway</code>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the gateway to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeGatewayResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeGatewayResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe the resources associated with an Amazon ECS gateway",
+                    "relativeDocumentation": "API_DescribeGatewayResources.html",
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Returns the infrastructure that a gateway has created and manages, so that you can follow the traffic path from top-level shared resources, such as load balancers, to the service-specific resources represented as gateway routes. Responses include only the Amazon Resource Names (ARNs) of gateway-managed infrastructure. For the current state of a resource, describe it with the corresponding Amazon Web Services service (Elastic Load Balancing, Amazon EC2, or Amazon Web Services Certificate Manager). The results are paginated.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe the infrastructure that a gateway manages",
+                        "documentation": "This example returns the load balancers, listeners, and gateway routes that the gateway named my-gateway manages.",
+                        "input": {
+                            "gateway": "my-gateway"
+                        },
+                        "output": {
+                            "gatewayResources": {
+                                "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                                "resources": {
+                                    "hostSharedAlb": [
+                                        {
+                                            "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/ecs-gateway-alb-1/50dc6c495c0c9188",
+                                            "listenerArn": "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2",
+                                            "securityGroup": "sg-0123456789abcdef0",
+                                            "gatewayRouteArns": [
+                                                "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that the operation returns in a single page. The maximum value is 20 and the default is 10.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayResources": {
+                    "target": "com.amazonaws.ecs#GatewayResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The infrastructure resources that the gateway manages, grouped by gateway type.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future request to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#Gateway",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayRoute": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeGatewayRouteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeGatewayRouteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to describe a route for an Amazon ECS gateway",
+                    "relativeDocumentation": "API_DescribeGatewayRoute.html",
+                    "resources": {
+                        "required": {
+                            "gateway-route": {
+                                "conditionKeys": [
+                                    "ecs:gateway",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "gateway": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Describes a gateway route, including its status, the service it routes traffic to, and the service-specific infrastructure, such as target groups and listener rules, that the gateway manages for it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe a gateway route",
+                        "documentation": "This example describes the specified gateway route, including the service URL and the load balancer resources that the gateway manages for the route.",
+                        "input": {
+                            "gatewayRouteArn": "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f"
+                        },
+                        "output": {
+                            "gatewayRoute": {
+                                "gatewayRouteArn": "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f",
+                                "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/my-cluster/my-web-service",
+                                "serviceContainerPortName": "web",
+                                "status": "ACTIVE",
+                                "serviceUrl": "https://my-web-service.example.com",
+                                "resources": {
+                                    "hostSharedAlb": [
+                                        {
+                                            "acmCertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-90ab-cdef-1234-567890abcdef",
+                                            "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/ecs-gateway-alb-1/50dc6c495c0c9188",
+                                            "listenerArn": "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2",
+                                            "listenerRuleArn": "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener-rule/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee",
+                                            "testListenerRuleArns": [
+                                                "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener-rule/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cc1d2"
+                                            ],
+                                            "loadBalancerSecurityGroups": [
+                                                {
+                                                    "arn": "arn:aws:ec2:us-east-1:123456789012:security-group/sg-0123456789abcdef0",
+                                                    "ruleArns": [
+                                                        "arn:aws:ec2:us-east-1:123456789012:security-group-rule/sgr-0123456789abcdef0"
+                                                    ]
+                                                }
+                                            ],
+                                            "serviceSecurityGroupArn": "arn:aws:ec2:us-east-1:123456789012:security-group/sg-0fedcba9876543210"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayRouteRequest": {
+            "type": "structure",
+            "members": {
+                "gatewayRouteArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway route to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeGatewayRouteResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayRoute": {
+                    "target": "com.amazonaws.ecs#GatewayRoute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the gateway route.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#DescribeServiceDeployments": {
             "type": "operation",
             "input": {
@@ -11307,6 +12168,121 @@
                 "target": "com.amazonaws.ecs#Device"
             }
         },
+        "com.amazonaws.ecs#DisassociateGatewayFromCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DisassociateGatewayFromClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DisassociateGatewayFromClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to disassociate an Amazon ECS gateway from a cluster",
+                    "relativeDocumentation": "API_DisassociateGatewayFromCluster.html",
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Removes the association between a gateway and an Amazon ECS cluster. The association remains in the <code>DISASSOCIATING</code> state until you remove all of the gateway routes for the cluster by updating the associated services. You can use <code>ListGatewayRoutes</code> with a cluster filter to determine which routes are preventing disassociation. No infrastructure changes are made until the affected services are updated.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disassociate a gateway from a cluster",
+                        "documentation": "This example removes the association between the gateway named my-gateway and the cluster named my-cluster. The association remains in the DISASSOCIATING state until all gateway routes for the cluster are removed.",
+                        "input": {
+                            "gateway": "my-gateway",
+                            "cluster": "my-cluster"
+                        },
+                        "output": {
+                            "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                            "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                            "status": "DISASSOCIATING"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#DisassociateGatewayFromClusterRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the gateway to disassociate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the cluster to disassociate the gateway from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DisassociateGatewayFromClusterResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayClusterAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the association. After a successful request, the status is <code>DISASSOCIATING</code> until all routes are removed, after which the association is deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#DiscoverPollEndpoint": {
             "type": "operation",
             "input": {
@@ -11600,6 +12576,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The log groups managed by the Express service.</p>"
                     }
+                },
+                "gatewayConnections": {
+                    "target": "com.amazonaws.ecs#GatewayConnectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway-managed connections for the service revision, including the gateway routes and infrastructure that a gateway created for the service's connector.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11700,6 +12682,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This parameter is specified when you're using an Amazon Elastic File System file system for task storage. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html\">Amazon EFS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ElbGatewayResources": {
+            "type": "structure",
+            "members": {
+                "loadBalancerArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer.</p>"
+                    }
+                },
+                "listenerArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener on the load balancer.</p>"
+                    }
+                },
+                "securityGroup": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group attached to the load balancer.</p>"
+                    }
+                },
+                "gatewayRouteArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the gateway routes that use this load balancer for ingress.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Application Load Balancer and its associated resources that a gateway manages.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ElbGatewayResourcesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ElbGatewayResources"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Application Load Balancer resource groups that a gateway manages.</p>",
+                "smithy.api#length": {
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.ecs#EnvironmentFile": {
@@ -12507,6 +13533,1264 @@
                 }
             }
         },
+        "com.amazonaws.ecs#Gateway": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the gateway.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable explanation of the current status. This value is populated when the gateway is in a failure state, such as <code>UPDATE_FAILED</code>.</p>"
+                    }
+                },
+                "failures": {
+                    "target": "com.amazonaws.ecs#GatewayResourceFailureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-resource failure details for asynchronous gateway processes, such as an <code>UpdateGateway</code> operation that couldn't update every load balancer.</p>"
+                    }
+                },
+                "infrastructureRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the gateway uses to manage infrastructure on your behalf.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether deletion protection is enabled for the gateway.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.ecs#DescribeGatewayConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type-specific configuration for the gateway.</p>"
+                    }
+                },
+                "accessType": {
+                    "target": "com.amazonaws.ecs#AccessType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the gateway is publicly accessible (<code>PUBLIC</code>) or private (<code>PRIVATE</code>). The gateway derives this value from its scheme when you create the gateway, and the value is immutable.</p>"
+                    }
+                },
+                "propagateTags": {
+                    "target": "com.amazonaws.ecs#PropagateGatewayTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the gateway propagates its tags to the infrastructure it manages.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata applied to the gateway. Each tag consists of a key and an optional value.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the gateway was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the gateway was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a gateway, including its configuration, status, and the infrastructure settings for its type.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayAlbDesyncMitigationMode": {
+            "type": "enum",
+            "members": {
+                "MONITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers forward requests that are considered ambiguous but allow them to be monitored.</p>",
+                        "smithy.api#enumValue": "monitor"
+                    }
+                },
+                "DEFENSIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers allow through most requests but drop those that pose a significant security risk.</p>",
+                        "smithy.api#enumValue": "defensive"
+                    }
+                },
+                "STRICTEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers allow through only requests that comply with HTTP/1.1.</p>",
+                        "smithy.api#enumValue": "strictest"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The desync mitigation mode for a gateway's load balancers, which determines how the load balancers handle requests that might pose a security risk.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayAlbProtocol": {
+            "type": "enum",
+            "members": {
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listener uses HTTP.</p>",
+                        "smithy.api#enumValue": "HTTP"
+                    }
+                },
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listener uses HTTPS.</p>",
+                        "smithy.api#enumValue": "HTTPS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The protocol for a gateway's load balancer listener.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayAlbTestTrafficRules": {
+            "type": "structure",
+            "members": {
+                "header": {
+                    "target": "com.amazonaws.ecs#GatewayTestTrafficHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The header-based rule that identifies test traffic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rules that route test traffic to services behind a gateway during progressive deployments.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayClusterAssociationStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association is active.</p>",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association is being removed and remains in this state until all gateway routes for the cluster are removed.</p>",
+                        "smithy.api#enumValue": "DISASSOCIATING"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an association between a gateway and a cluster.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayClusterAssociationStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayClusterAssociationStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 3
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.ecs#GatewayClusterAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayClusterAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an association between a gateway and a cluster.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayClusterAssociationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayClusterAssociationSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of gateway-cluster association summaries.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConfiguration": {
+            "type": "union",
+            "members": {
+                "hostSharedAlb": {
+                    "target": "com.amazonaws.ecs#HostSharedAlbConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a host-based, shared Application Load Balancer gateway. Each service that uses the gateway is assigned a unique DNS host name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type-specific configuration for a gateway that you provide when you create it. Exactly one variant is set, and it determines the gateway type.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnection": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "gatewayRouteArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway route for the connection.</p>"
+                    }
+                },
+                "portName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service port that receives gateway-managed ingress traffic.</p>"
+                    }
+                },
+                "serviceUrl": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL that the gateway uses to route ingress traffic to the service.</p>"
+                    }
+                },
+                "accessType": {
+                    "target": "com.amazonaws.ecs#AccessType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access type of the gateway ingress path.</p> <p>Valid values:</p> <ul> <li> <p> <code>PUBLIC</code> - The ingress path is publicly accessible.</p> </li> <li> <p> <code>PRIVATE</code> - The ingress path is only accessible privately.</p> </li> </ul>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayRouteStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway route for the connection.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.ecs#GatewayConnectionResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway-managed infrastructure resources for the connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A gateway-managed connection for a service revision. A connection represents the association between the service's gateway connector and a specific gateway, along with the infrastructure that the gateway created for it.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectionAlbResources": {
+            "type": "structure",
+            "members": {
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager certificate that is attached to the load balancer listener.</p>"
+                    }
+                },
+                "loadBalancerArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer.</p>"
+                    }
+                },
+                "loadBalancerSecurityGroupArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that the gateway attaches to the load balancer.</p>"
+                    }
+                },
+                "listenerArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener on the load balancer.</p>"
+                    }
+                },
+                "listenerRuleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener rule that routes production traffic to the service.</p>"
+                    }
+                },
+                "testListenerRuleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener rule that routes test traffic to the service during progressive deployments.</p>"
+                    }
+                },
+                "targetGroupArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target group that receives production traffic.</p>"
+                    }
+                },
+                "alternateTargetGroupArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alternate target group that the gateway uses during progressive deployments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Application Load Balancer resources that a gateway created and manages for a connection.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectionAlbResourcesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayConnectionAlbResources"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Application Load Balancer resource groups for a gateway connection.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayConnection"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of gateway-managed connections for a service revision.</p>",
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectionResources": {
+            "type": "union",
+            "members": {
+                "hostSharedAlb": {
+                    "target": "com.amazonaws.ecs#GatewayConnectionAlbResourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Application Load Balancer resources for a host-based, shared ALB gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The gateway-managed infrastructure resources for a connection, as a union keyed by gateway type.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnector": {
+            "type": "structure",
+            "members": {
+                "portName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service port that the gateway routes ingress traffic to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "healthCheck": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorHealthCheck",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health check that the gateway uses to determine whether the targets for this connector are healthy.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters that control which gateway ingress paths the connector applies to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A gateway connector that attaches an Amazon ECS service to a gateway ingress path. The connector specifies the service port that receives gateway-managed ingress traffic, along with the health check and traffic filters that the gateway applies. A service can have at most one gateway connector.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectorFilters": {
+            "type": "structure",
+            "members": {
+                "accessTypes": {
+                    "target": "com.amazonaws.ecs#AccessTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access types of the gateway ingress paths that the connector applies to.</p> <p>The access type can be one of the following values:</p> <ul> <li> <p> <code>PUBLIC</code> - The ingress path is publicly accessible.</p> </li> <li> <p> <code>PRIVATE</code> - The ingress path is only accessible privately.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters that determine which gateway ingress paths a connector applies to.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectorHealthCheck": {
+            "type": "structure",
+            "members": {
+                "healthCheckProtocol": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorHealthCheckProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol that the gateway uses to perform health checks.</p> <p>Valid values:</p> <ul> <li> <p> <code>HTTP</code> - Health checks are performed over HTTP.</p> </li> <li> <p> <code>HTTPS</code> - Health checks are performed over HTTPS.</p> </li> </ul>"
+                    }
+                },
+                "healthCheckPort": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that the gateway uses to perform health checks on the targets.</p>"
+                    }
+                },
+                "healthCheckPath": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination path for health check requests.</p>"
+                    }
+                },
+                "healthCheckTimeoutSeconds": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, during which no response from a target means a failed health check.</p>"
+                    }
+                },
+                "healthCheckIntervalSeconds": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate amount of time, in seconds, between health checks of an individual target.</p>"
+                    }
+                },
+                "healthyThresholdCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive successful health checks that a target must pass before the gateway considers it healthy.</p>"
+                    }
+                },
+                "unhealthyThresholdCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive failed health checks that a target must fail before the gateway considers it unhealthy.</p>"
+                    }
+                },
+                "matcher": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorHealthCheckMatcher",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP or gRPC codes that indicate a successful health check response from a target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The health check configuration that a gateway uses to evaluate the targets associated with a gateway connector.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectorHealthCheckMatcher": {
+            "type": "structure",
+            "members": {
+                "httpCode": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP codes that indicate a successful response from a target.</p>"
+                    }
+                },
+                "grpcCode": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gRPC codes that indicate a successful response from a target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The codes that indicate a successful health check response from a target.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectorHealthCheckProtocol": {
+            "type": "enum",
+            "members": {
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway performs health checks over HTTP.</p>",
+                        "smithy.api#enumValue": "HTTP"
+                    }
+                },
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway performs health checks over HTTPS.</p>",
+                        "smithy.api#enumValue": "HTTPS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The protocol that a gateway uses to perform health checks on connector targets.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayConnector"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of gateway connectors. A service can have at most one gateway connector.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.ecs#GatewayElbAccessLogConfiguration": {
+            "type": "structure",
+            "members": {
+                "destination": {
+                    "target": "com.amazonaws.ecs#GatewayElbAccessLogDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination where access logs are delivered.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access log configuration for the load balancers that a gateway manages.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayElbAccessLogDestination": {
+            "type": "union",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.ecs#GatewayElbAccessLogS3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination for access logs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination where the access logs for a gateway's load balancers are delivered.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayElbAccessLogS3Destination": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where access logs are delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key prefix for the access logs in the Amazon S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 destination for the access logs of a gateway's load balancers.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayElbIpAddressType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers use IPv4 addresses only.</p>",
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers use both IPv4 and IPv6 addresses.</p>",
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                },
+                "DUALSTACK_WITHOUT_PUBLIC_IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers use IPv6 addresses and private IPv4 addresses, without public IPv4 addresses.</p>",
+                        "smithy.api#enumValue": "dualstack-without-public-ipv4"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IP address type for the load balancers that a gateway manages.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayElbNetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "inboundSecurityGroup": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a security group that you provide to control inbound traffic to the load balancers that the gateway manages. When you specify a security group, the gateway doesn't create inbound rules on the security group it manages.</p>"
+                    }
+                },
+                "subnets": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnets for the load balancers that the gateway manages. The default is the subnets in the default VPC.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.ecs#GatewayElbIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the load balancers that the gateway manages. The default is <code>dualstack</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network configuration for the load balancers that a gateway manages.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayElbScheme": {
+            "type": "enum",
+            "members": {
+                "INTERNET_FACING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers are internet-facing.</p>",
+                        "smithy.api#enumValue": "internet-facing"
+                    }
+                },
+                "INTERNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers are internal.</p>",
+                        "smithy.api#enumValue": "internal"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the load balancers that a gateway manages are internet-facing or internal.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayInfrastructureResources": {
+            "type": "union",
+            "members": {
+                "hostSharedAlb": {
+                    "target": "com.amazonaws.ecs#ElbGatewayResourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Application Load Balancer resource groups for a host-based, shared ALB gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The gateway-managed infrastructure in a <code>DescribeGatewayResources</code> response, as a union keyed by gateway type.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified gateway wasn't found. Check that the gateway name or ARN is correct and that the gateway exists in your account and Region.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecs#GatewayOperationError": {
+            "type": "structure",
+            "members": {
+                "operation": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM-style action identifier of the operation that failed, such as <code>elasticloadbalancing:ModifyLoadBalancerAttributes</code>.</p>"
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code returned by the failed operation, passed through from the downstream service, such as <code>AccessDenied</code>.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed error message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single failed operation against a resource that a gateway manages.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayOperationErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayOperationError"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of operation errors.</p>",
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ecs#GatewayResource": {
+            "type": "resource",
+            "identifiers": {
+                "GatewayName": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "GatewayId": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.ecs#AssociateGatewayWithCluster"
+                },
+                {
+                    "target": "com.amazonaws.ecs#CreateGateway"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DeleteGateway"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DescribeGateway"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DescribeGatewayResources"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DisassociateGatewayFromCluster"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ListGatewayClusterAssociations"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ListGateways"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UpdateGateway"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "gateway/{GatewayName}/{GatewayId}"
+                },
+                "aws.api#taggable": {},
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "gateway",
+                    "relativeDocumentation": "gateway.html",
+                    "disableConditionKeyInheritance": true
+                },
+                "smithy.api#documentation": "Represents an Application Load Balancer gateway that is managed by Amazon ECS"
+            }
+        },
+        "com.amazonaws.ecs#GatewayResourceFailure": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that failed to update, such as a load balancer ARN.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.ecs#GatewayOperationErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The errors that were encountered while operating on the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The failures for a single resource that was touched by an asynchronous gateway process.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayResourceFailureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayResourceFailure"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of resource failures.</p>",
+                "smithy.api#length": {
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ecs#GatewayResources": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.ecs#GatewayInfrastructureResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The infrastructure resources that the gateway manages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> <code>DescribeGatewayResources</code> returns the gateway-managed infrastructure, grouped by gateway type.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRoute": {
+            "type": "structure",
+            "members": {
+                "gatewayRouteArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway route.</p>"
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service associated with the route.</p>"
+                    }
+                },
+                "serviceContainerPortName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task definition container port name that the route targets on the service.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayRouteStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway route.</p>"
+                    }
+                },
+                "serviceUrl": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for accessing the service, including the <code>https://</code> scheme.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.ecs#GatewayRouteResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service-specific infrastructure that the gateway manages for the route, keyed by gateway type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A gateway route, which represents the association between a service and a gateway and the service-specific infrastructure that the gateway manages for the service's revisions.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteAlbResources": {
+            "type": "structure",
+            "members": {
+                "acmCertificateArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager certificate.</p>"
+                    }
+                },
+                "loadBalancerArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the load balancer.</p>"
+                    }
+                },
+                "listenerArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener.</p>"
+                    }
+                },
+                "listenerRuleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener rule for production traffic.</p>"
+                    }
+                },
+                "testListenerRuleArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the listener rules for test traffic. There is one rule except when a test header configuration is being changed to another.</p>"
+                    }
+                },
+                "loadBalancerSecurityGroups": {
+                    "target": "com.amazonaws.ecs#GatewayRouteLoadBalancerSecurityGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups attached to the load balancer.</p>"
+                    }
+                },
+                "serviceSecurityGroupArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service security group in which the gateway manages the ingress rule for this route.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Application Load Balancer resources that a gateway manages for a route.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteAlbResourcesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayRouteAlbResources"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the Application Load Balancer resources for a gateway route.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteLoadBalancerSecurityGroup": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the security group.</p>"
+                    }
+                },
+                "ruleArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security group rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A security group attached to the load balancer for a gateway route.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteLoadBalancerSecurityGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayRouteLoadBalancerSecurityGroup"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the security groups attached to a gateway route's load balancer.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteResource": {
+            "type": "resource",
+            "identifiers": {
+                "GatewayName": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "GatewayId": {
+                    "target": "com.amazonaws.ecs#String"
+                },
+                "RouteId": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.ecs#DescribeGatewayRoute"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ListGatewayRoutes"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "gateway-route/{GatewayName}/{GatewayId}/{RouteId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "ecs:gateway",
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "gateway-route",
+                    "relativeDocumentation": "gateway-route.html",
+                    "disableConditionKeyInheritance": true
+                },
+                "smithy.api#documentation": "Represents a route that maps traffic to a target on an Amazon ECS gateway"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteResources": {
+            "type": "union",
+            "members": {
+                "hostSharedAlb": {
+                    "target": "com.amazonaws.ecs#GatewayRouteAlbResourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Application Load Balancer resources for a host-based, shared ALB gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service-specific infrastructure that a gateway manages for a route, keyed by gateway type.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route is active and routing traffic.</p>",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route is being created.</p>",
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route couldn't be created.</p>",
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route is being updated.</p>",
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route couldn't be updated.</p>",
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route is being deleted.</p>",
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route couldn't be deleted.</p>",
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a gateway route.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayRouteStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 7
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteSummary": {
+            "type": "structure",
+            "members": {
+                "gatewayRouteArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway route.</p>"
+                    }
+                },
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service.</p>"
+                    }
+                },
+                "serviceContainerPortName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task definition container port name that the route targets on the service.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayRouteStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway route.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a gateway route that is returned by the <code>ListGatewayRoutes</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayRouteSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayRouteSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of gateway route summaries.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway is active and available for use.</p>",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An update to the gateway is in progress.</p>",
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update to the gateway completed successfully.</p>",
+                        "smithy.api#enumValue": "UPDATE_COMPLETE"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update to the gateway failed. See <code>statusReason</code> for details.</p>",
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway is deleted.</p>",
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a gateway.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewayStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.ecs#GatewaySummary": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the gateway.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the gateway was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a gateway that is returned by the <code>ListGateways</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewaySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#GatewaySummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of gateway summaries.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayTestTrafficHeader": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the header to match for test traffic routing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The header values to match for test traffic routing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A header-based rule that identifies test traffic for progressive deployments.</p>"
+            }
+        },
         "com.amazonaws.ecs#GetTaskProtection": {
             "type": "operation",
             "input": {
@@ -12727,6 +15011,68 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#HostEntry"
+            }
+        },
+        "com.amazonaws.ecs#HostSharedAlbConfiguration": {
+            "type": "structure",
+            "members": {
+                "networkConfiguration": {
+                    "target": "com.amazonaws.ecs#GatewayElbNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "scheme": {
+                    "target": "com.amazonaws.ecs#GatewayElbScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the load balancers the gateway manages are <code>internet-facing</code> or <code>internal</code>. The default is <code>internet-facing</code>.</p>"
+                    }
+                },
+                "webACLArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the WAF web ACL to associate with the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "accessLogs": {
+                    "target": "com.amazonaws.ecs#GatewayElbAccessLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access log configuration for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that the load balancer listener uses is 443. The gateway supports only HTTPS at port 443.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.ecs#GatewayAlbProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol for the load balancer listener is <code>HTTPS</code>. No other protocol is supported.</p>"
+                    }
+                },
+                "maxAlbCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Application Load Balancers that the gateway manages. The default is 10.</p>"
+                    }
+                },
+                "httpDesync": {
+                    "target": "com.amazonaws.ecs#GatewayAlbDesyncMitigationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desync mitigation mode for the load balancers that the gateway manages, which determines how the load balancers handle requests that might pose a security risk. The default is <code>defensive</code>.</p>"
+                    }
+                },
+                "testTrafficRules": {
+                    "target": "com.amazonaws.ecs#GatewayAlbTestTrafficRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules that route test traffic for progressive deployments. During a progressive deployment, requests whose headers match these rules are routed to the new service revision so that it can be validated before production traffic shifts to it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a gateway that uses shared Application Load Balancers with host-based routing. Where they apply, the field names and values are kept consistent with the Elastic Load Balancing API.</p>"
             }
         },
         "com.amazonaws.ecs#HostVolumeProperties": {
@@ -14384,6 +16730,434 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDaemons</code> request. When the results of a <code>ListDaemons</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results.</p>",
                         "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewayClusterAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListGatewayClusterAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListGatewayClusterAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list the cluster associations for Amazon ECS gateways",
+                    "relativeDocumentation": "API_ListGatewayClusterAssociations.html",
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "ecs:gateway",
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        },
+                        "optional": {
+                            "cluster": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Returns a list of the associations between gateways and clusters. You can filter the results by gateway, cluster, and status. The results are paginated. We recommend that you use pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the clusters associated with a gateway",
+                        "documentation": "This example lists the clusters that are associated with the gateway named my-gateway.",
+                        "input": {
+                            "gateway": "my-gateway"
+                        },
+                        "output": {
+                            "gatewayClusterAssociations": [
+                                {
+                                    "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                                    "status": "ACTIVE"
+                                },
+                                {
+                                    "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-staging-cluster",
+                                    "status": "ACTIVE"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "gatewayClusterAssociations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewayClusterAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a gateway to filter the results by.</p>"
+                    }
+                },
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a cluster to filter the results by.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayClusterAssociationStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association status to filter the results by.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that the operation returns in a single page. The default is 100.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewayClusterAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayClusterAssociations": {
+                    "target": "com.amazonaws.ecs#GatewayClusterAssociationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway-cluster associations that match the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future request to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewayRoutes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListGatewayRoutesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListGatewayRoutesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list the routes for an Amazon ECS gateway",
+                    "relativeDocumentation": "API_ListGatewayRoutes.html",
+                    "resources": {
+                        "optional": {
+                            "gateway-route": {},
+                            "gateway": {
+                                "conditionKeys": [
+                                    "ecs:gateway",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "cluster": {
+                                "conditionKeys": [
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "service": {
+                                "conditionKeys": [
+                                    "ecs:service",
+                                    "ecs:cluster",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Returns a list of gateway routes. A gateway route represents the association between a service and a gateway and the service-specific infrastructure the gateway manages for it. You can filter the results by gateway, cluster, service, container port name, and status. The results are paginated. We recommend that you use pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the gateway routes for a gateway",
+                        "documentation": "This example lists the gateway routes for the gateway named my-gateway in the cluster named my-cluster.",
+                        "input": {
+                            "gateway": "my-gateway",
+                            "cluster": "my-cluster"
+                        },
+                        "output": {
+                            "gatewayRoutes": [
+                                {
+                                    "gatewayRouteArn": "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f",
+                                    "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                                    "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster",
+                                    "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/my-cluster/my-web-service",
+                                    "serviceContainerPortName": "web",
+                                    "status": "ACTIVE"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "gatewayRoutes"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewayRoutesRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a gateway to filter the results by.</p>"
+                    }
+                },
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a cluster to filter the results by.</p>"
+                    }
+                },
+                "service": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of a service to filter the results by. Because services can span clusters, a service name isn't necessarily unique and can match multiple services.</p>"
+                    }
+                },
+                "serviceContainerPortName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a task definition container port to filter the results by.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayRouteStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway route status to filter the results by.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that the operation returns in a single page. The default is 100.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewayRoutesResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayRoutes": {
+                    "target": "com.amazonaws.ecs#GatewayRouteSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway routes that match the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future request to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGateways": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListGatewaysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListGatewaysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list Amazon ECS gateways",
+                    "relativeDocumentation": "API_ListGateways.html",
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "ecs:gateway",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Returns a list of gateways in your account. You can filter the results by gateway name and status. The results are paginated. We recommend that you use pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list active gateways",
+                        "documentation": "This example lists the gateways in your account that have a status of ACTIVE.",
+                        "input": {
+                            "status": [
+                                "ACTIVE"
+                            ]
+                        },
+                        "output": {
+                            "gateways": [
+                                {
+                                    "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                                    "name": "my-gateway",
+                                    "status": "ACTIVE",
+                                    "createdAt": "2026-10-20T12:00:00.000Z"
+                                },
+                                {
+                                    "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-internal-gateway/0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+                                    "name": "my-internal-gateway",
+                                    "status": "ACTIVE",
+                                    "createdAt": "2026-10-21T09:30:00.000Z"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "gateways"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewaysRequest": {
+            "type": "structure",
+            "members": {
+                "names": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway names to filter the results by. You can specify up to 10 names.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway statuses to filter the results by.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of gateway results that <code>ListGateways</code> returns in a single page. The default is 100.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListGateways</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ListGatewaysResponse": {
+            "type": "structure",
+            "members": {
+                "gateways": {
+                    "target": "com.amazonaws.ecs#GatewaySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of gateways that match the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListGateways</code> request. When the results of a <code>ListGateways</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
                     }
                 }
             },
@@ -17032,6 +19806,28 @@
                     "min": 0,
                     "max": 65535
                 }
+            }
+        },
+        "com.amazonaws.ecs#PropagateGatewayTags": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags aren't propagated to managed infrastructure.</p>",
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags on the gateway are propagated to the infrastructure that the gateway manages.</p>",
+                        "smithy.api#enumValue": "GATEWAY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether the tags on a gateway are propagated to the infrastructure that the gateway manages.</p>"
             }
         },
         "com.amazonaws.ecs#PropagateMITags": {
@@ -20444,6 +23240,12 @@
                         "smithy.api#documentation": "<p>The effective runtime overrides that Amazon ECS applies to this service revision. This value is present only when Amazon ECS detects a difference between the task definition and the actual runtime configuration.</p>"
                     }
                 },
+                "gatewayConnectors": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gateway connectors that are associated with the service revision.</p>"
+                    }
+                },
                 "monitoring": {
                     "target": "com.amazonaws.ecs#MonitoringConfiguration",
                     "traits": {
@@ -21806,7 +24608,8 @@
                             "task-set": {},
                             "capacity-provider": {},
                             "daemon": {},
-                            "daemon-task-definition": {}
+                            "daemon-task-definition": {},
+                            "gateway": {}
                         }
                     }
                 },
@@ -23393,7 +26196,8 @@
                             "task-set": {},
                             "capacity-provider": {},
                             "daemon": {},
-                            "daemon-task-definition": {}
+                            "daemon-task-definition": {},
+                            "gateway": {}
                         }
                     }
                 },
@@ -24679,6 +27483,215 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#UpdateGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#UpdateGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#UpdateGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#GatewayNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "ecs:enable-ecs-managed-tags",
+                    "ecs:propagate-tags"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to modify the parameters of an Amazon ECS gateway",
+                    "relativeDocumentation": "API_UpdateGateway.html",
+                    "requiredActions": [
+                        "iam:PassRole"
+                    ],
+                    "resources": {
+                        "required": {
+                            "gateway": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Modifies the configuration of a gateway. You can change only the properties that can be applied without interrupting traffic, and the configuration variant that you provide must match the gateway's type. <code>UpdateGateway</code> is an asynchronous operation: the changes are applied to each load balancer the gateway manages, and the gateway reports a status of <code>UPDATE_IN_PROGRESS</code> until the update completes. If Amazon ECS can't update one or more resources, it makes a best effort to update the rest and the gateway status changes to <code>UPDATE_FAILED</code>. Use <code>DescribeGateway</code> to inspect the gateway's <code>statusReason</code> and failures list, which gives the ARN of each load balancer that was not updated and the operation, error code, and message for each failure.</p> <p>If you specify <code>infrastructureRoleArn</code>, you must have the <code>iam:PassRole</code> permission for that role.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a gateway",
+                        "documentation": "This example raises the maximum number of Application Load Balancers that the gateway named my-gateway manages, and changes the desync mitigation mode to strictest.",
+                        "input": {
+                            "gateway": "my-gateway",
+                            "configuration": {
+                                "hostSharedAlb": {
+                                    "maxAlbCount": 20,
+                                    "httpDesync": "strictest"
+                                }
+                            }
+                        },
+                        "output": {
+                            "gatewayArn": "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678",
+                            "name": "my-gateway",
+                            "status": "UPDATE_IN_PROGRESS"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecs#UpdateGatewayAlbConfiguration": {
+            "type": "structure",
+            "members": {
+                "networkConfiguration": {
+                    "target": "com.amazonaws.ecs#UpdateGatewayNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mutable network configuration for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "maxAlbCount": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Application Load Balancers that the gateway manages.</p>"
+                    }
+                },
+                "webACLArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the WAF web ACL to associate with the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "accessLogs": {
+                    "target": "com.amazonaws.ecs#GatewayElbAccessLogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access log configuration for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "httpDesync": {
+                    "target": "com.amazonaws.ecs#GatewayAlbDesyncMitigationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desync mitigation mode for the load balancers that the gateway manages.</p>"
+                    }
+                },
+                "testTrafficRules": {
+                    "target": "com.amazonaws.ecs#GatewayAlbTestTrafficRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules that route test traffic for progressive deployments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The mutable configuration fields for a gateway that uses shared Application Load Balancers. Only fields that can be changed without interrupting traffic are included.</p>"
+            }
+        },
+        "com.amazonaws.ecs#UpdateGatewayConfiguration": {
+            "type": "union",
+            "members": {
+                "hostSharedAlb": {
+                    "target": "com.amazonaws.ecs#UpdateGatewayAlbConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mutable configuration for a host-based, shared Application Load Balancer gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type-specific configuration to change on a gateway. The variant must match the gateway's existing type.</p>"
+            }
+        },
+        "com.amazonaws.ecs#UpdateGatewayNetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "inboundSecurityGroup": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a security group that you provide to control inbound traffic to the load balancers that the gateway manages. When you specify a security group, the gateway doesn't create inbound rules on the security group it manages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The mutable network configuration for the load balancers that a gateway manages.</p>"
+            }
+        },
+        "com.amazonaws.ecs#UpdateGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "gateway": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the gateway to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "infrastructureRoleArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the gateway assumes to manage infrastructure on your behalf.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.ecs#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable deletion protection for the gateway. When enabled, the gateway can't be deleted.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.ecs#UpdateGatewayConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated type-specific configuration for the gateway. The configuration variant must match the gateway's existing type, and only mutable fields can be changed.</p>"
+                    }
+                },
+                "propagateTags": {
+                    "target": "com.amazonaws.ecs#PropagateGatewayTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the gateway to the infrastructure that the gateway manages. If you don't specify a value, the gateway's existing setting is unchanged.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#UpdateGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "gatewayArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the gateway.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#GatewayStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the gateway. After a successful update request, the status is <code>UPDATE_IN_PROGRESS</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#UpdateInProgressException": {
             "type": "structure",
             "members": {
@@ -25148,6 +28161,12 @@
                     "target": "com.amazonaws.ecs#VpcLatticeConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing the VPC Lattice configuration for the service being updated.</p> <p>This parameter triggers a new service deployment.</p>"
+                    }
+                },
+                "gatewayConnectors": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated set of gateway connectors that connect the service to a gateway ingress path. A service supports no more than one gateway connector.</p>"
                     }
                 },
                 "monitoring": {

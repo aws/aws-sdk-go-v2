@@ -4001,6 +4001,48 @@
                 "smithy.api#documentation": "<p>Stops replication from the DynamoDB table to the Kinesis data stream. This\n            is done without deleting either of the resources.</p>"
             }
         },
+        "com.amazonaws.dynamodb#DisassociateReplicationGroupMemberAction": {
+            "type": "structure",
+            "members": {
+                "RegionName": {
+                    "target": "com.amazonaws.dynamodb#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the replica to disassociate. Set this value to the Region where\n            you send the <code>UpdateTable</code> request. You must use credentials for the\n            account that owns the replica.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisassociationMode": {
+                    "target": "com.amazonaws.dynamodb#DisassociationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode for handling pending replication before disassociation completes.\n            You must specify <code>WAIT_FOR_REPLICATION</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html\">Disassociating a global table replica</a> in the <i>Amazon DynamoDB\n                Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters for disassociating the local replica from a global table using\n            Version 2019.11.21 with multi-Region eventual consistency (MREC).</p>\n         <p>After disassociation completes, the replica remains a standalone regional table\n            that keeps its data, indexes, and table settings.</p>\n         <p>For request requirements, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html\">UpdateTable</a>.\n            For prerequisites, the protection update, and completion checks, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html\">Disassociating a global table replica</a> in the <i>Amazon DynamoDB\n                Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#DisassociationMode": {
+            "type": "enum",
+            "members": {
+                "WAIT_FOR_REPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAIT_FOR_REPLICATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how pending replication is handled before a replica is disassociated.\n            <code>WAIT_FOR_REPLICATION</code> is the only supported value.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#DisassociationProtectionEnabled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether a global table replica is protected from disassociation. While\n            protection is enabled, <code>UpdateTable</code> rejects requests to disassociate the\n            replica. Disassociation protection is enabled by default and is independent of\n            deletion protection.</p>"
+            }
+        },
         "com.amazonaws.dynamodb#DoubleObject": {
             "type": "double"
         },
@@ -23094,10 +23136,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters required for deleting a replica for the table.</p>"
                     }
+                },
+                "Disassociate": {
+                    "target": "com.amazonaws.dynamodb#DisassociateReplicationGroupMemberAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for disassociating the local replica from the global table and\n            retaining it as a standalone regional table.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents one of the following:</p>\n         <ul>\n            <li>\n               <p>A new replica to be added to an existing regional table or global table. This\n                    request invokes the <code>CreateTableReplica</code> action in the destination\n                    Region.</p>\n            </li>\n            <li>\n               <p>New parameters for an existing replica. This request invokes the\n                        <code>UpdateTable</code> action in the destination Region.</p>\n            </li>\n            <li>\n               <p>An existing replica to be deleted. The request invokes the\n                        <code>DeleteTableReplica</code> action in the destination Region, deleting\n                    the replica and all if its items in the destination Region.</p>\n            </li>\n         </ul>\n         <note>\n            <p>When you manually remove a table or global table replica, you do not automatically\n                remove any associated scalable targets, scaling policies, or CloudWatch\n                alarms.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Represents one of the following:</p>\n         <ul>\n            <li>\n               <p>A new replica to be added to an existing regional table or global table. This\n                    request invokes the <code>CreateTableReplica</code> action in the destination\n                    Region.</p>\n            </li>\n            <li>\n               <p>New parameters for an existing replica. This request invokes the\n                        <code>UpdateTable</code> action in the destination Region.</p>\n            </li>\n            <li>\n               <p>An existing replica to be deleted. The request invokes the\n                        <code>DeleteTableReplica</code> action in the destination Region, deleting\n                    the replica and all if its items in the destination Region.</p>\n            </li>\n            <li>\n               <p>The local replica to be disassociated from a global table and retained as\n                    a standalone regional table.</p>\n            </li>\n         </ul>\n         <p>Each <code>ReplicationGroupUpdate</code> contains exactly one action. A\n            <code>Disassociate</code> action must be the only replica update in the request;\n            including other updates causes the request to fail.</p>\n         <note>\n            <p>When you manually remove a table or global table replica, you do not automatically\n                remove any associated scalable targets, scaling policies, or CloudWatch\n                alarms.</p>\n         </note>"
             }
         },
         "com.amazonaws.dynamodb#ReplicationGroupUpdateList": {
@@ -24786,7 +24834,7 @@
                 "Replicas": {
                     "target": "com.amazonaws.dynamodb#ReplicaDescriptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents replicas of the table.</p>"
+                        "smithy.api#documentation": "<p>Represents replicas of the table.</p>\n         <p>After a successful disassociation, this list is absent or empty. To confirm\n            disassociation, also verify that <code>TableStatus</code> is\n            <code>ACTIVE</code>.</p>"
                     }
                 },
                 "GlobalTableWitnesses": {
@@ -24829,6 +24877,12 @@
                     "target": "com.amazonaws.dynamodb#DeletionProtectionEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled (true) or disabled (false) on the\n            table.</p>"
+                    }
+                },
+                "DisassociationProtectionEnabled": {
+                    "target": "com.amazonaws.dynamodb#DisassociationProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether disassociation protection is enabled (<code>true</code>) or\n            disabled (<code>false</code>) for the local global table replica. Protection is\n            enabled by default.</p>"
                     }
                 },
                 "OnDemandThroughput": {
@@ -26413,7 +26467,108 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB\n            Streams settings for a given table.</p>\n         <p>You can only perform one of the following operations at once:</p>\n         <ul>\n            <li>\n               <p>Modify the provisioned throughput settings of the table.</p>\n            </li>\n            <li>\n               <p>Remove a global secondary index from the table.</p>\n            </li>\n            <li>\n               <p>Create a new global secondary index on the table. After the index begins\n                    backfilling, you can use <code>UpdateTable</code> to perform other\n                    operations.</p>\n            </li>\n         </ul>\n         <p>\n            <code>UpdateTable</code> is an asynchronous operation; while it's executing, the table\n            status changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it's\n                <code>UPDATING</code>, you can't issue another <code>UpdateTable</code> request.\n            When the table returns to the <code>ACTIVE</code> state, the <code>UpdateTable</code>\n            operation is complete.</p>"
+                "smithy.api#documentation": "<p>Modifies the provisioned throughput settings, global secondary indexes, DynamoDB\n            Streams settings, or global table replica settings for a given table.</p>\n         <p>You can only perform one of the following operations at once:</p>\n         <ul>\n            <li>\n               <p>Modify the provisioned throughput settings of the table.</p>\n            </li>\n            <li>\n               <p>Remove a global secondary index from the table.</p>\n            </li>\n            <li>\n               <p>Create a new global secondary index on the table. After the index begins\n                    backfilling, you can use <code>UpdateTable</code> to perform other\n                    operations.</p>\n            </li>\n            <li>\n               <p>Enable or disable disassociation protection for the local global table\n                    replica.</p>\n            </li>\n            <li>\n               <p>Disassociate the local global table replica and keep it as a standalone\n                    regional table. The <code>Disassociate</code> action must be the only\n                    replica update in the request. If the request includes any other update,\n                    <code>UpdateTable</code> fails with a <code>ValidationException</code> and\n                    the disassociation does not start.</p>\n            </li>\n         </ul>\n         <p>\n            <code>UpdateTable</code> is an asynchronous operation; while it's executing, the table\n            status changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it's\n                <code>UPDATING</code>, you can't issue another <code>UpdateTable</code> request.\n            Use <code>DescribeTable</code> to monitor the table's status.</p>\n         <p>To use this operation to disassociate a local replica, you must have the\n            <code>dynamodb:UpdateTable</code> and <code>dynamodb:DisassociateTableReplica</code>\n            IAM permissions on the local replica. Send disassociation and disassociation\n            protection requests to the replica's Region using credentials for the account that\n            owns the replica. For prerequisites and the procedure, see\n            <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html\">Disassociating a global table replica</a> in the <i>Amazon DynamoDB\n                Developer Guide</i>.</p>\n         <p>To confirm successful disassociation, call <code>DescribeTable</code> in the\n            replica's Region and verify that <code>TableStatus</code> is <code>ACTIVE</code>\n            and <code>Replicas</code> is absent or empty. If <code>TableStatus</code> returns to\n            <code>ACTIVE</code> but the response still includes a <code>Replicas</code> list, the\n            disassociation did not complete. Check <code>ReplicaStatus</code> for a\n            replication-permission or encryption-access problem, resolve it, and retry.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To modify a table's provisioned throughput",
+                        "documentation": "This example increases the provisioned read and write capacity on the Music table.",
+                        "input": {
+                            "ProvisionedThroughput": {
+                                "ReadCapacityUnits": 10,
+                                "WriteCapacityUnits": 10
+                            },
+                            "TableName": "MusicCollection"
+                        },
+                        "output": {
+                            "TableDescription": {
+                                "AttributeDefinitions": [
+                                    {
+                                        "AttributeName": "Artist",
+                                        "AttributeType": "S"
+                                    },
+                                    {
+                                        "AttributeName": "SongTitle",
+                                        "AttributeType": "S"
+                                    }
+                                ],
+                                "ProvisionedThroughput": {
+                                    "NumberOfDecreasesToday": 1,
+                                    "WriteCapacityUnits": 1,
+                                    "LastIncreaseDateTime": 1.421874759194E9,
+                                    "ReadCapacityUnits": 1
+                                },
+                                "TableSizeBytes": 0,
+                                "TableName": "MusicCollection",
+                                "TableStatus": "UPDATING",
+                                "KeySchema": [
+                                    {
+                                        "KeyType": "HASH",
+                                        "AttributeName": "Artist"
+                                    },
+                                    {
+                                        "KeyType": "RANGE",
+                                        "AttributeName": "SongTitle"
+                                    }
+                                ],
+                                "ItemCount": 0,
+                                "CreationDateTime": 1.421866952062E9
+                            }
+                        }
+                    },
+                    {
+                        "title": "To disable disassociation protection on a local replica",
+                        "documentation": "This example disables disassociation protection on the MusicCollection replica in us-west-2. You must send the request to us-west-2 using credentials for the account that owns the replica. Your table must be a global table that uses Version 2019.11.21 and multi-Region eventual consistency (MREC). You cannot combine this change with any other change in the same UpdateTable request. Before requesting disassociation, use DescribeTable to confirm that DisassociationProtectionEnabled is false and TableStatus is ACTIVE.",
+                        "input": {
+                            "TableName": "MusicCollection",
+                            "DisassociationProtectionEnabled": false
+                        },
+                        "output": {
+                            "TableDescription": {
+                                "TableName": "MusicCollection",
+                                "TableArn": "arn:aws:dynamodb:us-west-2:123456789012:table/MusicCollection",
+                                "TableStatus": "ACTIVE",
+                                "GlobalTableVersion": "2019.11.21",
+                                "DisassociationProtectionEnabled": false,
+                                "Replicas": [
+                                    {
+                                        "RegionName": "us-east-1",
+                                        "ReplicaStatus": "ACTIVE"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "title": "To disassociate a local global table replica",
+                        "documentation": "This example disassociates the MusicCollection replica in us-west-2. You must first disable protection in a separate UpdateTable request. You must send the request to us-west-2 using credentials for account 123456789012, the account that owns the replica. This request works for global tables that use Version 2019.11.21 and multi-Region eventual consistency (MREC). Replicas can belong to one account or multiple accounts. You must specify WAIT_FOR_REPLICATION. The response shows that DynamoDB accepted the asynchronous request. To confirm completion, use DescribeTable in us-west-2. Verify that TableStatus is ACTIVE and Replicas is absent or empty. ACTIVE alone does not confirm successful disassociation.",
+                        "input": {
+                            "TableName": "arn:aws:dynamodb:us-west-2:123456789012:table/MusicCollection",
+                            "ReplicaUpdates": [
+                                {
+                                    "Disassociate": {
+                                        "RegionName": "us-west-2",
+                                        "DisassociationMode": "WAIT_FOR_REPLICATION"
+                                    }
+                                }
+                            ]
+                        },
+                        "output": {
+                            "TableDescription": {
+                                "TableName": "MusicCollection",
+                                "TableArn": "arn:aws:dynamodb:us-west-2:123456789012:table/MusicCollection",
+                                "TableStatus": "UPDATING",
+                                "GlobalTableVersion": "2019.11.21",
+                                "DisassociationProtectionEnabled": false,
+                                "Replicas": [
+                                    {
+                                        "RegionName": "us-east-1",
+                                        "ReplicaStatus": "ACTIVE"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.dynamodb#UpdateTableInput": {
@@ -26468,7 +26623,7 @@
                 "ReplicaUpdates": {
                     "target": "com.amazonaws.dynamodb#ReplicationGroupUpdateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of replica update actions (create, delete, or update) for the table.</p>"
+                        "smithy.api#documentation": "<p>A list of replica update actions (create, delete, update, or disassociate) for the\n            table.</p>"
                     }
                 },
                 "TableClass": {
@@ -26511,6 +26666,12 @@
                     "target": "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Controls the settings replication mode for a global table replica. This attribute can be defined\n            using UpdateTable operation only on a regional table with values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Defines settings replication on a regional table to be used as a\n                    source table for creating Multi-Account Global Table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code>: Remove settings replication on a regional table. Settings replication needs\n                    to be defined to ENABLED again in order to create a Multi-Account Global Table using this table.\n                </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DisassociationProtectionEnabled": {
+                    "target": "com.amazonaws.dynamodb#DisassociationProtectionEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether disassociation protection is enabled (<code>true</code>) or\n            disabled (<code>false</code>) for the local replica of a multi-Region eventual\n            consistency (MREC) global table using Version 2019.11.21.</p>\n         <p>Disassociation protection is enabled by default. If you omit this parameter, the\n            existing setting is unchanged. This setting is independent of\n            <code>DeletionProtectionEnabled</code>.</p>\n         <p>You can't combine this change with any other change in the same\n            <code>UpdateTable</code> request.</p>"
                     }
                 },
                 "VectorIndexUpdates": {

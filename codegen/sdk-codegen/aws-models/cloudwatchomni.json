@@ -10540,7 +10540,7 @@
                 "smithy.api#examples": [
                     {
                         "title": "Search principals by name",
-                        "documentation": "The following example searches a domain for principals whose name matches a text query. A text search (any searchQuery other than *) returns at most 10 results and does not paginate, so maxResults and nextToken are not supplied and no nextToken is returned. To grant access to a result, pass its principalId to CreateAccessGrant with a principalType of IDC_USER for a user or IDC_GROUP for a group. Payloads are shown as JSON; on the wire they are CBOR-encoded.",
+                        "documentation": "The following example searches a domain for principals whose name matches a text query. No nextToken is returned, so there are no more results. To grant access to a result, pass its principalId to CreateAccessGrant with a principalType of IDC_USER for a user or IDC_GROUP for a group. Payloads are shown as JSON; on the wire they are CBOR-encoded.",
                         "input": {
                             "domainId": "d-1a2b3c4d5e",
                             "searchQuery": "jane"
@@ -10595,17 +10595,17 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "The maximum number of results to return. Defaults to 10. Valid only when searchQuery\nis *; other searches reject this parameter and return at most 10 results.",
+                        "smithy.api#documentation": "The maximum number of results to return. Defaults to 100.",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 50
+                            "max": 100
                         }
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchomni#SearchPrincipalsNextToken",
                     "traits": {
-                        "smithy.api#documentation": "A token to retrieve the next page of results. Valid only when searchQuery is *;\nother searches do not paginate and reject this parameter. Tokens expire after\n24 hours."
+                        "smithy.api#documentation": "A token to retrieve the next page of results. Supply the same searchQuery used\non the request that returned it. Tokens expire after 24 hours."
                     }
                 }
             },

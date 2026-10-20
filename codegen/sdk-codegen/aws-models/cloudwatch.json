@@ -549,6 +549,29 @@
                 "smithy.api#documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric, statistic,\n            or metric math expression. You can use the model to display a band of expected, normal\n            values when the metric is graphed.</p>\n         <p>If you have enabled unified cross-account observability, and this account is a\n            monitoring account, the metric can be in the same account or a source account.</p>"
             }
         },
+        "com.amazonaws.cloudwatch#AnomalyDetectorAdaptationSpeed": {
+            "type": "enum",
+            "members": {
+                "FAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAST"
+                    }
+                },
+                "NORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMAL"
+                    }
+                },
+                "SLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SLOW"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#AnomalyDetectorConfiguration": {
             "type": "structure",
             "members": {
@@ -562,6 +585,18 @@
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorMetricTimezone",
                     "traits": {
                         "smithy.api#documentation": "<p>The time zone to use for the metric. This is useful to enable the model to\n            automatically account for daylight savings time changes if the metric is sensitive to\n            such time changes.</p>\n         <p>To specify a time zone, use the name of the time zone as specified in the standard\n            tz database. For more information, see <a href=\"https://en.wikipedia.org/wiki/Tz_database\">tz database</a>.</p>"
+                    }
+                },
+                "AdaptationSpeed": {
+                    "target": "com.amazonaws.cloudwatch#AnomalyDetectorAdaptationSpeed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speed at which the anomaly detection model adapts to sustained changes in the\n            metric's baseline. Faster adaptation lets the model track shifting workloads sooner, but\n            increases the chance that the model treats a real, lasting change as normal.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAST</code> - The model adapts quickly to sustained changes in the baseline.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NORMAL</code> - The model adapts at a moderate pace. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLOW</code> - The model adapts slowly, reducing the risk of treating a real change as normal.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "OutlierFilteringStrength": {
+                    "target": "com.amazonaws.cloudwatch#AnomalyDetectorOutlierFilteringStrength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggressiveness with which CloudWatch filters outliers from the metric data\n            that the anomaly detection model uses. Stronger filtering excludes more extreme values,\n            which can produce a tighter band of expected values but may also suppress legitimate\n            spikes.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MINIMAL</code> - Excludes only the most extreme outliers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODERATE</code> - Excludes a moderate range of outliers. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STRICT</code> - Excludes a wider range of outliers, which can suppress legitimate spikes.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -615,6 +650,29 @@
                     "max": 50
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.cloudwatch#AnomalyDetectorOutlierFilteringStrength": {
+            "type": "enum",
+            "members": {
+                "MINIMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINIMAL"
+                    }
+                },
+                "MODERATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODERATE"
+                    }
+                },
+                "STRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRICT"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorStateValue": {

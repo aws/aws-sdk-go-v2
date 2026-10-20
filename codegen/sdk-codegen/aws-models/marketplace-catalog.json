@@ -3214,6 +3214,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains summary information about the offer set.</p>"
                     }
+                },
+                "ExpressPrivateOfferConfigurationSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains summary information about the express private offer configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3283,6 +3289,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A filter for offer sets.</p>"
                     }
+                },
+                "ExpressPrivateOfferConfigurationFilters": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for express private offer configurations.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3335,6 +3347,12 @@
                     "target": "com.amazonaws.marketplacecatalog#OfferSetSort",
                     "traits": {
                         "smithy.api#documentation": "<p>A sort for offer sets.</p>"
+                    }
+                },
+                "ExpressPrivateOfferConfigurationSort": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sort for express private offer configurations.</p>"
                     }
                 }
             },
@@ -3440,6 +3458,216 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationEntityIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationEntityIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>EntityId</code> values to filter on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the <code>EntityId</code> of an express private offer configuration.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationEntityIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationEntityIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationEntityIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationFilters": {
+            "type": "structure",
+            "members": {
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationEntityIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can filter on the <code>EntityId</code> of an express private offer configuration.</p>"
+                    }
+                },
+                "ProductId": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationProductIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can filter on the <code>ProductId</code> of an express private offer configuration.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationStateFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the express private offer configuration to filter on. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The configuration is active and you can use it to generate offers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> – The configuration is deprecated or deleted.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter fields for the express private offer configuration entity.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationProductIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationProductIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ProductId</code> values to filter on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the <code>ProductId</code> of an express private offer configuration.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationProductIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationProductIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationProductIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationSort": {
+            "type": "structure",
+            "members": {
+                "SortBy": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort by. Valid values are <code>EntityId</code>, <code>LastModifiedDate</code>, <code>ProductId</code>, and <code>State</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.marketplacecatalog#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order. Valid values are <code>ASCENDING</code> and <code>DESCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort fields for express private offer configurations.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationSortBy": {
+            "type": "enum",
+            "members": {
+                "EntityId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EntityId"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastModifiedDate"
+                    }
+                },
+                "ProductId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductId"
+                    }
+                },
+                "State": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "State"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationStateFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationStateFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>State</code> values to filter on. Valid values are <code>ACTIVE</code> and <code>INACTIVE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter for the <code>State</code> of an express private offer configuration.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationStateFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationStateString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationStateString": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "ProductId": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationProductIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product ID associated with the express private offer configuration.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.marketplacecatalog#ExpressPrivateOfferConfigurationStateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the express private offer configuration. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The configuration is active and you can use it to generate offers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> – The configuration is deprecated or deleted.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarized information about an express private offer configuration.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#FailureCode": {
