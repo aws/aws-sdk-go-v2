@@ -886,6 +886,38 @@ func TestDownloadObjectIntegrity(t *testing.T) {
 	}
 }
 
+// Every response is individually consistent and the byte totals add up, but
+// the Content-Range of the last part points at the previous part's offset, so
+// the writes overlap and leave a gap.
+func TestDownloadObjectNonContiguousWrites(t *testing.T) {
+	sizes := []int{8 * megabyte, 8 * megabyte, 8 * megabyte}
+	data := randomBytes(5, 24*megabyte)
+	fn := partsGetObjectFn(data, sizes)
+
+	s3Client := &s3testing.TransferManagerLoggingClient{Data: data}
+	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		out, err := fn(c, params)
+		if err != nil || aws.ToInt32(params.PartNumber) != 3 {
+			return out, err
+		}
+		out.ContentRange = aws.String(fmt.Sprintf("bytes %d-%d/%d", 8*megabyte, 16*megabyte-1, len(data)))
+		return out, nil
+	}
+
+	d := New(s3Client, func(o *Options) {
+		o.Concurrency = 1
+	})
+
+	_, err := d.DownloadObject(context.Background(), &DownloadObjectInput{
+		Bucket:   aws.String("bucket"),
+		Key:      aws.String("key"),
+		WriterAt: types.NewWriteAtBuffer(nil),
+	})
+	if err == nil || !strings.Contains(err.Error(), "not contiguous") {
+		t.Fatalf("expected non-contiguous writes error, got %v", err)
+	}
+}
+
 type failingWriterAt struct {
 	failOff int64
 	err     error

@@ -1,7 +1,9 @@
 package io
 
 import (
+	"fmt"
 	"io"
+	"slices"
 	"sync"
 )
 
@@ -41,6 +43,12 @@ type AsyncWriterAt struct {
 	failed    chan struct{}
 	errOnce   sync.Once
 	err       error
+
+	// landed maps the offset of each completed write to its length. A chunk
+	// retry rewrites the offsets of the attempt it replaces, so the latest
+	// write at an offset wins.
+	landedMu sync.Mutex
+	landed   map[int64]int
 }
 
 // NewAsyncWriterAt initializes an async writer for the given sink and buffer pool.
@@ -51,6 +59,7 @@ func NewAsyncWriterAt(w io.WriterAt, bufs BufferPool) *AsyncWriterAt {
 		queue:  make(chan writeAtJob, jobQueueDepth),
 		stop:   make(chan struct{}),
 		failed: make(chan struct{}),
+		landed: make(map[int64]int),
 	}
 }
 
@@ -148,6 +157,36 @@ func (w *AsyncWriterAt) Wait() {
 	w.jobs.Wait()
 }
 
+// CheckContiguous verifies that the writes which landed, ordered by offset,
+// exactly tile [0, size): the first begins at 0, each begins where the
+// previous one ended, and the last ends at size.
+//
+// The caller MUST first Wait for all submitted jobs. This is meaningful only
+// when no write failed or was discarded.
+func (w *AsyncWriterAt) CheckContiguous(size int64) error {
+	w.landedMu.Lock()
+	offs := make([]int64, 0, len(w.landed))
+	for off := range w.landed {
+		offs = append(offs, off)
+	}
+	slices.Sort(offs)
+
+	var next int64
+	for _, off := range offs {
+		if off != next {
+			w.landedMu.Unlock()
+			return fmt.Errorf("write at offset %d, expected %d", off, next)
+		}
+		next += int64(w.landed[off])
+	}
+	w.landedMu.Unlock()
+
+	if next != size {
+		return fmt.Errorf("writes end at offset %d, expected %d", next, size)
+	}
+	return nil
+}
+
 func (w *AsyncWriterAt) fail(err error) {
 	w.errOnce.Do(func() {
 		w.err = err
@@ -174,6 +213,10 @@ func (w *AsyncWriterAt) doWrites() {
 			}
 			if err != nil {
 				w.fail(err)
+			} else if job.n > 0 {
+				w.landedMu.Lock()
+				w.landed[job.off] = job.n
+				w.landedMu.Unlock()
 			}
 
 			w.finish(job)

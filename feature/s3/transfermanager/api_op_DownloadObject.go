@@ -695,6 +695,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	if d.err == nil {
 		d.err = d.checkWritten()
 	}
+	if d.err == nil {
+		d.err = d.checkContiguous()
+	}
 
 	if d.err != nil {
 		freshCtx, cancel := d.freshContext(ctx)
@@ -926,6 +929,16 @@ func (d *downloader) checkWritten() error {
 	want := d.totalBytes - d.offset
 	if got := d.written.Load(); got != want {
 		return fmt.Errorf("downloaded %d bytes, expected %d", got, want)
+	}
+	return nil
+}
+
+// checkContiguous reports an error if the writes that reached the writer don't
+// tile the requested span with no gaps or overlaps. checkWritten only compares
+// totals, which can agree even when the bytes landed at the wrong offsets.
+func (d *downloader) checkContiguous() error {
+	if err := d.writer.CheckContiguous(d.totalBytes - d.offset); err != nil {
+		return fmt.Errorf("writes not contiguous: %w", err)
 	}
 	return nil
 }

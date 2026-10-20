@@ -1072,3 +1072,68 @@ func TestAsyncWriterAtDoneGroup(t *testing.T) {
 		}
 	})
 }
+
+func TestAsyncWriterAtCheckContiguous(t *testing.T) {
+	type write struct {
+		off int64
+		n   int
+	}
+	for name, c := range map[string]struct {
+		writes    []write
+		size      int64
+		expectErr string
+	}{
+		"empty":            {size: 0},
+		"single":           {writes: []write{{0, 10}}, size: 10},
+		"in order":         {writes: []write{{0, 8}, {8, 4}, {12, 8}}, size: 20},
+		"out of order":     {writes: []write{{12, 8}, {0, 8}, {8, 4}}, size: 20},
+		"missing":          {size: 10, expectErr: "writes end at offset 0, expected 10"},
+		"gap at start":     {writes: []write{{4, 6}}, size: 10, expectErr: "write at offset 4, expected 0"},
+		"gap in middle":    {writes: []write{{0, 8}, {12, 8}}, size: 20, expectErr: "write at offset 12, expected 8"},
+		"overlap":          {writes: []write{{0, 8}, {4, 8}}, size: 12, expectErr: "write at offset 4, expected 8"},
+		"short":            {writes: []write{{0, 8}, {8, 4}}, size: 20, expectErr: "writes end at offset 12, expected 20"},
+		"long":             {writes: []write{{0, 8}, {8, 16}}, size: 20, expectErr: "writes end at offset 24, expected 20"},
+		"zero length skip": {writes: []write{{0, 8}, {8, 0}, {8, 4}}, size: 12},
+	} {
+		t.Run(name, func(t *testing.T) {
+			w := NewAsyncWriterAt(writerAtFunc(func(p []byte, _ int64) (int, error) { return len(p), nil }), newTestPool(t, 32))
+			w.Start()
+			defer w.Stop()
+
+			for _, wr := range c.writes {
+				w.WriteAt(w.Buffer(), wr.n, wr.off, nil)
+			}
+			w.Wait()
+
+			err := w.CheckContiguous(c.size)
+			if c.expectErr == "" {
+				if err != nil {
+					t.Fatalf("unexpected error: %v", err)
+				}
+				return
+			}
+			if err == nil || err.Error() != c.expectErr {
+				t.Fatalf("err = %v, want %q", err, c.expectErr)
+			}
+		})
+	}
+}
+
+func TestAsyncWriterAtCheckContiguousIgnoresFailedWrites(t *testing.T) {
+	w := NewAsyncWriterAt(writerAtFunc(func(p []byte, off int64) (int, error) {
+		if off == 8 {
+			return 0, errInjected
+		}
+		return len(p), nil
+	}), newTestPool(t, 32))
+	w.Start()
+	defer w.Stop()
+
+	w.WriteAt(w.Buffer(), 8, 0, nil)
+	w.WriteAt(w.Buffer(), 8, 8, nil)
+	w.Wait()
+
+	if err := w.CheckContiguous(16); err == nil {
+		t.Fatal("expected error, got nil")
+	}
+}
