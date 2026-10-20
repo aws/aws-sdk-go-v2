@@ -1,0 +1,8 @@
+{
+    "id": "4cc607ef-9416-4e96-a774-b10f1ecd9909",
+    "type": "feature",
+    "description": "Documentation update release for AWS service",
+    "modules": [
+        "service/workspacesinstances"
+    ]
+}

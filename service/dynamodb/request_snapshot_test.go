@@ -3474,6 +3474,10 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 			{
 				Create: &types.CreateReplicationGroupMemberAction{
@@ -3541,6 +3545,10 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 		},
 		TableClass:                types.TableClass("STANDARD"),
@@ -3573,6 +3581,7 @@ func TestCheckRequestSnapshot_UpdateTable(t *testing.T) {
 			WriteUnitsPerSecond: ptr.Int64(1),
 		},
 		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		DisassociationProtectionEnabled:    ptr.Bool(true),
 		VectorIndexUpdates: []types.VectorIndexUpdate{
 			{
 				Create: &types.CreateVectorIndexAction{
@@ -7151,6 +7160,10 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 			{
 				Create: &types.CreateReplicationGroupMemberAction{
@@ -7218,6 +7231,10 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 		},
 		TableClass:                types.TableClass("STANDARD"),
@@ -7250,6 +7267,7 @@ func TestUpdateRequestSnapshot_UpdateTable(t *testing.T) {
 			WriteUnitsPerSecond: ptr.Int64(1),
 		},
 		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		DisassociationProtectionEnabled:    ptr.Bool(true),
 		VectorIndexUpdates: []types.VectorIndexUpdate{
 			{
 				Create: &types.CreateVectorIndexAction{

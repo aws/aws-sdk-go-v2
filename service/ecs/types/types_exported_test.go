@@ -7,6 +7,114 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
 
+func ExampleDescribeGatewayConfiguration_outputUsage() {
+	var union types.DescribeGatewayConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DescribeGatewayConfigurationMemberHostSharedAlb:
+		_ = v.Value // Value is types.DescribeGatewayAlbConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DescribeGatewayAlbConfiguration
+
+func ExampleGatewayConfiguration_outputUsage() {
+	var union types.GatewayConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GatewayConfigurationMemberHostSharedAlb:
+		_ = v.Value // Value is types.HostSharedAlbConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HostSharedAlbConfiguration
+
+func ExampleGatewayConnectionResources_outputUsage() {
+	var union types.GatewayConnectionResources
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GatewayConnectionResourcesMemberHostSharedAlb:
+		_ = v.Value // Value is []types.GatewayConnectionAlbResources
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.GatewayConnectionAlbResources
+
+func ExampleGatewayElbAccessLogDestination_outputUsage() {
+	var union types.GatewayElbAccessLogDestination
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GatewayElbAccessLogDestinationMemberS3:
+		_ = v.Value // Value is types.GatewayElbAccessLogS3Destination
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GatewayElbAccessLogS3Destination
+
+func ExampleGatewayInfrastructureResources_outputUsage() {
+	var union types.GatewayInfrastructureResources
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GatewayInfrastructureResourcesMemberHostSharedAlb:
+		_ = v.Value // Value is []types.ElbGatewayResources
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.ElbGatewayResources
+
+func ExampleGatewayRouteResources_outputUsage() {
+	var union types.GatewayRouteResources
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GatewayRouteResourcesMemberHostSharedAlb:
+		_ = v.Value // Value is []types.GatewayRouteAlbResources
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.GatewayRouteAlbResources
+
 func ExampleServiceConnectContainerConfiguration_outputUsage() {
 	var union types.ServiceConnectContainerConfiguration
 	// type switches can be used to check the union value
@@ -24,3 +132,21 @@ func ExampleServiceConnectContainerConfiguration_outputUsage() {
 }
 
 var _ types.ServiceConnectContainerLogLevel
+
+func ExampleUpdateGatewayConfiguration_outputUsage() {
+	var union types.UpdateGatewayConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateGatewayConfigurationMemberHostSharedAlb:
+		_ = v.Value // Value is types.UpdateGatewayAlbConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UpdateGatewayAlbConfiguration

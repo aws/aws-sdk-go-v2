@@ -1,0 +1,8 @@
+{
+    "id": "830912eb-d21b-4099-a545-32eadcf08c75",
+    "type": "feature",
+    "description": "Amazon CloudWatch now supports two new anomaly detector settings. AdaptationSpeed (FAST, NORMAL, SLOW) controls how fast the model adapts to baseline changes, and OutlierFilteringStrength (MINIMAL, MODERATE, STRICT) controls how aggressively outliers are filtered.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

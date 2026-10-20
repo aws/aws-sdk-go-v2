@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListGatewayRoutes
+
+{"cluster":"__Cluster__","gateway":"__Gateway__","maxResults":1,"nextToken":"__NextToken__","service":"__Service__","serviceContainerPortName":"__ServiceContainerPortName__","status":["ACTIVE","ACTIVE"]}

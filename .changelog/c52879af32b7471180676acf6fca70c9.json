@@ -1,0 +1,8 @@
+{
+    "id": "c52879af-32b7-4711-8067-6acf6fca70c9",
+    "type": "feature",
+    "description": "ECS Service Gateway makes it easier for developers to deploy ECS services without having to worry about complex ingress networking constructs.",
+    "modules": [
+        "service/ecs"
+    ]
+}

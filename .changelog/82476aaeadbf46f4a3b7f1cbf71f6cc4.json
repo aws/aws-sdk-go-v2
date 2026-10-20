@@ -1,0 +1,8 @@
+{
+    "id": "82476aae-adbf-46f4-a3b7-f1cbf71f6cc4",
+    "type": "feature",
+    "description": "Updating max value for maxResults in SearchPrincipals API",
+    "modules": [
+        "service/cloudwatchomni"
+    ]
+}

@@ -209,6 +209,17 @@ func serializeConsolidatedPolicyV1(s smithy.ShapeSerializer, schema *smithy.Sche
 	}
 }
 
+func serializeDatabricksConnectionType(s smithy.ShapeSerializer, schema *smithy.Schema, v DatabricksConnectionType) {
+	switch vv := v.(type) {
+	case *DatabricksConnectionTypeMemberDeltaSharing:
+		s.WriteUnion(schema, schemas.DatabricksConnectionType_deltaSharing)
+		s.WriteStruct(schemas.DatabricksConnectionType_deltaSharing)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeIntermediateTableAnalysisRulePolicy(s smithy.ShapeSerializer, schema *smithy.Schema, v IntermediateTableAnalysisRulePolicy) {
 	switch vv := v.(type) {
 	case *IntermediateTableAnalysisRulePolicyMemberV1:
@@ -557,6 +568,12 @@ func serializeTableReference(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *TableReferenceMemberDatabricks:
+		s.WriteUnion(schema, schemas.TableReference_databricks)
+		s.WriteStruct(schemas.TableReference_databricks)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *TableReferenceMemberGlue:
 		s.WriteUnion(schema, schemas.TableReference_glue)
 		s.WriteStruct(schemas.TableReference_glue)
@@ -774,6 +791,18 @@ func deserializeConsolidatedPolicyV1(d smithy.ShapeDeserializer, s *smithy.Schem
 			return vv.Deserialize(d)
 		case schemas.ConsolidatedPolicyV1_list:
 			vv := &ConsolidatedPolicyV1MemberList{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeDatabricksConnectionType(d smithy.ShapeDeserializer, s *smithy.Schema, v *DatabricksConnectionType) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.DatabricksConnectionType_deltaSharing:
+			vv := &DatabricksConnectionTypeMemberDeltaSharing{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1130,6 +1159,10 @@ func deserializeTableReference(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		switch ms {
 		case schemas.TableReference_athena:
 			vv := &TableReferenceMemberAthena{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.TableReference_databricks:
+			vv := &TableReferenceMemberDatabricks{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.TableReference_glue:

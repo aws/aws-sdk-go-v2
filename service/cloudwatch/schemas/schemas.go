@@ -534,13 +534,27 @@ var AnomalyDetector_SingleMetricAnomalyDetector *smithy.Schema
 
 var AnomalyDetector_MetricMathAnomalyDetector *smithy.Schema
 
+var AnomalyDetectorAdaptationSpeed = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "AnomalyDetectorAdaptationSpeed",
+}, smithy.ShapeTypeEnum, 3)
+var AnomalyDetectorAdaptationSpeed_FAST *smithy.Schema
+
+var AnomalyDetectorAdaptationSpeed_NORMAL *smithy.Schema
+
+var AnomalyDetectorAdaptationSpeed_SLOW *smithy.Schema
+
 var AnomalyDetectorConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "AnomalyDetectorConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var AnomalyDetectorConfiguration_ExcludedTimeRanges *smithy.Schema
 
 var AnomalyDetectorConfiguration_MetricTimezone *smithy.Schema
+
+var AnomalyDetectorConfiguration_AdaptationSpeed *smithy.Schema
+
+var AnomalyDetectorConfiguration_OutlierFilteringStrength *smithy.Schema
 
 var _AnomalyDetectorExcludedTimeRanges = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -568,6 +582,16 @@ var _AnomalyDetectorMetricTimezone = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "AnomalyDetectorMetricTimezone",
 }, smithy.ShapeTypeString, 0)
+
+var AnomalyDetectorOutlierFilteringStrength = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "AnomalyDetectorOutlierFilteringStrength",
+}, smithy.ShapeTypeEnum, 3)
+var AnomalyDetectorOutlierFilteringStrength_MINIMAL *smithy.Schema
+
+var AnomalyDetectorOutlierFilteringStrength_MODERATE *smithy.Schema
+
+var AnomalyDetectorOutlierFilteringStrength_STRICT *smithy.Schema
 
 var _AnomalyDetectors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3576,9 +3600,25 @@ func init() {
 
 	_AnomalyDetectorExcludedTimeRanges_member = _AnomalyDetectorExcludedTimeRanges.AddMember("member", Range)
 
+	AnomalyDetectorAdaptationSpeed_FAST = AnomalyDetectorAdaptationSpeed.AddMember("FAST", smithyprelude.Unit)
+
+	AnomalyDetectorAdaptationSpeed_NORMAL = AnomalyDetectorAdaptationSpeed.AddMember("NORMAL", smithyprelude.Unit)
+
+	AnomalyDetectorAdaptationSpeed_SLOW = AnomalyDetectorAdaptationSpeed.AddMember("SLOW", smithyprelude.Unit)
+
+	AnomalyDetectorOutlierFilteringStrength_MINIMAL = AnomalyDetectorOutlierFilteringStrength.AddMember("MINIMAL", smithyprelude.Unit)
+
+	AnomalyDetectorOutlierFilteringStrength_MODERATE = AnomalyDetectorOutlierFilteringStrength.AddMember("MODERATE", smithyprelude.Unit)
+
+	AnomalyDetectorOutlierFilteringStrength_STRICT = AnomalyDetectorOutlierFilteringStrength.AddMember("STRICT", smithyprelude.Unit)
+
 	AnomalyDetectorConfiguration_ExcludedTimeRanges = AnomalyDetectorConfiguration.AddMember("ExcludedTimeRanges", _AnomalyDetectorExcludedTimeRanges)
 
 	AnomalyDetectorConfiguration_MetricTimezone = AnomalyDetectorConfiguration.AddMember("MetricTimezone", _AnomalyDetectorMetricTimezone)
+
+	AnomalyDetectorConfiguration_AdaptationSpeed = AnomalyDetectorConfiguration.AddMember("AdaptationSpeed", AnomalyDetectorAdaptationSpeed)
+
+	AnomalyDetectorConfiguration_OutlierFilteringStrength = AnomalyDetectorConfiguration.AddMember("OutlierFilteringStrength", AnomalyDetectorOutlierFilteringStrength)
 
 	AnomalyDetectorStateValue_PENDING_TRAINING = AnomalyDetectorStateValue.AddMember("PENDING_TRAINING", smithyprelude.Unit)
 

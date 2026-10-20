@@ -8,6 +8,66 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeDescribeGatewayConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.DescribeGatewayConfiguration) {
+	switch vv := v.(type) {
+	case *types.DescribeGatewayConfigurationMemberHostSharedAlb:
+		s.WriteUnion(schema, schemas.DescribeGatewayConfiguration_hostSharedAlb)
+		s.WriteStruct(schemas.DescribeGatewayConfiguration_hostSharedAlb)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeGatewayConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.GatewayConfiguration) {
+	switch vv := v.(type) {
+	case *types.GatewayConfigurationMemberHostSharedAlb:
+		s.WriteUnion(schema, schemas.GatewayConfiguration_hostSharedAlb)
+		s.WriteStruct(schemas.GatewayConfiguration_hostSharedAlb)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeGatewayConnectionResources(s smithy.ShapeSerializer, schema *smithy.Schema, v types.GatewayConnectionResources) {
+	switch vv := v.(type) {
+	case *types.GatewayConnectionResourcesMemberHostSharedAlb:
+		s.WriteUnion(schema, schemas.GatewayConnectionResources_hostSharedAlb)
+		serializeGatewayConnectionAlbResourcesList(s, schemas.GatewayConnectionResources_hostSharedAlb, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeGatewayElbAccessLogDestination(s smithy.ShapeSerializer, schema *smithy.Schema, v types.GatewayElbAccessLogDestination) {
+	switch vv := v.(type) {
+	case *types.GatewayElbAccessLogDestinationMemberS3:
+		s.WriteUnion(schema, schemas.GatewayElbAccessLogDestination_s3)
+		s.WriteStruct(schemas.GatewayElbAccessLogDestination_s3)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeGatewayInfrastructureResources(s smithy.ShapeSerializer, schema *smithy.Schema, v types.GatewayInfrastructureResources) {
+	switch vv := v.(type) {
+	case *types.GatewayInfrastructureResourcesMemberHostSharedAlb:
+		s.WriteUnion(schema, schemas.GatewayInfrastructureResources_hostSharedAlb)
+		serializeElbGatewayResourcesList(s, schemas.GatewayInfrastructureResources_hostSharedAlb, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeGatewayRouteResources(s smithy.ShapeSerializer, schema *smithy.Schema, v types.GatewayRouteResources) {
+	switch vv := v.(type) {
+	case *types.GatewayRouteResourcesMemberHostSharedAlb:
+		s.WriteUnion(schema, schemas.GatewayRouteResources_hostSharedAlb)
+		serializeGatewayRouteAlbResourcesList(s, schemas.GatewayRouteResources_hostSharedAlb, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func serializeServiceConnectContainerConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ServiceConnectContainerConfiguration) {
 	switch vv := v.(type) {
 	case *types.ServiceConnectContainerConfigurationMemberLogLevel:
@@ -17,11 +77,106 @@ func serializeServiceConnectContainerConfiguration(s smithy.ShapeSerializer, sch
 	}
 }
 
+func serializeUpdateGatewayConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.UpdateGatewayConfiguration) {
+	switch vv := v.(type) {
+	case *types.UpdateGatewayConfigurationMemberHostSharedAlb:
+		s.WriteUnion(schema, schemas.UpdateGatewayConfiguration_hostSharedAlb)
+		s.WriteStruct(schemas.UpdateGatewayConfiguration_hostSharedAlb)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeDescribeGatewayConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.DescribeGatewayConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.DescribeGatewayConfiguration_hostSharedAlb:
+			vv := &types.DescribeGatewayConfigurationMemberHostSharedAlb{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeGatewayConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.GatewayConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.GatewayConfiguration_hostSharedAlb:
+			vv := &types.GatewayConfigurationMemberHostSharedAlb{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeGatewayConnectionResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.GatewayConnectionResources) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.GatewayConnectionResources_hostSharedAlb:
+			vv := &types.GatewayConnectionResourcesMemberHostSharedAlb{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeGatewayElbAccessLogDestination(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.GatewayElbAccessLogDestination) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.GatewayElbAccessLogDestination_s3:
+			vv := &types.GatewayElbAccessLogDestinationMemberS3{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeGatewayInfrastructureResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.GatewayInfrastructureResources) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.GatewayInfrastructureResources_hostSharedAlb:
+			vv := &types.GatewayInfrastructureResourcesMemberHostSharedAlb{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeGatewayRouteResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.GatewayRouteResources) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.GatewayRouteResources_hostSharedAlb:
+			vv := &types.GatewayRouteResourcesMemberHostSharedAlb{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeServiceConnectContainerConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ServiceConnectContainerConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
 		case schemas.ServiceConnectContainerConfiguration_logLevel:
 			vv := &types.ServiceConnectContainerConfigurationMemberLogLevel{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeUpdateGatewayConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.UpdateGatewayConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.UpdateGatewayConfiguration_hostSharedAlb:
+			vv := &types.UpdateGatewayConfigurationMemberHostSharedAlb{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -52,6 +207,17 @@ func serializeAcceleratorNameSet(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeAcceleratorTypeSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AcceleratorType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAccessTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccessType) {
 	if v == nil {
 		return
 	}
@@ -577,6 +743,19 @@ func serializeEBSTagSpecifications(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeElbGatewayResourcesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ElbGatewayResources) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeEnvironmentFiles(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EnvironmentFile) {
 	if v == nil {
 		return
@@ -639,6 +818,169 @@ func serializeExpressGatewayServiceIncludeList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeFailures(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Failure) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayClusterAssociationStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayClusterAssociationStatus) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeGatewayClusterAssociationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayClusterAssociationSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayConnectionAlbResourcesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayConnectionAlbResources) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayConnectionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayConnection) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayConnectorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayConnector) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayOperationErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayOperationError) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayResourceFailureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayResourceFailure) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayRouteAlbResourcesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayRouteAlbResources) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayRouteLoadBalancerSecurityGroupList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayRouteLoadBalancerSecurityGroup) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayRouteStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayRouteStatus) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeGatewayRouteSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayRouteSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGatewayStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayStatus) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeGatewaySummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewaySummary) {
 	if v == nil {
 		return
 	}
@@ -1607,6 +1949,27 @@ func deserializeAcceleratorTypeSet(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
+func deserializeAccessTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccessType) error {
+	*v = make([]types.AccessType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AccessType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.AccessType(vv))
+		return nil
+	})
+}
+
 func deserializeAllowedInstanceTypeSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -2500,6 +2863,28 @@ func deserializeEBSTagSpecifications(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeElbGatewayResourcesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ElbGatewayResources) error {
+	*v = make([]types.ElbGatewayResources, 0)
+	var vv types.ElbGatewayResources
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ElbGatewayResources
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ElbGatewayResources{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeEnvironmentFiles(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EnvironmentFile) error {
 	*v = make([]types.EnvironmentFile, 0)
 	var vv types.EnvironmentFile
@@ -2621,6 +3006,289 @@ func deserializeFailures(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 		}
 
 		vv = types.Failure{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayClusterAssociationStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayClusterAssociationStatus) error {
+	*v = make([]types.GatewayClusterAssociationStatus, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayClusterAssociationStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.GatewayClusterAssociationStatus(vv))
+		return nil
+	})
+}
+
+func deserializeGatewayClusterAssociationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayClusterAssociationSummary) error {
+	*v = make([]types.GatewayClusterAssociationSummary, 0)
+	var vv types.GatewayClusterAssociationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayClusterAssociationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayClusterAssociationSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayConnectionAlbResourcesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayConnectionAlbResources) error {
+	*v = make([]types.GatewayConnectionAlbResources, 0)
+	var vv types.GatewayConnectionAlbResources
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayConnectionAlbResources
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayConnectionAlbResources{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayConnectionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayConnection) error {
+	*v = make([]types.GatewayConnection, 0)
+	var vv types.GatewayConnection
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayConnection
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayConnection{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayConnectorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayConnector) error {
+	*v = make([]types.GatewayConnector, 0)
+	var vv types.GatewayConnector
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayConnector
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayConnector{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayOperationErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayOperationError) error {
+	*v = make([]types.GatewayOperationError, 0)
+	var vv types.GatewayOperationError
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayOperationError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayOperationError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayResourceFailureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayResourceFailure) error {
+	*v = make([]types.GatewayResourceFailure, 0)
+	var vv types.GatewayResourceFailure
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayResourceFailure
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayResourceFailure{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayRouteAlbResourcesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayRouteAlbResources) error {
+	*v = make([]types.GatewayRouteAlbResources, 0)
+	var vv types.GatewayRouteAlbResources
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayRouteAlbResources
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayRouteAlbResources{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayRouteLoadBalancerSecurityGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayRouteLoadBalancerSecurityGroup) error {
+	*v = make([]types.GatewayRouteLoadBalancerSecurityGroup, 0)
+	var vv types.GatewayRouteLoadBalancerSecurityGroup
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayRouteLoadBalancerSecurityGroup
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayRouteLoadBalancerSecurityGroup{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayRouteStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayRouteStatus) error {
+	*v = make([]types.GatewayRouteStatus, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayRouteStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.GatewayRouteStatus(vv))
+		return nil
+	})
+}
+
+func deserializeGatewayRouteSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayRouteSummary) error {
+	*v = make([]types.GatewayRouteSummary, 0)
+	var vv types.GatewayRouteSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayRouteSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewayRouteSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGatewayStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayStatus) error {
+	*v = make([]types.GatewayStatus, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewayStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.GatewayStatus(vv))
+		return nil
+	})
+}
+
+func deserializeGatewaySummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewaySummary) error {
+	*v = make([]types.GatewaySummary, 0)
+	var vv types.GatewaySummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GatewaySummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GatewaySummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

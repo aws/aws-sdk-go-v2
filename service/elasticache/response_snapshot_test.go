@@ -521,6 +521,58 @@ func TestCheckResponseSnapshot_CompleteMigration(t *testing.T) {
 			Durability:                 types.Durability("default"),
 			EffectiveDurability:        types.EffectiveDurability("async"),
 		},
+		ServerlessCache: &types.ServerlessCache{
+			ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+			Description:         ptr.String("__Description__"),
+			CreateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:              ptr.String("__Status__"),
+			Engine:              ptr.String("__Engine__"),
+			MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+			FullEngineVersion:   ptr.String("__FullEngineVersion__"),
+			CacheUsageLimits: &types.CacheUsageLimits{
+				DataStorage: &types.DataStorage{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+					Unit:    types.DataStorageUnit("GB"),
+				},
+				ECPUPerSecond: &types.ECPUPerSecond{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+				},
+			},
+			KmsKeyId:              ptr.String("__KmsKeyId__"),
+			StorageEncryptionType: types.StorageEncryptionType("none"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Endpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ReaderEndpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ARN:         ptr.String("__ARN__"),
+			UserGroupId: ptr.String("__UserGroupId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotRetentionLimit: ptr.Int32(1),
+			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+			NetworkType:            types.NetworkType("ipv4"),
+			ConnectionType:         types.ConnectionType("vpc"),
+			Migration: &types.MigrationSummary{
+				Status: ptr.String("__Status__"),
+				MigrationEndpoint: &types.Endpoint{
+					Address: ptr.String("__Address__"),
+					Port:    ptr.Int32(1),
+				},
+				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CompleteMigration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -531,8 +583,9 @@ func TestCheckResponseSnapshot_CompleteMigration(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
-		Force:              ptr.Bool(true),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Force:               ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1613,6 +1666,14 @@ func TestCheckResponseSnapshot_CreateServerlessCache(t *testing.T) {
 			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 			NetworkType:            types.NetworkType("ipv4"),
 			ConnectionType:         types.ConnectionType("vpc"),
+			Migration: &types.MigrationSummary{
+				Status: ptr.String("__Status__"),
+				MigrationEndpoint: &types.Endpoint{
+					Address: ptr.String("__Address__"),
+					Port:    ptr.Int32(1),
+				},
+				CutoverMode: ptr.String("__CutoverMode__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateServerlessCache.response")
@@ -2889,6 +2950,14 @@ func TestCheckResponseSnapshot_DeleteServerlessCache(t *testing.T) {
 			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 			NetworkType:            types.NetworkType("ipv4"),
 			ConnectionType:         types.ConnectionType("vpc"),
+			Migration: &types.MigrationSummary{
+				Status: ptr.String("__Status__"),
+				MigrationEndpoint: &types.Endpoint{
+					Address: ptr.String("__Address__"),
+					Port:    ptr.Int32(1),
+				},
+				CutoverMode: ptr.String("__CutoverMode__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteServerlessCache.response")
@@ -4781,6 +4850,14 @@ func TestCheckResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 				DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 				NetworkType:            types.NetworkType("ipv4"),
 				ConnectionType:         types.ConnectionType("vpc"),
+				Migration: &types.MigrationSummary{
+					Status: ptr.String("__Status__"),
+					MigrationEndpoint: &types.Endpoint{
+						Address: ptr.String("__Address__"),
+						Port:    ptr.Int32(1),
+					},
+					CutoverMode: ptr.String("__CutoverMode__"),
+				},
 			},
 			{
 				ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
@@ -4825,6 +4902,14 @@ func TestCheckResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 				DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 				NetworkType:            types.NetworkType("ipv4"),
 				ConnectionType:         types.ConnectionType("vpc"),
+				Migration: &types.MigrationSummary{
+					Status: ptr.String("__Status__"),
+					MigrationEndpoint: &types.Endpoint{
+						Address: ptr.String("__Address__"),
+						Port:    ptr.Int32(1),
+					},
+					CutoverMode: ptr.String("__CutoverMode__"),
+				},
 			},
 		},
 	}
@@ -7110,6 +7195,14 @@ func TestCheckResponseSnapshot_ModifyServerlessCache(t *testing.T) {
 			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 			NetworkType:            types.NetworkType("ipv4"),
 			ConnectionType:         types.ConnectionType("vpc"),
+			Migration: &types.MigrationSummary{
+				Status: ptr.String("__Status__"),
+				MigrationEndpoint: &types.Endpoint{
+					Address: ptr.String("__Address__"),
+					Port:    ptr.Int32(1),
+				},
+				CutoverMode: ptr.String("__CutoverMode__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyServerlessCache.response")
@@ -7260,6 +7353,99 @@ func TestCheckResponseSnapshot_ModifyUserGroup(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ModifyUserGroup.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PrepareMigration(t *testing.T) {
+	want := &PrepareMigrationOutput{
+		ServerlessCache: &types.ServerlessCache{
+			ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+			Description:         ptr.String("__Description__"),
+			CreateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:              ptr.String("__Status__"),
+			Engine:              ptr.String("__Engine__"),
+			MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+			FullEngineVersion:   ptr.String("__FullEngineVersion__"),
+			CacheUsageLimits: &types.CacheUsageLimits{
+				DataStorage: &types.DataStorage{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+					Unit:    types.DataStorageUnit("GB"),
+				},
+				ECPUPerSecond: &types.ECPUPerSecond{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+				},
+			},
+			KmsKeyId:              ptr.String("__KmsKeyId__"),
+			StorageEncryptionType: types.StorageEncryptionType("none"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Endpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ReaderEndpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ARN:         ptr.String("__ARN__"),
+			UserGroupId: ptr.String("__UserGroupId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotRetentionLimit: ptr.Int32(1),
+			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+			NetworkType:            types.NetworkType("ipv4"),
+			ConnectionType:         types.ConnectionType("vpc"),
+			Migration: &types.MigrationSummary{
+				Status: ptr.String("__Status__"),
+				MigrationEndpoint: &types.Endpoint{
+					Address: ptr.String("__Address__"),
+					Port:    ptr.Int32(1),
+				},
+				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("PrepareMigration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PrepareMigration(context.Background(), &PrepareMigrationInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+		},
+		SourceAuthenticationConfiguration: &types.SourceAuthenticationConfiguration{
+			SecretManagerConfig: &types.SecretManagerAuthConfig{
+				SecretArn: ptr.String("__SecretArn__"),
+			},
+		},
+		SourceTlsConfiguration: &types.SourceTlsConfiguration{
+			SourceTlsMode:        types.TlsMode("none"),
+			SourceTlsCertificate: ptr.String("__SourceTlsCertificate__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PrepareMigration.response", err)
 	}
 }
 
@@ -7898,6 +8084,58 @@ func TestCheckResponseSnapshot_StartMigration(t *testing.T) {
 			Durability:                 types.Durability("default"),
 			EffectiveDurability:        types.EffectiveDurability("async"),
 		},
+		ServerlessCache: &types.ServerlessCache{
+			ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+			Description:         ptr.String("__Description__"),
+			CreateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:              ptr.String("__Status__"),
+			Engine:              ptr.String("__Engine__"),
+			MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+			FullEngineVersion:   ptr.String("__FullEngineVersion__"),
+			CacheUsageLimits: &types.CacheUsageLimits{
+				DataStorage: &types.DataStorage{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+					Unit:    types.DataStorageUnit("GB"),
+				},
+				ECPUPerSecond: &types.ECPUPerSecond{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+				},
+			},
+			KmsKeyId:              ptr.String("__KmsKeyId__"),
+			StorageEncryptionType: types.StorageEncryptionType("none"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Endpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ReaderEndpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ARN:         ptr.String("__ARN__"),
+			UserGroupId: ptr.String("__UserGroupId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotRetentionLimit: ptr.Int32(1),
+			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+			NetworkType:            types.NetworkType("ipv4"),
+			ConnectionType:         types.ConnectionType("vpc"),
+			Migration: &types.MigrationSummary{
+				Status: ptr.String("__Status__"),
+				MigrationEndpoint: &types.Endpoint{
+					Address: ptr.String("__Address__"),
+					Port:    ptr.Int32(1),
+				},
+				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartMigration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7908,7 +8146,8 @@ func TestCheckResponseSnapshot_StartMigration(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.StartMigration(context.Background(), &StartMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
 		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
 			{
 				Address: ptr.String("__Address__"),
@@ -7919,12 +8158,88 @@ func TestCheckResponseSnapshot_StartMigration(t *testing.T) {
 				Port:    ptr.Int32(1),
 			},
 		},
+		AutoCutover:          ptr.Bool(true),
+		ClearTargetCacheData: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartMigration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopMigration(t *testing.T) {
+	want := &StopMigrationOutput{
+		ServerlessCache: &types.ServerlessCache{
+			ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+			Description:         ptr.String("__Description__"),
+			CreateTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:              ptr.String("__Status__"),
+			Engine:              ptr.String("__Engine__"),
+			MajorEngineVersion:  ptr.String("__MajorEngineVersion__"),
+			FullEngineVersion:   ptr.String("__FullEngineVersion__"),
+			CacheUsageLimits: &types.CacheUsageLimits{
+				DataStorage: &types.DataStorage{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+					Unit:    types.DataStorageUnit("GB"),
+				},
+				ECPUPerSecond: &types.ECPUPerSecond{
+					Maximum: ptr.Int32(1),
+					Minimum: ptr.Int32(1),
+				},
+			},
+			KmsKeyId:              ptr.String("__KmsKeyId__"),
+			StorageEncryptionType: types.StorageEncryptionType("none"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Endpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ReaderEndpoint: &types.Endpoint{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			ARN:         ptr.String("__ARN__"),
+			UserGroupId: ptr.String("__UserGroupId__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SnapshotRetentionLimit: ptr.Int32(1),
+			DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
+			NetworkType:            types.NetworkType("ipv4"),
+			ConnectionType:         types.ConnectionType("vpc"),
+			Migration: &types.MigrationSummary{
+				Status: ptr.String("__Status__"),
+				MigrationEndpoint: &types.Endpoint{
+					Address: ptr.String("__Address__"),
+					Port:    ptr.Int32(1),
+				},
+				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StopMigration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopMigration(context.Background(), &StopMigrationInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopMigration.response", err)
 	}
 }
 
@@ -9513,131 +9828,10 @@ func TestCheckResponseSnapshot_Error_InvalidCacheClusterStateFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationGroup(context.Background(), &CreateReplicationGroupInput{
-		ReplicationGroupId:          ptr.String("__ReplicationGroupId__"),
-		ReplicationGroupDescription: ptr.String("__ReplicationGroupDescription__"),
-		GlobalReplicationGroupId:    ptr.String("__GlobalReplicationGroupId__"),
-		PrimaryClusterId:            ptr.String("__PrimaryClusterId__"),
-		AutomaticFailoverEnabled:    ptr.Bool(true),
-		MultiAZEnabled:              ptr.Bool(true),
-		NumCacheClusters:            ptr.Int32(1),
-		PreferredCacheClusterAZs: []string{
-			"__Member__",
-			"__Member__",
-		},
-		NumNodeGroups:        ptr.Int32(1),
-		ReplicasPerNodeGroup: ptr.Int32(1),
-		NodeGroupConfiguration: []types.NodeGroupConfiguration{
-			{
-				NodeGroupId:             ptr.String("__NodeGroupId__"),
-				Slots:                   ptr.String("__Slots__"),
-				ReplicaCount:            ptr.Int32(1),
-				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
-				ReplicaAvailabilityZones: []string{
-					"__Member__",
-					"__Member__",
-				},
-				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
-				ReplicaOutpostArns: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				NodeGroupId:             ptr.String("__NodeGroupId__"),
-				Slots:                   ptr.String("__Slots__"),
-				ReplicaCount:            ptr.Int32(1),
-				PrimaryAvailabilityZone: ptr.String("__PrimaryAvailabilityZone__"),
-				ReplicaAvailabilityZones: []string{
-					"__Member__",
-					"__Member__",
-				},
-				PrimaryOutpostArn: ptr.String("__PrimaryOutpostArn__"),
-				ReplicaOutpostArns: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		CacheNodeType:           ptr.String("__CacheNodeType__"),
-		Engine:                  ptr.String("__Engine__"),
-		EngineVersion:           ptr.String("__EngineVersion__"),
-		CacheParameterGroupName: ptr.String("__CacheParameterGroupName__"),
-		CacheSubnetGroupName:    ptr.String("__CacheSubnetGroupName__"),
-		CacheSecurityGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		SecurityGroupIds: []string{
-			"__Member__",
-			"__Member__",
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-		SnapshotArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		SnapshotName:               ptr.String("__SnapshotName__"),
-		PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
-		Port:                       ptr.Int32(1),
-		NotificationTopicArn:       ptr.String("__NotificationTopicArn__"),
-		AutoMinorVersionUpgrade:    ptr.Bool(true),
-		SnapshotRetentionLimit:     ptr.Int32(1),
-		SnapshotWindow:             ptr.String("__SnapshotWindow__"),
-		AuthToken:                  ptr.String("__AuthToken__"),
-		TransitEncryptionEnabled:   ptr.Bool(true),
-		AtRestEncryptionEnabled:    ptr.Bool(true),
-		KmsKeyId:                   ptr.String("__KmsKeyId__"),
-		UserGroupIds: []string{
-			"__Member__",
-			"__Member__",
-		},
-		LogDeliveryConfigurations: []types.LogDeliveryConfigurationRequest{
-			{
-				LogType:         types.LogType("slow-log"),
-				DestinationType: types.DestinationType("cloudwatch-logs"),
-				DestinationDetails: &types.DestinationDetails{
-					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
-						LogGroup: ptr.String("__LogGroup__"),
-					},
-					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
-						DeliveryStream: ptr.String("__DeliveryStream__"),
-					},
-				},
-				LogFormat: types.LogFormat("text"),
-				Enabled:   ptr.Bool(true),
-			},
-			{
-				LogType:         types.LogType("slow-log"),
-				DestinationType: types.DestinationType("cloudwatch-logs"),
-				DestinationDetails: &types.DestinationDetails{
-					CloudWatchLogsDetails: &types.CloudWatchLogsDestinationDetails{
-						LogGroup: ptr.String("__LogGroup__"),
-					},
-					KinesisFirehoseDetails: &types.KinesisFirehoseDestinationDetails{
-						DeliveryStream: ptr.String("__DeliveryStream__"),
-					},
-				},
-				LogFormat: types.LogFormat("text"),
-				Enabled:   ptr.Bool(true),
-			},
-		},
-		DataTieringEnabled:          ptr.Bool(true),
-		NetworkType:                 types.NetworkType("ipv4"),
-		IpDiscovery:                 types.IpDiscovery("ipv4"),
-		TransitEncryptionMode:       types.TransitEncryptionMode("preferred"),
-		ClusterMode:                 types.ClusterMode("enabled"),
-		ServerlessCacheSnapshotName: ptr.String("__ServerlessCacheSnapshotName__"),
-		Durability:                  types.Durability("default"),
+	_, opErr := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Force:               ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -10538,6 +10732,35 @@ func TestCheckResponseSnapshot_Error_InvalidVPCNetworkStateFault(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_MigrationHealthFault(t *testing.T) {
+	want := &types.MigrationHealthFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("MigrationHealthFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Force:               ptr.Bool(true),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.MigrationHealthFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.MigrationHealthFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "MigrationHealthFault.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_NoOperationFault(t *testing.T) {
 	want := &types.NoOperationFault{
 		Message: ptr.String("__Message__"),
@@ -11156,7 +11379,8 @@ func TestCheckResponseSnapshot_Error_ReplicationGroupAlreadyUnderMigrationFault(
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.StartMigration(context.Background(), &StartMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
 		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
 			{
 				Address: ptr.String("__Address__"),
@@ -11167,6 +11391,8 @@ func TestCheckResponseSnapshot_Error_ReplicationGroupAlreadyUnderMigrationFault(
 				Port:    ptr.Int32(1),
 			},
 		},
+		AutoCutover:          ptr.Bool(true),
+		ClearTargetCacheData: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -11230,8 +11456,9 @@ func TestCheckResponseSnapshot_Error_ReplicationGroupNotUnderMigrationFault(t *t
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
-		Force:              ptr.Bool(true),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Force:               ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -11462,6 +11689,52 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheAlreadyExistsFault(t *testin
 	}
 }
 
+func TestCheckResponseSnapshot_Error_ServerlessCacheAlreadyUnderMigrationFault(t *testing.T) {
+	want := &types.ServerlessCacheAlreadyUnderMigrationFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServerlessCacheAlreadyUnderMigrationFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.PrepareMigration(context.Background(), &PrepareMigrationInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+		},
+		SourceAuthenticationConfiguration: &types.SourceAuthenticationConfiguration{
+			SecretManagerConfig: &types.SecretManagerAuthConfig{
+				SecretArn: ptr.String("__SecretArn__"),
+			},
+		},
+		SourceTlsConfiguration: &types.SourceTlsConfiguration{
+			SourceTlsMode:        types.TlsMode("none"),
+			SourceTlsCertificate: ptr.String("__SourceTlsCertificate__"),
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServerlessCacheAlreadyUnderMigrationFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServerlessCacheAlreadyUnderMigrationFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServerlessCacheAlreadyUnderMigrationFault.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_ServerlessCacheNotFoundFault(t *testing.T) {
 	want := &types.ServerlessCacheNotFoundFault{
 		Message: ptr.String("__Message__"),
@@ -11496,6 +11769,35 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheNotFoundFault(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServerlessCacheNotFoundFault.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ServerlessCacheNotUnderMigrationFault(t *testing.T) {
+	want := &types.ServerlessCacheNotUnderMigrationFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServerlessCacheNotUnderMigrationFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CompleteMigration(context.Background(), &CompleteMigrationInput{
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Force:               ptr.Bool(true),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServerlessCacheNotUnderMigrationFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServerlessCacheNotUnderMigrationFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServerlessCacheNotUnderMigrationFault.error", err)
 	}
 }
 

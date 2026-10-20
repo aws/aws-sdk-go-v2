@@ -1,0 +1,8 @@
+{
+    "id": "d9dd79b4-792e-42b9-b8f0-9420a434e68a",
+    "type": "feature",
+    "description": "LiveMigration enables customers to migrate from self-hosted EC2 Redis and Valkey clusters to ElastiCache Serverless with near-zero downtime. Customers control the migration through three API-driven phases (prepare, start, complete) that handle traffic proxying, data replication, and cutover.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

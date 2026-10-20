@@ -1074,6 +1074,23 @@ type LogDeliveryConfigurationRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Provides a summary of the current migration status for a serverless cache.
+type MigrationSummary struct {
+
+	// The cutover configuration for the migration.
+	CutoverMode *string
+
+	// The migration endpoint, which is the standard endpoint of the serverless cache.
+	// Point your application at this endpoint during the migration. Until cutover,
+	// ElastiCache routes requests on this endpoint to your source.
+	MigrationEndpoint *Endpoint
+
+	// The current status of the migration.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a collection of cache nodes in a replication group. One node in the
 // node group is the read/write primary node. All the other nodes are read-only
 // Replica nodes.
@@ -1966,6 +1983,17 @@ type ScaleConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for authenticating with the source using Secrets Manager during
+// migration.
+type SecretManagerAuthConfig struct {
+
+	// The ARN of the secret in AWS Secrets Manager that contains the credentials for
+	// authenticating with the source.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a single cache security group and its status.
 type SecurityGroupMembership struct {
 
@@ -2021,6 +2049,9 @@ type ServerlessCache struct {
 
 	// The version number of the engine the serverless cache is compatible with.
 	MajorEngineVersion *string
+
+	// Provides a summary of the migration status for the serverless cache.
+	Migration *MigrationSummary
 
 	// The type of IP address protocol used by the serverless cache. Must be either
 	// ipv4 | ipv6 | dual_stack . ipv6 is only supported with IPv6-only subnets. If
@@ -2421,6 +2452,29 @@ type Snapshot struct {
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group
 	// for the source cluster.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The authentication configuration for connecting to the source during migration.
+type SourceAuthenticationConfiguration struct {
+
+	// The Secrets Manager configuration used for authenticating with the source
+	// during migration.
+	SecretManagerConfig *SecretManagerAuthConfig
+
+	noSmithyDocumentSerde
+}
+
+// The TLS configuration for connecting to the source during migration.
+type SourceTlsConfiguration struct {
+
+	// The TLS certificate used to verify the identity of the source during migration.
+	SourceTlsCertificate *string
+
+	// The TLS mode to use when connecting to the source. Valid values are none and
+	// verify-ca .
+	SourceTlsMode TlsMode
 
 	noSmithyDocumentSerde
 }

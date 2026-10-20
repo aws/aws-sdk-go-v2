@@ -614,6 +614,54 @@ func (v *DaemonNotFoundException) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The specified gateway wasn't found. Check that the gateway name or ARN is
+// correct and that the gateway exists in your account and Region.
+type GatewayNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *GatewayNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GatewayNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GatewayNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "GatewayNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *GatewayNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *GatewayNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.GatewayNotFoundException_message, *v.Message)
+	}
+}
+func (v *GatewayNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GatewayNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The specified parameter isn't valid. Review the available parameters for the
 // API request.
 //

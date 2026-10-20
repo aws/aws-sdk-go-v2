@@ -650,6 +650,10 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 					},
 					SolutionId: ptr.String("__SolutionId__"),
 				},
+				ExpressPrivateOfferConfigurationSummary: &types.ExpressPrivateOfferConfigurationSummary{
+					ProductId: ptr.String("__ProductId__"),
+					State:     types.ExpressPrivateOfferConfigurationStateString("ACTIVE"),
+				},
 			},
 			{
 				Name:             ptr.String("__Name__"),
@@ -723,6 +727,10 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 						"__Member__",
 					},
 					SolutionId: ptr.String("__SolutionId__"),
+				},
+				ExpressPrivateOfferConfigurationSummary: &types.ExpressPrivateOfferConfigurationSummary{
+					ProductId: ptr.String("__ProductId__"),
+					State:     types.ExpressPrivateOfferConfigurationStateString("ACTIVE"),
 				},
 			},
 		},

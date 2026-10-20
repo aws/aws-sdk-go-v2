@@ -1036,7 +1036,8 @@ func TestUpdateResponseSnapshot_CreateTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -1778,7 +1779,8 @@ func TestUpdateResponseSnapshot_DeleteTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -3400,7 +3402,8 @@ func TestUpdateResponseSnapshot_DescribeTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -5260,7 +5263,8 @@ func TestUpdateResponseSnapshot_RestoreTableFromBackup(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -5679,7 +5683,8 @@ func TestUpdateResponseSnapshot_RestoreTableToPointInTime(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -7169,7 +7174,8 @@ func TestUpdateResponseSnapshot_UpdateTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),

@@ -59,6 +59,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.DaemonNotFoundException,
 			New:    func() any { return &types.DaemonNotFoundException{} },
 		},
+		"com.amazonaws.ecs#GatewayNotFoundException": {
+			Schema: schemas.GatewayNotFoundException,
+			New:    func() any { return &types.GatewayNotFoundException{} },
+		},
 		"com.amazonaws.ecs#InvalidParameterException": {
 			Schema: schemas.InvalidParameterException,
 			New:    func() any { return &types.InvalidParameterException{} },

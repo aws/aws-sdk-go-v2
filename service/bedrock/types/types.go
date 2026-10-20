@@ -8801,6 +8801,9 @@ type GuardrailContextualGroundingPolicy struct {
 	// This member is required.
 	Filters []GuardrailContextualGroundingFilter
 
+	// The tier that your guardrail uses for contextual grounding.
+	Tier *GuardrailContextualGroundingTier
+
 	noSmithyDocumentSerde
 }
 
@@ -8812,12 +8815,20 @@ func (v *GuardrailContextualGroundingPolicy) Serialize(s smithy.ShapeSerializer)
 
 func (v *GuardrailContextualGroundingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeGuardrailContextualGroundingFilters(s, schemas.GuardrailContextualGroundingPolicy_filters, v.Filters)
+	if v.Tier != nil {
+		s.WriteStruct(schemas.GuardrailContextualGroundingPolicy_tier)
+		v.Tier.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *GuardrailContextualGroundingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingPolicy, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.GuardrailContextualGroundingPolicy_filters:
 			return deserializeGuardrailContextualGroundingFilters(d, schemas.GuardrailContextualGroundingPolicy_filters, &v.Filters)
+		case schemas.GuardrailContextualGroundingPolicy_tier:
+			v.Tier = &GuardrailContextualGroundingTier{}
+			return v.Tier.Deserialize(d)
 		}
 		return nil
 	})
@@ -8831,6 +8842,9 @@ type GuardrailContextualGroundingPolicyConfig struct {
 	// This member is required.
 	FiltersConfig []GuardrailContextualGroundingFilterConfig
 
+	// The tier that your guardrail uses for contextual grounding.
+	TierConfig *GuardrailContextualGroundingTierConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -8842,12 +8856,114 @@ func (v *GuardrailContextualGroundingPolicyConfig) Serialize(s smithy.ShapeSeria
 
 func (v *GuardrailContextualGroundingPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeGuardrailContextualGroundingFiltersConfig(s, schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig, v.FiltersConfig)
+	if v.TierConfig != nil {
+		s.WriteStruct(schemas.GuardrailContextualGroundingPolicyConfig_tierConfig)
+		v.TierConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *GuardrailContextualGroundingPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingPolicyConfig, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig:
 			return deserializeGuardrailContextualGroundingFiltersConfig(d, schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig, &v.FiltersConfig)
+		case schemas.GuardrailContextualGroundingPolicyConfig_tierConfig:
+			v.TierConfig = &GuardrailContextualGroundingTierConfig{}
+			return v.TierConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies the tier that your guardrail uses for contextual grounding checks.
+type GuardrailContextualGroundingTier struct {
+
+	// The tier that your guardrail uses for contextual grounding. Valid values
+	// include:
+	//
+	//   - CLASSIC tier – Provides established contextual grounding functionality
+	//   supporting English, French, and Spanish languages.
+	//
+	//   - STANDARD tier – Provides a more robust solution than the CLASSIC tier, with
+	//   support for reasoning, conversational content and more comprehensive language
+	//   support. This tier requires that your guardrail use [cross-Region inference].
+	//
+	// [cross-Region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+	//
+	// This member is required.
+	TierName GuardrailContextualGroundingTierName
+
+	noSmithyDocumentSerde
+}
+
+func (v *GuardrailContextualGroundingTier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContextualGroundingTier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContextualGroundingTier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TierName != "" {
+		s.WriteString(schemas.GuardrailContextualGroundingTier_tierName, string(v.TierName))
+	}
+}
+func (v *GuardrailContextualGroundingTier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingTier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContextualGroundingTier_tierName:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContextualGroundingTier_tierName, &ev); err != nil {
+				return err
+			}
+			v.TierName = GuardrailContextualGroundingTierName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Specifies the tier that your guardrail uses for contextual grounding checks.
+type GuardrailContextualGroundingTierConfig struct {
+
+	// The tier that your guardrail uses for contextual grounding. Valid values
+	// include:
+	//
+	//   - CLASSIC tier – Provides established contextual grounding functionality
+	//   supporting English, French, and Spanish languages.
+	//
+	//   - STANDARD tier – Provides a more robust solution than the CLASSIC tier, with
+	//   support for reasoning, conversational content and more comprehensive language
+	//   support. This tier requires that your guardrail use [cross-Region inference].
+	//
+	// [cross-Region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+	//
+	// This member is required.
+	TierName GuardrailContextualGroundingTierName
+
+	noSmithyDocumentSerde
+}
+
+func (v *GuardrailContextualGroundingTierConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContextualGroundingTierConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContextualGroundingTierConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TierName != "" {
+		s.WriteString(schemas.GuardrailContextualGroundingTierConfig_tierName, string(v.TierName))
+	}
+}
+func (v *GuardrailContextualGroundingTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingTierConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContextualGroundingTierConfig_tierName:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContextualGroundingTierConfig_tierName, &ev); err != nil {
+				return err
+			}
+			v.TierName = GuardrailContextualGroundingTierName(ev)
+			return nil
 		}
 		return nil
 	})

@@ -28,6 +28,12 @@ func serializeEntityTypeFilters(s smithy.ShapeSerializer, schema *smithy.Schema,
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.EntityTypeFiltersMemberExpressPrivateOfferConfigurationFilters:
+		s.WriteUnion(schema, schemas.EntityTypeFilters_ExpressPrivateOfferConfigurationFilters)
+		s.WriteStruct(schemas.EntityTypeFilters_ExpressPrivateOfferConfigurationFilters)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.EntityTypeFiltersMemberMachineLearningProductFilters:
 		s.WriteUnion(schema, schemas.EntityTypeFilters_MachineLearningProductFilters)
 		s.WriteStruct(schemas.EntityTypeFilters_MachineLearningProductFilters)
@@ -78,6 +84,12 @@ func serializeEntityTypeSort(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	case *types.EntityTypeSortMemberDataProductSort:
 		s.WriteUnion(schema, schemas.EntityTypeSort_DataProductSort)
 		s.WriteStruct(schemas.EntityTypeSort_DataProductSort)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.EntityTypeSortMemberExpressPrivateOfferConfigurationSort:
+		s.WriteUnion(schema, schemas.EntityTypeSort_ExpressPrivateOfferConfigurationSort)
+		s.WriteStruct(schemas.EntityTypeSort_ExpressPrivateOfferConfigurationSort)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -163,6 +175,10 @@ func deserializeEntityTypeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, 
 			vv := &types.EntityTypeFiltersMemberDataProductFilters{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.EntityTypeFilters_ExpressPrivateOfferConfigurationFilters:
+			vv := &types.EntityTypeFiltersMemberExpressPrivateOfferConfigurationFilters{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.EntityTypeFilters_MachineLearningProductFilters:
 			vv := &types.EntityTypeFiltersMemberMachineLearningProductFilters{}
 			*v = vv
@@ -201,6 +217,10 @@ func deserializeEntityTypeSort(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 			return vv.Deserialize(d)
 		case schemas.EntityTypeSort_DataProductSort:
 			vv := &types.EntityTypeSortMemberDataProductSort{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.EntityTypeSort_ExpressPrivateOfferConfigurationSort:
+			vv := &types.EntityTypeSortMemberExpressPrivateOfferConfigurationSort{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.EntityTypeSort_MachineLearningProductSort:
@@ -472,6 +492,39 @@ func serializeErrorScopeList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeExpressPrivateOfferConfigurationEntityIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeExpressPrivateOfferConfigurationProductIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeExpressPrivateOfferConfigurationStateFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExpressPrivateOfferConfigurationStateString) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -1373,6 +1426,69 @@ func deserializeErrorScopeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExpressPrivateOfferConfigurationEntityIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExpressPrivateOfferConfigurationProductIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExpressPrivateOfferConfigurationStateFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExpressPrivateOfferConfigurationStateString) error {
+	*v = make([]types.ExpressPrivateOfferConfigurationStateString, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExpressPrivateOfferConfigurationStateString
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ExpressPrivateOfferConfigurationStateString(vv))
 		return nil
 	})
 }

@@ -1320,7 +1320,9 @@ func TestUpdateResponseSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
 					},
-					MetricTimezone: ptr.String("__MetricTimezone__"),
+					MetricTimezone:           ptr.String("__MetricTimezone__"),
+					AdaptationSpeed:          types.AnomalyDetectorAdaptationSpeed("FAST"),
+					OutlierFilteringStrength: types.AnomalyDetectorOutlierFilteringStrength("MINIMAL"),
 				},
 				StateValue: types.AnomalyDetectorStateValue("PENDING_TRAINING"),
 				MetricCharacteristics: &types.MetricCharacteristics{
@@ -1427,7 +1429,9 @@ func TestUpdateResponseSnapshot_DescribeAnomalyDetectors(t *testing.T) {
 							EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
 					},
-					MetricTimezone: ptr.String("__MetricTimezone__"),
+					MetricTimezone:           ptr.String("__MetricTimezone__"),
+					AdaptationSpeed:          types.AnomalyDetectorAdaptationSpeed("FAST"),
+					OutlierFilteringStrength: types.AnomalyDetectorOutlierFilteringStrength("MINIMAL"),
 				},
 				StateValue: types.AnomalyDetectorStateValue("PENDING_TRAINING"),
 				MetricCharacteristics: &types.MetricCharacteristics{

@@ -255,6 +255,10 @@ type UpdateServiceInput struct {
 	// my_image:latest ) or to roll Fargate tasks onto a newer platform version.
 	ForceNewDeployment bool
 
+	// The updated set of gateway connectors that connect the service to a gateway
+	// ingress path. A service supports no more than one gateway connector.
+	GatewayConnectors []types.GatewayConnector
+
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
 	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
 	// a task has first started. If you don't specify a health check grace period
@@ -460,6 +464,7 @@ func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ForceNewDeployment != false {
 		s.WriteBool(schemas.UpdateServiceRequest_forceNewDeployment, v.ForceNewDeployment)
 	}
+	serializeGatewayConnectorList(s, schemas.UpdateServiceRequest_gatewayConnectors, v.GatewayConnectors)
 	if v.HealthCheckGracePeriodSeconds != nil {
 		s.WriteInt32(schemas.UpdateServiceRequest_healthCheckGracePeriodSeconds, *v.HealthCheckGracePeriodSeconds)
 	}

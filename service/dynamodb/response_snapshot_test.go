@@ -1096,7 +1096,8 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -2088,7 +2089,8 @@ func TestCheckResponseSnapshot_DeleteTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -3696,7 +3698,8 @@ func TestCheckResponseSnapshot_DescribeTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -5903,7 +5906,8 @@ func TestCheckResponseSnapshot_RestoreTableFromBackup(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -6496,7 +6500,8 @@ func TestCheckResponseSnapshot_RestoreTableToPointInTime(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -8663,7 +8668,8 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 				TableClass:         types.TableClass("STANDARD"),
 				LastUpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
-			DeletionProtectionEnabled: ptr.Bool(true),
+			DeletionProtectionEnabled:       ptr.Bool(true),
+			DisassociationProtectionEnabled: ptr.Bool(true),
 			OnDemandThroughput: &types.OnDemandThroughput{
 				MaxReadRequestUnits:  ptr.Int64(1),
 				MaxWriteRequestUnits: ptr.Int64(1),
@@ -8945,6 +8951,10 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 			{
 				Create: &types.CreateReplicationGroupMemberAction{
@@ -9012,6 +9022,10 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 				Delete: &types.DeleteReplicationGroupMemberAction{
 					RegionName: ptr.String("__RegionName__"),
 				},
+				Disassociate: &types.DisassociateReplicationGroupMemberAction{
+					RegionName:         ptr.String("__RegionName__"),
+					DisassociationMode: types.DisassociationMode("WAIT_FOR_REPLICATION"),
+				},
 			},
 		},
 		TableClass:                types.TableClass("STANDARD"),
@@ -9044,6 +9058,7 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 			WriteUnitsPerSecond: ptr.Int64(1),
 		},
 		GlobalTableSettingsReplicationMode: types.GlobalTableSettingsReplicationMode("ENABLED"),
+		DisassociationProtectionEnabled:    ptr.Bool(true),
 		VectorIndexUpdates: []types.VectorIndexUpdate{
 			{
 				Create: &types.CreateVectorIndexAction{

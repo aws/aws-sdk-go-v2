@@ -1167,6 +1167,25 @@ var DestinationStatus_ENABLE_FAILED *smithy.Schema
 
 var DestinationStatus_UPDATING *smithy.Schema
 
+var DisassociateReplicationGroupMemberAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DisassociateReplicationGroupMemberAction",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateReplicationGroupMemberAction_RegionName *smithy.Schema
+
+var DisassociateReplicationGroupMemberAction_DisassociationMode *smithy.Schema
+
+var DisassociationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DisassociationMode",
+}, smithy.ShapeTypeEnum, 1)
+var DisassociationMode_WAIT_FOR_REPLICATION *smithy.Schema
+
+var _DisassociationProtectionEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dynamodb",
+	Name:      "DisassociationProtectionEnabled",
+}, smithy.ShapeTypeBoolean, 0)
+
 var _DoubleObject = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "DoubleObject",
@@ -2743,12 +2762,14 @@ var ReplicatedWriteConflictException_message *smithy.Schema
 var ReplicationGroupUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "ReplicationGroupUpdate",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ReplicationGroupUpdate_Create *smithy.Schema
 
 var ReplicationGroupUpdate_Update *smithy.Schema
 
 var ReplicationGroupUpdate_Delete *smithy.Schema
+
+var ReplicationGroupUpdate_Disassociate *smithy.Schema
 
 var _ReplicationGroupUpdateList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
@@ -3189,7 +3210,7 @@ var TableCreationParameters_VectorIndexes *smithy.Schema
 var TableDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "TableDescription",
-}, smithy.ShapeTypeStructure, 29)
+}, smithy.ShapeTypeStructure, 30)
 var TableDescription_AttributeDefinitions *smithy.Schema
 
 var TableDescription_TableName *smithy.Schema
@@ -3239,6 +3260,8 @@ var TableDescription_ArchivalSummary *smithy.Schema
 var TableDescription_TableClassSummary *smithy.Schema
 
 var TableDescription_DeletionProtectionEnabled *smithy.Schema
+
+var TableDescription_DisassociationProtectionEnabled *smithy.Schema
 
 var TableDescription_OnDemandThroughput *smithy.Schema
 
@@ -4795,7 +4818,7 @@ var UpdateKinesisStreamingDestinationOutput_UpdateKinesisStreamingConfiguration 
 var UpdateTableInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dynamodb",
 	Name:      "UpdateTableInput",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var UpdateTableInput_AttributeDefinitions *smithy.Schema
 
 var UpdateTableInput_TableName *smithy.Schema
@@ -4825,6 +4848,8 @@ var UpdateTableInput_OnDemandThroughput *smithy.Schema
 var UpdateTableInput_WarmThroughput *smithy.Schema
 
 var UpdateTableInput_GlobalTableSettingsReplicationMode *smithy.Schema
+
+var UpdateTableInput_DisassociationProtectionEnabled *smithy.Schema
 
 var UpdateTableInput_VectorIndexUpdates *smithy.Schema
 
@@ -5571,6 +5596,12 @@ func init() {
 
 	DestinationStatus_UPDATING = DestinationStatus.AddMember("UPDATING", smithyprelude.Unit)
 
+	DisassociationMode_WAIT_FOR_REPLICATION = DisassociationMode.AddMember("WAIT_FOR_REPLICATION", smithyprelude.Unit)
+
+	DisassociateReplicationGroupMemberAction_RegionName = DisassociateReplicationGroupMemberAction.AddMember("RegionName", _RegionName)
+
+	DisassociateReplicationGroupMemberAction_DisassociationMode = DisassociateReplicationGroupMemberAction.AddMember("DisassociationMode", DisassociationMode)
+
 	DuplicateItemException_message = DuplicateItemException.AddMember("message", _ErrorMessage)
 
 	EnableKinesisStreamingConfiguration_ApproximateCreationDateTimePrecision = EnableKinesisStreamingConfiguration.AddMember("ApproximateCreationDateTimePrecision", ApproximateCreationDateTimePrecision)
@@ -6295,6 +6326,8 @@ func init() {
 
 	ReplicationGroupUpdate_Delete = ReplicationGroupUpdate.AddMember("Delete", DeleteReplicationGroupMemberAction)
 
+	ReplicationGroupUpdate_Disassociate = ReplicationGroupUpdate.AddMember("Disassociate", DisassociateReplicationGroupMemberAction)
+
 	_ReplicationGroupUpdateList_member = _ReplicationGroupUpdateList.AddMember("member", ReplicationGroupUpdate)
 
 	ReplicaUpdate_Create = ReplicaUpdate.AddMember("Create", CreateReplicaAction)
@@ -6436,6 +6469,8 @@ func init() {
 	TableDescription_TableClassSummary = TableDescription.AddMember("TableClassSummary", TableClassSummary)
 
 	TableDescription_DeletionProtectionEnabled = TableDescription.AddMember("DeletionProtectionEnabled", _DeletionProtectionEnabled)
+
+	TableDescription_DisassociationProtectionEnabled = TableDescription.AddMember("DisassociationProtectionEnabled", _DisassociationProtectionEnabled)
 
 	TableDescription_OnDemandThroughput = TableDescription.AddMember("OnDemandThroughput", OnDemandThroughput)
 
@@ -7226,6 +7261,8 @@ func init() {
 	UpdateTableInput_WarmThroughput = UpdateTableInput.AddMember("WarmThroughput", WarmThroughput)
 
 	UpdateTableInput_GlobalTableSettingsReplicationMode = UpdateTableInput.AddMember("GlobalTableSettingsReplicationMode", GlobalTableSettingsReplicationMode)
+
+	UpdateTableInput_DisassociationProtectionEnabled = UpdateTableInput.AddMember("DisassociationProtectionEnabled", _DisassociationProtectionEnabled)
 
 	UpdateTableInput_VectorIndexUpdates = UpdateTableInput.AddMember("VectorIndexUpdates", _VectorIndexUpdateList)
 

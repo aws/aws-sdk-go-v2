@@ -296,6 +296,10 @@ type CreateServiceInput struct {
 	// in the service tasks.
 	EnableExecuteCommand bool
 
+	// The gateway connectors that attach the service to a gateway ingress path. You
+	// can specify at most one gateway connector.
+	GatewayConnectors []types.GatewayConnector
+
 	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
 	// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
 	// a task has first started. If you do not specify a health check grace period
@@ -586,6 +590,7 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableExecuteCommand != false {
 		s.WriteBool(schemas.CreateServiceRequest_enableExecuteCommand, v.EnableExecuteCommand)
 	}
+	serializeGatewayConnectorList(s, schemas.CreateServiceRequest_gatewayConnectors, v.GatewayConnectors)
 	if v.HealthCheckGracePeriodSeconds != nil {
 		s.WriteInt32(schemas.CreateServiceRequest_healthCheckGracePeriodSeconds, *v.HealthCheckGracePeriodSeconds)
 	}

@@ -185,6 +185,42 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// [Configure IAM and your VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
 	CustomIamInstanceProfile *string
 
+	// The identifier or the name of the DB capacity reservation to associate with
+	// this DB instance. You can specify the identifier, which has the prefix dbcr- ,
+	// or the reservation name. When you specify this parameter, the DB instance uses
+	// reserved capacity from the specified reservation.
+	//
+	// If you specify AvailabilityZone , Amazon RDS places the DB instance in that
+	// Availability Zone, and the reservation must cover it.
+	//
+	// Constraints:
+	//
+	//   - The reservation must reserve capacity for the DB instance class and the
+	//   database engine of the DB instance.
+	//
+	//   - If the reservation reserves capacity for a specific license model, the
+	//   license model of the DB instance must match it.
+	//
+	//   - The reservation must be in the active state, and it must not be past its end
+	//   date.
+	//
+	//   - If you specify AvailabilityZone , it must be one of the Availability Zones
+	//   of the reservation.
+	//
+	//   - For a Multi-AZ DB instance, the reservation must cover two or more
+	//   Availability Zones. A Multi-AZ DB instance uses one unit of reserved capacity in
+	//   each of two Availability Zones. If the reservation covers more than two
+	//   Availability Zones, Amazon RDS chooses the two that the DB instance uses.
+	//
+	//   - The reservation must have available capacity in each Availability Zone that
+	//   the DB instance uses.
+	//
+	//   - The DB subnet group must be in a VPC with default tenancy.
+	//
+	//   - The DB subnet group must cover each Availability Zone that the DB instance
+	//   uses.
+	DBCapacityReservationIdentifier *string
+
 	// The identifier for the Multi-AZ DB cluster snapshot to restore from.
 	//
 	// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User Guide.

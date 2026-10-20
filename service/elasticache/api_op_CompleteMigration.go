@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Complete the migration of data.
+// Completes the migration of data.
 func (c *Client) CompleteMigration(ctx context.Context, params *CompleteMigrationInput, optFns ...func(*Options)) (*CompleteMigrationOutput, error) {
 	if params == nil {
 		params = &CompleteMigrationInput{}
@@ -26,15 +26,16 @@ func (c *Client) CompleteMigration(ctx context.Context, params *CompleteMigratio
 
 type CompleteMigrationInput struct {
 
-	// The ID of the replication group to which data is being migrated.
-	//
-	// This member is required.
-	ReplicationGroupId *string
-
 	// Forces the migration to stop without ensuring that data is in sync. It is
 	// recommended to use this option only to abort the migration and not recommended
 	// when application wants to continue migration to ElastiCache.
 	Force *bool
+
+	// The ID of the replication group to which data is being migrated.
+	ReplicationGroupId *string
+
+	// The name of the serverless cache to which data is being migrated.
+	ServerlessCacheName *string
 
 	noSmithyDocumentSerde
 }
@@ -44,6 +45,9 @@ type CompleteMigrationOutput struct {
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
 	// group.
 	ReplicationGroup *types.ReplicationGroup
+
+	// Provides the details of the serverless cache for which the migration completed.
+	ServerlessCache *types.ServerlessCache
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,9 +75,6 @@ func (c *Client) addOperationCompleteMigrationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpCompleteMigrationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.UpdateGateway
+
+{"configuration":{"hostSharedAlb":{"accessLogs":{"destination":{"s3":{"bucket":"__Bucket__","prefix":"__Prefix__"}}},"httpDesync":"monitor","maxAlbCount":1,"networkConfiguration":{"inboundSecurityGroup":"__InboundSecurityGroup__"},"testTrafficRules":{"header":{"name":"__Name__","values":["__Member__","__Member__"]}},"webACLArn":"__WebACLArn__"}},"deletionProtection":true,"gateway":"__Gateway__","infrastructureRoleArn":"__InfrastructureRoleArn__","propagateTags":"NONE"}

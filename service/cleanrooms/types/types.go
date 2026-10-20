@@ -5402,6 +5402,10 @@ type ConfiguredTable struct {
 	//  The selected analysis methods for the configured table.
 	SelectedAnalysisMethods []SelectedAnalysisMethod
 
+	// Type of the Configured Table DataSource, example: Glue, Snowflake, Athena,
+	// Databricks
+	TableType TableReferenceType
+
 	noSmithyDocumentSerde
 }
 
@@ -5434,6 +5438,9 @@ func (v *ConfiguredTable) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeSelectedAnalysisMethods(s, schemas.ConfiguredTable_selectedAnalysisMethods, v.SelectedAnalysisMethods)
 	serializeTableReference(s, schemas.ConfiguredTable_tableReference, v.TableReference)
+	if v.TableType != "" {
+		s.WriteString(schemas.ConfiguredTable_tableType, string(v.TableType))
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.ConfiguredTable_updateTime, *v.UpdateTime)
 	}
@@ -5471,6 +5478,13 @@ func (v *ConfiguredTable) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeSelectedAnalysisMethods(d, schemas.ConfiguredTable_selectedAnalysisMethods, &v.SelectedAnalysisMethods)
 		case schemas.ConfiguredTable_tableReference:
 			return deserializeTableReference(d, schemas.ConfiguredTable_tableReference, &v.TableReference)
+		case schemas.ConfiguredTable_tableType:
+			var ev string
+			if err := d.ReadString(schemas.ConfiguredTable_tableType, &ev); err != nil {
+				return err
+			}
+			v.TableType = TableReferenceType(ev)
+			return nil
 		case schemas.ConfiguredTable_updateTime:
 			v.UpdateTime = new(time.Time)
 			return d.ReadTime(schemas.ConfiguredTable_updateTime, v.UpdateTime)
@@ -6332,6 +6346,10 @@ type ConfiguredTableSummary struct {
 	//  The selected analysis methods for the configured table summary.
 	SelectedAnalysisMethods []SelectedAnalysisMethod
 
+	// Type of the Configured Table DataSource, example: Glue, Snowflake, Athena,
+	// Databricks
+	TableType TableReferenceType
+
 	noSmithyDocumentSerde
 }
 
@@ -6359,6 +6377,9 @@ func (v *ConfiguredTableSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.ConfiguredTableSummary_name, *v.Name)
 	}
 	serializeSelectedAnalysisMethods(s, schemas.ConfiguredTableSummary_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	if v.TableType != "" {
+		s.WriteString(schemas.ConfiguredTableSummary_tableType, string(v.TableType))
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.ConfiguredTableSummary_updateTime, *v.UpdateTime)
 	}
@@ -6389,6 +6410,13 @@ func (v *ConfiguredTableSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ConfiguredTableSummary_name, v.Name)
 		case schemas.ConfiguredTableSummary_selectedAnalysisMethods:
 			return deserializeSelectedAnalysisMethods(d, schemas.ConfiguredTableSummary_selectedAnalysisMethods, &v.SelectedAnalysisMethods)
+		case schemas.ConfiguredTableSummary_tableType:
+			var ev string
+			if err := d.ReadString(schemas.ConfiguredTableSummary_tableType, &ev); err != nil {
+				return err
+			}
+			v.TableType = TableReferenceType(ev)
+			return nil
 		case schemas.ConfiguredTableSummary_updateTime:
 			v.UpdateTime = new(time.Time)
 			return d.ReadTime(schemas.ConfiguredTableSummary_updateTime, v.UpdateTime)
@@ -6751,6 +6779,141 @@ func (v *ConsolidatedPolicyV1MemberList) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *ConsolidatedPolicyV1MemberList) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// Type of the connector to be used for connecting to Databricks. Supported
+// connector: Delta Sharing
+//
+// The following types satisfy this interface:
+//
+//	DatabricksConnectionTypeMemberDeltaSharing
+type DatabricksConnectionType interface {
+	isDatabricksConnectionType()
+}
+
+// Details about Connector for Databricks
+type DatabricksConnectionTypeMemberDeltaSharing struct {
+	Value DatabricksDeltaSharingConnection
+
+	noSmithyDocumentSerde
+}
+
+func (*DatabricksConnectionTypeMemberDeltaSharing) isDatabricksConnectionType() {}
+func (v *DatabricksConnectionTypeMemberDeltaSharing) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabricksConnectionType_deltaSharing)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DatabricksConnectionTypeMemberDeltaSharing) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Details about Delta Sharing Connector for Databricks
+type DatabricksDeltaSharingConnection struct {
+
+	// The base URL of a Delta Sharing server that hosts shared datasets.
+	//
+	// This member is required.
+	DeltaShareEndpoint *string
+
+	// Name of the Share used for OpenSharing (Delta Sharing) the Databricks Table.
+	//
+	// This member is required.
+	ShareName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabricksDeltaSharingConnection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabricksDeltaSharingConnection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabricksDeltaSharingConnection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeltaShareEndpoint != nil {
+		s.WriteString(schemas.DatabricksDeltaSharingConnection_deltaShareEndpoint, *v.DeltaShareEndpoint)
+	}
+	if v.ShareName != nil {
+		s.WriteString(schemas.DatabricksDeltaSharingConnection_shareName, *v.ShareName)
+	}
+}
+func (v *DatabricksDeltaSharingConnection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabricksDeltaSharingConnection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabricksDeltaSharingConnection_deltaShareEndpoint:
+			v.DeltaShareEndpoint = new(string)
+			return d.ReadString(schemas.DatabricksDeltaSharingConnection_deltaShareEndpoint, v.DeltaShareEndpoint)
+		case schemas.DatabricksDeltaSharingConnection_shareName:
+			v.ShareName = new(string)
+			return d.ReadString(schemas.DatabricksDeltaSharingConnection_shareName, v.ShareName)
+		}
+		return nil
+	})
+}
+
+// A reference to a table within Databricks.
+type DatabricksTableReference struct {
+
+	// Type of the connector to be used for connecting to Databricks. Supported
+	// connector: Delta Sharing
+	//
+	// This member is required.
+	ConnectionType DatabricksConnectionType
+
+	// Name of the Schema within Databricks.
+	//
+	// This member is required.
+	SchemaName *string
+
+	// Name of the Table within Databricks.
+	//
+	// This member is required.
+	TableName *string
+
+	// URL for the Databricks Workspace.
+	//
+	// This member is required.
+	WorkspaceUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabricksTableReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabricksTableReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabricksTableReference) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabricksConnectionType(s, schemas.DatabricksTableReference_connectionType, v.ConnectionType)
+	if v.SchemaName != nil {
+		s.WriteString(schemas.DatabricksTableReference_schemaName, *v.SchemaName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.DatabricksTableReference_tableName, *v.TableName)
+	}
+	if v.WorkspaceUrl != nil {
+		s.WriteString(schemas.DatabricksTableReference_workspaceUrl, *v.WorkspaceUrl)
+	}
+}
+func (v *DatabricksTableReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabricksTableReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabricksTableReference_connectionType:
+			return deserializeDatabricksConnectionType(d, schemas.DatabricksTableReference_connectionType, &v.ConnectionType)
+		case schemas.DatabricksTableReference_schemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.DatabricksTableReference_schemaName, v.SchemaName)
+		case schemas.DatabricksTableReference_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.DatabricksTableReference_tableName, v.TableName)
+		case schemas.DatabricksTableReference_workspaceUrl:
+			v.WorkspaceUrl = new(string)
+			return d.ReadString(schemas.DatabricksTableReference_workspaceUrl, v.WorkspaceUrl)
+		}
+		return nil
+	})
 }
 
 // The settings for client-side encryption for cryptographic computing.
@@ -15380,6 +15543,7 @@ func (v *SyntheticDataParametersMemberMlSyntheticDataParameters) Deserialize(d s
 // The following types satisfy this interface:
 //
 //	TableReferenceMemberAthena
+//	TableReferenceMemberDatabricks
 //	TableReferenceMemberGlue
 //	TableReferenceMemberSnowflake
 type TableReference interface {
@@ -15402,6 +15566,25 @@ func (v *TableReferenceMemberAthena) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *TableReferenceMemberAthena) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+//	If present, a reference to the Databricks table referred to by this table
+//
+// reference.
+type TableReferenceMemberDatabricks struct {
+	Value DatabricksTableReference
+
+	noSmithyDocumentSerde
+}
+
+func (*TableReferenceMemberDatabricks) isTableReference() {}
+func (v *TableReferenceMemberDatabricks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableReference_databricks)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TableReferenceMemberDatabricks) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -15657,6 +15840,7 @@ func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicy()     
 func (*UnknownUnionMember) isConfiguredTableAssociationAnalysisRulePolicyV1()      {}
 func (*UnknownUnionMember) isConsolidatedPolicy()                                  {}
 func (*UnknownUnionMember) isConsolidatedPolicyV1()                                {}
+func (*UnknownUnionMember) isDatabricksConnectionType()                            {}
 func (*UnknownUnionMember) isIntermediateTableAnalysisRulePolicy()                 {}
 func (*UnknownUnionMember) isIntermediateTableAnalysisRulePolicyV1()               {}
 func (*UnknownUnionMember) isIntermediateTableComputeConfiguration()               {}

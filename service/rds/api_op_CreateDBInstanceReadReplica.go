@@ -131,6 +131,44 @@ type CreateDBInstanceReadReplicaInput struct {
 	// [Configure IAM and your VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
 	CustomIamInstanceProfile *string
 
+	// The identifier or the name of the DB capacity reservation to associate with
+	// this read replica. You can specify the identifier, which has the prefix dbcr- ,
+	// or the reservation name. When you specify this parameter, the read replica uses
+	// reserved capacity from the specified reservation. A read replica uses one unit
+	// of reserved capacity, in the same way as any other DB instance.
+	//
+	// If you specify AvailabilityZone , Amazon RDS places the DB instance in that
+	// Availability Zone, and the reservation must cover it.
+	//
+	// Constraints:
+	//
+	//   - The reservation must reserve capacity for the DB instance class and the
+	//   database engine of the DB instance.
+	//
+	//   - If the reservation reserves capacity for a specific license model, the
+	//   license model of the source DB instance must match it. A read replica inherits
+	//   its license model from the source DB instance.
+	//
+	//   - The reservation must be in the active state, and it must not be past its end
+	//   date.
+	//
+	//   - If you specify AvailabilityZone , it must be one of the Availability Zones
+	//   of the reservation.
+	//
+	//   - For a Multi-AZ DB instance, the reservation must cover two or more
+	//   Availability Zones. A Multi-AZ DB instance uses one unit of reserved capacity in
+	//   each of two Availability Zones. If the reservation covers more than two
+	//   Availability Zones, Amazon RDS chooses the two that the DB instance uses.
+	//
+	//   - The reservation must have available capacity in each Availability Zone that
+	//   the DB instance uses.
+	//
+	//   - The DB subnet group must be in a VPC with default tenancy.
+	//
+	//   - The DB subnet group must cover each Availability Zone that the DB instance
+	//   uses.
+	DBCapacityReservationIdentifier *string
+
 	// The compute and memory capacity of the read replica, for example db.m4.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
 	// for all database engines. For the full list of DB instance classes, and
@@ -327,10 +365,13 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
 	// or alias name for the KMS key.
 	//
-	// If you create an encrypted read replica in the same Amazon Web Services Region
-	// as the source DB instance or Multi-AZ DB cluster, don't specify a value for this
-	// parameter. A read replica in the same Amazon Web Services Region is always
-	// encrypted with the same KMS key as the source DB instance or cluster.
+	// For a read replica in the same Amazon Web Services Region as the source DB
+	// instance or Multi-AZ DB cluster, specifying this parameter is optional. If you
+	// specify a KMS key identifier, the read replica is encrypted with that KMS key,
+	// which can be different from the KMS key of the source.
+	//
+	// If you don't specify a value for this parameter, the read replica is encrypted
+	// with the same KMS key as the source DB instance or Multi-AZ DB cluster.
 	//
 	// If you create an encrypted read replica in a different Amazon Web Services
 	// Region, then you must specify a KMS key identifier for the destination Amazon

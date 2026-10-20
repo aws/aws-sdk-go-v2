@@ -560,6 +560,21 @@ func (v *AnomalyDetector) Deserialize(d smithy.ShapeDeserializer) error {
 // the time zone to use for the metric.
 type AnomalyDetectorConfiguration struct {
 
+	// The speed at which the anomaly detection model adapts to sustained changes in
+	// the metric's baseline. Faster adaptation lets the model track shifting workloads
+	// sooner, but increases the chance that the model treats a real, lasting change as
+	// normal.
+	//
+	// Valid values:
+	//
+	//   - FAST - The model adapts quickly to sustained changes in the baseline.
+	//
+	//   - NORMAL - The model adapts at a moderate pace. This is the default value.
+	//
+	//   - SLOW - The model adapts slowly, reducing the risk of treating a real change
+	//   as normal.
+	AdaptationSpeed AnomalyDetectorAdaptationSpeed
+
 	// An array of time ranges to exclude from use when the anomaly detection model is
 	// trained. Use this to make sure that events that could cause unusual values for
 	// the metric, such as deployments, aren't used when CloudWatch creates the model.
@@ -575,6 +590,21 @@ type AnomalyDetectorConfiguration struct {
 	// [tz database]: https://en.wikipedia.org/wiki/Tz_database
 	MetricTimezone *string
 
+	// The aggressiveness with which CloudWatch filters outliers from the metric data
+	// that the anomaly detection model uses. Stronger filtering excludes more extreme
+	// values, which can produce a tighter band of expected values but may also
+	// suppress legitimate spikes.
+	//
+	// Valid values:
+	//
+	//   - MINIMAL - Excludes only the most extreme outliers.
+	//
+	//   - MODERATE - Excludes a moderate range of outliers. This is the default value.
+	//
+	//   - STRICT - Excludes a wider range of outliers, which can suppress legitimate
+	//   spikes.
+	OutlierFilteringStrength AnomalyDetectorOutlierFilteringStrength
+
 	noSmithyDocumentSerde
 }
 
@@ -585,19 +615,39 @@ func (v *AnomalyDetectorConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnomalyDetectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptationSpeed != "" {
+		s.WriteString(schemas.AnomalyDetectorConfiguration_AdaptationSpeed, string(v.AdaptationSpeed))
+	}
 	serializeAnomalyDetectorExcludedTimeRanges(s, schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges, v.ExcludedTimeRanges)
 	if v.MetricTimezone != nil {
 		s.WriteString(schemas.AnomalyDetectorConfiguration_MetricTimezone, *v.MetricTimezone)
+	}
+	if v.OutlierFilteringStrength != "" {
+		s.WriteString(schemas.AnomalyDetectorConfiguration_OutlierFilteringStrength, string(v.OutlierFilteringStrength))
 	}
 }
 func (v *AnomalyDetectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnomalyDetectorConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AnomalyDetectorConfiguration_AdaptationSpeed:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyDetectorConfiguration_AdaptationSpeed, &ev); err != nil {
+				return err
+			}
+			v.AdaptationSpeed = AnomalyDetectorAdaptationSpeed(ev)
+			return nil
 		case schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges:
 			return deserializeAnomalyDetectorExcludedTimeRanges(d, schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges, &v.ExcludedTimeRanges)
 		case schemas.AnomalyDetectorConfiguration_MetricTimezone:
 			v.MetricTimezone = new(string)
 			return d.ReadString(schemas.AnomalyDetectorConfiguration_MetricTimezone, v.MetricTimezone)
+		case schemas.AnomalyDetectorConfiguration_OutlierFilteringStrength:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyDetectorConfiguration_OutlierFilteringStrength, &ev); err != nil {
+				return err
+			}
+			v.OutlierFilteringStrength = AnomalyDetectorOutlierFilteringStrength(ev)
+			return nil
 		}
 		return nil
 	})

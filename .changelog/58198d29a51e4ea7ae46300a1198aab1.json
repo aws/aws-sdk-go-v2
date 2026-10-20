@@ -1,0 +1,8 @@
+{
+    "id": "58198d29-a51e-4ea7-ae46-300a1198aab1",
+    "type": "feature",
+    "description": "This release allows customers and their partners to easily collaborate with data stored in Databricks, without having to move or share their underlying data among collaborators.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

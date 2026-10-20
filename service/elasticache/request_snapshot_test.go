@@ -321,8 +321,9 @@ func TestCheckRequestSnapshot_BatchStopUpdateAction(t *testing.T) {
 
 func TestCheckRequestSnapshot_CompleteMigration(t *testing.T) {
 	input := &CompleteMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
-		Force:              ptr.Bool(true),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Force:               ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2844,6 +2845,52 @@ func TestCheckRequestSnapshot_ModifyUserGroup(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PrepareMigration(t *testing.T) {
+	input := &PrepareMigrationInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+		},
+		SourceAuthenticationConfiguration: &types.SourceAuthenticationConfiguration{
+			SecretManagerConfig: &types.SecretManagerAuthConfig{
+				SecretArn: ptr.String("__SecretArn__"),
+			},
+		},
+		SourceTlsConfiguration: &types.SourceTlsConfiguration{
+			SourceTlsMode:        types.TlsMode("none"),
+			SourceTlsCertificate: ptr.String("__SourceTlsCertificate__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PrepareMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PrepareMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PurchaseReservedCacheNodesOffering(t *testing.T) {
 	input := &PurchaseReservedCacheNodesOfferingInput{
 		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
@@ -3042,7 +3089,8 @@ func TestCheckRequestSnapshot_RevokeCacheSecurityGroupIngress(t *testing.T) {
 
 func TestCheckRequestSnapshot_StartMigration(t *testing.T) {
 	input := &StartMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
 		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
 			{
 				Address: ptr.String("__Address__"),
@@ -3053,6 +3101,8 @@ func TestCheckRequestSnapshot_StartMigration(t *testing.T) {
 				Port:    ptr.Int32(1),
 			},
 		},
+		AutoCutover:          ptr.Bool(true),
+		ClearTargetCacheData: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3073,6 +3123,33 @@ func TestCheckRequestSnapshot_StartMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StopMigration(t *testing.T) {
+	input := &StopMigrationInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopMigration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3279,8 +3356,9 @@ func TestUpdateRequestSnapshot_BatchStopUpdateAction(t *testing.T) {
 
 func TestUpdateRequestSnapshot_CompleteMigration(t *testing.T) {
 	input := &CompleteMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
-		Force:              ptr.Bool(true),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		Force:               ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5802,6 +5880,52 @@ func TestUpdateRequestSnapshot_ModifyUserGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_PrepareMigration(t *testing.T) {
+	input := &PrepareMigrationInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+			{
+				Address: ptr.String("__Address__"),
+				Port:    ptr.Int32(1),
+			},
+		},
+		SourceAuthenticationConfiguration: &types.SourceAuthenticationConfiguration{
+			SecretManagerConfig: &types.SecretManagerAuthConfig{
+				SecretArn: ptr.String("__SecretArn__"),
+			},
+		},
+		SourceTlsConfiguration: &types.SourceTlsConfiguration{
+			SourceTlsMode:        types.TlsMode("none"),
+			SourceTlsCertificate: ptr.String("__SourceTlsCertificate__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PrepareMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PrepareMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PurchaseReservedCacheNodesOffering(t *testing.T) {
 	input := &PurchaseReservedCacheNodesOfferingInput{
 		ReservedCacheNodesOfferingId: ptr.String("__ReservedCacheNodesOfferingId__"),
@@ -6000,7 +6124,8 @@ func TestUpdateRequestSnapshot_RevokeCacheSecurityGroupIngress(t *testing.T) {
 
 func TestUpdateRequestSnapshot_StartMigration(t *testing.T) {
 	input := &StartMigrationInput{
-		ReplicationGroupId: ptr.String("__ReplicationGroupId__"),
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+		ReplicationGroupId:  ptr.String("__ReplicationGroupId__"),
 		CustomerNodeEndpointList: []types.CustomerNodeEndpoint{
 			{
 				Address: ptr.String("__Address__"),
@@ -6011,6 +6136,8 @@ func TestUpdateRequestSnapshot_StartMigration(t *testing.T) {
 				Port:    ptr.Int32(1),
 			},
 		},
+		AutoCutover:          ptr.Bool(true),
+		ClearTargetCacheData: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6031,6 +6158,33 @@ func TestUpdateRequestSnapshot_StartMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartMigration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StopMigration(t *testing.T) {
+	input := &StopMigrationInput{
+		ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopMigration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopMigration"); err != nil {
 		t.Fatal(err)
 	}
 }

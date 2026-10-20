@@ -333,6 +333,23 @@ func (DestinationStatus) Values() []DestinationStatus {
 	}
 }
 
+type DisassociationMode string
+
+// Enum values for DisassociationMode
+const (
+	DisassociationModeWaitForReplication DisassociationMode = "WAIT_FOR_REPLICATION"
+)
+
+// Values returns all known values for DisassociationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DisassociationMode) Values() []DisassociationMode {
+	return []DisassociationMode{
+		"WAIT_FOR_REPLICATION",
+	}
+}
+
 type ExportFormat string
 
 // Enum values for ExportFormat

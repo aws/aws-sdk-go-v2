@@ -8,6 +8,11 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var AssociateGatewayWithCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "AssociateGatewayWithCluster",
+}, smithy.ShapeTypeOperation, 0)
+
 var ContinueServiceDeployment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ContinueServiceDeployment",
@@ -31,6 +36,11 @@ var CreateDaemon = smithy.NewSchema(smithy.ShapeID{
 var CreateExpressGatewayService = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "CreateExpressGatewayService",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "CreateGateway",
 }, smithy.ShapeTypeOperation, 0)
 
 var CreateService = smithy.NewSchema(smithy.ShapeID{
@@ -76,6 +86,11 @@ var DeleteDaemonTaskDefinition = smithy.NewSchema(smithy.ShapeID{
 var DeleteExpressGatewayService = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DeleteExpressGatewayService",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DeleteGateway",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteService = smithy.NewSchema(smithy.ShapeID{
@@ -143,6 +158,21 @@ var DescribeExpressGatewayService = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeExpressGatewayService",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGateway",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeGatewayResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayResources",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeGatewayRoute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayRoute",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeServiceDeployments = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DescribeServiceDeployments",
@@ -171,6 +201,11 @@ var DescribeTasks = smithy.NewSchema(smithy.ShapeID{
 var DescribeTaskSets = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DescribeTaskSets",
+}, smithy.ShapeTypeOperation, 0)
+
+var DisassociateGatewayFromCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DisassociateGatewayFromCluster",
 }, smithy.ShapeTypeOperation, 0)
 
 var DiscoverPollEndpoint = smithy.NewSchema(smithy.ShapeID{
@@ -221,6 +256,21 @@ var ListDaemons = smithy.NewSchema(smithy.ShapeID{
 var ListDaemonTaskDefinitions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ListDaemonTaskDefinitions",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListGatewayClusterAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewayClusterAssociations",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListGatewayRoutes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewayRoutes",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListGateways = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGateways",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListServiceDeployments = smithy.NewSchema(smithy.ShapeID{
@@ -373,6 +423,11 @@ var UpdateExpressGatewayService = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateExpressGatewayService",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "UpdateGateway",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateService = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "UpdateService",
@@ -500,6 +555,12 @@ var AccessType = smithy.NewSchema(smithy.ShapeID{
 var AccessType_PUBLIC *smithy.Schema
 
 var AccessType_PRIVATE *smithy.Schema
+
+var _AccessTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "AccessTypeList",
+}, smithy.ShapeTypeList, 1)
+var _AccessTypeList_member *smithy.Schema
 
 var AdvancedConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -2218,6 +2279,36 @@ var DeploymentStrategy_LINEAR *smithy.Schema
 
 var DeploymentStrategy_CANARY *smithy.Schema
 
+var DescribeGatewayAlbConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayAlbConfiguration",
+}, smithy.ShapeTypeStructure, 10)
+var DescribeGatewayAlbConfiguration_networkConfiguration *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_scheme *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_accessLogs *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_webACLArn *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_port *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_protocol *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_maxAlbCount *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_currentAlbCount *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_httpDesync *smithy.Schema
+
+var DescribeGatewayAlbConfiguration_testTrafficRules *smithy.Schema
+
+var DescribeGatewayConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var DescribeGatewayConfiguration_hostSharedAlb *smithy.Schema
+
 var DesiredStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DesiredStatus",
@@ -2356,7 +2447,7 @@ var ECSExpressGatewayService_updatedAt *smithy.Schema
 var ECSManagedResources = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ECSManagedResources",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ECSManagedResources_ingressPaths *smithy.Schema
 
 var ECSManagedResources_autoScaling *smithy.Schema
@@ -2366,6 +2457,8 @@ var ECSManagedResources_metricAlarms *smithy.Schema
 var ECSManagedResources_serviceSecurityGroups *smithy.Schema
 
 var ECSManagedResources_logGroups *smithy.Schema
+
+var ECSManagedResources_gatewayConnections *smithy.Schema
 
 var _ECSVolumeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -2409,6 +2502,24 @@ var EFSVolumeConfiguration_transitEncryption *smithy.Schema
 var EFSVolumeConfiguration_transitEncryptionPort *smithy.Schema
 
 var EFSVolumeConfiguration_authorizationConfig *smithy.Schema
+
+var ElbGatewayResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ElbGatewayResources",
+}, smithy.ShapeTypeStructure, 4)
+var ElbGatewayResources_loadBalancerArn *smithy.Schema
+
+var ElbGatewayResources_listenerArn *smithy.Schema
+
+var ElbGatewayResources_securityGroup *smithy.Schema
+
+var ElbGatewayResources_gatewayRouteArns *smithy.Schema
+
+var _ElbGatewayResourcesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ElbGatewayResourcesList",
+}, smithy.ShapeTypeList, 1)
+var _ElbGatewayResourcesList_member *smithy.Schema
 
 var EnvironmentFile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -2681,6 +2792,462 @@ var FSxWindowsFileServerVolumeConfiguration_rootDirectory *smithy.Schema
 
 var FSxWindowsFileServerVolumeConfiguration_authorizationConfig *smithy.Schema
 
+var Gateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "Gateway",
+}, smithy.ShapeTypeStructure, 13)
+var Gateway_gatewayArn *smithy.Schema
+
+var Gateway_name *smithy.Schema
+
+var Gateway_status *smithy.Schema
+
+var Gateway_statusReason *smithy.Schema
+
+var Gateway_failures *smithy.Schema
+
+var Gateway_infrastructureRoleArn *smithy.Schema
+
+var Gateway_deletionProtection *smithy.Schema
+
+var Gateway_configuration *smithy.Schema
+
+var Gateway_accessType *smithy.Schema
+
+var Gateway_propagateTags *smithy.Schema
+
+var Gateway_tags *smithy.Schema
+
+var Gateway_createdAt *smithy.Schema
+
+var Gateway_updatedAt *smithy.Schema
+
+var GatewayAlbDesyncMitigationMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayAlbDesyncMitigationMode",
+}, smithy.ShapeTypeEnum, 3)
+var GatewayAlbDesyncMitigationMode_MONITOR *smithy.Schema
+
+var GatewayAlbDesyncMitigationMode_DEFENSIVE *smithy.Schema
+
+var GatewayAlbDesyncMitigationMode_STRICTEST *smithy.Schema
+
+var GatewayAlbProtocol = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayAlbProtocol",
+}, smithy.ShapeTypeEnum, 2)
+var GatewayAlbProtocol_HTTP *smithy.Schema
+
+var GatewayAlbProtocol_HTTPS *smithy.Schema
+
+var GatewayAlbTestTrafficRules = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayAlbTestTrafficRules",
+}, smithy.ShapeTypeStructure, 1)
+var GatewayAlbTestTrafficRules_header *smithy.Schema
+
+var GatewayClusterAssociationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayClusterAssociationStatus",
+}, smithy.ShapeTypeEnum, 3)
+var GatewayClusterAssociationStatus_ACTIVE *smithy.Schema
+
+var GatewayClusterAssociationStatus_DISASSOCIATING *smithy.Schema
+
+var GatewayClusterAssociationStatus_INACTIVE *smithy.Schema
+
+var _GatewayClusterAssociationStatusList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayClusterAssociationStatusList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayClusterAssociationStatusList_member *smithy.Schema
+
+var GatewayClusterAssociationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayClusterAssociationSummary",
+}, smithy.ShapeTypeStructure, 3)
+var GatewayClusterAssociationSummary_gatewayArn *smithy.Schema
+
+var GatewayClusterAssociationSummary_clusterArn *smithy.Schema
+
+var GatewayClusterAssociationSummary_status *smithy.Schema
+
+var _GatewayClusterAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayClusterAssociationSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayClusterAssociationSummaryList_member *smithy.Schema
+
+var GatewayConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var GatewayConfiguration_hostSharedAlb *smithy.Schema
+
+var GatewayConnection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnection",
+}, smithy.ShapeTypeStructure, 7)
+var GatewayConnection_gatewayArn *smithy.Schema
+
+var GatewayConnection_gatewayRouteArn *smithy.Schema
+
+var GatewayConnection_portName *smithy.Schema
+
+var GatewayConnection_serviceUrl *smithy.Schema
+
+var GatewayConnection_accessType *smithy.Schema
+
+var GatewayConnection_status *smithy.Schema
+
+var GatewayConnection_resources *smithy.Schema
+
+var GatewayConnectionAlbResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectionAlbResources",
+}, smithy.ShapeTypeStructure, 8)
+var GatewayConnectionAlbResources_acmCertificateArn *smithy.Schema
+
+var GatewayConnectionAlbResources_loadBalancerArn *smithy.Schema
+
+var GatewayConnectionAlbResources_loadBalancerSecurityGroupArns *smithy.Schema
+
+var GatewayConnectionAlbResources_listenerArn *smithy.Schema
+
+var GatewayConnectionAlbResources_listenerRuleArn *smithy.Schema
+
+var GatewayConnectionAlbResources_testListenerRuleArn *smithy.Schema
+
+var GatewayConnectionAlbResources_targetGroupArn *smithy.Schema
+
+var GatewayConnectionAlbResources_alternateTargetGroupArn *smithy.Schema
+
+var _GatewayConnectionAlbResourcesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectionAlbResourcesList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayConnectionAlbResourcesList_member *smithy.Schema
+
+var _GatewayConnectionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectionList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayConnectionList_member *smithy.Schema
+
+var GatewayConnectionResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectionResources",
+}, smithy.ShapeTypeUnion, 1)
+var GatewayConnectionResources_hostSharedAlb *smithy.Schema
+
+var GatewayConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnector",
+}, smithy.ShapeTypeStructure, 3)
+var GatewayConnector_portName *smithy.Schema
+
+var GatewayConnector_healthCheck *smithy.Schema
+
+var GatewayConnector_filters *smithy.Schema
+
+var GatewayConnectorFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectorFilters",
+}, smithy.ShapeTypeStructure, 1)
+var GatewayConnectorFilters_accessTypes *smithy.Schema
+
+var GatewayConnectorHealthCheck = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectorHealthCheck",
+}, smithy.ShapeTypeStructure, 8)
+var GatewayConnectorHealthCheck_healthCheckProtocol *smithy.Schema
+
+var GatewayConnectorHealthCheck_healthCheckPort *smithy.Schema
+
+var GatewayConnectorHealthCheck_healthCheckPath *smithy.Schema
+
+var GatewayConnectorHealthCheck_healthCheckTimeoutSeconds *smithy.Schema
+
+var GatewayConnectorHealthCheck_healthCheckIntervalSeconds *smithy.Schema
+
+var GatewayConnectorHealthCheck_healthyThresholdCount *smithy.Schema
+
+var GatewayConnectorHealthCheck_unhealthyThresholdCount *smithy.Schema
+
+var GatewayConnectorHealthCheck_matcher *smithy.Schema
+
+var GatewayConnectorHealthCheckMatcher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectorHealthCheckMatcher",
+}, smithy.ShapeTypeStructure, 2)
+var GatewayConnectorHealthCheckMatcher_httpCode *smithy.Schema
+
+var GatewayConnectorHealthCheckMatcher_grpcCode *smithy.Schema
+
+var GatewayConnectorHealthCheckProtocol = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectorHealthCheckProtocol",
+}, smithy.ShapeTypeEnum, 2)
+var GatewayConnectorHealthCheckProtocol_HTTP *smithy.Schema
+
+var GatewayConnectorHealthCheckProtocol_HTTPS *smithy.Schema
+
+var _GatewayConnectorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectorList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayConnectorList_member *smithy.Schema
+
+var GatewayElbAccessLogConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayElbAccessLogConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var GatewayElbAccessLogConfiguration_destination *smithy.Schema
+
+var GatewayElbAccessLogDestination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayElbAccessLogDestination",
+}, smithy.ShapeTypeUnion, 1)
+var GatewayElbAccessLogDestination_s3 *smithy.Schema
+
+var GatewayElbAccessLogS3Destination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayElbAccessLogS3Destination",
+}, smithy.ShapeTypeStructure, 2)
+var GatewayElbAccessLogS3Destination_bucket *smithy.Schema
+
+var GatewayElbAccessLogS3Destination_prefix *smithy.Schema
+
+var GatewayElbIpAddressType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayElbIpAddressType",
+}, smithy.ShapeTypeEnum, 3)
+var GatewayElbIpAddressType_IPV4 *smithy.Schema
+
+var GatewayElbIpAddressType_DUALSTACK *smithy.Schema
+
+var GatewayElbIpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4 *smithy.Schema
+
+var GatewayElbNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayElbNetworkConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var GatewayElbNetworkConfiguration_inboundSecurityGroup *smithy.Schema
+
+var GatewayElbNetworkConfiguration_subnets *smithy.Schema
+
+var GatewayElbNetworkConfiguration_ipAddressType *smithy.Schema
+
+var GatewayElbScheme = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayElbScheme",
+}, smithy.ShapeTypeEnum, 2)
+var GatewayElbScheme_INTERNET_FACING *smithy.Schema
+
+var GatewayElbScheme_INTERNAL *smithy.Schema
+
+var GatewayInfrastructureResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayInfrastructureResources",
+}, smithy.ShapeTypeUnion, 1)
+var GatewayInfrastructureResources_hostSharedAlb *smithy.Schema
+
+var GatewayNotFoundException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayNotFoundException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var GatewayNotFoundException_message *smithy.Schema
+
+var GatewayOperationError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayOperationError",
+}, smithy.ShapeTypeStructure, 3)
+var GatewayOperationError_operation *smithy.Schema
+
+var GatewayOperationError_code *smithy.Schema
+
+var GatewayOperationError_message *smithy.Schema
+
+var _GatewayOperationErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayOperationErrorList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayOperationErrorList_member *smithy.Schema
+
+var GatewayResourceFailure = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayResourceFailure",
+}, smithy.ShapeTypeStructure, 2)
+var GatewayResourceFailure_arn *smithy.Schema
+
+var GatewayResourceFailure_errors *smithy.Schema
+
+var _GatewayResourceFailureList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayResourceFailureList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayResourceFailureList_member *smithy.Schema
+
+var GatewayResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayResources",
+}, smithy.ShapeTypeStructure, 2)
+var GatewayResources_gatewayArn *smithy.Schema
+
+var GatewayResources_resources *smithy.Schema
+
+var GatewayRoute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRoute",
+}, smithy.ShapeTypeStructure, 6)
+var GatewayRoute_gatewayRouteArn *smithy.Schema
+
+var GatewayRoute_serviceArn *smithy.Schema
+
+var GatewayRoute_serviceContainerPortName *smithy.Schema
+
+var GatewayRoute_status *smithy.Schema
+
+var GatewayRoute_serviceUrl *smithy.Schema
+
+var GatewayRoute_resources *smithy.Schema
+
+var GatewayRouteAlbResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteAlbResources",
+}, smithy.ShapeTypeStructure, 7)
+var GatewayRouteAlbResources_acmCertificateArn *smithy.Schema
+
+var GatewayRouteAlbResources_loadBalancerArn *smithy.Schema
+
+var GatewayRouteAlbResources_listenerArn *smithy.Schema
+
+var GatewayRouteAlbResources_listenerRuleArn *smithy.Schema
+
+var GatewayRouteAlbResources_testListenerRuleArns *smithy.Schema
+
+var GatewayRouteAlbResources_loadBalancerSecurityGroups *smithy.Schema
+
+var GatewayRouteAlbResources_serviceSecurityGroupArn *smithy.Schema
+
+var _GatewayRouteAlbResourcesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteAlbResourcesList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayRouteAlbResourcesList_member *smithy.Schema
+
+var GatewayRouteLoadBalancerSecurityGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteLoadBalancerSecurityGroup",
+}, smithy.ShapeTypeStructure, 2)
+var GatewayRouteLoadBalancerSecurityGroup_arn *smithy.Schema
+
+var GatewayRouteLoadBalancerSecurityGroup_ruleArns *smithy.Schema
+
+var _GatewayRouteLoadBalancerSecurityGroupList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteLoadBalancerSecurityGroupList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayRouteLoadBalancerSecurityGroupList_member *smithy.Schema
+
+var GatewayRouteResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteResources",
+}, smithy.ShapeTypeUnion, 1)
+var GatewayRouteResources_hostSharedAlb *smithy.Schema
+
+var GatewayRouteStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteStatus",
+}, smithy.ShapeTypeEnum, 7)
+var GatewayRouteStatus_ACTIVE *smithy.Schema
+
+var GatewayRouteStatus_CREATE_IN_PROGRESS *smithy.Schema
+
+var GatewayRouteStatus_CREATE_FAILED *smithy.Schema
+
+var GatewayRouteStatus_UPDATE_IN_PROGRESS *smithy.Schema
+
+var GatewayRouteStatus_UPDATE_FAILED *smithy.Schema
+
+var GatewayRouteStatus_DELETE_IN_PROGRESS *smithy.Schema
+
+var GatewayRouteStatus_DELETE_FAILED *smithy.Schema
+
+var _GatewayRouteStatusList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteStatusList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayRouteStatusList_member *smithy.Schema
+
+var GatewayRouteSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteSummary",
+}, smithy.ShapeTypeStructure, 6)
+var GatewayRouteSummary_gatewayRouteArn *smithy.Schema
+
+var GatewayRouteSummary_gatewayArn *smithy.Schema
+
+var GatewayRouteSummary_clusterArn *smithy.Schema
+
+var GatewayRouteSummary_serviceArn *smithy.Schema
+
+var GatewayRouteSummary_serviceContainerPortName *smithy.Schema
+
+var GatewayRouteSummary_status *smithy.Schema
+
+var _GatewayRouteSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayRouteSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayRouteSummaryList_member *smithy.Schema
+
+var GatewayStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayStatus",
+}, smithy.ShapeTypeEnum, 5)
+var GatewayStatus_ACTIVE *smithy.Schema
+
+var GatewayStatus_UPDATE_IN_PROGRESS *smithy.Schema
+
+var GatewayStatus_UPDATE_COMPLETE *smithy.Schema
+
+var GatewayStatus_UPDATE_FAILED *smithy.Schema
+
+var GatewayStatus_DELETED *smithy.Schema
+
+var _GatewayStatusList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayStatusList",
+}, smithy.ShapeTypeList, 1)
+var _GatewayStatusList_member *smithy.Schema
+
+var GatewaySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewaySummary",
+}, smithy.ShapeTypeStructure, 4)
+var GatewaySummary_gatewayArn *smithy.Schema
+
+var GatewaySummary_name *smithy.Schema
+
+var GatewaySummary_status *smithy.Schema
+
+var GatewaySummary_createdAt *smithy.Schema
+
+var _GatewaySummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewaySummaryList",
+}, smithy.ShapeTypeList, 1)
+var _GatewaySummaryList_member *smithy.Schema
+
+var GatewayTestTrafficHeader = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayTestTrafficHeader",
+}, smithy.ShapeTypeStructure, 2)
+var GatewayTestTrafficHeader_name *smithy.Schema
+
+var GatewayTestTrafficHeader_values *smithy.Schema
+
 var _GpuIds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "GpuIds",
@@ -2734,6 +3301,28 @@ var _HostEntryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "HostEntryList",
 }, smithy.ShapeTypeList, 1)
 var _HostEntryList_member *smithy.Schema
+
+var HostSharedAlbConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "HostSharedAlbConfiguration",
+}, smithy.ShapeTypeStructure, 9)
+var HostSharedAlbConfiguration_networkConfiguration *smithy.Schema
+
+var HostSharedAlbConfiguration_scheme *smithy.Schema
+
+var HostSharedAlbConfiguration_webACLArn *smithy.Schema
+
+var HostSharedAlbConfiguration_accessLogs *smithy.Schema
+
+var HostSharedAlbConfiguration_port *smithy.Schema
+
+var HostSharedAlbConfiguration_protocol *smithy.Schema
+
+var HostSharedAlbConfiguration_maxAlbCount *smithy.Schema
+
+var HostSharedAlbConfiguration_httpDesync *smithy.Schema
+
+var HostSharedAlbConfiguration_testTrafficRules *smithy.Schema
 
 var HostVolumeProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -3794,6 +4383,14 @@ var _PortNumber = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PortNumber",
 }, smithy.ShapeTypeInteger, 0)
 
+var PropagateGatewayTags = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "PropagateGatewayTags",
+}, smithy.ShapeTypeEnum, 2)
+var PropagateGatewayTags_NONE *smithy.Schema
+
+var PropagateGatewayTags_GATEWAY *smithy.Schema
+
 var PropagateMITags = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "PropagateMITags",
@@ -4524,7 +5121,7 @@ var ServiceRegistry_containerPort *smithy.Schema
 var ServiceRevision = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ServiceRevision",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var ServiceRevision_serviceRevisionArn *smithy.Schema
 
 var ServiceRevision_serviceArn *smithy.Schema
@@ -4566,6 +5163,8 @@ var ServiceRevision_resolvedConfiguration *smithy.Schema
 var ServiceRevision_ecsManagedResources *smithy.Schema
 
 var ServiceRevision_overrides *smithy.Schema
+
+var ServiceRevision_gatewayConnectors *smithy.Schema
 
 var ServiceRevision_monitoring *smithy.Schema
 
@@ -5366,6 +5965,34 @@ var UpdatedExpressGatewayService_createdAt *smithy.Schema
 
 var UpdatedExpressGatewayService_updatedAt *smithy.Schema
 
+var UpdateGatewayAlbConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "UpdateGatewayAlbConfiguration",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateGatewayAlbConfiguration_networkConfiguration *smithy.Schema
+
+var UpdateGatewayAlbConfiguration_maxAlbCount *smithy.Schema
+
+var UpdateGatewayAlbConfiguration_webACLArn *smithy.Schema
+
+var UpdateGatewayAlbConfiguration_accessLogs *smithy.Schema
+
+var UpdateGatewayAlbConfiguration_httpDesync *smithy.Schema
+
+var UpdateGatewayAlbConfiguration_testTrafficRules *smithy.Schema
+
+var UpdateGatewayConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "UpdateGatewayConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var UpdateGatewayConfiguration_hostSharedAlb *smithy.Schema
+
+var UpdateGatewayNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "UpdateGatewayNetworkConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateGatewayNetworkConfiguration_inboundSecurityGroup *smithy.Schema
+
 var UpdateInProgressException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "UpdateInProgressException",
@@ -5477,6 +6104,24 @@ var _VpcLatticeConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VpcLatticeConfigurations",
 }, smithy.ShapeTypeList, 1)
 var _VpcLatticeConfigurations_member *smithy.Schema
+
+var AssociateGatewayWithClusterRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "AssociateGatewayWithClusterRequest",
+}, smithy.ShapeTypeStructure, 2)
+var AssociateGatewayWithClusterRequest_gateway *smithy.Schema
+
+var AssociateGatewayWithClusterRequest_cluster *smithy.Schema
+
+var AssociateGatewayWithClusterResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "AssociateGatewayWithClusterResponse",
+}, smithy.ShapeTypeStructure, 3)
+var AssociateGatewayWithClusterResponse_gatewayArn *smithy.Schema
+
+var AssociateGatewayWithClusterResponse_clusterArn *smithy.Schema
+
+var AssociateGatewayWithClusterResponse_status *smithy.Schema
 
 var ContinueServiceDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -5614,10 +6259,38 @@ var CreateExpressGatewayServiceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateExpressGatewayServiceResponse_service *smithy.Schema
 
+var CreateGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "CreateGatewayRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateGatewayRequest_name *smithy.Schema
+
+var CreateGatewayRequest_infrastructureRoleArn *smithy.Schema
+
+var CreateGatewayRequest_clientToken *smithy.Schema
+
+var CreateGatewayRequest_deletionProtection *smithy.Schema
+
+var CreateGatewayRequest_configuration *smithy.Schema
+
+var CreateGatewayRequest_tags *smithy.Schema
+
+var CreateGatewayRequest_propagateTags *smithy.Schema
+
+var CreateGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "CreateGatewayResponse",
+}, smithy.ShapeTypeStructure, 3)
+var CreateGatewayResponse_gatewayArn *smithy.Schema
+
+var CreateGatewayResponse_name *smithy.Schema
+
+var CreateGatewayResponse_status *smithy.Schema
+
 var CreateServiceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "CreateServiceRequest",
-}, smithy.ShapeTypeStructure, 27)
+}, smithy.ShapeTypeStructure, 28)
 var CreateServiceRequest_cluster *smithy.Schema
 
 var CreateServiceRequest_serviceName *smithy.Schema
@@ -5669,6 +6342,8 @@ var CreateServiceRequest_serviceConnectConfiguration *smithy.Schema
 var CreateServiceRequest_volumeConfigurations *smithy.Schema
 
 var CreateServiceRequest_vpcLatticeConfigurations *smithy.Schema
+
+var CreateServiceRequest_gatewayConnectors *smithy.Schema
 
 var CreateServiceRequest_monitoring *smithy.Schema
 
@@ -5811,6 +6486,22 @@ var DeleteExpressGatewayServiceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteExpressGatewayServiceResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteExpressGatewayServiceResponse_service *smithy.Schema
+
+var DeleteGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DeleteGatewayRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteGatewayRequest_gateway *smithy.Schema
+
+var DeleteGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DeleteGatewayResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteGatewayResponse_gatewayArn *smithy.Schema
+
+var DeleteGatewayResponse_name *smithy.Schema
+
+var DeleteGatewayResponse_status *smithy.Schema
 
 var DeleteServiceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -6012,6 +6703,48 @@ var DescribeExpressGatewayServiceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DescribeExpressGatewayServiceResponse_service *smithy.Schema
 
+var DescribeGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeGatewayRequest_gateway *smithy.Schema
+
+var DescribeGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeGatewayResponse_gateway *smithy.Schema
+
+var DescribeGatewayResourcesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayResourcesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeGatewayResourcesRequest_gateway *smithy.Schema
+
+var DescribeGatewayResourcesRequest_maxResults *smithy.Schema
+
+var DescribeGatewayResourcesRequest_nextToken *smithy.Schema
+
+var DescribeGatewayResourcesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayResourcesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeGatewayResourcesResponse_gatewayResources *smithy.Schema
+
+var DescribeGatewayResourcesResponse_nextToken *smithy.Schema
+
+var DescribeGatewayRouteRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayRouteRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeGatewayRouteRequest_gatewayRouteArn *smithy.Schema
+
+var DescribeGatewayRouteResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DescribeGatewayRouteResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeGatewayRouteResponse_gatewayRoute *smithy.Schema
+
 var DescribeServiceDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "DescribeServiceDeploymentsRequest",
@@ -6111,6 +6844,24 @@ var DescribeTasksResponse = smithy.NewSchema(smithy.ShapeID{
 var DescribeTasksResponse_tasks *smithy.Schema
 
 var DescribeTasksResponse_failures *smithy.Schema
+
+var DisassociateGatewayFromClusterRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DisassociateGatewayFromClusterRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateGatewayFromClusterRequest_gateway *smithy.Schema
+
+var DisassociateGatewayFromClusterRequest_cluster *smithy.Schema
+
+var DisassociateGatewayFromClusterResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "DisassociateGatewayFromClusterResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DisassociateGatewayFromClusterResponse_gatewayArn *smithy.Schema
+
+var DisassociateGatewayFromClusterResponse_clusterArn *smithy.Schema
+
+var DisassociateGatewayFromClusterResponse_status *smithy.Schema
 
 var DiscoverPollEndpointRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -6329,6 +7080,74 @@ var ListDaemonTaskDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListDaemonTaskDefinitionsResponse_daemonTaskDefinitions *smithy.Schema
 
 var ListDaemonTaskDefinitionsResponse_nextToken *smithy.Schema
+
+var ListGatewayClusterAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewayClusterAssociationsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListGatewayClusterAssociationsRequest_gateway *smithy.Schema
+
+var ListGatewayClusterAssociationsRequest_cluster *smithy.Schema
+
+var ListGatewayClusterAssociationsRequest_status *smithy.Schema
+
+var ListGatewayClusterAssociationsRequest_maxResults *smithy.Schema
+
+var ListGatewayClusterAssociationsRequest_nextToken *smithy.Schema
+
+var ListGatewayClusterAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewayClusterAssociationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListGatewayClusterAssociationsResponse_gatewayClusterAssociations *smithy.Schema
+
+var ListGatewayClusterAssociationsResponse_nextToken *smithy.Schema
+
+var ListGatewayRoutesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewayRoutesRequest",
+}, smithy.ShapeTypeStructure, 7)
+var ListGatewayRoutesRequest_gateway *smithy.Schema
+
+var ListGatewayRoutesRequest_cluster *smithy.Schema
+
+var ListGatewayRoutesRequest_service *smithy.Schema
+
+var ListGatewayRoutesRequest_serviceContainerPortName *smithy.Schema
+
+var ListGatewayRoutesRequest_status *smithy.Schema
+
+var ListGatewayRoutesRequest_maxResults *smithy.Schema
+
+var ListGatewayRoutesRequest_nextToken *smithy.Schema
+
+var ListGatewayRoutesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewayRoutesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListGatewayRoutesResponse_gatewayRoutes *smithy.Schema
+
+var ListGatewayRoutesResponse_nextToken *smithy.Schema
+
+var ListGatewaysRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewaysRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListGatewaysRequest_names *smithy.Schema
+
+var ListGatewaysRequest_status *smithy.Schema
+
+var ListGatewaysRequest_maxResults *smithy.Schema
+
+var ListGatewaysRequest_nextToken *smithy.Schema
+
+var ListGatewaysResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "ListGatewaysResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListGatewaysResponse_gateways *smithy.Schema
+
+var ListGatewaysResponse_nextToken *smithy.Schema
 
 var ListServiceDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -7010,10 +7829,34 @@ var UpdateExpressGatewayServiceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateExpressGatewayServiceResponse_service *smithy.Schema
 
+var UpdateGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "UpdateGatewayRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateGatewayRequest_gateway *smithy.Schema
+
+var UpdateGatewayRequest_infrastructureRoleArn *smithy.Schema
+
+var UpdateGatewayRequest_deletionProtection *smithy.Schema
+
+var UpdateGatewayRequest_configuration *smithy.Schema
+
+var UpdateGatewayRequest_propagateTags *smithy.Schema
+
+var UpdateGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "UpdateGatewayResponse",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateGatewayResponse_gatewayArn *smithy.Schema
+
+var UpdateGatewayResponse_name *smithy.Schema
+
+var UpdateGatewayResponse_status *smithy.Schema
+
 var UpdateServiceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "UpdateServiceRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var UpdateServiceRequest_cluster *smithy.Schema
 
 var UpdateServiceRequest_service *smithy.Schema
@@ -7057,6 +7900,8 @@ var UpdateServiceRequest_serviceConnectConfiguration *smithy.Schema
 var UpdateServiceRequest_volumeConfigurations *smithy.Schema
 
 var UpdateServiceRequest_vpcLatticeConfigurations *smithy.Schema
+
+var UpdateServiceRequest_gatewayConnectors *smithy.Schema
 
 var UpdateServiceRequest_monitoring *smithy.Schema
 
@@ -7182,6 +8027,8 @@ func init() {
 	AccessType_PUBLIC = AccessType.AddMember("PUBLIC", smithyprelude.Unit)
 
 	AccessType_PRIVATE = AccessType.AddMember("PRIVATE", smithyprelude.Unit)
+
+	_AccessTypeList_member = _AccessTypeList.AddMember("member", AccessType)
 
 	AdvancedConfiguration_alternateTargetGroupArn = AdvancedConfiguration.AddMember("alternateTargetGroupArn", _String)
 
@@ -8959,6 +9806,68 @@ func init() {
 
 	_Deployments_member = _Deployments.AddMember("member", Deployment)
 
+	GatewayElbIpAddressType_IPV4 = GatewayElbIpAddressType.AddMember("IPV4", smithyprelude.Unit)
+
+	GatewayElbIpAddressType_DUALSTACK = GatewayElbIpAddressType.AddMember("DUALSTACK", smithyprelude.Unit)
+
+	GatewayElbIpAddressType_DUALSTACK_WITHOUT_PUBLIC_IPV4 = GatewayElbIpAddressType.AddMember("DUALSTACK_WITHOUT_PUBLIC_IPV4", smithyprelude.Unit)
+
+	GatewayElbNetworkConfiguration_inboundSecurityGroup = GatewayElbNetworkConfiguration.AddMember("inboundSecurityGroup", _String)
+
+	GatewayElbNetworkConfiguration_subnets = GatewayElbNetworkConfiguration.AddMember("subnets", _StringList)
+
+	GatewayElbNetworkConfiguration_ipAddressType = GatewayElbNetworkConfiguration.AddMember("ipAddressType", GatewayElbIpAddressType)
+
+	GatewayElbScheme_INTERNET_FACING = GatewayElbScheme.AddMember("INTERNET_FACING", smithyprelude.Unit)
+
+	GatewayElbScheme_INTERNAL = GatewayElbScheme.AddMember("INTERNAL", smithyprelude.Unit)
+
+	GatewayElbAccessLogS3Destination_bucket = GatewayElbAccessLogS3Destination.AddMember("bucket", _String)
+
+	GatewayElbAccessLogS3Destination_prefix = GatewayElbAccessLogS3Destination.AddMember("prefix", _String)
+
+	GatewayElbAccessLogDestination_s3 = GatewayElbAccessLogDestination.AddMember("s3", GatewayElbAccessLogS3Destination)
+
+	GatewayElbAccessLogConfiguration_destination = GatewayElbAccessLogConfiguration.AddMember("destination", GatewayElbAccessLogDestination)
+
+	GatewayAlbProtocol_HTTP = GatewayAlbProtocol.AddMember("HTTP", smithyprelude.Unit)
+
+	GatewayAlbProtocol_HTTPS = GatewayAlbProtocol.AddMember("HTTPS", smithyprelude.Unit)
+
+	GatewayAlbDesyncMitigationMode_MONITOR = GatewayAlbDesyncMitigationMode.AddMember("MONITOR", smithyprelude.Unit)
+
+	GatewayAlbDesyncMitigationMode_DEFENSIVE = GatewayAlbDesyncMitigationMode.AddMember("DEFENSIVE", smithyprelude.Unit)
+
+	GatewayAlbDesyncMitigationMode_STRICTEST = GatewayAlbDesyncMitigationMode.AddMember("STRICTEST", smithyprelude.Unit)
+
+	GatewayTestTrafficHeader_name = GatewayTestTrafficHeader.AddMember("name", _String)
+
+	GatewayTestTrafficHeader_values = GatewayTestTrafficHeader.AddMember("values", _StringList)
+
+	GatewayAlbTestTrafficRules_header = GatewayAlbTestTrafficRules.AddMember("header", GatewayTestTrafficHeader)
+
+	DescribeGatewayAlbConfiguration_networkConfiguration = DescribeGatewayAlbConfiguration.AddMember("networkConfiguration", GatewayElbNetworkConfiguration)
+
+	DescribeGatewayAlbConfiguration_scheme = DescribeGatewayAlbConfiguration.AddMember("scheme", GatewayElbScheme)
+
+	DescribeGatewayAlbConfiguration_accessLogs = DescribeGatewayAlbConfiguration.AddMember("accessLogs", GatewayElbAccessLogConfiguration)
+
+	DescribeGatewayAlbConfiguration_webACLArn = DescribeGatewayAlbConfiguration.AddMember("webACLArn", _String)
+
+	DescribeGatewayAlbConfiguration_port = DescribeGatewayAlbConfiguration.AddMember("port", _BoxedInteger)
+
+	DescribeGatewayAlbConfiguration_protocol = DescribeGatewayAlbConfiguration.AddMember("protocol", GatewayAlbProtocol)
+
+	DescribeGatewayAlbConfiguration_maxAlbCount = DescribeGatewayAlbConfiguration.AddMember("maxAlbCount", _BoxedInteger)
+
+	DescribeGatewayAlbConfiguration_currentAlbCount = DescribeGatewayAlbConfiguration.AddMember("currentAlbCount", _BoxedInteger)
+
+	DescribeGatewayAlbConfiguration_httpDesync = DescribeGatewayAlbConfiguration.AddMember("httpDesync", GatewayAlbDesyncMitigationMode)
+
+	DescribeGatewayAlbConfiguration_testTrafficRules = DescribeGatewayAlbConfiguration.AddMember("testTrafficRules", GatewayAlbTestTrafficRules)
+
+	DescribeGatewayConfiguration_hostSharedAlb = DescribeGatewayConfiguration.AddMember("hostSharedAlb", DescribeGatewayAlbConfiguration)
+
 	DesiredStatus_RUNNING = DesiredStatus.AddMember("RUNNING", smithyprelude.Unit)
 
 	DesiredStatus_PENDING = DesiredStatus.AddMember("PENDING", smithyprelude.Unit)
@@ -9237,6 +10146,56 @@ func init() {
 
 	_ManagedLogGroups_member = _ManagedLogGroups.AddMember("member", ManagedLogGroup)
 
+	GatewayRouteStatus_ACTIVE = GatewayRouteStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	GatewayRouteStatus_CREATE_IN_PROGRESS = GatewayRouteStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
+
+	GatewayRouteStatus_CREATE_FAILED = GatewayRouteStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	GatewayRouteStatus_UPDATE_IN_PROGRESS = GatewayRouteStatus.AddMember("UPDATE_IN_PROGRESS", smithyprelude.Unit)
+
+	GatewayRouteStatus_UPDATE_FAILED = GatewayRouteStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
+	GatewayRouteStatus_DELETE_IN_PROGRESS = GatewayRouteStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
+
+	GatewayRouteStatus_DELETE_FAILED = GatewayRouteStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
+	GatewayConnectionAlbResources_acmCertificateArn = GatewayConnectionAlbResources.AddMember("acmCertificateArn", _String)
+
+	GatewayConnectionAlbResources_loadBalancerArn = GatewayConnectionAlbResources.AddMember("loadBalancerArn", _String)
+
+	GatewayConnectionAlbResources_loadBalancerSecurityGroupArns = GatewayConnectionAlbResources.AddMember("loadBalancerSecurityGroupArns", _StringList)
+
+	GatewayConnectionAlbResources_listenerArn = GatewayConnectionAlbResources.AddMember("listenerArn", _String)
+
+	GatewayConnectionAlbResources_listenerRuleArn = GatewayConnectionAlbResources.AddMember("listenerRuleArn", _String)
+
+	GatewayConnectionAlbResources_testListenerRuleArn = GatewayConnectionAlbResources.AddMember("testListenerRuleArn", _String)
+
+	GatewayConnectionAlbResources_targetGroupArn = GatewayConnectionAlbResources.AddMember("targetGroupArn", _String)
+
+	GatewayConnectionAlbResources_alternateTargetGroupArn = GatewayConnectionAlbResources.AddMember("alternateTargetGroupArn", _String)
+
+	_GatewayConnectionAlbResourcesList_member = _GatewayConnectionAlbResourcesList.AddMember("member", GatewayConnectionAlbResources)
+
+	GatewayConnectionResources_hostSharedAlb = GatewayConnectionResources.AddMember("hostSharedAlb", _GatewayConnectionAlbResourcesList)
+
+	GatewayConnection_gatewayArn = GatewayConnection.AddMember("gatewayArn", _String)
+
+	GatewayConnection_gatewayRouteArn = GatewayConnection.AddMember("gatewayRouteArn", _String)
+
+	GatewayConnection_portName = GatewayConnection.AddMember("portName", _String)
+
+	GatewayConnection_serviceUrl = GatewayConnection.AddMember("serviceUrl", _String)
+
+	GatewayConnection_accessType = GatewayConnection.AddMember("accessType", AccessType)
+
+	GatewayConnection_status = GatewayConnection.AddMember("status", GatewayRouteStatus)
+
+	GatewayConnection_resources = GatewayConnection.AddMember("resources", GatewayConnectionResources)
+
+	_GatewayConnectionList_member = _GatewayConnectionList.AddMember("member", GatewayConnection)
+
 	ECSManagedResources_ingressPaths = ECSManagedResources.AddMember("ingressPaths", _ManagedIngressPaths)
 
 	ECSManagedResources_autoScaling = ECSManagedResources.AddMember("autoScaling", ManagedAutoScaling)
@@ -9246,6 +10205,8 @@ func init() {
 	ECSManagedResources_serviceSecurityGroups = ECSManagedResources.AddMember("serviceSecurityGroups", _ManagedSecurityGroups)
 
 	ECSManagedResources_logGroups = ECSManagedResources.AddMember("logGroups", _ManagedLogGroups)
+
+	ECSManagedResources_gatewayConnections = ECSManagedResources.AddMember("gatewayConnections", _GatewayConnectionList)
 
 	EFSAuthorizationConfigIAM_ENABLED = EFSAuthorizationConfigIAM.AddMember("ENABLED", smithyprelude.Unit)
 
@@ -9268,6 +10229,16 @@ func init() {
 	EFSVolumeConfiguration_transitEncryptionPort = EFSVolumeConfiguration.AddMember("transitEncryptionPort", _BoxedInteger)
 
 	EFSVolumeConfiguration_authorizationConfig = EFSVolumeConfiguration.AddMember("authorizationConfig", EFSAuthorizationConfig)
+
+	ElbGatewayResources_loadBalancerArn = ElbGatewayResources.AddMember("loadBalancerArn", _String)
+
+	ElbGatewayResources_listenerArn = ElbGatewayResources.AddMember("listenerArn", _String)
+
+	ElbGatewayResources_securityGroup = ElbGatewayResources.AddMember("securityGroup", _String)
+
+	ElbGatewayResources_gatewayRouteArns = ElbGatewayResources.AddMember("gatewayRouteArns", _StringList)
+
+	_ElbGatewayResourcesList_member = _ElbGatewayResourcesList.AddMember("member", ElbGatewayResources)
 
 	EphemeralStorage_sizeInGiB = EphemeralStorage.AddMember("sizeInGiB", _Integer)
 
@@ -9292,6 +10263,202 @@ func init() {
 	FSxWindowsFileServerVolumeConfiguration_rootDirectory = FSxWindowsFileServerVolumeConfiguration.AddMember("rootDirectory", _String)
 
 	FSxWindowsFileServerVolumeConfiguration_authorizationConfig = FSxWindowsFileServerVolumeConfiguration.AddMember("authorizationConfig", FSxWindowsFileServerAuthorizationConfig)
+
+	GatewayStatus_ACTIVE = GatewayStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	GatewayStatus_UPDATE_IN_PROGRESS = GatewayStatus.AddMember("UPDATE_IN_PROGRESS", smithyprelude.Unit)
+
+	GatewayStatus_UPDATE_COMPLETE = GatewayStatus.AddMember("UPDATE_COMPLETE", smithyprelude.Unit)
+
+	GatewayStatus_UPDATE_FAILED = GatewayStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
+	GatewayStatus_DELETED = GatewayStatus.AddMember("DELETED", smithyprelude.Unit)
+
+	GatewayOperationError_operation = GatewayOperationError.AddMember("operation", _String)
+
+	GatewayOperationError_code = GatewayOperationError.AddMember("code", _String)
+
+	GatewayOperationError_message = GatewayOperationError.AddMember("message", _String)
+
+	_GatewayOperationErrorList_member = _GatewayOperationErrorList.AddMember("member", GatewayOperationError)
+
+	GatewayResourceFailure_arn = GatewayResourceFailure.AddMember("arn", _String)
+
+	GatewayResourceFailure_errors = GatewayResourceFailure.AddMember("errors", _GatewayOperationErrorList)
+
+	_GatewayResourceFailureList_member = _GatewayResourceFailureList.AddMember("member", GatewayResourceFailure)
+
+	PropagateGatewayTags_NONE = PropagateGatewayTags.AddMember("NONE", smithyprelude.Unit)
+
+	PropagateGatewayTags_GATEWAY = PropagateGatewayTags.AddMember("GATEWAY", smithyprelude.Unit)
+
+	Gateway_gatewayArn = Gateway.AddMember("gatewayArn", _String)
+
+	Gateway_name = Gateway.AddMember("name", _String)
+
+	Gateway_status = Gateway.AddMember("status", GatewayStatus)
+
+	Gateway_statusReason = Gateway.AddMember("statusReason", _String)
+
+	Gateway_failures = Gateway.AddMember("failures", _GatewayResourceFailureList)
+
+	Gateway_infrastructureRoleArn = Gateway.AddMember("infrastructureRoleArn", _String)
+
+	Gateway_deletionProtection = Gateway.AddMember("deletionProtection", _BoxedBoolean)
+
+	Gateway_configuration = Gateway.AddMember("configuration", DescribeGatewayConfiguration)
+
+	Gateway_accessType = Gateway.AddMember("accessType", AccessType)
+
+	Gateway_propagateTags = Gateway.AddMember("propagateTags", PropagateGatewayTags)
+
+	Gateway_tags = Gateway.AddMember("tags", _Tags)
+
+	Gateway_createdAt = Gateway.AddMember("createdAt", _Timestamp)
+
+	Gateway_updatedAt = Gateway.AddMember("updatedAt", _Timestamp)
+
+	GatewayClusterAssociationStatus_ACTIVE = GatewayClusterAssociationStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	GatewayClusterAssociationStatus_DISASSOCIATING = GatewayClusterAssociationStatus.AddMember("DISASSOCIATING", smithyprelude.Unit)
+
+	GatewayClusterAssociationStatus_INACTIVE = GatewayClusterAssociationStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	_GatewayClusterAssociationStatusList_member = _GatewayClusterAssociationStatusList.AddMember("member", GatewayClusterAssociationStatus)
+
+	GatewayClusterAssociationSummary_gatewayArn = GatewayClusterAssociationSummary.AddMember("gatewayArn", _String)
+
+	GatewayClusterAssociationSummary_clusterArn = GatewayClusterAssociationSummary.AddMember("clusterArn", _String)
+
+	GatewayClusterAssociationSummary_status = GatewayClusterAssociationSummary.AddMember("status", GatewayClusterAssociationStatus)
+
+	_GatewayClusterAssociationSummaryList_member = _GatewayClusterAssociationSummaryList.AddMember("member", GatewayClusterAssociationSummary)
+
+	HostSharedAlbConfiguration_networkConfiguration = HostSharedAlbConfiguration.AddMember("networkConfiguration", GatewayElbNetworkConfiguration)
+
+	HostSharedAlbConfiguration_scheme = HostSharedAlbConfiguration.AddMember("scheme", GatewayElbScheme)
+
+	HostSharedAlbConfiguration_webACLArn = HostSharedAlbConfiguration.AddMember("webACLArn", _String)
+
+	HostSharedAlbConfiguration_accessLogs = HostSharedAlbConfiguration.AddMember("accessLogs", GatewayElbAccessLogConfiguration)
+
+	HostSharedAlbConfiguration_port = HostSharedAlbConfiguration.AddMember("port", _BoxedInteger)
+
+	HostSharedAlbConfiguration_protocol = HostSharedAlbConfiguration.AddMember("protocol", GatewayAlbProtocol)
+
+	HostSharedAlbConfiguration_maxAlbCount = HostSharedAlbConfiguration.AddMember("maxAlbCount", _BoxedInteger)
+
+	HostSharedAlbConfiguration_httpDesync = HostSharedAlbConfiguration.AddMember("httpDesync", GatewayAlbDesyncMitigationMode)
+
+	HostSharedAlbConfiguration_testTrafficRules = HostSharedAlbConfiguration.AddMember("testTrafficRules", GatewayAlbTestTrafficRules)
+
+	GatewayConfiguration_hostSharedAlb = GatewayConfiguration.AddMember("hostSharedAlb", HostSharedAlbConfiguration)
+
+	GatewayConnectorHealthCheckProtocol_HTTP = GatewayConnectorHealthCheckProtocol.AddMember("HTTP", smithyprelude.Unit)
+
+	GatewayConnectorHealthCheckProtocol_HTTPS = GatewayConnectorHealthCheckProtocol.AddMember("HTTPS", smithyprelude.Unit)
+
+	GatewayConnectorHealthCheckMatcher_httpCode = GatewayConnectorHealthCheckMatcher.AddMember("httpCode", _String)
+
+	GatewayConnectorHealthCheckMatcher_grpcCode = GatewayConnectorHealthCheckMatcher.AddMember("grpcCode", _String)
+
+	GatewayConnectorHealthCheck_healthCheckProtocol = GatewayConnectorHealthCheck.AddMember("healthCheckProtocol", GatewayConnectorHealthCheckProtocol)
+
+	GatewayConnectorHealthCheck_healthCheckPort = GatewayConnectorHealthCheck.AddMember("healthCheckPort", _BoxedInteger)
+
+	GatewayConnectorHealthCheck_healthCheckPath = GatewayConnectorHealthCheck.AddMember("healthCheckPath", _String)
+
+	GatewayConnectorHealthCheck_healthCheckTimeoutSeconds = GatewayConnectorHealthCheck.AddMember("healthCheckTimeoutSeconds", _BoxedInteger)
+
+	GatewayConnectorHealthCheck_healthCheckIntervalSeconds = GatewayConnectorHealthCheck.AddMember("healthCheckIntervalSeconds", _BoxedInteger)
+
+	GatewayConnectorHealthCheck_healthyThresholdCount = GatewayConnectorHealthCheck.AddMember("healthyThresholdCount", _BoxedInteger)
+
+	GatewayConnectorHealthCheck_unhealthyThresholdCount = GatewayConnectorHealthCheck.AddMember("unhealthyThresholdCount", _BoxedInteger)
+
+	GatewayConnectorHealthCheck_matcher = GatewayConnectorHealthCheck.AddMember("matcher", GatewayConnectorHealthCheckMatcher)
+
+	GatewayConnectorFilters_accessTypes = GatewayConnectorFilters.AddMember("accessTypes", _AccessTypeList)
+
+	GatewayConnector_portName = GatewayConnector.AddMember("portName", _String)
+
+	GatewayConnector_healthCheck = GatewayConnector.AddMember("healthCheck", GatewayConnectorHealthCheck)
+
+	GatewayConnector_filters = GatewayConnector.AddMember("filters", GatewayConnectorFilters)
+
+	_GatewayConnectorList_member = _GatewayConnectorList.AddMember("member", GatewayConnector)
+
+	GatewayInfrastructureResources_hostSharedAlb = GatewayInfrastructureResources.AddMember("hostSharedAlb", _ElbGatewayResourcesList)
+
+	GatewayNotFoundException_message = GatewayNotFoundException.AddMember("message", _String)
+
+	GatewayResources_gatewayArn = GatewayResources.AddMember("gatewayArn", _String)
+
+	GatewayResources_resources = GatewayResources.AddMember("resources", GatewayInfrastructureResources)
+
+	GatewayRouteLoadBalancerSecurityGroup_arn = GatewayRouteLoadBalancerSecurityGroup.AddMember("arn", _String)
+
+	GatewayRouteLoadBalancerSecurityGroup_ruleArns = GatewayRouteLoadBalancerSecurityGroup.AddMember("ruleArns", _StringList)
+
+	_GatewayRouteLoadBalancerSecurityGroupList_member = _GatewayRouteLoadBalancerSecurityGroupList.AddMember("member", GatewayRouteLoadBalancerSecurityGroup)
+
+	GatewayRouteAlbResources_acmCertificateArn = GatewayRouteAlbResources.AddMember("acmCertificateArn", _String)
+
+	GatewayRouteAlbResources_loadBalancerArn = GatewayRouteAlbResources.AddMember("loadBalancerArn", _String)
+
+	GatewayRouteAlbResources_listenerArn = GatewayRouteAlbResources.AddMember("listenerArn", _String)
+
+	GatewayRouteAlbResources_listenerRuleArn = GatewayRouteAlbResources.AddMember("listenerRuleArn", _String)
+
+	GatewayRouteAlbResources_testListenerRuleArns = GatewayRouteAlbResources.AddMember("testListenerRuleArns", _StringList)
+
+	GatewayRouteAlbResources_loadBalancerSecurityGroups = GatewayRouteAlbResources.AddMember("loadBalancerSecurityGroups", _GatewayRouteLoadBalancerSecurityGroupList)
+
+	GatewayRouteAlbResources_serviceSecurityGroupArn = GatewayRouteAlbResources.AddMember("serviceSecurityGroupArn", _String)
+
+	_GatewayRouteAlbResourcesList_member = _GatewayRouteAlbResourcesList.AddMember("member", GatewayRouteAlbResources)
+
+	GatewayRouteResources_hostSharedAlb = GatewayRouteResources.AddMember("hostSharedAlb", _GatewayRouteAlbResourcesList)
+
+	GatewayRoute_gatewayRouteArn = GatewayRoute.AddMember("gatewayRouteArn", _String)
+
+	GatewayRoute_serviceArn = GatewayRoute.AddMember("serviceArn", _String)
+
+	GatewayRoute_serviceContainerPortName = GatewayRoute.AddMember("serviceContainerPortName", _String)
+
+	GatewayRoute_status = GatewayRoute.AddMember("status", GatewayRouteStatus)
+
+	GatewayRoute_serviceUrl = GatewayRoute.AddMember("serviceUrl", _String)
+
+	GatewayRoute_resources = GatewayRoute.AddMember("resources", GatewayRouteResources)
+
+	_GatewayRouteStatusList_member = _GatewayRouteStatusList.AddMember("member", GatewayRouteStatus)
+
+	GatewayRouteSummary_gatewayRouteArn = GatewayRouteSummary.AddMember("gatewayRouteArn", _String)
+
+	GatewayRouteSummary_gatewayArn = GatewayRouteSummary.AddMember("gatewayArn", _String)
+
+	GatewayRouteSummary_clusterArn = GatewayRouteSummary.AddMember("clusterArn", _String)
+
+	GatewayRouteSummary_serviceArn = GatewayRouteSummary.AddMember("serviceArn", _String)
+
+	GatewayRouteSummary_serviceContainerPortName = GatewayRouteSummary.AddMember("serviceContainerPortName", _String)
+
+	GatewayRouteSummary_status = GatewayRouteSummary.AddMember("status", GatewayRouteStatus)
+
+	_GatewayRouteSummaryList_member = _GatewayRouteSummaryList.AddMember("member", GatewayRouteSummary)
+
+	_GatewayStatusList_member = _GatewayStatusList.AddMember("member", GatewayStatus)
+
+	GatewaySummary_gatewayArn = GatewaySummary.AddMember("gatewayArn", _String)
+
+	GatewaySummary_name = GatewaySummary.AddMember("name", _String)
+
+	GatewaySummary_status = GatewaySummary.AddMember("status", GatewayStatus)
+
+	GatewaySummary_createdAt = GatewaySummary.AddMember("createdAt", _Timestamp)
+
+	_GatewaySummaryList_member = _GatewaySummaryList.AddMember("member", GatewaySummary)
 
 	InferenceAccelerator_deviceName = InferenceAccelerator.AddMember("deviceName", _String)
 
@@ -9853,6 +11020,8 @@ func init() {
 
 	ServiceRevision_overrides = ServiceRevision.AddMember("overrides", ServiceRevisionOverrides)
 
+	ServiceRevision_gatewayConnectors = ServiceRevision.AddMember("gatewayConnectors", _GatewayConnectorList)
+
 	ServiceRevision_monitoring = ServiceRevision.AddMember("monitoring", MonitoringConfiguration)
 
 	_ServiceRevisions_member = _ServiceRevisions.AddMember("member", ServiceRevision)
@@ -10175,6 +11344,22 @@ func init() {
 
 	UpdatedExpressGatewayService_updatedAt = UpdatedExpressGatewayService.AddMember("updatedAt", _Timestamp)
 
+	UpdateGatewayNetworkConfiguration_inboundSecurityGroup = UpdateGatewayNetworkConfiguration.AddMember("inboundSecurityGroup", _String)
+
+	UpdateGatewayAlbConfiguration_networkConfiguration = UpdateGatewayAlbConfiguration.AddMember("networkConfiguration", UpdateGatewayNetworkConfiguration)
+
+	UpdateGatewayAlbConfiguration_maxAlbCount = UpdateGatewayAlbConfiguration.AddMember("maxAlbCount", _BoxedInteger)
+
+	UpdateGatewayAlbConfiguration_webACLArn = UpdateGatewayAlbConfiguration.AddMember("webACLArn", _String)
+
+	UpdateGatewayAlbConfiguration_accessLogs = UpdateGatewayAlbConfiguration.AddMember("accessLogs", GatewayElbAccessLogConfiguration)
+
+	UpdateGatewayAlbConfiguration_httpDesync = UpdateGatewayAlbConfiguration.AddMember("httpDesync", GatewayAlbDesyncMitigationMode)
+
+	UpdateGatewayAlbConfiguration_testTrafficRules = UpdateGatewayAlbConfiguration.AddMember("testTrafficRules", GatewayAlbTestTrafficRules)
+
+	UpdateGatewayConfiguration_hostSharedAlb = UpdateGatewayConfiguration.AddMember("hostSharedAlb", UpdateGatewayAlbConfiguration)
+
 	UpdateInProgressException_message = UpdateInProgressException.AddMember("message", _String)
 
 	UpdateManagedInstancesProviderConfiguration_infrastructureRoleArn = UpdateManagedInstancesProviderConfiguration.AddMember("infrastructureRoleArn", _String)
@@ -10186,6 +11371,16 @@ func init() {
 	UpdateManagedInstancesProviderConfiguration_infrastructureOptimization = UpdateManagedInstancesProviderConfiguration.AddMember("infrastructureOptimization", InfrastructureOptimization)
 
 	UpdateManagedInstancesProviderConfiguration_autoRepairConfiguration = UpdateManagedInstancesProviderConfiguration.AddMember("autoRepairConfiguration", AutoRepairConfiguration)
+
+	AssociateGatewayWithClusterRequest_gateway = AssociateGatewayWithClusterRequest.AddMember("gateway", _String)
+
+	AssociateGatewayWithClusterRequest_cluster = AssociateGatewayWithClusterRequest.AddMember("cluster", _String)
+
+	AssociateGatewayWithClusterResponse_gatewayArn = AssociateGatewayWithClusterResponse.AddMember("gatewayArn", _String)
+
+	AssociateGatewayWithClusterResponse_clusterArn = AssociateGatewayWithClusterResponse.AddMember("clusterArn", _String)
+
+	AssociateGatewayWithClusterResponse_status = AssociateGatewayWithClusterResponse.AddMember("status", GatewayClusterAssociationStatus)
 
 	ContinueServiceDeploymentRequest_serviceDeploymentArn = ContinueServiceDeploymentRequest.AddMember("serviceDeploymentArn", _String)
 
@@ -10283,6 +11478,26 @@ func init() {
 
 	CreateExpressGatewayServiceResponse_service = CreateExpressGatewayServiceResponse.AddMember("service", ECSExpressGatewayService)
 
+	CreateGatewayRequest_name = CreateGatewayRequest.AddMember("name", _String)
+
+	CreateGatewayRequest_infrastructureRoleArn = CreateGatewayRequest.AddMember("infrastructureRoleArn", _String)
+
+	CreateGatewayRequest_clientToken = CreateGatewayRequest.AddMember("clientToken", _String)
+
+	CreateGatewayRequest_deletionProtection = CreateGatewayRequest.AddMember("deletionProtection", _BoxedBoolean)
+
+	CreateGatewayRequest_configuration = CreateGatewayRequest.AddMember("configuration", GatewayConfiguration)
+
+	CreateGatewayRequest_tags = CreateGatewayRequest.AddMember("tags", _Tags)
+
+	CreateGatewayRequest_propagateTags = CreateGatewayRequest.AddMember("propagateTags", PropagateGatewayTags)
+
+	CreateGatewayResponse_gatewayArn = CreateGatewayResponse.AddMember("gatewayArn", _String)
+
+	CreateGatewayResponse_name = CreateGatewayResponse.AddMember("name", _String)
+
+	CreateGatewayResponse_status = CreateGatewayResponse.AddMember("status", GatewayStatus)
+
 	CreateServiceRequest_cluster = CreateServiceRequest.AddMember("cluster", _String)
 
 	CreateServiceRequest_serviceName = CreateServiceRequest.AddMember("serviceName", _String)
@@ -10334,6 +11549,8 @@ func init() {
 	CreateServiceRequest_volumeConfigurations = CreateServiceRequest.AddMember("volumeConfigurations", _ServiceVolumeConfigurations)
 
 	CreateServiceRequest_vpcLatticeConfigurations = CreateServiceRequest.AddMember("vpcLatticeConfigurations", _VpcLatticeConfigurations)
+
+	CreateServiceRequest_gatewayConnectors = CreateServiceRequest.AddMember("gatewayConnectors", _GatewayConnectorList)
 
 	CreateServiceRequest_monitoring = CreateServiceRequest.AddMember("monitoring", MonitoringConfiguration)
 
@@ -10408,6 +11625,14 @@ func init() {
 	DeleteExpressGatewayServiceRequest_serviceArn = DeleteExpressGatewayServiceRequest.AddMember("serviceArn", _String)
 
 	DeleteExpressGatewayServiceResponse_service = DeleteExpressGatewayServiceResponse.AddMember("service", ECSExpressGatewayService)
+
+	DeleteGatewayRequest_gateway = DeleteGatewayRequest.AddMember("gateway", _String)
+
+	DeleteGatewayResponse_gatewayArn = DeleteGatewayResponse.AddMember("gatewayArn", _String)
+
+	DeleteGatewayResponse_name = DeleteGatewayResponse.AddMember("name", _String)
+
+	DeleteGatewayResponse_status = DeleteGatewayResponse.AddMember("status", GatewayStatus)
 
 	DeleteServiceRequest_cluster = DeleteServiceRequest.AddMember("cluster", _String)
 
@@ -10505,6 +11730,24 @@ func init() {
 
 	DescribeExpressGatewayServiceResponse_service = DescribeExpressGatewayServiceResponse.AddMember("service", ECSExpressGatewayService)
 
+	DescribeGatewayRequest_gateway = DescribeGatewayRequest.AddMember("gateway", _String)
+
+	DescribeGatewayResponse_gateway = DescribeGatewayResponse.AddMember("gateway", Gateway)
+
+	DescribeGatewayResourcesRequest_gateway = DescribeGatewayResourcesRequest.AddMember("gateway", _String)
+
+	DescribeGatewayResourcesRequest_maxResults = DescribeGatewayResourcesRequest.AddMember("maxResults", _BoxedInteger)
+
+	DescribeGatewayResourcesRequest_nextToken = DescribeGatewayResourcesRequest.AddMember("nextToken", _String)
+
+	DescribeGatewayResourcesResponse_gatewayResources = DescribeGatewayResourcesResponse.AddMember("gatewayResources", GatewayResources)
+
+	DescribeGatewayResourcesResponse_nextToken = DescribeGatewayResourcesResponse.AddMember("nextToken", _String)
+
+	DescribeGatewayRouteRequest_gatewayRouteArn = DescribeGatewayRouteRequest.AddMember("gatewayRouteArn", _String)
+
+	DescribeGatewayRouteResponse_gatewayRoute = DescribeGatewayRouteResponse.AddMember("gatewayRoute", GatewayRoute)
+
 	DescribeServiceDeploymentsRequest_serviceDeploymentArns = DescribeServiceDeploymentsRequest.AddMember("serviceDeploymentArns", _StringList)
 
 	DescribeServiceDeploymentsResponse_serviceDeployments = DescribeServiceDeploymentsResponse.AddMember("serviceDeployments", _ServiceDeployments)
@@ -10556,6 +11799,16 @@ func init() {
 	DescribeTasksResponse_tasks = DescribeTasksResponse.AddMember("tasks", _Tasks)
 
 	DescribeTasksResponse_failures = DescribeTasksResponse.AddMember("failures", _Failures)
+
+	DisassociateGatewayFromClusterRequest_gateway = DisassociateGatewayFromClusterRequest.AddMember("gateway", _String)
+
+	DisassociateGatewayFromClusterRequest_cluster = DisassociateGatewayFromClusterRequest.AddMember("cluster", _String)
+
+	DisassociateGatewayFromClusterResponse_gatewayArn = DisassociateGatewayFromClusterResponse.AddMember("gatewayArn", _String)
+
+	DisassociateGatewayFromClusterResponse_clusterArn = DisassociateGatewayFromClusterResponse.AddMember("clusterArn", _String)
+
+	DisassociateGatewayFromClusterResponse_status = DisassociateGatewayFromClusterResponse.AddMember("status", GatewayClusterAssociationStatus)
 
 	DiscoverPollEndpointRequest_containerInstance = DiscoverPollEndpointRequest.AddMember("containerInstance", _String)
 
@@ -10694,6 +11947,50 @@ func init() {
 	ListDaemonTaskDefinitionsResponse_daemonTaskDefinitions = ListDaemonTaskDefinitionsResponse.AddMember("daemonTaskDefinitions", _DaemonTaskDefinitionSummaries)
 
 	ListDaemonTaskDefinitionsResponse_nextToken = ListDaemonTaskDefinitionsResponse.AddMember("nextToken", _String)
+
+	ListGatewayClusterAssociationsRequest_gateway = ListGatewayClusterAssociationsRequest.AddMember("gateway", _String)
+
+	ListGatewayClusterAssociationsRequest_cluster = ListGatewayClusterAssociationsRequest.AddMember("cluster", _String)
+
+	ListGatewayClusterAssociationsRequest_status = ListGatewayClusterAssociationsRequest.AddMember("status", _GatewayClusterAssociationStatusList)
+
+	ListGatewayClusterAssociationsRequest_maxResults = ListGatewayClusterAssociationsRequest.AddMember("maxResults", _BoxedInteger)
+
+	ListGatewayClusterAssociationsRequest_nextToken = ListGatewayClusterAssociationsRequest.AddMember("nextToken", _String)
+
+	ListGatewayClusterAssociationsResponse_gatewayClusterAssociations = ListGatewayClusterAssociationsResponse.AddMember("gatewayClusterAssociations", _GatewayClusterAssociationSummaryList)
+
+	ListGatewayClusterAssociationsResponse_nextToken = ListGatewayClusterAssociationsResponse.AddMember("nextToken", _String)
+
+	ListGatewayRoutesRequest_gateway = ListGatewayRoutesRequest.AddMember("gateway", _String)
+
+	ListGatewayRoutesRequest_cluster = ListGatewayRoutesRequest.AddMember("cluster", _String)
+
+	ListGatewayRoutesRequest_service = ListGatewayRoutesRequest.AddMember("service", _String)
+
+	ListGatewayRoutesRequest_serviceContainerPortName = ListGatewayRoutesRequest.AddMember("serviceContainerPortName", _String)
+
+	ListGatewayRoutesRequest_status = ListGatewayRoutesRequest.AddMember("status", _GatewayRouteStatusList)
+
+	ListGatewayRoutesRequest_maxResults = ListGatewayRoutesRequest.AddMember("maxResults", _BoxedInteger)
+
+	ListGatewayRoutesRequest_nextToken = ListGatewayRoutesRequest.AddMember("nextToken", _String)
+
+	ListGatewayRoutesResponse_gatewayRoutes = ListGatewayRoutesResponse.AddMember("gatewayRoutes", _GatewayRouteSummaryList)
+
+	ListGatewayRoutesResponse_nextToken = ListGatewayRoutesResponse.AddMember("nextToken", _String)
+
+	ListGatewaysRequest_names = ListGatewaysRequest.AddMember("names", _StringList)
+
+	ListGatewaysRequest_status = ListGatewaysRequest.AddMember("status", _GatewayStatusList)
+
+	ListGatewaysRequest_maxResults = ListGatewaysRequest.AddMember("maxResults", _BoxedInteger)
+
+	ListGatewaysRequest_nextToken = ListGatewaysRequest.AddMember("nextToken", _String)
+
+	ListGatewaysResponse_gateways = ListGatewaysResponse.AddMember("gateways", _GatewaySummaryList)
+
+	ListGatewaysResponse_nextToken = ListGatewaysResponse.AddMember("nextToken", _String)
 
 	ListServiceDeploymentsRequest_service = ListServiceDeploymentsRequest.AddMember("service", _String)
 
@@ -11133,6 +12430,22 @@ func init() {
 
 	UpdateExpressGatewayServiceResponse_service = UpdateExpressGatewayServiceResponse.AddMember("service", UpdatedExpressGatewayService)
 
+	UpdateGatewayRequest_gateway = UpdateGatewayRequest.AddMember("gateway", _String)
+
+	UpdateGatewayRequest_infrastructureRoleArn = UpdateGatewayRequest.AddMember("infrastructureRoleArn", _String)
+
+	UpdateGatewayRequest_deletionProtection = UpdateGatewayRequest.AddMember("deletionProtection", _BoxedBoolean)
+
+	UpdateGatewayRequest_configuration = UpdateGatewayRequest.AddMember("configuration", UpdateGatewayConfiguration)
+
+	UpdateGatewayRequest_propagateTags = UpdateGatewayRequest.AddMember("propagateTags", PropagateGatewayTags)
+
+	UpdateGatewayResponse_gatewayArn = UpdateGatewayResponse.AddMember("gatewayArn", _String)
+
+	UpdateGatewayResponse_name = UpdateGatewayResponse.AddMember("name", _String)
+
+	UpdateGatewayResponse_status = UpdateGatewayResponse.AddMember("status", GatewayStatus)
+
 	UpdateServiceRequest_cluster = UpdateServiceRequest.AddMember("cluster", _String)
 
 	UpdateServiceRequest_service = UpdateServiceRequest.AddMember("service", _String)
@@ -11176,6 +12489,8 @@ func init() {
 	UpdateServiceRequest_volumeConfigurations = UpdateServiceRequest.AddMember("volumeConfigurations", _ServiceVolumeConfigurations)
 
 	UpdateServiceRequest_vpcLatticeConfigurations = UpdateServiceRequest.AddMember("vpcLatticeConfigurations", _VpcLatticeConfigurations)
+
+	UpdateServiceRequest_gatewayConnectors = UpdateServiceRequest.AddMember("gatewayConnectors", _GatewayConnectorList)
 
 	UpdateServiceRequest_monitoring = UpdateServiceRequest.AddMember("monitoring", MonitoringConfiguration)
 

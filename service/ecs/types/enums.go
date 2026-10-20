@@ -91,7 +91,9 @@ type AccessType string
 
 // Enum values for AccessType
 const (
-	AccessTypePublic  AccessType = "PUBLIC"
+	// The resource is publicly accessible from the internet.
+	AccessTypePublic AccessType = "PUBLIC"
+	// The resource is private and reachable only from within the VPC.
 	AccessTypePrivate AccessType = "PRIVATE"
 )
 
@@ -1180,6 +1182,213 @@ func (FirelensConfigurationType) Values() []FirelensConfigurationType {
 	}
 }
 
+type GatewayAlbDesyncMitigationMode string
+
+// Enum values for GatewayAlbDesyncMitigationMode
+const (
+	// The load balancers forward requests that are considered ambiguous but allow
+	// them to be monitored.
+	GatewayAlbDesyncMitigationModeMonitor GatewayAlbDesyncMitigationMode = "monitor"
+	// The load balancers allow through most requests but drop those that pose a
+	// significant security risk.
+	GatewayAlbDesyncMitigationModeDefensive GatewayAlbDesyncMitigationMode = "defensive"
+	// The load balancers allow through only requests that comply with HTTP/1.1.
+	GatewayAlbDesyncMitigationModeStrictest GatewayAlbDesyncMitigationMode = "strictest"
+)
+
+// Values returns all known values for GatewayAlbDesyncMitigationMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayAlbDesyncMitigationMode) Values() []GatewayAlbDesyncMitigationMode {
+	return []GatewayAlbDesyncMitigationMode{
+		"monitor",
+		"defensive",
+		"strictest",
+	}
+}
+
+type GatewayAlbProtocol string
+
+// Enum values for GatewayAlbProtocol
+const (
+	// The listener uses HTTP.
+	GatewayAlbProtocolHttp GatewayAlbProtocol = "HTTP"
+	// The listener uses HTTPS.
+	GatewayAlbProtocolHttps GatewayAlbProtocol = "HTTPS"
+)
+
+// Values returns all known values for GatewayAlbProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayAlbProtocol) Values() []GatewayAlbProtocol {
+	return []GatewayAlbProtocol{
+		"HTTP",
+		"HTTPS",
+	}
+}
+
+type GatewayClusterAssociationStatus string
+
+// Enum values for GatewayClusterAssociationStatus
+const (
+	// The association is active.
+	GatewayClusterAssociationStatusActive GatewayClusterAssociationStatus = "ACTIVE"
+	// The association is being removed and remains in this state until all gateway
+	// routes for the cluster are removed.
+	GatewayClusterAssociationStatusDisassociating GatewayClusterAssociationStatus = "DISASSOCIATING"
+	GatewayClusterAssociationStatusInactive       GatewayClusterAssociationStatus = "INACTIVE"
+)
+
+// Values returns all known values for GatewayClusterAssociationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayClusterAssociationStatus) Values() []GatewayClusterAssociationStatus {
+	return []GatewayClusterAssociationStatus{
+		"ACTIVE",
+		"DISASSOCIATING",
+		"INACTIVE",
+	}
+}
+
+type GatewayConnectorHealthCheckProtocol string
+
+// Enum values for GatewayConnectorHealthCheckProtocol
+const (
+	// The gateway performs health checks over HTTP.
+	GatewayConnectorHealthCheckProtocolHttp GatewayConnectorHealthCheckProtocol = "HTTP"
+	// The gateway performs health checks over HTTPS.
+	GatewayConnectorHealthCheckProtocolHttps GatewayConnectorHealthCheckProtocol = "HTTPS"
+)
+
+// Values returns all known values for GatewayConnectorHealthCheckProtocol. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayConnectorHealthCheckProtocol) Values() []GatewayConnectorHealthCheckProtocol {
+	return []GatewayConnectorHealthCheckProtocol{
+		"HTTP",
+		"HTTPS",
+	}
+}
+
+type GatewayElbIpAddressType string
+
+// Enum values for GatewayElbIpAddressType
+const (
+	// The load balancers use IPv4 addresses only.
+	GatewayElbIpAddressTypeIpv4 GatewayElbIpAddressType = "ipv4"
+	// The load balancers use both IPv4 and IPv6 addresses.
+	GatewayElbIpAddressTypeDualstack GatewayElbIpAddressType = "dualstack"
+	// The load balancers use IPv6 addresses and private IPv4 addresses, without
+	// public IPv4 addresses.
+	GatewayElbIpAddressTypeDualstackWithoutPublicIpv4 GatewayElbIpAddressType = "dualstack-without-public-ipv4"
+)
+
+// Values returns all known values for GatewayElbIpAddressType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayElbIpAddressType) Values() []GatewayElbIpAddressType {
+	return []GatewayElbIpAddressType{
+		"ipv4",
+		"dualstack",
+		"dualstack-without-public-ipv4",
+	}
+}
+
+type GatewayElbScheme string
+
+// Enum values for GatewayElbScheme
+const (
+	// The load balancers are internet-facing.
+	GatewayElbSchemeInternetFacing GatewayElbScheme = "internet-facing"
+	// The load balancers are internal.
+	GatewayElbSchemeInternal GatewayElbScheme = "internal"
+)
+
+// Values returns all known values for GatewayElbScheme. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayElbScheme) Values() []GatewayElbScheme {
+	return []GatewayElbScheme{
+		"internet-facing",
+		"internal",
+	}
+}
+
+type GatewayRouteStatus string
+
+// Enum values for GatewayRouteStatus
+const (
+	// The gateway route is active and routing traffic.
+	GatewayRouteStatusActive GatewayRouteStatus = "ACTIVE"
+	// The gateway route is being created.
+	GatewayRouteStatusCreateInProgress GatewayRouteStatus = "CREATE_IN_PROGRESS"
+	// The gateway route couldn't be created.
+	GatewayRouteStatusCreateFailed GatewayRouteStatus = "CREATE_FAILED"
+	// The gateway route is being updated.
+	GatewayRouteStatusUpdateInProgress GatewayRouteStatus = "UPDATE_IN_PROGRESS"
+	// The gateway route couldn't be updated.
+	GatewayRouteStatusUpdateFailed GatewayRouteStatus = "UPDATE_FAILED"
+	// The gateway route is being deleted.
+	GatewayRouteStatusDeleteInProgress GatewayRouteStatus = "DELETE_IN_PROGRESS"
+	// The gateway route couldn't be deleted.
+	GatewayRouteStatusDeleteFailed GatewayRouteStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for GatewayRouteStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayRouteStatus) Values() []GatewayRouteStatus {
+	return []GatewayRouteStatus{
+		"ACTIVE",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+	}
+}
+
+type GatewayStatus string
+
+// Enum values for GatewayStatus
+const (
+	// The gateway is active and available for use.
+	GatewayStatusActive GatewayStatus = "ACTIVE"
+	// An update to the gateway is in progress.
+	GatewayStatusUpdateInProgress GatewayStatus = "UPDATE_IN_PROGRESS"
+	// The update to the gateway completed successfully.
+	GatewayStatusUpdateComplete GatewayStatus = "UPDATE_COMPLETE"
+	// The update to the gateway failed. See statusReason for details.
+	GatewayStatusUpdateFailed GatewayStatus = "UPDATE_FAILED"
+	// The gateway is deleted.
+	GatewayStatusDeleted GatewayStatus = "DELETED"
+)
+
+// Values returns all known values for GatewayStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayStatus) Values() []GatewayStatus {
+	return []GatewayStatus{
+		"ACTIVE",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
+		"DELETED",
+	}
+}
+
 type HealthStatus string
 
 // Enum values for HealthStatus
@@ -1634,6 +1843,28 @@ func (PlatformDeviceType) Values() []PlatformDeviceType {
 	return []PlatformDeviceType{
 		"GPU",
 		"NEURON_DEVICE",
+	}
+}
+
+type PropagateGatewayTags string
+
+// Enum values for PropagateGatewayTags
+const (
+	// Tags aren't propagated to managed infrastructure.
+	PropagateGatewayTagsNone PropagateGatewayTags = "NONE"
+	// Tags on the gateway are propagated to the infrastructure that the gateway
+	// manages.
+	PropagateGatewayTagsGateway PropagateGatewayTags = "GATEWAY"
+)
+
+// Values returns all known values for PropagateGatewayTags. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PropagateGatewayTags) Values() []PropagateGatewayTags {
+	return []PropagateGatewayTags{
+		"NONE",
+		"GATEWAY",
 	}
 }
 

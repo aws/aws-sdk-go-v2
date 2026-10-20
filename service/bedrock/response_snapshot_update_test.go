@@ -2281,6 +2281,9 @@ func TestUpdateResponseSnapshot_GetGuardrail(t *testing.T) {
 					Enabled:   ptr.Bool(true),
 				},
 			},
+			Tier: &types.GuardrailContextualGroundingTier{
+				TierName: types.GuardrailContextualGroundingTierName("CLASSIC"),
+			},
 		},
 		AutomatedReasoningPolicy: &types.GuardrailAutomatedReasoningPolicy{
 			Policies: []string{

@@ -1,0 +1,8 @@
+{
+    "id": "4ffeef04-ace9-421c-8882-1df38e3be19e",
+    "type": "feature",
+    "description": "Adds ListEntities filter, sort, and summary support for the ExpressPrivateOfferConfiguration entity type, including filtering by ProductId.",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

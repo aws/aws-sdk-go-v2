@@ -358,6 +358,65 @@ func TestCheckResponseSnapshot_BacktrackDBCluster(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelDBCapacityReservation(t *testing.T) {
+	want := &CancelDBCapacityReservationOutput{
+		DBCapacityReservation: &types.DBCapacityReservation{
+			DBCapacityReservationName:           ptr.String("__DBCapacityReservationName__"),
+			DBInstanceClass:                     ptr.String("__DBInstanceClass__"),
+			Engine:                              ptr.String("__Engine__"),
+			LicenseModel:                        ptr.String("__LicenseModel__"),
+			ReservedCapacityPerAvailabilityZone: ptr.Int32(1),
+			AvailableCapacityPerAvailabilityZoneList: []types.AvailableCapacityPerAvailabilityZone{
+				{
+					AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+					AvailableCapacity: ptr.Int32(1),
+				},
+				{
+					AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+					AvailableCapacity: ptr.Int32(1),
+				},
+			},
+			EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CommitmentInfo: &types.DBCapacityReservationCommitmentInfo{
+				CommittedCapacityPerAvailabilityZone: ptr.Int32(1),
+				CommitmentEndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			State:                           types.DBCapacityReservationState("active"),
+			DBCapacityReservationArn:        ptr.String("__DBCapacityReservationArn__"),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			TagList: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelDBCapacityReservation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelDBCapacityReservation(context.Background(), &CancelDBCapacityReservationInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelDBCapacityReservation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CancelExportTask(t *testing.T) {
 	want := &CancelExportTaskOutput{
 		ExportTaskIdentifier: ptr.String("__ExportTaskIdentifier__"),
@@ -1103,6 +1162,86 @@ func TestCheckResponseSnapshot_CreateCustomDBEngineVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateDBCapacityReservation(t *testing.T) {
+	want := &CreateDBCapacityReservationOutput{
+		DBCapacityReservation: &types.DBCapacityReservation{
+			DBCapacityReservationName:           ptr.String("__DBCapacityReservationName__"),
+			DBInstanceClass:                     ptr.String("__DBInstanceClass__"),
+			Engine:                              ptr.String("__Engine__"),
+			LicenseModel:                        ptr.String("__LicenseModel__"),
+			ReservedCapacityPerAvailabilityZone: ptr.Int32(1),
+			AvailableCapacityPerAvailabilityZoneList: []types.AvailableCapacityPerAvailabilityZone{
+				{
+					AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+					AvailableCapacity: ptr.Int32(1),
+				},
+				{
+					AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+					AvailableCapacity: ptr.Int32(1),
+				},
+			},
+			EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CommitmentInfo: &types.DBCapacityReservationCommitmentInfo{
+				CommittedCapacityPerAvailabilityZone: ptr.Int32(1),
+				CommitmentEndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			State:                           types.DBCapacityReservationState("active"),
+			DBCapacityReservationArn:        ptr.String("__DBCapacityReservationArn__"),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			TagList: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateDBCapacityReservation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateDBCapacityReservation(context.Background(), &CreateDBCapacityReservationInput{
+		DBCapacityReservationName:   ptr.String("__DBCapacityReservationName__"),
+		DBInstanceClass:             ptr.String("__DBInstanceClass__"),
+		Engine:                      ptr.String("__Engine__"),
+		CapacityPerAvailabilityZone: ptr.Int32(1),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CommitmentDuration: ptr.Int64(1),
+		LicenseModel:       ptr.String("__LicenseModel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateDBCapacityReservation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateDBCluster(t *testing.T) {
 	want := &CreateDBClusterOutput{
 		DBCluster: &types.DBCluster{
@@ -1816,6 +1955,7 @@ func TestCheckResponseSnapshot_CreateDBInstance(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -2017,6 +2157,7 @@ func TestCheckResponseSnapshot_CreateDBInstance(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDBInstance.response")
@@ -2168,7 +2309,8 @@ func TestCheckResponseSnapshot_CreateDBInstance(t *testing.T) {
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2321,6 +2463,7 @@ func TestCheckResponseSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -2522,6 +2665,7 @@ func TestCheckResponseSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDBInstanceReadReplica.response")
@@ -2653,8 +2797,9 @@ func TestCheckResponseSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 				},
 			},
 		},
-		SourceRegion:      ptr.String("__SourceRegion__"),
-		destinationRegion: ptr.String("__destinationRegion__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		SourceRegion:                    ptr.String("__SourceRegion__"),
+		destinationRegion:               ptr.String("__destinationRegion__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4448,6 +4593,7 @@ func TestCheckResponseSnapshot_DeleteDBInstance(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -4649,6 +4795,7 @@ func TestCheckResponseSnapshot_DeleteDBInstance(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteDBInstance.response")
@@ -5578,6 +5725,123 @@ func TestCheckResponseSnapshot_DescribeCertificates(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeCertificates.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeDBCapacityReservations(t *testing.T) {
+	want := &DescribeDBCapacityReservationsOutput{
+		DBCapacityReservations: []types.DBCapacityReservation{
+			{
+				DBCapacityReservationName:           ptr.String("__DBCapacityReservationName__"),
+				DBInstanceClass:                     ptr.String("__DBInstanceClass__"),
+				Engine:                              ptr.String("__Engine__"),
+				LicenseModel:                        ptr.String("__LicenseModel__"),
+				ReservedCapacityPerAvailabilityZone: ptr.Int32(1),
+				AvailableCapacityPerAvailabilityZoneList: []types.AvailableCapacityPerAvailabilityZone{
+					{
+						AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+						AvailableCapacity: ptr.Int32(1),
+					},
+					{
+						AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+						AvailableCapacity: ptr.Int32(1),
+					},
+				},
+				EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CommitmentInfo: &types.DBCapacityReservationCommitmentInfo{
+					CommittedCapacityPerAvailabilityZone: ptr.Int32(1),
+					CommitmentEndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				State:                           types.DBCapacityReservationState("active"),
+				DBCapacityReservationArn:        ptr.String("__DBCapacityReservationArn__"),
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+				TagList: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				DBCapacityReservationName:           ptr.String("__DBCapacityReservationName__"),
+				DBInstanceClass:                     ptr.String("__DBInstanceClass__"),
+				Engine:                              ptr.String("__Engine__"),
+				LicenseModel:                        ptr.String("__LicenseModel__"),
+				ReservedCapacityPerAvailabilityZone: ptr.Int32(1),
+				AvailableCapacityPerAvailabilityZoneList: []types.AvailableCapacityPerAvailabilityZone{
+					{
+						AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+						AvailableCapacity: ptr.Int32(1),
+					},
+					{
+						AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+						AvailableCapacity: ptr.Int32(1),
+					},
+				},
+				EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CommitmentInfo: &types.DBCapacityReservationCommitmentInfo{
+					CommittedCapacityPerAvailabilityZone: ptr.Int32(1),
+					CommitmentEndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				State:                           types.DBCapacityReservationState("active"),
+				DBCapacityReservationArn:        ptr.String("__DBCapacityReservationArn__"),
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+				TagList: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Marker: ptr.String("__Marker__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeDBCapacityReservations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeDBCapacityReservations(context.Background(), &DescribeDBCapacityReservationsInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		Marker:                          ptr.String("__Marker__"),
+		MaxRecords:                      ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeDBCapacityReservations.response", err)
 	}
 }
 
@@ -7342,6 +7606,7 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 							StorageType:         ptr.String("__StorageType__"),
 						},
 					},
+					DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 				},
 				LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				MultiAZ:                               ptr.Bool(true),
@@ -7543,6 +7808,7 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 				StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 				StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 				StorageOperationPercentProgress: ptr.Int32(1),
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			{
 				DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
@@ -7685,6 +7951,7 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 							StorageType:         ptr.String("__StorageType__"),
 						},
 					},
+					DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 				},
 				LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				MultiAZ:                               ptr.Bool(true),
@@ -7886,6 +8153,7 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 				StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 				StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 				StorageOperationPercentProgress: ptr.Int32(1),
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 		},
 	}
@@ -12946,6 +13214,68 @@ func TestCheckResponseSnapshot_ModifyCustomDBEngineVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ModifyDBCapacityReservation(t *testing.T) {
+	want := &ModifyDBCapacityReservationOutput{
+		DBCapacityReservation: &types.DBCapacityReservation{
+			DBCapacityReservationName:           ptr.String("__DBCapacityReservationName__"),
+			DBInstanceClass:                     ptr.String("__DBInstanceClass__"),
+			Engine:                              ptr.String("__Engine__"),
+			LicenseModel:                        ptr.String("__LicenseModel__"),
+			ReservedCapacityPerAvailabilityZone: ptr.Int32(1),
+			AvailableCapacityPerAvailabilityZoneList: []types.AvailableCapacityPerAvailabilityZone{
+				{
+					AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+					AvailableCapacity: ptr.Int32(1),
+				},
+				{
+					AvailabilityZone:  ptr.String("__AvailabilityZone__"),
+					AvailableCapacity: ptr.Int32(1),
+				},
+			},
+			EndDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CommitmentInfo: &types.DBCapacityReservationCommitmentInfo{
+				CommittedCapacityPerAvailabilityZone: ptr.Int32(1),
+				CommitmentEndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			State:                           types.DBCapacityReservationState("active"),
+			DBCapacityReservationArn:        ptr.String("__DBCapacityReservationArn__"),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			TagList: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyDBCapacityReservation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyDBCapacityReservation(context.Background(), &ModifyDBCapacityReservationInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		CapacityPerAvailabilityZone:     ptr.Int32(1),
+		EndDateType:                     types.EndDateType("unlimited"),
+		EndDate:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyDBCapacityReservation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ModifyDBCluster(t *testing.T) {
 	want := &ModifyDBClusterOutput{
 		DBCluster: &types.DBCluster{
@@ -13579,6 +13909,7 @@ func TestCheckResponseSnapshot_ModifyDBInstance(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -13780,6 +14111,7 @@ func TestCheckResponseSnapshot_ModifyDBInstance(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyDBInstance.response")
@@ -13899,6 +14231,7 @@ func TestCheckResponseSnapshot_ModifyDBInstance(t *testing.T) {
 				SetForDelete:        ptr.Bool(true),
 			},
 		},
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		TagSpecifications: []types.TagSpecification{
 			{
 				ResourceType: ptr.String("__ResourceType__"),
@@ -15416,6 +15749,7 @@ func TestCheckResponseSnapshot_PromoteReadReplica(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -15617,6 +15951,7 @@ func TestCheckResponseSnapshot_PromoteReadReplica(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PromoteReadReplica.response")
@@ -16404,6 +16739,7 @@ func TestCheckResponseSnapshot_RebootDBInstance(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -16605,6 +16941,7 @@ func TestCheckResponseSnapshot_RebootDBInstance(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RebootDBInstance.response")
@@ -18285,6 +18622,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -18486,6 +18824,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBInstanceFromDBSnapshot.response")
@@ -18554,20 +18893,21 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		UseDefaultProcessorFeatures: ptr.Bool(true),
-		DBParameterGroupName:        ptr.String("__DBParameterGroupName__"),
-		DeletionProtection:          ptr.Bool(true),
-		EnableCustomerOwnedIp:       ptr.Bool(true),
-		NetworkType:                 ptr.String("__NetworkType__"),
-		BackupTarget:                ptr.String("__BackupTarget__"),
-		CustomIamInstanceProfile:    ptr.String("__CustomIamInstanceProfile__"),
-		AllocatedStorage:            ptr.Int32(1),
-		DBClusterSnapshotIdentifier: ptr.String("__DBClusterSnapshotIdentifier__"),
-		BackupRetentionPeriod:       ptr.Int32(1),
-		PreferredBackupWindow:       ptr.String("__PreferredBackupWindow__"),
-		DedicatedLogVolume:          ptr.Bool(true),
-		CACertificateIdentifier:     ptr.String("__CACertificateIdentifier__"),
-		EngineLifecycleSupport:      ptr.String("__EngineLifecycleSupport__"),
+		UseDefaultProcessorFeatures:     ptr.Bool(true),
+		DBParameterGroupName:            ptr.String("__DBParameterGroupName__"),
+		DeletionProtection:              ptr.Bool(true),
+		EnableCustomerOwnedIp:           ptr.Bool(true),
+		NetworkType:                     ptr.String("__NetworkType__"),
+		BackupTarget:                    ptr.String("__BackupTarget__"),
+		CustomIamInstanceProfile:        ptr.String("__CustomIamInstanceProfile__"),
+		AllocatedStorage:                ptr.Int32(1),
+		DBClusterSnapshotIdentifier:     ptr.String("__DBClusterSnapshotIdentifier__"),
+		BackupRetentionPeriod:           ptr.Int32(1),
+		PreferredBackupWindow:           ptr.String("__PreferredBackupWindow__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		DedicatedLogVolume:              ptr.Bool(true),
+		CACertificateIdentifier:         ptr.String("__CACertificateIdentifier__"),
+		EngineLifecycleSupport:          ptr.String("__EngineLifecycleSupport__"),
 		AdditionalStorageVolumes: []types.AdditionalStorageVolume{
 			{
 				VolumeName:          ptr.String("__VolumeName__"),
@@ -18768,6 +19108,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -18969,6 +19310,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBInstanceFromS3.response")
@@ -19050,15 +19392,16 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		UseDefaultProcessorFeatures: ptr.Bool(true),
-		DeletionProtection:          ptr.Bool(true),
-		MaxAllocatedStorage:         ptr.Int32(1),
-		NetworkType:                 ptr.String("__NetworkType__"),
-		ManageMasterUserPassword:    ptr.Bool(true),
-		MasterUserSecretKmsKeyId:    ptr.String("__MasterUserSecretKmsKeyId__"),
-		DedicatedLogVolume:          ptr.Bool(true),
-		CACertificateIdentifier:     ptr.String("__CACertificateIdentifier__"),
-		EngineLifecycleSupport:      ptr.String("__EngineLifecycleSupport__"),
+		UseDefaultProcessorFeatures:     ptr.Bool(true),
+		DeletionProtection:              ptr.Bool(true),
+		MaxAllocatedStorage:             ptr.Int32(1),
+		NetworkType:                     ptr.String("__NetworkType__"),
+		ManageMasterUserPassword:        ptr.Bool(true),
+		MasterUserSecretKmsKeyId:        ptr.String("__MasterUserSecretKmsKeyId__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		DedicatedLogVolume:              ptr.Bool(true),
+		CACertificateIdentifier:         ptr.String("__CACertificateIdentifier__"),
+		EngineLifecycleSupport:          ptr.String("__EngineLifecycleSupport__"),
 		AdditionalStorageVolumes: []types.AdditionalStorageVolume{
 			{
 				VolumeName:          ptr.String("__VolumeName__"),
@@ -19257,6 +19600,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -19458,6 +19802,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBInstanceToPointInTime.response")
@@ -19541,6 +19886,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 		AllocatedStorage:                    ptr.Int32(1),
 		BackupRetentionPeriod:               ptr.Int32(1),
 		PreferredBackupWindow:               ptr.String("__PreferredBackupWindow__"),
+		DBCapacityReservationIdentifier:     ptr.String("__DBCapacityReservationIdentifier__"),
 		DedicatedLogVolume:                  ptr.Bool(true),
 		CACertificateIdentifier:             ptr.String("__CACertificateIdentifier__"),
 		EngineLifecycleSupport:              ptr.String("__EngineLifecycleSupport__"),
@@ -20099,6 +20445,7 @@ func TestCheckResponseSnapshot_StartDBInstance(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -20300,6 +20647,7 @@ func TestCheckResponseSnapshot_StartDBInstance(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartDBInstance.response")
@@ -20311,7 +20659,8 @@ func TestCheckResponseSnapshot_StartDBInstance(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.StartDBInstance(context.Background(), &StartDBInstanceInput{
-		DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
+		DBInstanceIdentifier:            ptr.String("__DBInstanceIdentifier__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -20914,6 +21263,7 @@ func TestCheckResponseSnapshot_StopDBInstance(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -21115,6 +21465,7 @@ func TestCheckResponseSnapshot_StopDBInstance(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopDBInstance.response")
@@ -21126,8 +21477,9 @@ func TestCheckResponseSnapshot_StopDBInstance(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.StopDBInstance(context.Background(), &StopDBInstanceInput{
-		DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
-		DBSnapshotIdentifier: ptr.String("__DBSnapshotIdentifier__"),
+		DBInstanceIdentifier:            ptr.String("__DBInstanceIdentifier__"),
+		DBSnapshotIdentifier:            ptr.String("__DBSnapshotIdentifier__"),
+		DetachFromDBCapacityReservation: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -21515,6 +21867,7 @@ func TestCheckResponseSnapshot_SwitchoverReadReplica(t *testing.T) {
 						StorageType:         ptr.String("__StorageType__"),
 					},
 				},
+				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 			},
 			LatestRestorableTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			MultiAZ:                               ptr.Bool(true),
@@ -21716,6 +22069,7 @@ func TestCheckResponseSnapshot_SwitchoverReadReplica(t *testing.T) {
 			StorageVolumeStatus:             ptr.String("__StorageVolumeStatus__"),
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
+			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("SwitchoverReadReplica.response")
@@ -21921,7 +22275,8 @@ func TestCheckResponseSnapshot_Error_AuthorizationNotFoundFault(t *testing.T) {
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -22119,7 +22474,8 @@ func TestCheckResponseSnapshot_Error_BackupPolicyNotFoundFault(t *testing.T) {
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -22380,7 +22736,8 @@ func TestCheckResponseSnapshot_Error_CertificateNotFoundFault(t *testing.T) {
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -22639,6 +22996,139 @@ func TestCheckResponseSnapshot_Error_CustomDBEngineVersionQuotaExceededFault(t *
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "CustomDBEngineVersionQuotaExceededFault.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_DBCapacityReservationAlreadyExistsFault(t *testing.T) {
+	want := &types.DBCapacityReservationAlreadyExistsFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DBCapacityReservationAlreadyExistsFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateDBCapacityReservation(context.Background(), &CreateDBCapacityReservationInput{
+		DBCapacityReservationName:   ptr.String("__DBCapacityReservationName__"),
+		DBInstanceClass:             ptr.String("__DBInstanceClass__"),
+		Engine:                      ptr.String("__Engine__"),
+		CapacityPerAvailabilityZone: ptr.Int32(1),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CommitmentDuration: ptr.Int64(1),
+		LicenseModel:       ptr.String("__LicenseModel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.DBCapacityReservationAlreadyExistsFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.DBCapacityReservationAlreadyExistsFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "DBCapacityReservationAlreadyExistsFault.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_DBCapacityReservationNotFoundFault(t *testing.T) {
+	want := &types.DBCapacityReservationNotFoundFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DBCapacityReservationNotFoundFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceName: ptr.String("__ResourceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.DBCapacityReservationNotFoundFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.DBCapacityReservationNotFoundFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "DBCapacityReservationNotFoundFault.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_DBCapacityReservationUnsupportedFault(t *testing.T) {
+	want := &types.DBCapacityReservationUnsupportedFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DBCapacityReservationUnsupportedFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateDBCapacityReservation(context.Background(), &CreateDBCapacityReservationInput{
+		DBCapacityReservationName:   ptr.String("__DBCapacityReservationName__"),
+		DBInstanceClass:             ptr.String("__DBInstanceClass__"),
+		Engine:                      ptr.String("__Engine__"),
+		CapacityPerAvailabilityZone: ptr.Int32(1),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CommitmentDuration: ptr.Int64(1),
+		LicenseModel:       ptr.String("__LicenseModel__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.DBCapacityReservationUnsupportedFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.DBCapacityReservationUnsupportedFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "DBCapacityReservationUnsupportedFault.error", err)
 	}
 }
 
@@ -23492,7 +23982,8 @@ func TestCheckResponseSnapshot_Error_DBInstanceAlreadyExistsFault(t *testing.T) 
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -24974,8 +25465,9 @@ func TestCheckResponseSnapshot_Error_DBSubnetGroupNotAllowedFault(t *testing.T) 
 				},
 			},
 		},
-		SourceRegion:      ptr.String("__SourceRegion__"),
-		destinationRegion: ptr.String("__destinationRegion__"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		SourceRegion:                    ptr.String("__SourceRegion__"),
+		destinationRegion:               ptr.String("__destinationRegion__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -25351,6 +25843,7 @@ func TestCheckResponseSnapshot_Error_DBUpgradeDependencyFailureFault(t *testing.
 				SetForDelete:        ptr.Bool(true),
 			},
 		},
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
 		TagSpecifications: []types.TagSpecification{
 			{
 				ResourceType: ptr.String("__ResourceType__"),
@@ -26270,30 +26763,19 @@ func TestCheckResponseSnapshot_Error_InsufficientDBInstanceCapacityFault(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDBCluster(context.Background(), &CreateDBClusterInput{
+	_, opErr := svc.CreateDBCapacityReservation(context.Background(), &CreateDBCapacityReservationInput{
+		DBCapacityReservationName:   ptr.String("__DBCapacityReservationName__"),
+		DBInstanceClass:             ptr.String("__DBInstanceClass__"),
+		Engine:                      ptr.String("__Engine__"),
+		CapacityPerAvailabilityZone: ptr.Int32(1),
 		AvailabilityZones: []string{
 			"__Member__",
 			"__Member__",
 		},
-		BackupRetentionPeriod:       ptr.Int32(1),
-		CharacterSetName:            ptr.String("__CharacterSetName__"),
-		DatabaseName:                ptr.String("__DatabaseName__"),
-		DBClusterIdentifier:         ptr.String("__DBClusterIdentifier__"),
-		DBClusterParameterGroupName: ptr.String("__DBClusterParameterGroupName__"),
-		VpcSecurityGroupIds: []string{
-			"__Member__",
-			"__Member__",
-		},
-		DBSubnetGroupName:           ptr.String("__DBSubnetGroupName__"),
-		Engine:                      ptr.String("__Engine__"),
-		EngineVersion:               ptr.String("__EngineVersion__"),
-		Port:                        ptr.Int32(1),
-		MasterUsername:              ptr.String("__MasterUsername__"),
-		MasterUserPassword:          ptr.String("__MasterUserPassword__"),
-		OptionGroupName:             ptr.String("__OptionGroupName__"),
-		PreferredBackupWindow:       ptr.String("__PreferredBackupWindow__"),
-		PreferredMaintenanceWindow:  ptr.String("__PreferredMaintenanceWindow__"),
-		ReplicationSourceIdentifier: ptr.String("__ReplicationSourceIdentifier__"),
+		EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CommitmentDuration: ptr.Int64(1),
+		LicenseModel:       ptr.String("__LicenseModel__"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -26304,104 +26786,6 @@ func TestCheckResponseSnapshot_Error_InsufficientDBInstanceCapacityFault(t *test
 				Value: ptr.String("__Value__"),
 			},
 		},
-		StorageEncrypted:                ptr.Bool(true),
-		KmsKeyId:                        ptr.String("__KmsKeyId__"),
-		PreSignedUrl:                    ptr.String("__PreSignedUrl__"),
-		EnableIAMDatabaseAuthentication: ptr.Bool(true),
-		BacktrackWindow:                 ptr.Int64(1),
-		EnableCloudwatchLogsExports: []string{
-			"__Member__",
-			"__Member__",
-		},
-		EngineMode: ptr.String("__EngineMode__"),
-		ScalingConfiguration: &types.ScalingConfiguration{
-			MinCapacity:           ptr.Int32(1),
-			MaxCapacity:           ptr.Int32(1),
-			AutoPause:             ptr.Bool(true),
-			SecondsUntilAutoPause: ptr.Int32(1),
-			TimeoutAction:         ptr.String("__TimeoutAction__"),
-			SecondsBeforeTimeout:  ptr.Int32(1),
-		},
-		RdsCustomClusterConfiguration: &types.RdsCustomClusterConfiguration{
-			InterconnectSubnetId:            ptr.String("__InterconnectSubnetId__"),
-			TransitGatewayMulticastDomainId: ptr.String("__TransitGatewayMulticastDomainId__"),
-			ReplicaMode:                     types.ReplicaMode("open-read-only"),
-		},
-		DBClusterInstanceClass:      ptr.String("__DBClusterInstanceClass__"),
-		AllocatedStorage:            ptr.Int32(1),
-		StorageType:                 ptr.String("__StorageType__"),
-		Iops:                        ptr.Int32(1),
-		PubliclyAccessible:          ptr.Bool(true),
-		AutoMinorVersionUpgrade:     ptr.Bool(true),
-		DeletionProtection:          ptr.Bool(true),
-		GlobalClusterIdentifier:     ptr.String("__GlobalClusterIdentifier__"),
-		EnableHttpEndpoint:          ptr.Bool(true),
-		CopyTagsToSnapshot:          ptr.Bool(true),
-		Domain:                      ptr.String("__Domain__"),
-		DomainIAMRoleName:           ptr.String("__DomainIAMRoleName__"),
-		EnableGlobalWriteForwarding: ptr.Bool(true),
-		NetworkType:                 ptr.String("__NetworkType__"),
-		ServerlessV2ScalingConfiguration: &types.ServerlessV2ScalingConfiguration{
-			MinCapacity:           ptr.Float64(1.0),
-			MaxCapacity:           ptr.Float64(1.0),
-			SecondsUntilAutoPause: ptr.Int32(1),
-		},
-		MonitoringInterval:                 ptr.Int32(1),
-		MonitoringRoleArn:                  ptr.String("__MonitoringRoleArn__"),
-		DatabaseInsightsMode:               types.DatabaseInsightsMode("standard"),
-		EnablePerformanceInsights:          ptr.Bool(true),
-		PerformanceInsightsKMSKeyId:        ptr.String("__PerformanceInsightsKMSKeyId__"),
-		PerformanceInsightsRetentionPeriod: ptr.Int32(1),
-		EnableLimitlessDatabase:            ptr.Bool(true),
-		ClusterScalabilityType:             types.ClusterScalabilityType("standard"),
-		DBSystemId:                         ptr.String("__DBSystemId__"),
-		ManageMasterUserPassword:           ptr.Bool(true),
-		EnableLocalWriteForwarding:         ptr.Bool(true),
-		MasterUserSecretKmsKeyId:           ptr.String("__MasterUserSecretKmsKeyId__"),
-		CACertificateIdentifier:            ptr.String("__CACertificateIdentifier__"),
-		EngineLifecycleSupport:             ptr.String("__EngineLifecycleSupport__"),
-		TagSpecifications: []types.TagSpecification{
-			{
-				ResourceType: ptr.String("__ResourceType__"),
-				Tags: []types.Tag{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-				},
-			},
-			{
-				ResourceType: ptr.String("__ResourceType__"),
-				Tags: []types.Tag{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-				},
-			},
-		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
-		WithExpressConfiguration:     ptr.Bool(true),
-		AssociatedRoles: []types.DBClusterAssociatedRole{
-			{
-				RoleArn:     ptr.String("__RoleArn__"),
-				FeatureName: ptr.String("__FeatureName__"),
-			},
-			{
-				RoleArn:     ptr.String("__RoleArn__"),
-				FeatureName: ptr.String("__FeatureName__"),
-			},
-		},
-		SourceRegion:      ptr.String("__SourceRegion__"),
-		destinationRegion: ptr.String("__destinationRegion__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -26819,6 +27203,33 @@ func TestCheckResponseSnapshot_Error_InvalidCustomDBEngineVersionStateFault(t *t
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidCustomDBEngineVersionStateFault.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_InvalidDBCapacityReservationStateFault(t *testing.T) {
+	want := &types.InvalidDBCapacityReservationStateFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidDBCapacityReservationStateFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CancelDBCapacityReservation(context.Background(), &CancelDBCapacityReservationInput{
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidDBCapacityReservationStateFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidDBCapacityReservationStateFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidDBCapacityReservationStateFault.error", err)
 	}
 }
 
@@ -28992,6 +29403,7 @@ func TestCheckResponseSnapshot_Error_PointInTimeRestoreNotEnabledFault(t *testin
 		AllocatedStorage:                    ptr.Int32(1),
 		BackupRetentionPeriod:               ptr.Int32(1),
 		PreferredBackupWindow:               ptr.String("__PreferredBackupWindow__"),
+		DBCapacityReservationIdentifier:     ptr.String("__DBCapacityReservationIdentifier__"),
 		DedicatedLogVolume:                  ptr.Bool(true),
 		CACertificateIdentifier:             ptr.String("__CACertificateIdentifier__"),
 		EngineLifecycleSupport:              ptr.String("__EngineLifecycleSupport__"),
@@ -29209,7 +29621,8 @@ func TestCheckResponseSnapshot_Error_ProvisionedIopsNotAvailableInAZFault(t *tes
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -30498,7 +30911,8 @@ func TestCheckResponseSnapshot_Error_TenantDatabaseQuotaExceededFault(t *testing
 				},
 			},
 		},
-		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+		MasterUserAuthenticationType:    types.MasterUserAuthenticationType("password"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

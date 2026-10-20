@@ -65,6 +65,50 @@ func (AlarmType) Values() []AlarmType {
 	}
 }
 
+type AnomalyDetectorAdaptationSpeed string
+
+// Enum values for AnomalyDetectorAdaptationSpeed
+const (
+	AnomalyDetectorAdaptationSpeedFast   AnomalyDetectorAdaptationSpeed = "FAST"
+	AnomalyDetectorAdaptationSpeedNormal AnomalyDetectorAdaptationSpeed = "NORMAL"
+	AnomalyDetectorAdaptationSpeedSlow   AnomalyDetectorAdaptationSpeed = "SLOW"
+)
+
+// Values returns all known values for AnomalyDetectorAdaptationSpeed. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnomalyDetectorAdaptationSpeed) Values() []AnomalyDetectorAdaptationSpeed {
+	return []AnomalyDetectorAdaptationSpeed{
+		"FAST",
+		"NORMAL",
+		"SLOW",
+	}
+}
+
+type AnomalyDetectorOutlierFilteringStrength string
+
+// Enum values for AnomalyDetectorOutlierFilteringStrength
+const (
+	AnomalyDetectorOutlierFilteringStrengthMinimal  AnomalyDetectorOutlierFilteringStrength = "MINIMAL"
+	AnomalyDetectorOutlierFilteringStrengthModerate AnomalyDetectorOutlierFilteringStrength = "MODERATE"
+	AnomalyDetectorOutlierFilteringStrengthStrict   AnomalyDetectorOutlierFilteringStrength = "STRICT"
+)
+
+// Values returns all known values for AnomalyDetectorOutlierFilteringStrength.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnomalyDetectorOutlierFilteringStrength) Values() []AnomalyDetectorOutlierFilteringStrength {
+	return []AnomalyDetectorOutlierFilteringStrength{
+		"MINIMAL",
+		"MODERATE",
+		"STRICT",
+	}
+}
+
 type AnomalyDetectorStateValue string
 
 // Enum values for AnomalyDetectorStateValue

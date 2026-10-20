@@ -146,6 +146,18 @@ func TestCheckSnapshot_BacktrackDBCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelDBCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelDBCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelDBCapacityReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelExportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelExportTask(context.Background(), nil, func(o *Options) {
@@ -235,6 +247,18 @@ func TestCheckSnapshot_CreateCustomDBEngineVersion(t *testing.T) {
 	_, err := svc.CreateCustomDBEngineVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateCustomDBEngineVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDBCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDBCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDBCapacityReservation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -751,6 +775,18 @@ func TestCheckSnapshot_DescribeCertificates(t *testing.T) {
 	_, err := svc.DescribeCertificates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCertificates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeDBCapacityReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDBCapacityReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDBCapacityReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1399,6 +1435,18 @@ func TestCheckSnapshot_ModifyCustomDBEngineVersion(t *testing.T) {
 	_, err := svc.ModifyCustomDBEngineVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyCustomDBEngineVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyDBCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyDBCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyDBCapacityReservation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2113,6 +2161,18 @@ func TestUpdateSnapshot_BacktrackDBCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelDBCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelDBCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelDBCapacityReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelExportTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelExportTask(context.Background(), nil, func(o *Options) {
@@ -2202,6 +2262,18 @@ func TestUpdateSnapshot_CreateCustomDBEngineVersion(t *testing.T) {
 	_, err := svc.CreateCustomDBEngineVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCustomDBEngineVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDBCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDBCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDBCapacityReservation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2718,6 +2790,18 @@ func TestUpdateSnapshot_DescribeCertificates(t *testing.T) {
 	_, err := svc.DescribeCertificates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCertificates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeDBCapacityReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDBCapacityReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDBCapacityReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3366,6 +3450,18 @@ func TestUpdateSnapshot_ModifyCustomDBEngineVersion(t *testing.T) {
 	_, err := svc.ModifyCustomDBEngineVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyCustomDBEngineVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyDBCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyDBCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyDBCapacityReservation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -108,6 +108,32 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AssociateGatewayWithCluster(t *testing.T) {
+	want := &AssociateGatewayWithClusterOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateGatewayWithCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateGatewayWithCluster.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ContinueServiceDeployment(t *testing.T) {
 	want := &ContinueServiceDeploymentOutput{
 		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
@@ -939,6 +965,80 @@ func TestCheckResponseSnapshot_CreateExpressGatewayService(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateExpressGatewayService.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
+	want := &CreateGatewayOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.GatewayStatus("ACTIVE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateGateway(context.Background(), &CreateGatewayInput{
+		Name:                  ptr.String("__Name__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		DeletionProtection:    ptr.Bool(true),
+		Configuration: &types.GatewayConfigurationMemberHostSharedAlb{
+			Value: types.HostSharedAlbConfiguration{
+				NetworkConfiguration: &types.GatewayElbNetworkConfiguration{
+					InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					IpAddressType: types.GatewayElbIpAddressType("ipv4"),
+				},
+				Scheme:    types.GatewayElbScheme("internet-facing"),
+				WebACLArn: ptr.String("__WebACLArn__"),
+				AccessLogs: &types.GatewayElbAccessLogConfiguration{
+					Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+						Value: types.GatewayElbAccessLogS3Destination{
+							Bucket: ptr.String("__Bucket__"),
+							Prefix: ptr.String("__Prefix__"),
+						},
+					},
+				},
+				Port:        ptr.Int32(1),
+				Protocol:    types.GatewayAlbProtocol("HTTP"),
+				MaxAlbCount: ptr.Int32(1),
+				HttpDesync:  types.GatewayAlbDesyncMitigationMode("monitor"),
+				TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+					Header: &types.GatewayTestTrafficHeader{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PropagateTags: types.PropagateGatewayTags("NONE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateGateway.response", err)
 	}
 }
 
@@ -2358,6 +2458,52 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 				},
 			},
 		},
+		GatewayConnectors: []types.GatewayConnector{
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+		},
 		Monitoring: &types.MonitoringConfiguration{
 			MetricConfigurations: []types.MetricConfiguration{
 				{
@@ -3209,6 +3355,31 @@ func TestCheckResponseSnapshot_DeleteExpressGatewayService(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteExpressGatewayService.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteGateway(t *testing.T) {
+	want := &DeleteGatewayOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.GatewayStatus("ACTIVE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteGateway(context.Background(), &DeleteGatewayInput{
+		Gateway: ptr.String("__Gateway__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteGateway.response", err)
 	}
 }
 
@@ -8648,6 +8819,255 @@ func TestCheckResponseSnapshot_DescribeExpressGatewayService(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeGateway(t *testing.T) {
+	want := &DescribeGatewayOutput{
+		Gateway: &types.Gateway{
+			GatewayArn:   ptr.String("__GatewayArn__"),
+			Name:         ptr.String("__Name__"),
+			Status:       types.GatewayStatus("ACTIVE"),
+			StatusReason: ptr.String("__StatusReason__"),
+			Failures: []types.GatewayResourceFailure{
+				{
+					Arn: ptr.String("__Arn__"),
+					Errors: []types.GatewayOperationError{
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+					},
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+					Errors: []types.GatewayOperationError{
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+						{
+							Operation: ptr.String("__Operation__"),
+							Code:      ptr.String("__Code__"),
+							Message:   ptr.String("__Message__"),
+						},
+					},
+				},
+			},
+			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+			DeletionProtection:    ptr.Bool(true),
+			Configuration: &types.DescribeGatewayConfigurationMemberHostSharedAlb{
+				Value: types.DescribeGatewayAlbConfiguration{
+					NetworkConfiguration: &types.GatewayElbNetworkConfiguration{
+						InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						IpAddressType: types.GatewayElbIpAddressType("ipv4"),
+					},
+					Scheme: types.GatewayElbScheme("internet-facing"),
+					AccessLogs: &types.GatewayElbAccessLogConfiguration{
+						Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+							Value: types.GatewayElbAccessLogS3Destination{
+								Bucket: ptr.String("__Bucket__"),
+								Prefix: ptr.String("__Prefix__"),
+							},
+						},
+					},
+					WebACLArn:       ptr.String("__WebACLArn__"),
+					Port:            ptr.Int32(1),
+					Protocol:        types.GatewayAlbProtocol("HTTP"),
+					MaxAlbCount:     ptr.Int32(1),
+					CurrentAlbCount: ptr.Int32(1),
+					HttpDesync:      types.GatewayAlbDesyncMitigationMode("monitor"),
+					TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+						Header: &types.GatewayTestTrafficHeader{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			AccessType:    types.AccessType("PUBLIC"),
+			PropagateTags: types.PropagateGatewayTags("NONE"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeGateway(context.Background(), &DescribeGatewayInput{
+		Gateway: ptr.String("__Gateway__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeGatewayResources(t *testing.T) {
+	want := &DescribeGatewayResourcesOutput{
+		GatewayResources: &types.GatewayResources{
+			GatewayArn: ptr.String("__GatewayArn__"),
+			Resources: &types.GatewayInfrastructureResourcesMemberHostSharedAlb{
+				Value: []types.ElbGatewayResources{
+					{
+						LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+						ListenerArn:     ptr.String("__ListenerArn__"),
+						SecurityGroup:   ptr.String("__SecurityGroup__"),
+						GatewayRouteArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						LoadBalancerArn: ptr.String("__LoadBalancerArn__"),
+						ListenerArn:     ptr.String("__ListenerArn__"),
+						SecurityGroup:   ptr.String("__SecurityGroup__"),
+						GatewayRouteArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeGatewayResources.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeGatewayResources(context.Background(), &DescribeGatewayResourcesInput{
+		Gateway:    ptr.String("__Gateway__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeGatewayResources.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeGatewayRoute(t *testing.T) {
+	want := &DescribeGatewayRouteOutput{
+		GatewayRoute: &types.GatewayRoute{
+			GatewayRouteArn:          ptr.String("__GatewayRouteArn__"),
+			ServiceArn:               ptr.String("__ServiceArn__"),
+			ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+			Status:                   types.GatewayRouteStatus("ACTIVE"),
+			ServiceUrl:               ptr.String("__ServiceUrl__"),
+			Resources: &types.GatewayRouteResourcesMemberHostSharedAlb{
+				Value: []types.GatewayRouteAlbResources{
+					{
+						AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+						LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+						ListenerArn:       ptr.String("__ListenerArn__"),
+						ListenerRuleArn:   ptr.String("__ListenerRuleArn__"),
+						TestListenerRuleArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LoadBalancerSecurityGroups: []types.GatewayRouteLoadBalancerSecurityGroup{
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ServiceSecurityGroupArn: ptr.String("__ServiceSecurityGroupArn__"),
+					},
+					{
+						AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+						LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+						ListenerArn:       ptr.String("__ListenerArn__"),
+						ListenerRuleArn:   ptr.String("__ListenerRuleArn__"),
+						TestListenerRuleArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LoadBalancerSecurityGroups: []types.GatewayRouteLoadBalancerSecurityGroup{
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Arn: ptr.String("__Arn__"),
+								RuleArns: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						ServiceSecurityGroupArn: ptr.String("__ServiceSecurityGroupArn__"),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeGatewayRoute.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeGatewayRoute(context.Background(), &DescribeGatewayRouteInput{
+		GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeGatewayRoute.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 	want := &DescribeServiceDeploymentsOutput{
 		ServiceDeployments: []types.ServiceDeployment{
@@ -9543,10 +9963,134 @@ func TestCheckResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 							LogGroupName: ptr.String("__LogGroupName__"),
 						},
 					},
+					GatewayConnections: []types.GatewayConnection{
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+					},
 				},
 				Overrides: &types.ServiceRevisionOverrides{
 					RuntimePlatform: &types.RuntimePlatformOverride{
 						CpuArchitecture: ptr.String("__CpuArchitecture__"),
+					},
+				},
+				GatewayConnectors: []types.GatewayConnector{
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
+					},
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
 					},
 				},
 				Monitoring: &types.MonitoringConfiguration{
@@ -10133,10 +10677,134 @@ func TestCheckResponseSnapshot_DescribeServiceRevisions(t *testing.T) {
 							LogGroupName: ptr.String("__LogGroupName__"),
 						},
 					},
+					GatewayConnections: []types.GatewayConnection{
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+						{
+							GatewayArn:      ptr.String("__GatewayArn__"),
+							GatewayRouteArn: ptr.String("__GatewayRouteArn__"),
+							PortName:        ptr.String("__PortName__"),
+							ServiceUrl:      ptr.String("__ServiceUrl__"),
+							AccessType:      types.AccessType("PUBLIC"),
+							Status:          types.GatewayRouteStatus("ACTIVE"),
+							Resources: &types.GatewayConnectionResourcesMemberHostSharedAlb{
+								Value: []types.GatewayConnectionAlbResources{
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+									{
+										AcmCertificateArn: ptr.String("__AcmCertificateArn__"),
+										LoadBalancerArn:   ptr.String("__LoadBalancerArn__"),
+										LoadBalancerSecurityGroupArns: []string{
+											"__Member__",
+											"__Member__",
+										},
+										ListenerArn:             ptr.String("__ListenerArn__"),
+										ListenerRuleArn:         ptr.String("__ListenerRuleArn__"),
+										TestListenerRuleArn:     ptr.String("__TestListenerRuleArn__"),
+										TargetGroupArn:          ptr.String("__TargetGroupArn__"),
+										AlternateTargetGroupArn: ptr.String("__AlternateTargetGroupArn__"),
+									},
+								},
+							},
+						},
+					},
 				},
 				Overrides: &types.ServiceRevisionOverrides{
 					RuntimePlatform: &types.RuntimePlatformOverride{
 						CpuArchitecture: ptr.String("__CpuArchitecture__"),
+					},
+				},
+				GatewayConnectors: []types.GatewayConnector{
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
+					},
+					{
+						PortName: ptr.String("__PortName__"),
+						HealthCheck: &types.GatewayConnectorHealthCheck{
+							HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+							HealthCheckPort:            ptr.Int32(1),
+							HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+							HealthCheckTimeoutSeconds:  ptr.Int32(1),
+							HealthCheckIntervalSeconds: ptr.Int32(1),
+							HealthyThresholdCount:      ptr.Int32(1),
+							UnhealthyThresholdCount:    ptr.Int32(1),
+							Matcher: &types.GatewayConnectorHealthCheckMatcher{
+								HttpCode: ptr.String("__HttpCode__"),
+								GrpcCode: ptr.String("__GrpcCode__"),
+							},
+						},
+						Filters: &types.GatewayConnectorFilters{
+							AccessTypes: []types.AccessType{
+								types.AccessType("PUBLIC"),
+								types.AccessType("PUBLIC"),
+							},
+						},
 					},
 				},
 				Monitoring: &types.MonitoringConfiguration{
@@ -13940,6 +14608,32 @@ func TestCheckResponseSnapshot_DescribeTasks(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisassociateGatewayFromCluster(t *testing.T) {
+	want := &DisassociateGatewayFromClusterOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateGatewayFromCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateGatewayFromCluster(context.Background(), &DisassociateGatewayFromClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateGatewayFromCluster.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DiscoverPollEndpoint(t *testing.T) {
 	want := &DiscoverPollEndpointOutput{
 		Endpoint:               ptr.String("__Endpoint__"),
@@ -14339,6 +15033,144 @@ func TestCheckResponseSnapshot_ListDaemons(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListDaemons.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListGatewayClusterAssociations(t *testing.T) {
+	want := &ListGatewayClusterAssociationsOutput{
+		GatewayClusterAssociations: []types.GatewayClusterAssociationSummary{
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+				Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+			},
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+				Status:     types.GatewayClusterAssociationStatus("ACTIVE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListGatewayClusterAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListGatewayClusterAssociations(context.Background(), &ListGatewayClusterAssociationsInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+		Status: []types.GatewayClusterAssociationStatus{
+			types.GatewayClusterAssociationStatus("ACTIVE"),
+			types.GatewayClusterAssociationStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListGatewayClusterAssociations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListGatewayRoutes(t *testing.T) {
+	want := &ListGatewayRoutesOutput{
+		GatewayRoutes: []types.GatewayRouteSummary{
+			{
+				GatewayRouteArn:          ptr.String("__GatewayRouteArn__"),
+				GatewayArn:               ptr.String("__GatewayArn__"),
+				ClusterArn:               ptr.String("__ClusterArn__"),
+				ServiceArn:               ptr.String("__ServiceArn__"),
+				ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+				Status:                   types.GatewayRouteStatus("ACTIVE"),
+			},
+			{
+				GatewayRouteArn:          ptr.String("__GatewayRouteArn__"),
+				GatewayArn:               ptr.String("__GatewayArn__"),
+				ClusterArn:               ptr.String("__ClusterArn__"),
+				ServiceArn:               ptr.String("__ServiceArn__"),
+				ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+				Status:                   types.GatewayRouteStatus("ACTIVE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListGatewayRoutes.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListGatewayRoutes(context.Background(), &ListGatewayRoutesInput{
+		Gateway:                  ptr.String("__Gateway__"),
+		Cluster:                  ptr.String("__Cluster__"),
+		Service:                  ptr.String("__Service__"),
+		ServiceContainerPortName: ptr.String("__ServiceContainerPortName__"),
+		Status: []types.GatewayRouteStatus{
+			types.GatewayRouteStatus("ACTIVE"),
+			types.GatewayRouteStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListGatewayRoutes.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListGateways(t *testing.T) {
+	want := &ListGatewaysOutput{
+		Gateways: []types.GatewaySummary{
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.GatewayStatus("ACTIVE"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				GatewayArn: ptr.String("__GatewayArn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.GatewayStatus("ACTIVE"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListGateways.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListGateways(context.Background(), &ListGatewaysInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: []types.GatewayStatus{
+			types.GatewayStatus("ACTIVE"),
+			types.GatewayStatus("ACTIVE"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListGateways.response", err)
 	}
 }
 
@@ -20783,6 +21615,61 @@ func TestCheckResponseSnapshot_UpdateExpressGatewayService(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
+	want := &UpdateGatewayOutput{
+		GatewayArn: ptr.String("__GatewayArn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.GatewayStatus("ACTIVE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateGateway(context.Background(), &UpdateGatewayInput{
+		Gateway:               ptr.String("__Gateway__"),
+		InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+		DeletionProtection:    ptr.Bool(true),
+		Configuration: &types.UpdateGatewayConfigurationMemberHostSharedAlb{
+			Value: types.UpdateGatewayAlbConfiguration{
+				NetworkConfiguration: &types.UpdateGatewayNetworkConfiguration{
+					InboundSecurityGroup: ptr.String("__InboundSecurityGroup__"),
+				},
+				MaxAlbCount: ptr.Int32(1),
+				WebACLArn:   ptr.String("__WebACLArn__"),
+				AccessLogs: &types.GatewayElbAccessLogConfiguration{
+					Destination: &types.GatewayElbAccessLogDestinationMemberS3{
+						Value: types.GatewayElbAccessLogS3Destination{
+							Bucket: ptr.String("__Bucket__"),
+							Prefix: ptr.String("__Prefix__"),
+						},
+					},
+				},
+				HttpDesync: types.GatewayAlbDesyncMitigationMode("monitor"),
+				TestTrafficRules: &types.GatewayAlbTestTrafficRules{
+					Header: &types.GatewayTestTrafficHeader{
+						Name: ptr.String("__Name__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		PropagateTags: types.PropagateGatewayTags("NONE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateGateway.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 	want := &UpdateServiceOutput{
 		Service: &types.Service{
@@ -22186,6 +23073,52 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 				},
 			},
 		},
+		GatewayConnectors: []types.GatewayConnector{
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+			{
+				PortName: ptr.String("__PortName__"),
+				HealthCheck: &types.GatewayConnectorHealthCheck{
+					HealthCheckProtocol:        types.GatewayConnectorHealthCheckProtocol("HTTP"),
+					HealthCheckPort:            ptr.Int32(1),
+					HealthCheckPath:            ptr.String("__HealthCheckPath__"),
+					HealthCheckTimeoutSeconds:  ptr.Int32(1),
+					HealthCheckIntervalSeconds: ptr.Int32(1),
+					HealthyThresholdCount:      ptr.Int32(1),
+					UnhealthyThresholdCount:    ptr.Int32(1),
+					Matcher: &types.GatewayConnectorHealthCheckMatcher{
+						HttpCode: ptr.String("__HttpCode__"),
+						GrpcCode: ptr.String("__GrpcCode__"),
+					},
+				},
+				Filters: &types.GatewayConnectorFilters{
+					AccessTypes: []types.AccessType{
+						types.AccessType("PUBLIC"),
+						types.AccessType("PUBLIC"),
+					},
+				},
+			},
+		},
 		Monitoring: &types.MonitoringConfiguration{
 			MetricConfigurations: []types.MetricConfiguration{
 				{
@@ -22533,10 +23466,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
-		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
-		HookId:               ptr.String("__HookId__"),
-		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	_, opErr := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -22895,10 +23827,9 @@ func TestCheckResponseSnapshot_Error_ClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
-		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
-		HookId:               ptr.String("__HookId__"),
-		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	_, opErr := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -23032,145 +23963,9 @@ func TestCheckResponseSnapshot_Error_ClusterNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapacityProvider(context.Background(), &CreateCapacityProviderInput{
-		Name:    ptr.String("__Name__"),
+	_, opErr := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
 		Cluster: ptr.String("__Cluster__"),
-		AutoScalingGroupProvider: &types.AutoScalingGroupProvider{
-			AutoScalingGroupArn: ptr.String("__AutoScalingGroupArn__"),
-			ManagedScaling: &types.ManagedScaling{
-				Status:                 types.ManagedScalingStatus("ENABLED"),
-				TargetCapacity:         ptr.Int32(1),
-				MinimumScalingStepSize: ptr.Int32(1),
-				MaximumScalingStepSize: ptr.Int32(1),
-				InstanceWarmupPeriod:   ptr.Int32(1),
-			},
-			ManagedTerminationProtection: types.ManagedTerminationProtection("ENABLED"),
-			ManagedDraining:              types.ManagedDraining("ENABLED"),
-		},
-		ManagedInstancesProvider: &types.CreateManagedInstancesProviderConfiguration{
-			InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
-			InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
-				Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
-				NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
-					Subnets: []string{
-						"__Member__",
-						"__Member__",
-					},
-					SecurityGroups: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
-					StorageSizeGiB: ptr.Int32(1),
-				},
-				LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
-					UseLocalStorage: true,
-				},
-				Monitoring:                      types.ManagedInstancesMonitoringOptions("BASIC"),
-				CapacityOptionType:              types.CapacityOptionType("ON_DEMAND"),
-				InstanceMetadataTagsPropagation: ptr.Bool(true),
-				InstanceRequirements: &types.InstanceRequirementsRequest{
-					VCpuCount: &types.VCpuCountRangeRequest{
-						Min: ptr.Int32(1),
-						Max: ptr.Int32(1),
-					},
-					MemoryMiB: &types.MemoryMiBRequest{
-						Min: ptr.Int32(1),
-						Max: ptr.Int32(1),
-					},
-					CpuManufacturers: []types.CpuManufacturer{
-						types.CpuManufacturer("intel"),
-						types.CpuManufacturer("intel"),
-					},
-					MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
-						Min: ptr.Float64(1.0),
-						Max: ptr.Float64(1.0),
-					},
-					ExcludedInstanceTypes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					InstanceGenerations: []types.InstanceGeneration{
-						types.InstanceGeneration("current"),
-						types.InstanceGeneration("current"),
-					},
-					SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
-					OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
-					BareMetal:               types.BareMetal("included"),
-					BurstablePerformance:    types.BurstablePerformance("included"),
-					RequireHibernateSupport: ptr.Bool(true),
-					NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
-						Min: ptr.Int32(1),
-						Max: ptr.Int32(1),
-					},
-					LocalStorage: types.LocalStorage("included"),
-					LocalStorageTypes: []types.LocalStorageType{
-						types.LocalStorageType("hdd"),
-						types.LocalStorageType("hdd"),
-					},
-					TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
-						Min: ptr.Float64(1.0),
-						Max: ptr.Float64(1.0),
-					},
-					BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
-						Min: ptr.Int32(1),
-						Max: ptr.Int32(1),
-					},
-					AcceleratorTypes: []types.AcceleratorType{
-						types.AcceleratorType("gpu"),
-						types.AcceleratorType("gpu"),
-					},
-					AcceleratorCount: &types.AcceleratorCountRequest{
-						Min: ptr.Int32(1),
-						Max: ptr.Int32(1),
-					},
-					AcceleratorManufacturers: []types.AcceleratorManufacturer{
-						types.AcceleratorManufacturer("amazon-web-services"),
-						types.AcceleratorManufacturer("amazon-web-services"),
-					},
-					AcceleratorNames: []types.AcceleratorName{
-						types.AcceleratorName("a100"),
-						types.AcceleratorName("a100"),
-					},
-					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
-						Min: ptr.Int32(1),
-						Max: ptr.Int32(1),
-					},
-					NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
-						Min: ptr.Float64(1.0),
-						Max: ptr.Float64(1.0),
-					},
-					AllowedInstanceTypes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
-				},
-				FipsEnabled: ptr.Bool(true),
-				CapacityReservations: &types.CapacityReservationRequest{
-					ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
-					ReservationPreference: types.CapacityReservationPreference("RESERVATIONS_ONLY"),
-				},
-			},
-			PropagateTags: types.PropagateMITags("CAPACITY_PROVIDER"),
-			InfrastructureOptimization: &types.InfrastructureOptimization{
-				ScaleInAfter: ptr.Int32(1),
-			},
-			AutoRepairConfiguration: &types.AutoRepairConfiguration{
-				ActionsStatus: types.AutoRepairActionsStatus("ENABLED"),
-			},
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -23534,6 +24329,34 @@ func TestCheckResponseSnapshot_Error_DaemonNotFoundException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_GatewayNotFoundException(t *testing.T) {
+	want := &types.GatewayNotFoundException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GatewayNotFoundException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.GatewayNotFoundException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.GatewayNotFoundException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "GatewayNotFoundException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message: ptr.String("__Message__"),
@@ -23546,10 +24369,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
-		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
-		HookId:               ptr.String("__HookId__"),
-		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	_, opErr := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -24108,10 +24930,9 @@ func TestCheckResponseSnapshot_Error_ServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
-		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
-		HookId:               ptr.String("__HookId__"),
-		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	_, opErr := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -24492,10 +25313,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedFeatureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ContinueServiceDeployment(context.Background(), &ContinueServiceDeploymentInput{
-		ServiceDeploymentArn: ptr.String("__ServiceDeploymentArn__"),
-		HookId:               ptr.String("__HookId__"),
-		Action:               types.DeploymentLifecycleHookAction("ROLLBACK"),
+	_, opErr := svc.AssociateGatewayWithCluster(context.Background(), &AssociateGatewayWithClusterInput{
+		Gateway: ptr.String("__Gateway__"),
+		Cluster: ptr.String("__Cluster__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
