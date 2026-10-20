@@ -1,3 +1,7 @@
+# v1.74.0 (2026-10-20)
+
+* **Feature**: Amazon Bedrock Guardrails now supports a configurable tier for the contextual grounding policy via a new tier option. Select the Standard tier for grounding that better supports conversations and reasoning, with expanded language coverage.
+
 # v1.73.5 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

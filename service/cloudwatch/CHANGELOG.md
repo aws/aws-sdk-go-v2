@@ -1,3 +1,7 @@
+# v1.75.0 (2026-10-20)
+
+* **Feature**: Amazon CloudWatch now supports two new anomaly detector settings. AdaptationSpeed (FAST, NORMAL, SLOW) controls how fast the model adapts to baseline changes, and OutlierFilteringStrength (MINIMAL, MODERATE, STRICT) controls how aggressively outliers are filtered.
+
 # v1.74.0 (2026-10-19)
 
 * **Feature**: This release adds ActionConfiguration to PutMetricAlarm, PutCompositeAlarm and PutLogAlarm. It allows customers to include an alarm's tags in its notifications and alarm state change events

@@ -1,8 +1,0 @@
-{
-    "id": "80ab8424-360e-4a80-83f2-fb6d8d1566c9",
-    "type": "feature",
-    "description": "S3 Files adds support for the \"Misconfigured\" file system status.",
-    "modules": [
-        "service/s3files"
-    ]
-}

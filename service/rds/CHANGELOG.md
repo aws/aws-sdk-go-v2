@@ -1,3 +1,7 @@
+# v1.131.0 (2026-10-20)
+
+* **Feature**: Amazon RDS now supports On-Demand Capacity Reservations for DB instances.
+
 # v1.130.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

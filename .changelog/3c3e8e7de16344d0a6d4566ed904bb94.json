@@ -1,8 +1,0 @@
-{
-    "id": "3c3e8e7d-e163-44d0-a6d4-566ed904bb94",
-    "type": "feature",
-    "description": "Amazon RDS now supports On-Demand Capacity Reservations for DB instances.",
-    "modules": [
-        "service/rds"
-    ]
-}

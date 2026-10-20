@@ -1,3 +1,7 @@
+# v1.53.0 (2026-10-20)
+
+* **Feature**: Adds ListEntities filter, sort, and summary support for the ExpressPrivateOfferConfiguration entity type, including filtering by ProductId.
+
 # v1.52.5 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

@@ -1,3 +1,7 @@
+# v1.72.0 (2026-10-20)
+
+* **Feature**: Adds support for disassociating a replica from an Amazon DynamoDB multi-Region eventual consistency global table, so you can keep it as a single-Region table with its existing data. Also adds disassociation protection, on by default, to help prevent accidental disassociation.
+
 # v1.71.0 (2026-10-19)
 
 * **Feature**: Enable account endpoint generation for existing CN and GovCloud regions

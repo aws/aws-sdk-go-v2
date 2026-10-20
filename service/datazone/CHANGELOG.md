@@ -1,3 +1,7 @@
+# v1.80.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.79.0 (2026-10-19)
 
 * **Feature**: Adds SDK and CLI support for the Iceberg REST catalog connection types already available in Amazon SageMaker Unified Studio - ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, and DATABRICKSICEBERGRESTCATALOG.

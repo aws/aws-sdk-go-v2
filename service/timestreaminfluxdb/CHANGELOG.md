@@ -1,3 +1,7 @@
+# v1.31.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.30.0 (2026-10-19)
 
 * **Feature**: Adds four new parameters to the InfluxDBv3Enterprise parameter group for Amazon Timestream for InfluxDB. The new parameters are upgradePachaTree, walBufferSize, snapshotSize, and snapshotDuration.

@@ -1,3 +1,7 @@
+# v1.58.0 (2026-10-20)
+
+* **Feature**: This release allows customers and their partners to easily collaborate with data stored in Databricks, without having to move or share their underlying data among collaborators.
+
 # v1.57.5 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

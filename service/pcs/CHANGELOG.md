@@ -1,3 +1,7 @@
+# v1.31.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.30.0 (2026-10-12)
 
 * **Feature**: Adding scheduler version to RegisterComputeNodeGroup API. A compute node uses this value to run the matching scheduler version.

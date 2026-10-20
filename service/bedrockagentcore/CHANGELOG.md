@@ -1,3 +1,7 @@
+# v1.53.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.52.0 (2026-10-19)
 
 * **Feature**: Adds the Builtin.FailureAnalysis evaluator for batch evaluations. GetBatchEvaluation now returns insightResults that group session failures into insights with root causes and suggested fixes.

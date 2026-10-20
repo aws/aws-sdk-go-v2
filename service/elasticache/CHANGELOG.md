@@ -1,3 +1,7 @@
+# v1.64.0 (2026-10-20)
+
+* **Feature**: LiveMigration enables customers to migrate from self-hosted EC2 Redis and Valkey clusters to ElastiCache Serverless with near-zero downtime. Customers control the migration through three API-driven phases (prepare, start, complete) that handle traffic proxying, data replication, and cutover.
+
 # v1.63.3 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

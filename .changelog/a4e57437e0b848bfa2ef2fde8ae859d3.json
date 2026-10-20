@@ -1,8 +1,0 @@
-{
-    "id": "a4e57437-e0b8-48bf-a2ef-2fde8ae859d3",
-    "type": "feature",
-    "description": "Amazon Bedrock Guardrails now supports a configurable tier for the contextual grounding policy via a new tier option. Select the Standard tier for grounding that better supports conversations and reasoning, with expanded language coverage.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

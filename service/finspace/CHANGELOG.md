@@ -1,3 +1,7 @@
+# v1.42.0 (2026-10-20)
+
+* **Feature**: Marked service APIs as deprecated. This service has reached end-of-life.
+
 # v1.41.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

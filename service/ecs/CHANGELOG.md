@@ -1,3 +1,7 @@
+# v1.102.0 (2026-10-20)
+
+* **Feature**: ECS Service Gateway makes it easier for developers to deploy ECS services without having to worry about complex ingress networking constructs.
+
 # v1.101.0 (2026-10-19)
 
 * **Feature**: Adds support for configurable envoy application log levels. Customers can now debug network connectivity issues with their task's sidecar envoys.

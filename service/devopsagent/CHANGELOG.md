@@ -1,3 +1,7 @@
+# v1.20.0 (2026-10-20)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.19.0 (2026-10-12)
 
 * **Feature**: Adds support for the includedData field in GetAgentSpace and ListAgentSpaces APIs
