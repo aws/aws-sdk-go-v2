@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,36 @@ type CreateGatewayTargetInput struct {
 	PrivateEndpoint types.PrivateEndpoint
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateGatewayTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateConfigurationList(s, schemas.CreateGatewayTargetRequest_certificateConfigurations, v.CertificateConfigurations)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateGatewayTargetRequest_clientToken, *v.ClientToken)
+	}
+	serializeCredentialProviderConfigurations(s, schemas.CreateGatewayTargetRequest_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGatewayTargetRequest_description, *v.Description)
+	}
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.CreateGatewayTargetRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.CreateGatewayTargetRequest_metadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGatewayTargetRequest_name, *v.Name)
+	}
+	serializePrivateEndpoint(s, schemas.CreateGatewayTargetRequest_privateEndpoint, v.PrivateEndpoint)
+	serializeTargetConfiguration(s, schemas.CreateGatewayTargetRequest_targetConfiguration, v.TargetConfiguration)
 }
 
 type CreateGatewayTargetOutput struct {
@@ -153,13 +185,117 @@ type CreateGatewayTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizationData(s, schemas.CreateGatewayTargetResponse_authorizationData, v.AuthorizationData)
+	serializeCertificateConfigurationList(s, schemas.CreateGatewayTargetResponse_certificateConfigurations, v.CertificateConfigurations)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateGatewayTargetResponse_createdAt, *v.CreatedAt)
+	}
+	serializeCredentialProviderConfigurations(s, schemas.CreateGatewayTargetResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGatewayTargetResponse_description, *v.Description)
+	}
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.CreateGatewayTargetResponse_gatewayArn, *v.GatewayArn)
+	}
+	if v.LastSynchronizedAt != nil {
+		s.WriteTime(schemas.CreateGatewayTargetResponse_lastSynchronizedAt, *v.LastSynchronizedAt)
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.CreateGatewayTargetResponse_metadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGatewayTargetResponse_name, *v.Name)
+	}
+	serializePrivateEndpoint(s, schemas.CreateGatewayTargetResponse_privateEndpoint, v.PrivateEndpoint)
+	serializePrivateEndpointManagedResources(s, schemas.CreateGatewayTargetResponse_privateEndpointManagedResources, v.PrivateEndpointManagedResources)
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.CreateGatewayTargetResponse_protocolType, string(v.ProtocolType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGatewayTargetResponse_status, string(v.Status))
+	}
+	serializeStatusReasons(s, schemas.CreateGatewayTargetResponse_statusReasons, v.StatusReasons)
+	serializeTargetConfiguration(s, schemas.CreateGatewayTargetResponse_targetConfiguration, v.TargetConfiguration)
+	if v.TargetId != nil {
+		s.WriteString(schemas.CreateGatewayTargetResponse_targetId, *v.TargetId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateGatewayTargetResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateGatewayTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayTargetResponse_authorizationData:
+			return deserializeAuthorizationData(d, schemas.CreateGatewayTargetResponse_authorizationData, &v.AuthorizationData)
+		case schemas.CreateGatewayTargetResponse_certificateConfigurations:
+			return deserializeCertificateConfigurationList(d, schemas.CreateGatewayTargetResponse_certificateConfigurations, &v.CertificateConfigurations)
+		case schemas.CreateGatewayTargetResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateGatewayTargetResponse_createdAt, v.CreatedAt)
+		case schemas.CreateGatewayTargetResponse_credentialProviderConfigurations:
+			return deserializeCredentialProviderConfigurations(d, schemas.CreateGatewayTargetResponse_credentialProviderConfigurations, &v.CredentialProviderConfigurations)
+		case schemas.CreateGatewayTargetResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateGatewayTargetResponse_description, v.Description)
+		case schemas.CreateGatewayTargetResponse_gatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.CreateGatewayTargetResponse_gatewayArn, v.GatewayArn)
+		case schemas.CreateGatewayTargetResponse_lastSynchronizedAt:
+			v.LastSynchronizedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateGatewayTargetResponse_lastSynchronizedAt, v.LastSynchronizedAt)
+		case schemas.CreateGatewayTargetResponse_metadataConfiguration:
+			v.MetadataConfiguration = &types.MetadataConfiguration{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.CreateGatewayTargetResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateGatewayTargetResponse_name, v.Name)
+		case schemas.CreateGatewayTargetResponse_privateEndpoint:
+			return deserializePrivateEndpoint(d, schemas.CreateGatewayTargetResponse_privateEndpoint, &v.PrivateEndpoint)
+		case schemas.CreateGatewayTargetResponse_privateEndpointManagedResources:
+			return deserializePrivateEndpointManagedResources(d, schemas.CreateGatewayTargetResponse_privateEndpointManagedResources, &v.PrivateEndpointManagedResources)
+		case schemas.CreateGatewayTargetResponse_protocolType:
+			var ev string
+			if err := d.ReadString(schemas.CreateGatewayTargetResponse_protocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = types.TargetProtocolType(ev)
+			return nil
+		case schemas.CreateGatewayTargetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGatewayTargetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TargetStatus(ev)
+			return nil
+		case schemas.CreateGatewayTargetResponse_statusReasons:
+			return deserializeStatusReasons(d, schemas.CreateGatewayTargetResponse_statusReasons, &v.StatusReasons)
+		case schemas.CreateGatewayTargetResponse_targetConfiguration:
+			return deserializeTargetConfiguration(d, schemas.CreateGatewayTargetResponse_targetConfiguration, &v.TargetConfiguration)
+		case schemas.CreateGatewayTargetResponse_targetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.CreateGatewayTargetResponse_targetId, v.TargetId)
+		case schemas.CreateGatewayTargetResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateGatewayTargetResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGatewayTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGatewayTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGatewayTarget, schemas.CreateGatewayTargetRequest, schemas.CreateGatewayTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGatewayTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGatewayTarget, schemas.CreateGatewayTargetRequest, schemas.CreateGatewayTargetResponse), output: &CreateGatewayTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

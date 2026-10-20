@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,42 @@ type CreateMemoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMemoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMemoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMemoryInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMemoryInput_description, *v.Description)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateMemoryInput_encryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EventExpiryDuration != nil {
+		s.WriteInt32(schemas.CreateMemoryInput_eventExpiryDuration, *v.EventExpiryDuration)
+	}
+	serializeIndexedKeysList(s, schemas.CreateMemoryInput_indexedKeys, v.IndexedKeys)
+	if v.MemoryExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateMemoryInput_memoryExecutionRoleArn, *v.MemoryExecutionRoleArn)
+	}
+	serializeMemoryStrategyInputList(s, schemas.CreateMemoryInput_memoryStrategies, v.MemoryStrategies)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMemoryInput_name, *v.Name)
+	}
+	serializeNamespaceKeysList(s, schemas.CreateMemoryInput_namespaceKeys, v.NamespaceKeys)
+	if v.StreamDeliveryResources != nil {
+		s.WriteStruct(schemas.CreateMemoryInput_streamDeliveryResources)
+		v.StreamDeliveryResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateMemoryInput_tags, v.Tags)
+}
+
 type CreateMemoryOutput struct {
 
 	// The details of the created memory, including its ID, ARN, name, description,
@@ -88,13 +126,34 @@ type CreateMemoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMemoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMemoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMemoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Memory != nil {
+		s.WriteStruct(schemas.CreateMemoryOutput_memory)
+		v.Memory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMemoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMemoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMemoryOutput_memory:
+			v.Memory = &types.Memory{}
+			return v.Memory.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMemoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMemory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMemory, schemas.CreateMemoryInput, schemas.CreateMemoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMemory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMemory, schemas.CreateMemoryInput, schemas.CreateMemoryOutput), output: &CreateMemoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

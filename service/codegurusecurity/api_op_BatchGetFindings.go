@@ -4,7 +4,9 @@ package codegurusecurity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type BatchGetFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingIdentifiers(s, schemas.BatchGetFindingsRequest_findingIdentifiers, v.FindingIdentifiers)
+}
+
 type BatchGetFindingsOutput struct {
 
 	// A list of errors for individual findings which were not fetched. Each
@@ -55,13 +67,32 @@ type BatchGetFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetFindingsErrors(s, schemas.BatchGetFindingsResponse_failedFindings, v.FailedFindings)
+	serializeFindings(s, schemas.BatchGetFindingsResponse_findings, v.Findings)
+}
+func (v *BatchGetFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFindingsResponse_failedFindings:
+			return deserializeBatchGetFindingsErrors(d, schemas.BatchGetFindingsResponse_failedFindings, &v.FailedFindings)
+		case schemas.BatchGetFindingsResponse_findings:
+			return deserializeFindings(d, schemas.BatchGetFindingsResponse_findings, &v.Findings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFindings, schemas.BatchGetFindingsRequest, schemas.BatchGetFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFindings, schemas.BatchGetFindingsRequest, schemas.BatchGetFindingsResponse), output: &BatchGetFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

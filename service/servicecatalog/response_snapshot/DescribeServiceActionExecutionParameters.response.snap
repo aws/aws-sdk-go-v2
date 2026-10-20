@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.DescribeServiceActionExecutionParameters
+
+{"ServiceActionParameters":[{"DefaultValues":["__Member__","__Member__"],"Name":"__Name__","Type":"__Type__"},{"DefaultValues":["__Member__","__Member__"],"Name":"__Name__","Type":"__Type__"}]}

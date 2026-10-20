@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataSegmentRelationshipSummaries":[{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"sourceDatasetId":"__SourceDatasetId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"targetDatasetId":"__TargetDatasetId__","timeSeriesId":"__TimeSeriesId__"},{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"sourceDatasetId":"__SourceDatasetId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"targetDatasetId":"__TargetDatasetId__","timeSeriesId":"__TimeSeriesId__"}],"nextToken":"__NextToken__"}

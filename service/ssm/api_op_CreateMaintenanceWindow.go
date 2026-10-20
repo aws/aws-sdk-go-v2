@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -124,6 +126,45 @@ type CreateMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMaintenanceWindowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMaintenanceWindowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMaintenanceWindowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.CreateMaintenanceWindowRequest_AllowUnassociatedTargets, v.AllowUnassociatedTargets)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowRequest_ClientToken, *v.ClientToken)
+	}
+	s.WriteInt32(schemas.CreateMaintenanceWindowRequest_Cutoff, v.Cutoff)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowRequest_Description, *v.Description)
+	}
+	if v.Duration != nil {
+		s.WriteInt32(schemas.CreateMaintenanceWindowRequest_Duration, *v.Duration)
+	}
+	if v.EndDate != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowRequest_EndDate, *v.EndDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowRequest_Name, *v.Name)
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowRequest_Schedule, *v.Schedule)
+	}
+	if v.ScheduleOffset != nil {
+		s.WriteInt32(schemas.CreateMaintenanceWindowRequest_ScheduleOffset, *v.ScheduleOffset)
+	}
+	if v.ScheduleTimezone != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowRequest_ScheduleTimezone, *v.ScheduleTimezone)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowRequest_StartDate, *v.StartDate)
+	}
+	serializeTagList(s, schemas.CreateMaintenanceWindowRequest_Tags, v.Tags)
+}
+
 type CreateMaintenanceWindowOutput struct {
 
 	// The ID of the created maintenance window.
@@ -135,13 +176,32 @@ type CreateMaintenanceWindowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMaintenanceWindowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMaintenanceWindowResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMaintenanceWindowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WindowId != nil {
+		s.WriteString(schemas.CreateMaintenanceWindowResult_WindowId, *v.WindowId)
+	}
+}
+func (v *CreateMaintenanceWindowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMaintenanceWindowResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMaintenanceWindowResult_WindowId:
+			v.WindowId = new(string)
+			return d.ReadString(schemas.CreateMaintenanceWindowResult_WindowId, v.WindowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMaintenanceWindow, schemas.CreateMaintenanceWindowRequest, schemas.CreateMaintenanceWindowResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMaintenanceWindow, schemas.CreateMaintenanceWindowRequest, schemas.CreateMaintenanceWindowResult), output: &CreateMaintenanceWindowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

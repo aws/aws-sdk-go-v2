@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -46,6 +48,87 @@ type AccessPointDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessPointDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessPointDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessPointDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.AccessPointDescription_AccessPointArn, *v.AccessPointArn)
+	}
+	if v.AccessPointId != nil {
+		s.WriteString(schemas.AccessPointDescription_AccessPointId, *v.AccessPointId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AccessPointDescription_ClientToken, *v.ClientToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.AccessPointDescription_FileSystemId, *v.FileSystemId)
+	}
+	if v.LifeCycleState != "" {
+		s.WriteString(schemas.AccessPointDescription_LifeCycleState, string(v.LifeCycleState))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AccessPointDescription_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.AccessPointDescription_OwnerId, *v.OwnerId)
+	}
+	if v.PosixUser != nil {
+		s.WriteStruct(schemas.AccessPointDescription_PosixUser)
+		v.PosixUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootDirectory != nil {
+		s.WriteStruct(schemas.AccessPointDescription_RootDirectory)
+		v.RootDirectory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.AccessPointDescription_Tags, v.Tags)
+}
+func (v *AccessPointDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessPointDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessPointDescription_AccessPointArn:
+			v.AccessPointArn = new(string)
+			return d.ReadString(schemas.AccessPointDescription_AccessPointArn, v.AccessPointArn)
+		case schemas.AccessPointDescription_AccessPointId:
+			v.AccessPointId = new(string)
+			return d.ReadString(schemas.AccessPointDescription_AccessPointId, v.AccessPointId)
+		case schemas.AccessPointDescription_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.AccessPointDescription_ClientToken, v.ClientToken)
+		case schemas.AccessPointDescription_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.AccessPointDescription_FileSystemId, v.FileSystemId)
+		case schemas.AccessPointDescription_LifeCycleState:
+			var ev string
+			if err := d.ReadString(schemas.AccessPointDescription_LifeCycleState, &ev); err != nil {
+				return err
+			}
+			v.LifeCycleState = LifeCycleState(ev)
+			return nil
+		case schemas.AccessPointDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AccessPointDescription_Name, v.Name)
+		case schemas.AccessPointDescription_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.AccessPointDescription_OwnerId, v.OwnerId)
+		case schemas.AccessPointDescription_PosixUser:
+			v.PosixUser = &PosixUser{}
+			return v.PosixUser.Deserialize(d)
+		case schemas.AccessPointDescription_RootDirectory:
+			v.RootDirectory = &RootDirectory{}
+			return v.RootDirectory.Deserialize(d)
+		case schemas.AccessPointDescription_Tags:
+			return deserializeTags(d, schemas.AccessPointDescription_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The backup policy for the file system used to create automatic daily backups.
 // If status has a value of ENABLED , the file system is being automatically backed
 // up. For more information, see [Automatic backups].
@@ -67,6 +150,32 @@ type BackupPolicy struct {
 	Status Status
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackupPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.BackupPolicy_Status, string(v.Status))
+	}
+}
+func (v *BackupPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupPolicy_Status:
+			var ev string
+			if err := d.ReadString(schemas.BackupPolicy_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required if the RootDirectory > Path specified does not exist. Specifies the
@@ -103,6 +212,40 @@ type CreationInfo struct {
 	Permissions *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OwnerGid != nil {
+		s.WriteInt64(schemas.CreationInfo_OwnerGid, *v.OwnerGid)
+	}
+	if v.OwnerUid != nil {
+		s.WriteInt64(schemas.CreationInfo_OwnerUid, *v.OwnerUid)
+	}
+	if v.Permissions != nil {
+		s.WriteString(schemas.CreationInfo_Permissions, *v.Permissions)
+	}
+}
+func (v *CreationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreationInfo_OwnerGid:
+			v.OwnerGid = new(int64)
+			return d.ReadInt64(schemas.CreationInfo_OwnerGid, v.OwnerGid)
+		case schemas.CreationInfo_OwnerUid:
+			v.OwnerUid = new(int64)
+			return d.ReadInt64(schemas.CreationInfo_OwnerUid, v.OwnerUid)
+		case schemas.CreationInfo_Permissions:
+			v.Permissions = new(string)
+			return d.ReadString(schemas.CreationInfo_Permissions, v.Permissions)
+		}
+		return nil
+	})
 }
 
 // Describes the destination file system in the replication configuration.
@@ -150,6 +293,68 @@ type Destination struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Destination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Destination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Destination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.Destination_FileSystemId, *v.FileSystemId)
+	}
+	if v.LastReplicatedTimestamp != nil {
+		s.WriteTime(schemas.Destination_LastReplicatedTimestamp, *v.LastReplicatedTimestamp)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.Destination_OwnerId, *v.OwnerId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Destination_Region, *v.Region)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Destination_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Destination_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Destination_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *Destination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Destination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Destination_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.Destination_FileSystemId, v.FileSystemId)
+		case schemas.Destination_LastReplicatedTimestamp:
+			v.LastReplicatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Destination_LastReplicatedTimestamp, v.LastReplicatedTimestamp)
+		case schemas.Destination_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.Destination_OwnerId, v.OwnerId)
+		case schemas.Destination_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Destination_Region, v.Region)
+		case schemas.Destination_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Destination_RoleArn, v.RoleArn)
+		case schemas.Destination_Status:
+			var ev string
+			if err := d.ReadString(schemas.Destination_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplicationStatus(ev)
+			return nil
+		case schemas.Destination_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Destination_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
 }
 
 // Describes the new or existing destination file system for the replication
@@ -235,6 +440,52 @@ type DestinationToCreate struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DestinationToCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationToCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationToCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneName != nil {
+		s.WriteString(schemas.DestinationToCreate_AvailabilityZoneName, *v.AvailabilityZoneName)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DestinationToCreate_FileSystemId, *v.FileSystemId)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DestinationToCreate_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DestinationToCreate_Region, *v.Region)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DestinationToCreate_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DestinationToCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationToCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationToCreate_AvailabilityZoneName:
+			v.AvailabilityZoneName = new(string)
+			return d.ReadString(schemas.DestinationToCreate_AvailabilityZoneName, v.AvailabilityZoneName)
+		case schemas.DestinationToCreate_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.DestinationToCreate_FileSystemId, v.FileSystemId)
+		case schemas.DestinationToCreate_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DestinationToCreate_KmsKeyId, v.KmsKeyId)
+		case schemas.DestinationToCreate_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DestinationToCreate_Region, v.Region)
+		case schemas.DestinationToCreate_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DestinationToCreate_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // A description of the file system.
@@ -341,6 +592,140 @@ type FileSystemDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileSystemDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.FileSystemDescription_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.AvailabilityZoneName != nil {
+		s.WriteString(schemas.FileSystemDescription_AvailabilityZoneName, *v.AvailabilityZoneName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FileSystemDescription_CreationTime, *v.CreationTime)
+	}
+	if v.CreationToken != nil {
+		s.WriteString(schemas.FileSystemDescription_CreationToken, *v.CreationToken)
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.FileSystemDescription_Encrypted, *v.Encrypted)
+	}
+	if v.FileSystemArn != nil {
+		s.WriteString(schemas.FileSystemDescription_FileSystemArn, *v.FileSystemArn)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.FileSystemDescription_FileSystemId, *v.FileSystemId)
+	}
+	if v.FileSystemProtection != nil {
+		s.WriteStruct(schemas.FileSystemDescription_FileSystemProtection)
+		v.FileSystemProtection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.FileSystemDescription_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LifeCycleState != "" {
+		s.WriteString(schemas.FileSystemDescription_LifeCycleState, string(v.LifeCycleState))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FileSystemDescription_Name, *v.Name)
+	}
+	s.WriteInt32(schemas.FileSystemDescription_NumberOfMountTargets, v.NumberOfMountTargets)
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FileSystemDescription_OwnerId, *v.OwnerId)
+	}
+	if v.PerformanceMode != "" {
+		s.WriteString(schemas.FileSystemDescription_PerformanceMode, string(v.PerformanceMode))
+	}
+	if v.ProvisionedThroughputInMibps != nil {
+		s.WriteFloat64(schemas.FileSystemDescription_ProvisionedThroughputInMibps, *v.ProvisionedThroughputInMibps)
+	}
+	if v.SizeInBytes != nil {
+		s.WriteStruct(schemas.FileSystemDescription_SizeInBytes)
+		v.SizeInBytes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	if v.ThroughputMode != "" {
+		s.WriteString(schemas.FileSystemDescription_ThroughputMode, string(v.ThroughputMode))
+	}
+}
+func (v *FileSystemDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemDescription_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.FileSystemDescription_AvailabilityZoneName:
+			v.AvailabilityZoneName = new(string)
+			return d.ReadString(schemas.FileSystemDescription_AvailabilityZoneName, v.AvailabilityZoneName)
+		case schemas.FileSystemDescription_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FileSystemDescription_CreationTime, v.CreationTime)
+		case schemas.FileSystemDescription_CreationToken:
+			v.CreationToken = new(string)
+			return d.ReadString(schemas.FileSystemDescription_CreationToken, v.CreationToken)
+		case schemas.FileSystemDescription_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.FileSystemDescription_Encrypted, v.Encrypted)
+		case schemas.FileSystemDescription_FileSystemArn:
+			v.FileSystemArn = new(string)
+			return d.ReadString(schemas.FileSystemDescription_FileSystemArn, v.FileSystemArn)
+		case schemas.FileSystemDescription_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_FileSystemId, v.FileSystemId)
+		case schemas.FileSystemDescription_FileSystemProtection:
+			v.FileSystemProtection = &FileSystemProtectionDescription{}
+			return v.FileSystemProtection.Deserialize(d)
+		case schemas.FileSystemDescription_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_KmsKeyId, v.KmsKeyId)
+		case schemas.FileSystemDescription_LifeCycleState:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemDescription_LifeCycleState, &ev); err != nil {
+				return err
+			}
+			v.LifeCycleState = LifeCycleState(ev)
+			return nil
+		case schemas.FileSystemDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FileSystemDescription_Name, v.Name)
+		case schemas.FileSystemDescription_NumberOfMountTargets:
+			return d.ReadInt32(schemas.FileSystemDescription_NumberOfMountTargets, &v.NumberOfMountTargets)
+		case schemas.FileSystemDescription_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FileSystemDescription_OwnerId, v.OwnerId)
+		case schemas.FileSystemDescription_PerformanceMode:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemDescription_PerformanceMode, &ev); err != nil {
+				return err
+			}
+			v.PerformanceMode = PerformanceMode(ev)
+			return nil
+		case schemas.FileSystemDescription_ProvisionedThroughputInMibps:
+			v.ProvisionedThroughputInMibps = new(float64)
+			return d.ReadFloat64(schemas.FileSystemDescription_ProvisionedThroughputInMibps, v.ProvisionedThroughputInMibps)
+		case schemas.FileSystemDescription_SizeInBytes:
+			v.SizeInBytes = &FileSystemSize{}
+			return v.SizeInBytes.Deserialize(d)
+		case schemas.FileSystemDescription_Tags:
+			return deserializeTags(d, schemas.FileSystemDescription_Tags, &v.Tags)
+		case schemas.FileSystemDescription_ThroughputMode:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemDescription_ThroughputMode, &ev); err != nil {
+				return err
+			}
+			v.ThroughputMode = ThroughputMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the protection on a file system.
 type FileSystemProtectionDescription struct {
 
@@ -363,6 +748,32 @@ type FileSystemProtectionDescription struct {
 	ReplicationOverwriteProtection ReplicationOverwriteProtection
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileSystemProtectionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemProtectionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemProtectionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationOverwriteProtection != "" {
+		s.WriteString(schemas.FileSystemProtectionDescription_ReplicationOverwriteProtection, string(v.ReplicationOverwriteProtection))
+	}
+}
+func (v *FileSystemProtectionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemProtectionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemProtectionDescription_ReplicationOverwriteProtection:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemProtectionDescription_ReplicationOverwriteProtection, &ev); err != nil {
+				return err
+			}
+			v.ReplicationOverwriteProtection = ReplicationOverwriteProtection(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The latest known metered size (in bytes) of data stored in the file system, in
@@ -399,6 +810,49 @@ type FileSystemSize struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileSystemSize) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemSize)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemSize) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.FileSystemSize_Timestamp, *v.Timestamp)
+	}
+	s.WriteInt64(schemas.FileSystemSize_Value, v.Value)
+	if v.ValueInArchive != nil {
+		s.WriteInt64(schemas.FileSystemSize_ValueInArchive, *v.ValueInArchive)
+	}
+	if v.ValueInIA != nil {
+		s.WriteInt64(schemas.FileSystemSize_ValueInIA, *v.ValueInIA)
+	}
+	if v.ValueInStandard != nil {
+		s.WriteInt64(schemas.FileSystemSize_ValueInStandard, *v.ValueInStandard)
+	}
+}
+func (v *FileSystemSize) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemSize, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemSize_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.FileSystemSize_Timestamp, v.Timestamp)
+		case schemas.FileSystemSize_Value:
+			return d.ReadInt64(schemas.FileSystemSize_Value, &v.Value)
+		case schemas.FileSystemSize_ValueInArchive:
+			v.ValueInArchive = new(int64)
+			return d.ReadInt64(schemas.FileSystemSize_ValueInArchive, v.ValueInArchive)
+		case schemas.FileSystemSize_ValueInIA:
+			v.ValueInIA = new(int64)
+			return d.ReadInt64(schemas.FileSystemSize_ValueInIA, v.ValueInIA)
+		case schemas.FileSystemSize_ValueInStandard:
+			v.ValueInStandard = new(int64)
+			return d.ReadInt64(schemas.FileSystemSize_ValueInStandard, v.ValueInStandard)
+		}
+		return nil
+	})
+}
+
 // Describes a policy used by lifecycle management that specifies when to
 // transition files into and out of storage classes. For more information, see [Managing file system storage].
 //
@@ -430,6 +884,52 @@ type LifecyclePolicy struct {
 	TransitionToPrimaryStorageClass TransitionToPrimaryStorageClassRules
 
 	noSmithyDocumentSerde
+}
+
+func (v *LifecyclePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransitionToArchive != "" {
+		s.WriteString(schemas.LifecyclePolicy_TransitionToArchive, string(v.TransitionToArchive))
+	}
+	if v.TransitionToIA != "" {
+		s.WriteString(schemas.LifecyclePolicy_TransitionToIA, string(v.TransitionToIA))
+	}
+	if v.TransitionToPrimaryStorageClass != "" {
+		s.WriteString(schemas.LifecyclePolicy_TransitionToPrimaryStorageClass, string(v.TransitionToPrimaryStorageClass))
+	}
+}
+func (v *LifecyclePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicy_TransitionToArchive:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicy_TransitionToArchive, &ev); err != nil {
+				return err
+			}
+			v.TransitionToArchive = TransitionToArchiveRules(ev)
+			return nil
+		case schemas.LifecyclePolicy_TransitionToIA:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicy_TransitionToIA, &ev); err != nil {
+				return err
+			}
+			v.TransitionToIA = TransitionToIARules(ev)
+			return nil
+		case schemas.LifecyclePolicy_TransitionToPrimaryStorageClass:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicy_TransitionToPrimaryStorageClass, &ev); err != nil {
+				return err
+			}
+			v.TransitionToPrimaryStorageClass = TransitionToPrimaryStorageClassRules(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides a description of a mount target.
@@ -486,6 +986,92 @@ type MountTargetDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MountTargetDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MountTargetDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MountTargetDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.MountTargetDescription_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.AvailabilityZoneName != nil {
+		s.WriteString(schemas.MountTargetDescription_AvailabilityZoneName, *v.AvailabilityZoneName)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.MountTargetDescription_FileSystemId, *v.FileSystemId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.MountTargetDescription_IpAddress, *v.IpAddress)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.MountTargetDescription_Ipv6Address, *v.Ipv6Address)
+	}
+	if v.LifeCycleState != "" {
+		s.WriteString(schemas.MountTargetDescription_LifeCycleState, string(v.LifeCycleState))
+	}
+	if v.MountTargetId != nil {
+		s.WriteString(schemas.MountTargetDescription_MountTargetId, *v.MountTargetId)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.MountTargetDescription_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.MountTargetDescription_OwnerId, *v.OwnerId)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.MountTargetDescription_SubnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.MountTargetDescription_VpcId, *v.VpcId)
+	}
+}
+func (v *MountTargetDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MountTargetDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MountTargetDescription_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.MountTargetDescription_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.MountTargetDescription_AvailabilityZoneName:
+			v.AvailabilityZoneName = new(string)
+			return d.ReadString(schemas.MountTargetDescription_AvailabilityZoneName, v.AvailabilityZoneName)
+		case schemas.MountTargetDescription_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.MountTargetDescription_FileSystemId, v.FileSystemId)
+		case schemas.MountTargetDescription_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.MountTargetDescription_IpAddress, v.IpAddress)
+		case schemas.MountTargetDescription_Ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.MountTargetDescription_Ipv6Address, v.Ipv6Address)
+		case schemas.MountTargetDescription_LifeCycleState:
+			var ev string
+			if err := d.ReadString(schemas.MountTargetDescription_LifeCycleState, &ev); err != nil {
+				return err
+			}
+			v.LifeCycleState = LifeCycleState(ev)
+			return nil
+		case schemas.MountTargetDescription_MountTargetId:
+			v.MountTargetId = new(string)
+			return d.ReadString(schemas.MountTargetDescription_MountTargetId, v.MountTargetId)
+		case schemas.MountTargetDescription_NetworkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.MountTargetDescription_NetworkInterfaceId, v.NetworkInterfaceId)
+		case schemas.MountTargetDescription_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.MountTargetDescription_OwnerId, v.OwnerId)
+		case schemas.MountTargetDescription_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.MountTargetDescription_SubnetId, v.SubnetId)
+		case schemas.MountTargetDescription_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.MountTargetDescription_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // The full POSIX identity, including the user ID, group ID, and any secondary
 // group IDs, on the access point that is used for all file system operations
 // performed by NFS clients using the access point.
@@ -506,6 +1092,37 @@ type PosixUser struct {
 	SecondaryGids []int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *PosixUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PosixUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PosixUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Gid != nil {
+		s.WriteInt64(schemas.PosixUser_Gid, *v.Gid)
+	}
+	serializeSecondaryGids(s, schemas.PosixUser_SecondaryGids, v.SecondaryGids)
+	if v.Uid != nil {
+		s.WriteInt64(schemas.PosixUser_Uid, *v.Uid)
+	}
+}
+func (v *PosixUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PosixUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PosixUser_Gid:
+			v.Gid = new(int64)
+			return d.ReadInt64(schemas.PosixUser_Gid, v.Gid)
+		case schemas.PosixUser_SecondaryGids:
+			return deserializeSecondaryGids(d, schemas.PosixUser_SecondaryGids, &v.SecondaryGids)
+		case schemas.PosixUser_Uid:
+			v.Uid = new(int64)
+			return d.ReadInt64(schemas.PosixUser_Uid, v.Uid)
+		}
+		return nil
+	})
 }
 
 // Describes the replication configuration for a specific file system.
@@ -549,6 +1166,61 @@ type ReplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicationConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ReplicationConfigurationDescription_CreationTime, *v.CreationTime)
+	}
+	serializeDestinations(s, schemas.ReplicationConfigurationDescription_Destinations, v.Destinations)
+	if v.OriginalSourceFileSystemArn != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn, *v.OriginalSourceFileSystemArn)
+	}
+	if v.SourceFileSystemArn != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemArn, *v.SourceFileSystemArn)
+	}
+	if v.SourceFileSystemId != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemId, *v.SourceFileSystemId)
+	}
+	if v.SourceFileSystemOwnerId != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemOwnerId, *v.SourceFileSystemOwnerId)
+	}
+	if v.SourceFileSystemRegion != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemRegion, *v.SourceFileSystemRegion)
+	}
+}
+func (v *ReplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationConfigurationDescription_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ReplicationConfigurationDescription_CreationTime, v.CreationTime)
+		case schemas.ReplicationConfigurationDescription_Destinations:
+			return deserializeDestinations(d, schemas.ReplicationConfigurationDescription_Destinations, &v.Destinations)
+		case schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn:
+			v.OriginalSourceFileSystemArn = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn, v.OriginalSourceFileSystemArn)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemArn:
+			v.SourceFileSystemArn = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemArn, v.SourceFileSystemArn)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemId:
+			v.SourceFileSystemId = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemId, v.SourceFileSystemId)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemOwnerId:
+			v.SourceFileSystemOwnerId = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemOwnerId, v.SourceFileSystemOwnerId)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemRegion:
+			v.SourceFileSystemRegion = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemRegion, v.SourceFileSystemRegion)
+		}
+		return nil
+	})
+}
+
 // Describes the resource type and its ID preference for the user's Amazon Web
 // Services account, in the current Amazon Web Services Region.
 type ResourceIdPreference struct {
@@ -562,6 +1234,35 @@ type ResourceIdPreference struct {
 	Resources []Resource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceIdPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceIdPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceIdPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdType != "" {
+		s.WriteString(schemas.ResourceIdPreference_ResourceIdType, string(v.ResourceIdType))
+	}
+	serializeResources(s, schemas.ResourceIdPreference_Resources, v.Resources)
+}
+func (v *ResourceIdPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceIdPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceIdPreference_ResourceIdType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceIdPreference_ResourceIdType, &ev); err != nil {
+				return err
+			}
+			v.ResourceIdType = ResourceIdType(ev)
+			return nil
+		case schemas.ResourceIdPreference_Resources:
+			return deserializeResources(d, schemas.ResourceIdPreference_Resources, &v.Resources)
+		}
+		return nil
+	})
 }
 
 // Specifies the directory on the Amazon EFS file system that the access point
@@ -590,6 +1291,36 @@ type RootDirectory struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RootDirectory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RootDirectory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RootDirectory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationInfo != nil {
+		s.WriteStruct(schemas.RootDirectory_CreationInfo)
+		v.CreationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.RootDirectory_Path, *v.Path)
+	}
+}
+func (v *RootDirectory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RootDirectory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RootDirectory_CreationInfo:
+			v.CreationInfo = &CreationInfo{}
+			return v.CreationInfo.Deserialize(d)
+		case schemas.RootDirectory_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.RootDirectory_Path, v.Path)
+		}
+		return nil
+	})
+}
+
 // A tag is a key-value pair. Allowed characters are letters, white space, and
 // numbers that can be represented in UTF-8, and the following characters: + - = .
 // _ : / .
@@ -606,6 +1337,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

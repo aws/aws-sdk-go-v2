@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type DescribeActivationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDescribeActivationsFilterList(s, schemas.DescribeActivationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeActivationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeActivationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeActivationsOutput struct {
 
 	// A list of activations for your Amazon Web Services account.
@@ -58,13 +76,35 @@ type DescribeActivationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActivationList(s, schemas.DescribeActivationsResult_ActivationList, v.ActivationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeActivationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeActivationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActivationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActivationsResult_ActivationList:
+			return deserializeActivationList(d, schemas.DescribeActivationsResult_ActivationList, &v.ActivationList)
+		case schemas.DescribeActivationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeActivationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActivationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeActivations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivations, schemas.DescribeActivationsRequest, schemas.DescribeActivationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeActivations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivations, schemas.DescribeActivationsRequest, schemas.DescribeActivationsResult), output: &DescribeActivationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type DescribeDocumentPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDocumentPermissionRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeDocumentPermissionRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDocumentPermissionRequest_NextToken, *v.NextToken)
+	}
+	if v.PermissionType != "" {
+		s.WriteString(schemas.DescribeDocumentPermissionRequest_PermissionType, string(v.PermissionType))
+	}
+}
+
 type DescribeDocumentPermissionOutput struct {
 
 	// The account IDs that have permission to use this document. The ID can be either
@@ -70,13 +93,38 @@ type DescribeDocumentPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentPermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.DescribeDocumentPermissionResponse_AccountIds, v.AccountIds)
+	serializeAccountSharingInfoList(s, schemas.DescribeDocumentPermissionResponse_AccountSharingInfoList, v.AccountSharingInfoList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDocumentPermissionResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDocumentPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDocumentPermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDocumentPermissionResponse_AccountIds:
+			return deserializeAccountIdList(d, schemas.DescribeDocumentPermissionResponse_AccountIds, &v.AccountIds)
+		case schemas.DescribeDocumentPermissionResponse_AccountSharingInfoList:
+			return deserializeAccountSharingInfoList(d, schemas.DescribeDocumentPermissionResponse_AccountSharingInfoList, &v.AccountSharingInfoList)
+		case schemas.DescribeDocumentPermissionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDocumentPermissionResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDocumentPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDocumentPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentPermission, schemas.DescribeDocumentPermissionRequest, schemas.DescribeDocumentPermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDocumentPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentPermission, schemas.DescribeDocumentPermissionRequest, schemas.DescribeDocumentPermissionResponse), output: &DescribeDocumentPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.ListTablesRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTablesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTablesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTablesOutput struct {
 
 	// A token to specify where to start paginating. This is the NextToken from a
@@ -62,13 +82,35 @@ type ListTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTablesResponse_NextToken, *v.NextToken)
+	}
+	serializeTableList(s, schemas.ListTablesResponse_Tables, v.Tables)
+}
+func (v *ListTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTablesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTablesResponse_NextToken, v.NextToken)
+		case schemas.ListTablesResponse_Tables:
+			return deserializeTableList(d, schemas.ListTablesResponse_Tables, &v.Tables)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesRequest, schemas.ListTablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesRequest, schemas.ListTablesResponse), output: &ListTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

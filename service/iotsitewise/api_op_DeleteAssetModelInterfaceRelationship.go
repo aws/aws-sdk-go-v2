@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,24 @@ type DeleteAssetModelInterfaceRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetModelInterfaceRelationshipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetModelInterfaceRelationshipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetModelInterfaceRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DeleteAssetModelInterfaceRelationshipRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAssetModelInterfaceRelationshipRequest_clientToken, *v.ClientToken)
+	}
+	if v.InterfaceAssetModelId != nil {
+		s.WriteString(schemas.DeleteAssetModelInterfaceRelationshipRequest_interfaceAssetModelId, *v.InterfaceAssetModelId)
+	}
+}
+
 type DeleteAssetModelInterfaceRelationshipOutput struct {
 
 	// The ARN of the asset model, which has the following format.
@@ -81,13 +101,52 @@ type DeleteAssetModelInterfaceRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetModelInterfaceRelationshipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetModelInterfaceRelationshipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetModelInterfaceRelationshipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelArn != nil {
+		s.WriteString(schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelArn, *v.AssetModelArn)
+	}
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelStatus != nil {
+		s.WriteStruct(schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelStatus)
+		v.AssetModelStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InterfaceAssetModelId != nil {
+		s.WriteString(schemas.DeleteAssetModelInterfaceRelationshipResponse_interfaceAssetModelId, *v.InterfaceAssetModelId)
+	}
+}
+func (v *DeleteAssetModelInterfaceRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssetModelInterfaceRelationshipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelArn:
+			v.AssetModelArn = new(string)
+			return d.ReadString(schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelArn, v.AssetModelArn)
+		case schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelId, v.AssetModelId)
+		case schemas.DeleteAssetModelInterfaceRelationshipResponse_assetModelStatus:
+			v.AssetModelStatus = &types.AssetModelStatus{}
+			return v.AssetModelStatus.Deserialize(d)
+		case schemas.DeleteAssetModelInterfaceRelationshipResponse_interfaceAssetModelId:
+			v.InterfaceAssetModelId = new(string)
+			return d.ReadString(schemas.DeleteAssetModelInterfaceRelationshipResponse_interfaceAssetModelId, v.InterfaceAssetModelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssetModelInterfaceRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssetModelInterfaceRelationship{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetModelInterfaceRelationship, schemas.DeleteAssetModelInterfaceRelationshipRequest, schemas.DeleteAssetModelInterfaceRelationshipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssetModelInterfaceRelationship{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetModelInterfaceRelationship, schemas.DeleteAssetModelInterfaceRelationshipRequest, schemas.DeleteAssetModelInterfaceRelationshipResponse), output: &DeleteAssetModelInterfaceRelationshipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

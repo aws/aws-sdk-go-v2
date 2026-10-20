@@ -4,7 +4,9 @@ package wafregional
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,25 @@ type CreateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.CreateRuleGroupRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateRuleGroupRequest_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRuleGroupRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+}
+
 type CreateRuleGroupOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRuleGroup request. You can
@@ -91,13 +112,40 @@ type CreateRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.CreateRuleGroupResponse_ChangeToken, *v.ChangeToken)
+	}
+	if v.RuleGroup != nil {
+		s.WriteStruct(schemas.CreateRuleGroupResponse_RuleGroup)
+		v.RuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleGroupResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.CreateRuleGroupResponse_ChangeToken, v.ChangeToken)
+		case schemas.CreateRuleGroupResponse_RuleGroup:
+			v.RuleGroup = &types.RuleGroup{}
+			return v.RuleGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleGroup, schemas.CreateRuleGroupRequest, schemas.CreateRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleGroup, schemas.CreateRuleGroupRequest, schemas.CreateRuleGroupResponse), output: &CreateRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

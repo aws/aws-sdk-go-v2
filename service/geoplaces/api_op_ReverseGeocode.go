@@ -4,7 +4,9 @@ package geoplaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -113,6 +115,46 @@ type ReverseGeocodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReverseGeocodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReverseGeocodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReverseGeocodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReverseGeocodeAdditionalFeatureList(s, schemas.ReverseGeocodeRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AddressNamesMode != "" {
+		s.WriteString(schemas.ReverseGeocodeRequest_AddressNamesMode, string(v.AddressNamesMode))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ReverseGeocodeRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Heading != 0 {
+		s.WriteFloat64(schemas.ReverseGeocodeRequest_Heading, v.Heading)
+	}
+	if v.IntendedUse != "" {
+		s.WriteString(schemas.ReverseGeocodeRequest_IntendedUse, string(v.IntendedUse))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ReverseGeocodeRequest_Key, *v.Key)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.ReverseGeocodeRequest_Language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ReverseGeocodeRequest_MaxResults, *v.MaxResults)
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.ReverseGeocodeRequest_PoliticalView, *v.PoliticalView)
+	}
+	serializePosition(s, schemas.ReverseGeocodeRequest_QueryPosition, v.QueryPosition)
+	if v.QueryRadius != nil {
+		s.WriteInt64(schemas.ReverseGeocodeRequest_QueryRadius, *v.QueryRadius)
+	}
+}
+
 type ReverseGeocodeOutput struct {
 
 	// The pricing bucket for which the query is charged at.
@@ -133,13 +175,35 @@ type ReverseGeocodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReverseGeocodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReverseGeocodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReverseGeocodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PricingBucket != nil {
+		s.WriteString(schemas.ReverseGeocodeResponse_PricingBucket, *v.PricingBucket)
+	}
+	serializeReverseGeocodeResultItemList(s, schemas.ReverseGeocodeResponse_ResultItems, v.ResultItems)
+}
+func (v *ReverseGeocodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReverseGeocodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReverseGeocodeResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.ReverseGeocodeResponse_PricingBucket, v.PricingBucket)
+		case schemas.ReverseGeocodeResponse_ResultItems:
+			return deserializeReverseGeocodeResultItemList(d, schemas.ReverseGeocodeResponse_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReverseGeocodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReverseGeocode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReverseGeocode, schemas.ReverseGeocodeRequest, schemas.ReverseGeocodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReverseGeocode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReverseGeocode, schemas.ReverseGeocodeRequest, schemas.ReverseGeocodeResponse), output: &ReverseGeocodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

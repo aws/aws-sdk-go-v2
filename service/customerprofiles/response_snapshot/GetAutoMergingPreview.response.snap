@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DomainName":"__DomainName__","NumberOfMatchesInSample":1,"NumberOfProfilesInSample":1,"NumberOfProfilesWillBeMerged":1}

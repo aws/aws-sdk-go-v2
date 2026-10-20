@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,21 @@ type GetCodeInterpreterSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeInterpreterSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeInterpreterSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeInterpreterSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeInterpreterIdentifier != nil {
+		s.WriteString(schemas.GetCodeInterpreterSessionRequest_codeInterpreterIdentifier, *v.CodeInterpreterIdentifier)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetCodeInterpreterSessionRequest_sessionId, *v.SessionId)
+	}
+}
+
 type GetCodeInterpreterSessionOutput struct {
 
 	// The identifier of the code interpreter.
@@ -98,13 +115,72 @@ type GetCodeInterpreterSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeInterpreterSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeInterpreterSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeInterpreterSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificates(s, schemas.GetCodeInterpreterSessionResponse_certificates, v.Certificates)
+	if v.CodeInterpreterIdentifier != nil {
+		s.WriteString(schemas.GetCodeInterpreterSessionResponse_codeInterpreterIdentifier, *v.CodeInterpreterIdentifier)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCodeInterpreterSessionResponse_createdAt, *v.CreatedAt)
+	}
+	serializeToolsFileSystemConfigurations(s, schemas.GetCodeInterpreterSessionResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.Name != nil {
+		s.WriteString(schemas.GetCodeInterpreterSessionResponse_name, *v.Name)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetCodeInterpreterSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionTimeoutSeconds != nil {
+		s.WriteInt32(schemas.GetCodeInterpreterSessionResponse_sessionTimeoutSeconds, *v.SessionTimeoutSeconds)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCodeInterpreterSessionResponse_status, string(v.Status))
+	}
+}
+func (v *GetCodeInterpreterSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodeInterpreterSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodeInterpreterSessionResponse_certificates:
+			return deserializeCertificates(d, schemas.GetCodeInterpreterSessionResponse_certificates, &v.Certificates)
+		case schemas.GetCodeInterpreterSessionResponse_codeInterpreterIdentifier:
+			v.CodeInterpreterIdentifier = new(string)
+			return d.ReadString(schemas.GetCodeInterpreterSessionResponse_codeInterpreterIdentifier, v.CodeInterpreterIdentifier)
+		case schemas.GetCodeInterpreterSessionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCodeInterpreterSessionResponse_createdAt, v.CreatedAt)
+		case schemas.GetCodeInterpreterSessionResponse_filesystemConfigurations:
+			return deserializeToolsFileSystemConfigurations(d, schemas.GetCodeInterpreterSessionResponse_filesystemConfigurations, &v.FilesystemConfigurations)
+		case schemas.GetCodeInterpreterSessionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCodeInterpreterSessionResponse_name, v.Name)
+		case schemas.GetCodeInterpreterSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetCodeInterpreterSessionResponse_sessionId, v.SessionId)
+		case schemas.GetCodeInterpreterSessionResponse_sessionTimeoutSeconds:
+			v.SessionTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.GetCodeInterpreterSessionResponse_sessionTimeoutSeconds, v.SessionTimeoutSeconds)
+		case schemas.GetCodeInterpreterSessionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCodeInterpreterSessionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeInterpreterSessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodeInterpreterSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeInterpreterSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeInterpreterSession, schemas.GetCodeInterpreterSessionRequest, schemas.GetCodeInterpreterSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeInterpreterSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeInterpreterSession, schemas.GetCodeInterpreterSessionRequest, schemas.GetCodeInterpreterSessionResponse), output: &GetCodeInterpreterSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

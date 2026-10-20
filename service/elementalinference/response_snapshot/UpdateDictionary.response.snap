@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","id":"__Id__","language":"eng","name":"__Name__","references":["__Member__","__Member__"],"status":"CREATING","tags":{"key0":"__Value__"}}

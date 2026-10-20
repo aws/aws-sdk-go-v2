@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetStreamForSegmentsInput struct {
 	DomainName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetStreamForSegmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamForSegmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamForSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetStreamForSegmentsRequest_DomainName, *v.DomainName)
+	}
 }
 
 type GetStreamForSegmentsOutput struct {
@@ -80,13 +94,75 @@ type GetStreamForSegmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamForSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamForSegmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamForSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAt != nil {
+		s.WriteTime(schemas.GetStreamForSegmentsResponse_AssociatedAt, *v.AssociatedAt)
+	}
+	serializeAssociatedSegmentsList(s, schemas.GetStreamForSegmentsResponse_AssociatedSegments, v.AssociatedSegments)
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.GetStreamForSegmentsResponse_DestinationArn, *v.DestinationArn)
+	}
+	if v.DestinationRoleArn != nil {
+		s.WriteString(schemas.GetStreamForSegmentsResponse_DestinationRoleArn, *v.DestinationRoleArn)
+	}
+	if v.DisassociatedAt != nil {
+		s.WriteTime(schemas.GetStreamForSegmentsResponse_DisassociatedAt, *v.DisassociatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetStreamForSegmentsResponse_DomainName, *v.DomainName)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetStreamForSegmentsResponse_FailureReason, *v.FailureReason)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetStreamForSegmentsResponse_State, string(v.State))
+	}
+}
+func (v *GetStreamForSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStreamForSegmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStreamForSegmentsResponse_AssociatedAt:
+			v.AssociatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStreamForSegmentsResponse_AssociatedAt, v.AssociatedAt)
+		case schemas.GetStreamForSegmentsResponse_AssociatedSegments:
+			return deserializeAssociatedSegmentsList(d, schemas.GetStreamForSegmentsResponse_AssociatedSegments, &v.AssociatedSegments)
+		case schemas.GetStreamForSegmentsResponse_DestinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.GetStreamForSegmentsResponse_DestinationArn, v.DestinationArn)
+		case schemas.GetStreamForSegmentsResponse_DestinationRoleArn:
+			v.DestinationRoleArn = new(string)
+			return d.ReadString(schemas.GetStreamForSegmentsResponse_DestinationRoleArn, v.DestinationRoleArn)
+		case schemas.GetStreamForSegmentsResponse_DisassociatedAt:
+			v.DisassociatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStreamForSegmentsResponse_DisassociatedAt, v.DisassociatedAt)
+		case schemas.GetStreamForSegmentsResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetStreamForSegmentsResponse_DomainName, v.DomainName)
+		case schemas.GetStreamForSegmentsResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetStreamForSegmentsResponse_FailureReason, v.FailureReason)
+		case schemas.GetStreamForSegmentsResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.GetStreamForSegmentsResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EventSubscriptionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStreamForSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamForSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamForSegments, schemas.GetStreamForSegmentsRequest, schemas.GetStreamForSegmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStreamForSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamForSegments, schemas.GetStreamForSegmentsRequest, schemas.GetStreamForSegmentsResponse), output: &GetStreamForSegmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,22 @@ type CompleteAttachmentUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteAttachmentUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteAttachmentUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteAttachmentUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompletedUploadList(s, schemas.CompleteAttachmentUploadRequest_completedUploads, v.CompletedUploads)
+	if v.DryRun != nil {
+		s.WriteBool(schemas.CompleteAttachmentUploadRequest_dryRun, *v.DryRun)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.CompleteAttachmentUploadRequest_uploadId, *v.UploadId)
+	}
+}
+
 type CompleteAttachmentUploadOutput struct {
 
 	// The status of the multipart upload after the operation finalizes the
@@ -67,13 +85,36 @@ type CompleteAttachmentUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteAttachmentUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteAttachmentUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteAttachmentUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UploadStatus != "" {
+		s.WriteString(schemas.CompleteAttachmentUploadResponse_uploadStatus, string(v.UploadStatus))
+	}
+}
+func (v *CompleteAttachmentUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteAttachmentUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteAttachmentUploadResponse_uploadStatus:
+			var ev string
+			if err := d.ReadString(schemas.CompleteAttachmentUploadResponse_uploadStatus, &ev); err != nil {
+				return err
+			}
+			v.UploadStatus = types.UploadStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCompleteAttachmentUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteAttachmentUpload, schemas.CompleteAttachmentUploadRequest, schemas.CompleteAttachmentUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCompleteAttachmentUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteAttachmentUpload, schemas.CompleteAttachmentUploadRequest, schemas.CompleteAttachmentUploadResponse), output: &CompleteAttachmentUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListPrincipalsForPortfolio
+
+{"NextPageToken":"__NextPageToken__","Principals":[{"PrincipalARN":"__PrincipalARN__","PrincipalType":"IAM"},{"PrincipalARN":"__PrincipalARN__","PrincipalType":"IAM"}]}

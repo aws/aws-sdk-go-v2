@@ -5,7 +5,9 @@ package bedrockdataautomation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,37 @@ type ListDataAutomationProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataAutomationProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataAutomationProjectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataAutomationProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintFilter != nil {
+		s.WriteStruct(schemas.ListDataAutomationProjectsRequest_blueprintFilter)
+		v.BlueprintFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LibraryFilter != nil {
+		s.WriteStruct(schemas.ListDataAutomationProjectsRequest_libraryFilter)
+		v.LibraryFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataAutomationProjectsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataAutomationProjectsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProjectStageFilter != "" {
+		s.WriteString(schemas.ListDataAutomationProjectsRequest_projectStageFilter, string(v.ProjectStageFilter))
+	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.ListDataAutomationProjectsRequest_resourceOwner, string(v.ResourceOwner))
+	}
+}
+
 // List DataAutomationProject Response
 type ListDataAutomationProjectsOutput struct {
 
@@ -66,13 +99,35 @@ type ListDataAutomationProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataAutomationProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataAutomationProjectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataAutomationProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataAutomationProjectsResponse_nextToken, *v.NextToken)
+	}
+	serializeDataAutomationProjectSummaries(s, schemas.ListDataAutomationProjectsResponse_projects, v.Projects)
+}
+func (v *ListDataAutomationProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataAutomationProjectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataAutomationProjectsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataAutomationProjectsResponse_nextToken, v.NextToken)
+		case schemas.ListDataAutomationProjectsResponse_projects:
+			return deserializeDataAutomationProjectSummaries(d, schemas.ListDataAutomationProjectsResponse_projects, &v.Projects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataAutomationProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataAutomationProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAutomationProjects, schemas.ListDataAutomationProjectsRequest, schemas.ListDataAutomationProjectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataAutomationProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAutomationProjects, schemas.ListDataAutomationProjectsRequest, schemas.ListDataAutomationProjectsResponse), output: &ListDataAutomationProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

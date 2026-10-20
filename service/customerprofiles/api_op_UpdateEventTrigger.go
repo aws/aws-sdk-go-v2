@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,36 @@ type UpdateEventTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventTriggerRequest_Description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateEventTriggerRequest_DomainName, *v.DomainName)
+	}
+	serializeEventTriggerConditions(s, schemas.UpdateEventTriggerRequest_EventTriggerConditions, v.EventTriggerConditions)
+	if v.EventTriggerLimits != nil {
+		s.WriteStruct(schemas.UpdateEventTriggerRequest_EventTriggerLimits)
+		v.EventTriggerLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventTriggerName != nil {
+		s.WriteString(schemas.UpdateEventTriggerRequest_EventTriggerName, *v.EventTriggerName)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.UpdateEventTriggerRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.SegmentFilter != nil {
+		s.WriteString(schemas.UpdateEventTriggerRequest_SegmentFilter, *v.SegmentFilter)
+	}
+}
+
 type UpdateEventTriggerOutput struct {
 
 	// The timestamp of when the event trigger was created.
@@ -98,13 +130,76 @@ type UpdateEventTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateEventTriggerResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventTriggerResponse_Description, *v.Description)
+	}
+	serializeEventTriggerConditions(s, schemas.UpdateEventTriggerResponse_EventTriggerConditions, v.EventTriggerConditions)
+	if v.EventTriggerLimits != nil {
+		s.WriteStruct(schemas.UpdateEventTriggerResponse_EventTriggerLimits)
+		v.EventTriggerLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventTriggerName != nil {
+		s.WriteString(schemas.UpdateEventTriggerResponse_EventTriggerName, *v.EventTriggerName)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateEventTriggerResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.UpdateEventTriggerResponse_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.SegmentFilter != nil {
+		s.WriteString(schemas.UpdateEventTriggerResponse_SegmentFilter, *v.SegmentFilter)
+	}
+	serializeTagMap(s, schemas.UpdateEventTriggerResponse_Tags, v.Tags)
+}
+func (v *UpdateEventTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventTriggerResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventTriggerResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateEventTriggerResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEventTriggerResponse_Description, v.Description)
+		case schemas.UpdateEventTriggerResponse_EventTriggerConditions:
+			return deserializeEventTriggerConditions(d, schemas.UpdateEventTriggerResponse_EventTriggerConditions, &v.EventTriggerConditions)
+		case schemas.UpdateEventTriggerResponse_EventTriggerLimits:
+			v.EventTriggerLimits = &types.EventTriggerLimits{}
+			return v.EventTriggerLimits.Deserialize(d)
+		case schemas.UpdateEventTriggerResponse_EventTriggerName:
+			v.EventTriggerName = new(string)
+			return d.ReadString(schemas.UpdateEventTriggerResponse_EventTriggerName, v.EventTriggerName)
+		case schemas.UpdateEventTriggerResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventTriggerResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateEventTriggerResponse_ObjectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.UpdateEventTriggerResponse_ObjectTypeName, v.ObjectTypeName)
+		case schemas.UpdateEventTriggerResponse_SegmentFilter:
+			v.SegmentFilter = new(string)
+			return d.ReadString(schemas.UpdateEventTriggerResponse_SegmentFilter, v.SegmentFilter)
+		case schemas.UpdateEventTriggerResponse_Tags:
+			return deserializeTagMap(d, schemas.UpdateEventTriggerResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEventTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventTrigger, schemas.UpdateEventTriggerRequest, schemas.UpdateEventTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEventTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventTrigger, schemas.UpdateEventTriggerRequest, schemas.UpdateEventTriggerResponse), output: &UpdateEventTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

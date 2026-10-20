@@ -4,7 +4,9 @@ package ssoadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,22 @@ type PutApplicationGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApplicationGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.PutApplicationGrantRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	serializeGrant(s, schemas.PutApplicationGrantRequest_Grant, v.Grant)
+	if v.GrantType != "" {
+		s.WriteString(schemas.PutApplicationGrantRequest_GrantType, string(v.GrantType))
+	}
+}
+
 type PutApplicationGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -101,13 +119,26 @@ type PutApplicationGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutApplicationGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutApplicationGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutApplicationGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationGrant, schemas.PutApplicationGrantRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutApplicationGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationGrant, schemas.PutApplicationGrantRequest, nil), output: &PutApplicationGrantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

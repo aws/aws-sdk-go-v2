@@ -4,6 +4,8 @@ package iotdataplane
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListNamedShadowsForThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamedShadowsForThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamedShadowsForThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamedShadowsForThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNamedShadowsForThingRequest_nextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListNamedShadowsForThingRequest_pageSize, *v.PageSize)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListNamedShadowsForThingRequest_thingName, *v.ThingName)
+	}
+}
+
 type ListNamedShadowsForThingOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -61,13 +81,40 @@ type ListNamedShadowsForThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamedShadowsForThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamedShadowsForThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamedShadowsForThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNamedShadowsForThingResponse_nextToken, *v.NextToken)
+	}
+	serializeNamedShadowList(s, schemas.ListNamedShadowsForThingResponse_results, v.Results)
+	if v.Timestamp != 0 {
+		s.WriteInt64(schemas.ListNamedShadowsForThingResponse_timestamp, v.Timestamp)
+	}
+}
+func (v *ListNamedShadowsForThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNamedShadowsForThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNamedShadowsForThingResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNamedShadowsForThingResponse_nextToken, v.NextToken)
+		case schemas.ListNamedShadowsForThingResponse_results:
+			return deserializeNamedShadowList(d, schemas.ListNamedShadowsForThingResponse_results, &v.Results)
+		case schemas.ListNamedShadowsForThingResponse_timestamp:
+			return d.ReadInt64(schemas.ListNamedShadowsForThingResponse_timestamp, &v.Timestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNamedShadowsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNamedShadowsForThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamedShadowsForThing, schemas.ListNamedShadowsForThingRequest, schemas.ListNamedShadowsForThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNamedShadowsForThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamedShadowsForThing, schemas.ListNamedShadowsForThingRequest, schemas.ListNamedShadowsForThingResponse), output: &ListNamedShadowsForThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeleteHarnessEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHarnessEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHarnessEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHarnessEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteHarnessEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DeleteHarnessEndpointRequest_endpointName, *v.EndpointName)
+	}
+	if v.HarnessId != nil {
+		s.WriteString(schemas.DeleteHarnessEndpointRequest_harnessId, *v.HarnessId)
+	}
+}
+
 type DeleteHarnessEndpointOutput struct {
 
 	// The endpoint that was deleted.
@@ -56,13 +76,34 @@ type DeleteHarnessEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHarnessEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHarnessEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHarnessEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.DeleteHarnessEndpointResponse_endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteHarnessEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteHarnessEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteHarnessEndpointResponse_endpoint:
+			v.Endpoint = &types.HarnessEndpoint{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHarnessEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteHarnessEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHarnessEndpoint, schemas.DeleteHarnessEndpointRequest, schemas.DeleteHarnessEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteHarnessEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHarnessEndpoint, schemas.DeleteHarnessEndpointRequest, schemas.DeleteHarnessEndpointResponse), output: &DeleteHarnessEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

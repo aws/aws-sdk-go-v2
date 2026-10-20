@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type PostTimeSeriesDataPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostTimeSeriesDataPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostTimeSeriesDataPointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostTimeSeriesDataPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PostTimeSeriesDataPointsInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.PostTimeSeriesDataPointsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EntityIdentifier != nil {
+		s.WriteString(schemas.PostTimeSeriesDataPointsInput_entityIdentifier, *v.EntityIdentifier)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.PostTimeSeriesDataPointsInput_entityType, string(v.EntityType))
+	}
+	serializeTimeSeriesDataPointFormInputList(s, schemas.PostTimeSeriesDataPointsInput_forms, v.Forms)
+}
+
 type PostTimeSeriesDataPointsOutput struct {
 
 	// The ID of the Amazon DataZone domain in which you want to post time series data
@@ -76,13 +100,51 @@ type PostTimeSeriesDataPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostTimeSeriesDataPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostTimeSeriesDataPointsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostTimeSeriesDataPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.PostTimeSeriesDataPointsOutput_domainId, *v.DomainId)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.PostTimeSeriesDataPointsOutput_entityId, *v.EntityId)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.PostTimeSeriesDataPointsOutput_entityType, string(v.EntityType))
+	}
+	serializeTimeSeriesDataPointFormOutputList(s, schemas.PostTimeSeriesDataPointsOutput_forms, v.Forms)
+}
+func (v *PostTimeSeriesDataPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostTimeSeriesDataPointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostTimeSeriesDataPointsOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.PostTimeSeriesDataPointsOutput_domainId, v.DomainId)
+		case schemas.PostTimeSeriesDataPointsOutput_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.PostTimeSeriesDataPointsOutput_entityId, v.EntityId)
+		case schemas.PostTimeSeriesDataPointsOutput_entityType:
+			var ev string
+			if err := d.ReadString(schemas.PostTimeSeriesDataPointsOutput_entityType, &ev); err != nil {
+				return err
+			}
+			v.EntityType = types.TimeSeriesEntityType(ev)
+			return nil
+		case schemas.PostTimeSeriesDataPointsOutput_forms:
+			return deserializeTimeSeriesDataPointFormOutputList(d, schemas.PostTimeSeriesDataPointsOutput_forms, &v.Forms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPostTimeSeriesDataPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostTimeSeriesDataPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostTimeSeriesDataPoints, schemas.PostTimeSeriesDataPointsInput, schemas.PostTimeSeriesDataPointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostTimeSeriesDataPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostTimeSeriesDataPoints, schemas.PostTimeSeriesDataPointsInput, schemas.PostTimeSeriesDataPointsOutput), output: &PostTimeSeriesDataPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

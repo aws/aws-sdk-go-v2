@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,34 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTargetWithMaintenanceWindowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTargetWithMaintenanceWindowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTargetWithMaintenanceWindowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_Name, *v.Name)
+	}
+	if v.OwnerInformation != nil {
+		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_OwnerInformation, *v.OwnerInformation)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_ResourceType, string(v.ResourceType))
+	}
+	serializeTargets(s, schemas.RegisterTargetWithMaintenanceWindowRequest_Targets, v.Targets)
+	if v.WindowId != nil {
+		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_WindowId, *v.WindowId)
+	}
+}
+
 type RegisterTargetWithMaintenanceWindowOutput struct {
 
 	// The ID of the target definition in this maintenance window.
@@ -108,13 +138,32 @@ type RegisterTargetWithMaintenanceWindowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTargetWithMaintenanceWindowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTargetWithMaintenanceWindowResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTargetWithMaintenanceWindowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WindowTargetId != nil {
+		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowResult_WindowTargetId, *v.WindowTargetId)
+	}
+}
+func (v *RegisterTargetWithMaintenanceWindowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterTargetWithMaintenanceWindowResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterTargetWithMaintenanceWindowResult_WindowTargetId:
+			v.WindowTargetId = new(string)
+			return d.ReadString(schemas.RegisterTargetWithMaintenanceWindowResult_WindowTargetId, v.WindowTargetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterTargetWithMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterTargetWithMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTargetWithMaintenanceWindow, schemas.RegisterTargetWithMaintenanceWindowRequest, schemas.RegisterTargetWithMaintenanceWindowResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterTargetWithMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTargetWithMaintenanceWindow, schemas.RegisterTargetWithMaintenanceWindowRequest, schemas.RegisterTargetWithMaintenanceWindowResult), output: &RegisterTargetWithMaintenanceWindowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

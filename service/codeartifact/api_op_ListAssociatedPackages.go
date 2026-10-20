@@ -5,7 +5,9 @@ package codeartifact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type ListAssociatedPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedPackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedPackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListAssociatedPackagesRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.ListAssociatedPackagesRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociatedPackagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedPackagesRequest_nextToken, *v.NextToken)
+	}
+	if v.PackageGroup != nil {
+		s.WriteString(schemas.ListAssociatedPackagesRequest_packageGroup, *v.PackageGroup)
+	}
+	if v.Preview != nil {
+		s.WriteBool(schemas.ListAssociatedPackagesRequest_preview, *v.Preview)
+	}
+}
+
 type ListAssociatedPackagesOutput struct {
 
 	//  The token for the next set of results. Use the value returned in the previous
@@ -76,13 +105,35 @@ type ListAssociatedPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedPackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedPackagesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedPackagesResult_nextToken, *v.NextToken)
+	}
+	serializeAssociatedPackageList(s, schemas.ListAssociatedPackagesResult_packages, v.Packages)
+}
+func (v *ListAssociatedPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedPackagesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedPackagesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedPackagesResult_nextToken, v.NextToken)
+		case schemas.ListAssociatedPackagesResult_packages:
+			return deserializeAssociatedPackageList(d, schemas.ListAssociatedPackagesResult_packages, &v.Packages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedPackages, schemas.ListAssociatedPackagesRequest, schemas.ListAssociatedPackagesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedPackages, schemas.ListAssociatedPackagesRequest, schemas.ListAssociatedPackagesResult), output: &ListAssociatedPackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

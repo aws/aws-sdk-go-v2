@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteConfigurationBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationBundleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationBundleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.DeleteConfigurationBundleRequest_bundleId, *v.BundleId)
+	}
+}
+
 type DeleteConfigurationBundleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted configuration bundle.
@@ -57,13 +71,48 @@ type DeleteConfigurationBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationBundleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationBundleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationBundleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleArn != nil {
+		s.WriteString(schemas.DeleteConfigurationBundleResponse_bundleArn, *v.BundleArn)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.DeleteConfigurationBundleResponse_bundleId, *v.BundleId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteConfigurationBundleResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteConfigurationBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfigurationBundleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConfigurationBundleResponse_bundleArn:
+			v.BundleArn = new(string)
+			return d.ReadString(schemas.DeleteConfigurationBundleResponse_bundleArn, v.BundleArn)
+		case schemas.DeleteConfigurationBundleResponse_bundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.DeleteConfigurationBundleResponse_bundleId, v.BundleId)
+		case schemas.DeleteConfigurationBundleResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteConfigurationBundleResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ConfigurationBundleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfigurationBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfigurationBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationBundle, schemas.DeleteConfigurationBundleRequest, schemas.DeleteConfigurationBundleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfigurationBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationBundle, schemas.DeleteConfigurationBundleRequest, schemas.DeleteConfigurationBundleResponse), output: &DeleteConfigurationBundleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

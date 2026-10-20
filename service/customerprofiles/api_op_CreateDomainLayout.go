@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,37 @@ type CreateDomainLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainLayoutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainLayoutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDomainLayoutRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateDomainLayoutRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateDomainLayoutRequest_DomainName, *v.DomainName)
+	}
+	if v.IsDefault != false {
+		s.WriteBool(schemas.CreateDomainLayoutRequest_IsDefault, v.IsDefault)
+	}
+	if v.Layout != nil {
+		s.WriteString(schemas.CreateDomainLayoutRequest_Layout, *v.Layout)
+	}
+	if v.LayoutDefinitionName != nil {
+		s.WriteString(schemas.CreateDomainLayoutRequest_LayoutDefinitionName, *v.LayoutDefinitionName)
+	}
+	if v.LayoutType != "" {
+		s.WriteString(schemas.CreateDomainLayoutRequest_LayoutType, string(v.LayoutType))
+	}
+	serializeTagMap(s, schemas.CreateDomainLayoutRequest_Tags, v.Tags)
+}
+
 type CreateDomainLayoutOutput struct {
 
 	// The timestamp of when the layout was created.
@@ -126,13 +159,86 @@ type CreateDomainLayoutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainLayoutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainLayoutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDomainLayoutResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDomainLayoutResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateDomainLayoutResponse_DisplayName, *v.DisplayName)
+	}
+	if v.IsDefault != false {
+		s.WriteBool(schemas.CreateDomainLayoutResponse_IsDefault, v.IsDefault)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.CreateDomainLayoutResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Layout != nil {
+		s.WriteString(schemas.CreateDomainLayoutResponse_Layout, *v.Layout)
+	}
+	if v.LayoutDefinitionName != nil {
+		s.WriteString(schemas.CreateDomainLayoutResponse_LayoutDefinitionName, *v.LayoutDefinitionName)
+	}
+	if v.LayoutType != "" {
+		s.WriteString(schemas.CreateDomainLayoutResponse_LayoutType, string(v.LayoutType))
+	}
+	serializeTagMap(s, schemas.CreateDomainLayoutResponse_Tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.CreateDomainLayoutResponse_Version, *v.Version)
+	}
+}
+func (v *CreateDomainLayoutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainLayoutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainLayoutResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDomainLayoutResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateDomainLayoutResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDomainLayoutResponse_Description, v.Description)
+		case schemas.CreateDomainLayoutResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateDomainLayoutResponse_DisplayName, v.DisplayName)
+		case schemas.CreateDomainLayoutResponse_IsDefault:
+			return d.ReadBool(schemas.CreateDomainLayoutResponse_IsDefault, &v.IsDefault)
+		case schemas.CreateDomainLayoutResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDomainLayoutResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CreateDomainLayoutResponse_Layout:
+			v.Layout = new(string)
+			return d.ReadString(schemas.CreateDomainLayoutResponse_Layout, v.Layout)
+		case schemas.CreateDomainLayoutResponse_LayoutDefinitionName:
+			v.LayoutDefinitionName = new(string)
+			return d.ReadString(schemas.CreateDomainLayoutResponse_LayoutDefinitionName, v.LayoutDefinitionName)
+		case schemas.CreateDomainLayoutResponse_LayoutType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDomainLayoutResponse_LayoutType, &ev); err != nil {
+				return err
+			}
+			v.LayoutType = types.LayoutType(ev)
+			return nil
+		case schemas.CreateDomainLayoutResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateDomainLayoutResponse_Tags, &v.Tags)
+		case schemas.CreateDomainLayoutResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateDomainLayoutResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainLayoutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomainLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainLayout, schemas.CreateDomainLayoutRequest, schemas.CreateDomainLayoutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomainLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainLayout, schemas.CreateDomainLayoutRequest, schemas.CreateDomainLayoutResponse), output: &CreateDomainLayoutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

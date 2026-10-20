@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,36 @@ type ListExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != nil {
+		s.WriteString(schemas.ListExecutionsRequest_actionType, *v.ActionType)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResolveToResourceId != nil {
+		s.WriteString(schemas.ListExecutionsRequest_resolveToResourceId, *v.ResolveToResourceId)
+	}
+	if v.ResolveToResourceType != "" {
+		s.WriteString(schemas.ListExecutionsRequest_resolveToResourceType, string(v.ResolveToResourceType))
+	}
+	if v.TargetResourceId != nil {
+		s.WriteString(schemas.ListExecutionsRequest_targetResourceId, *v.TargetResourceId)
+	}
+	if v.TargetResourceType != "" {
+		s.WriteString(schemas.ListExecutionsRequest_targetResourceType, string(v.TargetResourceType))
+	}
+}
+
 type ListExecutionsOutput struct {
 
 	// Contains the list of execution summaries of the computation models.
@@ -73,13 +105,35 @@ type ListExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExecutionSummaries(s, schemas.ListExecutionsResponse_executionSummaries, v.ExecutionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExecutionsResponse_executionSummaries:
+			return deserializeExecutionSummaries(d, schemas.ListExecutionsResponse_executionSummaries, &v.ExecutionSummaries)
+		case schemas.ListExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExecutions, schemas.ListExecutionsRequest, schemas.ListExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExecutions, schemas.ListExecutionsRequest, schemas.ListExecutionsResponse), output: &ListExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package timestreaminfluxdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DeleteDbBackupInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteDbBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDbBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDbBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteDbBackupInput_identifier, *v.Identifier)
+	}
 }
 
 type DeleteDbBackupOutput struct {
@@ -123,13 +137,208 @@ type DeleteDbBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDbBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDbBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.DeleteDbBackupOutput_allocatedStorage, *v.AllocatedStorage)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_arn, *v.Arn)
+	}
+	if v.ClusterConfiguration != nil {
+		s.WriteStruct(schemas.DeleteDbBackupOutput_clusterConfiguration)
+		v.ClusterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeleteDbBackupOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbParameterGroupId != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_dbParameterGroupId, *v.DbParameterGroupId)
+	}
+	if v.DbResourceId != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_dbResourceId, *v.DbResourceId)
+	}
+	if v.DbStorageType != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_deploymentType, string(v.DeploymentType))
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_engineType, string(v.EngineType))
+	}
+	if v.ExpiresAfter != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_expiresAfter, *v.ExpiresAfter)
+	}
+	if v.FailoverMode != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_failoverMode, string(v.FailoverMode))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_id, *v.Id)
+	}
+	if v.InfluxAuthParametersSecretArn != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_influxAuthParametersSecretArn, *v.InfluxAuthParametersSecretArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LogDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.DeleteDbBackupOutput_logDeliveryConfiguration)
+		v.LogDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceSchedule != nil {
+		s.WriteStruct(schemas.DeleteDbBackupOutput_maintenanceSchedule)
+		v.MaintenanceSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteDbBackupOutput_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_networkType, string(v.NetworkType))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.DeleteDbBackupOutput_port, *v.Port)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.DeleteDbBackupOutput_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DeleteDbBackupOutput_type, string(v.Type))
+	}
+	serializeVpcSecurityGroupIdList(s, schemas.DeleteDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	serializeVpcSubnetIdList(s, schemas.DeleteDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+}
+func (v *DeleteDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDbBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDbBackupOutput_allocatedStorage:
+			v.AllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.DeleteDbBackupOutput_allocatedStorage, v.AllocatedStorage)
+		case schemas.DeleteDbBackupOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_arn, v.Arn)
+		case schemas.DeleteDbBackupOutput_clusterConfiguration:
+			v.ClusterConfiguration = &types.ClusterConfiguration{}
+			return v.ClusterConfiguration.Deserialize(d)
+		case schemas.DeleteDbBackupOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteDbBackupOutput_createdAt, v.CreatedAt)
+		case schemas.DeleteDbBackupOutput_dbInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_dbInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DbInstanceType = types.DbInstanceType(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_dbParameterGroupId:
+			v.DbParameterGroupId = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_dbParameterGroupId, v.DbParameterGroupId)
+		case schemas.DeleteDbBackupOutput_dbResourceId:
+			v.DbResourceId = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_dbResourceId, v.DbResourceId)
+		case schemas.DeleteDbBackupOutput_dbStorageType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_dbStorageType, &ev); err != nil {
+				return err
+			}
+			v.DbStorageType = types.DbStorageType(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.ResourceDeploymentType(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_engineType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_expiresAfter:
+			v.ExpiresAfter = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_expiresAfter, v.ExpiresAfter)
+		case schemas.DeleteDbBackupOutput_failoverMode:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_failoverMode, &ev); err != nil {
+				return err
+			}
+			v.FailoverMode = types.FailoverMode(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_id, v.Id)
+		case schemas.DeleteDbBackupOutput_influxAuthParametersSecretArn:
+			v.InfluxAuthParametersSecretArn = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
+		case schemas.DeleteDbBackupOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.DeleteDbBackupOutput_logDeliveryConfiguration:
+			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
+			return v.LogDeliveryConfiguration.Deserialize(d)
+		case schemas.DeleteDbBackupOutput_maintenanceSchedule:
+			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
+			return v.MaintenanceSchedule.Deserialize(d)
+		case schemas.DeleteDbBackupOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteDbBackupOutput_name, v.Name)
+		case schemas.DeleteDbBackupOutput_networkType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.NetworkType(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.DeleteDbBackupOutput_port, v.Port)
+		case schemas.DeleteDbBackupOutput_publiclyAccessible:
+			v.PubliclyAccessible = new(bool)
+			return d.ReadBool(schemas.DeleteDbBackupOutput_publiclyAccessible, v.PubliclyAccessible)
+		case schemas.DeleteDbBackupOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DbBackupStatus(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbBackupOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DbBackupType(ev)
+			return nil
+		case schemas.DeleteDbBackupOutput_vpcSecurityGroupIds:
+			return deserializeVpcSecurityGroupIdList(d, schemas.DeleteDbBackupOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
+		case schemas.DeleteDbBackupOutput_vpcSubnetIds:
+			return deserializeVpcSubnetIdList(d, schemas.DeleteDbBackupOutput_vpcSubnetIds, &v.VpcSubnetIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDbBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDbBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDbBackup, schemas.DeleteDbBackupInput, schemas.DeleteDbBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDbBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDbBackup, schemas.DeleteDbBackupInput, schemas.DeleteDbBackupOutput), output: &DeleteDbBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

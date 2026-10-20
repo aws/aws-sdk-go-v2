@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type SearchUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.SearchUsersRequest_CollectionId, *v.CollectionId)
+	}
+	if v.FaceId != nil {
+		s.WriteString(schemas.SearchUsersRequest_FaceId, *v.FaceId)
+	}
+	if v.MaxUsers != nil {
+		s.WriteInt32(schemas.SearchUsersRequest_MaxUsers, *v.MaxUsers)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.SearchUsersRequest_UserId, *v.UserId)
+	}
+	if v.UserMatchThreshold != nil {
+		s.WriteFloat32(schemas.SearchUsersRequest_UserMatchThreshold, *v.UserMatchThreshold)
+	}
+}
+
 type SearchUsersOutput struct {
 
 	// Version number of the face detection model associated with the input
@@ -76,13 +102,51 @@ type SearchUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUsersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUsersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceModelVersion != nil {
+		s.WriteString(schemas.SearchUsersResponse_FaceModelVersion, *v.FaceModelVersion)
+	}
+	if v.SearchedFace != nil {
+		s.WriteStruct(schemas.SearchUsersResponse_SearchedFace)
+		v.SearchedFace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchedUser != nil {
+		s.WriteStruct(schemas.SearchUsersResponse_SearchedUser)
+		v.SearchedUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUserMatchList(s, schemas.SearchUsersResponse_UserMatches, v.UserMatches)
+}
+func (v *SearchUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchUsersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchUsersResponse_FaceModelVersion:
+			v.FaceModelVersion = new(string)
+			return d.ReadString(schemas.SearchUsersResponse_FaceModelVersion, v.FaceModelVersion)
+		case schemas.SearchUsersResponse_SearchedFace:
+			v.SearchedFace = &types.SearchedFace{}
+			return v.SearchedFace.Deserialize(d)
+		case schemas.SearchUsersResponse_SearchedUser:
+			v.SearchedUser = &types.SearchedUser{}
+			return v.SearchedUser.Deserialize(d)
+		case schemas.SearchUsersResponse_UserMatches:
+			return deserializeUserMatchList(d, schemas.SearchUsersResponse_UserMatches, &v.UserMatches)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUsers, schemas.SearchUsersRequest, schemas.SearchUsersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUsers, schemas.SearchUsersRequest, schemas.SearchUsersResponse), output: &SearchUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

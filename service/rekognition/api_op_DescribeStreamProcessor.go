@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,18 @@ type DescribeStreamProcessorInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeStreamProcessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamProcessorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeStreamProcessorRequest_Name, *v.Name)
+	}
 }
 
 type DescribeStreamProcessorOutput struct {
@@ -116,13 +130,121 @@ type DescribeStreamProcessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamProcessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamProcessorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamProcessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.DescribeStreamProcessorResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.DataSharingPreference != nil {
+		s.WriteStruct(schemas.DescribeStreamProcessorResponse_DataSharingPreference)
+		v.DataSharingPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.DescribeStreamProcessorResponse_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribeStreamProcessorResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastUpdateTimestamp != nil {
+		s.WriteTime(schemas.DescribeStreamProcessorResponse_LastUpdateTimestamp, *v.LastUpdateTimestamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeStreamProcessorResponse_Name, *v.Name)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.DescribeStreamProcessorResponse_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Output != nil {
+		s.WriteStruct(schemas.DescribeStreamProcessorResponse_Output)
+		v.Output.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRegionsOfInterest(s, schemas.DescribeStreamProcessorResponse_RegionsOfInterest, v.RegionsOfInterest)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeStreamProcessorResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.DescribeStreamProcessorResponse_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeStreamProcessorResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeStreamProcessorResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.StreamProcessorArn != nil {
+		s.WriteString(schemas.DescribeStreamProcessorResponse_StreamProcessorArn, *v.StreamProcessorArn)
+	}
+}
+func (v *DescribeStreamProcessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStreamProcessorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStreamProcessorResponse_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeStreamProcessorResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.DescribeStreamProcessorResponse_DataSharingPreference:
+			v.DataSharingPreference = &types.StreamProcessorDataSharingPreference{}
+			return v.DataSharingPreference.Deserialize(d)
+		case schemas.DescribeStreamProcessorResponse_Input:
+			v.Input = &types.StreamProcessorInput{}
+			return v.Input.Deserialize(d)
+		case schemas.DescribeStreamProcessorResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeStreamProcessorResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribeStreamProcessorResponse_LastUpdateTimestamp:
+			v.LastUpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeStreamProcessorResponse_LastUpdateTimestamp, v.LastUpdateTimestamp)
+		case schemas.DescribeStreamProcessorResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeStreamProcessorResponse_Name, v.Name)
+		case schemas.DescribeStreamProcessorResponse_NotificationChannel:
+			v.NotificationChannel = &types.StreamProcessorNotificationChannel{}
+			return v.NotificationChannel.Deserialize(d)
+		case schemas.DescribeStreamProcessorResponse_Output:
+			v.Output = &types.StreamProcessorOutput{}
+			return v.Output.Deserialize(d)
+		case schemas.DescribeStreamProcessorResponse_RegionsOfInterest:
+			return deserializeRegionsOfInterest(d, schemas.DescribeStreamProcessorResponse_RegionsOfInterest, &v.RegionsOfInterest)
+		case schemas.DescribeStreamProcessorResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeStreamProcessorResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeStreamProcessorResponse_Settings:
+			v.Settings = &types.StreamProcessorSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.DescribeStreamProcessorResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStreamProcessorResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamProcessorStatus(ev)
+			return nil
+		case schemas.DescribeStreamProcessorResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeStreamProcessorResponse_StatusMessage, v.StatusMessage)
+		case schemas.DescribeStreamProcessorResponse_StreamProcessorArn:
+			v.StreamProcessorArn = new(string)
+			return d.ReadString(schemas.DescribeStreamProcessorResponse_StreamProcessorArn, v.StreamProcessorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamProcessor, schemas.DescribeStreamProcessorRequest, schemas.DescribeStreamProcessorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamProcessor, schemas.DescribeStreamProcessorRequest, schemas.DescribeStreamProcessorResponse), output: &DescribeStreamProcessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

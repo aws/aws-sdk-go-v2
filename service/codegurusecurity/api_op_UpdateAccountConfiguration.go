@@ -4,7 +4,9 @@ package codegurusecurity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,20 @@ type UpdateAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.UpdateAccountConfigurationRequest_encryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAccountConfigurationOutput struct {
 
 	// An EncryptionConfig object that contains the KMS key ARN that is used for
@@ -52,13 +68,34 @@ type UpdateAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.UpdateAccountConfigurationResponse_encryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountConfigurationResponse_encryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountConfiguration, schemas.UpdateAccountConfigurationRequest, schemas.UpdateAccountConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountConfiguration, schemas.UpdateAccountConfigurationRequest, schemas.UpdateAccountConfigurationResponse), output: &UpdateAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

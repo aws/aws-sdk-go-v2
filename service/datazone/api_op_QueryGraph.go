@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type QueryGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryGraphInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalAttributes != nil {
+		s.WriteStruct(schemas.QueryGraphInput_additionalAttributes)
+		v.AdditionalAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.QueryGraphInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeMatchClauses(s, schemas.QueryGraphInput_match, v.Match)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.QueryGraphInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryGraphInput_nextToken, *v.NextToken)
+	}
+}
+
 type QueryGraphOutput struct {
 
 	// The results of the QueryGraph action.
@@ -74,13 +100,35 @@ type QueryGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryGraphOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResultItemList(s, schemas.QueryGraphOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryGraphOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *QueryGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryGraphOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryGraphOutput_items:
+			return deserializeResultItemList(d, schemas.QueryGraphOutput_items, &v.Items)
+		case schemas.QueryGraphOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.QueryGraphOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryGraph, schemas.QueryGraphInput, schemas.QueryGraphOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpQueryGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryGraph, schemas.QueryGraphInput, schemas.QueryGraphOutput), output: &QueryGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

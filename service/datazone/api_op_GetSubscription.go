@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetSubscriptionInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetSubscriptionInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetSubscriptionInput_identifier, *v.Identifier)
+	}
 }
 
 type GetSubscriptionOutput struct {
@@ -97,13 +114,95 @@ type GetSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSubscriptionOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetSubscriptionOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetSubscriptionOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetSubscriptionOutput_id, *v.Id)
+	}
+	if v.RetainPermissions != nil {
+		s.WriteBool(schemas.GetSubscriptionOutput_retainPermissions, *v.RetainPermissions)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSubscriptionOutput_status, string(v.Status))
+	}
+	if v.SubscribedListing != nil {
+		s.WriteStruct(schemas.GetSubscriptionOutput_subscribedListing)
+		v.SubscribedListing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSubscribedPrincipal(s, schemas.GetSubscriptionOutput_subscribedPrincipal, v.SubscribedPrincipal)
+	if v.SubscriptionRequestId != nil {
+		s.WriteString(schemas.GetSubscriptionOutput_subscriptionRequestId, *v.SubscriptionRequestId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetSubscriptionOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetSubscriptionOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionOutput_createdAt, v.CreatedAt)
+		case schemas.GetSubscriptionOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionOutput_createdBy, v.CreatedBy)
+		case schemas.GetSubscriptionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetSubscriptionOutput_domainId, v.DomainId)
+		case schemas.GetSubscriptionOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetSubscriptionOutput_id, v.Id)
+		case schemas.GetSubscriptionOutput_retainPermissions:
+			v.RetainPermissions = new(bool)
+			return d.ReadBool(schemas.GetSubscriptionOutput_retainPermissions, v.RetainPermissions)
+		case schemas.GetSubscriptionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSubscriptionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionStatus(ev)
+			return nil
+		case schemas.GetSubscriptionOutput_subscribedListing:
+			v.SubscribedListing = &types.SubscribedListing{}
+			return v.SubscribedListing.Deserialize(d)
+		case schemas.GetSubscriptionOutput_subscribedPrincipal:
+			return deserializeSubscribedPrincipal(d, schemas.GetSubscriptionOutput_subscribedPrincipal, &v.SubscribedPrincipal)
+		case schemas.GetSubscriptionOutput_subscriptionRequestId:
+			v.SubscriptionRequestId = new(string)
+			return d.ReadString(schemas.GetSubscriptionOutput_subscriptionRequestId, v.SubscriptionRequestId)
+		case schemas.GetSubscriptionOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetSubscriptionOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscription, schemas.GetSubscriptionInput, schemas.GetSubscriptionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscription, schemas.GetSubscriptionInput, schemas.GetSubscriptionOutput), output: &GetSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

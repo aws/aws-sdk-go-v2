@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,24 @@ type GetRecommenderInput struct {
 	TrainingMetricsCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRecommenderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommenderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetRecommenderRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderName != nil {
+		s.WriteString(schemas.GetRecommenderRequest_RecommenderName, *v.RecommenderName)
+	}
+	if v.TrainingMetricsCount != nil {
+		s.WriteInt32(schemas.GetRecommenderRequest_TrainingMetricsCount, *v.TrainingMetricsCount)
+	}
 }
 
 type GetRecommenderOutput struct {
@@ -100,13 +120,110 @@ type GetRecommenderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommenderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommenderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveRecommenderVersionName != nil {
+		s.WriteString(schemas.GetRecommenderResponse_ActiveRecommenderVersionName, *v.ActiveRecommenderVersionName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetRecommenderResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetRecommenderResponse_Description, *v.Description)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetRecommenderResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetRecommenderResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LatestRecommenderUpdate != nil {
+		s.WriteStruct(schemas.GetRecommenderResponse_LatestRecommenderUpdate)
+		v.LatestRecommenderUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecommenderConfig != nil {
+		s.WriteStruct(schemas.GetRecommenderResponse_RecommenderConfig)
+		v.RecommenderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecommenderName != nil {
+		s.WriteString(schemas.GetRecommenderResponse_RecommenderName, *v.RecommenderName)
+	}
+	if v.RecommenderRecipeName != "" {
+		s.WriteString(schemas.GetRecommenderResponse_RecommenderRecipeName, string(v.RecommenderRecipeName))
+	}
+	if v.RecommenderSchemaName != nil {
+		s.WriteString(schemas.GetRecommenderResponse_RecommenderSchemaName, *v.RecommenderSchemaName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRecommenderResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetRecommenderResponse_Tags, v.Tags)
+	serializeTrainingMetricsList(s, schemas.GetRecommenderResponse_TrainingMetrics, v.TrainingMetrics)
+}
+func (v *GetRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommenderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommenderResponse_ActiveRecommenderVersionName:
+			v.ActiveRecommenderVersionName = new(string)
+			return d.ReadString(schemas.GetRecommenderResponse_ActiveRecommenderVersionName, v.ActiveRecommenderVersionName)
+		case schemas.GetRecommenderResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRecommenderResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetRecommenderResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetRecommenderResponse_Description, v.Description)
+		case schemas.GetRecommenderResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetRecommenderResponse_FailureReason, v.FailureReason)
+		case schemas.GetRecommenderResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRecommenderResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetRecommenderResponse_LatestRecommenderUpdate:
+			v.LatestRecommenderUpdate = &types.RecommenderUpdate{}
+			return v.LatestRecommenderUpdate.Deserialize(d)
+		case schemas.GetRecommenderResponse_RecommenderConfig:
+			v.RecommenderConfig = &types.RecommenderConfig{}
+			return v.RecommenderConfig.Deserialize(d)
+		case schemas.GetRecommenderResponse_RecommenderName:
+			v.RecommenderName = new(string)
+			return d.ReadString(schemas.GetRecommenderResponse_RecommenderName, v.RecommenderName)
+		case schemas.GetRecommenderResponse_RecommenderRecipeName:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommenderResponse_RecommenderRecipeName, &ev); err != nil {
+				return err
+			}
+			v.RecommenderRecipeName = types.RecommenderRecipeName(ev)
+			return nil
+		case schemas.GetRecommenderResponse_RecommenderSchemaName:
+			v.RecommenderSchemaName = new(string)
+			return d.ReadString(schemas.GetRecommenderResponse_RecommenderSchemaName, v.RecommenderSchemaName)
+		case schemas.GetRecommenderResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommenderResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecommenderStatus(ev)
+			return nil
+		case schemas.GetRecommenderResponse_Tags:
+			return deserializeTagMap(d, schemas.GetRecommenderResponse_Tags, &v.Tags)
+		case schemas.GetRecommenderResponse_TrainingMetrics:
+			return deserializeTrainingMetricsList(d, schemas.GetRecommenderResponse_TrainingMetrics, &v.TrainingMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommenderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommender, schemas.GetRecommenderRequest, schemas.GetRecommenderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommender, schemas.GetRecommenderRequest, schemas.GetRecommenderResponse), output: &GetRecommenderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

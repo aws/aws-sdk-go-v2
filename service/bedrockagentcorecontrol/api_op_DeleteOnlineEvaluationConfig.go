@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteOnlineEvaluationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOnlineEvaluationConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOnlineEvaluationConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOnlineEvaluationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnlineEvaluationConfigId != nil {
+		s.WriteString(schemas.DeleteOnlineEvaluationConfigRequest_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
+	}
+}
+
 type DeleteOnlineEvaluationConfigOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the deleted online evaluation configuration.
@@ -59,13 +73,48 @@ type DeleteOnlineEvaluationConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOnlineEvaluationConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOnlineEvaluationConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOnlineEvaluationConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnlineEvaluationConfigArn != nil {
+		s.WriteString(schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, *v.OnlineEvaluationConfigArn)
+	}
+	if v.OnlineEvaluationConfigId != nil {
+		s.WriteString(schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteOnlineEvaluationConfigResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteOnlineEvaluationConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOnlineEvaluationConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigArn:
+			v.OnlineEvaluationConfigArn = new(string)
+			return d.ReadString(schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, v.OnlineEvaluationConfigArn)
+		case schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigId:
+			v.OnlineEvaluationConfigId = new(string)
+			return d.ReadString(schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigId, v.OnlineEvaluationConfigId)
+		case schemas.DeleteOnlineEvaluationConfigResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteOnlineEvaluationConfigResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.OnlineEvaluationConfigStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOnlineEvaluationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOnlineEvaluationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOnlineEvaluationConfig, schemas.DeleteOnlineEvaluationConfigRequest, schemas.DeleteOnlineEvaluationConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOnlineEvaluationConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOnlineEvaluationConfig, schemas.DeleteOnlineEvaluationConfigRequest, schemas.DeleteOnlineEvaluationConfigResponse), output: &DeleteOnlineEvaluationConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

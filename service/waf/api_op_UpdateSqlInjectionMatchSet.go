@@ -4,7 +4,9 @@ package waf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,22 @@ type UpdateSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSqlInjectionMatchSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSqlInjectionMatchSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSqlInjectionMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.UpdateSqlInjectionMatchSetRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.SqlInjectionMatchSetId != nil {
+		s.WriteString(schemas.UpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId, *v.SqlInjectionMatchSetId)
+	}
+	serializeSqlInjectionMatchSetUpdates(s, schemas.UpdateSqlInjectionMatchSetRequest_Updates, v.Updates)
+}
+
 // The response to an UpdateSqlInjectionMatchSets request.
 type UpdateSqlInjectionMatchSetOutput struct {
 
@@ -113,13 +131,32 @@ type UpdateSqlInjectionMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSqlInjectionMatchSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSqlInjectionMatchSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSqlInjectionMatchSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.UpdateSqlInjectionMatchSetResponse_ChangeToken, *v.ChangeToken)
+	}
+}
+func (v *UpdateSqlInjectionMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSqlInjectionMatchSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSqlInjectionMatchSetResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.UpdateSqlInjectionMatchSetResponse_ChangeToken, v.ChangeToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSqlInjectionMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSqlInjectionMatchSet, schemas.UpdateSqlInjectionMatchSetRequest, schemas.UpdateSqlInjectionMatchSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSqlInjectionMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSqlInjectionMatchSet, schemas.UpdateSqlInjectionMatchSetRequest, schemas.UpdateSqlInjectionMatchSetResponse), output: &UpdateSqlInjectionMatchSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

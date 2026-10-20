@@ -4,7 +4,9 @@ package chatbot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,31 @@ type UpdateChimeWebhookConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChimeWebhookConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChimeWebhookConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChimeWebhookConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatConfigurationArn != nil {
+		s.WriteString(schemas.UpdateChimeWebhookConfigurationRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.UpdateChimeWebhookConfigurationRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.LoggingLevel != nil {
+		s.WriteString(schemas.UpdateChimeWebhookConfigurationRequest_LoggingLevel, *v.LoggingLevel)
+	}
+	serializeSnsTopicArnList(s, schemas.UpdateChimeWebhookConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	if v.WebhookDescription != nil {
+		s.WriteString(schemas.UpdateChimeWebhookConfigurationRequest_WebhookDescription, *v.WebhookDescription)
+	}
+	if v.WebhookUrl != nil {
+		s.WriteString(schemas.UpdateChimeWebhookConfigurationRequest_WebhookUrl, *v.WebhookUrl)
+	}
+}
+
 type UpdateChimeWebhookConfigurationOutput struct {
 
 	// A Amazon Chime webhook configuration.
@@ -70,13 +97,34 @@ type UpdateChimeWebhookConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChimeWebhookConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChimeWebhookConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChimeWebhookConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebhookConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChimeWebhookConfigurationResult_WebhookConfiguration)
+		v.WebhookConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateChimeWebhookConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChimeWebhookConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChimeWebhookConfigurationResult_WebhookConfiguration:
+			v.WebhookConfiguration = &types.ChimeWebhookConfiguration{}
+			return v.WebhookConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChimeWebhookConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChimeWebhookConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChimeWebhookConfiguration, schemas.UpdateChimeWebhookConfigurationRequest, schemas.UpdateChimeWebhookConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChimeWebhookConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChimeWebhookConfiguration, schemas.UpdateChimeWebhookConfigurationRequest, schemas.UpdateChimeWebhookConfigurationResult), output: &UpdateChimeWebhookConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

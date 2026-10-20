@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListHarnessEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHarnessEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHarnessEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHarnessEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HarnessId != nil {
+		s.WriteString(schemas.ListHarnessEndpointsRequest_harnessId, *v.HarnessId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHarnessEndpointsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHarnessEndpointsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListHarnessEndpointsOutput struct {
 
 	// The list of harness endpoints.
@@ -57,13 +77,35 @@ type ListHarnessEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHarnessEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHarnessEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHarnessEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHarnessEndpoints(s, schemas.ListHarnessEndpointsResponse_endpoints, v.Endpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHarnessEndpointsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListHarnessEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHarnessEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHarnessEndpointsResponse_endpoints:
+			return deserializeHarnessEndpoints(d, schemas.ListHarnessEndpointsResponse_endpoints, &v.Endpoints)
+		case schemas.ListHarnessEndpointsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHarnessEndpointsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHarnessEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHarnessEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHarnessEndpoints, schemas.ListHarnessEndpointsRequest, schemas.ListHarnessEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHarnessEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHarnessEndpoints, schemas.ListHarnessEndpointsRequest, schemas.ListHarnessEndpointsResponse), output: &ListHarnessEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

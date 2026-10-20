@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StopRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRecommenderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRecommenderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.StopRecommenderRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderName != nil {
+		s.WriteString(schemas.StopRecommenderRequest_RecommenderName, *v.RecommenderName)
+	}
+}
+
 type StopRecommenderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type StopRecommenderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRecommenderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRecommenderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRecommenderResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRecommenderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRecommender, schemas.StopRecommenderRequest, schemas.StopRecommenderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRecommender, schemas.StopRecommenderRequest, schemas.StopRecommenderResponse), output: &StopRecommenderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

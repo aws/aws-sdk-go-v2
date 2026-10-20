@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,43 @@ type UpdateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataStore != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_DataStore)
+		v.DataStore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeadLetterQueueUrl != nil {
+		s.WriteString(schemas.UpdateDomainRequest_DeadLetterQueueUrl, *v.DeadLetterQueueUrl)
+	}
+	if v.DefaultEncryptionKey != nil {
+		s.WriteString(schemas.UpdateDomainRequest_DefaultEncryptionKey, *v.DefaultEncryptionKey)
+	}
+	if v.DefaultExpirationDays != nil {
+		s.WriteInt32(schemas.UpdateDomainRequest_DefaultExpirationDays, *v.DefaultExpirationDays)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.Matching != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_Matching)
+		v.Matching.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleBasedMatching != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_RuleBasedMatching)
+		v.RuleBasedMatching.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.UpdateDomainRequest_Tags, v.Tags)
+}
+
 type UpdateDomainOutput struct {
 
 	// The timestamp of when the domain was created.
@@ -158,13 +197,89 @@ type UpdateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateDomainResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataStore != nil {
+		s.WriteStruct(schemas.UpdateDomainResponse_DataStore)
+		v.DataStore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeadLetterQueueUrl != nil {
+		s.WriteString(schemas.UpdateDomainResponse_DeadLetterQueueUrl, *v.DeadLetterQueueUrl)
+	}
+	if v.DefaultEncryptionKey != nil {
+		s.WriteString(schemas.UpdateDomainResponse_DefaultEncryptionKey, *v.DefaultEncryptionKey)
+	}
+	if v.DefaultExpirationDays != nil {
+		s.WriteInt32(schemas.UpdateDomainResponse_DefaultExpirationDays, *v.DefaultExpirationDays)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainResponse_DomainName, *v.DomainName)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateDomainResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Matching != nil {
+		s.WriteStruct(schemas.UpdateDomainResponse_Matching)
+		v.Matching.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleBasedMatching != nil {
+		s.WriteStruct(schemas.UpdateDomainResponse_RuleBasedMatching)
+		v.RuleBasedMatching.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.UpdateDomainResponse_Tags, v.Tags)
+}
+func (v *UpdateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDomainResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateDomainResponse_DataStore:
+			v.DataStore = &types.DataStoreResponse{}
+			return v.DataStore.Deserialize(d)
+		case schemas.UpdateDomainResponse_DeadLetterQueueUrl:
+			v.DeadLetterQueueUrl = new(string)
+			return d.ReadString(schemas.UpdateDomainResponse_DeadLetterQueueUrl, v.DeadLetterQueueUrl)
+		case schemas.UpdateDomainResponse_DefaultEncryptionKey:
+			v.DefaultEncryptionKey = new(string)
+			return d.ReadString(schemas.UpdateDomainResponse_DefaultEncryptionKey, v.DefaultEncryptionKey)
+		case schemas.UpdateDomainResponse_DefaultExpirationDays:
+			v.DefaultExpirationDays = new(int32)
+			return d.ReadInt32(schemas.UpdateDomainResponse_DefaultExpirationDays, v.DefaultExpirationDays)
+		case schemas.UpdateDomainResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.UpdateDomainResponse_DomainName, v.DomainName)
+		case schemas.UpdateDomainResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDomainResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateDomainResponse_Matching:
+			v.Matching = &types.MatchingResponse{}
+			return v.Matching.Deserialize(d)
+		case schemas.UpdateDomainResponse_RuleBasedMatching:
+			v.RuleBasedMatching = &types.RuleBasedMatchingResponse{}
+			return v.RuleBasedMatching.Deserialize(d)
+		case schemas.UpdateDomainResponse_Tags:
+			return deserializeTagMap(d, schemas.UpdateDomainResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainRequest, schemas.UpdateDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainRequest, schemas.UpdateDomainResponse), output: &UpdateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

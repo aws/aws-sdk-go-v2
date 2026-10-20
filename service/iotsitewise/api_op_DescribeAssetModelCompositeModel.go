@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,24 @@ type DescribeAssetModelCompositeModelInput struct {
 	AssetModelVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAssetModelCompositeModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetModelCompositeModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetModelCompositeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelCompositeModelId != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelRequest_assetModelCompositeModelId, *v.AssetModelCompositeModelId)
+	}
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelVersion != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelRequest_assetModelVersion, *v.AssetModelVersion)
+	}
 }
 
 type DescribeAssetModelCompositeModelOutput struct {
@@ -122,13 +142,82 @@ type DescribeAssetModelCompositeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetModelCompositeModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetModelCompositeModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetModelCompositeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionDefinitions(s, schemas.DescribeAssetModelCompositeModelResponse_actionDefinitions, v.ActionDefinitions)
+	if v.AssetModelCompositeModelDescription != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelDescription, *v.AssetModelCompositeModelDescription)
+	}
+	if v.AssetModelCompositeModelExternalId != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelExternalId, *v.AssetModelCompositeModelExternalId)
+	}
+	if v.AssetModelCompositeModelId != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelId, *v.AssetModelCompositeModelId)
+	}
+	if v.AssetModelCompositeModelName != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelName, *v.AssetModelCompositeModelName)
+	}
+	serializeAssetModelCompositeModelPath(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
+	serializeAssetModelProperties(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
+	serializeAssetModelCompositeModelSummaries(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelSummaries, v.AssetModelCompositeModelSummaries)
+	if v.AssetModelCompositeModelType != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelType, *v.AssetModelCompositeModelType)
+	}
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelId, *v.AssetModelId)
+	}
+	if v.CompositionDetails != nil {
+		s.WriteStruct(schemas.DescribeAssetModelCompositeModelResponse_compositionDetails)
+		v.CompositionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAssetModelCompositeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetModelCompositeModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetModelCompositeModelResponse_actionDefinitions:
+			return deserializeActionDefinitions(d, schemas.DescribeAssetModelCompositeModelResponse_actionDefinitions, &v.ActionDefinitions)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelDescription:
+			v.AssetModelCompositeModelDescription = new(string)
+			return d.ReadString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelDescription, v.AssetModelCompositeModelDescription)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelExternalId:
+			v.AssetModelCompositeModelExternalId = new(string)
+			return d.ReadString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelExternalId, v.AssetModelCompositeModelExternalId)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelId:
+			v.AssetModelCompositeModelId = new(string)
+			return d.ReadString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelId, v.AssetModelCompositeModelId)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelName:
+			v.AssetModelCompositeModelName = new(string)
+			return d.ReadString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelName, v.AssetModelCompositeModelName)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelPath:
+			return deserializeAssetModelCompositeModelPath(d, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelPath, &v.AssetModelCompositeModelPath)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelProperties:
+			return deserializeAssetModelProperties(d, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelProperties, &v.AssetModelCompositeModelProperties)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelSummaries:
+			return deserializeAssetModelCompositeModelSummaries(d, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelSummaries, &v.AssetModelCompositeModelSummaries)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelType:
+			v.AssetModelCompositeModelType = new(string)
+			return d.ReadString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelType, v.AssetModelCompositeModelType)
+		case schemas.DescribeAssetModelCompositeModelResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.DescribeAssetModelCompositeModelResponse_assetModelId, v.AssetModelId)
+		case schemas.DescribeAssetModelCompositeModelResponse_compositionDetails:
+			v.CompositionDetails = &types.CompositionDetails{}
+			return v.CompositionDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetModelCompositeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetModelCompositeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModelCompositeModel, schemas.DescribeAssetModelCompositeModelRequest, schemas.DescribeAssetModelCompositeModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetModelCompositeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModelCompositeModel, schemas.DescribeAssetModelCompositeModelRequest, schemas.DescribeAssetModelCompositeModelResponse), output: &DescribeAssetModelCompositeModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

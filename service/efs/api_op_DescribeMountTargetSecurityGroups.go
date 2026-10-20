@@ -4,6 +4,8 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DescribeMountTargetSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMountTargetSecurityGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMountTargetSecurityGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMountTargetSecurityGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MountTargetId != nil {
+		s.WriteString(schemas.DescribeMountTargetSecurityGroupsRequest_MountTargetId, *v.MountTargetId)
+	}
+}
+
 type DescribeMountTargetSecurityGroupsOutput struct {
 
 	// An array of security groups.
@@ -56,13 +70,29 @@ type DescribeMountTargetSecurityGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMountTargetSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMountTargetSecurityGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMountTargetSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroups(s, schemas.DescribeMountTargetSecurityGroupsResponse_SecurityGroups, v.SecurityGroups)
+}
+func (v *DescribeMountTargetSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMountTargetSecurityGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMountTargetSecurityGroupsResponse_SecurityGroups:
+			return deserializeSecurityGroups(d, schemas.DescribeMountTargetSecurityGroupsResponse_SecurityGroups, &v.SecurityGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMountTargetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMountTargetSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMountTargetSecurityGroups, schemas.DescribeMountTargetSecurityGroupsRequest, schemas.DescribeMountTargetSecurityGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMountTargetSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMountTargetSecurityGroups, schemas.DescribeMountTargetSecurityGroupsRequest, schemas.DescribeMountTargetSecurityGroupsResponse), output: &DescribeMountTargetSecurityGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

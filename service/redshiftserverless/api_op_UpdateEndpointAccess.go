@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type UpdateEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.UpdateEndpointAccessRequest_endpointName, *v.EndpointName)
+	}
+	serializeVpcSecurityGroupIdList(s, schemas.UpdateEndpointAccessRequest_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+
 type UpdateEndpointAccessOutput struct {
 
 	// The updated VPC endpoint.
@@ -49,13 +64,34 @@ type UpdateEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.UpdateEndpointAccessResponse_endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEndpointAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEndpointAccessResponse_endpoint:
+			v.Endpoint = &types.EndpointAccess{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpointAccess, schemas.UpdateEndpointAccessRequest, schemas.UpdateEndpointAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpointAccess, schemas.UpdateEndpointAccessRequest, schemas.UpdateEndpointAccessResponse), output: &UpdateEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"findingsMetrics":[{"closedFindings":{"critical":1,"high":1,"info":1,"low":1,"medium":1},"date":946684800,"meanTimeToClose":{"critical":1,"high":1,"info":1,"low":1,"medium":1},"newFindings":{"critical":1,"high":1,"info":1,"low":1,"medium":1},"openFindings":{"critical":1,"high":1,"info":1,"low":1,"medium":1}},{"closedFindings":{"critical":1,"high":1,"info":1,"low":1,"medium":1},"date":946684800,"meanTimeToClose":{"critical":1,"high":1,"info":1,"low":1,"medium":1},"newFindings":{"critical":1,"high":1,"info":1,"low":1,"medium":1},"openFindings":{"critical":1,"high":1,"info":1,"low":1,"medium":1}}],"nextToken":"__NextToken__"}

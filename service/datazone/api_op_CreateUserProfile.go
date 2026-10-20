@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type CreateUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateUserProfileInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateUserProfileInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.SessionName != nil {
+		s.WriteString(schemas.CreateUserProfileInput_sessionName, *v.SessionName)
+	}
+	if v.UserIdentifier != nil {
+		s.WriteString(schemas.CreateUserProfileInput_userIdentifier, *v.UserIdentifier)
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.CreateUserProfileInput_userType, string(v.UserType))
+	}
+}
+
 type CreateUserProfileOutput struct {
 
 	// The user profile details.
@@ -73,13 +99,61 @@ type CreateUserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserProfileOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserProfileDetails(s, schemas.CreateUserProfileOutput_details, v.Details)
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateUserProfileOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateUserProfileOutput_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateUserProfileOutput_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateUserProfileOutput_type, string(v.Type))
+	}
+}
+func (v *CreateUserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserProfileOutput_details:
+			return deserializeUserProfileDetails(d, schemas.CreateUserProfileOutput_details, &v.Details)
+		case schemas.CreateUserProfileOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateUserProfileOutput_domainId, v.DomainId)
+		case schemas.CreateUserProfileOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateUserProfileOutput_id, v.Id)
+		case schemas.CreateUserProfileOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateUserProfileOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.UserProfileStatus(ev)
+			return nil
+		case schemas.CreateUserProfileOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateUserProfileOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.UserProfileType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserProfile, schemas.CreateUserProfileInput, schemas.CreateUserProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserProfile, schemas.CreateUserProfileInput, schemas.CreateUserProfileOutput), output: &CreateUserProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

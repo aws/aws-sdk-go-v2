@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountLinked":true,"Sidewalk":{"AmazonId":"__AmazonId__","Arn":"__Arn__","Fingerprint":"__Fingerprint__"}}

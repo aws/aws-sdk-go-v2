@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","Id":"__Id__","LoRaWAN":{"AddGwMetadata":true,"ChannelMask":"__ChannelMask__","DevStatusReqFreq":1,"DlBucketSize":1,"DlRate":1,"DlRatePolicy":"__DlRatePolicy__","DrMax":1,"DrMin":1,"HrAllowed":true,"MinGwDiversity":1,"NbTransMax":1,"NbTransMin":1,"NwkGeoLoc":true,"PrAllowed":true,"RaAllowed":true,"ReportDevStatusBattery":true,"ReportDevStatusMargin":true,"TargetPer":1,"TxPowerIndexMax":1,"TxPowerIndexMin":1,"UlBucketSize":1,"UlRate":1,"UlRatePolicy":"__UlRatePolicy__"},"Name":"__Name__"}

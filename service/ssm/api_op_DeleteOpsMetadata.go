@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteOpsMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOpsMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOpsMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOpsMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OpsMetadataArn != nil {
+		s.WriteString(schemas.DeleteOpsMetadataRequest_OpsMetadataArn, *v.OpsMetadataArn)
+	}
+}
+
 type DeleteOpsMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteOpsMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOpsMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOpsMetadataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOpsMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteOpsMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOpsMetadataResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOpsMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOpsMetadata, schemas.DeleteOpsMetadataRequest, schemas.DeleteOpsMetadataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteOpsMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOpsMetadata, schemas.DeleteOpsMetadataRequest, schemas.DeleteOpsMetadataResult), output: &DeleteOpsMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

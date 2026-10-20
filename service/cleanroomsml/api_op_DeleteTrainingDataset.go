@@ -4,6 +4,8 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteTrainingDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrainingDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrainingDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrainingDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingDatasetArn != nil {
+		s.WriteString(schemas.DeleteTrainingDatasetRequest_trainingDatasetArn, *v.TrainingDatasetArn)
+	}
+}
+
 type DeleteTrainingDatasetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteTrainingDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrainingDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrainingDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrainingDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrainingDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTrainingDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrainingDataset, schemas.DeleteTrainingDatasetRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTrainingDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrainingDataset, schemas.DeleteTrainingDatasetRequest, nil), output: &DeleteTrainingDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

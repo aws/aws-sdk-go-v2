@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListDatasetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.ListDatasetVersionsRequest_datasetId, *v.DatasetId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDatasetVersionsOutput struct {
 
 	//  The list of published dataset versions.
@@ -59,13 +79,35 @@ type ListDatasetVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetVersionsResponse_nextToken, *v.NextToken)
+	}
+	serializeDatasetVersionSummaryList(s, schemas.ListDatasetVersionsResponse_versions, v.Versions)
+}
+func (v *ListDatasetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListDatasetVersionsResponse_versions:
+			return deserializeDatasetVersionSummaryList(d, schemas.ListDatasetVersionsResponse_versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetVersions, schemas.ListDatasetVersionsRequest, schemas.ListDatasetVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetVersions, schemas.ListDatasetVersionsRequest, schemas.ListDatasetVersionsResponse), output: &ListDatasetVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

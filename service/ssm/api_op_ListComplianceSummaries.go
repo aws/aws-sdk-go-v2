@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type ListComplianceSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceStringFilterList(s, schemas.ListComplianceSummariesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComplianceSummariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceSummariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListComplianceSummariesOutput struct {
 
 	// A list of compliant and non-compliant summary counts based on compliance types.
@@ -62,13 +80,35 @@ type ListComplianceSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceSummariesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceSummaryItemList(s, schemas.ListComplianceSummariesResult_ComplianceSummaryItems, v.ComplianceSummaryItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceSummariesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListComplianceSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComplianceSummariesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComplianceSummariesResult_ComplianceSummaryItems:
+			return deserializeComplianceSummaryItemList(d, schemas.ListComplianceSummariesResult_ComplianceSummaryItems, &v.ComplianceSummaryItems)
+		case schemas.ListComplianceSummariesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComplianceSummariesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComplianceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListComplianceSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceSummaries, schemas.ListComplianceSummariesRequest, schemas.ListComplianceSummariesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListComplianceSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceSummaries, schemas.ListComplianceSummariesRequest, schemas.ListComplianceSummariesResult), output: &ListComplianceSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

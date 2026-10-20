@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -79,6 +81,50 @@ type CreateEnvironmentInput struct {
 	UserParameters []types.EnvironmentParameter
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentOrder != nil {
+		s.WriteInt32(schemas.CreateEnvironmentInput_deploymentOrder, *v.DeploymentOrder)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnvironmentAccountIdentifier != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_environmentAccountIdentifier, *v.EnvironmentAccountIdentifier)
+	}
+	if v.EnvironmentAccountRegion != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_environmentAccountRegion, *v.EnvironmentAccountRegion)
+	}
+	if v.EnvironmentBlueprintIdentifier != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_environmentBlueprintIdentifier, *v.EnvironmentBlueprintIdentifier)
+	}
+	if v.EnvironmentConfigurationId != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_environmentConfigurationId, *v.EnvironmentConfigurationId)
+	}
+	if v.EnvironmentConfigurationName != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_environmentConfigurationName, *v.EnvironmentConfigurationName)
+	}
+	if v.EnvironmentProfileIdentifier != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_environmentProfileIdentifier, *v.EnvironmentProfileIdentifier)
+	}
+	serializeGlossaryTerms(s, schemas.CreateEnvironmentInput_glossaryTerms, v.GlossaryTerms)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_name, *v.Name)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.CreateEnvironmentInput_projectIdentifier, *v.ProjectIdentifier)
+	}
+	serializeEnvironmentParametersList(s, schemas.CreateEnvironmentInput_userParameters, v.UserParameters)
 }
 
 type CreateEnvironmentOutput struct {
@@ -172,13 +218,157 @@ type CreateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_awsAccountId, *v.AwsAccountId)
+	}
+	if v.AwsAccountRegion != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_awsAccountRegion, *v.AwsAccountRegion)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateEnvironmentOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DeploymentProperties != nil {
+		s.WriteStruct(schemas.CreateEnvironmentOutput_deploymentProperties)
+		v.DeploymentProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_domainId, *v.DomainId)
+	}
+	serializeEnvironmentActionList(s, schemas.CreateEnvironmentOutput_environmentActions, v.EnvironmentActions)
+	if v.EnvironmentBlueprintId != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_environmentBlueprintId, *v.EnvironmentBlueprintId)
+	}
+	if v.EnvironmentConfigurationId != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_environmentConfigurationId, *v.EnvironmentConfigurationId)
+	}
+	if v.EnvironmentConfigurationName != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_environmentConfigurationName, *v.EnvironmentConfigurationName)
+	}
+	if v.EnvironmentProfileId != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_environmentProfileId, *v.EnvironmentProfileId)
+	}
+	serializeGlossaryTerms(s, schemas.CreateEnvironmentOutput_glossaryTerms, v.GlossaryTerms)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_id, *v.Id)
+	}
+	if v.LastDeployment != nil {
+		s.WriteStruct(schemas.CreateEnvironmentOutput_lastDeployment)
+		v.LastDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_name, *v.Name)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_projectId, *v.ProjectId)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.CreateEnvironmentOutput_provider, *v.Provider)
+	}
+	serializeResourceList(s, schemas.CreateEnvironmentOutput_provisionedResources, v.ProvisionedResources)
+	serializeProvisioningProperties(s, schemas.CreateEnvironmentOutput_provisioningProperties, v.ProvisioningProperties)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateEnvironmentOutput_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateEnvironmentOutput_updatedAt, *v.UpdatedAt)
+	}
+	serializeCustomParameterList(s, schemas.CreateEnvironmentOutput_userParameters, v.UserParameters)
+}
+func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentOutput_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_awsAccountId, v.AwsAccountId)
+		case schemas.CreateEnvironmentOutput_awsAccountRegion:
+			v.AwsAccountRegion = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_awsAccountRegion, v.AwsAccountRegion)
+		case schemas.CreateEnvironmentOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEnvironmentOutput_createdAt, v.CreatedAt)
+		case schemas.CreateEnvironmentOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_createdBy, v.CreatedBy)
+		case schemas.CreateEnvironmentOutput_deploymentProperties:
+			v.DeploymentProperties = &types.DeploymentProperties{}
+			return v.DeploymentProperties.Deserialize(d)
+		case schemas.CreateEnvironmentOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_description, v.Description)
+		case schemas.CreateEnvironmentOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_domainId, v.DomainId)
+		case schemas.CreateEnvironmentOutput_environmentActions:
+			return deserializeEnvironmentActionList(d, schemas.CreateEnvironmentOutput_environmentActions, &v.EnvironmentActions)
+		case schemas.CreateEnvironmentOutput_environmentBlueprintId:
+			v.EnvironmentBlueprintId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_environmentBlueprintId, v.EnvironmentBlueprintId)
+		case schemas.CreateEnvironmentOutput_environmentConfigurationId:
+			v.EnvironmentConfigurationId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_environmentConfigurationId, v.EnvironmentConfigurationId)
+		case schemas.CreateEnvironmentOutput_environmentConfigurationName:
+			v.EnvironmentConfigurationName = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_environmentConfigurationName, v.EnvironmentConfigurationName)
+		case schemas.CreateEnvironmentOutput_environmentProfileId:
+			v.EnvironmentProfileId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_environmentProfileId, v.EnvironmentProfileId)
+		case schemas.CreateEnvironmentOutput_glossaryTerms:
+			return deserializeGlossaryTerms(d, schemas.CreateEnvironmentOutput_glossaryTerms, &v.GlossaryTerms)
+		case schemas.CreateEnvironmentOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_id, v.Id)
+		case schemas.CreateEnvironmentOutput_lastDeployment:
+			v.LastDeployment = &types.Deployment{}
+			return v.LastDeployment.Deserialize(d)
+		case schemas.CreateEnvironmentOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_name, v.Name)
+		case schemas.CreateEnvironmentOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_projectId, v.ProjectId)
+		case schemas.CreateEnvironmentOutput_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.CreateEnvironmentOutput_provider, v.Provider)
+		case schemas.CreateEnvironmentOutput_provisionedResources:
+			return deserializeResourceList(d, schemas.CreateEnvironmentOutput_provisionedResources, &v.ProvisionedResources)
+		case schemas.CreateEnvironmentOutput_provisioningProperties:
+			return deserializeProvisioningProperties(d, schemas.CreateEnvironmentOutput_provisioningProperties, &v.ProvisioningProperties)
+		case schemas.CreateEnvironmentOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnvironmentOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnvironmentStatus(ev)
+			return nil
+		case schemas.CreateEnvironmentOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEnvironmentOutput_updatedAt, v.UpdatedAt)
+		case schemas.CreateEnvironmentOutput_userParameters:
+			return deserializeCustomParameterList(d, schemas.CreateEnvironmentOutput_userParameters, &v.UserParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentInput, schemas.CreateEnvironmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentInput, schemas.CreateEnvironmentOutput), output: &CreateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

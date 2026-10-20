@@ -4,7 +4,9 @@ package clouddirectory
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type UpdateLinkAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkAttributeUpdateList(s, schemas.UpdateLinkAttributesRequest_AttributeUpdates, v.AttributeUpdates)
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.UpdateLinkAttributesRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.TypedLinkSpecifier != nil {
+		s.WriteStruct(schemas.UpdateLinkAttributesRequest_TypedLinkSpecifier)
+		v.TypedLinkSpecifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateLinkAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +76,26 @@ type UpdateLinkAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLinkAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLinkAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLinkAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLinkAttributes, schemas.UpdateLinkAttributesRequest, schemas.UpdateLinkAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLinkAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLinkAttributes, schemas.UpdateLinkAttributesRequest, schemas.UpdateLinkAttributesResponse), output: &UpdateLinkAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

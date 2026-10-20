@@ -5,7 +5,9 @@ package gameliftstreams
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,27 @@ type ListStreamUrlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamUrlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamUrlsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamUrlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamUrlsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamUrlsInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListStreamUrlsInput_Status, string(v.Status))
+	}
+	if v.StreamGroupIdentifier != nil {
+		s.WriteString(schemas.ListStreamUrlsInput_StreamGroupIdentifier, *v.StreamGroupIdentifier)
+	}
+}
+
 type ListStreamUrlsOutput struct {
 
 	// A collection of stream URL summaries. Each summary includes the identity,
@@ -83,13 +106,35 @@ type ListStreamUrlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamUrlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamUrlsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamUrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStreamUrlSummaryList(s, schemas.ListStreamUrlsOutput_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamUrlsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListStreamUrlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamUrlsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamUrlsOutput_Items:
+			return deserializeStreamUrlSummaryList(d, schemas.ListStreamUrlsOutput_Items, &v.Items)
+		case schemas.ListStreamUrlsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamUrlsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamUrlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamUrls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamUrls, schemas.ListStreamUrlsInput, schemas.ListStreamUrlsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStreamUrls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamUrls, schemas.ListStreamUrlsInput, schemas.ListStreamUrlsOutput), output: &ListStreamUrlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

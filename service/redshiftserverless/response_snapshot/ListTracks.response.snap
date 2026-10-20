@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.ListTracks
+
+{"nextToken":"__NextToken__","tracks":[{"trackName":"__TrackName__","updateTargets":[{"trackName":"__TrackName__","workgroupVersion":"__WorkgroupVersion__"},{"trackName":"__TrackName__","workgroupVersion":"__WorkgroupVersion__"}],"workgroupVersion":"__WorkgroupVersion__"},{"trackName":"__TrackName__","updateTargets":[{"trackName":"__TrackName__","workgroupVersion":"__WorkgroupVersion__"},{"trackName":"__TrackName__","workgroupVersion":"__WorkgroupVersion__"}],"workgroupVersion":"__WorkgroupVersion__"}]}

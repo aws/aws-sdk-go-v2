@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FileSystemId":"__FileSystemId__","Policy":"__Policy__"}

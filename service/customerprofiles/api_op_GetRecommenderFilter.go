@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetRecommenderFilterInput struct {
 	RecommenderFilterName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRecommenderFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommenderFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommenderFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetRecommenderFilterRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderFilterName != nil {
+		s.WriteString(schemas.GetRecommenderFilterRequest_RecommenderFilterName, *v.RecommenderFilterName)
+	}
 }
 
 type GetRecommenderFilterOutput struct {
@@ -83,13 +100,75 @@ type GetRecommenderFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommenderFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommenderFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommenderFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetRecommenderFilterResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetRecommenderFilterResponse_Description, *v.Description)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetRecommenderFilterResponse_FailureReason, *v.FailureReason)
+	}
+	if v.RecommenderFilterExpression != nil {
+		s.WriteString(schemas.GetRecommenderFilterResponse_RecommenderFilterExpression, *v.RecommenderFilterExpression)
+	}
+	if v.RecommenderFilterName != nil {
+		s.WriteString(schemas.GetRecommenderFilterResponse_RecommenderFilterName, *v.RecommenderFilterName)
+	}
+	if v.RecommenderSchemaName != nil {
+		s.WriteString(schemas.GetRecommenderFilterResponse_RecommenderSchemaName, *v.RecommenderSchemaName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRecommenderFilterResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetRecommenderFilterResponse_Tags, v.Tags)
+}
+func (v *GetRecommenderFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommenderFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommenderFilterResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRecommenderFilterResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetRecommenderFilterResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetRecommenderFilterResponse_Description, v.Description)
+		case schemas.GetRecommenderFilterResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetRecommenderFilterResponse_FailureReason, v.FailureReason)
+		case schemas.GetRecommenderFilterResponse_RecommenderFilterExpression:
+			v.RecommenderFilterExpression = new(string)
+			return d.ReadString(schemas.GetRecommenderFilterResponse_RecommenderFilterExpression, v.RecommenderFilterExpression)
+		case schemas.GetRecommenderFilterResponse_RecommenderFilterName:
+			v.RecommenderFilterName = new(string)
+			return d.ReadString(schemas.GetRecommenderFilterResponse_RecommenderFilterName, v.RecommenderFilterName)
+		case schemas.GetRecommenderFilterResponse_RecommenderSchemaName:
+			v.RecommenderSchemaName = new(string)
+			return d.ReadString(schemas.GetRecommenderFilterResponse_RecommenderSchemaName, v.RecommenderSchemaName)
+		case schemas.GetRecommenderFilterResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetRecommenderFilterResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecommenderFilterStatus(ev)
+			return nil
+		case schemas.GetRecommenderFilterResponse_Tags:
+			return deserializeTagMap(d, schemas.GetRecommenderFilterResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommenderFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecommenderFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommenderFilter, schemas.GetRecommenderFilterRequest, schemas.GetRecommenderFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecommenderFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommenderFilter, schemas.GetRecommenderFilterRequest, schemas.GetRecommenderFilterResponse), output: &GetRecommenderFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

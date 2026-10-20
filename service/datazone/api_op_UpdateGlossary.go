@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,33 @@ type UpdateGlossaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlossaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlossaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlossaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateGlossaryInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateGlossaryInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateGlossaryInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateGlossaryInput_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGlossaryInput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateGlossaryInput_status, string(v.Status))
+	}
+}
+
 type UpdateGlossaryOutput struct {
 
 	// The identifier of the Amazon DataZone domain in which a business glossary is to
@@ -102,13 +131,69 @@ type UpdateGlossaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlossaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlossaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlossaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateGlossaryOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateGlossaryOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateGlossaryOutput_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGlossaryOutput_name, *v.Name)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.UpdateGlossaryOutput_owningProjectId, *v.OwningProjectId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateGlossaryOutput_status, string(v.Status))
+	}
+	serializeGlossaryUsageRestrictions(s, schemas.UpdateGlossaryOutput_usageRestrictions, v.UsageRestrictions)
+}
+func (v *UpdateGlossaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGlossaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGlossaryOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateGlossaryOutput_description, v.Description)
+		case schemas.UpdateGlossaryOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateGlossaryOutput_domainId, v.DomainId)
+		case schemas.UpdateGlossaryOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateGlossaryOutput_id, v.Id)
+		case schemas.UpdateGlossaryOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateGlossaryOutput_name, v.Name)
+		case schemas.UpdateGlossaryOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.UpdateGlossaryOutput_owningProjectId, v.OwningProjectId)
+		case schemas.UpdateGlossaryOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGlossaryOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GlossaryStatus(ev)
+			return nil
+		case schemas.UpdateGlossaryOutput_usageRestrictions:
+			return deserializeGlossaryUsageRestrictions(d, schemas.UpdateGlossaryOutput_usageRestrictions, &v.UsageRestrictions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGlossaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGlossary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlossary, schemas.UpdateGlossaryInput, schemas.UpdateGlossaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGlossary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlossary, schemas.UpdateGlossaryInput, schemas.UpdateGlossaryOutput), output: &UpdateGlossaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

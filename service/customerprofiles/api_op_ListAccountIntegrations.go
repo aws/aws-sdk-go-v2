@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type ListAccountIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountIntegrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeHidden != nil {
+		s.WriteBool(schemas.ListAccountIntegrationsRequest_IncludeHidden, *v.IncludeHidden)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccountIntegrationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountIntegrationsRequest_NextToken, *v.NextToken)
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.ListAccountIntegrationsRequest_Uri, *v.Uri)
+	}
+}
+
 type ListAccountIntegrationsOutput struct {
 
 	// The list of ListAccountIntegration instances.
@@ -57,13 +80,35 @@ type ListAccountIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountIntegrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationList(s, schemas.ListAccountIntegrationsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountIntegrationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountIntegrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountIntegrationsResponse_Items:
+			return deserializeIntegrationList(d, schemas.ListAccountIntegrationsResponse_Items, &v.Items)
+		case schemas.ListAccountIntegrationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountIntegrationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccountIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountIntegrations, schemas.ListAccountIntegrationsRequest, schemas.ListAccountIntegrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccountIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountIntegrations, schemas.ListAccountIntegrationsRequest, schemas.ListAccountIntegrationsResponse), output: &ListAccountIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

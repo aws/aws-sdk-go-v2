@@ -4,7 +4,9 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type DeleteReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionMode != "" {
+		s.WriteString(schemas.DeleteReplicationConfigurationRequest_DeletionMode, string(v.DeletionMode))
+	}
+	if v.SourceFileSystemId != nil {
+		s.WriteString(schemas.DeleteReplicationConfigurationRequest_SourceFileSystemId, *v.SourceFileSystemId)
+	}
+}
+
 type DeleteReplicationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +83,26 @@ type DeleteReplicationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReplicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationConfiguration, schemas.DeleteReplicationConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationConfiguration, schemas.DeleteReplicationConfigurationRequest, nil), output: &DeleteReplicationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

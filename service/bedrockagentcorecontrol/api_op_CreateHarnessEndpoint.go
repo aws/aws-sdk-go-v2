@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,31 @@ type CreateHarnessEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHarnessEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHarnessEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHarnessEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateHarnessEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHarnessEndpointRequest_description, *v.Description)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.CreateHarnessEndpointRequest_endpointName, *v.EndpointName)
+	}
+	if v.HarnessId != nil {
+		s.WriteString(schemas.CreateHarnessEndpointRequest_harnessId, *v.HarnessId)
+	}
+	serializeTagsMap(s, schemas.CreateHarnessEndpointRequest_tags, v.Tags)
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.CreateHarnessEndpointRequest_targetVersion, *v.TargetVersion)
+	}
+}
+
 type CreateHarnessEndpointOutput struct {
 
 	// The endpoint that was created.
@@ -66,13 +93,34 @@ type CreateHarnessEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHarnessEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHarnessEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHarnessEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.CreateHarnessEndpointResponse_endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateHarnessEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHarnessEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHarnessEndpointResponse_endpoint:
+			v.Endpoint = &types.HarnessEndpoint{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHarnessEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateHarnessEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHarnessEndpoint, schemas.CreateHarnessEndpointRequest, schemas.CreateHarnessEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateHarnessEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHarnessEndpoint, schemas.CreateHarnessEndpointRequest, schemas.CreateHarnessEndpointResponse), output: &CreateHarnessEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,27 @@ type PutProjectPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProjectPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProjectPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProjectPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.PutProjectPolicyRequest_PolicyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.PutProjectPolicyRequest_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyRevisionId != nil {
+		s.WriteString(schemas.PutProjectPolicyRequest_PolicyRevisionId, *v.PolicyRevisionId)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.PutProjectPolicyRequest_ProjectArn, *v.ProjectArn)
+	}
+}
+
 type PutProjectPolicyOutput struct {
 
 	// The ID of the project policy.
@@ -88,13 +111,32 @@ type PutProjectPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProjectPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProjectPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProjectPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyRevisionId != nil {
+		s.WriteString(schemas.PutProjectPolicyResponse_PolicyRevisionId, *v.PolicyRevisionId)
+	}
+}
+func (v *PutProjectPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProjectPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProjectPolicyResponse_PolicyRevisionId:
+			v.PolicyRevisionId = new(string)
+			return d.ReadString(schemas.PutProjectPolicyResponse_PolicyRevisionId, v.PolicyRevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProjectPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutProjectPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProjectPolicy, schemas.PutProjectPolicyRequest, schemas.PutProjectPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutProjectPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProjectPolicy, schemas.PutProjectPolicyRequest, schemas.PutProjectPolicyResponse), output: &PutProjectPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

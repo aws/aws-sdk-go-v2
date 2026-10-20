@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetDefaultPatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultPatchBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultPatchBaselineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultPatchBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.GetDefaultPatchBaselineRequest_OperatingSystem, string(v.OperatingSystem))
+	}
+}
+
 type GetDefaultPatchBaselineOutput struct {
 
 	// The ID of the default patch baseline.
@@ -51,13 +65,42 @@ type GetDefaultPatchBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultPatchBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultPatchBaselineResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultPatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.GetDefaultPatchBaselineResult_BaselineId, *v.BaselineId)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.GetDefaultPatchBaselineResult_OperatingSystem, string(v.OperatingSystem))
+	}
+}
+func (v *GetDefaultPatchBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDefaultPatchBaselineResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDefaultPatchBaselineResult_BaselineId:
+			v.BaselineId = new(string)
+			return d.ReadString(schemas.GetDefaultPatchBaselineResult_BaselineId, v.BaselineId)
+		case schemas.GetDefaultPatchBaselineResult_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.GetDefaultPatchBaselineResult_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = types.OperatingSystem(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDefaultPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDefaultPatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultPatchBaseline, schemas.GetDefaultPatchBaselineRequest, schemas.GetDefaultPatchBaselineResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDefaultPatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultPatchBaseline, schemas.GetDefaultPatchBaselineRequest, schemas.GetDefaultPatchBaselineResult), output: &GetDefaultPatchBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

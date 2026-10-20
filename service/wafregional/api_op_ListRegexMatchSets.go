@@ -4,7 +4,9 @@ package wafregional
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,21 @@ type ListRegexMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegexMatchSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegexMatchSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegexMatchSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListRegexMatchSetsRequest_Limit, v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListRegexMatchSetsRequest_NextMarker, *v.NextMarker)
+	}
+}
+
 type ListRegexMatchSetsOutput struct {
 
 	// If you have more RegexMatchSet objects than the number that you specified for
@@ -71,13 +88,35 @@ type ListRegexMatchSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegexMatchSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegexMatchSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegexMatchSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListRegexMatchSetsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeRegexMatchSetSummaries(s, schemas.ListRegexMatchSetsResponse_RegexMatchSets, v.RegexMatchSets)
+}
+func (v *ListRegexMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegexMatchSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegexMatchSetsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListRegexMatchSetsResponse_NextMarker, v.NextMarker)
+		case schemas.ListRegexMatchSetsResponse_RegexMatchSets:
+			return deserializeRegexMatchSetSummaries(d, schemas.ListRegexMatchSetsResponse_RegexMatchSets, &v.RegexMatchSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegexMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRegexMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegexMatchSets, schemas.ListRegexMatchSetsRequest, schemas.ListRegexMatchSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRegexMatchSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegexMatchSets, schemas.ListRegexMatchSetsRequest, schemas.ListRegexMatchSetsResponse), output: &ListRegexMatchSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

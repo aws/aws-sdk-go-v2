@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/eksauth/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,34 @@ type AssumedRoleUser struct {
 	AssumeRoleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssumedRoleUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumedRoleUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumedRoleUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssumedRoleUser_arn, *v.Arn)
+	}
+	if v.AssumeRoleId != nil {
+		s.WriteString(schemas.AssumedRoleUser_assumeRoleId, *v.AssumeRoleId)
+	}
+}
+func (v *AssumedRoleUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumedRoleUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumedRoleUser_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssumedRoleUser_arn, v.Arn)
+		case schemas.AssumedRoleUser_assumeRoleId:
+			v.AssumeRoleId = new(string)
+			return d.ReadString(schemas.AssumedRoleUser_assumeRoleId, v.AssumeRoleId)
+		}
+		return nil
+	})
 }
 
 // The Amazon Web Services Signature Version 4 type of temporary credentials.
@@ -54,6 +84,46 @@ type Credentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Credentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Credentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Credentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.Credentials_accessKeyId, *v.AccessKeyId)
+	}
+	if v.Expiration != nil {
+		s.WriteTime(schemas.Credentials_expiration, *v.Expiration)
+	}
+	if v.SecretAccessKey != nil {
+		s.WriteString(schemas.Credentials_secretAccessKey, *v.SecretAccessKey)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.Credentials_sessionToken, *v.SessionToken)
+	}
+}
+func (v *Credentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Credentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Credentials_accessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.Credentials_accessKeyId, v.AccessKeyId)
+		case schemas.Credentials_expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.Credentials_expiration, v.Expiration)
+		case schemas.Credentials_secretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.Credentials_secretAccessKey, v.SecretAccessKey)
+		case schemas.Credentials_sessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.Credentials_sessionToken, v.SessionToken)
+		}
+		return nil
+	})
+}
+
 // Amazon EKS Pod Identity associations provide the ability to manage credentials
 // for your applications, similar to the way that Amazon EC2 instance profiles
 // provide credentials to Amazon EC2 instances.
@@ -70,6 +140,34 @@ type PodIdentityAssociation struct {
 	AssociationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PodIdentityAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PodIdentityAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PodIdentityAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationArn != nil {
+		s.WriteString(schemas.PodIdentityAssociation_associationArn, *v.AssociationArn)
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.PodIdentityAssociation_associationId, *v.AssociationId)
+	}
+}
+func (v *PodIdentityAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PodIdentityAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PodIdentityAssociation_associationArn:
+			v.AssociationArn = new(string)
+			return d.ReadString(schemas.PodIdentityAssociation_associationArn, v.AssociationArn)
+		case schemas.PodIdentityAssociation_associationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.PodIdentityAssociation_associationId, v.AssociationId)
+		}
+		return nil
+	})
 }
 
 // An object containing the name of the Kubernetes service account inside the
@@ -90,6 +188,34 @@ type Subject struct {
 	ServiceAccount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Subject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Namespace != nil {
+		s.WriteString(schemas.Subject_namespace, *v.Namespace)
+	}
+	if v.ServiceAccount != nil {
+		s.WriteString(schemas.Subject_serviceAccount, *v.ServiceAccount)
+	}
+}
+func (v *Subject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subject_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.Subject_namespace, v.Namespace)
+		case schemas.Subject_serviceAccount:
+			v.ServiceAccount = new(string)
+			return d.ReadString(schemas.Subject_serviceAccount, v.ServiceAccount)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

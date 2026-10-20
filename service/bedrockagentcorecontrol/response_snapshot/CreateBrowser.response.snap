@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"browserArn":"__BrowserArn__","browserId":"__BrowserId__","createdAt":"2000-01-01T00:00:00Z","status":"CREATING"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","projects":[{"creationTime":"2000-01-01T00:00:00Z","projectArn":"__ProjectArn__","projectName":"__ProjectName__","projectStage":"DEVELOPMENT","projectType":"ASYNC"},{"creationTime":"2000-01-01T00:00:00Z","projectArn":"__ProjectArn__","projectName":"__ProjectName__","projectStage":"DEVELOPMENT","projectType":"ASYNC"}]}

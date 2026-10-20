@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type CreateDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateDatabaseRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateDatabaseRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	serializeTagList(s, schemas.CreateDatabaseRequest_Tags, v.Tags)
+}
+
 type CreateDatabaseOutput struct {
 
 	// The newly created Timestream database.
@@ -63,13 +81,34 @@ type CreateDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatabaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteStruct(schemas.CreateDatabaseResponse_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatabaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatabaseResponse_Database:
+			v.Database = &types.Database{}
+			return v.Database.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatabase, schemas.CreateDatabaseRequest, schemas.CreateDatabaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatabase, schemas.CreateDatabaseRequest, schemas.CreateDatabaseResponse), output: &CreateDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package gameliftstreams
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type ListApplicationShaderCachesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationShaderCachesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationShaderCachesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationShaderCachesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListApplicationShaderCachesInput_Identifier, *v.Identifier)
+	}
+}
+
 type ListApplicationShaderCachesOutput struct {
 
 	// A collection of shader cache metadata for the specified Amazon GameLift Streams
@@ -56,13 +70,29 @@ type ListApplicationShaderCachesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationShaderCachesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationShaderCachesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationShaderCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeShaderCacheSummaryList(s, schemas.ListApplicationShaderCachesOutput_Items, v.Items)
+}
+func (v *ListApplicationShaderCachesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationShaderCachesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationShaderCachesOutput_Items:
+			return deserializeShaderCacheSummaryList(d, schemas.ListApplicationShaderCachesOutput_Items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationShaderCachesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplicationShaderCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationShaderCaches, schemas.ListApplicationShaderCachesInput, schemas.ListApplicationShaderCachesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplicationShaderCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationShaderCaches, schemas.ListApplicationShaderCachesInput, schemas.ListApplicationShaderCachesOutput), output: &ListApplicationShaderCachesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

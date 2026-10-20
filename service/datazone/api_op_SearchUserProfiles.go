@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type SearchUserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUserProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUserProfilesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUserProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.SearchUserProfilesInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchUserProfilesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchUserProfilesInput_nextToken, *v.NextToken)
+	}
+	if v.SearchText != nil {
+		s.WriteString(schemas.SearchUserProfilesInput_searchText, *v.SearchText)
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.SearchUserProfilesInput_userType, string(v.UserType))
+	}
+}
+
 type SearchUserProfilesOutput struct {
 
 	// The results of the SearchUserProfiles action.
@@ -75,13 +101,35 @@ type SearchUserProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUserProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUserProfilesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUserProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserProfileSummaries(s, schemas.SearchUserProfilesOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchUserProfilesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *SearchUserProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchUserProfilesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchUserProfilesOutput_items:
+			return deserializeUserProfileSummaries(d, schemas.SearchUserProfilesOutput_items, &v.Items)
+		case schemas.SearchUserProfilesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchUserProfilesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchUserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchUserProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUserProfiles, schemas.SearchUserProfilesInput, schemas.SearchUserProfilesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchUserProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUserProfiles, schemas.SearchUserProfilesInput, schemas.SearchUserProfilesOutput), output: &SearchUserProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

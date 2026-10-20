@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"customPluginArn":"__CustomPluginArn__","customPluginState":"CREATING","name":"__Name__","revision":1}

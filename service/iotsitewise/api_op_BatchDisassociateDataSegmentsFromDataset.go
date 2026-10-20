@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,25 @@ type BatchDisassociateDataSegmentsFromDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateDataSegmentsFromDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateDataSegmentsFromDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateDataSegmentsFromDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetRequest_datasetId, *v.DatasetId)
+	}
+	serializeDisassociateDataSegmentEntries(s, schemas.BatchDisassociateDataSegmentsFromDatasetRequest_disassociateDataSegmentEntries, v.DisassociateDataSegmentEntries)
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type BatchDisassociateDataSegmentsFromDatasetOutput struct {
 
 	// The ID of the dataset.
@@ -75,13 +96,41 @@ type BatchDisassociateDataSegmentsFromDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateDataSegmentsFromDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateDataSegmentsFromDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateDataSegmentsFromDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetResponse_datasetId, *v.DatasetId)
+	}
+	if v.DatasetVersion != nil {
+		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetResponse_datasetVersion, *v.DatasetVersion)
+	}
+	serializeFailedDataSegmentDisassociations(s, schemas.BatchDisassociateDataSegmentsFromDatasetResponse_failedDisassociations, v.FailedDisassociations)
+}
+func (v *BatchDisassociateDataSegmentsFromDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateDataSegmentsFromDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateDataSegmentsFromDatasetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.BatchDisassociateDataSegmentsFromDatasetResponse_datasetId, v.DatasetId)
+		case schemas.BatchDisassociateDataSegmentsFromDatasetResponse_datasetVersion:
+			v.DatasetVersion = new(string)
+			return d.ReadString(schemas.BatchDisassociateDataSegmentsFromDatasetResponse_datasetVersion, v.DatasetVersion)
+		case schemas.BatchDisassociateDataSegmentsFromDatasetResponse_failedDisassociations:
+			return deserializeFailedDataSegmentDisassociations(d, schemas.BatchDisassociateDataSegmentsFromDatasetResponse_failedDisassociations, &v.FailedDisassociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateDataSegmentsFromDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateDataSegmentsFromDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateDataSegmentsFromDataset, schemas.BatchDisassociateDataSegmentsFromDatasetRequest, schemas.BatchDisassociateDataSegmentsFromDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateDataSegmentsFromDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateDataSegmentsFromDataset, schemas.BatchDisassociateDataSegmentsFromDatasetRequest, schemas.BatchDisassociateDataSegmentsFromDatasetResponse), output: &BatchDisassociateDataSegmentsFromDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

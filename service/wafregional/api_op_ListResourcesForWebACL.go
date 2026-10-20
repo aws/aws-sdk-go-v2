@@ -4,7 +4,9 @@ package wafregional
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type ListResourcesForWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesForWebACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesForWebACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesForWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListResourcesForWebACLRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.WebACLId != nil {
+		s.WriteString(schemas.ListResourcesForWebACLRequest_WebACLId, *v.WebACLId)
+	}
+}
+
 type ListResourcesForWebACLOutput struct {
 
 	// An array of ARNs (Amazon Resource Names) of the resources associated with the
@@ -62,13 +79,29 @@ type ListResourcesForWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesForWebACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesForWebACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesForWebACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceArns(s, schemas.ListResourcesForWebACLResponse_ResourceArns, v.ResourceArns)
+}
+func (v *ListResourcesForWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesForWebACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesForWebACLResponse_ResourceArns:
+			return deserializeResourceArns(d, schemas.ListResourcesForWebACLResponse_ResourceArns, &v.ResourceArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourcesForWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourcesForWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesForWebACL, schemas.ListResourcesForWebACLRequest, schemas.ListResourcesForWebACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourcesForWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesForWebACL, schemas.ListResourcesForWebACLRequest, schemas.ListResourcesForWebACLResponse), output: &ListResourcesForWebACLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

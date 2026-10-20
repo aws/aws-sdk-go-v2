@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DeleteResourceDataSync
+
+{"__type":"ResourceDataSyncNotFoundException","Message":"__Message__","SyncName":"__SyncName__","SyncType":"__SyncType__"}

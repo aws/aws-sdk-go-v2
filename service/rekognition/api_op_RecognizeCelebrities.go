@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,20 @@ type RecognizeCelebritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecognizeCelebritiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecognizeCelebritiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecognizeCelebritiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Image != nil {
+		s.WriteStruct(schemas.RecognizeCelebritiesRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RecognizeCelebritiesOutput struct {
 
 	// Details about each celebrity found in the image. Amazon Rekognition can detect
@@ -106,13 +122,42 @@ type RecognizeCelebritiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecognizeCelebritiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecognizeCelebritiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecognizeCelebritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCelebrityList(s, schemas.RecognizeCelebritiesResponse_CelebrityFaces, v.CelebrityFaces)
+	if v.OrientationCorrection != "" {
+		s.WriteString(schemas.RecognizeCelebritiesResponse_OrientationCorrection, string(v.OrientationCorrection))
+	}
+	serializeComparedFaceList(s, schemas.RecognizeCelebritiesResponse_UnrecognizedFaces, v.UnrecognizedFaces)
+}
+func (v *RecognizeCelebritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecognizeCelebritiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecognizeCelebritiesResponse_CelebrityFaces:
+			return deserializeCelebrityList(d, schemas.RecognizeCelebritiesResponse_CelebrityFaces, &v.CelebrityFaces)
+		case schemas.RecognizeCelebritiesResponse_OrientationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.RecognizeCelebritiesResponse_OrientationCorrection, &ev); err != nil {
+				return err
+			}
+			v.OrientationCorrection = types.OrientationCorrection(ev)
+			return nil
+		case schemas.RecognizeCelebritiesResponse_UnrecognizedFaces:
+			return deserializeComparedFaceList(d, schemas.RecognizeCelebritiesResponse_UnrecognizedFaces, &v.UnrecognizedFaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRecognizeCelebritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRecognizeCelebrities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecognizeCelebrities, schemas.RecognizeCelebritiesRequest, schemas.RecognizeCelebritiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRecognizeCelebrities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecognizeCelebrities, schemas.RecognizeCelebritiesRequest, schemas.RecognizeCelebritiesResponse), output: &RecognizeCelebritiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

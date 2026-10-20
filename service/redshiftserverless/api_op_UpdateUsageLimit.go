@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type UpdateUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUsageLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUsageLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUsageLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteInt64(schemas.UpdateUsageLimitRequest_amount, *v.Amount)
+	}
+	if v.BreachAction != "" {
+		s.WriteString(schemas.UpdateUsageLimitRequest_breachAction, string(v.BreachAction))
+	}
+	if v.UsageLimitId != nil {
+		s.WriteString(schemas.UpdateUsageLimitRequest_usageLimitId, *v.UsageLimitId)
+	}
+}
+
 type UpdateUsageLimitOutput struct {
 
 	// The updated usage limit object.
@@ -55,13 +75,34 @@ type UpdateUsageLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUsageLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUsageLimitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUsageLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UsageLimit != nil {
+		s.WriteStruct(schemas.UpdateUsageLimitResponse_usageLimit)
+		v.UsageLimit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateUsageLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUsageLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUsageLimitResponse_usageLimit:
+			v.UsageLimit = &types.UsageLimit{}
+			return v.UsageLimit.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUsageLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUsageLimit, schemas.UpdateUsageLimitRequest, schemas.UpdateUsageLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUsageLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUsageLimit, schemas.UpdateUsageLimitRequest, schemas.UpdateUsageLimitResponse), output: &UpdateUsageLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type GetInventorySchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInventorySchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInventorySchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInventorySchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Aggregator != false {
+		s.WriteBool(schemas.GetInventorySchemaRequest_Aggregator, v.Aggregator)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetInventorySchemaRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInventorySchemaRequest_NextToken, *v.NextToken)
+	}
+	if v.SubType != nil {
+		s.WriteBool(schemas.GetInventorySchemaRequest_SubType, *v.SubType)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.GetInventorySchemaRequest_TypeName, *v.TypeName)
+	}
+}
+
 type GetInventorySchemaOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no
@@ -65,13 +91,35 @@ type GetInventorySchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInventorySchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInventorySchemaResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInventorySchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInventorySchemaResult_NextToken, *v.NextToken)
+	}
+	serializeInventoryItemSchemaResultList(s, schemas.GetInventorySchemaResult_Schemas, v.Schemas)
+}
+func (v *GetInventorySchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInventorySchemaResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInventorySchemaResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetInventorySchemaResult_NextToken, v.NextToken)
+		case schemas.GetInventorySchemaResult_Schemas:
+			return deserializeInventoryItemSchemaResultList(d, schemas.GetInventorySchemaResult_Schemas, &v.Schemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInventorySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInventorySchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInventorySchema, schemas.GetInventorySchemaRequest, schemas.GetInventorySchemaResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInventorySchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInventorySchema, schemas.GetInventorySchemaRequest, schemas.GetInventorySchemaResult), output: &GetInventorySchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

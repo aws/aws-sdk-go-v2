@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,24 @@ type GetAssetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetPropertyValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetPropertyValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetPropertyValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetAssetPropertyValueRequest_assetId, *v.AssetId)
+	}
+	if v.PropertyAlias != nil {
+		s.WriteString(schemas.GetAssetPropertyValueRequest_propertyAlias, *v.PropertyAlias)
+	}
+	if v.PropertyId != nil {
+		s.WriteString(schemas.GetAssetPropertyValueRequest_propertyId, *v.PropertyId)
+	}
+}
+
 type GetAssetPropertyValueOutput struct {
 
 	// The current asset property value.
@@ -67,13 +87,34 @@ type GetAssetPropertyValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetPropertyValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetPropertyValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetPropertyValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PropertyValue != nil {
+		s.WriteStruct(schemas.GetAssetPropertyValueResponse_propertyValue)
+		v.PropertyValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetPropertyValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetPropertyValueResponse_propertyValue:
+			v.PropertyValue = &types.AssetPropertyValue{}
+			return v.PropertyValue.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetPropertyValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyValue, schemas.GetAssetPropertyValueRequest, schemas.GetAssetPropertyValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetPropertyValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyValue, schemas.GetAssetPropertyValueRequest, schemas.GetAssetPropertyValueResponse), output: &GetAssetPropertyValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

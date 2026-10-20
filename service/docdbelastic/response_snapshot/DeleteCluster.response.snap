@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cluster":{"adminUserName":"__AdminUserName__","authType":"PLAIN_TEXT","backupRetentionPeriod":1,"clusterArn":"__ClusterArn__","clusterEndpoint":"__ClusterEndpoint__","clusterName":"__ClusterName__","createTime":"__CreateTime__","kmsKeyId":"__KmsKeyId__","preferredBackupWindow":"__PreferredBackupWindow__","preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","shardCapacity":1,"shardCount":1,"shardInstanceCount":1,"shards":[{"createTime":"__CreateTime__","shardId":"__ShardId__","status":"CREATING"},{"createTime":"__CreateTime__","shardId":"__ShardId__","status":"CREATING"}],"status":"CREATING","subnetIds":["__Member__","__Member__"],"vpcSecurityGroupIds":["__Member__","__Member__"]}}

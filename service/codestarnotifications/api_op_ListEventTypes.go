@@ -5,7 +5,9 @@ package codestarnotifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type ListEventTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListEventTypesFilters(s, schemas.ListEventTypesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventTypesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventTypesOutput struct {
 
 	// Information about each event, including service name, resource type, event ID,
@@ -58,13 +76,35 @@ type ListEventTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventTypesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTypeBatch(s, schemas.ListEventTypesResult_EventTypes, v.EventTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventTypesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventTypesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventTypesResult_EventTypes:
+			return deserializeEventTypeBatch(d, schemas.ListEventTypesResult_EventTypes, &v.EventTypes)
+		case schemas.ListEventTypesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventTypesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventTypes, schemas.ListEventTypesRequest, schemas.ListEventTypesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventTypes, schemas.ListEventTypesRequest, schemas.ListEventTypesResult), output: &ListEventTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,24 @@ type GetMetadataGenerationRunInput struct {
 	Type types.MetadataGenerationRunType
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMetadataGenerationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetadataGenerationRunInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetadataGenerationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetMetadataGenerationRunInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetMetadataGenerationRunInput_identifier, *v.Identifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetMetadataGenerationRunInput_type, string(v.Type))
+	}
 }
 
 type GetMetadataGenerationRunOutput struct {
@@ -101,13 +121,90 @@ type GetMetadataGenerationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetadataGenerationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetadataGenerationRunOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetadataGenerationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetMetadataGenerationRunOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetMetadataGenerationRunOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetMetadataGenerationRunOutput_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetMetadataGenerationRunOutput_id, *v.Id)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.GetMetadataGenerationRunOutput_owningProjectId, *v.OwningProjectId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMetadataGenerationRunOutput_status, string(v.Status))
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.GetMetadataGenerationRunOutput_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetMetadataGenerationRunOutput_type, string(v.Type))
+	}
+	serializeMetadataGenerationRunTypeStats(s, schemas.GetMetadataGenerationRunOutput_typeStats, v.TypeStats)
+	serializeMetadataGenerationRunTypes(s, schemas.GetMetadataGenerationRunOutput_types, v.Types)
+}
+func (v *GetMetadataGenerationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetadataGenerationRunOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetadataGenerationRunOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMetadataGenerationRunOutput_createdAt, v.CreatedAt)
+		case schemas.GetMetadataGenerationRunOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetMetadataGenerationRunOutput_createdBy, v.CreatedBy)
+		case schemas.GetMetadataGenerationRunOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetMetadataGenerationRunOutput_domainId, v.DomainId)
+		case schemas.GetMetadataGenerationRunOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMetadataGenerationRunOutput_id, v.Id)
+		case schemas.GetMetadataGenerationRunOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.GetMetadataGenerationRunOutput_owningProjectId, v.OwningProjectId)
+		case schemas.GetMetadataGenerationRunOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetMetadataGenerationRunOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MetadataGenerationRunStatus(ev)
+			return nil
+		case schemas.GetMetadataGenerationRunOutput_target:
+			v.Target = &types.MetadataGenerationRunTarget{}
+			return v.Target.Deserialize(d)
+		case schemas.GetMetadataGenerationRunOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.GetMetadataGenerationRunOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.MetadataGenerationRunType(ev)
+			return nil
+		case schemas.GetMetadataGenerationRunOutput_typeStats:
+			return deserializeMetadataGenerationRunTypeStats(d, schemas.GetMetadataGenerationRunOutput_typeStats, &v.TypeStats)
+		case schemas.GetMetadataGenerationRunOutput_types:
+			return deserializeMetadataGenerationRunTypes(d, schemas.GetMetadataGenerationRunOutput_types, &v.Types)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetadataGenerationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMetadataGenerationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadataGenerationRun, schemas.GetMetadataGenerationRunInput, schemas.GetMetadataGenerationRunOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMetadataGenerationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadataGenerationRun, schemas.GetMetadataGenerationRunInput, schemas.GetMetadataGenerationRunOutput), output: &GetMetadataGenerationRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

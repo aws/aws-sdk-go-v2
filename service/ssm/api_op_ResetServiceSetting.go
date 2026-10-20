@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,18 @@ type ResetServiceSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetServiceSettingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetServiceSettingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetServiceSettingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SettingId != nil {
+		s.WriteString(schemas.ResetServiceSettingRequest_SettingId, *v.SettingId)
+	}
+}
+
 // The result body of the ResetServiceSetting API operation.
 type ResetServiceSettingOutput struct {
 
@@ -84,13 +98,34 @@ type ResetServiceSettingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetServiceSettingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetServiceSettingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetServiceSettingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSetting != nil {
+		s.WriteStruct(schemas.ResetServiceSettingResult_ServiceSetting)
+		v.ServiceSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResetServiceSettingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetServiceSettingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetServiceSettingResult_ServiceSetting:
+			v.ServiceSetting = &types.ServiceSetting{}
+			return v.ServiceSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetServiceSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetServiceSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetServiceSetting, schemas.ResetServiceSettingRequest, schemas.ResetServiceSettingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResetServiceSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetServiceSetting, schemas.ResetServiceSettingRequest, schemas.ResetServiceSettingResult), output: &ResetServiceSettingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

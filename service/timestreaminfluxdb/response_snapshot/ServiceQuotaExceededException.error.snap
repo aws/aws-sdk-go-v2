@@ -1,0 +1,5 @@
+402
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.CreateDbBackup
+
+{"__type":"ServiceQuotaExceededException","message":"__Message__"}

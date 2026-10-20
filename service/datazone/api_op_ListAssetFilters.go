@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,30 @@ type ListAssetFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetFiltersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetFiltersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetFiltersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.ListAssetFiltersInput_assetIdentifier, *v.AssetIdentifier)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListAssetFiltersInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetFiltersInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetFiltersInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListAssetFiltersInput_status, string(v.Status))
+	}
+}
+
 type ListAssetFiltersOutput struct {
 
 	// The results of the ListAssetFilters action.
@@ -83,13 +109,35 @@ type ListAssetFiltersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetFiltersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetFiltersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetFiltersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetFilters(s, schemas.ListAssetFiltersOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetFiltersOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetFiltersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetFiltersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetFiltersOutput_items:
+			return deserializeAssetFilters(d, schemas.ListAssetFiltersOutput_items, &v.Items)
+		case schemas.ListAssetFiltersOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetFiltersOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetFilters, schemas.ListAssetFiltersInput, schemas.ListAssetFiltersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetFilters, schemas.ListAssetFiltersInput, schemas.ListAssetFiltersOutput), output: &ListAssetFiltersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

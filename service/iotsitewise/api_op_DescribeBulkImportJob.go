@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type DescribeBulkImportJobInput struct {
 	WorkspaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeBulkImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBulkImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBulkImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeBulkImportJobRequest_jobId, *v.JobId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeBulkImportJobRequest_workspaceName, *v.WorkspaceName)
+	}
 }
 
 type DescribeBulkImportJobOutput struct {
@@ -137,13 +154,109 @@ type DescribeBulkImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBulkImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBulkImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBulkImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptiveIngestion != nil {
+		s.WriteBool(schemas.DescribeBulkImportJobResponse_adaptiveIngestion, *v.AdaptiveIngestion)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DescribeBulkImportJobResponse_datasetId, *v.DatasetId)
+	}
+	if v.DeleteFilesAfterImport != nil {
+		s.WriteBool(schemas.DescribeBulkImportJobResponse_deleteFilesAfterImport, *v.DeleteFilesAfterImport)
+	}
+	if v.ErrorReportLocation != nil {
+		s.WriteStruct(schemas.DescribeBulkImportJobResponse_errorReportLocation)
+		v.ErrorReportLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFiles(s, schemas.DescribeBulkImportJobResponse_files, v.Files)
+	if v.JobConfiguration != nil {
+		s.WriteStruct(schemas.DescribeBulkImportJobResponse_jobConfiguration)
+		v.JobConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobCreationDate != nil {
+		s.WriteTime(schemas.DescribeBulkImportJobResponse_jobCreationDate, *v.JobCreationDate)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeBulkImportJobResponse_jobId, *v.JobId)
+	}
+	if v.JobLastUpdateDate != nil {
+		s.WriteTime(schemas.DescribeBulkImportJobResponse_jobLastUpdateDate, *v.JobLastUpdateDate)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.DescribeBulkImportJobResponse_jobName, *v.JobName)
+	}
+	if v.JobRoleArn != nil {
+		s.WriteString(schemas.DescribeBulkImportJobResponse_jobRoleArn, *v.JobRoleArn)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DescribeBulkImportJobResponse_jobStatus, string(v.JobStatus))
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeBulkImportJobResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *DescribeBulkImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBulkImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBulkImportJobResponse_adaptiveIngestion:
+			v.AdaptiveIngestion = new(bool)
+			return d.ReadBool(schemas.DescribeBulkImportJobResponse_adaptiveIngestion, v.AdaptiveIngestion)
+		case schemas.DescribeBulkImportJobResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_datasetId, v.DatasetId)
+		case schemas.DescribeBulkImportJobResponse_deleteFilesAfterImport:
+			v.DeleteFilesAfterImport = new(bool)
+			return d.ReadBool(schemas.DescribeBulkImportJobResponse_deleteFilesAfterImport, v.DeleteFilesAfterImport)
+		case schemas.DescribeBulkImportJobResponse_errorReportLocation:
+			v.ErrorReportLocation = &types.ErrorReportLocation{}
+			return v.ErrorReportLocation.Deserialize(d)
+		case schemas.DescribeBulkImportJobResponse_files:
+			return deserializeFiles(d, schemas.DescribeBulkImportJobResponse_files, &v.Files)
+		case schemas.DescribeBulkImportJobResponse_jobConfiguration:
+			v.JobConfiguration = &types.JobConfiguration{}
+			return v.JobConfiguration.Deserialize(d)
+		case schemas.DescribeBulkImportJobResponse_jobCreationDate:
+			v.JobCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBulkImportJobResponse_jobCreationDate, v.JobCreationDate)
+		case schemas.DescribeBulkImportJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_jobId, v.JobId)
+		case schemas.DescribeBulkImportJobResponse_jobLastUpdateDate:
+			v.JobLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBulkImportJobResponse_jobLastUpdateDate, v.JobLastUpdateDate)
+		case schemas.DescribeBulkImportJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_jobName, v.JobName)
+		case schemas.DescribeBulkImportJobResponse_jobRoleArn:
+			v.JobRoleArn = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_jobRoleArn, v.JobRoleArn)
+		case schemas.DescribeBulkImportJobResponse_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBulkImportJobResponse_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.DescribeBulkImportJobResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.DescribeBulkImportJobResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBulkImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBulkImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBulkImportJob, schemas.DescribeBulkImportJobRequest, schemas.DescribeBulkImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBulkImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBulkImportJob, schemas.DescribeBulkImportJobRequest, schemas.DescribeBulkImportJobResponse), output: &DescribeBulkImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

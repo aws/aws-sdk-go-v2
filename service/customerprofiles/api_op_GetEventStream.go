@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetEventStreamInput struct {
 	EventStreamName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEventStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetEventStreamRequest_DomainName, *v.DomainName)
+	}
+	if v.EventStreamName != nil {
+		s.WriteString(schemas.GetEventStreamRequest_EventStreamName, *v.EventStreamName)
+	}
 }
 
 type GetEventStreamOutput struct {
@@ -79,13 +96,71 @@ type GetEventStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetEventStreamResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DestinationDetails != nil {
+		s.WriteStruct(schemas.GetEventStreamResponse_DestinationDetails)
+		v.DestinationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetEventStreamResponse_DomainName, *v.DomainName)
+	}
+	if v.EventStreamArn != nil {
+		s.WriteString(schemas.GetEventStreamResponse_EventStreamArn, *v.EventStreamArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetEventStreamResponse_State, string(v.State))
+	}
+	if v.StoppedSince != nil {
+		s.WriteTime(schemas.GetEventStreamResponse_StoppedSince, *v.StoppedSince)
+	}
+	serializeTagMap(s, schemas.GetEventStreamResponse_Tags, v.Tags)
+}
+func (v *GetEventStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventStreamResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEventStreamResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetEventStreamResponse_DestinationDetails:
+			v.DestinationDetails = &types.EventStreamDestinationDetails{}
+			return v.DestinationDetails.Deserialize(d)
+		case schemas.GetEventStreamResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetEventStreamResponse_DomainName, v.DomainName)
+		case schemas.GetEventStreamResponse_EventStreamArn:
+			v.EventStreamArn = new(string)
+			return d.ReadString(schemas.GetEventStreamResponse_EventStreamArn, v.EventStreamArn)
+		case schemas.GetEventStreamResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.GetEventStreamResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EventStreamState(ev)
+			return nil
+		case schemas.GetEventStreamResponse_StoppedSince:
+			v.StoppedSince = new(time.Time)
+			return d.ReadTime(schemas.GetEventStreamResponse_StoppedSince, v.StoppedSince)
+		case schemas.GetEventStreamResponse_Tags:
+			return deserializeTagMap(d, schemas.GetEventStreamResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventStream, schemas.GetEventStreamRequest, schemas.GetEventStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventStream, schemas.GetEventStreamRequest, schemas.GetEventStreamResponse), output: &GetEventStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

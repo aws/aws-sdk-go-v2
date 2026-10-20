@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"feeds":[{"arn":"__Arn__","association":{"associatedResourceName":"__AssociatedResourceName__"},"id":"__Id__","name":"__Name__","status":"CREATING"},{"arn":"__Arn__","association":{"associatedResourceName":"__AssociatedResourceName__"},"id":"__Id__","name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

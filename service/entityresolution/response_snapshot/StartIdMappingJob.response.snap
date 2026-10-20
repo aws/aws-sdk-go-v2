@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobId":"__JobId__","jobType":"BATCH","outputSourceConfig":[{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"},{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"}]}

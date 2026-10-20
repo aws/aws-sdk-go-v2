@@ -4,7 +4,9 @@ package efs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/efs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,19 @@ type CreateReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDestinationsToCreate(s, schemas.CreateReplicationConfigurationRequest_Destinations, v.Destinations)
+	if v.SourceFileSystemId != nil {
+		s.WriteString(schemas.CreateReplicationConfigurationRequest_SourceFileSystemId, *v.SourceFileSystemId)
+	}
+}
+
 // Describes the replication configuration for a specific file system.
 type CreateReplicationConfigurationOutput struct {
 
@@ -111,13 +126,65 @@ type CreateReplicationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ReplicationConfigurationDescription_CreationTime, *v.CreationTime)
+	}
+	serializeDestinations(s, schemas.ReplicationConfigurationDescription_Destinations, v.Destinations)
+	if v.OriginalSourceFileSystemArn != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn, *v.OriginalSourceFileSystemArn)
+	}
+	if v.SourceFileSystemArn != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemArn, *v.SourceFileSystemArn)
+	}
+	if v.SourceFileSystemId != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemId, *v.SourceFileSystemId)
+	}
+	if v.SourceFileSystemOwnerId != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemOwnerId, *v.SourceFileSystemOwnerId)
+	}
+	if v.SourceFileSystemRegion != nil {
+		s.WriteString(schemas.ReplicationConfigurationDescription_SourceFileSystemRegion, *v.SourceFileSystemRegion)
+	}
+}
+func (v *CreateReplicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationConfigurationDescription_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ReplicationConfigurationDescription_CreationTime, v.CreationTime)
+		case schemas.ReplicationConfigurationDescription_Destinations:
+			return deserializeDestinations(d, schemas.ReplicationConfigurationDescription_Destinations, &v.Destinations)
+		case schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn:
+			v.OriginalSourceFileSystemArn = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn, v.OriginalSourceFileSystemArn)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemArn:
+			v.SourceFileSystemArn = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemArn, v.SourceFileSystemArn)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemId:
+			v.SourceFileSystemId = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemId, v.SourceFileSystemId)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemOwnerId:
+			v.SourceFileSystemOwnerId = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemOwnerId, v.SourceFileSystemOwnerId)
+		case schemas.ReplicationConfigurationDescription_SourceFileSystemRegion:
+			v.SourceFileSystemRegion = new(string)
+			return d.ReadString(schemas.ReplicationConfigurationDescription_SourceFileSystemRegion, v.SourceFileSystemRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationConfiguration, schemas.CreateReplicationConfigurationRequest, schemas.ReplicationConfigurationDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicationConfiguration, schemas.CreateReplicationConfigurationRequest, schemas.ReplicationConfigurationDescription), output: &CreateReplicationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

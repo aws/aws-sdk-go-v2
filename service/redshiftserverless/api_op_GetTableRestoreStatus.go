@@ -4,7 +4,9 @@ package redshiftserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableRestoreStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRestoreStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableRestoreStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableRestoreRequestId != nil {
+		s.WriteString(schemas.GetTableRestoreStatusRequest_tableRestoreRequestId, *v.TableRestoreRequestId)
+	}
+}
+
 type GetTableRestoreStatusOutput struct {
 
 	// The returned TableRestoreStatus object that contains information about the
@@ -46,13 +60,34 @@ type GetTableRestoreStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableRestoreStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRestoreStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableRestoreStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableRestoreStatus != nil {
+		s.WriteStruct(schemas.GetTableRestoreStatusResponse_tableRestoreStatus)
+		v.TableRestoreStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTableRestoreStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableRestoreStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableRestoreStatusResponse_tableRestoreStatus:
+			v.TableRestoreStatus = &types.TableRestoreStatus{}
+			return v.TableRestoreStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableRestoreStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTableRestoreStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableRestoreStatus, schemas.GetTableRestoreStatusRequest, schemas.GetTableRestoreStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTableRestoreStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableRestoreStatus, schemas.GetTableRestoreStatusRequest, schemas.GetTableRestoreStatusResponse), output: &GetTableRestoreStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

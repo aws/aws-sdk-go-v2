@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,31 @@ type CreateCapacityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCapacityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCapacityProviderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCapacityProviderInput_clientToken, *v.ClientToken)
+	}
+	serializeComputeConfiguration(s, schemas.CreateCapacityProviderInput_computeConfiguration, v.ComputeConfiguration)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCapacityProviderInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCapacityProviderInput_name, *v.Name)
+	}
+	if v.PermissionsConfiguration != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderInput_permissionsConfiguration)
+		v.PermissionsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateCapacityProviderInput_tags, v.Tags)
+}
+
 type CreateCapacityProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the capacity provider.
@@ -100,13 +127,54 @@ type CreateCapacityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCapacityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCapacityProviderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderArn != nil {
+		s.WriteString(schemas.CreateCapacityProviderOutput_capacityProviderArn, *v.CapacityProviderArn)
+	}
+	if v.CapacityProviderId != nil {
+		s.WriteString(schemas.CreateCapacityProviderOutput_capacityProviderId, *v.CapacityProviderId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCapacityProviderOutput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateCapacityProviderOutput_status, string(v.Status))
+	}
+}
+func (v *CreateCapacityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCapacityProviderOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCapacityProviderOutput_capacityProviderArn:
+			v.CapacityProviderArn = new(string)
+			return d.ReadString(schemas.CreateCapacityProviderOutput_capacityProviderArn, v.CapacityProviderArn)
+		case schemas.CreateCapacityProviderOutput_capacityProviderId:
+			v.CapacityProviderId = new(string)
+			return d.ReadString(schemas.CreateCapacityProviderOutput_capacityProviderId, v.CapacityProviderId)
+		case schemas.CreateCapacityProviderOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCapacityProviderOutput_name, v.Name)
+		case schemas.CreateCapacityProviderOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCapacityProviderOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CapacityProviderStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCapacityProvider, schemas.CreateCapacityProviderInput, schemas.CreateCapacityProviderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCapacityProvider, schemas.CreateCapacityProviderInput, schemas.CreateCapacityProviderOutput), output: &CreateCapacityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

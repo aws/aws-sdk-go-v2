@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"description":"__Description__","domainId":"__DomainId__","id":"__Id__","name":"__Name__","owningProjectId":"__OwningProjectId__","status":"DISABLED","usageRestrictions":["ASSET_GOVERNED_TERMS","ASSET_GOVERNED_TERMS"]}

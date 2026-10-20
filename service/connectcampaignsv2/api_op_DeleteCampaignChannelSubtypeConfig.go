@@ -4,7 +4,9 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteCampaignChannelSubtypeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCampaignChannelSubtypeConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCampaignChannelSubtypeConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCampaignChannelSubtypeConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelSubtype != "" {
+		s.WriteString(schemas.DeleteCampaignChannelSubtypeConfigRequest_channelSubtype, string(v.ChannelSubtype))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteCampaignChannelSubtypeConfigRequest_id, *v.Id)
+	}
+}
+
 type DeleteCampaignChannelSubtypeConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteCampaignChannelSubtypeConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCampaignChannelSubtypeConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCampaignChannelSubtypeConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCampaignChannelSubtypeConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCampaignChannelSubtypeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCampaignChannelSubtypeConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignChannelSubtypeConfig, schemas.DeleteCampaignChannelSubtypeConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCampaignChannelSubtypeConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignChannelSubtypeConfig, schemas.DeleteCampaignChannelSubtypeConfigRequest, nil), output: &DeleteCampaignChannelSubtypeConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

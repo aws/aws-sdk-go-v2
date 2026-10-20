@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,24 @@ type RejectSubscriptionRequestInput struct {
 	DecisionComment *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RejectSubscriptionRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectSubscriptionRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectSubscriptionRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DecisionComment != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestInput_decisionComment, *v.DecisionComment)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestInput_identifier, *v.Identifier)
+	}
 }
 
 type RejectSubscriptionRequestOutput struct {
@@ -113,13 +133,105 @@ type RejectSubscriptionRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectSubscriptionRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectSubscriptionRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectSubscriptionRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RejectSubscriptionRequestOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DecisionComment != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_decisionComment, *v.DecisionComment)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_domainId, *v.DomainId)
+	}
+	if v.ExistingSubscriptionId != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_existingSubscriptionId, *v.ExistingSubscriptionId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_id, *v.Id)
+	}
+	serializeMetadataForms(s, schemas.RejectSubscriptionRequestOutput_metadataForms, v.MetadataForms)
+	if v.RequestReason != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_requestReason, *v.RequestReason)
+	}
+	if v.ReviewerId != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_reviewerId, *v.ReviewerId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_status, string(v.Status))
+	}
+	serializeSubscribedListings(s, schemas.RejectSubscriptionRequestOutput_subscribedListings, v.SubscribedListings)
+	serializeSubscribedPrincipals(s, schemas.RejectSubscriptionRequestOutput_subscribedPrincipals, v.SubscribedPrincipals)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RejectSubscriptionRequestOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.RejectSubscriptionRequestOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *RejectSubscriptionRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectSubscriptionRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectSubscriptionRequestOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RejectSubscriptionRequestOutput_createdAt, v.CreatedAt)
+		case schemas.RejectSubscriptionRequestOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_createdBy, v.CreatedBy)
+		case schemas.RejectSubscriptionRequestOutput_decisionComment:
+			v.DecisionComment = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_decisionComment, v.DecisionComment)
+		case schemas.RejectSubscriptionRequestOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_domainId, v.DomainId)
+		case schemas.RejectSubscriptionRequestOutput_existingSubscriptionId:
+			v.ExistingSubscriptionId = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_existingSubscriptionId, v.ExistingSubscriptionId)
+		case schemas.RejectSubscriptionRequestOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_id, v.Id)
+		case schemas.RejectSubscriptionRequestOutput_metadataForms:
+			return deserializeMetadataForms(d, schemas.RejectSubscriptionRequestOutput_metadataForms, &v.MetadataForms)
+		case schemas.RejectSubscriptionRequestOutput_requestReason:
+			v.RequestReason = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_requestReason, v.RequestReason)
+		case schemas.RejectSubscriptionRequestOutput_reviewerId:
+			v.ReviewerId = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_reviewerId, v.ReviewerId)
+		case schemas.RejectSubscriptionRequestOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.RejectSubscriptionRequestOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionRequestStatus(ev)
+			return nil
+		case schemas.RejectSubscriptionRequestOutput_subscribedListings:
+			return deserializeSubscribedListings(d, schemas.RejectSubscriptionRequestOutput_subscribedListings, &v.SubscribedListings)
+		case schemas.RejectSubscriptionRequestOutput_subscribedPrincipals:
+			return deserializeSubscribedPrincipals(d, schemas.RejectSubscriptionRequestOutput_subscribedPrincipals, &v.SubscribedPrincipals)
+		case schemas.RejectSubscriptionRequestOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RejectSubscriptionRequestOutput_updatedAt, v.UpdatedAt)
+		case schemas.RejectSubscriptionRequestOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.RejectSubscriptionRequestOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectSubscriptionRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectSubscriptionRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectSubscriptionRequest, schemas.RejectSubscriptionRequestInput, schemas.RejectSubscriptionRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectSubscriptionRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectSubscriptionRequest, schemas.RejectSubscriptionRequestInput, schemas.RejectSubscriptionRequestOutput), output: &RejectSubscriptionRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

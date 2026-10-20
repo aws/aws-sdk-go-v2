@@ -5,7 +5,9 @@ package cleanroomsml
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListAudienceExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAudienceExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAudienceExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAudienceExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudienceGenerationJobArn != nil {
+		s.WriteString(schemas.ListAudienceExportJobsRequest_audienceGenerationJobArn, *v.AudienceGenerationJobArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAudienceExportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAudienceExportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAudienceExportJobsOutput struct {
 
 	// The audience export jobs that match the request.
@@ -57,13 +77,35 @@ type ListAudienceExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAudienceExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAudienceExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAudienceExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudienceExportJobList(s, schemas.ListAudienceExportJobsResponse_audienceExportJobs, v.AudienceExportJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAudienceExportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAudienceExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAudienceExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAudienceExportJobsResponse_audienceExportJobs:
+			return deserializeAudienceExportJobList(d, schemas.ListAudienceExportJobsResponse_audienceExportJobs, &v.AudienceExportJobs)
+		case schemas.ListAudienceExportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAudienceExportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAudienceExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAudienceExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAudienceExportJobs, schemas.ListAudienceExportJobsRequest, schemas.ListAudienceExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAudienceExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAudienceExportJobs, schemas.ListAudienceExportJobsRequest, schemas.ListAudienceExportJobsResponse), output: &ListAudienceExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

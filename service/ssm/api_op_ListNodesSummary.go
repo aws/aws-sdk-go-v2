@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,26 @@ type ListNodesSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNodeAggregatorList(s, schemas.ListNodesSummaryRequest_Aggregators, v.Aggregators)
+	serializeNodeFilterList(s, schemas.ListNodesSummaryRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNodesSummaryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesSummaryRequest_NextToken, *v.NextToken)
+	}
+	if v.SyncName != nil {
+		s.WriteString(schemas.ListNodesSummaryRequest_SyncName, *v.SyncName)
+	}
+}
+
 type ListNodesSummaryOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no
@@ -76,13 +98,35 @@ type ListNodesSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesSummaryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesSummaryResult_NextToken, *v.NextToken)
+	}
+	serializeNodeSummaryList(s, schemas.ListNodesSummaryResult_Summary, v.Summary)
+}
+func (v *ListNodesSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodesSummaryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodesSummaryResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodesSummaryResult_NextToken, v.NextToken)
+		case schemas.ListNodesSummaryResult_Summary:
+			return deserializeNodeSummaryList(d, schemas.ListNodesSummaryResult_Summary, &v.Summary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNodesSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNodesSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodesSummary, schemas.ListNodesSummaryRequest, schemas.ListNodesSummaryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListNodesSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodesSummary, schemas.ListNodesSummaryRequest, schemas.ListNodesSummaryResult), output: &ListNodesSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

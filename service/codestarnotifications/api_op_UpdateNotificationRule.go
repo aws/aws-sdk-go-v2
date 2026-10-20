@@ -4,7 +4,9 @@ package codestarnotifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,29 @@ type UpdateNotificationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateNotificationRuleRequest_Arn, *v.Arn)
+	}
+	if v.DetailType != "" {
+		s.WriteString(schemas.UpdateNotificationRuleRequest_DetailType, string(v.DetailType))
+	}
+	serializeEventTypeIds(s, schemas.UpdateNotificationRuleRequest_EventTypeIds, v.EventTypeIds)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNotificationRuleRequest_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateNotificationRuleRequest_Status, string(v.Status))
+	}
+	serializeTargets(s, schemas.UpdateNotificationRuleRequest_Targets, v.Targets)
+}
+
 type UpdateNotificationRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +94,26 @@ type UpdateNotificationRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNotificationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNotificationRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotificationRule, schemas.UpdateNotificationRuleRequest, schemas.UpdateNotificationRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotificationRule, schemas.UpdateNotificationRuleRequest, schemas.UpdateNotificationRuleResult), output: &UpdateNotificationRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

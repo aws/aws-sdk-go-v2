@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.GetPolicyTemplate
+
+{"createdDate":"2000-01-01T00:00:00Z","description":"__Description__","lastUpdatedDate":"2000-01-01T00:00:00Z","name":"__Name__","policyStoreId":"__PolicyStoreId__","policyTemplateId":"__PolicyTemplateId__","statement":"__Statement__"}

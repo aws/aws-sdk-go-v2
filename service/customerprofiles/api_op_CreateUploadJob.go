@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,28 @@ type CreateUploadJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUploadJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUploadJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUploadJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataExpiry != nil {
+		s.WriteInt32(schemas.CreateUploadJobRequest_DataExpiry, *v.DataExpiry)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateUploadJobRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateUploadJobRequest_DomainName, *v.DomainName)
+	}
+	serializeFieldMap(s, schemas.CreateUploadJobRequest_Fields, v.Fields)
+	if v.UniqueKey != nil {
+		s.WriteString(schemas.CreateUploadJobRequest_UniqueKey, *v.UniqueKey)
+	}
+}
+
 type CreateUploadJobOutput struct {
 
 	// The unique identifier for the created upload job.
@@ -71,13 +95,32 @@ type CreateUploadJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUploadJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUploadJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUploadJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateUploadJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *CreateUploadJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUploadJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUploadJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateUploadJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUploadJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUploadJob, schemas.CreateUploadJobRequest, schemas.CreateUploadJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUploadJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUploadJob, schemas.CreateUploadJobRequest, schemas.CreateUploadJobResponse), output: &CreateUploadJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

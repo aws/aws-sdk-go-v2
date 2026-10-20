@@ -4,6 +4,8 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,22 @@ type VerifySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *VerifySessionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type VerifySessionOutput struct {
 
 	// The system-generated unique ID of the user in Amazon CodeCatalyst.
@@ -39,13 +57,32 @@ type VerifySessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifySessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identity != nil {
+		s.WriteString(schemas.VerifySessionResponse_identity, *v.Identity)
+	}
+}
+func (v *VerifySessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifySessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifySessionResponse_identity:
+			v.Identity = new(string)
+			return d.ReadString(schemas.VerifySessionResponse_identity, v.Identity)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySession, nil, schemas.VerifySessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySession, nil, schemas.VerifySessionResponse), output: &VerifySessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

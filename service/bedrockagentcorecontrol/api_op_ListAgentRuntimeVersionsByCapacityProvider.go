@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ListAgentRuntimeVersionsByCapacityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentRuntimeVersionsByCapacityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentRuntimeVersionsByCapacityProviderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentRuntimeVersionsByCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderId != nil {
+		s.WriteString(schemas.ListAgentRuntimeVersionsByCapacityProviderInput_capacityProviderId, *v.CapacityProviderId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentRuntimeVersionsByCapacityProviderInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentRuntimeVersionsByCapacityProviderInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentRuntimeVersionsByCapacityProviderOutput struct {
 
 	// The list of agent runtime versions that are associated with the capacity
@@ -68,13 +88,35 @@ type ListAgentRuntimeVersionsByCapacityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentRuntimeVersionsByCapacityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentRuntimeVersionsByCapacityProviderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentRuntimeVersionsByCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentRuntimeVersionSummaryList(s, schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_agentRuntimes, v.AgentRuntimes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentRuntimeVersionsByCapacityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentRuntimeVersionsByCapacityProviderOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_agentRuntimes:
+			return deserializeAgentRuntimeVersionSummaryList(d, schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_agentRuntimes, &v.AgentRuntimes)
+		case schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentRuntimeVersionsByCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentRuntimeVersionsByCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentRuntimeVersionsByCapacityProvider, schemas.ListAgentRuntimeVersionsByCapacityProviderInput, schemas.ListAgentRuntimeVersionsByCapacityProviderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentRuntimeVersionsByCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentRuntimeVersionsByCapacityProvider, schemas.ListAgentRuntimeVersionsByCapacityProviderInput, schemas.ListAgentRuntimeVersionsByCapacityProviderOutput), output: &ListAgentRuntimeVersionsByCapacityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","dnsSubdomain":"__DnsSubdomain__","id":"__Id__","name":"__Name__","status":"CREATING"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"consentPortalArn":"__ConsentPortalArn__","consentPortalId":"__ConsentPortalId__","createdAt":946684800,"description":"__Description__","executionRoleArn":"__ExecutionRoleArn__","idpConfig":{"audience":"__Audience__","credentialProviderArn":"__CredentialProviderArn__","scopes":["__Member__","__Member__"]},"name":"__Name__","portalUrl":"__PortalUrl__","sources":[{"identifier":"__Identifier__","type":"agentcore-gateway"},{"identifier":"__Identifier__","type":"agentcore-gateway"}],"status":"CREATING","statusReason":"__StatusReason__","updatedAt":946684800}

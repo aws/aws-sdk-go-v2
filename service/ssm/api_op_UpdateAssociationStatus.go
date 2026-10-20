@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,26 @@ type UpdateAssociationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssociationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssociationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssociationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationStatus != nil {
+		s.WriteStruct(schemas.UpdateAssociationStatusRequest_AssociationStatus)
+		v.AssociationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateAssociationStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssociationStatusRequest_Name, *v.Name)
+	}
+}
+
 type UpdateAssociationStatusOutput struct {
 
 	// Information about the association.
@@ -60,13 +82,34 @@ type UpdateAssociationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssociationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssociationStatusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssociationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationDescription != nil {
+		s.WriteStruct(schemas.UpdateAssociationStatusResult_AssociationDescription)
+		v.AssociationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssociationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssociationStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssociationStatusResult_AssociationDescription:
+			v.AssociationDescription = &types.AssociationDescription{}
+			return v.AssociationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAssociationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssociationStatus, schemas.UpdateAssociationStatusRequest, schemas.UpdateAssociationStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAssociationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssociationStatus, schemas.UpdateAssociationStatusRequest, schemas.UpdateAssociationStatusResult), output: &UpdateAssociationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,22 @@ type AddDatasetExamplesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDatasetExamplesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDatasetExamplesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AddDatasetExamplesRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.AddDatasetExamplesRequest_datasetId, *v.DatasetId)
+	}
+	serializeDataSourceType(s, schemas.AddDatasetExamplesRequest_source, v.Source)
+}
+
 type AddDatasetExamplesOutput struct {
 
 	//  The number of examples added.
@@ -91,13 +109,63 @@ type AddDatasetExamplesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDatasetExamplesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDatasetExamplesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDatasetExamplesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddedCount != nil {
+		s.WriteInt64(schemas.AddDatasetExamplesResponse_addedCount, *v.AddedCount)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.AddDatasetExamplesResponse_datasetArn, *v.DatasetArn)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.AddDatasetExamplesResponse_datasetId, *v.DatasetId)
+	}
+	serializeExampleIdList(s, schemas.AddDatasetExamplesResponse_exampleIds, v.ExampleIds)
+	if v.Status != "" {
+		s.WriteString(schemas.AddDatasetExamplesResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AddDatasetExamplesResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AddDatasetExamplesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddDatasetExamplesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddDatasetExamplesResponse_addedCount:
+			v.AddedCount = new(int64)
+			return d.ReadInt64(schemas.AddDatasetExamplesResponse_addedCount, v.AddedCount)
+		case schemas.AddDatasetExamplesResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.AddDatasetExamplesResponse_datasetArn, v.DatasetArn)
+		case schemas.AddDatasetExamplesResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.AddDatasetExamplesResponse_datasetId, v.DatasetId)
+		case schemas.AddDatasetExamplesResponse_exampleIds:
+			return deserializeExampleIdList(d, schemas.AddDatasetExamplesResponse_exampleIds, &v.ExampleIds)
+		case schemas.AddDatasetExamplesResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.AddDatasetExamplesResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		case schemas.AddDatasetExamplesResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AddDatasetExamplesResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddDatasetExamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddDatasetExamples{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDatasetExamples, schemas.AddDatasetExamplesRequest, schemas.AddDatasetExamplesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddDatasetExamples{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDatasetExamples, schemas.AddDatasetExamplesRequest, schemas.AddDatasetExamplesResponse), output: &AddDatasetExamplesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

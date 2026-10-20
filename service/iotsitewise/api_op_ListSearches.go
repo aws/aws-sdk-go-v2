@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,29 @@ type ListSearchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSearchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSearchesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSearchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListSearchesFilters != nil {
+		s.WriteStruct(schemas.ListSearchesRequest_listSearchesFilters)
+		v.ListSearchesFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSearchesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSearchesRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListSearchesRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Output of the ListSearches operation.
 type ListSearchesOutput struct {
 
@@ -69,13 +94,35 @@ type ListSearchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSearchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSearchesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSearchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSearchesResponse_nextToken, *v.NextToken)
+	}
+	serializeSearchSummaries(s, schemas.ListSearchesResponse_searchSummaries, v.SearchSummaries)
+}
+func (v *ListSearchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSearchesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSearchesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSearchesResponse_nextToken, v.NextToken)
+		case schemas.ListSearchesResponse_searchSummaries:
+			return deserializeSearchSummaries(d, schemas.ListSearchesResponse_searchSummaries, &v.SearchSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSearchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSearches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSearches, schemas.ListSearchesRequest, schemas.ListSearchesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSearches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSearches, schemas.ListSearchesRequest, schemas.ListSearchesResponse), output: &ListSearchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

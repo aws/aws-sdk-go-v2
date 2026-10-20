@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtraildata/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *ChannelInsufficientPermission) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ChannelInsufficientPermission) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ChannelInsufficientPermission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelInsufficientPermission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelInsufficientPermission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ChannelInsufficientPermission_message, *v.Message)
+	}
+}
+func (v *ChannelInsufficientPermission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelInsufficientPermission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelInsufficientPermission_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ChannelInsufficientPermission_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The channel could not be found.
 type ChannelNotFound struct {
@@ -58,6 +80,27 @@ func (e *ChannelNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ChannelNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ChannelNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ChannelNotFound_message, *v.Message)
+	}
+}
+func (v *ChannelNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelNotFound_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ChannelNotFound_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The schema type of the event is not supported.
 type ChannelUnsupportedSchema struct {
@@ -84,6 +127,27 @@ func (e *ChannelUnsupportedSchema) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ChannelUnsupportedSchema) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ChannelUnsupportedSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelUnsupportedSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelUnsupportedSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ChannelUnsupportedSchema_message, *v.Message)
+	}
+}
+func (v *ChannelUnsupportedSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelUnsupportedSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelUnsupportedSchema_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ChannelUnsupportedSchema_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Two or more entries in the request have the same event ID.
 type DuplicatedAuditEventId struct {
@@ -110,6 +174,27 @@ func (e *DuplicatedAuditEventId) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicatedAuditEventId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicatedAuditEventId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicatedAuditEventId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicatedAuditEventId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicatedAuditEventId_message, *v.Message)
+	}
+}
+func (v *DuplicatedAuditEventId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicatedAuditEventId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicatedAuditEventId_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicatedAuditEventId_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified channel ARN is not a valid channel ARN.
 type InvalidChannelARN struct {
@@ -136,6 +221,27 @@ func (e *InvalidChannelARN) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidChannelARN) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidChannelARN) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidChannelARN)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidChannelARN) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidChannelARN_message, *v.Message)
+	}
+}
+func (v *InvalidChannelARN) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidChannelARN, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidChannelARN_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidChannelARN_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation requested is not supported in this region or account.
 type UnsupportedOperationException struct {
@@ -162,3 +268,24 @@ func (e *UnsupportedOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedOperationException_message, *v.Message)
+	}
+}
+func (v *UnsupportedOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedOperationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedOperationException_message, v.Message)
+		}
+		return nil
+	})
+}

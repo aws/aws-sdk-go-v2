@@ -4,6 +4,8 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type StopJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StopJobRunRequest_Name, *v.Name)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.StopJobRunRequest_RunId, *v.RunId)
+	}
+}
+
 type StopJobRunOutput struct {
 
 	// The ID of the job run that you stopped.
@@ -51,13 +68,32 @@ type StopJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.StopJobRunResponse_RunId, *v.RunId)
+	}
+}
+func (v *StopJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopJobRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.StopJobRunResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJobRun, schemas.StopJobRunRequest, schemas.StopJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJobRun, schemas.StopJobRunRequest, schemas.StopJobRunResponse), output: &StopJobRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

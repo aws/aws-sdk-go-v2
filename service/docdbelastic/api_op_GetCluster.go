@@ -4,7 +4,9 @@ package docdbelastic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.GetClusterInput_clusterArn, *v.ClusterArn)
+	}
+}
+func (v *GetClusterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetClusterInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetClusterInput_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.GetClusterInput_clusterArn, v.ClusterArn)
+		}
+		return nil
+	})
+}
+
 type GetClusterOutput struct {
 
 	// Returns information about a specific elastic cluster.
@@ -47,13 +71,34 @@ type GetClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.GetClusterOutput_cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetClusterOutput_cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCluster, schemas.GetClusterInput, schemas.GetClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCluster, schemas.GetClusterInput, schemas.GetClusterOutput), output: &GetClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,22 @@ type AddAttachmentsToSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddAttachmentsToSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddAttachmentsToSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddAttachmentsToSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentSetId != nil {
+		s.WriteString(schemas.AddAttachmentsToSetRequest_attachmentSetId, *v.AttachmentSetId)
+	}
+	serializeAttachments(s, schemas.AddAttachmentsToSetRequest_attachments, v.Attachments)
+	if v.DryRun != nil {
+		s.WriteBool(schemas.AddAttachmentsToSetRequest_dryRun, *v.DryRun)
+	}
+}
+
 // The ID and expiry time of the attachment set returned by the AddAttachmentsToSet operation.
 type AddAttachmentsToSetOutput struct {
 
@@ -89,13 +107,38 @@ type AddAttachmentsToSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddAttachmentsToSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddAttachmentsToSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddAttachmentsToSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentSetId != nil {
+		s.WriteString(schemas.AddAttachmentsToSetResponse_attachmentSetId, *v.AttachmentSetId)
+	}
+	if v.ExpiryTime != nil {
+		s.WriteString(schemas.AddAttachmentsToSetResponse_expiryTime, *v.ExpiryTime)
+	}
+}
+func (v *AddAttachmentsToSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddAttachmentsToSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddAttachmentsToSetResponse_attachmentSetId:
+			v.AttachmentSetId = new(string)
+			return d.ReadString(schemas.AddAttachmentsToSetResponse_attachmentSetId, v.AttachmentSetId)
+		case schemas.AddAttachmentsToSetResponse_expiryTime:
+			v.ExpiryTime = new(string)
+			return d.ReadString(schemas.AddAttachmentsToSetResponse_expiryTime, v.ExpiryTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddAttachmentsToSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddAttachmentsToSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddAttachmentsToSet, schemas.AddAttachmentsToSetRequest, schemas.AddAttachmentsToSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddAttachmentsToSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddAttachmentsToSet, schemas.AddAttachmentsToSetRequest, schemas.AddAttachmentsToSetResponse), output: &AddAttachmentsToSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

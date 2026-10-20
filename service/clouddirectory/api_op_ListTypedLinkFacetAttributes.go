@@ -5,7 +5,9 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListTypedLinkFacetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypedLinkFacetAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypedLinkFacetAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypedLinkFacetAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTypedLinkFacetAttributesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListTypedLinkFacetAttributesRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypedLinkFacetAttributesRequest_NextToken, *v.NextToken)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.ListTypedLinkFacetAttributesRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type ListTypedLinkFacetAttributesOutput struct {
 
 	// An ordered set of attributes associate with the typed link.
@@ -64,13 +87,35 @@ type ListTypedLinkFacetAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypedLinkFacetAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypedLinkFacetAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypedLinkFacetAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypedLinkAttributeDefinitionList(s, schemas.ListTypedLinkFacetAttributesResponse_Attributes, v.Attributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypedLinkFacetAttributesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListTypedLinkFacetAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTypedLinkFacetAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTypedLinkFacetAttributesResponse_Attributes:
+			return deserializeTypedLinkAttributeDefinitionList(d, schemas.ListTypedLinkFacetAttributesResponse_Attributes, &v.Attributes)
+		case schemas.ListTypedLinkFacetAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTypedLinkFacetAttributesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTypedLinkFacetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTypedLinkFacetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypedLinkFacetAttributes, schemas.ListTypedLinkFacetAttributesRequest, schemas.ListTypedLinkFacetAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTypedLinkFacetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypedLinkFacetAttributes, schemas.ListTypedLinkFacetAttributesRequest, schemas.ListTypedLinkFacetAttributesResponse), output: &ListTypedLinkFacetAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

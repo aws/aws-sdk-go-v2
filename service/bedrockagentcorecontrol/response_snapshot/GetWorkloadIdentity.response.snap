@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"allowedResourceOauth2ReturnUrls":["__Member__","__Member__"],"createdTime":946684800,"lastUpdatedTime":946684800,"name":"__Name__","workloadIdentityArn":"__WorkloadIdentityArn__"}

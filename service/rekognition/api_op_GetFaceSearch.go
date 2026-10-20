@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,27 @@ type GetFaceSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFaceSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFaceSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFaceSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetFaceSearchRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFaceSearchRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFaceSearchRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetFaceSearchRequest_SortBy, string(v.SortBy))
+	}
+}
+
 type GetFaceSearchOutput struct {
 
 	// Job identifier for the face search operation for which you want to obtain
@@ -126,13 +149,79 @@ type GetFaceSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFaceSearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFaceSearchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFaceSearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetFaceSearchResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetFaceSearchResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.GetFaceSearchResponse_JobTag, *v.JobTag)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFaceSearchResponse_NextToken, *v.NextToken)
+	}
+	serializePersonMatches(s, schemas.GetFaceSearchResponse_Persons, v.Persons)
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetFaceSearchResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.GetFaceSearchResponse_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoMetadata != nil {
+		s.WriteStruct(schemas.GetFaceSearchResponse_VideoMetadata)
+		v.VideoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFaceSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFaceSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFaceSearchResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetFaceSearchResponse_JobId, v.JobId)
+		case schemas.GetFaceSearchResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetFaceSearchResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.VideoJobStatus(ev)
+			return nil
+		case schemas.GetFaceSearchResponse_JobTag:
+			v.JobTag = new(string)
+			return d.ReadString(schemas.GetFaceSearchResponse_JobTag, v.JobTag)
+		case schemas.GetFaceSearchResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFaceSearchResponse_NextToken, v.NextToken)
+		case schemas.GetFaceSearchResponse_Persons:
+			return deserializePersonMatches(d, schemas.GetFaceSearchResponse_Persons, &v.Persons)
+		case schemas.GetFaceSearchResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetFaceSearchResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetFaceSearchResponse_Video:
+			v.Video = &types.Video{}
+			return v.Video.Deserialize(d)
+		case schemas.GetFaceSearchResponse_VideoMetadata:
+			v.VideoMetadata = &types.VideoMetadata{}
+			return v.VideoMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFaceSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFaceSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFaceSearch, schemas.GetFaceSearchRequest, schemas.GetFaceSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFaceSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFaceSearch, schemas.GetFaceSearchRequest, schemas.GetFaceSearchResponse), output: &GetFaceSearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

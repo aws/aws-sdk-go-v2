@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListOtaTaskConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOtaTaskConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOtaTaskConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOtaTaskConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOtaTaskConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOtaTaskConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOtaTaskConfigurationsOutput struct {
 
 	// The list of the over-the-air (OTA) task configurations.
@@ -50,13 +67,35 @@ type ListOtaTaskConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOtaTaskConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOtaTaskConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOtaTaskConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOtaTaskConfigurationListDefinition(s, schemas.ListOtaTaskConfigurationsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOtaTaskConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListOtaTaskConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOtaTaskConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOtaTaskConfigurationsResponse_Items:
+			return deserializeOtaTaskConfigurationListDefinition(d, schemas.ListOtaTaskConfigurationsResponse_Items, &v.Items)
+		case schemas.ListOtaTaskConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOtaTaskConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOtaTaskConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOtaTaskConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOtaTaskConfigurations, schemas.ListOtaTaskConfigurationsRequest, schemas.ListOtaTaskConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOtaTaskConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOtaTaskConfigurations, schemas.ListOtaTaskConfigurationsRequest, schemas.ListOtaTaskConfigurationsResponse), output: &ListOtaTaskConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

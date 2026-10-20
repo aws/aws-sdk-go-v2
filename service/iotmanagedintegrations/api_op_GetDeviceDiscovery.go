@@ -4,7 +4,9 @@ package iotmanagedintegrations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetDeviceDiscoveryInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeviceDiscoveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceDiscoveryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetDeviceDiscoveryRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetDeviceDiscoveryOutput struct {
@@ -88,13 +102,91 @@ type GetDeviceDiscoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceDiscoveryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceDiscoveryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceDiscoveryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssociationId != nil {
+		s.WriteString(schemas.GetDeviceDiscoveryResponse_AccountAssociationId, *v.AccountAssociationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDeviceDiscoveryResponse_Arn, *v.Arn)
+	}
+	if v.ConnectorAssociationId != nil {
+		s.WriteString(schemas.GetDeviceDiscoveryResponse_ConnectorAssociationId, *v.ConnectorAssociationId)
+	}
+	if v.ControllerId != nil {
+		s.WriteString(schemas.GetDeviceDiscoveryResponse_ControllerId, *v.ControllerId)
+	}
+	if v.DiscoveryType != "" {
+		s.WriteString(schemas.GetDeviceDiscoveryResponse_DiscoveryType, string(v.DiscoveryType))
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.GetDeviceDiscoveryResponse_FinishedAt, *v.FinishedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetDeviceDiscoveryResponse_Id, *v.Id)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetDeviceDiscoveryResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDeviceDiscoveryResponse_Status, string(v.Status))
+	}
+	serializeTagsMap(s, schemas.GetDeviceDiscoveryResponse_Tags, v.Tags)
+}
+func (v *GetDeviceDiscoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeviceDiscoveryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeviceDiscoveryResponse_AccountAssociationId:
+			v.AccountAssociationId = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_AccountAssociationId, v.AccountAssociationId)
+		case schemas.GetDeviceDiscoveryResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_Arn, v.Arn)
+		case schemas.GetDeviceDiscoveryResponse_ConnectorAssociationId:
+			v.ConnectorAssociationId = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_ConnectorAssociationId, v.ConnectorAssociationId)
+		case schemas.GetDeviceDiscoveryResponse_ControllerId:
+			v.ControllerId = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_ControllerId, v.ControllerId)
+		case schemas.GetDeviceDiscoveryResponse_DiscoveryType:
+			var ev string
+			if err := d.ReadString(schemas.GetDeviceDiscoveryResponse_DiscoveryType, &ev); err != nil {
+				return err
+			}
+			v.DiscoveryType = types.DiscoveryType(ev)
+			return nil
+		case schemas.GetDeviceDiscoveryResponse_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDeviceDiscoveryResponse_FinishedAt, v.FinishedAt)
+		case schemas.GetDeviceDiscoveryResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_Id, v.Id)
+		case schemas.GetDeviceDiscoveryResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDeviceDiscoveryResponse_StartedAt, v.StartedAt)
+		case schemas.GetDeviceDiscoveryResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDeviceDiscoveryResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DeviceDiscoveryStatus(ev)
+			return nil
+		case schemas.GetDeviceDiscoveryResponse_Tags:
+			return deserializeTagsMap(d, schemas.GetDeviceDiscoveryResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeviceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceDiscovery, schemas.GetDeviceDiscoveryRequest, schemas.GetDeviceDiscoveryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeviceDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceDiscovery, schemas.GetDeviceDiscoveryRequest, schemas.GetDeviceDiscoveryResponse), output: &GetDeviceDiscoveryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

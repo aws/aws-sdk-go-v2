@@ -4,7 +4,9 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,26 @@ type UpdateIdNamespaceInput struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateIdNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdNamespaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIdNamespaceInput_description, *v.Description)
+	}
+	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.UpdateIdNamespaceInput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdNamespaceName != nil {
+		s.WriteString(schemas.UpdateIdNamespaceInput_idNamespaceName, *v.IdNamespaceName)
+	}
+	serializeIdNamespaceInputSourceConfig(s, schemas.UpdateIdNamespaceInput_inputSourceConfig, v.InputSourceConfig)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateIdNamespaceInput_roleArn, *v.RoleArn)
+	}
 }
 
 type UpdateIdNamespaceOutput struct {
@@ -106,13 +128,78 @@ type UpdateIdNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdNamespaceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateIdNamespaceOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIdNamespaceOutput_description, *v.Description)
+	}
+	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.UpdateIdNamespaceOutput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdNamespaceArn != nil {
+		s.WriteString(schemas.UpdateIdNamespaceOutput_idNamespaceArn, *v.IdNamespaceArn)
+	}
+	if v.IdNamespaceName != nil {
+		s.WriteString(schemas.UpdateIdNamespaceOutput_idNamespaceName, *v.IdNamespaceName)
+	}
+	serializeIdNamespaceInputSourceConfig(s, schemas.UpdateIdNamespaceOutput_inputSourceConfig, v.InputSourceConfig)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateIdNamespaceOutput_roleArn, *v.RoleArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateIdNamespaceOutput_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateIdNamespaceOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateIdNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIdNamespaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIdNamespaceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateIdNamespaceOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateIdNamespaceOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateIdNamespaceOutput_description, v.Description)
+		case schemas.UpdateIdNamespaceOutput_idMappingWorkflowProperties:
+			return deserializeIdNamespaceIdMappingWorkflowPropertiesList(d, schemas.UpdateIdNamespaceOutput_idMappingWorkflowProperties, &v.IdMappingWorkflowProperties)
+		case schemas.UpdateIdNamespaceOutput_idNamespaceArn:
+			v.IdNamespaceArn = new(string)
+			return d.ReadString(schemas.UpdateIdNamespaceOutput_idNamespaceArn, v.IdNamespaceArn)
+		case schemas.UpdateIdNamespaceOutput_idNamespaceName:
+			v.IdNamespaceName = new(string)
+			return d.ReadString(schemas.UpdateIdNamespaceOutput_idNamespaceName, v.IdNamespaceName)
+		case schemas.UpdateIdNamespaceOutput_inputSourceConfig:
+			return deserializeIdNamespaceInputSourceConfig(d, schemas.UpdateIdNamespaceOutput_inputSourceConfig, &v.InputSourceConfig)
+		case schemas.UpdateIdNamespaceOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateIdNamespaceOutput_roleArn, v.RoleArn)
+		case schemas.UpdateIdNamespaceOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIdNamespaceOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IdNamespaceType(ev)
+			return nil
+		case schemas.UpdateIdNamespaceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateIdNamespaceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIdNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdNamespace, schemas.UpdateIdNamespaceInput, schemas.UpdateIdNamespaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIdNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdNamespace, schemas.UpdateIdNamespaceInput, schemas.UpdateIdNamespaceOutput), output: &UpdateIdNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

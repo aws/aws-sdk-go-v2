@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,26 @@ type UpdateCapacityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCapacityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapacityProviderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderId != nil {
+		s.WriteString(schemas.UpdateCapacityProviderInput_capacityProviderId, *v.CapacityProviderId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateCapacityProviderInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteStruct(schemas.UpdateCapacityProviderInput_description)
+		v.Description.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateCapacityProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the capacity provider.
@@ -88,13 +110,66 @@ type UpdateCapacityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCapacityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapacityProviderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderArn != nil {
+		s.WriteString(schemas.UpdateCapacityProviderOutput_capacityProviderArn, *v.CapacityProviderArn)
+	}
+	if v.CapacityProviderId != nil {
+		s.WriteString(schemas.UpdateCapacityProviderOutput_capacityProviderId, *v.CapacityProviderId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateCapacityProviderOutput_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateCapacityProviderOutput_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCapacityProviderOutput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateCapacityProviderOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateCapacityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCapacityProviderOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCapacityProviderOutput_capacityProviderArn:
+			v.CapacityProviderArn = new(string)
+			return d.ReadString(schemas.UpdateCapacityProviderOutput_capacityProviderArn, v.CapacityProviderArn)
+		case schemas.UpdateCapacityProviderOutput_capacityProviderId:
+			v.CapacityProviderId = new(string)
+			return d.ReadString(schemas.UpdateCapacityProviderOutput_capacityProviderId, v.CapacityProviderId)
+		case schemas.UpdateCapacityProviderOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCapacityProviderOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateCapacityProviderOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCapacityProviderOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateCapacityProviderOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCapacityProviderOutput_name, v.Name)
+		case schemas.UpdateCapacityProviderOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCapacityProviderOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CapacityProviderStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapacityProvider, schemas.UpdateCapacityProviderInput, schemas.UpdateCapacityProviderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapacityProvider, schemas.UpdateCapacityProviderInput, schemas.UpdateCapacityProviderOutput), output: &UpdateCapacityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

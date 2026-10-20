@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -49,6 +51,21 @@ type GetPolicyGenerationInput struct {
 	PolicyGenerationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPolicyGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.GetPolicyGenerationRequest_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyGenerationId != nil {
+		s.WriteString(schemas.GetPolicyGenerationRequest_policyGenerationId, *v.PolicyGenerationId)
+	}
 }
 
 type GetPolicyGenerationOutput struct {
@@ -118,13 +135,84 @@ type GetPolicyGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetPolicyGenerationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Findings != nil {
+		s.WriteString(schemas.GetPolicyGenerationResponse_findings, *v.Findings)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPolicyGenerationResponse_name, *v.Name)
+	}
+	if v.PolicyEngineId != nil {
+		s.WriteString(schemas.GetPolicyGenerationResponse_policyEngineId, *v.PolicyEngineId)
+	}
+	if v.PolicyGenerationArn != nil {
+		s.WriteString(schemas.GetPolicyGenerationResponse_policyGenerationArn, *v.PolicyGenerationArn)
+	}
+	if v.PolicyGenerationId != nil {
+		s.WriteString(schemas.GetPolicyGenerationResponse_policyGenerationId, *v.PolicyGenerationId)
+	}
+	serializeResource(s, schemas.GetPolicyGenerationResponse_resource, v.Resource)
+	if v.Status != "" {
+		s.WriteString(schemas.GetPolicyGenerationResponse_status, string(v.Status))
+	}
+	serializePolicyStatusReasons(s, schemas.GetPolicyGenerationResponse_statusReasons, v.StatusReasons)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPolicyGenerationResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetPolicyGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyGenerationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyGenerationResponse_createdAt, v.CreatedAt)
+		case schemas.GetPolicyGenerationResponse_findings:
+			v.Findings = new(string)
+			return d.ReadString(schemas.GetPolicyGenerationResponse_findings, v.Findings)
+		case schemas.GetPolicyGenerationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPolicyGenerationResponse_name, v.Name)
+		case schemas.GetPolicyGenerationResponse_policyEngineId:
+			v.PolicyEngineId = new(string)
+			return d.ReadString(schemas.GetPolicyGenerationResponse_policyEngineId, v.PolicyEngineId)
+		case schemas.GetPolicyGenerationResponse_policyGenerationArn:
+			v.PolicyGenerationArn = new(string)
+			return d.ReadString(schemas.GetPolicyGenerationResponse_policyGenerationArn, v.PolicyGenerationArn)
+		case schemas.GetPolicyGenerationResponse_policyGenerationId:
+			v.PolicyGenerationId = new(string)
+			return d.ReadString(schemas.GetPolicyGenerationResponse_policyGenerationId, v.PolicyGenerationId)
+		case schemas.GetPolicyGenerationResponse_resource:
+			return deserializeResource(d, schemas.GetPolicyGenerationResponse_resource, &v.Resource)
+		case schemas.GetPolicyGenerationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetPolicyGenerationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PolicyGenerationStatus(ev)
+			return nil
+		case schemas.GetPolicyGenerationResponse_statusReasons:
+			return deserializePolicyStatusReasons(d, schemas.GetPolicyGenerationResponse_statusReasons, &v.StatusReasons)
+		case schemas.GetPolicyGenerationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyGenerationResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyGeneration, schemas.GetPolicyGenerationRequest, schemas.GetPolicyGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyGeneration, schemas.GetPolicyGenerationRequest, schemas.GetPolicyGenerationResponse), output: &GetPolicyGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

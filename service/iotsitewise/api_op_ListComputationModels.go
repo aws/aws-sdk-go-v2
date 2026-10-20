@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,24 @@ type ListComputationModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputationModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputationModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputationModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputationModelType != "" {
+		s.WriteString(schemas.ListComputationModelsRequest_computationModelType, string(v.ComputationModelType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComputationModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputationModelsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListComputationModelsOutput struct {
 
 	// A list summarizing each computation model.
@@ -58,13 +78,35 @@ type ListComputationModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputationModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputationModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputationModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputationModelSummaries(s, schemas.ListComputationModelsResponse_computationModelSummaries, v.ComputationModelSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputationModelsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListComputationModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComputationModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComputationModelsResponse_computationModelSummaries:
+			return deserializeComputationModelSummaries(d, schemas.ListComputationModelsResponse_computationModelSummaries, &v.ComputationModelSummaries)
+		case schemas.ListComputationModelsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComputationModelsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComputationModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComputationModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputationModels, schemas.ListComputationModelsRequest, schemas.ListComputationModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComputationModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputationModels, schemas.ListComputationModelsRequest, schemas.ListComputationModelsResponse), output: &ListComputationModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

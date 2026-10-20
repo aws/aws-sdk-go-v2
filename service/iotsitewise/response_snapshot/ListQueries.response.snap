@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","queries":[{"completedAt":946684800,"queryId":"__QueryId__","status":"SUBMITTED","submittedAt":946684800},{"completedAt":946684800,"queryId":"__QueryId__","status":"SUBMITTED","submittedAt":946684800}]}

@@ -3,7 +3,10 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	smithyprelude "github.com/aws/smithy-go/prelude"
 	"time"
 )
 
@@ -30,6 +33,34 @@ type ActionIdentifier struct {
 	ActionType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActionIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.ActionIdentifier_actionId, *v.ActionId)
+	}
+	if v.ActionType != nil {
+		s.WriteString(schemas.ActionIdentifier_actionType, *v.ActionType)
+	}
+}
+func (v *ActionIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionIdentifier_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.ActionIdentifier_actionId, v.ActionId)
+		case schemas.ActionIdentifier_actionType:
+			v.ActionType = new(string)
+			return d.ReadString(schemas.ActionIdentifier_actionType, v.ActionType)
+		}
+		return nil
+	})
 }
 
 // The value of an attribute.
@@ -73,6 +104,12 @@ type AttributeValueMemberBoolean struct {
 }
 
 func (*AttributeValueMemberBoolean) isAttributeValue() {}
+func (v *AttributeValueMemberBoolean) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AttributeValue_boolean, v.Value)
+}
+func (v *AttributeValueMemberBoolean) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AttributeValue_boolean, &v.Value)
+}
 
 // An attribute value of [datetime] type.
 //
@@ -86,6 +123,12 @@ type AttributeValueMemberDatetime struct {
 }
 
 func (*AttributeValueMemberDatetime) isAttributeValue() {}
+func (v *AttributeValueMemberDatetime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_datetime, v.Value)
+}
+func (v *AttributeValueMemberDatetime) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_datetime, &v.Value)
+}
 
 // An attribute value of [decimal] type.
 //
@@ -99,6 +142,12 @@ type AttributeValueMemberDecimal struct {
 }
 
 func (*AttributeValueMemberDecimal) isAttributeValue() {}
+func (v *AttributeValueMemberDecimal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_decimal, v.Value)
+}
+func (v *AttributeValueMemberDecimal) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_decimal, &v.Value)
+}
 
 // An attribute value of [duration] type.
 //
@@ -112,6 +161,12 @@ type AttributeValueMemberDuration struct {
 }
 
 func (*AttributeValueMemberDuration) isAttributeValue() {}
+func (v *AttributeValueMemberDuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_duration, v.Value)
+}
+func (v *AttributeValueMemberDuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_duration, &v.Value)
+}
 
 // An attribute value of type [EntityIdentifier].
 //
@@ -125,6 +180,14 @@ type AttributeValueMemberEntityIdentifier struct {
 }
 
 func (*AttributeValueMemberEntityIdentifier) isAttributeValue() {}
+func (v *AttributeValueMemberEntityIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeValue_entityIdentifier)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AttributeValueMemberEntityIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An attribute value of [ipaddr] type.
 //
@@ -138,6 +201,12 @@ type AttributeValueMemberIpaddr struct {
 }
 
 func (*AttributeValueMemberIpaddr) isAttributeValue() {}
+func (v *AttributeValueMemberIpaddr) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_ipaddr, v.Value)
+}
+func (v *AttributeValueMemberIpaddr) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_ipaddr, &v.Value)
+}
 
 // An attribute value of [Long] type.
 //
@@ -151,6 +220,12 @@ type AttributeValueMemberLong struct {
 }
 
 func (*AttributeValueMemberLong) isAttributeValue() {}
+func (v *AttributeValueMemberLong) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.AttributeValue_long, v.Value)
+}
+func (v *AttributeValueMemberLong) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt64(schemas.AttributeValue_long, &v.Value)
+}
 
 // An attribute value of [Record] type.
 //
@@ -164,6 +239,12 @@ type AttributeValueMemberRecord struct {
 }
 
 func (*AttributeValueMemberRecord) isAttributeValue() {}
+func (v *AttributeValueMemberRecord) Serialize(s smithy.ShapeSerializer) {
+	serializeRecordAttribute(s, schemas.AttributeValue_record, v.Value)
+}
+func (v *AttributeValueMemberRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRecordAttribute(d, schemas.AttributeValue_record, &v.Value)
+}
 
 // An attribute value of [Set] type.
 //
@@ -177,6 +258,12 @@ type AttributeValueMemberSet struct {
 }
 
 func (*AttributeValueMemberSet) isAttributeValue() {}
+func (v *AttributeValueMemberSet) Serialize(s smithy.ShapeSerializer) {
+	serializeSetAttribute(s, schemas.AttributeValue_set, v.Value)
+}
+func (v *AttributeValueMemberSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeSetAttribute(d, schemas.AttributeValue_set, &v.Value)
+}
 
 // An attribute value of [String] type.
 //
@@ -190,6 +277,12 @@ type AttributeValueMemberString struct {
 }
 
 func (*AttributeValueMemberString) isAttributeValue() {}
+func (v *AttributeValueMemberString) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_string, v.Value)
+}
+func (v *AttributeValueMemberString) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_string, &v.Value)
+}
 
 // Contains the information about an error resulting from a BatchGetPolicy API
 // call.
@@ -218,6 +311,50 @@ type BatchGetPolicyErrorItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPolicyErrorItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPolicyErrorItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPolicyErrorItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.BatchGetPolicyErrorItem_code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchGetPolicyErrorItem_message, *v.Message)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.BatchGetPolicyErrorItem_policyId, *v.PolicyId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.BatchGetPolicyErrorItem_policyStoreId, *v.PolicyStoreId)
+	}
+}
+func (v *BatchGetPolicyErrorItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetPolicyErrorItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetPolicyErrorItem_code:
+			var ev string
+			if err := d.ReadString(schemas.BatchGetPolicyErrorItem_code, &ev); err != nil {
+				return err
+			}
+			v.Code = BatchGetPolicyErrorCode(ev)
+			return nil
+		case schemas.BatchGetPolicyErrorItem_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchGetPolicyErrorItem_message, v.Message)
+		case schemas.BatchGetPolicyErrorItem_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.BatchGetPolicyErrorItem_policyId, v.PolicyId)
+		case schemas.BatchGetPolicyErrorItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.BatchGetPolicyErrorItem_policyStoreId, v.PolicyStoreId)
+		}
+		return nil
+	})
+}
+
 // Information about a policy that you include in a BatchGetPolicy API request.
 type BatchGetPolicyInputItem struct {
 
@@ -240,6 +377,34 @@ type BatchGetPolicyInputItem struct {
 	PolicyStoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetPolicyInputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPolicyInputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPolicyInputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.BatchGetPolicyInputItem_policyId, *v.PolicyId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.BatchGetPolicyInputItem_policyStoreId, *v.PolicyStoreId)
+	}
+}
+func (v *BatchGetPolicyInputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetPolicyInputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetPolicyInputItem_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.BatchGetPolicyInputItem_policyId, v.PolicyId)
+		case schemas.BatchGetPolicyInputItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.BatchGetPolicyInputItem_policyStoreId, v.PolicyStoreId)
+		}
+		return nil
+	})
 }
 
 // Contains information about a policy returned from a BatchGetPolicy API request.
@@ -287,6 +452,65 @@ type BatchGetPolicyOutputItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPolicyOutputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPolicyOutputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPolicyOutputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.BatchGetPolicyOutputItem_createdDate, *v.CreatedDate)
+	}
+	serializePolicyDefinitionDetail(s, schemas.BatchGetPolicyOutputItem_definition, v.Definition)
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.BatchGetPolicyOutputItem_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BatchGetPolicyOutputItem_name, *v.Name)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.BatchGetPolicyOutputItem_policyId, *v.PolicyId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.BatchGetPolicyOutputItem_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.BatchGetPolicyOutputItem_policyType, string(v.PolicyType))
+	}
+}
+func (v *BatchGetPolicyOutputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetPolicyOutputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetPolicyOutputItem_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.BatchGetPolicyOutputItem_createdDate, v.CreatedDate)
+		case schemas.BatchGetPolicyOutputItem_definition:
+			return deserializePolicyDefinitionDetail(d, schemas.BatchGetPolicyOutputItem_definition, &v.Definition)
+		case schemas.BatchGetPolicyOutputItem_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.BatchGetPolicyOutputItem_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.BatchGetPolicyOutputItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BatchGetPolicyOutputItem_name, v.Name)
+		case schemas.BatchGetPolicyOutputItem_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.BatchGetPolicyOutputItem_policyId, v.PolicyId)
+		case schemas.BatchGetPolicyOutputItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.BatchGetPolicyOutputItem_policyStoreId, v.PolicyStoreId)
+		case schemas.BatchGetPolicyOutputItem_policyType:
+			var ev string
+			if err := d.ReadString(schemas.BatchGetPolicyOutputItem_policyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = PolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An authorization request that you include in a BatchIsAuthorized API request.
 type BatchIsAuthorizedInputItem struct {
 
@@ -306,6 +530,49 @@ type BatchIsAuthorizedInputItem struct {
 	Resource *EntityIdentifier
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchIsAuthorizedInputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchIsAuthorizedInputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchIsAuthorizedInputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.BatchIsAuthorizedInputItem_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContextDefinition(s, schemas.BatchIsAuthorizedInputItem_context, v.Context)
+	if v.Principal != nil {
+		s.WriteStruct(schemas.BatchIsAuthorizedInputItem_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.BatchIsAuthorizedInputItem_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchIsAuthorizedInputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchIsAuthorizedInputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchIsAuthorizedInputItem_action:
+			v.Action = &ActionIdentifier{}
+			return v.Action.Deserialize(d)
+		case schemas.BatchIsAuthorizedInputItem_context:
+			return deserializeContextDefinition(d, schemas.BatchIsAuthorizedInputItem_context, &v.Context)
+		case schemas.BatchIsAuthorizedInputItem_principal:
+			v.Principal = &EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		case schemas.BatchIsAuthorizedInputItem_resource:
+			v.Resource = &EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The decision, based on policy evaluation, from an individual authorization
@@ -342,6 +609,46 @@ type BatchIsAuthorizedOutputItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchIsAuthorizedOutputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchIsAuthorizedOutputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchIsAuthorizedOutputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Decision != "" {
+		s.WriteString(schemas.BatchIsAuthorizedOutputItem_decision, string(v.Decision))
+	}
+	serializeDeterminingPolicyList(s, schemas.BatchIsAuthorizedOutputItem_determiningPolicies, v.DeterminingPolicies)
+	serializeEvaluationErrorList(s, schemas.BatchIsAuthorizedOutputItem_errors, v.Errors)
+	if v.Request != nil {
+		s.WriteStruct(schemas.BatchIsAuthorizedOutputItem_request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchIsAuthorizedOutputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchIsAuthorizedOutputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchIsAuthorizedOutputItem_decision:
+			var ev string
+			if err := d.ReadString(schemas.BatchIsAuthorizedOutputItem_decision, &ev); err != nil {
+				return err
+			}
+			v.Decision = Decision(ev)
+			return nil
+		case schemas.BatchIsAuthorizedOutputItem_determiningPolicies:
+			return deserializeDeterminingPolicyList(d, schemas.BatchIsAuthorizedOutputItem_determiningPolicies, &v.DeterminingPolicies)
+		case schemas.BatchIsAuthorizedOutputItem_errors:
+			return deserializeEvaluationErrorList(d, schemas.BatchIsAuthorizedOutputItem_errors, &v.Errors)
+		case schemas.BatchIsAuthorizedOutputItem_request:
+			v.Request = &BatchIsAuthorizedInputItem{}
+			return v.Request.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An authorization request that you include in a BatchIsAuthorizedWithToken API
 // request.
 type BatchIsAuthorizedWithTokenInputItem struct {
@@ -359,6 +666,41 @@ type BatchIsAuthorizedWithTokenInputItem struct {
 	Resource *EntityIdentifier
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchIsAuthorizedWithTokenInputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchIsAuthorizedWithTokenInputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchIsAuthorizedWithTokenInputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.BatchIsAuthorizedWithTokenInputItem_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContextDefinition(s, schemas.BatchIsAuthorizedWithTokenInputItem_context, v.Context)
+	if v.Resource != nil {
+		s.WriteStruct(schemas.BatchIsAuthorizedWithTokenInputItem_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchIsAuthorizedWithTokenInputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchIsAuthorizedWithTokenInputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchIsAuthorizedWithTokenInputItem_action:
+			v.Action = &ActionIdentifier{}
+			return v.Action.Deserialize(d)
+		case schemas.BatchIsAuthorizedWithTokenInputItem_context:
+			return deserializeContextDefinition(d, schemas.BatchIsAuthorizedWithTokenInputItem_context, &v.Context)
+		case schemas.BatchIsAuthorizedWithTokenInputItem_resource:
+			v.Resource = &EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The decision, based on policy evaluation, from an individual authorization
@@ -393,6 +735,46 @@ type BatchIsAuthorizedWithTokenOutputItem struct {
 	Request *BatchIsAuthorizedWithTokenInputItem
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchIsAuthorizedWithTokenOutputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchIsAuthorizedWithTokenOutputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchIsAuthorizedWithTokenOutputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Decision != "" {
+		s.WriteString(schemas.BatchIsAuthorizedWithTokenOutputItem_decision, string(v.Decision))
+	}
+	serializeDeterminingPolicyList(s, schemas.BatchIsAuthorizedWithTokenOutputItem_determiningPolicies, v.DeterminingPolicies)
+	serializeEvaluationErrorList(s, schemas.BatchIsAuthorizedWithTokenOutputItem_errors, v.Errors)
+	if v.Request != nil {
+		s.WriteStruct(schemas.BatchIsAuthorizedWithTokenOutputItem_request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchIsAuthorizedWithTokenOutputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchIsAuthorizedWithTokenOutputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchIsAuthorizedWithTokenOutputItem_decision:
+			var ev string
+			if err := d.ReadString(schemas.BatchIsAuthorizedWithTokenOutputItem_decision, &ev); err != nil {
+				return err
+			}
+			v.Decision = Decision(ev)
+			return nil
+		case schemas.BatchIsAuthorizedWithTokenOutputItem_determiningPolicies:
+			return deserializeDeterminingPolicyList(d, schemas.BatchIsAuthorizedWithTokenOutputItem_determiningPolicies, &v.DeterminingPolicies)
+		case schemas.BatchIsAuthorizedWithTokenOutputItem_errors:
+			return deserializeEvaluationErrorList(d, schemas.BatchIsAuthorizedWithTokenOutputItem_errors, &v.Errors)
+		case schemas.BatchIsAuthorizedWithTokenOutputItem_request:
+			v.Request = &BatchIsAuthorizedWithTokenInputItem{}
+			return v.Request.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The value of an entity's Cedar tag.
@@ -434,6 +816,12 @@ type CedarTagValueMemberBoolean struct {
 }
 
 func (*CedarTagValueMemberBoolean) isCedarTagValue() {}
+func (v *CedarTagValueMemberBoolean) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.CedarTagValue_boolean, v.Value)
+}
+func (v *CedarTagValueMemberBoolean) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.CedarTagValue_boolean, &v.Value)
+}
 
 // A Cedar tag value of [datetime] type.
 //
@@ -447,6 +835,12 @@ type CedarTagValueMemberDatetime struct {
 }
 
 func (*CedarTagValueMemberDatetime) isCedarTagValue() {}
+func (v *CedarTagValueMemberDatetime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CedarTagValue_datetime, v.Value)
+}
+func (v *CedarTagValueMemberDatetime) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CedarTagValue_datetime, &v.Value)
+}
 
 // A Cedar tag value of [decimal] type.
 //
@@ -460,6 +854,12 @@ type CedarTagValueMemberDecimal struct {
 }
 
 func (*CedarTagValueMemberDecimal) isCedarTagValue() {}
+func (v *CedarTagValueMemberDecimal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CedarTagValue_decimal, v.Value)
+}
+func (v *CedarTagValueMemberDecimal) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CedarTagValue_decimal, &v.Value)
+}
 
 // A Cedar tag value of [duration] type.
 //
@@ -473,6 +873,12 @@ type CedarTagValueMemberDuration struct {
 }
 
 func (*CedarTagValueMemberDuration) isCedarTagValue() {}
+func (v *CedarTagValueMemberDuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CedarTagValue_duration, v.Value)
+}
+func (v *CedarTagValueMemberDuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CedarTagValue_duration, &v.Value)
+}
 
 // A Cedar tag value of type [EntityIdentifier].
 //
@@ -486,6 +892,14 @@ type CedarTagValueMemberEntityIdentifier struct {
 }
 
 func (*CedarTagValueMemberEntityIdentifier) isCedarTagValue() {}
+func (v *CedarTagValueMemberEntityIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CedarTagValue_entityIdentifier)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CedarTagValueMemberEntityIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A Cedar tag value of [ipaddr] type.
 //
@@ -499,6 +913,12 @@ type CedarTagValueMemberIpaddr struct {
 }
 
 func (*CedarTagValueMemberIpaddr) isCedarTagValue() {}
+func (v *CedarTagValueMemberIpaddr) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CedarTagValue_ipaddr, v.Value)
+}
+func (v *CedarTagValueMemberIpaddr) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CedarTagValue_ipaddr, &v.Value)
+}
 
 // A Cedar tag value of [Long] type.
 //
@@ -512,6 +932,12 @@ type CedarTagValueMemberLong struct {
 }
 
 func (*CedarTagValueMemberLong) isCedarTagValue() {}
+func (v *CedarTagValueMemberLong) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.CedarTagValue_long, v.Value)
+}
+func (v *CedarTagValueMemberLong) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt64(schemas.CedarTagValue_long, &v.Value)
+}
 
 // A Cedar tag value of [Record] type.
 //
@@ -525,6 +951,12 @@ type CedarTagValueMemberRecord struct {
 }
 
 func (*CedarTagValueMemberRecord) isCedarTagValue() {}
+func (v *CedarTagValueMemberRecord) Serialize(s smithy.ShapeSerializer) {
+	serializeCedarTagRecordAttribute(s, schemas.CedarTagValue_record, v.Value)
+}
+func (v *CedarTagValueMemberRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCedarTagRecordAttribute(d, schemas.CedarTagValue_record, &v.Value)
+}
 
 // A Cedar tag value of [Set] type.
 //
@@ -538,6 +970,12 @@ type CedarTagValueMemberSet struct {
 }
 
 func (*CedarTagValueMemberSet) isCedarTagValue() {}
+func (v *CedarTagValueMemberSet) Serialize(s smithy.ShapeSerializer) {
+	serializeCedarTagSetAttribute(s, schemas.CedarTagValue_set, v.Value)
+}
+func (v *CedarTagValueMemberSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCedarTagSetAttribute(d, schemas.CedarTagValue_set, &v.Value)
+}
 
 // A Cedar tag value of [String] type.
 //
@@ -551,6 +989,12 @@ type CedarTagValueMemberString struct {
 }
 
 func (*CedarTagValueMemberString) isCedarTagValue() {}
+func (v *CedarTagValueMemberString) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CedarTagValue_string, v.Value)
+}
+func (v *CedarTagValueMemberString) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CedarTagValue_string, &v.Value)
+}
 
 // The type of entity that a policy store maps to groups from an Amazon Cognito
 // user pool identity source.
@@ -570,6 +1014,28 @@ type CognitoGroupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CognitoGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.CognitoGroupConfiguration_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *CognitoGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoGroupConfiguration_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.CognitoGroupConfiguration_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
+}
+
 // The type of entity that a policy store maps to groups from an Amazon Cognito
 // user pool identity source.
 //
@@ -586,6 +1052,28 @@ type CognitoGroupConfigurationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CognitoGroupConfigurationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoGroupConfigurationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoGroupConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.CognitoGroupConfigurationDetail_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *CognitoGroupConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoGroupConfigurationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoGroupConfigurationDetail_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.CognitoGroupConfigurationDetail_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
+}
+
 // The type of entity that a policy store maps to groups from an Amazon Cognito
 // user pool identity source.
 //
@@ -600,6 +1088,28 @@ type CognitoGroupConfigurationItem struct {
 	GroupEntityType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CognitoGroupConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoGroupConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoGroupConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.CognitoGroupConfigurationItem_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *CognitoGroupConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoGroupConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoGroupConfigurationItem_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.CognitoGroupConfigurationItem_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
 }
 
 // The configuration for an identity source that represents a connection to an
@@ -638,6 +1148,39 @@ type CognitoUserPoolConfiguration struct {
 	GroupConfiguration *CognitoGroupConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoUserPoolConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoUserPoolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.CognitoUserPoolConfiguration_clientIds, v.ClientIds)
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.CognitoUserPoolConfiguration_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolArn != nil {
+		s.WriteString(schemas.CognitoUserPoolConfiguration_userPoolArn, *v.UserPoolArn)
+	}
+}
+func (v *CognitoUserPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoUserPoolConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoUserPoolConfiguration_clientIds:
+			return deserializeClientIds(d, schemas.CognitoUserPoolConfiguration_clientIds, &v.ClientIds)
+		case schemas.CognitoUserPoolConfiguration_groupConfiguration:
+			v.GroupConfiguration = &CognitoGroupConfiguration{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.CognitoUserPoolConfiguration_userPoolArn:
+			v.UserPoolArn = new(string)
+			return d.ReadString(schemas.CognitoUserPoolConfiguration_userPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
 }
 
 // The configuration for an identity source that represents a connection to an
@@ -690,6 +1233,45 @@ type CognitoUserPoolConfigurationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CognitoUserPoolConfigurationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoUserPoolConfigurationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoUserPoolConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.CognitoUserPoolConfigurationDetail_clientIds, v.ClientIds)
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.CognitoUserPoolConfigurationDetail_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.CognitoUserPoolConfigurationDetail_issuer, *v.Issuer)
+	}
+	if v.UserPoolArn != nil {
+		s.WriteString(schemas.CognitoUserPoolConfigurationDetail_userPoolArn, *v.UserPoolArn)
+	}
+}
+func (v *CognitoUserPoolConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoUserPoolConfigurationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoUserPoolConfigurationDetail_clientIds:
+			return deserializeClientIds(d, schemas.CognitoUserPoolConfigurationDetail_clientIds, &v.ClientIds)
+		case schemas.CognitoUserPoolConfigurationDetail_groupConfiguration:
+			v.GroupConfiguration = &CognitoGroupConfigurationDetail{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.CognitoUserPoolConfigurationDetail_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.CognitoUserPoolConfigurationDetail_issuer, v.Issuer)
+		case schemas.CognitoUserPoolConfigurationDetail_userPoolArn:
+			v.UserPoolArn = new(string)
+			return d.ReadString(schemas.CognitoUserPoolConfigurationDetail_userPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
+}
+
 // The configuration for an identity source that represents a connection to an
 // Amazon Cognito user pool used as an identity provider for Verified Permissions.
 //
@@ -740,6 +1322,45 @@ type CognitoUserPoolConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CognitoUserPoolConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoUserPoolConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoUserPoolConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.CognitoUserPoolConfigurationItem_clientIds, v.ClientIds)
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.CognitoUserPoolConfigurationItem_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.CognitoUserPoolConfigurationItem_issuer, *v.Issuer)
+	}
+	if v.UserPoolArn != nil {
+		s.WriteString(schemas.CognitoUserPoolConfigurationItem_userPoolArn, *v.UserPoolArn)
+	}
+}
+func (v *CognitoUserPoolConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoUserPoolConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoUserPoolConfigurationItem_clientIds:
+			return deserializeClientIds(d, schemas.CognitoUserPoolConfigurationItem_clientIds, &v.ClientIds)
+		case schemas.CognitoUserPoolConfigurationItem_groupConfiguration:
+			v.GroupConfiguration = &CognitoGroupConfigurationItem{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.CognitoUserPoolConfigurationItem_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.CognitoUserPoolConfigurationItem_issuer, v.Issuer)
+		case schemas.CognitoUserPoolConfigurationItem_userPoolArn:
+			v.UserPoolArn = new(string)
+			return d.ReadString(schemas.CognitoUserPoolConfigurationItem_userPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
+}
+
 // Contains configuration information used when creating a new identity source.
 //
 // This data type is used as a request parameter for the [CreateIdentitySource] operation.
@@ -772,6 +1393,14 @@ type ConfigurationMemberCognitoUserPoolConfiguration struct {
 }
 
 func (*ConfigurationMemberCognitoUserPoolConfiguration) isConfiguration() {}
+func (v *ConfigurationMemberCognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Configuration_cognitoUserPoolConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConfigurationMemberCognitoUserPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
 // or identity source, that Verified Permissions can use to generate entities from
@@ -787,6 +1416,14 @@ type ConfigurationMemberOpenIdConnectConfiguration struct {
 }
 
 func (*ConfigurationMemberOpenIdConnectConfiguration) isConfiguration() {}
+func (v *ConfigurationMemberOpenIdConnectConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Configuration_openIdConnectConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConfigurationMemberOpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration information about an identity source.
 //
@@ -820,6 +1457,14 @@ type ConfigurationDetailMemberCognitoUserPoolConfiguration struct {
 }
 
 func (*ConfigurationDetailMemberCognitoUserPoolConfiguration) isConfigurationDetail() {}
+func (v *ConfigurationDetailMemberCognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationDetail_cognitoUserPoolConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConfigurationDetailMemberCognitoUserPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
 // or identity source, that Verified Permissions can use to generate entities from
@@ -835,6 +1480,14 @@ type ConfigurationDetailMemberOpenIdConnectConfiguration struct {
 }
 
 func (*ConfigurationDetailMemberOpenIdConnectConfiguration) isConfigurationDetail() {}
+func (v *ConfigurationDetailMemberOpenIdConnectConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationDetail_openIdConnectConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConfigurationDetailMemberOpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration information about an identity source.
 //
@@ -868,6 +1521,14 @@ type ConfigurationItemMemberCognitoUserPoolConfiguration struct {
 }
 
 func (*ConfigurationItemMemberCognitoUserPoolConfiguration) isConfigurationItem() {}
+func (v *ConfigurationItemMemberCognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationItem_cognitoUserPoolConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConfigurationItemMemberCognitoUserPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
 // or identity source, that Verified Permissions can use to generate entities from
@@ -883,6 +1544,14 @@ type ConfigurationItemMemberOpenIdConnectConfiguration struct {
 }
 
 func (*ConfigurationItemMemberOpenIdConnectConfiguration) isConfigurationItem() {}
+func (v *ConfigurationItemMemberOpenIdConnectConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationItem_openIdConnectConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConfigurationItemMemberOpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains additional details about the context of the request. Verified
 // Permissions evaluates this information in an authorization request as part of
@@ -920,6 +1589,12 @@ type ContextDefinitionMemberCedarJson struct {
 }
 
 func (*ContextDefinitionMemberCedarJson) isContextDefinition() {}
+func (v *ContextDefinitionMemberCedarJson) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.ContextDefinition_cedarJson, v.Value)
+}
+func (v *ContextDefinitionMemberCedarJson) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.ContextDefinition_cedarJson, &v.Value)
+}
 
 // An list of attributes that are needed to successfully evaluate an authorization
 // request. Each attribute in this array must include a map of a data type and its
@@ -933,6 +1608,12 @@ type ContextDefinitionMemberContextMap struct {
 }
 
 func (*ContextDefinitionMemberContextMap) isContextDefinition() {}
+func (v *ContextDefinitionMemberContextMap) Serialize(s smithy.ShapeSerializer) {
+	serializeContextMap(s, schemas.ContextDefinition_contextMap, v.Value)
+}
+func (v *ContextDefinitionMemberContextMap) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeContextMap(d, schemas.ContextDefinition_contextMap, &v.Value)
+}
 
 // Contains information about one of the policies that determined an authorization
 // decision.
@@ -955,6 +1636,28 @@ type DeterminingPolicyItem struct {
 	PolicyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeterminingPolicyItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeterminingPolicyItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeterminingPolicyItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DeterminingPolicyItem_policyId, *v.PolicyId)
+	}
+}
+func (v *DeterminingPolicyItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeterminingPolicyItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeterminingPolicyItem_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.DeterminingPolicyItem_policyId, v.PolicyId)
+		}
+		return nil
+	})
 }
 
 // A structure that contains the encryption configuration for the policy store and
@@ -981,6 +1684,14 @@ type EncryptionSettingsMemberDefault struct {
 }
 
 func (*EncryptionSettingsMemberDefault) isEncryptionSettings() {}
+func (v *EncryptionSettingsMemberDefault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionSettings_default)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionSettingsMemberDefault) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The KMS encryption settings for this policy store to encrypt data with. It will
 // contain the customer-managed KMS key, and a user-defined encryption context.
@@ -991,6 +1702,14 @@ type EncryptionSettingsMemberKmsEncryptionSettings struct {
 }
 
 func (*EncryptionSettingsMemberKmsEncryptionSettings) isEncryptionSettings() {}
+func (v *EncryptionSettingsMemberKmsEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionSettings_kmsEncryptionSettings)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionSettingsMemberKmsEncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure that contains the encryption configuration for the policy store and
 // child resources.
@@ -1016,6 +1735,14 @@ type EncryptionStateMemberDefault struct {
 }
 
 func (*EncryptionStateMemberDefault) isEncryptionState() {}
+func (v *EncryptionStateMemberDefault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionState_default)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionStateMemberDefault) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The KMS encryption settings currently configured for this policy store to
 // encrypt data with. It contains the customer-managed KMS key, and a user-defined
@@ -1027,6 +1754,14 @@ type EncryptionStateMemberKmsEncryptionState struct {
 }
 
 func (*EncryptionStateMemberKmsEncryptionState) isEncryptionState() {}
+func (v *EncryptionStateMemberKmsEncryptionState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionState_kmsEncryptionState)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionStateMemberKmsEncryptionState) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the list of entities to be considered during an authorization request.
 // This includes all principals, resources, and actions required to successfully
@@ -1058,6 +1793,12 @@ type EntitiesDefinitionMemberCedarJson struct {
 }
 
 func (*EntitiesDefinitionMemberCedarJson) isEntitiesDefinition() {}
+func (v *EntitiesDefinitionMemberCedarJson) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.EntitiesDefinition_cedarJson, v.Value)
+}
+func (v *EntitiesDefinitionMemberCedarJson) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.EntitiesDefinition_cedarJson, &v.Value)
+}
 
 // An array of entities that are needed to successfully evaluate an authorization
 // request. Each entity in this array must include an identifier for the entity,
@@ -1072,6 +1813,12 @@ type EntitiesDefinitionMemberEntityList struct {
 }
 
 func (*EntitiesDefinitionMemberEntityList) isEntitiesDefinition() {}
+func (v *EntitiesDefinitionMemberEntityList) Serialize(s smithy.ShapeSerializer) {
+	serializeEntityList(s, schemas.EntitiesDefinition_entityList, v.Value)
+}
+func (v *EntitiesDefinitionMemberEntityList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeEntityList(d, schemas.EntitiesDefinition_entityList, &v.Value)
+}
 
 // Contains the identifier of an entity, including its ID and type.
 //
@@ -1101,6 +1848,34 @@ type EntityIdentifier struct {
 	EntityType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.EntityIdentifier_entityId, *v.EntityId)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.EntityIdentifier_entityType, *v.EntityType)
+	}
+}
+func (v *EntityIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityIdentifier_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.EntityIdentifier_entityId, v.EntityId)
+		case schemas.EntityIdentifier_entityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.EntityIdentifier_entityType, v.EntityType)
+		}
+		return nil
+	})
 }
 
 // Contains information about an entity that can be referenced in a Cedar policy.
@@ -1138,6 +1913,39 @@ type EntityItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityAttributes(s, schemas.EntityItem_attributes, v.Attributes)
+	if v.Identifier != nil {
+		s.WriteStruct(schemas.EntityItem_identifier)
+		v.Identifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParentList(s, schemas.EntityItem_parents, v.Parents)
+	serializeEntityCedarTags(s, schemas.EntityItem_tags, v.Tags)
+}
+func (v *EntityItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityItem_attributes:
+			return deserializeEntityAttributes(d, schemas.EntityItem_attributes, &v.Attributes)
+		case schemas.EntityItem_identifier:
+			v.Identifier = &EntityIdentifier{}
+			return v.Identifier.Deserialize(d)
+		case schemas.EntityItem_parents:
+			return deserializeParentList(d, schemas.EntityItem_parents, &v.Parents)
+		case schemas.EntityItem_tags:
+			return deserializeEntityCedarTags(d, schemas.EntityItem_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Contains information about a principal or resource that can be referenced in a
 // Cedar policy.
 //
@@ -1164,6 +1972,14 @@ type EntityReferenceMemberIdentifier struct {
 }
 
 func (*EntityReferenceMemberIdentifier) isEntityReference() {}
+func (v *EntityReferenceMemberIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityReference_identifier)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityReferenceMemberIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Used to indicate that a principal or resource is not specified. This can be
 // used to search for policies that are not associated with a specific principal or
@@ -1175,6 +1991,12 @@ type EntityReferenceMemberUnspecified struct {
 }
 
 func (*EntityReferenceMemberUnspecified) isEntityReference() {}
+func (v *EntityReferenceMemberUnspecified) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.EntityReference_unspecified, v.Value)
+}
+func (v *EntityReferenceMemberUnspecified) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.EntityReference_unspecified, &v.Value)
+}
 
 // Contains a description of an evaluation error.
 //
@@ -1191,6 +2013,28 @@ type EvaluationErrorItem struct {
 	ErrorDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationErrorItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationErrorItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationErrorItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorDescription != nil {
+		s.WriteString(schemas.EvaluationErrorItem_errorDescription, *v.ErrorDescription)
+	}
+}
+func (v *EvaluationErrorItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationErrorItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationErrorItem_errorDescription:
+			v.ErrorDescription = new(string)
+			return d.ReadString(schemas.EvaluationErrorItem_errorDescription, v.ErrorDescription)
+		}
+		return nil
+	})
 }
 
 // A structure that contains configuration of the identity source.
@@ -1239,6 +2083,47 @@ type IdentitySourceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentitySourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentitySourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentitySourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.IdentitySourceDetails_clientIds, v.ClientIds)
+	if v.DiscoveryUrl != nil {
+		s.WriteString(schemas.IdentitySourceDetails_discoveryUrl, *v.DiscoveryUrl)
+	}
+	if v.OpenIdIssuer != "" {
+		s.WriteString(schemas.IdentitySourceDetails_openIdIssuer, string(v.OpenIdIssuer))
+	}
+	if v.UserPoolArn != nil {
+		s.WriteString(schemas.IdentitySourceDetails_userPoolArn, *v.UserPoolArn)
+	}
+}
+func (v *IdentitySourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentitySourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentitySourceDetails_clientIds:
+			return deserializeClientIds(d, schemas.IdentitySourceDetails_clientIds, &v.ClientIds)
+		case schemas.IdentitySourceDetails_discoveryUrl:
+			v.DiscoveryUrl = new(string)
+			return d.ReadString(schemas.IdentitySourceDetails_discoveryUrl, v.DiscoveryUrl)
+		case schemas.IdentitySourceDetails_openIdIssuer:
+			var ev string
+			if err := d.ReadString(schemas.IdentitySourceDetails_openIdIssuer, &ev); err != nil {
+				return err
+			}
+			v.OpenIdIssuer = OpenIdIssuer(ev)
+			return nil
+		case schemas.IdentitySourceDetails_userPoolArn:
+			v.UserPoolArn = new(string)
+			return d.ReadString(schemas.IdentitySourceDetails_userPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
+}
+
 // A structure that defines characteristics of an identity source that you can use
 // to filter.
 //
@@ -1252,6 +2137,28 @@ type IdentitySourceFilter struct {
 	PrincipalEntityType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdentitySourceFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentitySourceFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentitySourceFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalEntityType != nil {
+		s.WriteString(schemas.IdentitySourceFilter_principalEntityType, *v.PrincipalEntityType)
+	}
+}
+func (v *IdentitySourceFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentitySourceFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentitySourceFilter_principalEntityType:
+			v.PrincipalEntityType = new(string)
+			return d.ReadString(schemas.IdentitySourceFilter_principalEntityType, v.PrincipalEntityType)
+		}
+		return nil
+	})
 }
 
 // A structure that defines an identity source.
@@ -1299,6 +2206,63 @@ type IdentitySourceItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentitySourceItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentitySourceItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentitySourceItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationItem(s, schemas.IdentitySourceItem_configuration, v.Configuration)
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.IdentitySourceItem_createdDate, *v.CreatedDate)
+	}
+	if v.Details != nil {
+		s.WriteStruct(schemas.IdentitySourceItem_details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentitySourceId != nil {
+		s.WriteString(schemas.IdentitySourceItem_identitySourceId, *v.IdentitySourceId)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.IdentitySourceItem_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.IdentitySourceItem_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.PrincipalEntityType != nil {
+		s.WriteString(schemas.IdentitySourceItem_principalEntityType, *v.PrincipalEntityType)
+	}
+}
+func (v *IdentitySourceItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentitySourceItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentitySourceItem_configuration:
+			return deserializeConfigurationItem(d, schemas.IdentitySourceItem_configuration, &v.Configuration)
+		case schemas.IdentitySourceItem_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.IdentitySourceItem_createdDate, v.CreatedDate)
+		case schemas.IdentitySourceItem_details:
+			v.Details = &IdentitySourceItemDetails{}
+			return v.Details.Deserialize(d)
+		case schemas.IdentitySourceItem_identitySourceId:
+			v.IdentitySourceId = new(string)
+			return d.ReadString(schemas.IdentitySourceItem_identitySourceId, v.IdentitySourceId)
+		case schemas.IdentitySourceItem_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.IdentitySourceItem_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.IdentitySourceItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.IdentitySourceItem_policyStoreId, v.PolicyStoreId)
+		case schemas.IdentitySourceItem_principalEntityType:
+			v.PrincipalEntityType = new(string)
+			return d.ReadString(schemas.IdentitySourceItem_principalEntityType, v.PrincipalEntityType)
+		}
+		return nil
+	})
+}
+
 // A structure that contains configuration of the identity source.
 //
 // This data type was a response parameter for the [ListIdentitySources] operation. Replaced by [ConfigurationItem].
@@ -1343,6 +2307,47 @@ type IdentitySourceItemDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentitySourceItemDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentitySourceItemDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentitySourceItemDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.IdentitySourceItemDetails_clientIds, v.ClientIds)
+	if v.DiscoveryUrl != nil {
+		s.WriteString(schemas.IdentitySourceItemDetails_discoveryUrl, *v.DiscoveryUrl)
+	}
+	if v.OpenIdIssuer != "" {
+		s.WriteString(schemas.IdentitySourceItemDetails_openIdIssuer, string(v.OpenIdIssuer))
+	}
+	if v.UserPoolArn != nil {
+		s.WriteString(schemas.IdentitySourceItemDetails_userPoolArn, *v.UserPoolArn)
+	}
+}
+func (v *IdentitySourceItemDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentitySourceItemDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentitySourceItemDetails_clientIds:
+			return deserializeClientIds(d, schemas.IdentitySourceItemDetails_clientIds, &v.ClientIds)
+		case schemas.IdentitySourceItemDetails_discoveryUrl:
+			v.DiscoveryUrl = new(string)
+			return d.ReadString(schemas.IdentitySourceItemDetails_discoveryUrl, v.DiscoveryUrl)
+		case schemas.IdentitySourceItemDetails_openIdIssuer:
+			var ev string
+			if err := d.ReadString(schemas.IdentitySourceItemDetails_openIdIssuer, &ev); err != nil {
+				return err
+			}
+			v.OpenIdIssuer = OpenIdIssuer(ev)
+			return nil
+		case schemas.IdentitySourceItemDetails_userPoolArn:
+			v.UserPoolArn = new(string)
+			return d.ReadString(schemas.IdentitySourceItemDetails_userPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the KMS encryption configuration for the policy
 // store. The encryption settings determine what customer-managed KMS key will be
 // used to encrypt all resources within the policy store, and any user-defined
@@ -1370,6 +2375,31 @@ type KmsEncryptionSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KmsEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KmsEncryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KmsEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncryptionContext(s, schemas.KmsEncryptionSettings_encryptionContext, v.EncryptionContext)
+	if v.Key != nil {
+		s.WriteString(schemas.KmsEncryptionSettings_key, *v.Key)
+	}
+}
+func (v *KmsEncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KmsEncryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KmsEncryptionSettings_encryptionContext:
+			return deserializeEncryptionContext(d, schemas.KmsEncryptionSettings_encryptionContext, &v.EncryptionContext)
+		case schemas.KmsEncryptionSettings_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.KmsEncryptionSettings_key, v.Key)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the KMS encryption configuration for the policy
 // store. The encryption state shows what customer-managed KMS key is being used to
 // encrypt all resources within the policy store, and any user-defined context
@@ -1395,6 +2425,31 @@ type KmsEncryptionState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KmsEncryptionState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KmsEncryptionState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KmsEncryptionState) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncryptionContext(s, schemas.KmsEncryptionState_encryptionContext, v.EncryptionContext)
+	if v.Key != nil {
+		s.WriteString(schemas.KmsEncryptionState_key, *v.Key)
+	}
+}
+func (v *KmsEncryptionState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KmsEncryptionState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KmsEncryptionState_encryptionContext:
+			return deserializeEncryptionContext(d, schemas.KmsEncryptionState_encryptionContext, &v.EncryptionContext)
+		case schemas.KmsEncryptionState_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.KmsEncryptionState_key, v.Key)
+		}
+		return nil
+	})
+}
+
 // The configuration of an OpenID Connect (OIDC) identity source for handling
 // access token claims. Contains the claim that you want to identify as the
 // principal in an authorization request, and the values of the aud claim, or
@@ -1414,6 +2469,31 @@ type OpenIdConnectAccessTokenConfiguration struct {
 	PrincipalIdClaim *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenIdConnectAccessTokenConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectAccessTokenConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectAccessTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfiguration_audiences, v.Audiences)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.OpenIdConnectAccessTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *OpenIdConnectAccessTokenConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectAccessTokenConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectAccessTokenConfiguration_audiences:
+			return deserializeAudiences(d, schemas.OpenIdConnectAccessTokenConfiguration_audiences, &v.Audiences)
+		case schemas.OpenIdConnectAccessTokenConfiguration_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectAccessTokenConfiguration_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
 }
 
 // The configuration of an OpenID Connect (OIDC) identity source for handling
@@ -1437,6 +2517,31 @@ type OpenIdConnectAccessTokenConfigurationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenIdConnectAccessTokenConfigurationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectAccessTokenConfigurationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectAccessTokenConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfigurationDetail_audiences, v.Audiences)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.OpenIdConnectAccessTokenConfigurationDetail_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *OpenIdConnectAccessTokenConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectAccessTokenConfigurationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectAccessTokenConfigurationDetail_audiences:
+			return deserializeAudiences(d, schemas.OpenIdConnectAccessTokenConfigurationDetail_audiences, &v.Audiences)
+		case schemas.OpenIdConnectAccessTokenConfigurationDetail_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectAccessTokenConfigurationDetail_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
+}
+
 // The configuration of an OpenID Connect (OIDC) identity source for handling
 // access token claims. Contains the claim that you want to identify as the
 // principal in an authorization request, and the values of the aud claim, or
@@ -1456,6 +2561,31 @@ type OpenIdConnectAccessTokenConfigurationItem struct {
 	PrincipalIdClaim *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenIdConnectAccessTokenConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectAccessTokenConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectAccessTokenConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfigurationItem_audiences, v.Audiences)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.OpenIdConnectAccessTokenConfigurationItem_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *OpenIdConnectAccessTokenConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectAccessTokenConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectAccessTokenConfigurationItem_audiences:
+			return deserializeAudiences(d, schemas.OpenIdConnectAccessTokenConfigurationItem_audiences, &v.Audiences)
+		case schemas.OpenIdConnectAccessTokenConfigurationItem_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectAccessTokenConfigurationItem_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
 }
 
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
@@ -1496,6 +2626,45 @@ type OpenIdConnectConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenIdConnectConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityIdPrefix != nil {
+		s.WriteString(schemas.OpenIdConnectConfiguration_entityIdPrefix, *v.EntityIdPrefix)
+	}
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.OpenIdConnectConfiguration_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.OpenIdConnectConfiguration_issuer, *v.Issuer)
+	}
+	serializeOpenIdConnectTokenSelection(s, schemas.OpenIdConnectConfiguration_tokenSelection, v.TokenSelection)
+}
+func (v *OpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectConfiguration_entityIdPrefix:
+			v.EntityIdPrefix = new(string)
+			return d.ReadString(schemas.OpenIdConnectConfiguration_entityIdPrefix, v.EntityIdPrefix)
+		case schemas.OpenIdConnectConfiguration_groupConfiguration:
+			v.GroupConfiguration = &OpenIdConnectGroupConfiguration{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.OpenIdConnectConfiguration_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.OpenIdConnectConfiguration_issuer, v.Issuer)
+		case schemas.OpenIdConnectConfiguration_tokenSelection:
+			return deserializeOpenIdConnectTokenSelection(d, schemas.OpenIdConnectConfiguration_tokenSelection, &v.TokenSelection)
+		}
+		return nil
+	})
+}
+
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
 // or identity source, that Verified Permissions can use to generate entities from
 // authenticated identities. It specifies the issuer URL, token type that you want
@@ -1532,6 +2701,45 @@ type OpenIdConnectConfigurationDetail struct {
 	GroupConfiguration *OpenIdConnectGroupConfigurationDetail
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenIdConnectConfigurationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectConfigurationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityIdPrefix != nil {
+		s.WriteString(schemas.OpenIdConnectConfigurationDetail_entityIdPrefix, *v.EntityIdPrefix)
+	}
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.OpenIdConnectConfigurationDetail_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.OpenIdConnectConfigurationDetail_issuer, *v.Issuer)
+	}
+	serializeOpenIdConnectTokenSelectionDetail(s, schemas.OpenIdConnectConfigurationDetail_tokenSelection, v.TokenSelection)
+}
+func (v *OpenIdConnectConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectConfigurationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectConfigurationDetail_entityIdPrefix:
+			v.EntityIdPrefix = new(string)
+			return d.ReadString(schemas.OpenIdConnectConfigurationDetail_entityIdPrefix, v.EntityIdPrefix)
+		case schemas.OpenIdConnectConfigurationDetail_groupConfiguration:
+			v.GroupConfiguration = &OpenIdConnectGroupConfigurationDetail{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.OpenIdConnectConfigurationDetail_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.OpenIdConnectConfigurationDetail_issuer, v.Issuer)
+		case schemas.OpenIdConnectConfigurationDetail_tokenSelection:
+			return deserializeOpenIdConnectTokenSelectionDetail(d, schemas.OpenIdConnectConfigurationDetail_tokenSelection, &v.TokenSelection)
+		}
+		return nil
+	})
 }
 
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
@@ -1572,6 +2780,45 @@ type OpenIdConnectConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenIdConnectConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityIdPrefix != nil {
+		s.WriteString(schemas.OpenIdConnectConfigurationItem_entityIdPrefix, *v.EntityIdPrefix)
+	}
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.OpenIdConnectConfigurationItem_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.OpenIdConnectConfigurationItem_issuer, *v.Issuer)
+	}
+	serializeOpenIdConnectTokenSelectionItem(s, schemas.OpenIdConnectConfigurationItem_tokenSelection, v.TokenSelection)
+}
+func (v *OpenIdConnectConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectConfigurationItem_entityIdPrefix:
+			v.EntityIdPrefix = new(string)
+			return d.ReadString(schemas.OpenIdConnectConfigurationItem_entityIdPrefix, v.EntityIdPrefix)
+		case schemas.OpenIdConnectConfigurationItem_groupConfiguration:
+			v.GroupConfiguration = &OpenIdConnectGroupConfigurationItem{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.OpenIdConnectConfigurationItem_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.OpenIdConnectConfigurationItem_issuer, v.Issuer)
+		case schemas.OpenIdConnectConfigurationItem_tokenSelection:
+			return deserializeOpenIdConnectTokenSelectionItem(d, schemas.OpenIdConnectConfigurationItem_tokenSelection, &v.TokenSelection)
+		}
+		return nil
+	})
+}
+
 // The claim in OIDC identity provider tokens that indicates a user's group
 // membership, and the entity type that you want to map it to. For example, this
 // object can map the contents of a groups claim to MyCorp::UserGroup .
@@ -1596,6 +2843,34 @@ type OpenIdConnectGroupConfiguration struct {
 	GroupEntityType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenIdConnectGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupClaim != nil {
+		s.WriteString(schemas.OpenIdConnectGroupConfiguration_groupClaim, *v.GroupClaim)
+	}
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.OpenIdConnectGroupConfiguration_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *OpenIdConnectGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectGroupConfiguration_groupClaim:
+			v.GroupClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectGroupConfiguration_groupClaim, v.GroupClaim)
+		case schemas.OpenIdConnectGroupConfiguration_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.OpenIdConnectGroupConfiguration_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
 }
 
 // The claim in OIDC identity provider tokens that indicates a user's group
@@ -1624,6 +2899,34 @@ type OpenIdConnectGroupConfigurationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenIdConnectGroupConfigurationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectGroupConfigurationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectGroupConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupClaim != nil {
+		s.WriteString(schemas.OpenIdConnectGroupConfigurationDetail_groupClaim, *v.GroupClaim)
+	}
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.OpenIdConnectGroupConfigurationDetail_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *OpenIdConnectGroupConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectGroupConfigurationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectGroupConfigurationDetail_groupClaim:
+			v.GroupClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectGroupConfigurationDetail_groupClaim, v.GroupClaim)
+		case schemas.OpenIdConnectGroupConfigurationDetail_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.OpenIdConnectGroupConfigurationDetail_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
+}
+
 // The claim in OIDC identity provider tokens that indicates a user's group
 // membership, and the entity type that you want to map it to. For example, this
 // object can map the contents of a groups claim to MyCorp::UserGroup .
@@ -1650,6 +2953,34 @@ type OpenIdConnectGroupConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenIdConnectGroupConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectGroupConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectGroupConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupClaim != nil {
+		s.WriteString(schemas.OpenIdConnectGroupConfigurationItem_groupClaim, *v.GroupClaim)
+	}
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.OpenIdConnectGroupConfigurationItem_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *OpenIdConnectGroupConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectGroupConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectGroupConfigurationItem_groupClaim:
+			v.GroupClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectGroupConfigurationItem_groupClaim, v.GroupClaim)
+		case schemas.OpenIdConnectGroupConfigurationItem_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.OpenIdConnectGroupConfigurationItem_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
+}
+
 // The configuration of an OpenID Connect (OIDC) identity source for handling
 // identity (ID) token claims. Contains the claim that you want to identify as the
 // principal in an authorization request, and the values of the aud claim, or
@@ -1670,6 +3001,31 @@ type OpenIdConnectIdentityTokenConfiguration struct {
 	PrincipalIdClaim *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenIdConnectIdentityTokenConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectIdentityTokenConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectIdentityTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfiguration_clientIds, v.ClientIds)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.OpenIdConnectIdentityTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *OpenIdConnectIdentityTokenConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectIdentityTokenConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectIdentityTokenConfiguration_clientIds:
+			return deserializeClientIds(d, schemas.OpenIdConnectIdentityTokenConfiguration_clientIds, &v.ClientIds)
+		case schemas.OpenIdConnectIdentityTokenConfiguration_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectIdentityTokenConfiguration_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
 }
 
 // The configuration of an OpenID Connect (OIDC) identity source for handling
@@ -1694,6 +3050,31 @@ type OpenIdConnectIdentityTokenConfigurationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenIdConnectIdentityTokenConfigurationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectIdentityTokenConfigurationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectIdentityTokenConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfigurationDetail_clientIds, v.ClientIds)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.OpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *OpenIdConnectIdentityTokenConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectIdentityTokenConfigurationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectIdentityTokenConfigurationDetail_clientIds:
+			return deserializeClientIds(d, schemas.OpenIdConnectIdentityTokenConfigurationDetail_clientIds, &v.ClientIds)
+		case schemas.OpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
+}
+
 // The configuration of an OpenID Connect (OIDC) identity source for handling
 // identity (ID) token claims. Contains the claim that you want to identify as the
 // principal in an authorization request, and the values of the aud claim, or
@@ -1714,6 +3095,31 @@ type OpenIdConnectIdentityTokenConfigurationItem struct {
 	PrincipalIdClaim *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenIdConnectIdentityTokenConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectIdentityTokenConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenIdConnectIdentityTokenConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfigurationItem_clientIds, v.ClientIds)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.OpenIdConnectIdentityTokenConfigurationItem_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *OpenIdConnectIdentityTokenConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenIdConnectIdentityTokenConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenIdConnectIdentityTokenConfigurationItem_clientIds:
+			return deserializeClientIds(d, schemas.OpenIdConnectIdentityTokenConfigurationItem_clientIds, &v.ClientIds)
+		case schemas.OpenIdConnectIdentityTokenConfigurationItem_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.OpenIdConnectIdentityTokenConfigurationItem_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
 }
 
 // The token type that you want to process from your OIDC identity provider. Your
@@ -1743,6 +3149,14 @@ type OpenIdConnectTokenSelectionMemberAccessTokenOnly struct {
 }
 
 func (*OpenIdConnectTokenSelectionMemberAccessTokenOnly) isOpenIdConnectTokenSelection() {}
+func (v *OpenIdConnectTokenSelectionMemberAccessTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectTokenSelection_accessTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OpenIdConnectTokenSelectionMemberAccessTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The OIDC configuration for processing identity (ID) tokens. Contains allowed
 // client ID claims, for example 1example23456789 , and the claim that you want to
@@ -1754,6 +3168,14 @@ type OpenIdConnectTokenSelectionMemberIdentityTokenOnly struct {
 }
 
 func (*OpenIdConnectTokenSelectionMemberIdentityTokenOnly) isOpenIdConnectTokenSelection() {}
+func (v *OpenIdConnectTokenSelectionMemberIdentityTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectTokenSelection_identityTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OpenIdConnectTokenSelectionMemberIdentityTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The token type that you want to process from your OIDC identity provider. Your
 // policy store can process either identity (ID) or access tokens from a given OIDC
@@ -1783,6 +3205,14 @@ type OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly struct {
 
 func (*OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly) isOpenIdConnectTokenSelectionDetail() {
 }
+func (v *OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectTokenSelectionDetail_accessTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The OIDC configuration for processing identity (ID) tokens. Contains allowed
 // client ID claims, for example 1example23456789 , and the claim that you want to
@@ -1794,6 +3224,14 @@ type OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly struct {
 }
 
 func (*OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly) isOpenIdConnectTokenSelectionDetail() {
+}
+func (v *OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectTokenSelectionDetail_identityTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The token type that you want to process from your OIDC identity provider. Your
@@ -1823,6 +3261,14 @@ type OpenIdConnectTokenSelectionItemMemberAccessTokenOnly struct {
 }
 
 func (*OpenIdConnectTokenSelectionItemMemberAccessTokenOnly) isOpenIdConnectTokenSelectionItem() {}
+func (v *OpenIdConnectTokenSelectionItemMemberAccessTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectTokenSelectionItem_accessTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OpenIdConnectTokenSelectionItemMemberAccessTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The OIDC configuration for processing identity (ID) tokens. Contains allowed
 // client ID claims, for example 1example23456789 , and the claim that you want to
@@ -1834,6 +3280,14 @@ type OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly struct {
 }
 
 func (*OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly) isOpenIdConnectTokenSelectionItem() {}
+func (v *OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenIdConnectTokenSelectionItem_identityTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure that contains the details for a Cedar policy definition. It
 // includes the policy type, a description, and a policy body. This is a top level
@@ -1861,6 +3315,14 @@ type PolicyDefinitionMemberStatic struct {
 }
 
 func (*PolicyDefinitionMemberStatic) isPolicyDefinition() {}
+func (v *PolicyDefinitionMemberStatic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDefinition_static)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyDefinitionMemberStatic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure that describes a policy that was instantiated from a template. The
 // template can specify placeholders for principal and resource . When you use [CreatePolicy] to
@@ -1875,6 +3337,14 @@ type PolicyDefinitionMemberTemplateLinked struct {
 }
 
 func (*PolicyDefinitionMemberTemplateLinked) isPolicyDefinition() {}
+func (v *PolicyDefinitionMemberTemplateLinked) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDefinition_templateLinked)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyDefinitionMemberTemplateLinked) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure that describes a policy definition. It must always have either an
 // static or a templateLinked element.
@@ -1899,6 +3369,14 @@ type PolicyDefinitionDetailMemberStatic struct {
 }
 
 func (*PolicyDefinitionDetailMemberStatic) isPolicyDefinitionDetail() {}
+func (v *PolicyDefinitionDetailMemberStatic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDefinitionDetail_static)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyDefinitionDetailMemberStatic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Information about a template-linked policy that was created by instantiating a
 // policy template.
@@ -1909,6 +3387,14 @@ type PolicyDefinitionDetailMemberTemplateLinked struct {
 }
 
 func (*PolicyDefinitionDetailMemberTemplateLinked) isPolicyDefinitionDetail() {}
+func (v *PolicyDefinitionDetailMemberTemplateLinked) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDefinitionDetail_templateLinked)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyDefinitionDetailMemberTemplateLinked) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure that describes a [PolicyDefinintion]. It will always have either an StaticPolicy or a
 // TemplateLinkedPolicy element.
@@ -1935,6 +3421,14 @@ type PolicyDefinitionItemMemberStatic struct {
 }
 
 func (*PolicyDefinitionItemMemberStatic) isPolicyDefinitionItem() {}
+func (v *PolicyDefinitionItemMemberStatic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDefinitionItem_static)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyDefinitionItemMemberStatic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Information about a template-linked policy that was created by instantiating a
 // policy template.
@@ -1945,6 +3439,14 @@ type PolicyDefinitionItemMemberTemplateLinked struct {
 }
 
 func (*PolicyDefinitionItemMemberTemplateLinked) isPolicyDefinitionItem() {}
+func (v *PolicyDefinitionItemMemberTemplateLinked) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDefinitionItem_templateLinked)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyDefinitionItemMemberTemplateLinked) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains information about a filter to refine policies returned in a query.
 //
@@ -1967,6 +3469,44 @@ type PolicyFilter struct {
 	Resource EntityReference
 
 	noSmithyDocumentSerde
+}
+
+func (v *PolicyFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyTemplateId != nil {
+		s.WriteString(schemas.PolicyFilter_policyTemplateId, *v.PolicyTemplateId)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.PolicyFilter_policyType, string(v.PolicyType))
+	}
+	serializeEntityReference(s, schemas.PolicyFilter_principal, v.Principal)
+	serializeEntityReference(s, schemas.PolicyFilter_resource, v.Resource)
+}
+func (v *PolicyFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyFilter_policyTemplateId:
+			v.PolicyTemplateId = new(string)
+			return d.ReadString(schemas.PolicyFilter_policyTemplateId, v.PolicyTemplateId)
+		case schemas.PolicyFilter_policyType:
+			var ev string
+			if err := d.ReadString(schemas.PolicyFilter_policyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = PolicyType(ev)
+			return nil
+		case schemas.PolicyFilter_principal:
+			return deserializeEntityReference(d, schemas.PolicyFilter_principal, &v.Principal)
+		case schemas.PolicyFilter_resource:
+			return deserializeEntityReference(d, schemas.PolicyFilter_resource, &v.Resource)
+		}
+		return nil
+	})
 }
 
 // Contains information about a policy.
@@ -2033,6 +3573,94 @@ type PolicyItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionIdentifierList(s, schemas.PolicyItem_actions, v.Actions)
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.PolicyItem_createdDate, *v.CreatedDate)
+	}
+	serializePolicyDefinitionItem(s, schemas.PolicyItem_definition, v.Definition)
+	if v.Effect != "" {
+		s.WriteString(schemas.PolicyItem_effect, string(v.Effect))
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.PolicyItem_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PolicyItem_name, *v.Name)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.PolicyItem_policyId, *v.PolicyId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.PolicyItem_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.PolicyItem_policyType, string(v.PolicyType))
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.PolicyItem_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.PolicyItem_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PolicyItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyItem_actions:
+			return deserializeActionIdentifierList(d, schemas.PolicyItem_actions, &v.Actions)
+		case schemas.PolicyItem_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.PolicyItem_createdDate, v.CreatedDate)
+		case schemas.PolicyItem_definition:
+			return deserializePolicyDefinitionItem(d, schemas.PolicyItem_definition, &v.Definition)
+		case schemas.PolicyItem_effect:
+			var ev string
+			if err := d.ReadString(schemas.PolicyItem_effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = PolicyEffect(ev)
+			return nil
+		case schemas.PolicyItem_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.PolicyItem_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.PolicyItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PolicyItem_name, v.Name)
+		case schemas.PolicyItem_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.PolicyItem_policyId, v.PolicyId)
+		case schemas.PolicyItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.PolicyItem_policyStoreId, v.PolicyStoreId)
+		case schemas.PolicyItem_policyType:
+			var ev string
+			if err := d.ReadString(schemas.PolicyItem_policyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = PolicyType(ev)
+			return nil
+		case schemas.PolicyItem_principal:
+			v.Principal = &EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		case schemas.PolicyItem_resource:
+			v.Resource = &EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains filters for the ListPolicyStoreAliases operation.
 type PolicyStoreAliasFilter struct {
 
@@ -2041,6 +3669,28 @@ type PolicyStoreAliasFilter struct {
 	PolicyStoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PolicyStoreAliasFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyStoreAliasFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyStoreAliasFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.PolicyStoreAliasFilter_policyStoreId, *v.PolicyStoreId)
+	}
+}
+func (v *PolicyStoreAliasFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyStoreAliasFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyStoreAliasFilter_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.PolicyStoreAliasFilter_policyStoreId, v.PolicyStoreId)
+		}
+		return nil
+	})
 }
 
 // Contains information about a policy store alias.
@@ -2081,6 +3731,56 @@ type PolicyStoreAliasItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyStoreAliasItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyStoreAliasItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyStoreAliasItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasArn != nil {
+		s.WriteString(schemas.PolicyStoreAliasItem_aliasArn, *v.AliasArn)
+	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.PolicyStoreAliasItem_aliasName, *v.AliasName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PolicyStoreAliasItem_createdAt, *v.CreatedAt)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.PolicyStoreAliasItem_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.PolicyStoreAliasItem_state, string(v.State))
+	}
+}
+func (v *PolicyStoreAliasItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyStoreAliasItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyStoreAliasItem_aliasArn:
+			v.AliasArn = new(string)
+			return d.ReadString(schemas.PolicyStoreAliasItem_aliasArn, v.AliasArn)
+		case schemas.PolicyStoreAliasItem_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.PolicyStoreAliasItem_aliasName, v.AliasName)
+		case schemas.PolicyStoreAliasItem_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PolicyStoreAliasItem_createdAt, v.CreatedAt)
+		case schemas.PolicyStoreAliasItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.PolicyStoreAliasItem_policyStoreId, v.PolicyStoreId)
+		case schemas.PolicyStoreAliasItem_state:
+			var ev string
+			if err := d.ReadString(schemas.PolicyStoreAliasItem_state, &ev); err != nil {
+				return err
+			}
+			v.State = AliasState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about a policy store.
 //
 // This data type is used as a response parameter for the [ListPolicyStores] operation.
@@ -2111,6 +3811,52 @@ type PolicyStoreItem struct {
 	LastUpdatedDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *PolicyStoreItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyStoreItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyStoreItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PolicyStoreItem_arn, *v.Arn)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.PolicyStoreItem_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PolicyStoreItem_description, *v.Description)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.PolicyStoreItem_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.PolicyStoreItem_policyStoreId, *v.PolicyStoreId)
+	}
+}
+func (v *PolicyStoreItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyStoreItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyStoreItem_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PolicyStoreItem_arn, v.Arn)
+		case schemas.PolicyStoreItem_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.PolicyStoreItem_createdDate, v.CreatedDate)
+		case schemas.PolicyStoreItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PolicyStoreItem_description, v.Description)
+		case schemas.PolicyStoreItem_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.PolicyStoreItem_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.PolicyStoreItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.PolicyStoreItem_policyStoreId, v.PolicyStoreId)
+		}
+		return nil
+	})
 }
 
 // Contains details about a policy template
@@ -2150,6 +3896,58 @@ type PolicyTemplateItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyTemplateItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyTemplateItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyTemplateItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.PolicyTemplateItem_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PolicyTemplateItem_description, *v.Description)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.PolicyTemplateItem_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PolicyTemplateItem_name, *v.Name)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.PolicyTemplateItem_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.PolicyTemplateId != nil {
+		s.WriteString(schemas.PolicyTemplateItem_policyTemplateId, *v.PolicyTemplateId)
+	}
+}
+func (v *PolicyTemplateItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyTemplateItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyTemplateItem_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.PolicyTemplateItem_createdDate, v.CreatedDate)
+		case schemas.PolicyTemplateItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PolicyTemplateItem_description, v.Description)
+		case schemas.PolicyTemplateItem_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.PolicyTemplateItem_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.PolicyTemplateItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PolicyTemplateItem_name, v.Name)
+		case schemas.PolicyTemplateItem_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.PolicyTemplateItem_policyStoreId, v.PolicyStoreId)
+		case schemas.PolicyTemplateItem_policyTemplateId:
+			v.PolicyTemplateId = new(string)
+			return d.ReadString(schemas.PolicyTemplateItem_policyTemplateId, v.PolicyTemplateId)
+		}
+		return nil
+	})
+}
+
 // Contains information about a resource conflict.
 type ResourceConflict struct {
 
@@ -2164,6 +3962,38 @@ type ResourceConflict struct {
 	ResourceType ResourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceConflict) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceConflict)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceConflict) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ResourceConflict_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ResourceConflict_resourceType, string(v.ResourceType))
+	}
+}
+func (v *ResourceConflict) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceConflict, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceConflict_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResourceConflict_resourceId, v.ResourceId)
+		case schemas.ResourceConflict_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceConflict_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains a list of principal types, resource types, and actions that can be
@@ -2192,6 +4022,12 @@ type SchemaDefinitionMemberCedarJson struct {
 }
 
 func (*SchemaDefinitionMemberCedarJson) isSchemaDefinition() {}
+func (v *SchemaDefinitionMemberCedarJson) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SchemaDefinition_cedarJson, v.Value)
+}
+func (v *SchemaDefinitionMemberCedarJson) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SchemaDefinition_cedarJson, &v.Value)
+}
 
 // Contains information about a static policy.
 //
@@ -2209,6 +4045,34 @@ type StaticPolicyDefinition struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StaticPolicyDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StaticPolicyDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StaticPolicyDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.StaticPolicyDefinition_description, *v.Description)
+	}
+	if v.Statement != nil {
+		s.WriteString(schemas.StaticPolicyDefinition_statement, *v.Statement)
+	}
+}
+func (v *StaticPolicyDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StaticPolicyDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StaticPolicyDefinition_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StaticPolicyDefinition_description, v.Description)
+		case schemas.StaticPolicyDefinition_statement:
+			v.Statement = new(string)
+			return d.ReadString(schemas.StaticPolicyDefinition_statement, v.Statement)
+		}
+		return nil
+	})
 }
 
 // A structure that contains details about a static policy. It includes the
@@ -2232,6 +4096,34 @@ type StaticPolicyDefinitionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StaticPolicyDefinitionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StaticPolicyDefinitionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StaticPolicyDefinitionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.StaticPolicyDefinitionDetail_description, *v.Description)
+	}
+	if v.Statement != nil {
+		s.WriteString(schemas.StaticPolicyDefinitionDetail_statement, *v.Statement)
+	}
+}
+func (v *StaticPolicyDefinitionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StaticPolicyDefinitionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StaticPolicyDefinitionDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StaticPolicyDefinitionDetail_description, v.Description)
+		case schemas.StaticPolicyDefinitionDetail_statement:
+			v.Statement = new(string)
+			return d.ReadString(schemas.StaticPolicyDefinitionDetail_statement, v.Statement)
+		}
+		return nil
+	})
+}
+
 // A structure that contains details about a static policy. It includes the
 // description and policy statement.
 //
@@ -2246,6 +4138,28 @@ type StaticPolicyDefinitionItem struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StaticPolicyDefinitionItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StaticPolicyDefinitionItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StaticPolicyDefinitionItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.StaticPolicyDefinitionItem_description, *v.Description)
+	}
+}
+func (v *StaticPolicyDefinitionItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StaticPolicyDefinitionItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StaticPolicyDefinitionItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StaticPolicyDefinitionItem_description, v.Description)
+		}
+		return nil
+	})
 }
 
 // Contains information about a policy created by instantiating a policy template.
@@ -2267,6 +4181,44 @@ type TemplateLinkedPolicyDefinition struct {
 	Resource *EntityIdentifier
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateLinkedPolicyDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateLinkedPolicyDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateLinkedPolicyDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyTemplateId != nil {
+		s.WriteString(schemas.TemplateLinkedPolicyDefinition_policyTemplateId, *v.PolicyTemplateId)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.TemplateLinkedPolicyDefinition_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.TemplateLinkedPolicyDefinition_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TemplateLinkedPolicyDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateLinkedPolicyDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateLinkedPolicyDefinition_policyTemplateId:
+			v.PolicyTemplateId = new(string)
+			return d.ReadString(schemas.TemplateLinkedPolicyDefinition_policyTemplateId, v.PolicyTemplateId)
+		case schemas.TemplateLinkedPolicyDefinition_principal:
+			v.Principal = &EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		case schemas.TemplateLinkedPolicyDefinition_resource:
+			v.Resource = &EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about a policy that was created by instantiating a policy
@@ -2291,6 +4243,44 @@ type TemplateLinkedPolicyDefinitionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateLinkedPolicyDefinitionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateLinkedPolicyDefinitionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateLinkedPolicyDefinitionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyTemplateId != nil {
+		s.WriteString(schemas.TemplateLinkedPolicyDefinitionDetail_policyTemplateId, *v.PolicyTemplateId)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.TemplateLinkedPolicyDefinitionDetail_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.TemplateLinkedPolicyDefinitionDetail_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TemplateLinkedPolicyDefinitionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateLinkedPolicyDefinitionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateLinkedPolicyDefinitionDetail_policyTemplateId:
+			v.PolicyTemplateId = new(string)
+			return d.ReadString(schemas.TemplateLinkedPolicyDefinitionDetail_policyTemplateId, v.PolicyTemplateId)
+		case schemas.TemplateLinkedPolicyDefinitionDetail_principal:
+			v.Principal = &EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		case schemas.TemplateLinkedPolicyDefinitionDetail_resource:
+			v.Resource = &EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information about a policy created by instantiating a policy template.
 type TemplateLinkedPolicyDefinitionItem struct {
 
@@ -2312,6 +4302,44 @@ type TemplateLinkedPolicyDefinitionItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateLinkedPolicyDefinitionItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateLinkedPolicyDefinitionItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateLinkedPolicyDefinitionItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyTemplateId != nil {
+		s.WriteString(schemas.TemplateLinkedPolicyDefinitionItem_policyTemplateId, *v.PolicyTemplateId)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.TemplateLinkedPolicyDefinitionItem_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.TemplateLinkedPolicyDefinitionItem_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TemplateLinkedPolicyDefinitionItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateLinkedPolicyDefinitionItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateLinkedPolicyDefinitionItem_policyTemplateId:
+			v.PolicyTemplateId = new(string)
+			return d.ReadString(schemas.TemplateLinkedPolicyDefinitionItem_policyTemplateId, v.PolicyTemplateId)
+		case schemas.TemplateLinkedPolicyDefinitionItem_principal:
+			v.Principal = &EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		case schemas.TemplateLinkedPolicyDefinitionItem_resource:
+			v.Resource = &EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The user group entities from an Amazon Cognito user pool identity source.
 type UpdateCognitoGroupConfiguration struct {
 
@@ -2322,6 +4350,28 @@ type UpdateCognitoGroupConfiguration struct {
 	GroupEntityType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateCognitoGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCognitoGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCognitoGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.UpdateCognitoGroupConfiguration_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *UpdateCognitoGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCognitoGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCognitoGroupConfiguration_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.UpdateCognitoGroupConfiguration_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
 }
 
 // Contains configuration details of a Amazon Cognito user pool for use with an
@@ -2346,6 +4396,39 @@ type UpdateCognitoUserPoolConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCognitoUserPoolConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCognitoUserPoolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.UpdateCognitoUserPoolConfiguration_clientIds, v.ClientIds)
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.UpdateCognitoUserPoolConfiguration_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolArn != nil {
+		s.WriteString(schemas.UpdateCognitoUserPoolConfiguration_userPoolArn, *v.UserPoolArn)
+	}
+}
+func (v *UpdateCognitoUserPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCognitoUserPoolConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCognitoUserPoolConfiguration_clientIds:
+			return deserializeClientIds(d, schemas.UpdateCognitoUserPoolConfiguration_clientIds, &v.ClientIds)
+		case schemas.UpdateCognitoUserPoolConfiguration_groupConfiguration:
+			v.GroupConfiguration = &UpdateCognitoGroupConfiguration{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.UpdateCognitoUserPoolConfiguration_userPoolArn:
+			v.UserPoolArn = new(string)
+			return d.ReadString(schemas.UpdateCognitoUserPoolConfiguration_userPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
+}
+
 // Contains an update to replace the configuration in an existing identity source.
 //
 // The following types satisfy this interface:
@@ -2364,6 +4447,14 @@ type UpdateConfigurationMemberCognitoUserPoolConfiguration struct {
 }
 
 func (*UpdateConfigurationMemberCognitoUserPoolConfiguration) isUpdateConfiguration() {}
+func (v *UpdateConfigurationMemberCognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfiguration_cognitoUserPoolConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateConfigurationMemberCognitoUserPoolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
 // or identity source, that Verified Permissions can use to generate entities from
@@ -2376,6 +4467,14 @@ type UpdateConfigurationMemberOpenIdConnectConfiguration struct {
 }
 
 func (*UpdateConfigurationMemberOpenIdConnectConfiguration) isUpdateConfiguration() {}
+func (v *UpdateConfigurationMemberOpenIdConnectConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfiguration_openIdConnectConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateConfigurationMemberOpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The configuration of an OpenID Connect (OIDC) identity source for handling
 // access token claims. Contains the claim that you want to identify as the
@@ -2396,6 +4495,31 @@ type UpdateOpenIdConnectAccessTokenConfiguration struct {
 	PrincipalIdClaim *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateOpenIdConnectAccessTokenConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpenIdConnectAccessTokenConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpenIdConnectAccessTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudiences(s, schemas.UpdateOpenIdConnectAccessTokenConfiguration_audiences, v.Audiences)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.UpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *UpdateOpenIdConnectAccessTokenConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpenIdConnectAccessTokenConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOpenIdConnectAccessTokenConfiguration_audiences:
+			return deserializeAudiences(d, schemas.UpdateOpenIdConnectAccessTokenConfiguration_audiences, &v.Audiences)
+		case schemas.UpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.UpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
 }
 
 // Contains configuration details of an OpenID Connect (OIDC) identity provider,
@@ -2436,6 +4560,45 @@ type UpdateOpenIdConnectConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpenIdConnectConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpenIdConnectConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpenIdConnectConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityIdPrefix != nil {
+		s.WriteString(schemas.UpdateOpenIdConnectConfiguration_entityIdPrefix, *v.EntityIdPrefix)
+	}
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.UpdateOpenIdConnectConfiguration_groupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.UpdateOpenIdConnectConfiguration_issuer, *v.Issuer)
+	}
+	serializeUpdateOpenIdConnectTokenSelection(s, schemas.UpdateOpenIdConnectConfiguration_tokenSelection, v.TokenSelection)
+}
+func (v *UpdateOpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpenIdConnectConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOpenIdConnectConfiguration_entityIdPrefix:
+			v.EntityIdPrefix = new(string)
+			return d.ReadString(schemas.UpdateOpenIdConnectConfiguration_entityIdPrefix, v.EntityIdPrefix)
+		case schemas.UpdateOpenIdConnectConfiguration_groupConfiguration:
+			v.GroupConfiguration = &UpdateOpenIdConnectGroupConfiguration{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.UpdateOpenIdConnectConfiguration_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.UpdateOpenIdConnectConfiguration_issuer, v.Issuer)
+		case schemas.UpdateOpenIdConnectConfiguration_tokenSelection:
+			return deserializeUpdateOpenIdConnectTokenSelection(d, schemas.UpdateOpenIdConnectConfiguration_tokenSelection, &v.TokenSelection)
+		}
+		return nil
+	})
+}
+
 // The claim in OIDC identity provider tokens that indicates a user's group
 // membership, and the entity type that you want to map it to. For example, this
 // object can map the contents of a groups claim to MyCorp::UserGroup .
@@ -2462,6 +4625,34 @@ type UpdateOpenIdConnectGroupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpenIdConnectGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpenIdConnectGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpenIdConnectGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupClaim != nil {
+		s.WriteString(schemas.UpdateOpenIdConnectGroupConfiguration_groupClaim, *v.GroupClaim)
+	}
+	if v.GroupEntityType != nil {
+		s.WriteString(schemas.UpdateOpenIdConnectGroupConfiguration_groupEntityType, *v.GroupEntityType)
+	}
+}
+func (v *UpdateOpenIdConnectGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpenIdConnectGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOpenIdConnectGroupConfiguration_groupClaim:
+			v.GroupClaim = new(string)
+			return d.ReadString(schemas.UpdateOpenIdConnectGroupConfiguration_groupClaim, v.GroupClaim)
+		case schemas.UpdateOpenIdConnectGroupConfiguration_groupEntityType:
+			v.GroupEntityType = new(string)
+			return d.ReadString(schemas.UpdateOpenIdConnectGroupConfiguration_groupEntityType, v.GroupEntityType)
+		}
+		return nil
+	})
+}
+
 // The configuration of an OpenID Connect (OIDC) identity source for handling
 // identity (ID) token claims. Contains the claim that you want to identify as the
 // principal in an authorization request, and the values of the aud claim, or
@@ -2482,6 +4673,31 @@ type UpdateOpenIdConnectIdentityTokenConfiguration struct {
 	PrincipalIdClaim *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateOpenIdConnectIdentityTokenConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpenIdConnectIdentityTokenConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpenIdConnectIdentityTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientIds(s, schemas.UpdateOpenIdConnectIdentityTokenConfiguration_clientIds, v.ClientIds)
+	if v.PrincipalIdClaim != nil {
+		s.WriteString(schemas.UpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
+	}
+}
+func (v *UpdateOpenIdConnectIdentityTokenConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpenIdConnectIdentityTokenConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOpenIdConnectIdentityTokenConfiguration_clientIds:
+			return deserializeClientIds(d, schemas.UpdateOpenIdConnectIdentityTokenConfiguration_clientIds, &v.ClientIds)
+		case schemas.UpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim:
+			v.PrincipalIdClaim = new(string)
+			return d.ReadString(schemas.UpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim, v.PrincipalIdClaim)
+		}
+		return nil
+	})
 }
 
 // The token type that you want to process from your OIDC identity provider. Your
@@ -2512,6 +4728,14 @@ type UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly struct {
 
 func (*UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly) isUpdateOpenIdConnectTokenSelection() {
 }
+func (v *UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpenIdConnectTokenSelection_accessTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The OIDC configuration for processing identity (ID) tokens. Contains allowed
 // client ID claims, for example 1example23456789 , and the claim that you want to
@@ -2523,6 +4747,14 @@ type UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly struct {
 }
 
 func (*UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly) isUpdateOpenIdConnectTokenSelection() {
+}
+func (v *UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpenIdConnectTokenSelection_identityTokenOnly)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Contains information about updates to be applied to a policy.
@@ -2546,6 +4778,14 @@ type UpdatePolicyDefinitionMemberStatic struct {
 }
 
 func (*UpdatePolicyDefinitionMemberStatic) isUpdatePolicyDefinition() {}
+func (v *UpdatePolicyDefinitionMemberStatic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePolicyDefinition_static)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdatePolicyDefinitionMemberStatic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains information about an update to a static policy.
 type UpdateStaticPolicyDefinition struct {
@@ -2578,6 +4818,34 @@ type UpdateStaticPolicyDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStaticPolicyDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStaticPolicyDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStaticPolicyDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStaticPolicyDefinition_description, *v.Description)
+	}
+	if v.Statement != nil {
+		s.WriteString(schemas.UpdateStaticPolicyDefinition_statement, *v.Statement)
+	}
+}
+func (v *UpdateStaticPolicyDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStaticPolicyDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStaticPolicyDefinition_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateStaticPolicyDefinition_description, v.Description)
+		case schemas.UpdateStaticPolicyDefinition_statement:
+			v.Statement = new(string)
+			return d.ReadString(schemas.UpdateStaticPolicyDefinition_statement, v.Statement)
+		}
+		return nil
+	})
+}
+
 // Details about a field that failed policy validation.
 type ValidationExceptionField struct {
 
@@ -2593,6 +4861,34 @@ type ValidationExceptionField struct {
 	Path *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ValidationExceptionField_path, *v.Path)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_path, v.Path)
+		}
+		return nil
+	})
 }
 
 // A structure that contains Cedar policy validation settings for the policy
@@ -2630,8 +4926,50 @@ type ValidationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.ValidationSettings_mode, string(v.Mode))
+	}
+}
+func (v *ValidationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationSettings_mode:
+			var ev string
+			if err := d.ReadString(schemas.ValidationSettings_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = ValidationMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type Unit struct {
 	noSmithyDocumentSerde
+}
+
+func (v *Unit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(smithyprelude.Unit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Unit) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Unit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, smithyprelude.Unit, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

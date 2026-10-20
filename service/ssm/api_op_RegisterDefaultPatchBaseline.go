@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type RegisterDefaultPatchBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDefaultPatchBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDefaultPatchBaselineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDefaultPatchBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.RegisterDefaultPatchBaselineRequest_BaselineId, *v.BaselineId)
+	}
+}
+
 type RegisterDefaultPatchBaselineOutput struct {
 
 	// The ID of the default patch baseline.
@@ -50,13 +64,32 @@ type RegisterDefaultPatchBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDefaultPatchBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDefaultPatchBaselineResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDefaultPatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineId != nil {
+		s.WriteString(schemas.RegisterDefaultPatchBaselineResult_BaselineId, *v.BaselineId)
+	}
+}
+func (v *RegisterDefaultPatchBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterDefaultPatchBaselineResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterDefaultPatchBaselineResult_BaselineId:
+			v.BaselineId = new(string)
+			return d.ReadString(schemas.RegisterDefaultPatchBaselineResult_BaselineId, v.BaselineId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDefaultPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterDefaultPatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDefaultPatchBaseline, schemas.RegisterDefaultPatchBaselineRequest, schemas.RegisterDefaultPatchBaselineResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterDefaultPatchBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDefaultPatchBaseline, schemas.RegisterDefaultPatchBaselineRequest, schemas.RegisterDefaultPatchBaselineResult), output: &RegisterDefaultPatchBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

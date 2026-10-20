@@ -4,7 +4,9 @@ package waf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListTagsForResourceRequest_Limit, v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListTagsForResourceRequest_NextMarker, *v.NextMarker)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ListTagsForResourceRequest_ResourceARN, *v.ResourceARN)
+	}
+}
+
 type ListTagsForResourceOutput struct {
 
 	//
@@ -72,13 +92,40 @@ type ListTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListTagsForResourceResponse_NextMarker, *v.NextMarker)
+	}
+	if v.TagInfoForResource != nil {
+		s.WriteStruct(schemas.ListTagsForResourceResponse_TagInfoForResource)
+		v.TagInfoForResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForResourceResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListTagsForResourceResponse_NextMarker, v.NextMarker)
+		case schemas.ListTagsForResourceResponse_TagInfoForResource:
+			v.TagInfoForResource = &types.TagInfoForResource{}
+			return v.TagInfoForResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceRequest, schemas.ListTagsForResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceRequest, schemas.ListTagsForResourceResponse), output: &ListTagsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,19 @@ type GetCalendarStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalendarStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalendarStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalendarStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AtTime != nil {
+		s.WriteString(schemas.GetCalendarStateRequest_AtTime, *v.AtTime)
+	}
+	serializeCalendarNameOrARNList(s, schemas.GetCalendarStateRequest_CalendarNames, v.CalendarNames)
+}
+
 type GetCalendarStateOutput struct {
 
 	// The time, as an [ISO 8601] string, that you specified in your command. If you don't
@@ -83,13 +98,48 @@ type GetCalendarStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalendarStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalendarStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalendarStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AtTime != nil {
+		s.WriteString(schemas.GetCalendarStateResponse_AtTime, *v.AtTime)
+	}
+	if v.NextTransitionTime != nil {
+		s.WriteString(schemas.GetCalendarStateResponse_NextTransitionTime, *v.NextTransitionTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetCalendarStateResponse_State, string(v.State))
+	}
+}
+func (v *GetCalendarStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCalendarStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCalendarStateResponse_AtTime:
+			v.AtTime = new(string)
+			return d.ReadString(schemas.GetCalendarStateResponse_AtTime, v.AtTime)
+		case schemas.GetCalendarStateResponse_NextTransitionTime:
+			v.NextTransitionTime = new(string)
+			return d.ReadString(schemas.GetCalendarStateResponse_NextTransitionTime, v.NextTransitionTime)
+		case schemas.GetCalendarStateResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.GetCalendarStateResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.CalendarState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCalendarStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCalendarState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalendarState, schemas.GetCalendarStateRequest, schemas.GetCalendarStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCalendarState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalendarState, schemas.GetCalendarStateRequest, schemas.GetCalendarStateResponse), output: &GetCalendarStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

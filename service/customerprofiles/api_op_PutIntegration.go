@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -76,6 +78,38 @@ type PutIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.PutIntegrationRequest_DomainName, *v.DomainName)
+	}
+	serializeEventTriggerNames(s, schemas.PutIntegrationRequest_EventTriggerNames, v.EventTriggerNames)
+	if v.FlowDefinition != nil {
+		s.WriteStruct(schemas.PutIntegrationRequest_FlowDefinition)
+		v.FlowDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.PutIntegrationRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+	serializeObjectTypeNames(s, schemas.PutIntegrationRequest_ObjectTypeNames, v.ObjectTypeNames)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PutIntegrationRequest_RoleArn, *v.RoleArn)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.PutIntegrationRequest_Scope, string(v.Scope))
+	}
+	serializeTagMap(s, schemas.PutIntegrationRequest_Tags, v.Tags)
+	if v.Uri != nil {
+		s.WriteString(schemas.PutIntegrationRequest_Uri, *v.Uri)
+	}
+}
+
 type PutIntegrationOutput struct {
 
 	// The timestamp of when the domain was created.
@@ -139,13 +173,93 @@ type PutIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PutIntegrationResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.PutIntegrationResponse_DomainName, *v.DomainName)
+	}
+	serializeEventTriggerNames(s, schemas.PutIntegrationResponse_EventTriggerNames, v.EventTriggerNames)
+	if v.IsUnstructured != nil {
+		s.WriteBool(schemas.PutIntegrationResponse_IsUnstructured, *v.IsUnstructured)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.PutIntegrationResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.PutIntegrationResponse_ObjectTypeName, *v.ObjectTypeName)
+	}
+	serializeObjectTypeNames(s, schemas.PutIntegrationResponse_ObjectTypeNames, v.ObjectTypeNames)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PutIntegrationResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.PutIntegrationResponse_Scope, string(v.Scope))
+	}
+	serializeTagMap(s, schemas.PutIntegrationResponse_Tags, v.Tags)
+	if v.Uri != nil {
+		s.WriteString(schemas.PutIntegrationResponse_Uri, *v.Uri)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.PutIntegrationResponse_WorkflowId, *v.WorkflowId)
+	}
+}
+func (v *PutIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutIntegrationResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutIntegrationResponse_CreatedAt, v.CreatedAt)
+		case schemas.PutIntegrationResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.PutIntegrationResponse_DomainName, v.DomainName)
+		case schemas.PutIntegrationResponse_EventTriggerNames:
+			return deserializeEventTriggerNames(d, schemas.PutIntegrationResponse_EventTriggerNames, &v.EventTriggerNames)
+		case schemas.PutIntegrationResponse_IsUnstructured:
+			v.IsUnstructured = new(bool)
+			return d.ReadBool(schemas.PutIntegrationResponse_IsUnstructured, v.IsUnstructured)
+		case schemas.PutIntegrationResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutIntegrationResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.PutIntegrationResponse_ObjectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.PutIntegrationResponse_ObjectTypeName, v.ObjectTypeName)
+		case schemas.PutIntegrationResponse_ObjectTypeNames:
+			return deserializeObjectTypeNames(d, schemas.PutIntegrationResponse_ObjectTypeNames, &v.ObjectTypeNames)
+		case schemas.PutIntegrationResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.PutIntegrationResponse_RoleArn, v.RoleArn)
+		case schemas.PutIntegrationResponse_Scope:
+			var ev string
+			if err := d.ReadString(schemas.PutIntegrationResponse_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = types.Scope(ev)
+			return nil
+		case schemas.PutIntegrationResponse_Tags:
+			return deserializeTagMap(d, schemas.PutIntegrationResponse_Tags, &v.Tags)
+		case schemas.PutIntegrationResponse_Uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.PutIntegrationResponse_Uri, v.Uri)
+		case schemas.PutIntegrationResponse_WorkflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.PutIntegrationResponse_WorkflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIntegration, schemas.PutIntegrationRequest, schemas.PutIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIntegration, schemas.PutIntegrationRequest, schemas.PutIntegrationResponse), output: &PutIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

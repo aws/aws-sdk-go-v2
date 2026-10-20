@@ -5,6 +5,8 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollectionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCollectionsOutput struct {
 
 	// An array of collection IDs.
@@ -64,13 +81,38 @@ type ListCollectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectionIdList(s, schemas.ListCollectionsResponse_CollectionIds, v.CollectionIds)
+	serializeFaceModelVersionList(s, schemas.ListCollectionsResponse_FaceModelVersions, v.FaceModelVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCollectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollectionsResponse_CollectionIds:
+			return deserializeCollectionIdList(d, schemas.ListCollectionsResponse_CollectionIds, &v.CollectionIds)
+		case schemas.ListCollectionsResponse_FaceModelVersions:
+			return deserializeFaceModelVersionList(d, schemas.ListCollectionsResponse_FaceModelVersions, &v.FaceModelVersions)
+		case schemas.ListCollectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollectionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollections, schemas.ListCollectionsRequest, schemas.ListCollectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollections, schemas.ListCollectionsRequest, schemas.ListCollectionsResponse), output: &ListCollectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

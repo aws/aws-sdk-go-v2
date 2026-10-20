@@ -4,6 +4,8 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteDomainUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainUnitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.DeleteDomainUnitInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteDomainUnitInput_identifier, *v.Identifier)
+	}
+}
+
 type DeleteDomainUnitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteDomainUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainUnitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDomainUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainUnitOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainUnit, schemas.DeleteDomainUnitInput, schemas.DeleteDomainUnitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomainUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainUnit, schemas.DeleteDomainUnitInput, schemas.DeleteDomainUnitOutput), output: &DeleteDomainUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

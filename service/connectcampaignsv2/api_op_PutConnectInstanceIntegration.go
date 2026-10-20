@@ -4,7 +4,9 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type PutConnectInstanceIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConnectInstanceIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConnectInstanceIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConnectInstanceIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.PutConnectInstanceIntegrationRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+	serializeIntegrationConfig(s, schemas.PutConnectInstanceIntegrationRequest_integrationConfig, v.IntegrationConfig)
+}
+
 type PutConnectInstanceIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +62,26 @@ type PutConnectInstanceIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConnectInstanceIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConnectInstanceIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutConnectInstanceIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConnectInstanceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConnectInstanceIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConnectInstanceIntegration, schemas.PutConnectInstanceIntegrationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutConnectInstanceIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConnectInstanceIntegration, schemas.PutConnectInstanceIntegrationRequest, nil), output: &PutConnectInstanceIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,57 @@ type CreateDataSourceInput struct {
 	Schedule *types.ScheduleConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFormInputList(s, schemas.CreateDataSourceInput_assetFormsInput, v.AssetFormsInput)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDataSourceInput_clientToken, *v.ClientToken)
+	}
+	serializeDataSourceConfigurationInput(s, schemas.CreateDataSourceInput_configuration, v.Configuration)
+	if v.ConnectionIdentifier != nil {
+		s.WriteString(schemas.CreateDataSourceInput_connectionIdentifier, *v.ConnectionIdentifier)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataSourceInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateDataSourceInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnableSetting != "" {
+		s.WriteString(schemas.CreateDataSourceInput_enableSetting, string(v.EnableSetting))
+	}
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.CreateDataSourceInput_environmentIdentifier, *v.EnvironmentIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataSourceInput_name, *v.Name)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.CreateDataSourceInput_projectIdentifier, *v.ProjectIdentifier)
+	}
+	if v.PublishOnImport != nil {
+		s.WriteBool(schemas.CreateDataSourceInput_publishOnImport, *v.PublishOnImport)
+	}
+	if v.Recommendation != nil {
+		s.WriteStruct(schemas.CreateDataSourceInput_recommendation)
+		v.Recommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.CreateDataSourceInput_schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CreateDataSourceInput_type, *v.Type)
+	}
 }
 
 type CreateDataSourceOutput struct {
@@ -177,13 +230,166 @@ type CreateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFormOutputList(s, schemas.CreateDataSourceOutput_assetFormsOutput, v.AssetFormsOutput)
+	serializeDataSourceConfigurationOutput(s, schemas.CreateDataSourceOutput_configuration, v.Configuration)
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_connectionId, *v.ConnectionId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDataSourceOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_domainId, *v.DomainId)
+	}
+	if v.EnableSetting != "" {
+		s.WriteString(schemas.CreateDataSourceOutput_enableSetting, string(v.EnableSetting))
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_environmentId, *v.EnvironmentId)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteStruct(schemas.CreateDataSourceOutput_errorMessage)
+		v.ErrorMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_id, *v.Id)
+	}
+	if v.LastRunAt != nil {
+		s.WriteTime(schemas.CreateDataSourceOutput_lastRunAt, *v.LastRunAt)
+	}
+	if v.LastRunErrorMessage != nil {
+		s.WriteStruct(schemas.CreateDataSourceOutput_lastRunErrorMessage)
+		v.LastRunErrorMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastRunStatus != "" {
+		s.WriteString(schemas.CreateDataSourceOutput_lastRunStatus, string(v.LastRunStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_name, *v.Name)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_projectId, *v.ProjectId)
+	}
+	if v.PublishOnImport != nil {
+		s.WriteBool(schemas.CreateDataSourceOutput_publishOnImport, *v.PublishOnImport)
+	}
+	if v.Recommendation != nil {
+		s.WriteStruct(schemas.CreateDataSourceOutput_recommendation)
+		v.Recommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.CreateDataSourceOutput_schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDataSourceOutput_status, string(v.Status))
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CreateDataSourceOutput_type, *v.Type)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateDataSourceOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceOutput_assetFormsOutput:
+			return deserializeFormOutputList(d, schemas.CreateDataSourceOutput_assetFormsOutput, &v.AssetFormsOutput)
+		case schemas.CreateDataSourceOutput_configuration:
+			return deserializeDataSourceConfigurationOutput(d, schemas.CreateDataSourceOutput_configuration, &v.Configuration)
+		case schemas.CreateDataSourceOutput_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_connectionId, v.ConnectionId)
+		case schemas.CreateDataSourceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDataSourceOutput_createdAt, v.CreatedAt)
+		case schemas.CreateDataSourceOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_description, v.Description)
+		case schemas.CreateDataSourceOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_domainId, v.DomainId)
+		case schemas.CreateDataSourceOutput_enableSetting:
+			var ev string
+			if err := d.ReadString(schemas.CreateDataSourceOutput_enableSetting, &ev); err != nil {
+				return err
+			}
+			v.EnableSetting = types.EnableSetting(ev)
+			return nil
+		case schemas.CreateDataSourceOutput_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_environmentId, v.EnvironmentId)
+		case schemas.CreateDataSourceOutput_errorMessage:
+			v.ErrorMessage = &types.DataSourceErrorMessage{}
+			return v.ErrorMessage.Deserialize(d)
+		case schemas.CreateDataSourceOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_id, v.Id)
+		case schemas.CreateDataSourceOutput_lastRunAt:
+			v.LastRunAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDataSourceOutput_lastRunAt, v.LastRunAt)
+		case schemas.CreateDataSourceOutput_lastRunErrorMessage:
+			v.LastRunErrorMessage = &types.DataSourceErrorMessage{}
+			return v.LastRunErrorMessage.Deserialize(d)
+		case schemas.CreateDataSourceOutput_lastRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateDataSourceOutput_lastRunStatus, &ev); err != nil {
+				return err
+			}
+			v.LastRunStatus = types.DataSourceRunStatus(ev)
+			return nil
+		case schemas.CreateDataSourceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_name, v.Name)
+		case schemas.CreateDataSourceOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_projectId, v.ProjectId)
+		case schemas.CreateDataSourceOutput_publishOnImport:
+			v.PublishOnImport = new(bool)
+			return d.ReadBool(schemas.CreateDataSourceOutput_publishOnImport, v.PublishOnImport)
+		case schemas.CreateDataSourceOutput_recommendation:
+			v.Recommendation = &types.RecommendationConfiguration{}
+			return v.Recommendation.Deserialize(d)
+		case schemas.CreateDataSourceOutput_schedule:
+			v.Schedule = &types.ScheduleConfiguration{}
+			return v.Schedule.Deserialize(d)
+		case schemas.CreateDataSourceOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDataSourceOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceStatus(ev)
+			return nil
+		case schemas.CreateDataSourceOutput_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CreateDataSourceOutput_type, v.Type)
+		case schemas.CreateDataSourceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDataSourceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceInput, schemas.CreateDataSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceInput, schemas.CreateDataSourceOutput), output: &CreateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

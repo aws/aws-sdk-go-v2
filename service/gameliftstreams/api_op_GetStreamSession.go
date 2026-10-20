@@ -5,7 +5,9 @@ package gameliftstreams
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -55,6 +57,21 @@ type GetStreamSessionInput struct {
 	StreamSessionIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetStreamSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetStreamSessionInput_Identifier, *v.Identifier)
+	}
+	if v.StreamSessionIdentifier != nil {
+		s.WriteString(schemas.GetStreamSessionInput_StreamSessionIdentifier, *v.StreamSessionIdentifier)
+	}
 }
 
 type GetStreamSessionOutput struct {
@@ -255,13 +272,176 @@ type GetStreamSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentVariables(s, schemas.GetStreamSessionOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	serializeGameLaunchArgList(s, schemas.GetStreamSessionOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_Arn, *v.Arn)
+	}
+	if v.ConnectionTimeoutSeconds != nil {
+		s.WriteInt32(schemas.GetStreamSessionOutput_ConnectionTimeoutSeconds, *v.ConnectionTimeoutSeconds)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetStreamSessionOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_Description, *v.Description)
+	}
+	if v.DisplayConfiguration != nil {
+		s.WriteStruct(schemas.GetStreamSessionOutput_DisplayConfiguration)
+		v.DisplayConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportFilesMetadata != nil {
+		s.WriteStruct(schemas.GetStreamSessionOutput_ExportFilesMetadata)
+		v.ExportFilesMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetStreamSessionOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_Location, *v.Location)
+	}
+	if v.LogFileLocationUri != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_LogFileLocationUri, *v.LogFileLocationUri)
+	}
+	if v.PerformanceStatsConfiguration != nil {
+		s.WriteStruct(schemas.GetStreamSessionOutput_PerformanceStatsConfiguration)
+		v.PerformanceStatsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.GetStreamSessionOutput_Protocol, string(v.Protocol))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_RoleArn, *v.RoleArn)
+	}
+	if v.SessionLengthSeconds != nil {
+		s.WriteInt32(schemas.GetStreamSessionOutput_SessionLengthSeconds, *v.SessionLengthSeconds)
+	}
+	if v.SignalRequest != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_SignalRequest, *v.SignalRequest)
+	}
+	if v.SignalResponse != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_SignalResponse, *v.SignalResponse)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetStreamSessionOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.GetStreamSessionOutput_StatusReason, string(v.StatusReason))
+	}
+	if v.StreamGroupId != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_StreamGroupId, *v.StreamGroupId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_UserId, *v.UserId)
+	}
+	if v.WebSdkProtocolUrl != nil {
+		s.WriteString(schemas.GetStreamSessionOutput_WebSdkProtocolUrl, *v.WebSdkProtocolUrl)
+	}
+}
+func (v *GetStreamSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStreamSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStreamSessionOutput_AdditionalEnvironmentVariables:
+			return deserializeEnvironmentVariables(d, schemas.GetStreamSessionOutput_AdditionalEnvironmentVariables, &v.AdditionalEnvironmentVariables)
+		case schemas.GetStreamSessionOutput_AdditionalLaunchArgs:
+			return deserializeGameLaunchArgList(d, schemas.GetStreamSessionOutput_AdditionalLaunchArgs, &v.AdditionalLaunchArgs)
+		case schemas.GetStreamSessionOutput_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_ApplicationArn, v.ApplicationArn)
+		case schemas.GetStreamSessionOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_Arn, v.Arn)
+		case schemas.GetStreamSessionOutput_ConnectionTimeoutSeconds:
+			v.ConnectionTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.GetStreamSessionOutput_ConnectionTimeoutSeconds, v.ConnectionTimeoutSeconds)
+		case schemas.GetStreamSessionOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStreamSessionOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetStreamSessionOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_Description, v.Description)
+		case schemas.GetStreamSessionOutput_DisplayConfiguration:
+			v.DisplayConfiguration = &types.DisplayConfiguration{}
+			return v.DisplayConfiguration.Deserialize(d)
+		case schemas.GetStreamSessionOutput_ExportFilesMetadata:
+			v.ExportFilesMetadata = &types.ExportFilesMetadata{}
+			return v.ExportFilesMetadata.Deserialize(d)
+		case schemas.GetStreamSessionOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStreamSessionOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetStreamSessionOutput_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_Location, v.Location)
+		case schemas.GetStreamSessionOutput_LogFileLocationUri:
+			v.LogFileLocationUri = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_LogFileLocationUri, v.LogFileLocationUri)
+		case schemas.GetStreamSessionOutput_PerformanceStatsConfiguration:
+			v.PerformanceStatsConfiguration = &types.PerformanceStatsConfiguration{}
+			return v.PerformanceStatsConfiguration.Deserialize(d)
+		case schemas.GetStreamSessionOutput_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.GetStreamSessionOutput_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.Protocol(ev)
+			return nil
+		case schemas.GetStreamSessionOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_RoleArn, v.RoleArn)
+		case schemas.GetStreamSessionOutput_SessionLengthSeconds:
+			v.SessionLengthSeconds = new(int32)
+			return d.ReadInt32(schemas.GetStreamSessionOutput_SessionLengthSeconds, v.SessionLengthSeconds)
+		case schemas.GetStreamSessionOutput_SignalRequest:
+			v.SignalRequest = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_SignalRequest, v.SignalRequest)
+		case schemas.GetStreamSessionOutput_SignalResponse:
+			v.SignalResponse = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_SignalResponse, v.SignalResponse)
+		case schemas.GetStreamSessionOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetStreamSessionOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamSessionStatus(ev)
+			return nil
+		case schemas.GetStreamSessionOutput_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.GetStreamSessionOutput_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = types.StreamSessionStatusReason(ev)
+			return nil
+		case schemas.GetStreamSessionOutput_StreamGroupId:
+			v.StreamGroupId = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_StreamGroupId, v.StreamGroupId)
+		case schemas.GetStreamSessionOutput_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_UserId, v.UserId)
+		case schemas.GetStreamSessionOutput_WebSdkProtocolUrl:
+			v.WebSdkProtocolUrl = new(string)
+			return d.ReadString(schemas.GetStreamSessionOutput_WebSdkProtocolUrl, v.WebSdkProtocolUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStreamSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamSession, schemas.GetStreamSessionInput, schemas.GetStreamSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStreamSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamSession, schemas.GetStreamSessionInput, schemas.GetStreamSessionOutput), output: &GetStreamSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

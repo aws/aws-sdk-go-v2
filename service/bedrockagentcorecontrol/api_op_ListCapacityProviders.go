@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListCapacityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityProvidersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCapacityProvidersInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityProvidersInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListCapacityProvidersOutput struct {
 
 	// The list of capacity provider summaries.
@@ -62,13 +79,35 @@ type ListCapacityProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityProvidersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProviderList(s, schemas.ListCapacityProvidersOutput_capacityProviders, v.CapacityProviders)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityProvidersOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCapacityProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCapacityProvidersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCapacityProvidersOutput_capacityProviders:
+			return deserializeCapacityProviderList(d, schemas.ListCapacityProvidersOutput_capacityProviders, &v.CapacityProviders)
+		case schemas.ListCapacityProvidersOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCapacityProvidersOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityProviders, schemas.ListCapacityProvidersInput, schemas.ListCapacityProvidersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityProviders, schemas.ListCapacityProvidersInput, schemas.ListCapacityProvidersOutput), output: &ListCapacityProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotdeviceadvisor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -48,6 +50,24 @@ type CreateSuiteDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSuiteDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSuiteDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSuiteDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSuiteDefinitionRequest_clientToken, *v.ClientToken)
+	}
+	if v.SuiteDefinitionConfiguration != nil {
+		s.WriteStruct(schemas.CreateSuiteDefinitionRequest_suiteDefinitionConfiguration)
+		v.SuiteDefinitionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateSuiteDefinitionRequest_tags, v.Tags)
+}
+
 type CreateSuiteDefinitionOutput struct {
 
 	// The timestamp of when the test suite was created.
@@ -68,13 +88,50 @@ type CreateSuiteDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSuiteDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSuiteDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSuiteDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateSuiteDefinitionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.SuiteDefinitionArn != nil {
+		s.WriteString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionArn, *v.SuiteDefinitionArn)
+	}
+	if v.SuiteDefinitionId != nil {
+		s.WriteString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionId, *v.SuiteDefinitionId)
+	}
+	if v.SuiteDefinitionName != nil {
+		s.WriteString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionName, *v.SuiteDefinitionName)
+	}
+}
+func (v *CreateSuiteDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSuiteDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSuiteDefinitionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateSuiteDefinitionResponse_createdAt, v.CreatedAt)
+		case schemas.CreateSuiteDefinitionResponse_suiteDefinitionArn:
+			v.SuiteDefinitionArn = new(string)
+			return d.ReadString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionArn, v.SuiteDefinitionArn)
+		case schemas.CreateSuiteDefinitionResponse_suiteDefinitionId:
+			v.SuiteDefinitionId = new(string)
+			return d.ReadString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionId, v.SuiteDefinitionId)
+		case schemas.CreateSuiteDefinitionResponse_suiteDefinitionName:
+			v.SuiteDefinitionName = new(string)
+			return d.ReadString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionName, v.SuiteDefinitionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSuiteDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSuiteDefinition, schemas.CreateSuiteDefinitionRequest, schemas.CreateSuiteDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSuiteDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSuiteDefinition, schemas.CreateSuiteDefinitionRequest, schemas.CreateSuiteDefinitionResponse), output: &CreateSuiteDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

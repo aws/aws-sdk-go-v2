@@ -4,6 +4,8 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListTagsForStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagsForStreamInput_NextToken, *v.NextToken)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ListTagsForStreamInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.ListTagsForStreamInput_StreamName, *v.StreamName)
+	}
+}
+
 type ListTagsForStreamOutput struct {
 
 	// If you specify this parameter and the result of a ListTags call is truncated,
@@ -57,13 +77,35 @@ type ListTagsForStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagsForStreamOutput_NextToken, *v.NextToken)
+	}
+	serializeResourceTags(s, schemas.ListTagsForStreamOutput_Tags, v.Tags)
+}
+func (v *ListTagsForStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForStreamOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTagsForStreamOutput_NextToken, v.NextToken)
+		case schemas.ListTagsForStreamOutput_Tags:
+			return deserializeResourceTags(d, schemas.ListTagsForStreamOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForStream, schemas.ListTagsForStreamInput, schemas.ListTagsForStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagsForStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForStream, schemas.ListTagsForStreamInput, schemas.ListTagsForStreamOutput), output: &ListTagsForStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

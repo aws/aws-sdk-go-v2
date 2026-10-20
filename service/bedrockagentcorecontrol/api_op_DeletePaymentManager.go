@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeletePaymentManagerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentManagerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeletePaymentManagerRequest_clientToken, *v.ClientToken)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.DeletePaymentManagerRequest_paymentManagerId, *v.PaymentManagerId)
+	}
+}
+
 type DeletePaymentManagerOutput struct {
 
 	// The current status of the payment manager, set to DELETING when deletion is
@@ -63,13 +80,42 @@ type DeletePaymentManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePaymentManagerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePaymentManagerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePaymentManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.DeletePaymentManagerResponse_paymentManagerId, *v.PaymentManagerId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePaymentManagerResponse_status, string(v.Status))
+	}
+}
+func (v *DeletePaymentManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePaymentManagerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePaymentManagerResponse_paymentManagerId:
+			v.PaymentManagerId = new(string)
+			return d.ReadString(schemas.DeletePaymentManagerResponse_paymentManagerId, v.PaymentManagerId)
+		case schemas.DeletePaymentManagerResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePaymentManagerResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentManagerStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePaymentManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePaymentManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentManager, schemas.DeletePaymentManagerRequest, schemas.DeletePaymentManagerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePaymentManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentManager, schemas.DeletePaymentManagerRequest, schemas.DeletePaymentManagerResponse), output: &DeletePaymentManagerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

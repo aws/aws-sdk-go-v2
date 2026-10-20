@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Directory":{"CreationDateTime":946684800,"DirectoryArn":"__DirectoryArn__","Name":"__Name__","State":"ENABLED"}}

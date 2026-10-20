@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,31 @@ type StartCelebrityRecognitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCelebrityRecognitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCelebrityRecognitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCelebrityRecognitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartCelebrityRecognitionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartCelebrityRecognitionRequest_JobTag, *v.JobTag)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartCelebrityRecognitionRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.StartCelebrityRecognitionRequest_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartCelebrityRecognitionOutput struct {
 
 	// The identifier for the celebrity recognition analysis job. Use JobId to
@@ -79,13 +106,32 @@ type StartCelebrityRecognitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCelebrityRecognitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCelebrityRecognitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCelebrityRecognitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartCelebrityRecognitionResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartCelebrityRecognitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCelebrityRecognitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCelebrityRecognitionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartCelebrityRecognitionResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCelebrityRecognition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCelebrityRecognition, schemas.StartCelebrityRecognitionRequest, schemas.StartCelebrityRecognitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartCelebrityRecognition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCelebrityRecognition, schemas.StartCelebrityRecognitionRequest, schemas.StartCelebrityRecognitionResponse), output: &StartCelebrityRecognitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

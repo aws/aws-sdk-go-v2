@@ -4,6 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeEngagementInput struct {
 	EngagementId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEngagementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngagementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementId != nil {
+		s.WriteString(schemas.DescribeEngagementRequest_EngagementId, *v.EngagementId)
+	}
 }
 
 type DescribeEngagementOutput struct {
@@ -88,13 +102,86 @@ type DescribeEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngagementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngagementResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.DescribeEngagementResult_ContactArn, *v.ContactArn)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.DescribeEngagementResult_Content, *v.Content)
+	}
+	if v.EngagementArn != nil {
+		s.WriteString(schemas.DescribeEngagementResult_EngagementArn, *v.EngagementArn)
+	}
+	if v.IncidentId != nil {
+		s.WriteString(schemas.DescribeEngagementResult_IncidentId, *v.IncidentId)
+	}
+	if v.PublicContent != nil {
+		s.WriteString(schemas.DescribeEngagementResult_PublicContent, *v.PublicContent)
+	}
+	if v.PublicSubject != nil {
+		s.WriteString(schemas.DescribeEngagementResult_PublicSubject, *v.PublicSubject)
+	}
+	if v.Sender != nil {
+		s.WriteString(schemas.DescribeEngagementResult_Sender, *v.Sender)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeEngagementResult_StartTime, *v.StartTime)
+	}
+	if v.StopTime != nil {
+		s.WriteTime(schemas.DescribeEngagementResult_StopTime, *v.StopTime)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.DescribeEngagementResult_Subject, *v.Subject)
+	}
+}
+func (v *DescribeEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEngagementResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEngagementResult_ContactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_ContactArn, v.ContactArn)
+		case schemas.DescribeEngagementResult_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_Content, v.Content)
+		case schemas.DescribeEngagementResult_EngagementArn:
+			v.EngagementArn = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_EngagementArn, v.EngagementArn)
+		case schemas.DescribeEngagementResult_IncidentId:
+			v.IncidentId = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_IncidentId, v.IncidentId)
+		case schemas.DescribeEngagementResult_PublicContent:
+			v.PublicContent = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_PublicContent, v.PublicContent)
+		case schemas.DescribeEngagementResult_PublicSubject:
+			v.PublicSubject = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_PublicSubject, v.PublicSubject)
+		case schemas.DescribeEngagementResult_Sender:
+			v.Sender = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_Sender, v.Sender)
+		case schemas.DescribeEngagementResult_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEngagementResult_StartTime, v.StartTime)
+		case schemas.DescribeEngagementResult_StopTime:
+			v.StopTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEngagementResult_StopTime, v.StopTime)
+		case schemas.DescribeEngagementResult_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.DescribeEngagementResult_Subject, v.Subject)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngagement, schemas.DescribeEngagementRequest, schemas.DescribeEngagementResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngagement, schemas.DescribeEngagementRequest, schemas.DescribeEngagementResult), output: &DescribeEngagementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

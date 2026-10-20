@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListPaymentConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPaymentConnectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPaymentConnectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPaymentConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPaymentConnectorsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPaymentConnectorsRequest_nextToken, *v.NextToken)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.ListPaymentConnectorsRequest_paymentManagerId, *v.PaymentManagerId)
+	}
+}
+
 type ListPaymentConnectorsOutput struct {
 
 	// The list of payment connector summaries. For details about the fields in each
@@ -65,13 +85,35 @@ type ListPaymentConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPaymentConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPaymentConnectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPaymentConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPaymentConnectorsResponse_nextToken, *v.NextToken)
+	}
+	serializePaymentConnectorSummaries(s, schemas.ListPaymentConnectorsResponse_paymentConnectors, v.PaymentConnectors)
+}
+func (v *ListPaymentConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPaymentConnectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPaymentConnectorsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPaymentConnectorsResponse_nextToken, v.NextToken)
+		case schemas.ListPaymentConnectorsResponse_paymentConnectors:
+			return deserializePaymentConnectorSummaries(d, schemas.ListPaymentConnectorsResponse_paymentConnectors, &v.PaymentConnectors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPaymentConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPaymentConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentConnectors, schemas.ListPaymentConnectorsRequest, schemas.ListPaymentConnectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPaymentConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentConnectors, schemas.ListPaymentConnectorsRequest, schemas.ListPaymentConnectorsResponse), output: &ListPaymentConnectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,7 +6,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/document"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +58,28 @@ type CreateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateAssetRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetType != nil {
+		s.WriteString(schemas.CreateAssetRequest_assetType, *v.AssetType)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAssetRequest_clientToken, *v.ClientToken)
+	}
+	serializeAssetContent(s, schemas.CreateAssetRequest_content, v.Content)
+	if v.Metadata != nil {
+		s.WriteDocument(schemas.CreateAssetRequest_metadata, &smithydocument.Opaque{Value: v.Metadata})
+	}
+}
+
 // Response structure for creating a new asset
 type CreateAssetOutput struct {
 
@@ -69,13 +94,34 @@ type CreateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asset != nil {
+		s.WriteStruct(schemas.CreateAssetResponse_asset)
+		v.Asset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssetResponse_asset:
+			v.Asset = &types.Asset{}
+			return v.Asset.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse), output: &CreateAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

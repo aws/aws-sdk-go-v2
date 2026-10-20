@@ -4,6 +4,8 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetIamPortalLoginUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIamPortalLoginUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIamPortalLoginUrlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIamPortalLoginUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetIamPortalLoginUrlInput_domainIdentifier, *v.DomainIdentifier)
+	}
+}
+
 type GetIamPortalLoginUrlOutput struct {
 
 	// The ID of the user profile.
@@ -49,13 +63,38 @@ type GetIamPortalLoginUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIamPortalLoginUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIamPortalLoginUrlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIamPortalLoginUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCodeUrl != nil {
+		s.WriteString(schemas.GetIamPortalLoginUrlOutput_authCodeUrl, *v.AuthCodeUrl)
+	}
+	if v.UserProfileId != nil {
+		s.WriteString(schemas.GetIamPortalLoginUrlOutput_userProfileId, *v.UserProfileId)
+	}
+}
+func (v *GetIamPortalLoginUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIamPortalLoginUrlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIamPortalLoginUrlOutput_authCodeUrl:
+			v.AuthCodeUrl = new(string)
+			return d.ReadString(schemas.GetIamPortalLoginUrlOutput_authCodeUrl, v.AuthCodeUrl)
+		case schemas.GetIamPortalLoginUrlOutput_userProfileId:
+			v.UserProfileId = new(string)
+			return d.ReadString(schemas.GetIamPortalLoginUrlOutput_userProfileId, v.UserProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIamPortalLoginUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIamPortalLoginUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIamPortalLoginUrl, schemas.GetIamPortalLoginUrlInput, schemas.GetIamPortalLoginUrlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIamPortalLoginUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIamPortalLoginUrl, schemas.GetIamPortalLoginUrlInput, schemas.GetIamPortalLoginUrlOutput), output: &GetIamPortalLoginUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

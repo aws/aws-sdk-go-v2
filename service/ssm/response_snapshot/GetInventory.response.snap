@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetInventory
+
+{"Entities":[{"Data":{"key0":{"CaptureTime":"__CaptureTime__","Content":[{"key0":"__Value__"},{"key0":"__Value__"}],"ContentHash":"__ContentHash__","SchemaVersion":"__SchemaVersion__","TypeName":"__TypeName__"}},"Id":"__Id__"},{"Data":{"key0":{"CaptureTime":"__CaptureTime__","Content":[{"key0":"__Value__"},{"key0":"__Value__"}],"ContentHash":"__ContentHash__","SchemaVersion":"__SchemaVersion__","TypeName":"__TypeName__"}},"Id":"__Id__"}],"NextToken":"__NextToken__"}

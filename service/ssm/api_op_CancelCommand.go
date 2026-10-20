@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type CancelCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCommandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelCommandRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandId != nil {
+		s.WriteString(schemas.CancelCommandRequest_CommandId, *v.CommandId)
+	}
+	serializeInstanceIdList(s, schemas.CancelCommandRequest_InstanceIds, v.InstanceIds)
+}
+
 // Whether or not the command was successfully canceled. There is no guarantee
 // that a request can be canceled.
 type CancelCommandOutput struct {
@@ -49,13 +64,26 @@ type CancelCommandOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCommandOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelCommandResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCommandOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelCommandOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelCommandResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCommand, schemas.CancelCommandRequest, schemas.CancelCommandResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCommand, schemas.CancelCommandRequest, schemas.CancelCommandResult), output: &CancelCommandOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

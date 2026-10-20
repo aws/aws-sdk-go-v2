@@ -4,7 +4,9 @@ package timestreaminfluxdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,56 @@ type RestoreFromDbBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreFromDbBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreFromDbBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreFromDbBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDbBackupConfigurationInputList(s, schemas.RestoreFromDbBackupInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupId != nil {
+		s.WriteString(schemas.RestoreFromDbBackupInput_dbBackupId, *v.DbBackupId)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.RestoreFromDbBackupInput_deploymentType, string(v.DeploymentType))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RestoreFromDbBackupInput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LogDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.RestoreFromDbBackupInput_logDeliveryConfiguration)
+		v.LogDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceSchedule != nil {
+		s.WriteStruct(schemas.RestoreFromDbBackupInput_maintenanceSchedule)
+		v.MaintenanceSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RestoreFromDbBackupInput_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.RestoreFromDbBackupInput_networkType, string(v.NetworkType))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RestoreFromDbBackupInput_port, *v.Port)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.RestoreFromDbBackupInput_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.RestoreMode != "" {
+		s.WriteString(schemas.RestoreFromDbBackupInput_restoreMode, string(v.RestoreMode))
+	}
+	if v.RestoreToTime != nil {
+		s.WriteTime(schemas.RestoreFromDbBackupInput_restoreToTime, *v.RestoreToTime)
+	}
+	serializeRequestTagMap(s, schemas.RestoreFromDbBackupInput_tags, v.Tags)
+	serializeVpcSecurityGroupIdList(s, schemas.RestoreFromDbBackupInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	serializeVpcSubnetIdList(s, schemas.RestoreFromDbBackupInput_vpcSubnetIds, v.VpcSubnetIds)
+}
+
 type RestoreFromDbBackupOutput struct {
 
 	// The deployment type of the restored resource.
@@ -113,13 +165,72 @@ type RestoreFromDbBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreFromDbBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreFromDbBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreFromDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.RestoreFromDbBackupOutput_deploymentType, string(v.DeploymentType))
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.RestoreFromDbBackupOutput_engineType, string(v.EngineType))
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.RestoreFromDbBackupOutput_resourceType, string(v.ResourceType))
+	}
+	if v.RestoreStatus != "" {
+		s.WriteString(schemas.RestoreFromDbBackupOutput_restoreStatus, string(v.RestoreStatus))
+	}
+	if v.RestoredDbResourceId != nil {
+		s.WriteString(schemas.RestoreFromDbBackupOutput_restoredDbResourceId, *v.RestoredDbResourceId)
+	}
+}
+func (v *RestoreFromDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreFromDbBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreFromDbBackupOutput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.RestoreFromDbBackupOutput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.ResourceDeploymentType(ev)
+			return nil
+		case schemas.RestoreFromDbBackupOutput_engineType:
+			var ev string
+			if err := d.ReadString(schemas.RestoreFromDbBackupOutput_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.RestoreFromDbBackupOutput_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.RestoreFromDbBackupOutput_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.RestoreFromDbBackupOutput_restoreStatus:
+			var ev string
+			if err := d.ReadString(schemas.RestoreFromDbBackupOutput_restoreStatus, &ev); err != nil {
+				return err
+			}
+			v.RestoreStatus = types.RestoreStatus(ev)
+			return nil
+		case schemas.RestoreFromDbBackupOutput_restoredDbResourceId:
+			v.RestoredDbResourceId = new(string)
+			return d.ReadString(schemas.RestoreFromDbBackupOutput_restoredDbResourceId, v.RestoredDbResourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreFromDbBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRestoreFromDbBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromDbBackup, schemas.RestoreFromDbBackupInput, schemas.RestoreFromDbBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRestoreFromDbBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromDbBackup, schemas.RestoreFromDbBackupInput, schemas.RestoreFromDbBackupOutput), output: &RestoreFromDbBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

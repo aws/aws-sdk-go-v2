@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"paymentTokenResponse":{"coinbaseCdpTokenResponse":{"bearerToken":"__BearerToken__","walletAuthToken":"__WalletAuthToken__"}}}

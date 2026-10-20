@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,31 @@ type UpdateAssetFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetFilterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.UpdateAssetFilterInput_assetIdentifier, *v.AssetIdentifier)
+	}
+	serializeAssetFilterConfiguration(s, schemas.UpdateAssetFilterInput_configuration, v.Configuration)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAssetFilterInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateAssetFilterInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateAssetFilterInput_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssetFilterInput_name, *v.Name)
+	}
+}
+
 type UpdateAssetFilterOutput struct {
 
 	// The ID of the data asset.
@@ -114,13 +141,90 @@ type UpdateAssetFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetFilterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.UpdateAssetFilterOutput_assetId, *v.AssetId)
+	}
+	serializeAssetFilterConfiguration(s, schemas.UpdateAssetFilterOutput_configuration, v.Configuration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateAssetFilterOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAssetFilterOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateAssetFilterOutput_domainId, *v.DomainId)
+	}
+	serializeColumnNameList(s, schemas.UpdateAssetFilterOutput_effectiveColumnNames, v.EffectiveColumnNames)
+	if v.EffectiveRowFilter != nil {
+		s.WriteString(schemas.UpdateAssetFilterOutput_effectiveRowFilter, *v.EffectiveRowFilter)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UpdateAssetFilterOutput_errorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAssetFilterOutput_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssetFilterOutput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAssetFilterOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateAssetFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetFilterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetFilterOutput_assetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.UpdateAssetFilterOutput_assetId, v.AssetId)
+		case schemas.UpdateAssetFilterOutput_configuration:
+			return deserializeAssetFilterConfiguration(d, schemas.UpdateAssetFilterOutput_configuration, &v.Configuration)
+		case schemas.UpdateAssetFilterOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAssetFilterOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateAssetFilterOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAssetFilterOutput_description, v.Description)
+		case schemas.UpdateAssetFilterOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateAssetFilterOutput_domainId, v.DomainId)
+		case schemas.UpdateAssetFilterOutput_effectiveColumnNames:
+			return deserializeColumnNameList(d, schemas.UpdateAssetFilterOutput_effectiveColumnNames, &v.EffectiveColumnNames)
+		case schemas.UpdateAssetFilterOutput_effectiveRowFilter:
+			v.EffectiveRowFilter = new(string)
+			return d.ReadString(schemas.UpdateAssetFilterOutput_effectiveRowFilter, v.EffectiveRowFilter)
+		case schemas.UpdateAssetFilterOutput_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UpdateAssetFilterOutput_errorMessage, v.ErrorMessage)
+		case schemas.UpdateAssetFilterOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAssetFilterOutput_id, v.Id)
+		case schemas.UpdateAssetFilterOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAssetFilterOutput_name, v.Name)
+		case schemas.UpdateAssetFilterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAssetFilterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FilterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssetFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetFilter, schemas.UpdateAssetFilterInput, schemas.UpdateAssetFilterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssetFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetFilter, schemas.UpdateAssetFilterInput, schemas.UpdateAssetFilterOutput), output: &UpdateAssetFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

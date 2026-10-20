@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,40 @@ type SearchTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.SearchTypesInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeFilterClause(s, schemas.SearchTypesInput_filters, v.Filters)
+	if v.Managed != nil {
+		s.WriteBool(schemas.SearchTypesInput_managed, *v.Managed)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchTypesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTypesInput_nextToken, *v.NextToken)
+	}
+	serializeSearchInList(s, schemas.SearchTypesInput_searchIn, v.SearchIn)
+	if v.SearchScope != "" {
+		s.WriteString(schemas.SearchTypesInput_searchScope, string(v.SearchScope))
+	}
+	if v.SearchText != nil {
+		s.WriteString(schemas.SearchTypesInput_searchText, *v.SearchText)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.SearchTypesInput_sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchTypesOutput struct {
 
 	// The results of the SearchTypes action.
@@ -107,13 +143,41 @@ type SearchTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchTypesResultItems(s, schemas.SearchTypesOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTypesOutput_nextToken, *v.NextToken)
+	}
+	if v.TotalMatchCount != nil {
+		s.WriteInt32(schemas.SearchTypesOutput_totalMatchCount, *v.TotalMatchCount)
+	}
+}
+func (v *SearchTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTypesOutput_items:
+			return deserializeSearchTypesResultItems(d, schemas.SearchTypesOutput_items, &v.Items)
+		case schemas.SearchTypesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchTypesOutput_nextToken, v.NextToken)
+		case schemas.SearchTypesOutput_totalMatchCount:
+			v.TotalMatchCount = new(int32)
+			return d.ReadInt32(schemas.SearchTypesOutput_totalMatchCount, v.TotalMatchCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTypes, schemas.SearchTypesInput, schemas.SearchTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTypes, schemas.SearchTypesInput, schemas.SearchTypesOutput), output: &SearchTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

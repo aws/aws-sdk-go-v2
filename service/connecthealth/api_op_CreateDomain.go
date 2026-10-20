@@ -4,7 +4,9 @@ package connecthealth
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,27 @@ type CreateDomainInput struct {
 	WebAppSetupConfiguration *types.CreateWebAppConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateDomainInput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDomainInput_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateDomainInput_tags, v.Tags)
+	if v.WebAppSetupConfiguration != nil {
+		s.WriteStruct(schemas.CreateDomainInput_webAppSetupConfiguration)
+		v.WebAppSetupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type CreateDomainOutput struct {
@@ -90,13 +113,88 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDomainOutput_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDomainOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateDomainOutput_domainId, *v.DomainId)
+	}
+	if v.EncryptionContext != nil {
+		s.WriteStruct(schemas.CreateDomainOutput_encryptionContext)
+		v.EncryptionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateDomainOutput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDomainOutput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDomainOutput_status, string(v.Status))
+	}
+	if v.WebAppConfiguration != nil {
+		s.WriteStruct(schemas.CreateDomainOutput_webAppConfiguration)
+		v.WebAppConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebAppUrl != nil {
+		s.WriteString(schemas.CreateDomainOutput_webAppUrl, *v.WebAppUrl)
+	}
+}
+func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDomainOutput_arn, v.Arn)
+		case schemas.CreateDomainOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDomainOutput_createdAt, v.CreatedAt)
+		case schemas.CreateDomainOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateDomainOutput_domainId, v.DomainId)
+		case schemas.CreateDomainOutput_encryptionContext:
+			v.EncryptionContext = &types.EncryptionContext{}
+			return v.EncryptionContext.Deserialize(d)
+		case schemas.CreateDomainOutput_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CreateDomainOutput_kmsKeyArn, v.KmsKeyArn)
+		case schemas.CreateDomainOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDomainOutput_name, v.Name)
+		case schemas.CreateDomainOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDomainOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DomainStatus(ev)
+			return nil
+		case schemas.CreateDomainOutput_webAppConfiguration:
+			v.WebAppConfiguration = &types.WebAppConfiguration{}
+			return v.WebAppConfiguration.Deserialize(d)
+		case schemas.CreateDomainOutput_webAppUrl:
+			v.WebAppUrl = new(string)
+			return d.ReadString(schemas.CreateDomainOutput_webAppUrl, v.WebAppUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainInput, schemas.CreateDomainOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainInput, schemas.CreateDomainOutput), output: &CreateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

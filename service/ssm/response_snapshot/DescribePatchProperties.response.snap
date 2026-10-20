@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribePatchProperties
+
+{"NextToken":"__NextToken__","Properties":[{"key0":"__Value__"},{"key0":"__Value__"}]}

@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,35 @@ type UpdateSubscriptionGrantStatusInput struct {
 	TargetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSubscriptionGrantStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriptionGrantStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriptionGrantStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusInput_assetIdentifier, *v.AssetIdentifier)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.FailureCause != nil {
+		s.WriteStruct(schemas.UpdateSubscriptionGrantStatusInput_failureCause)
+		v.FailureCause.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusInput_identifier, *v.Identifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusInput_status, string(v.Status))
+	}
+	if v.TargetName != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusInput_targetName, *v.TargetName)
+	}
 }
 
 type UpdateSubscriptionGrantStatusOutput struct {
@@ -126,13 +157,96 @@ type UpdateSubscriptionGrantStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriptionGrantStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriptionGrantStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriptionGrantStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubscribedAssets(s, schemas.UpdateSubscriptionGrantStatusOutput_assets, v.Assets)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateSubscriptionGrantStatusOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_createdBy, *v.CreatedBy)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_domainId, *v.DomainId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_environmentId, *v.EnvironmentId)
+	}
+	serializeGrantedEntity(s, schemas.UpdateSubscriptionGrantStatusOutput_grantedEntity, v.GrantedEntity)
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_status, string(v.Status))
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_subscriptionId, *v.SubscriptionId)
+	}
+	if v.SubscriptionTargetId != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_subscriptionTargetId, *v.SubscriptionTargetId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateSubscriptionGrantStatusOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.UpdateSubscriptionGrantStatusOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *UpdateSubscriptionGrantStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSubscriptionGrantStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSubscriptionGrantStatusOutput_assets:
+			return deserializeSubscribedAssets(d, schemas.UpdateSubscriptionGrantStatusOutput_assets, &v.Assets)
+		case schemas.UpdateSubscriptionGrantStatusOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateSubscriptionGrantStatusOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateSubscriptionGrantStatusOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_createdBy, v.CreatedBy)
+		case schemas.UpdateSubscriptionGrantStatusOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_domainId, v.DomainId)
+		case schemas.UpdateSubscriptionGrantStatusOutput_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_environmentId, v.EnvironmentId)
+		case schemas.UpdateSubscriptionGrantStatusOutput_grantedEntity:
+			return deserializeGrantedEntity(d, schemas.UpdateSubscriptionGrantStatusOutput_grantedEntity, &v.GrantedEntity)
+		case schemas.UpdateSubscriptionGrantStatusOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_id, v.Id)
+		case schemas.UpdateSubscriptionGrantStatusOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionGrantOverallStatus(ev)
+			return nil
+		case schemas.UpdateSubscriptionGrantStatusOutput_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_subscriptionId, v.SubscriptionId)
+		case schemas.UpdateSubscriptionGrantStatusOutput_subscriptionTargetId:
+			v.SubscriptionTargetId = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_subscriptionTargetId, v.SubscriptionTargetId)
+		case schemas.UpdateSubscriptionGrantStatusOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateSubscriptionGrantStatusOutput_updatedAt, v.UpdatedAt)
+		case schemas.UpdateSubscriptionGrantStatusOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionGrantStatusOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSubscriptionGrantStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSubscriptionGrantStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriptionGrantStatus, schemas.UpdateSubscriptionGrantStatusInput, schemas.UpdateSubscriptionGrantStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSubscriptionGrantStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriptionGrantStatus, schemas.UpdateSubscriptionGrantStatusInput, schemas.UpdateSubscriptionGrantStatusOutput), output: &UpdateSubscriptionGrantStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

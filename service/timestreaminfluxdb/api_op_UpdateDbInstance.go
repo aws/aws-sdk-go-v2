@@ -4,7 +4,9 @@ package timestreaminfluxdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,6 +74,47 @@ type UpdateDbInstanceInput struct {
 	Port *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateDbInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDbInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDbInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.UpdateDbInstanceInput_allocatedStorage, *v.AllocatedStorage)
+	}
+	serializeDbBackupConfigurationInputList(s, schemas.UpdateDbInstanceInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.UpdateDbInstanceInput_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbParameterGroupIdentifier != nil {
+		s.WriteString(schemas.UpdateDbInstanceInput_dbParameterGroupIdentifier, *v.DbParameterGroupIdentifier)
+	}
+	if v.DbStorageType != "" {
+		s.WriteString(schemas.UpdateDbInstanceInput_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.UpdateDbInstanceInput_deploymentType, string(v.DeploymentType))
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateDbInstanceInput_identifier, *v.Identifier)
+	}
+	if v.LogDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDbInstanceInput_logDeliveryConfiguration)
+		v.LogDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceSchedule != nil {
+		s.WriteStruct(schemas.UpdateDbInstanceInput_maintenanceSchedule)
+		v.MaintenanceSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.UpdateDbInstanceInput_port, *v.Port)
+	}
 }
 
 type UpdateDbInstanceOutput struct {
@@ -179,13 +222,204 @@ type UpdateDbInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDbInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDbInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDbInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.UpdateDbInstanceOutput_allocatedStorage, *v.AllocatedStorage)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_arn, *v.Arn)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_availabilityZone, *v.AvailabilityZone)
+	}
+	serializeDbBackupConfigurationOutputList(s, schemas.UpdateDbInstanceOutput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbClusterId != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_dbClusterId, *v.DbClusterId)
+	}
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.UpdateDbInstanceOutput_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbParameterGroupIdentifier != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_dbParameterGroupIdentifier, *v.DbParameterGroupIdentifier)
+	}
+	if v.DbStorageType != "" {
+		s.WriteString(schemas.UpdateDbInstanceOutput_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.UpdateDbInstanceOutput_deploymentType, string(v.DeploymentType))
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_id, *v.Id)
+	}
+	if v.InfluxAuthParametersSecretArn != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_influxAuthParametersSecretArn, *v.InfluxAuthParametersSecretArn)
+	}
+	if v.InstanceMode != "" {
+		s.WriteString(schemas.UpdateDbInstanceOutput_instanceMode, string(v.InstanceMode))
+	}
+	serializeInstanceModeList(s, schemas.UpdateDbInstanceOutput_instanceModes, v.InstanceModes)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastMaintenanceTime != nil {
+		s.WriteTime(schemas.UpdateDbInstanceOutput_lastMaintenanceTime, *v.LastMaintenanceTime)
+	}
+	if v.LogDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDbInstanceOutput_logDeliveryConfiguration)
+		v.LogDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceSchedule != nil {
+		s.WriteStruct(schemas.UpdateDbInstanceOutput_maintenanceSchedule)
+		v.MaintenanceSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.UpdateDbInstanceOutput_networkType, string(v.NetworkType))
+	}
+	if v.NextMaintenanceTime != nil {
+		s.WriteTime(schemas.UpdateDbInstanceOutput_nextMaintenanceTime, *v.NextMaintenanceTime)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.UpdateDbInstanceOutput_port, *v.Port)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.UpdateDbInstanceOutput_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.SecondaryAvailabilityZone != nil {
+		s.WriteString(schemas.UpdateDbInstanceOutput_secondaryAvailabilityZone, *v.SecondaryAvailabilityZone)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateDbInstanceOutput_status, string(v.Status))
+	}
+	serializeVpcSecurityGroupIdList(s, schemas.UpdateDbInstanceOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	serializeVpcSubnetIdList(s, schemas.UpdateDbInstanceOutput_vpcSubnetIds, v.VpcSubnetIds)
+}
+func (v *UpdateDbInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDbInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDbInstanceOutput_allocatedStorage:
+			v.AllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.UpdateDbInstanceOutput_allocatedStorage, v.AllocatedStorage)
+		case schemas.UpdateDbInstanceOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_arn, v.Arn)
+		case schemas.UpdateDbInstanceOutput_availabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_availabilityZone, v.AvailabilityZone)
+		case schemas.UpdateDbInstanceOutput_dbBackupConfigurations:
+			return deserializeDbBackupConfigurationOutputList(d, schemas.UpdateDbInstanceOutput_dbBackupConfigurations, &v.DbBackupConfigurations)
+		case schemas.UpdateDbInstanceOutput_dbClusterId:
+			v.DbClusterId = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_dbClusterId, v.DbClusterId)
+		case schemas.UpdateDbInstanceOutput_dbInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDbInstanceOutput_dbInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DbInstanceType = types.DbInstanceType(ev)
+			return nil
+		case schemas.UpdateDbInstanceOutput_dbParameterGroupIdentifier:
+			v.DbParameterGroupIdentifier = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_dbParameterGroupIdentifier, v.DbParameterGroupIdentifier)
+		case schemas.UpdateDbInstanceOutput_dbStorageType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDbInstanceOutput_dbStorageType, &ev); err != nil {
+				return err
+			}
+			v.DbStorageType = types.DbStorageType(ev)
+			return nil
+		case schemas.UpdateDbInstanceOutput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDbInstanceOutput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.DeploymentType(ev)
+			return nil
+		case schemas.UpdateDbInstanceOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_endpoint, v.Endpoint)
+		case schemas.UpdateDbInstanceOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_id, v.Id)
+		case schemas.UpdateDbInstanceOutput_influxAuthParametersSecretArn:
+			v.InfluxAuthParametersSecretArn = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
+		case schemas.UpdateDbInstanceOutput_instanceMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDbInstanceOutput_instanceMode, &ev); err != nil {
+				return err
+			}
+			v.InstanceMode = types.InstanceMode(ev)
+			return nil
+		case schemas.UpdateDbInstanceOutput_instanceModes:
+			return deserializeInstanceModeList(d, schemas.UpdateDbInstanceOutput_instanceModes, &v.InstanceModes)
+		case schemas.UpdateDbInstanceOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.UpdateDbInstanceOutput_lastMaintenanceTime:
+			v.LastMaintenanceTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateDbInstanceOutput_lastMaintenanceTime, v.LastMaintenanceTime)
+		case schemas.UpdateDbInstanceOutput_logDeliveryConfiguration:
+			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
+			return v.LogDeliveryConfiguration.Deserialize(d)
+		case schemas.UpdateDbInstanceOutput_maintenanceSchedule:
+			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
+			return v.MaintenanceSchedule.Deserialize(d)
+		case schemas.UpdateDbInstanceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_name, v.Name)
+		case schemas.UpdateDbInstanceOutput_networkType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDbInstanceOutput_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.NetworkType(ev)
+			return nil
+		case schemas.UpdateDbInstanceOutput_nextMaintenanceTime:
+			v.NextMaintenanceTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateDbInstanceOutput_nextMaintenanceTime, v.NextMaintenanceTime)
+		case schemas.UpdateDbInstanceOutput_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.UpdateDbInstanceOutput_port, v.Port)
+		case schemas.UpdateDbInstanceOutput_publiclyAccessible:
+			v.PubliclyAccessible = new(bool)
+			return d.ReadBool(schemas.UpdateDbInstanceOutput_publiclyAccessible, v.PubliclyAccessible)
+		case schemas.UpdateDbInstanceOutput_secondaryAvailabilityZone:
+			v.SecondaryAvailabilityZone = new(string)
+			return d.ReadString(schemas.UpdateDbInstanceOutput_secondaryAvailabilityZone, v.SecondaryAvailabilityZone)
+		case schemas.UpdateDbInstanceOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDbInstanceOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.UpdateDbInstanceOutput_vpcSecurityGroupIds:
+			return deserializeVpcSecurityGroupIdList(d, schemas.UpdateDbInstanceOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
+		case schemas.UpdateDbInstanceOutput_vpcSubnetIds:
+			return deserializeVpcSubnetIdList(d, schemas.UpdateDbInstanceOutput_vpcSubnetIds, &v.VpcSubnetIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateDbInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDbInstance, schemas.UpdateDbInstanceInput, schemas.UpdateDbInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateDbInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDbInstance, schemas.UpdateDbInstanceInput, schemas.UpdateDbInstanceOutput), output: &UpdateDbInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListLaunchPaths
+
+{"LaunchPathSummaries":[{"ConstraintSummaries":[{"Description":"__Description__","Type":"__Type__"},{"Description":"__Description__","Type":"__Type__"}],"Id":"__Id__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"ConstraintSummaries":[{"Description":"__Description__","Type":"__Type__"},{"Description":"__Description__","Type":"__Type__"}],"Id":"__Id__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"NextPageToken":"__NextPageToken__"}

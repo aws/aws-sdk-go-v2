@@ -4,7 +4,9 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type StartIdMappingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartIdMappingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartIdMappingJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartIdMappingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobType != "" {
+		s.WriteString(schemas.StartIdMappingJobInput_jobType, string(v.JobType))
+	}
+	serializeIdMappingJobOutputSourceConfig(s, schemas.StartIdMappingJobInput_outputSourceConfig, v.OutputSourceConfig)
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.StartIdMappingJobInput_workflowName, *v.WorkflowName)
+	}
+}
+
 type StartIdMappingJobOutput struct {
 
 	// The ID of the job.
@@ -82,13 +100,45 @@ type StartIdMappingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartIdMappingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartIdMappingJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartIdMappingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartIdMappingJobOutput_jobId, *v.JobId)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.StartIdMappingJobOutput_jobType, string(v.JobType))
+	}
+	serializeIdMappingJobOutputSourceConfig(s, schemas.StartIdMappingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+}
+func (v *StartIdMappingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartIdMappingJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartIdMappingJobOutput_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartIdMappingJobOutput_jobId, v.JobId)
+		case schemas.StartIdMappingJobOutput_jobType:
+			var ev string
+			if err := d.ReadString(schemas.StartIdMappingJobOutput_jobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = types.JobType(ev)
+			return nil
+		case schemas.StartIdMappingJobOutput_outputSourceConfig:
+			return deserializeIdMappingJobOutputSourceConfig(d, schemas.StartIdMappingJobOutput_outputSourceConfig, &v.OutputSourceConfig)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartIdMappingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartIdMappingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartIdMappingJob, schemas.StartIdMappingJobInput, schemas.StartIdMappingJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartIdMappingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartIdMappingJob, schemas.StartIdMappingJobInput, schemas.StartIdMappingJobOutput), output: &StartIdMappingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

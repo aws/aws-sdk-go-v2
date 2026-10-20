@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMaintenanceWindowExecutionTaskInvocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMaintenanceWindowExecutionTaskInvocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMaintenanceWindowFilterList(s, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest_NextToken, *v.NextToken)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest_TaskId, *v.TaskId)
+	}
+	if v.WindowExecutionId != nil {
+		s.WriteString(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest_WindowExecutionId, *v.WindowExecutionId)
+	}
+}
+
 type DescribeMaintenanceWindowExecutionTaskInvocationsOutput struct {
 
 	// The token to use when requesting the next set of items. If there are no
@@ -70,13 +94,35 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult_NextToken, *v.NextToken)
+	}
+	serializeMaintenanceWindowExecutionTaskInvocationIdentityList(s, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult_WindowExecutionTaskInvocationIdentities, v.WindowExecutionTaskInvocationIdentities)
+}
+func (v *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult_NextToken, v.NextToken)
+		case schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult_WindowExecutionTaskInvocationIdentities:
+			return deserializeMaintenanceWindowExecutionTaskInvocationIdentityList(d, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult_WindowExecutionTaskInvocationIdentities, &v.WindowExecutionTaskInvocationIdentities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMaintenanceWindowExecutionTaskInvocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMaintenanceWindowExecutionTaskInvocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMaintenanceWindowExecutionTaskInvocations, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMaintenanceWindowExecutionTaskInvocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMaintenanceWindowExecutionTaskInvocations, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsRequest, schemas.DescribeMaintenanceWindowExecutionTaskInvocationsResult), output: &DescribeMaintenanceWindowExecutionTaskInvocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

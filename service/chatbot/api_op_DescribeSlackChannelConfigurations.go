@@ -5,7 +5,9 @@ package chatbot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DescribeSlackChannelConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSlackChannelConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSlackChannelConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSlackChannelConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatConfigurationArn != nil {
+		s.WriteString(schemas.DescribeSlackChannelConfigurationsRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSlackChannelConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSlackChannelConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeSlackChannelConfigurationsOutput struct {
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -60,13 +80,35 @@ type DescribeSlackChannelConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSlackChannelConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSlackChannelConfigurationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSlackChannelConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSlackChannelConfigurationsResult_NextToken, *v.NextToken)
+	}
+	serializeSlackChannelConfigurationList(s, schemas.DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations, v.SlackChannelConfigurations)
+}
+func (v *DescribeSlackChannelConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSlackChannelConfigurationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSlackChannelConfigurationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSlackChannelConfigurationsResult_NextToken, v.NextToken)
+		case schemas.DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations:
+			return deserializeSlackChannelConfigurationList(d, schemas.DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations, &v.SlackChannelConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSlackChannelConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSlackChannelConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSlackChannelConfigurations, schemas.DescribeSlackChannelConfigurationsRequest, schemas.DescribeSlackChannelConfigurationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSlackChannelConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSlackChannelConfigurations, schemas.DescribeSlackChannelConfigurationsRequest, schemas.DescribeSlackChannelConfigurationsResult), output: &DescribeSlackChannelConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

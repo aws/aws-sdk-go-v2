@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.ListUsersRequest_CollectionId, *v.CollectionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUsersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListUsersOutput struct {
 
 	// A pagination token to be used with the subsequent request if the response is
@@ -60,13 +80,35 @@ type ListUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersResponse_NextToken, *v.NextToken)
+	}
+	serializeUserList(s, schemas.ListUsersResponse_Users, v.Users)
+}
+func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsersResponse_NextToken, v.NextToken)
+		case schemas.ListUsersResponse_Users:
+			return deserializeUserList(d, schemas.ListUsersResponse_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResponse), output: &ListUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

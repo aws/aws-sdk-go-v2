@@ -1,0 +1,4 @@
+429
+Content-Type: application/json
+
+{"__type":"ThrottlingException","limit":1,"message":"__Message__","resourceId":"__ResourceId__","resourceType":"ROOM"}

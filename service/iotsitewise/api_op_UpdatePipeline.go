@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,26 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeNodeList(s, schemas.UpdatePipelineRequest_computations, v.Computations)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_description, *v.Description)
+	}
+	serializeEnvironmentVariablesMap(s, schemas.UpdatePipelineRequest_environmentVariables, v.EnvironmentVariables)
+	if v.PipelineName != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_pipelineName, *v.PipelineName)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for UpdatePipeline operation.
 type UpdatePipelineOutput struct {
 
@@ -73,13 +95,40 @@ type UpdatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.UpdatePipelineResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdatePipelineResponse_version, *v.Version)
+	}
+}
+func (v *UpdatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipelineResponse_status:
+			v.Status = &types.ResourceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.UpdatePipelineResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.UpdatePipelineResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineRequest, schemas.UpdatePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineRequest, schemas.UpdatePipelineResponse), output: &UpdatePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

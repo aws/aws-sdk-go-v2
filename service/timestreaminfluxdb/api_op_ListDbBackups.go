@@ -5,7 +5,9 @@ package timestreaminfluxdb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListDbBackupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbBackupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbBackupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbBackupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbResourceId != nil {
+		s.WriteString(schemas.ListDbBackupsInput_dbResourceId, *v.DbResourceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDbBackupsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbBackupsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListDbBackupsOutput struct {
 
 	// A list of Timestream for InfluxDB backup summaries.
@@ -61,13 +81,35 @@ type ListDbBackupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbBackupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbBackupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDbBackupSummaryList(s, schemas.ListDbBackupsOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbBackupsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDbBackupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDbBackupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDbBackupsOutput_items:
+			return deserializeDbBackupSummaryList(d, schemas.ListDbBackupsOutput_items, &v.Items)
+		case schemas.ListDbBackupsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDbBackupsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDbBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbBackups, schemas.ListDbBackupsInput, schemas.ListDbBackupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbBackups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbBackups, schemas.ListDbBackupsInput, schemas.ListDbBackupsOutput), output: &ListDbBackupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,31 @@ type StartDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDevEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDevEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartDevEnvironmentRequest_id, *v.Id)
+	}
+	serializeIdeConfigurationList(s, schemas.StartDevEnvironmentRequest_ides, v.Ides)
+	if v.InactivityTimeoutMinutes != 0 {
+		s.WriteInt32(schemas.StartDevEnvironmentRequest_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.StartDevEnvironmentRequest_instanceType, string(v.InstanceType))
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StartDevEnvironmentRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.StartDevEnvironmentRequest_spaceName, *v.SpaceName)
+	}
+}
+
 type StartDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the Dev Environment.
@@ -84,13 +111,54 @@ type StartDevEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDevEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDevEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDevEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartDevEnvironmentResponse_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StartDevEnvironmentResponse_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.StartDevEnvironmentResponse_spaceName, *v.SpaceName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartDevEnvironmentResponse_status, string(v.Status))
+	}
+}
+func (v *StartDevEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDevEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDevEnvironmentResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartDevEnvironmentResponse_id, v.Id)
+		case schemas.StartDevEnvironmentResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.StartDevEnvironmentResponse_projectName, v.ProjectName)
+		case schemas.StartDevEnvironmentResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.StartDevEnvironmentResponse_spaceName, v.SpaceName)
+		case schemas.StartDevEnvironmentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartDevEnvironmentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DevEnvironmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDevEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDevEnvironment, schemas.StartDevEnvironmentRequest, schemas.StartDevEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDevEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDevEnvironment, schemas.StartDevEnvironmentRequest, schemas.StartDevEnvironmentResponse), output: &StartDevEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

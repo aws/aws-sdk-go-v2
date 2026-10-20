@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"IdentityResolutionJobsList":[{"DomainName":"__DomainName__","ExportingLocation":{"S3Exporting":{"S3BucketName":"__S3BucketName__","S3KeyName":"__S3KeyName__"}},"JobEndTime":946684800,"JobId":"__JobId__","JobStartTime":946684800,"JobStats":{"NumberOfMatchesFound":1,"NumberOfMergesDone":1,"NumberOfProfilesReviewed":1},"Message":"__Message__","Status":"PENDING"},{"DomainName":"__DomainName__","ExportingLocation":{"S3Exporting":{"S3BucketName":"__S3BucketName__","S3KeyName":"__S3KeyName__"}},"JobEndTime":946684800,"JobId":"__JobId__","JobStartTime":946684800,"JobStats":{"NumberOfMatchesFound":1,"NumberOfMergesDone":1,"NumberOfProfilesReviewed":1},"Message":"__Message__","Status":"PENDING"}],"NextToken":"__NextToken__"}

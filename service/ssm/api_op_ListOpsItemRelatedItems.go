@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,25 @@ type ListOpsItemRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpsItemRelatedItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpsItemRelatedItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpsItemRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOpsItemRelatedItemsFilters(s, schemas.ListOpsItemRelatedItemsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOpsItemRelatedItemsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpsItemRelatedItemsRequest_NextToken, *v.NextToken)
+	}
+	if v.OpsItemId != nil {
+		s.WriteString(schemas.ListOpsItemRelatedItemsRequest_OpsItemId, *v.OpsItemId)
+	}
+}
+
 type ListOpsItemRelatedItemsOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -61,13 +82,35 @@ type ListOpsItemRelatedItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpsItemRelatedItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpsItemRelatedItemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpsItemRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpsItemRelatedItemsResponse_NextToken, *v.NextToken)
+	}
+	serializeOpsItemRelatedItemSummaries(s, schemas.ListOpsItemRelatedItemsResponse_Summaries, v.Summaries)
+}
+func (v *ListOpsItemRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpsItemRelatedItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpsItemRelatedItemsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOpsItemRelatedItemsResponse_NextToken, v.NextToken)
+		case schemas.ListOpsItemRelatedItemsResponse_Summaries:
+			return deserializeOpsItemRelatedItemSummaries(d, schemas.ListOpsItemRelatedItemsResponse_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpsItemRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOpsItemRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpsItemRelatedItems, schemas.ListOpsItemRelatedItemsRequest, schemas.ListOpsItemRelatedItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOpsItemRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpsItemRelatedItems, schemas.ListOpsItemRelatedItemsRequest, schemas.ListOpsItemRelatedItemsResponse), output: &ListOpsItemRelatedItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,7 +6,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/document"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +62,31 @@ type CreateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteDocument(schemas.CreateTriggerRequest_action, &smithydocument.Opaque{Value: v.Action})
+	}
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateTriggerRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTriggerRequest_clientToken, *v.ClientToken)
+	}
+	serializeTriggerCondition(s, schemas.CreateTriggerRequest_condition, v.Condition)
+	if v.Status != nil {
+		s.WriteString(schemas.CreateTriggerRequest_status, *v.Status)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CreateTriggerRequest_type, *v.Type)
+	}
+}
+
 // Response structure for creating a new Trigger
 type CreateTriggerOutput struct {
 
@@ -73,13 +101,34 @@ type CreateTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Trigger != nil {
+		s.WriteStruct(schemas.CreateTriggerResponse_trigger)
+		v.Trigger.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTriggerResponse_trigger:
+			v.Trigger = &types.Trigger{}
+			return v.Trigger.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrigger, schemas.CreateTriggerRequest, schemas.CreateTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrigger, schemas.CreateTriggerRequest, schemas.CreateTriggerResponse), output: &CreateTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

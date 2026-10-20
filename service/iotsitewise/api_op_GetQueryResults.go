@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,27 @@ type GetQueryResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetQueryResultsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQueryResultsRequest_nextToken, *v.NextToken)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryResultsRequest_queryId, *v.QueryId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.GetQueryResultsRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Contains the response for the GetQueryResults operation.
 type GetQueryResultsOutput struct {
 
@@ -69,13 +92,38 @@ type GetQueryResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnInformationList(s, schemas.GetQueryResultsResponse_columnInfo, v.ColumnInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQueryResultsResponse_nextToken, *v.NextToken)
+	}
+	serializeRowList(s, schemas.GetQueryResultsResponse_rows, v.Rows)
+}
+func (v *GetQueryResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryResultsResponse_columnInfo:
+			return deserializeColumnInformationList(d, schemas.GetQueryResultsResponse_columnInfo, &v.ColumnInfo)
+		case schemas.GetQueryResultsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetQueryResultsResponse_nextToken, v.NextToken)
+		case schemas.GetQueryResultsResponse_rows:
+			return deserializeRowList(d, schemas.GetQueryResultsResponse_rows, &v.Rows)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResults, schemas.GetQueryResultsRequest, schemas.GetQueryResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResults, schemas.GetQueryResultsRequest, schemas.GetQueryResultsResponse), output: &GetQueryResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

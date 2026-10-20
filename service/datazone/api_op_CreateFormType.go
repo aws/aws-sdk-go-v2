@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,31 @@ type CreateFormTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFormTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFormTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFormTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFormTypeInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateFormTypeInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeModel(s, schemas.CreateFormTypeInput_model, v.Model)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFormTypeInput_name, *v.Name)
+	}
+	if v.OwningProjectIdentifier != nil {
+		s.WriteString(schemas.CreateFormTypeInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateFormTypeInput_status, string(v.Status))
+	}
+}
+
 type CreateFormTypeOutput struct {
 
 	// The ID of the Amazon DataZone domain in which this metadata form type is
@@ -120,13 +147,68 @@ type CreateFormTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFormTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFormTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFormTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFormTypeOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateFormTypeOutput_domainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFormTypeOutput_name, *v.Name)
+	}
+	if v.OriginDomainId != nil {
+		s.WriteString(schemas.CreateFormTypeOutput_originDomainId, *v.OriginDomainId)
+	}
+	if v.OriginProjectId != nil {
+		s.WriteString(schemas.CreateFormTypeOutput_originProjectId, *v.OriginProjectId)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.CreateFormTypeOutput_owningProjectId, *v.OwningProjectId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.CreateFormTypeOutput_revision, *v.Revision)
+	}
+}
+func (v *CreateFormTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFormTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFormTypeOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateFormTypeOutput_description, v.Description)
+		case schemas.CreateFormTypeOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateFormTypeOutput_domainId, v.DomainId)
+		case schemas.CreateFormTypeOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateFormTypeOutput_name, v.Name)
+		case schemas.CreateFormTypeOutput_originDomainId:
+			v.OriginDomainId = new(string)
+			return d.ReadString(schemas.CreateFormTypeOutput_originDomainId, v.OriginDomainId)
+		case schemas.CreateFormTypeOutput_originProjectId:
+			v.OriginProjectId = new(string)
+			return d.ReadString(schemas.CreateFormTypeOutput_originProjectId, v.OriginProjectId)
+		case schemas.CreateFormTypeOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.CreateFormTypeOutput_owningProjectId, v.OwningProjectId)
+		case schemas.CreateFormTypeOutput_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.CreateFormTypeOutput_revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFormTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFormType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFormType, schemas.CreateFormTypeInput, schemas.CreateFormTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFormType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFormType, schemas.CreateFormTypeInput, schemas.CreateFormTypeOutput), output: &CreateFormTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

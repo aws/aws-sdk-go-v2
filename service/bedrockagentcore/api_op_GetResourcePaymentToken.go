@@ -4,7 +4,9 @@ package bedrockagentcore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type GetResourcePaymentTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePaymentTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePaymentTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePaymentTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePaymentTokenRequestInput(s, schemas.GetResourcePaymentTokenRequest_paymentTokenRequest, v.PaymentTokenRequest)
+	if v.ResourceCredentialProviderName != nil {
+		s.WriteString(schemas.GetResourcePaymentTokenRequest_resourceCredentialProviderName, *v.ResourceCredentialProviderName)
+	}
+	if v.WorkloadIdentityToken != nil {
+		s.WriteString(schemas.GetResourcePaymentTokenRequest_workloadIdentityToken, *v.WorkloadIdentityToken)
+	}
+}
+
 type GetResourcePaymentTokenOutput struct {
 
 	// Vendor-specific token response output. Contains all response data in a
@@ -60,13 +78,29 @@ type GetResourcePaymentTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcePaymentTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcePaymentTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcePaymentTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePaymentTokenResponseOutput(s, schemas.GetResourcePaymentTokenResponse_paymentTokenResponse, v.PaymentTokenResponse)
+}
+func (v *GetResourcePaymentTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcePaymentTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcePaymentTokenResponse_paymentTokenResponse:
+			return deserializePaymentTokenResponseOutput(d, schemas.GetResourcePaymentTokenResponse_paymentTokenResponse, &v.PaymentTokenResponse)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcePaymentTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcePaymentToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePaymentToken, schemas.GetResourcePaymentTokenRequest, schemas.GetResourcePaymentTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcePaymentToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePaymentToken, schemas.GetResourcePaymentTokenRequest, schemas.GetResourcePaymentTokenResponse), output: &GetResourcePaymentTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

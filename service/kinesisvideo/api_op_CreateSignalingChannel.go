@@ -4,7 +4,9 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type CreateSignalingChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSignalingChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSignalingChannelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSignalingChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CreateSignalingChannelInput_ChannelName, *v.ChannelName)
+	}
+	if v.ChannelType != "" {
+		s.WriteString(schemas.CreateSignalingChannelInput_ChannelType, string(v.ChannelType))
+	}
+	if v.SingleMasterConfiguration != nil {
+		s.WriteStruct(schemas.CreateSignalingChannelInput_SingleMasterConfiguration)
+		v.SingleMasterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagOnCreateList(s, schemas.CreateSignalingChannelInput_Tags, v.Tags)
+}
+
 type CreateSignalingChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created channel.
@@ -60,13 +83,32 @@ type CreateSignalingChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSignalingChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSignalingChannelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSignalingChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.CreateSignalingChannelOutput_ChannelARN, *v.ChannelARN)
+	}
+}
+func (v *CreateSignalingChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSignalingChannelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSignalingChannelOutput_ChannelARN:
+			v.ChannelARN = new(string)
+			return d.ReadString(schemas.CreateSignalingChannelOutput_ChannelARN, v.ChannelARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSignalingChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSignalingChannel, schemas.CreateSignalingChannelInput, schemas.CreateSignalingChannelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSignalingChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSignalingChannel, schemas.CreateSignalingChannelInput, schemas.CreateSignalingChannelOutput), output: &CreateSignalingChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

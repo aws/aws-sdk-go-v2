@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,32 @@ type SearchProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeadditionalSearchKeysList(s, schemas.SearchProfilesRequest_AdditionalSearchKeys, v.AdditionalSearchKeys)
+	if v.DomainName != nil {
+		s.WriteString(schemas.SearchProfilesRequest_DomainName, *v.DomainName)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.SearchProfilesRequest_KeyName, *v.KeyName)
+	}
+	if v.LogicalOperator != "" {
+		s.WriteString(schemas.SearchProfilesRequest_LogicalOperator, string(v.LogicalOperator))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchProfilesRequest_NextToken, *v.NextToken)
+	}
+	serializerequestValueList(s, schemas.SearchProfilesRequest_Values, v.Values)
+}
+
 type SearchProfilesOutput struct {
 
 	// The list of Profiles matching the search criteria.
@@ -101,13 +129,35 @@ type SearchProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProfileList(s, schemas.SearchProfilesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchProfilesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchProfilesResponse_Items:
+			return deserializeProfileList(d, schemas.SearchProfilesResponse_Items, &v.Items)
+		case schemas.SearchProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchProfilesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProfiles, schemas.SearchProfilesRequest, schemas.SearchProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProfiles, schemas.SearchProfilesRequest, schemas.SearchProfilesResponse), output: &SearchProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

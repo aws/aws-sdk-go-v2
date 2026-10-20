@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdateProvisionedProduct
+
+{"RecordDetail":{"CreatedTime":946684800,"LaunchRoleArn":"__LaunchRoleArn__","PathId":"__PathId__","ProductId":"__ProductId__","ProvisionedProductId":"__ProvisionedProductId__","ProvisionedProductName":"__ProvisionedProductName__","ProvisionedProductType":"__ProvisionedProductType__","ProvisioningArtifactId":"__ProvisioningArtifactId__","RecordErrors":[{"Code":"__Code__","Description":"__Description__"},{"Code":"__Code__","Description":"__Description__"}],"RecordId":"__RecordId__","RecordTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"RecordType":"__RecordType__","Status":"CREATED","UpdatedTime":946684800}}

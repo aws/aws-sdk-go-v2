@@ -5,7 +5,9 @@ package devopsguru
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type ListMonitoredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoredResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoredResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoredResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListMonitoredResourcesRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitoredResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoredResourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMonitoredResourcesOutput struct {
 
 	//  Information about the resource that is being monitored, including the name of
@@ -63,13 +85,35 @@ type ListMonitoredResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoredResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoredResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoredResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoredResourceIdentifiers(s, schemas.ListMonitoredResourcesResponse_MonitoredResourceIdentifiers, v.MonitoredResourceIdentifiers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoredResourcesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMonitoredResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitoredResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitoredResourcesResponse_MonitoredResourceIdentifiers:
+			return deserializeMonitoredResourceIdentifiers(d, schemas.ListMonitoredResourcesResponse_MonitoredResourceIdentifiers, &v.MonitoredResourceIdentifiers)
+		case schemas.ListMonitoredResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitoredResourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitoredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMonitoredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoredResources, schemas.ListMonitoredResourcesRequest, schemas.ListMonitoredResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMonitoredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoredResources, schemas.ListMonitoredResourcesRequest, schemas.ListMonitoredResourcesResponse), output: &ListMonitoredResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

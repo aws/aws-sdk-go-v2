@@ -5,7 +5,9 @@ package devopsguru
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type ListNotificationChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationChannelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationChannelsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListNotificationChannelsOutput struct {
 
 	//  An array that contains the requested notification channels.
@@ -54,13 +68,35 @@ type ListNotificationChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationChannelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannels(s, schemas.ListNotificationChannelsResponse_Channels, v.Channels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationChannelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListNotificationChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotificationChannelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotificationChannelsResponse_Channels:
+			return deserializeChannels(d, schemas.ListNotificationChannelsResponse_Channels, &v.Channels)
+		case schemas.ListNotificationChannelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotificationChannelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotificationChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNotificationChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationChannels, schemas.ListNotificationChannelsRequest, schemas.ListNotificationChannelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNotificationChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationChannels, schemas.ListNotificationChannelsRequest, schemas.ListNotificationChannelsResponse), output: &ListNotificationChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package geoplaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,52 @@ type GeocodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeocodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeocodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeocodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGeocodeAdditionalFeatureList(s, schemas.GeocodeRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AddressNamesMode != "" {
+		s.WriteString(schemas.GeocodeRequest_AddressNamesMode, string(v.AddressNamesMode))
+	}
+	serializeAddressTranslationComponentList(s, schemas.GeocodeRequest_AddressTranslations, v.AddressTranslations)
+	serializePosition(s, schemas.GeocodeRequest_BiasPosition, v.BiasPosition)
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GeocodeRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntendedUse != "" {
+		s.WriteString(schemas.GeocodeRequest_IntendedUse, string(v.IntendedUse))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.GeocodeRequest_Key, *v.Key)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.GeocodeRequest_Language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GeocodeRequest_MaxResults, *v.MaxResults)
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.GeocodeRequest_PoliticalView, *v.PoliticalView)
+	}
+	if v.PostalCodeMode != "" {
+		s.WriteString(schemas.GeocodeRequest_PostalCodeMode, string(v.PostalCodeMode))
+	}
+	if v.QueryComponents != nil {
+		s.WriteStruct(schemas.GeocodeRequest_QueryComponents)
+		v.QueryComponents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryText != nil {
+		s.WriteString(schemas.GeocodeRequest_QueryText, *v.QueryText)
+	}
+}
+
 type GeocodeOutput struct {
 
 	// The pricing bucket for which the query is charged at, or the maximum pricing
@@ -139,13 +187,35 @@ type GeocodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeocodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeocodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeocodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PricingBucket != nil {
+		s.WriteString(schemas.GeocodeResponse_PricingBucket, *v.PricingBucket)
+	}
+	serializeGeocodeResultItemList(s, schemas.GeocodeResponse_ResultItems, v.ResultItems)
+}
+func (v *GeocodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeocodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeocodeResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.GeocodeResponse_PricingBucket, v.PricingBucket)
+		case schemas.GeocodeResponse_ResultItems:
+			return deserializeGeocodeResultItemList(d, schemas.GeocodeResponse_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGeocodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGeocode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Geocode, schemas.GeocodeRequest, schemas.GeocodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGeocode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Geocode, schemas.GeocodeRequest, schemas.GeocodeResponse), output: &GeocodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

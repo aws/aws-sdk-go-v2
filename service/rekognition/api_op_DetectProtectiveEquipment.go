@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,25 @@ type DetectProtectiveEquipmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectProtectiveEquipmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectProtectiveEquipmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectProtectiveEquipmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Image != nil {
+		s.WriteStruct(schemas.DetectProtectiveEquipmentRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SummarizationAttributes != nil {
+		s.WriteStruct(schemas.DetectProtectiveEquipmentRequest_SummarizationAttributes)
+		v.SummarizationAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetectProtectiveEquipmentOutput struct {
 
 	// An array of persons detected in the image (including persons not wearing PPE).
@@ -94,13 +115,43 @@ type DetectProtectiveEquipmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectProtectiveEquipmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectProtectiveEquipmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectProtectiveEquipmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectiveEquipmentPersons(s, schemas.DetectProtectiveEquipmentResponse_Persons, v.Persons)
+	if v.ProtectiveEquipmentModelVersion != nil {
+		s.WriteString(schemas.DetectProtectiveEquipmentResponse_ProtectiveEquipmentModelVersion, *v.ProtectiveEquipmentModelVersion)
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.DetectProtectiveEquipmentResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectProtectiveEquipmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectProtectiveEquipmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectProtectiveEquipmentResponse_Persons:
+			return deserializeProtectiveEquipmentPersons(d, schemas.DetectProtectiveEquipmentResponse_Persons, &v.Persons)
+		case schemas.DetectProtectiveEquipmentResponse_ProtectiveEquipmentModelVersion:
+			v.ProtectiveEquipmentModelVersion = new(string)
+			return d.ReadString(schemas.DetectProtectiveEquipmentResponse_ProtectiveEquipmentModelVersion, v.ProtectiveEquipmentModelVersion)
+		case schemas.DetectProtectiveEquipmentResponse_Summary:
+			v.Summary = &types.ProtectiveEquipmentSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectProtectiveEquipmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectProtectiveEquipment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectProtectiveEquipment, schemas.DetectProtectiveEquipmentRequest, schemas.DetectProtectiveEquipmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectProtectiveEquipment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectProtectiveEquipment, schemas.DetectProtectiveEquipmentRequest, schemas.DetectProtectiveEquipmentResponse), output: &DetectProtectiveEquipmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

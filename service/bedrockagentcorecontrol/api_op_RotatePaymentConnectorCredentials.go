@@ -5,7 +5,9 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,6 +74,25 @@ type RotatePaymentConnectorCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotatePaymentConnectorCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotatePaymentConnectorCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotatePaymentConnectorCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RotatePaymentConnectorCredentialsRequest_clientToken, *v.ClientToken)
+	}
+	serializeCredentialRotationConfig(s, schemas.RotatePaymentConnectorCredentialsRequest_credentialsToRotate, v.CredentialsToRotate)
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.RotatePaymentConnectorCredentialsRequest_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.RotatePaymentConnectorCredentialsRequest_paymentManagerId, *v.PaymentManagerId)
+	}
+}
+
 type RotatePaymentConnectorCredentialsOutput struct {
 
 	// The timestamp when the payment connector was last updated, which is when the
@@ -102,13 +123,54 @@ type RotatePaymentConnectorCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotatePaymentConnectorCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotatePaymentConnectorCredentialsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotatePaymentConnectorCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.RotatePaymentConnectorCredentialsResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.RotatePaymentConnectorCredentialsResponse_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.RotatePaymentConnectorCredentialsResponse_paymentManagerId, *v.PaymentManagerId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RotatePaymentConnectorCredentialsResponse_status, string(v.Status))
+	}
+}
+func (v *RotatePaymentConnectorCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotatePaymentConnectorCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotatePaymentConnectorCredentialsResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RotatePaymentConnectorCredentialsResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.RotatePaymentConnectorCredentialsResponse_paymentConnectorId:
+			v.PaymentConnectorId = new(string)
+			return d.ReadString(schemas.RotatePaymentConnectorCredentialsResponse_paymentConnectorId, v.PaymentConnectorId)
+		case schemas.RotatePaymentConnectorCredentialsResponse_paymentManagerId:
+			v.PaymentManagerId = new(string)
+			return d.ReadString(schemas.RotatePaymentConnectorCredentialsResponse_paymentManagerId, v.PaymentManagerId)
+		case schemas.RotatePaymentConnectorCredentialsResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.RotatePaymentConnectorCredentialsResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentConnectorStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotatePaymentConnectorCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRotatePaymentConnectorCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotatePaymentConnectorCredentials, schemas.RotatePaymentConnectorCredentialsRequest, schemas.RotatePaymentConnectorCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRotatePaymentConnectorCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotatePaymentConnectorCredentials, schemas.RotatePaymentConnectorCredentialsRequest, schemas.RotatePaymentConnectorCredentialsResponse), output: &RotatePaymentConnectorCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

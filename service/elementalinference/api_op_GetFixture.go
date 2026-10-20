@@ -4,7 +4,9 @@ package elementalinference
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetFixtureInput struct {
 	FixtureId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFixtureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFixtureRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFixtureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FixtureId != nil {
+		s.WriteString(schemas.GetFixtureRequest_fixtureId, *v.FixtureId)
+	}
 }
 
 type GetFixtureOutput struct {
@@ -75,13 +89,59 @@ type GetFixtureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFixtureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFixtureResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFixtureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompetitorList(s, schemas.GetFixtureResponse_competitors, v.Competitors)
+	if v.FixtureGroup != nil {
+		s.WriteString(schemas.GetFixtureResponse_fixtureGroup, *v.FixtureGroup)
+	}
+	if v.FixtureId != nil {
+		s.WriteString(schemas.GetFixtureResponse_fixtureId, *v.FixtureId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFixtureResponse_name, *v.Name)
+	}
+	if v.ScheduledStart != nil {
+		s.WriteTime(schemas.GetFixtureResponse_scheduledStart, *v.ScheduledStart)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetFixtureResponse_status, *v.Status)
+	}
+}
+func (v *GetFixtureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFixtureResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFixtureResponse_competitors:
+			return deserializeCompetitorList(d, schemas.GetFixtureResponse_competitors, &v.Competitors)
+		case schemas.GetFixtureResponse_fixtureGroup:
+			v.FixtureGroup = new(string)
+			return d.ReadString(schemas.GetFixtureResponse_fixtureGroup, v.FixtureGroup)
+		case schemas.GetFixtureResponse_fixtureId:
+			v.FixtureId = new(string)
+			return d.ReadString(schemas.GetFixtureResponse_fixtureId, v.FixtureId)
+		case schemas.GetFixtureResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFixtureResponse_name, v.Name)
+		case schemas.GetFixtureResponse_scheduledStart:
+			v.ScheduledStart = new(time.Time)
+			return d.ReadTime(schemas.GetFixtureResponse_scheduledStart, v.ScheduledStart)
+		case schemas.GetFixtureResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetFixtureResponse_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFixtureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFixture{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFixture, schemas.GetFixtureRequest, schemas.GetFixtureResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFixture{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFixture, schemas.GetFixtureRequest, schemas.GetFixtureResponse), output: &GetFixtureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

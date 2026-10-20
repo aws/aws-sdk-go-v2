@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,35 @@ type RegisterServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExchangeUrlPrivateConnectionName != nil {
+		s.WriteString(schemas.RegisterServiceInput_exchangeUrlPrivateConnectionName, *v.ExchangeUrlPrivateConnectionName)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.RegisterServiceInput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegisterServiceInput_name, *v.Name)
+	}
+	if v.PrivateConnectionName != nil {
+		s.WriteString(schemas.RegisterServiceInput_privateConnectionName, *v.PrivateConnectionName)
+	}
+	if v.Service != "" {
+		s.WriteString(schemas.RegisterServiceInput_service, string(v.Service))
+	}
+	serializeServiceDetails(s, schemas.RegisterServiceInput_serviceDetails, v.ServiceDetails)
+	serializeTags(s, schemas.RegisterServiceInput_tags, v.Tags)
+	if v.TargetUrlPrivateConnectionName != nil {
+		s.WriteString(schemas.RegisterServiceInput_targetUrlPrivateConnectionName, *v.TargetUrlPrivateConnectionName)
+	}
+}
+
 // Output containing the service ID and any additional steps required for
 // registration.
 type RegisterServiceOutput struct {
@@ -89,13 +120,44 @@ type RegisterServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalServiceRegistrationStep(s, schemas.RegisterServiceOutput_additionalStep, v.AdditionalStep)
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.RegisterServiceOutput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.RegisterServiceOutput_serviceId, *v.ServiceId)
+	}
+	serializeTags(s, schemas.RegisterServiceOutput_tags, v.Tags)
+}
+func (v *RegisterServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterServiceOutput_additionalStep:
+			return deserializeAdditionalServiceRegistrationStep(d, schemas.RegisterServiceOutput_additionalStep, &v.AdditionalStep)
+		case schemas.RegisterServiceOutput_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.RegisterServiceOutput_kmsKeyArn, v.KmsKeyArn)
+		case schemas.RegisterServiceOutput_serviceId:
+			v.ServiceId = new(string)
+			return d.ReadString(schemas.RegisterServiceOutput_serviceId, v.ServiceId)
+		case schemas.RegisterServiceOutput_tags:
+			return deserializeTags(d, schemas.RegisterServiceOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterService, schemas.RegisterServiceInput, schemas.RegisterServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterService, schemas.RegisterServiceInput, schemas.RegisterServiceOutput), output: &RegisterServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

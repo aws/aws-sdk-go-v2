@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,36 @@ type CreateRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommenderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommenderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRecommenderRequest_Description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateRecommenderRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderConfig != nil {
+		s.WriteStruct(schemas.CreateRecommenderRequest_RecommenderConfig)
+		v.RecommenderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecommenderName != nil {
+		s.WriteString(schemas.CreateRecommenderRequest_RecommenderName, *v.RecommenderName)
+	}
+	if v.RecommenderRecipeName != "" {
+		s.WriteString(schemas.CreateRecommenderRequest_RecommenderRecipeName, string(v.RecommenderRecipeName))
+	}
+	if v.RecommenderSchemaName != nil {
+		s.WriteString(schemas.CreateRecommenderRequest_RecommenderSchemaName, *v.RecommenderSchemaName)
+	}
+	serializeTagMap(s, schemas.CreateRecommenderRequest_Tags, v.Tags)
+}
+
 type CreateRecommenderOutput struct {
 
 	// The ARN of the recommender
@@ -73,13 +105,35 @@ type CreateRecommenderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommenderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommenderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderArn != nil {
+		s.WriteString(schemas.CreateRecommenderResponse_RecommenderArn, *v.RecommenderArn)
+	}
+	serializeTagMap(s, schemas.CreateRecommenderResponse_Tags, v.Tags)
+}
+func (v *CreateRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecommenderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecommenderResponse_RecommenderArn:
+			v.RecommenderArn = new(string)
+			return d.ReadString(schemas.CreateRecommenderResponse_RecommenderArn, v.RecommenderArn)
+		case schemas.CreateRecommenderResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateRecommenderResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecommenderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommender, schemas.CreateRecommenderRequest, schemas.CreateRecommenderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommender, schemas.CreateRecommenderRequest, schemas.CreateRecommenderResponse), output: &CreateRecommenderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

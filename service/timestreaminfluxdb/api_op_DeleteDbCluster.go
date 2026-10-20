@@ -4,7 +4,9 @@ package timestreaminfluxdb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteDbClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDbClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDbClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterId != nil {
+		s.WriteString(schemas.DeleteDbClusterInput_dbClusterId, *v.DbClusterId)
+	}
+	if v.RetainAutomatedBackups != nil {
+		s.WriteBool(schemas.DeleteDbClusterInput_retainAutomatedBackups, *v.RetainAutomatedBackups)
+	}
+}
+
 type DeleteDbClusterOutput struct {
 
 	// The status of the DB cluster.
@@ -49,13 +66,36 @@ type DeleteDbClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDbClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDbClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDbClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterStatus != "" {
+		s.WriteString(schemas.DeleteDbClusterOutput_dbClusterStatus, string(v.DbClusterStatus))
+	}
+}
+func (v *DeleteDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDbClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDbClusterOutput_dbClusterStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDbClusterOutput_dbClusterStatus, &ev); err != nil {
+				return err
+			}
+			v.DbClusterStatus = types.ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDbCluster, schemas.DeleteDbClusterInput, schemas.DeleteDbClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDbCluster, schemas.DeleteDbClusterInput, schemas.DeleteDbClusterOutput), output: &DeleteDbClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

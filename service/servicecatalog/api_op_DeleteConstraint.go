@@ -4,6 +4,8 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteConstraintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConstraintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConstraintInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConstraintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DeleteConstraintInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteConstraintInput_Id, *v.Id)
+	}
+}
+
 type DeleteConstraintOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteConstraintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConstraintOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConstraintOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConstraintOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConstraintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConstraintOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConstraint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConstraint, schemas.DeleteConstraintInput, schemas.DeleteConstraintOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteConstraint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConstraint, schemas.DeleteConstraintInput, schemas.DeleteConstraintOutput), output: &DeleteConstraintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

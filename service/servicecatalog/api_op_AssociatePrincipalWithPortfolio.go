@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -119,6 +121,27 @@ type AssociatePrincipalWithPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePrincipalWithPortfolioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePrincipalWithPortfolioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePrincipalWithPortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.AssociatePrincipalWithPortfolioInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.AssociatePrincipalWithPortfolioInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.PrincipalARN != nil {
+		s.WriteString(schemas.AssociatePrincipalWithPortfolioInput_PrincipalARN, *v.PrincipalARN)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.AssociatePrincipalWithPortfolioInput_PrincipalType, string(v.PrincipalType))
+	}
+}
+
 type AssociatePrincipalWithPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -126,13 +149,26 @@ type AssociatePrincipalWithPortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePrincipalWithPortfolioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePrincipalWithPortfolioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePrincipalWithPortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociatePrincipalWithPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePrincipalWithPortfolioOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociatePrincipalWithPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociatePrincipalWithPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePrincipalWithPortfolio, schemas.AssociatePrincipalWithPortfolioInput, schemas.AssociatePrincipalWithPortfolioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociatePrincipalWithPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePrincipalWithPortfolio, schemas.AssociatePrincipalWithPortfolioInput, schemas.AssociatePrincipalWithPortfolioOutput), output: &AssociatePrincipalWithPortfolioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

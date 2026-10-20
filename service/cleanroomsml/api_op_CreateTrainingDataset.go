@@ -4,7 +4,9 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,26 @@ type CreateTrainingDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTrainingDatasetRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTrainingDatasetRequest_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateTrainingDatasetRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagMap(s, schemas.CreateTrainingDatasetRequest_tags, v.Tags)
+	serializeDatasetList(s, schemas.CreateTrainingDatasetRequest_trainingData, v.TrainingData)
+}
+
 type CreateTrainingDatasetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the training dataset resource.
@@ -99,13 +121,32 @@ type CreateTrainingDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingDatasetArn != nil {
+		s.WriteString(schemas.CreateTrainingDatasetResponse_trainingDatasetArn, *v.TrainingDatasetArn)
+	}
+}
+func (v *CreateTrainingDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrainingDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrainingDatasetResponse_trainingDatasetArn:
+			v.TrainingDatasetArn = new(string)
+			return d.ReadString(schemas.CreateTrainingDatasetResponse_trainingDatasetArn, v.TrainingDatasetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrainingDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTrainingDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingDataset, schemas.CreateTrainingDatasetRequest, schemas.CreateTrainingDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTrainingDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingDataset, schemas.CreateTrainingDatasetRequest, schemas.CreateTrainingDatasetResponse), output: &CreateTrainingDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

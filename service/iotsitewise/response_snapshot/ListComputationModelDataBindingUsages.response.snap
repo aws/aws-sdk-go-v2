@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataBindingUsageSummaries":[{"computationModelIds":["__Member__","__Member__"],"matchedDataBinding":{"value":{"assetModelProperty":{"assetModelId":"__AssetModelId__","propertyId":"__PropertyId__"},"assetProperty":{"assetId":"__AssetId__","propertyId":"__PropertyId__"}}}},{"computationModelIds":["__Member__","__Member__"],"matchedDataBinding":{"value":{"assetModelProperty":{"assetModelId":"__AssetModelId__","propertyId":"__PropertyId__"},"assetProperty":{"assetId":"__AssetId__","propertyId":"__PropertyId__"}}}}],"nextToken":"__NextToken__"}

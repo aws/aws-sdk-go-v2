@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"defaultDisplayVersion":"__DefaultDisplayVersion__","format":"npm","namespace":"__Namespace__","nextToken":"__NextToken__","package":"__Package__","versions":[{"origin":{"domainEntryPoint":{"externalConnectionName":"__ExternalConnectionName__","repositoryName":"__RepositoryName__"},"originType":"INTERNAL"},"revision":"__Revision__","status":"Published","version":"__Version__"},{"origin":{"domainEntryPoint":{"externalConnectionName":"__ExternalConnectionName__","repositoryName":"__RepositoryName__"},"originType":"INTERNAL"},"revision":"__Revision__","status":"Published","version":"__Version__"}]}

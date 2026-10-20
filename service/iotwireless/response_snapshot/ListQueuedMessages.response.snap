@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DownlinkQueueMessagesList":[{"LoRaWAN":{"FPort":1,"ParticipatingGateways":{"DownlinkMode":"SEQUENTIAL","GatewayList":[{"DownlinkFrequency":1,"GatewayId":"__GatewayId__"},{"DownlinkFrequency":1,"GatewayId":"__GatewayId__"}],"TransmissionInterval":1}},"MessageId":"__MessageId__","ReceivedAt":"__ReceivedAt__","TransmitMode":1},{"LoRaWAN":{"FPort":1,"ParticipatingGateways":{"DownlinkMode":"SEQUENTIAL","GatewayList":[{"DownlinkFrequency":1,"GatewayId":"__GatewayId__"},{"DownlinkFrequency":1,"GatewayId":"__GatewayId__"}],"TransmissionInterval":1}},"MessageId":"__MessageId__","ReceivedAt":"__ReceivedAt__","TransmitMode":1}],"NextToken":"__NextToken__"}

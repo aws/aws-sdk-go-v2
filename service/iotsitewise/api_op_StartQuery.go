@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type StartQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartQueryRequest_clientToken, *v.ClientToken)
+	}
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.StartQueryRequest_queryStatement, *v.QueryStatement)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.StartQueryRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Contains the response for the StartQuery operation.
 type StartQueryOutput struct {
 
@@ -67,13 +87,42 @@ type StartQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.StartQueryResponse_queryId, *v.QueryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartQueryResponse_status, string(v.Status))
+	}
+}
+func (v *StartQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQueryResponse_queryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.StartQueryResponse_queryId, v.QueryId)
+		case schemas.StartQueryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartQueryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuery, schemas.StartQueryRequest, schemas.StartQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuery, schemas.StartQueryRequest, schemas.StartQueryResponse), output: &StartQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,47 @@ type UpdateFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFuotaTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFuotaTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFuotaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFuotaTaskRequest_Description, *v.Description)
+	}
+	if v.Descriptor != nil {
+		s.WriteString(schemas.UpdateFuotaTaskRequest_Descriptor, *v.Descriptor)
+	}
+	if v.FirmwareUpdateImage != nil {
+		s.WriteString(schemas.UpdateFuotaTaskRequest_FirmwareUpdateImage, *v.FirmwareUpdateImage)
+	}
+	if v.FirmwareUpdateRole != nil {
+		s.WriteString(schemas.UpdateFuotaTaskRequest_FirmwareUpdateRole, *v.FirmwareUpdateRole)
+	}
+	if v.FragmentIntervalMS != nil {
+		s.WriteInt32(schemas.UpdateFuotaTaskRequest_FragmentIntervalMS, *v.FragmentIntervalMS)
+	}
+	if v.FragmentSizeBytes != nil {
+		s.WriteInt32(schemas.UpdateFuotaTaskRequest_FragmentSizeBytes, *v.FragmentSizeBytes)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateFuotaTaskRequest_Id, *v.Id)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.UpdateFuotaTaskRequest_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFuotaTaskRequest_Name, *v.Name)
+	}
+	if v.RedundancyPercent != nil {
+		s.WriteInt32(schemas.UpdateFuotaTaskRequest_RedundancyPercent, *v.RedundancyPercent)
+	}
+}
+
 type UpdateFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,13 +124,26 @@ type UpdateFuotaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFuotaTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFuotaTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFuotaTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFuotaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFuotaTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFuotaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFuotaTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFuotaTask, schemas.UpdateFuotaTaskRequest, schemas.UpdateFuotaTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFuotaTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFuotaTask, schemas.UpdateFuotaTaskRequest, schemas.UpdateFuotaTaskResponse), output: &UpdateFuotaTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

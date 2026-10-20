@@ -4,7 +4,9 @@ package support
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,16 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrustedAdvisorCheckRefreshStatusesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrustedAdvisorCheckRefreshStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds, v.CheckIds)
+}
+
 // The statuses of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckRefreshStatuses operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 
@@ -78,13 +90,29 @@ type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrustedAdvisorCheckRefreshStatusesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrustedAdvisorCheckRefreshStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTrustedAdvisorCheckRefreshStatusList(s, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses, v.Statuses)
+}
+func (v *DescribeTrustedAdvisorCheckRefreshStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses:
+			return deserializeTrustedAdvisorCheckRefreshStatusList(d, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses, &v.Statuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrustedAdvisorCheckRefreshStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrustedAdvisorCheckRefreshStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedAdvisorCheckRefreshStatuses, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrustedAdvisorCheckRefreshStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedAdvisorCheckRefreshStatuses, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse), output: &DescribeTrustedAdvisorCheckRefreshStatusesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

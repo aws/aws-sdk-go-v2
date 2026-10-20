@@ -4,7 +4,9 @@ package devopsguru
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,23 @@ type UpdateResourceCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateResourceCollectionRequest_Action, string(v.Action))
+	}
+	if v.ResourceCollection != nil {
+		s.WriteStruct(schemas.UpdateResourceCollectionRequest_ResourceCollection)
+		v.ResourceCollection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateResourceCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +75,26 @@ type UpdateResourceCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateResourceCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceCollection, schemas.UpdateResourceCollectionRequest, schemas.UpdateResourceCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceCollection, schemas.UpdateResourceCollectionRequest, schemas.UpdateResourceCollectionResponse), output: &UpdateResourceCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

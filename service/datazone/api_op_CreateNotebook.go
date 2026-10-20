@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,35 @@ type CreateNotebookInput struct {
 	Type types.NotebookType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateNotebookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateNotebookInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNotebookInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateNotebookInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeMetadata(s, schemas.CreateNotebookInput_metadata, v.Metadata)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNotebookInput_name, *v.Name)
+	}
+	if v.OwningProjectIdentifier != nil {
+		s.WriteString(schemas.CreateNotebookInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
+	}
+	serializeParameters(s, schemas.CreateNotebookInput_parameters, v.Parameters)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateNotebookInput_type, string(v.Type))
+	}
 }
 
 type CreateNotebookOutput struct {
@@ -152,13 +183,157 @@ type CreateNotebookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotebookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCellOrder(s, schemas.CreateNotebookOutput_cellOrder, v.CellOrder)
+	if v.ComputeId != nil {
+		s.WriteString(schemas.CreateNotebookOutput_computeId, *v.ComputeId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateNotebookOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.CreateNotebookOutput_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNotebookOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateNotebookOutput_domainId, *v.DomainId)
+	}
+	if v.EnvironmentConfiguration != nil {
+		s.WriteStruct(schemas.CreateNotebookOutput_environmentConfiguration)
+		v.EnvironmentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.CreateNotebookOutput_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GitMetadata != nil {
+		s.WriteStruct(schemas.CreateNotebookOutput_gitMetadata)
+		v.GitMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateNotebookOutput_id, *v.Id)
+	}
+	if v.LockExpiresAt != nil {
+		s.WriteTime(schemas.CreateNotebookOutput_lockExpiresAt, *v.LockExpiresAt)
+	}
+	if v.LockedAt != nil {
+		s.WriteTime(schemas.CreateNotebookOutput_lockedAt, *v.LockedAt)
+	}
+	if v.LockedBy != nil {
+		s.WriteString(schemas.CreateNotebookOutput_lockedBy, *v.LockedBy)
+	}
+	serializeMetadata(s, schemas.CreateNotebookOutput_metadata, v.Metadata)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNotebookOutput_name, *v.Name)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.CreateNotebookOutput_owningProjectId, *v.OwningProjectId)
+	}
+	serializeParameters(s, schemas.CreateNotebookOutput_parameters, v.Parameters)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateNotebookOutput_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateNotebookOutput_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateNotebookOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.CreateNotebookOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *CreateNotebookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotebookOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotebookOutput_cellOrder:
+			return deserializeCellOrder(d, schemas.CreateNotebookOutput_cellOrder, &v.CellOrder)
+		case schemas.CreateNotebookOutput_computeId:
+			v.ComputeId = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_computeId, v.ComputeId)
+		case schemas.CreateNotebookOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateNotebookOutput_createdAt, v.CreatedAt)
+		case schemas.CreateNotebookOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_createdBy, v.CreatedBy)
+		case schemas.CreateNotebookOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_description, v.Description)
+		case schemas.CreateNotebookOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_domainId, v.DomainId)
+		case schemas.CreateNotebookOutput_environmentConfiguration:
+			v.EnvironmentConfiguration = &types.EnvironmentConfig{}
+			return v.EnvironmentConfiguration.Deserialize(d)
+		case schemas.CreateNotebookOutput_error:
+			v.Error = &types.NotebookError{}
+			return v.Error.Deserialize(d)
+		case schemas.CreateNotebookOutput_gitMetadata:
+			v.GitMetadata = &types.GitMetadata{}
+			return v.GitMetadata.Deserialize(d)
+		case schemas.CreateNotebookOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_id, v.Id)
+		case schemas.CreateNotebookOutput_lockExpiresAt:
+			v.LockExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateNotebookOutput_lockExpiresAt, v.LockExpiresAt)
+		case schemas.CreateNotebookOutput_lockedAt:
+			v.LockedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateNotebookOutput_lockedAt, v.LockedAt)
+		case schemas.CreateNotebookOutput_lockedBy:
+			v.LockedBy = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_lockedBy, v.LockedBy)
+		case schemas.CreateNotebookOutput_metadata:
+			return deserializeMetadata(d, schemas.CreateNotebookOutput_metadata, &v.Metadata)
+		case schemas.CreateNotebookOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_name, v.Name)
+		case schemas.CreateNotebookOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_owningProjectId, v.OwningProjectId)
+		case schemas.CreateNotebookOutput_parameters:
+			return deserializeParameters(d, schemas.CreateNotebookOutput_parameters, &v.Parameters)
+		case schemas.CreateNotebookOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateNotebookOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotebookStatus(ev)
+			return nil
+		case schemas.CreateNotebookOutput_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateNotebookOutput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.NotebookType(ev)
+			return nil
+		case schemas.CreateNotebookOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateNotebookOutput_updatedAt, v.UpdatedAt)
+		case schemas.CreateNotebookOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.CreateNotebookOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotebookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNotebook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebook, schemas.CreateNotebookInput, schemas.CreateNotebookOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNotebook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebook, schemas.CreateNotebookInput, schemas.CreateNotebookOutput), output: &CreateNotebookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

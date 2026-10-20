@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.ListAccountAssignmentCreationStatus
+
+{"AccountAssignmentsCreationStatus":[{"CreatedDate":946684800,"RequestId":"__RequestId__","Status":"IN_PROGRESS"},{"CreatedDate":946684800,"RequestId":"__RequestId__","Status":"IN_PROGRESS"}],"NextToken":"__NextToken__"}

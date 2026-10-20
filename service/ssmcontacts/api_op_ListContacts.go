@@ -5,7 +5,9 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,27 @@ type ListContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasPrefix != nil {
+		s.WriteString(schemas.ListContactsRequest_AliasPrefix, *v.AliasPrefix)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContactsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactsRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListContactsRequest_Type, string(v.Type))
+	}
+}
+
 type ListContactsOutput struct {
 
 	// A list of the contacts and escalation plans in your Incident Manager account.
@@ -56,13 +79,35 @@ type ListContactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactsList(s, schemas.ListContactsResult_Contacts, v.Contacts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactsResult_Contacts:
+			return deserializeContactsList(d, schemas.ListContactsResult_Contacts, &v.Contacts)
+		case schemas.ListContactsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContacts, schemas.ListContactsRequest, schemas.ListContactsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContacts, schemas.ListContactsRequest, schemas.ListContactsResult), output: &ListContactsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

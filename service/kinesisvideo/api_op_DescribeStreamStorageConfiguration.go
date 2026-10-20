@@ -4,7 +4,9 @@ package kinesisvideo
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeStreamStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamStorageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamStorageConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamStorageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DescribeStreamStorageConfigurationInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.DescribeStreamStorageConfigurationInput_StreamName, *v.StreamName)
+	}
+}
+
 type DescribeStreamStorageConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the stream.
@@ -60,13 +77,46 @@ type DescribeStreamStorageConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamStorageConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamStorageConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamStorageConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DescribeStreamStorageConfigurationOutput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.DescribeStreamStorageConfigurationOutput_StreamName, *v.StreamName)
+	}
+	if v.StreamStorageConfiguration != nil {
+		s.WriteStruct(schemas.DescribeStreamStorageConfigurationOutput_StreamStorageConfiguration)
+		v.StreamStorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStreamStorageConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStreamStorageConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStreamStorageConfigurationOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.DescribeStreamStorageConfigurationOutput_StreamARN, v.StreamARN)
+		case schemas.DescribeStreamStorageConfigurationOutput_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.DescribeStreamStorageConfigurationOutput_StreamName, v.StreamName)
+		case schemas.DescribeStreamStorageConfigurationOutput_StreamStorageConfiguration:
+			v.StreamStorageConfiguration = &types.StreamStorageConfiguration{}
+			return v.StreamStorageConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStreamStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeStreamStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamStorageConfiguration, schemas.DescribeStreamStorageConfigurationInput, schemas.DescribeStreamStorageConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeStreamStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamStorageConfiguration, schemas.DescribeStreamStorageConfigurationInput, schemas.DescribeStreamStorageConfigurationOutput), output: &DescribeStreamStorageConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

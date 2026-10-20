@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,22 @@ type UpdatePaymentCredentialProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePaymentCredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePaymentCredentialProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePaymentCredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialProviderVendor != "" {
+		s.WriteString(schemas.UpdatePaymentCredentialProviderRequest_credentialProviderVendor, string(v.CredentialProviderVendor))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePaymentCredentialProviderRequest_name, *v.Name)
+	}
+	serializePaymentProviderConfigurationInput(s, schemas.UpdatePaymentCredentialProviderRequest_providerConfigurationInput, v.ProviderConfigurationInput)
+}
+
 type UpdatePaymentCredentialProviderOutput struct {
 
 	// The timestamp when the payment credential provider was created.
@@ -85,13 +103,63 @@ type UpdatePaymentCredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePaymentCredentialProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePaymentCredentialProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePaymentCredentialProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.UpdatePaymentCredentialProviderResponse_createdTime, *v.CreatedTime)
+	}
+	if v.CredentialProviderArn != nil {
+		s.WriteString(schemas.UpdatePaymentCredentialProviderResponse_credentialProviderArn, *v.CredentialProviderArn)
+	}
+	if v.CredentialProviderVendor != "" {
+		s.WriteString(schemas.UpdatePaymentCredentialProviderResponse_credentialProviderVendor, string(v.CredentialProviderVendor))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.UpdatePaymentCredentialProviderResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePaymentCredentialProviderResponse_name, *v.Name)
+	}
+	serializePaymentProviderConfigurationOutput(s, schemas.UpdatePaymentCredentialProviderResponse_providerConfigurationOutput, v.ProviderConfigurationOutput)
+}
+func (v *UpdatePaymentCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePaymentCredentialProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePaymentCredentialProviderResponse_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdatePaymentCredentialProviderResponse_createdTime, v.CreatedTime)
+		case schemas.UpdatePaymentCredentialProviderResponse_credentialProviderArn:
+			v.CredentialProviderArn = new(string)
+			return d.ReadString(schemas.UpdatePaymentCredentialProviderResponse_credentialProviderArn, v.CredentialProviderArn)
+		case schemas.UpdatePaymentCredentialProviderResponse_credentialProviderVendor:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePaymentCredentialProviderResponse_credentialProviderVendor, &ev); err != nil {
+				return err
+			}
+			v.CredentialProviderVendor = types.PaymentCredentialProviderVendorType(ev)
+			return nil
+		case schemas.UpdatePaymentCredentialProviderResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdatePaymentCredentialProviderResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.UpdatePaymentCredentialProviderResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePaymentCredentialProviderResponse_name, v.Name)
+		case schemas.UpdatePaymentCredentialProviderResponse_providerConfigurationOutput:
+			return deserializePaymentProviderConfigurationOutput(d, schemas.UpdatePaymentCredentialProviderResponse_providerConfigurationOutput, &v.ProviderConfigurationOutput)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePaymentCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePaymentCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePaymentCredentialProvider, schemas.UpdatePaymentCredentialProviderRequest, schemas.UpdatePaymentCredentialProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePaymentCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePaymentCredentialProvider, schemas.UpdatePaymentCredentialProviderRequest, schemas.UpdatePaymentCredentialProviderResponse), output: &UpdatePaymentCredentialProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

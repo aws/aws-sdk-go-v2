@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,37 @@ type StartFaceSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFaceSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFaceSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFaceSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartFaceSearchRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CollectionId != nil {
+		s.WriteString(schemas.StartFaceSearchRequest_CollectionId, *v.CollectionId)
+	}
+	if v.FaceMatchThreshold != nil {
+		s.WriteFloat32(schemas.StartFaceSearchRequest_FaceMatchThreshold, *v.FaceMatchThreshold)
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartFaceSearchRequest_JobTag, *v.JobTag)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartFaceSearchRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.StartFaceSearchRequest_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartFaceSearchOutput struct {
 
 	// The identifier for the search job. Use JobId to identify the job in a
@@ -87,13 +120,32 @@ type StartFaceSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFaceSearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFaceSearchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFaceSearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartFaceSearchResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartFaceSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFaceSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFaceSearchResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartFaceSearchResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFaceSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFaceSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFaceSearch, schemas.StartFaceSearchRequest, schemas.StartFaceSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartFaceSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFaceSearch, schemas.StartFaceSearchRequest, schemas.StartFaceSearchResponse), output: &StartFaceSearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

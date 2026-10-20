@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DeleteProjectVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProjectVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProjectVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProjectVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectVersionArn != nil {
+		s.WriteString(schemas.DeleteProjectVersionRequest_ProjectVersionArn, *v.ProjectVersionArn)
+	}
+}
+
 type DeleteProjectVersionOutput struct {
 
 	// The status of the deletion operation.
@@ -54,13 +68,36 @@ type DeleteProjectVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProjectVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProjectVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProjectVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteProjectVersionResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteProjectVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProjectVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProjectVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteProjectVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProjectVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProjectVersion, schemas.DeleteProjectVersionRequest, schemas.DeleteProjectVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProjectVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProjectVersion, schemas.DeleteProjectVersionRequest, schemas.DeleteProjectVersionResponse), output: &DeleteProjectVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

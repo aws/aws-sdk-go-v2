@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,6 +50,24 @@ type CreateChatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChatRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateChatRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateChatRequest_userId, *v.UserId)
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.CreateChatRequest_userType, string(v.UserType))
+	}
+}
+
 // Response structure for creating a new chat
 type CreateChatOutput struct {
 
@@ -67,13 +87,38 @@ type CreateChatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChatResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateChatResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.CreateChatResponse_executionId, *v.ExecutionId)
+	}
+}
+func (v *CreateChatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChatResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChatResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateChatResponse_createdAt, v.CreatedAt)
+		case schemas.CreateChatResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.CreateChatResponse_executionId, v.ExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChat{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChat, schemas.CreateChatRequest, schemas.CreateChatResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChat, schemas.CreateChatRequest, schemas.CreateChatResponse), output: &CreateChatOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

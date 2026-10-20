@@ -4,7 +4,9 @@ package datazone
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,28 @@ type CreateAccountPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountPoolInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountSource(s, schemas.CreateAccountPoolInput_accountSource, v.AccountSource)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAccountPoolInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateAccountPoolInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAccountPoolInput_name, *v.Name)
+	}
+	if v.ResolutionStrategy != "" {
+		s.WriteString(schemas.CreateAccountPoolInput_resolutionStrategy, string(v.ResolutionStrategy))
+	}
+}
+
 type CreateAccountPoolOutput struct {
 
 	// The source of accounts for the account pool. In the current release, it's
@@ -102,13 +126,93 @@ type CreateAccountPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountPoolOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountSource(s, schemas.CreateAccountPoolOutput_accountSource, v.AccountSource)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateAccountPoolOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.CreateAccountPoolOutput_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAccountPoolOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateAccountPoolOutput_domainId, *v.DomainId)
+	}
+	if v.DomainUnitId != nil {
+		s.WriteString(schemas.CreateAccountPoolOutput_domainUnitId, *v.DomainUnitId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAccountPoolOutput_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.CreateAccountPoolOutput_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAccountPoolOutput_name, *v.Name)
+	}
+	if v.ResolutionStrategy != "" {
+		s.WriteString(schemas.CreateAccountPoolOutput_resolutionStrategy, string(v.ResolutionStrategy))
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.CreateAccountPoolOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *CreateAccountPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccountPoolOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccountPoolOutput_accountSource:
+			return deserializeAccountSource(d, schemas.CreateAccountPoolOutput_accountSource, &v.AccountSource)
+		case schemas.CreateAccountPoolOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAccountPoolOutput_createdAt, v.CreatedAt)
+		case schemas.CreateAccountPoolOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateAccountPoolOutput_createdBy, v.CreatedBy)
+		case schemas.CreateAccountPoolOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateAccountPoolOutput_description, v.Description)
+		case schemas.CreateAccountPoolOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateAccountPoolOutput_domainId, v.DomainId)
+		case schemas.CreateAccountPoolOutput_domainUnitId:
+			v.DomainUnitId = new(string)
+			return d.ReadString(schemas.CreateAccountPoolOutput_domainUnitId, v.DomainUnitId)
+		case schemas.CreateAccountPoolOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAccountPoolOutput_id, v.Id)
+		case schemas.CreateAccountPoolOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAccountPoolOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CreateAccountPoolOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAccountPoolOutput_name, v.Name)
+		case schemas.CreateAccountPoolOutput_resolutionStrategy:
+			var ev string
+			if err := d.ReadString(schemas.CreateAccountPoolOutput_resolutionStrategy, &ev); err != nil {
+				return err
+			}
+			v.ResolutionStrategy = types.ResolutionStrategy(ev)
+			return nil
+		case schemas.CreateAccountPoolOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.CreateAccountPoolOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccountPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccountPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountPool, schemas.CreateAccountPoolInput, schemas.CreateAccountPoolOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccountPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountPool, schemas.CreateAccountPoolInput, schemas.CreateAccountPoolOutput), output: &CreateAccountPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

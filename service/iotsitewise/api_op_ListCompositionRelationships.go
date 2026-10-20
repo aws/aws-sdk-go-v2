@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,24 @@ type ListCompositionRelationshipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompositionRelationshipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompositionRelationshipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompositionRelationshipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.ListCompositionRelationshipsRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCompositionRelationshipsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompositionRelationshipsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCompositionRelationshipsOutput struct {
 
 	// A list that summarizes each composition relationship.
@@ -66,13 +86,35 @@ type ListCompositionRelationshipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompositionRelationshipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompositionRelationshipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompositionRelationshipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompositionRelationshipSummaries(s, schemas.ListCompositionRelationshipsResponse_compositionRelationshipSummaries, v.CompositionRelationshipSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompositionRelationshipsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCompositionRelationshipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCompositionRelationshipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCompositionRelationshipsResponse_compositionRelationshipSummaries:
+			return deserializeCompositionRelationshipSummaries(d, schemas.ListCompositionRelationshipsResponse_compositionRelationshipSummaries, &v.CompositionRelationshipSummaries)
+		case schemas.ListCompositionRelationshipsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCompositionRelationshipsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCompositionRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCompositionRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompositionRelationships, schemas.ListCompositionRelationshipsRequest, schemas.ListCompositionRelationshipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCompositionRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompositionRelationships, schemas.ListCompositionRelationshipsRequest, schemas.ListCompositionRelationshipsResponse), output: &ListCompositionRelationshipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

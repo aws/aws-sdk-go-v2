@@ -4,7 +4,9 @@ package chatbot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetMicrosoftTeamsChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMicrosoftTeamsChannelConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTeamsChannelConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMicrosoftTeamsChannelConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatConfigurationArn != nil {
+		s.WriteString(schemas.GetTeamsChannelConfigurationRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
+	}
+}
+
 type GetMicrosoftTeamsChannelConfigurationOutput struct {
 
 	// The configuration for a Microsoft Teams channel configured with AWS Chatbot.
@@ -46,13 +60,34 @@ type GetMicrosoftTeamsChannelConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMicrosoftTeamsChannelConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTeamsChannelConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMicrosoftTeamsChannelConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelConfiguration != nil {
+		s.WriteStruct(schemas.GetTeamsChannelConfigurationResult_ChannelConfiguration)
+		v.ChannelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMicrosoftTeamsChannelConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTeamsChannelConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTeamsChannelConfigurationResult_ChannelConfiguration:
+			v.ChannelConfiguration = &types.TeamsChannelConfiguration{}
+			return v.ChannelConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMicrosoftTeamsChannelConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMicrosoftTeamsChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMicrosoftTeamsChannelConfiguration, schemas.GetTeamsChannelConfigurationRequest, schemas.GetTeamsChannelConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMicrosoftTeamsChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMicrosoftTeamsChannelConfiguration, schemas.GetTeamsChannelConfigurationRequest, schemas.GetTeamsChannelConfigurationResult), output: &GetMicrosoftTeamsChannelConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

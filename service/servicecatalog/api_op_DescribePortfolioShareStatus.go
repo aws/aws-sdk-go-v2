@@ -4,7 +4,9 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribePortfolioShareStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePortfolioShareStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePortfolioShareStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePortfolioShareStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortfolioShareToken != nil {
+		s.WriteString(schemas.DescribePortfolioShareStatusInput_PortfolioShareToken, *v.PortfolioShareToken)
+	}
+}
+
 type DescribePortfolioShareStatusOutput struct {
 
 	// Organization node identifier. It can be either account id, organizational unit
@@ -60,13 +74,62 @@ type DescribePortfolioShareStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePortfolioShareStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePortfolioShareStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePortfolioShareStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationNodeValue != nil {
+		s.WriteString(schemas.DescribePortfolioShareStatusOutput_OrganizationNodeValue, *v.OrganizationNodeValue)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.DescribePortfolioShareStatusOutput_PortfolioId, *v.PortfolioId)
+	}
+	if v.PortfolioShareToken != nil {
+		s.WriteString(schemas.DescribePortfolioShareStatusOutput_PortfolioShareToken, *v.PortfolioShareToken)
+	}
+	if v.ShareDetails != nil {
+		s.WriteStruct(schemas.DescribePortfolioShareStatusOutput_ShareDetails)
+		v.ShareDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribePortfolioShareStatusOutput_Status, string(v.Status))
+	}
+}
+func (v *DescribePortfolioShareStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePortfolioShareStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePortfolioShareStatusOutput_OrganizationNodeValue:
+			v.OrganizationNodeValue = new(string)
+			return d.ReadString(schemas.DescribePortfolioShareStatusOutput_OrganizationNodeValue, v.OrganizationNodeValue)
+		case schemas.DescribePortfolioShareStatusOutput_PortfolioId:
+			v.PortfolioId = new(string)
+			return d.ReadString(schemas.DescribePortfolioShareStatusOutput_PortfolioId, v.PortfolioId)
+		case schemas.DescribePortfolioShareStatusOutput_PortfolioShareToken:
+			v.PortfolioShareToken = new(string)
+			return d.ReadString(schemas.DescribePortfolioShareStatusOutput_PortfolioShareToken, v.PortfolioShareToken)
+		case schemas.DescribePortfolioShareStatusOutput_ShareDetails:
+			v.ShareDetails = &types.ShareDetails{}
+			return v.ShareDetails.Deserialize(d)
+		case schemas.DescribePortfolioShareStatusOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribePortfolioShareStatusOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShareStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePortfolioShareStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePortfolioShareStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShareStatus, schemas.DescribePortfolioShareStatusInput, schemas.DescribePortfolioShareStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePortfolioShareStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShareStatus, schemas.DescribePortfolioShareStatusInput, schemas.DescribePortfolioShareStatusOutput), output: &DescribePortfolioShareStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

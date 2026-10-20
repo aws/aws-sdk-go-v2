@@ -5,7 +5,9 @@ package codestarnotifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,33 @@ type CreateNotificationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotificationRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotificationRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotificationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateNotificationRuleRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DetailType != "" {
+		s.WriteString(schemas.CreateNotificationRuleRequest_DetailType, string(v.DetailType))
+	}
+	serializeEventTypeIds(s, schemas.CreateNotificationRuleRequest_EventTypeIds, v.EventTypeIds)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNotificationRuleRequest_Name, *v.Name)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.CreateNotificationRuleRequest_Resource, *v.Resource)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateNotificationRuleRequest_Status, string(v.Status))
+	}
+	serializeTags(s, schemas.CreateNotificationRuleRequest_Tags, v.Tags)
+	serializeTargets(s, schemas.CreateNotificationRuleRequest_Targets, v.Targets)
+}
+
 type CreateNotificationRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the notification rule.
@@ -96,13 +125,32 @@ type CreateNotificationRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotificationRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotificationRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotificationRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateNotificationRuleResult_Arn, *v.Arn)
+	}
+}
+func (v *CreateNotificationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotificationRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotificationRuleResult_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateNotificationRuleResult_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotificationRule, schemas.CreateNotificationRuleRequest, schemas.CreateNotificationRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNotificationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotificationRule, schemas.CreateNotificationRuleRequest, schemas.CreateNotificationRuleResult), output: &CreateNotificationRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

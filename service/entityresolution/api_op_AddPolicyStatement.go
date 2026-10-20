@@ -4,7 +4,9 @@ package entityresolution
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,29 @@ type AddPolicyStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddPolicyStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddPolicyStatementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddPolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStatementActionList(s, schemas.AddPolicyStatementInput_action, v.Action)
+	if v.Arn != nil {
+		s.WriteString(schemas.AddPolicyStatementInput_arn, *v.Arn)
+	}
+	if v.Condition != nil {
+		s.WriteString(schemas.AddPolicyStatementInput_condition, *v.Condition)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.AddPolicyStatementInput_effect, string(v.Effect))
+	}
+	serializeStatementPrincipalList(s, schemas.AddPolicyStatementInput_principal, v.Principal)
+	if v.StatementId != nil {
+		s.WriteString(schemas.AddPolicyStatementInput_statementId, *v.StatementId)
+	}
+}
+
 type AddPolicyStatementOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that will be accessed by the
@@ -90,13 +115,44 @@ type AddPolicyStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddPolicyStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddPolicyStatementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddPolicyStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AddPolicyStatementOutput_arn, *v.Arn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.AddPolicyStatementOutput_policy, *v.Policy)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.AddPolicyStatementOutput_token, *v.Token)
+	}
+}
+func (v *AddPolicyStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddPolicyStatementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddPolicyStatementOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AddPolicyStatementOutput_arn, v.Arn)
+		case schemas.AddPolicyStatementOutput_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.AddPolicyStatementOutput_policy, v.Policy)
+		case schemas.AddPolicyStatementOutput_token:
+			v.Token = new(string)
+			return d.ReadString(schemas.AddPolicyStatementOutput_token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddPolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddPolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddPolicyStatement, schemas.AddPolicyStatementInput, schemas.AddPolicyStatementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddPolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddPolicyStatement, schemas.AddPolicyStatementInput, schemas.AddPolicyStatementOutput), output: &AddPolicyStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

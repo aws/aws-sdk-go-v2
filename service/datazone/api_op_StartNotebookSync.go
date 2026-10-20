@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,39 @@ type StartNotebookSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookSyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookSyncInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartNotebookSyncInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartNotebookSyncInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.StartNotebookSyncInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.GitMetadata != nil {
+		s.WriteStruct(schemas.StartNotebookSyncInput_gitMetadata)
+		v.GitMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartNotebookSyncInput_name, *v.Name)
+	}
+	if v.NotebookId != nil {
+		s.WriteString(schemas.StartNotebookSyncInput_notebookId, *v.NotebookId)
+	}
+	if v.OwningProjectIdentifier != nil {
+		s.WriteString(schemas.StartNotebookSyncInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
+	}
+	serializeSourceLocation(s, schemas.StartNotebookSyncInput_sourceLocation, v.SourceLocation)
+}
+
 type StartNotebookSyncOutput struct {
 
 	// The timestamp of when the notebook sync was started.
@@ -105,13 +140,89 @@ type StartNotebookSyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookSyncOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookSyncOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookSyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartNotebookSyncOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.StartNotebookSyncOutput_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartNotebookSyncOutput_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.StartNotebookSyncOutput_domainId, *v.DomainId)
+	}
+	if v.GitMetadata != nil {
+		s.WriteStruct(schemas.StartNotebookSyncOutput_gitMetadata)
+		v.GitMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartNotebookSyncOutput_name, *v.Name)
+	}
+	if v.NotebookId != nil {
+		s.WriteString(schemas.StartNotebookSyncOutput_notebookId, *v.NotebookId)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.StartNotebookSyncOutput_owningProjectId, *v.OwningProjectId)
+	}
+	serializeSourceLocation(s, schemas.StartNotebookSyncOutput_sourceLocation, v.SourceLocation)
+	if v.Status != "" {
+		s.WriteString(schemas.StartNotebookSyncOutput_status, string(v.Status))
+	}
+}
+func (v *StartNotebookSyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNotebookSyncOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNotebookSyncOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartNotebookSyncOutput_createdAt, v.CreatedAt)
+		case schemas.StartNotebookSyncOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.StartNotebookSyncOutput_createdBy, v.CreatedBy)
+		case schemas.StartNotebookSyncOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StartNotebookSyncOutput_description, v.Description)
+		case schemas.StartNotebookSyncOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartNotebookSyncOutput_domainId, v.DomainId)
+		case schemas.StartNotebookSyncOutput_gitMetadata:
+			v.GitMetadata = &types.GitMetadata{}
+			return v.GitMetadata.Deserialize(d)
+		case schemas.StartNotebookSyncOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartNotebookSyncOutput_name, v.Name)
+		case schemas.StartNotebookSyncOutput_notebookId:
+			v.NotebookId = new(string)
+			return d.ReadString(schemas.StartNotebookSyncOutput_notebookId, v.NotebookId)
+		case schemas.StartNotebookSyncOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.StartNotebookSyncOutput_owningProjectId, v.OwningProjectId)
+		case schemas.StartNotebookSyncOutput_sourceLocation:
+			return deserializeSourceLocation(d, schemas.StartNotebookSyncOutput_sourceLocation, &v.SourceLocation)
+		case schemas.StartNotebookSyncOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartNotebookSyncOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotebookStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNotebookSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNotebookSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookSync, schemas.StartNotebookSyncInput, schemas.StartNotebookSyncOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNotebookSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookSync, schemas.StartNotebookSyncInput, schemas.StartNotebookSyncOutput), output: &StartNotebookSyncOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

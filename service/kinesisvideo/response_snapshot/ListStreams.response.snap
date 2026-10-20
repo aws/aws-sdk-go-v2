@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","StreamInfoList":[{"CreationTime":946684800,"DataRetentionInHours":1,"DeviceName":"__DeviceName__","KmsKeyId":"__KmsKeyId__","MediaType":"__MediaType__","Status":"CREATING","StreamARN":"__StreamARN__","StreamName":"__StreamName__","Version":"__Version__"},{"CreationTime":946684800,"DataRetentionInHours":1,"DeviceName":"__DeviceName__","KmsKeyId":"__KmsKeyId__","MediaType":"__MediaType__","Status":"CREATING","StreamARN":"__StreamARN__","StreamName":"__StreamName__","Version":"__Version__"}]}

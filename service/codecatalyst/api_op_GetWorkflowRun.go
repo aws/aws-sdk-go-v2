@@ -4,7 +4,9 @@ package codecatalyst
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,24 @@ type GetWorkflowRunInput struct {
 	SpaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkflowRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetWorkflowRunRequest_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GetWorkflowRunRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetWorkflowRunRequest_spaceName, *v.SpaceName)
+	}
 }
 
 type GetWorkflowRunOutput struct {
@@ -103,13 +123,81 @@ type GetWorkflowRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetWorkflowRunResponse_endTime, *v.EndTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetWorkflowRunResponse_id, *v.Id)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.GetWorkflowRunResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GetWorkflowRunResponse_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetWorkflowRunResponse_spaceName, *v.SpaceName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetWorkflowRunResponse_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWorkflowRunResponse_status, string(v.Status))
+	}
+	serializeWorkflowRunStatusReasons(s, schemas.GetWorkflowRunResponse_statusReasons, v.StatusReasons)
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetWorkflowRunResponse_workflowId, *v.WorkflowId)
+	}
+}
+func (v *GetWorkflowRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowRunResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowRunResponse_endTime, v.EndTime)
+		case schemas.GetWorkflowRunResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetWorkflowRunResponse_id, v.Id)
+		case schemas.GetWorkflowRunResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowRunResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetWorkflowRunResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.GetWorkflowRunResponse_projectName, v.ProjectName)
+		case schemas.GetWorkflowRunResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.GetWorkflowRunResponse_spaceName, v.SpaceName)
+		case schemas.GetWorkflowRunResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowRunResponse_startTime, v.StartTime)
+		case schemas.GetWorkflowRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowRunStatus(ev)
+			return nil
+		case schemas.GetWorkflowRunResponse_statusReasons:
+			return deserializeWorkflowRunStatusReasons(d, schemas.GetWorkflowRunResponse_statusReasons, &v.StatusReasons)
+		case schemas.GetWorkflowRunResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.GetWorkflowRunResponse_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowRun, schemas.GetWorkflowRunRequest, schemas.GetWorkflowRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowRun, schemas.GetWorkflowRunRequest, schemas.GetWorkflowRunResponse), output: &GetWorkflowRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

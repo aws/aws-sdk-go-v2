@@ -4,7 +4,9 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type StartInstanceOnboardingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInstanceOnboardingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInstanceOnboardingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInstanceOnboardingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.StartInstanceOnboardingJobRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.StartInstanceOnboardingJobRequest_encryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The response for StartInstanceOnboardingJob API.
 type StartInstanceOnboardingJobOutput struct {
 
@@ -55,13 +74,34 @@ type StartInstanceOnboardingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInstanceOnboardingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInstanceOnboardingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInstanceOnboardingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceOnboardingJobStatus != nil {
+		s.WriteStruct(schemas.StartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus)
+		v.ConnectInstanceOnboardingJobStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartInstanceOnboardingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInstanceOnboardingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus:
+			v.ConnectInstanceOnboardingJobStatus = &types.InstanceOnboardingJobStatus{}
+			return v.ConnectInstanceOnboardingJobStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInstanceOnboardingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartInstanceOnboardingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInstanceOnboardingJob, schemas.StartInstanceOnboardingJobRequest, schemas.StartInstanceOnboardingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartInstanceOnboardingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInstanceOnboardingJob, schemas.StartInstanceOnboardingJobRequest, schemas.StartInstanceOnboardingJobResponse), output: &StartInstanceOnboardingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

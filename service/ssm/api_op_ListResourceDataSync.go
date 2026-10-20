@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListResourceDataSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceDataSyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceDataSyncRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceDataSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceDataSyncRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceDataSyncRequest_NextToken, *v.NextToken)
+	}
+	if v.SyncType != nil {
+		s.WriteString(schemas.ListResourceDataSyncRequest_SyncType, *v.SyncType)
+	}
+}
+
 type ListResourceDataSyncOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -67,13 +87,35 @@ type ListResourceDataSyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceDataSyncOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceDataSyncResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceDataSyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceDataSyncResult_NextToken, *v.NextToken)
+	}
+	serializeResourceDataSyncItemList(s, schemas.ListResourceDataSyncResult_ResourceDataSyncItems, v.ResourceDataSyncItems)
+}
+func (v *ListResourceDataSyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceDataSyncResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceDataSyncResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceDataSyncResult_NextToken, v.NextToken)
+		case schemas.ListResourceDataSyncResult_ResourceDataSyncItems:
+			return deserializeResourceDataSyncItemList(d, schemas.ListResourceDataSyncResult_ResourceDataSyncItems, &v.ResourceDataSyncItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceDataSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceDataSync, schemas.ListResourceDataSyncRequest, schemas.ListResourceDataSyncResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceDataSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceDataSync, schemas.ListResourceDataSyncRequest, schemas.ListResourceDataSyncResult), output: &ListResourceDataSyncOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

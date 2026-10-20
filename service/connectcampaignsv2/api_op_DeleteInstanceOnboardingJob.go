@@ -4,6 +4,8 @@ package connectcampaignsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteInstanceOnboardingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstanceOnboardingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInstanceOnboardingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstanceOnboardingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.DeleteInstanceOnboardingJobRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+}
+
 type DeleteInstanceOnboardingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteInstanceOnboardingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstanceOnboardingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstanceOnboardingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteInstanceOnboardingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInstanceOnboardingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInstanceOnboardingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstanceOnboardingJob, schemas.DeleteInstanceOnboardingJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInstanceOnboardingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstanceOnboardingJob, schemas.DeleteInstanceOnboardingJobRequest, nil), output: &DeleteInstanceOnboardingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

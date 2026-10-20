@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,57 @@ type UpdateGatewayInput struct {
 	WafConfiguration *types.WafConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizerConfiguration(s, schemas.UpdateGatewayRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.UpdateGatewayRequest_authorizerType, string(v.AuthorizerType))
+	}
+	if v.CustomTransformConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGatewayRequest_customTransformConfiguration)
+		v.CustomTransformConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateGatewayRequest_description, *v.Description)
+	}
+	if v.ExceptionLevel != "" {
+		s.WriteString(schemas.UpdateGatewayRequest_exceptionLevel, string(v.ExceptionLevel))
+	}
+	if v.GatewayIdentifier != nil {
+		s.WriteString(schemas.UpdateGatewayRequest_gatewayIdentifier, *v.GatewayIdentifier)
+	}
+	serializeGatewayInterceptorConfigurations(s, schemas.UpdateGatewayRequest_interceptorConfigurations, v.InterceptorConfigurations)
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.UpdateGatewayRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGatewayRequest_name, *v.Name)
+	}
+	if v.PolicyEngineConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGatewayRequest_policyEngineConfiguration)
+		v.PolicyEngineConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGatewayProtocolConfiguration(s, schemas.UpdateGatewayRequest_protocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.UpdateGatewayRequest_protocolType, string(v.ProtocolType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateGatewayRequest_roleArn, *v.RoleArn)
+	}
+	if v.WafConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGatewayRequest_wafConfiguration)
+		v.WafConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type UpdateGatewayOutput struct {
@@ -189,13 +242,170 @@ type UpdateGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizerConfiguration(s, schemas.UpdateGatewayResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.UpdateGatewayResponse_authorizerType, string(v.AuthorizerType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateGatewayResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomTransformConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGatewayResponse_customTransformConfiguration)
+		v.CustomTransformConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_description, *v.Description)
+	}
+	if v.ExceptionLevel != "" {
+		s.WriteString(schemas.UpdateGatewayResponse_exceptionLevel, string(v.ExceptionLevel))
+	}
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_gatewayArn, *v.GatewayArn)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_gatewayId, *v.GatewayId)
+	}
+	if v.GatewayUrl != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_gatewayUrl, *v.GatewayUrl)
+	}
+	serializeGatewayInterceptorConfigurations(s, schemas.UpdateGatewayResponse_interceptorConfigurations, v.InterceptorConfigurations)
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_name, *v.Name)
+	}
+	if v.PolicyEngineConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGatewayResponse_policyEngineConfiguration)
+		v.PolicyEngineConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGatewayProtocolConfiguration(s, schemas.UpdateGatewayResponse_protocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.UpdateGatewayResponse_protocolType, string(v.ProtocolType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateGatewayResponse_status, string(v.Status))
+	}
+	serializeStatusReasons(s, schemas.UpdateGatewayResponse_statusReasons, v.StatusReasons)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateGatewayResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.WafConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGatewayResponse_wafConfiguration)
+		v.WafConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.UpdateGatewayResponse_webAclArn, *v.WebAclArn)
+	}
+	if v.WorkloadIdentityDetails != nil {
+		s.WriteStruct(schemas.UpdateGatewayResponse_workloadIdentityDetails)
+		v.WorkloadIdentityDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayResponse_authorizerConfiguration:
+			return deserializeAuthorizerConfiguration(d, schemas.UpdateGatewayResponse_authorizerConfiguration, &v.AuthorizerConfiguration)
+		case schemas.UpdateGatewayResponse_authorizerType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGatewayResponse_authorizerType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizerType = types.AuthorizerType(ev)
+			return nil
+		case schemas.UpdateGatewayResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateGatewayResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateGatewayResponse_customTransformConfiguration:
+			v.CustomTransformConfiguration = &types.CustomTransformConfiguration{}
+			return v.CustomTransformConfiguration.Deserialize(d)
+		case schemas.UpdateGatewayResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_description, v.Description)
+		case schemas.UpdateGatewayResponse_exceptionLevel:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGatewayResponse_exceptionLevel, &ev); err != nil {
+				return err
+			}
+			v.ExceptionLevel = types.ExceptionLevel(ev)
+			return nil
+		case schemas.UpdateGatewayResponse_gatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_gatewayArn, v.GatewayArn)
+		case schemas.UpdateGatewayResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_gatewayId, v.GatewayId)
+		case schemas.UpdateGatewayResponse_gatewayUrl:
+			v.GatewayUrl = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_gatewayUrl, v.GatewayUrl)
+		case schemas.UpdateGatewayResponse_interceptorConfigurations:
+			return deserializeGatewayInterceptorConfigurations(d, schemas.UpdateGatewayResponse_interceptorConfigurations, &v.InterceptorConfigurations)
+		case schemas.UpdateGatewayResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.UpdateGatewayResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_name, v.Name)
+		case schemas.UpdateGatewayResponse_policyEngineConfiguration:
+			v.PolicyEngineConfiguration = &types.GatewayPolicyEngineConfiguration{}
+			return v.PolicyEngineConfiguration.Deserialize(d)
+		case schemas.UpdateGatewayResponse_protocolConfiguration:
+			return deserializeGatewayProtocolConfiguration(d, schemas.UpdateGatewayResponse_protocolConfiguration, &v.ProtocolConfiguration)
+		case schemas.UpdateGatewayResponse_protocolType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGatewayResponse_protocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = types.GatewayProtocolType(ev)
+			return nil
+		case schemas.UpdateGatewayResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_roleArn, v.RoleArn)
+		case schemas.UpdateGatewayResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGatewayResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GatewayStatus(ev)
+			return nil
+		case schemas.UpdateGatewayResponse_statusReasons:
+			return deserializeStatusReasons(d, schemas.UpdateGatewayResponse_statusReasons, &v.StatusReasons)
+		case schemas.UpdateGatewayResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateGatewayResponse_updatedAt, v.UpdatedAt)
+		case schemas.UpdateGatewayResponse_wafConfiguration:
+			v.WafConfiguration = &types.WafConfiguration{}
+			return v.WafConfiguration.Deserialize(d)
+		case schemas.UpdateGatewayResponse_webAclArn:
+			v.WebAclArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayResponse_webAclArn, v.WebAclArn)
+		case schemas.UpdateGatewayResponse_workloadIdentityDetails:
+			v.WorkloadIdentityDetails = &types.WorkloadIdentityDetails{}
+			return v.WorkloadIdentityDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGateway, schemas.UpdateGatewayRequest, schemas.UpdateGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGateway, schemas.UpdateGatewayRequest, schemas.UpdateGatewayResponse), output: &UpdateGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

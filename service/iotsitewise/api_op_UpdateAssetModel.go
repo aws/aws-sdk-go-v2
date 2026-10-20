@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -129,6 +131,42 @@ type UpdateAssetModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetModelCompositeModels(s, schemas.UpdateAssetModelRequest_assetModelCompositeModels, v.AssetModelCompositeModels)
+	if v.AssetModelDescription != nil {
+		s.WriteString(schemas.UpdateAssetModelRequest_assetModelDescription, *v.AssetModelDescription)
+	}
+	if v.AssetModelExternalId != nil {
+		s.WriteString(schemas.UpdateAssetModelRequest_assetModelExternalId, *v.AssetModelExternalId)
+	}
+	serializeAssetModelHierarchies(s, schemas.UpdateAssetModelRequest_assetModelHierarchies, v.AssetModelHierarchies)
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.UpdateAssetModelRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelName != nil {
+		s.WriteString(schemas.UpdateAssetModelRequest_assetModelName, *v.AssetModelName)
+	}
+	serializeAssetModelProperties(s, schemas.UpdateAssetModelRequest_assetModelProperties, v.AssetModelProperties)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAssetModelRequest_clientToken, *v.ClientToken)
+	}
+	if v.IfMatch != nil {
+		s.WriteString(schemas.UpdateAssetModelRequest_ifMatch, *v.IfMatch)
+	}
+	if v.IfNoneMatch != nil {
+		s.WriteString(schemas.UpdateAssetModelRequest_ifNoneMatch, *v.IfNoneMatch)
+	}
+	if v.MatchForVersionType != "" {
+		s.WriteString(schemas.UpdateAssetModelRequest_matchForVersionType, string(v.MatchForVersionType))
+	}
+}
+
 type UpdateAssetModelOutput struct {
 
 	// The status of the asset model, which contains a state ( UPDATING after
@@ -146,13 +184,40 @@ type UpdateAssetModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.UpdateAssetModelResponse_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelStatus != nil {
+		s.WriteStruct(schemas.UpdateAssetModelResponse_assetModelStatus)
+		v.AssetModelStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssetModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetModelResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.UpdateAssetModelResponse_assetModelId, v.AssetModelId)
+		case schemas.UpdateAssetModelResponse_assetModelStatus:
+			v.AssetModelStatus = &types.AssetModelStatus{}
+			return v.AssetModelStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetModel, schemas.UpdateAssetModelRequest, schemas.UpdateAssetModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetModel, schemas.UpdateAssetModelRequest, schemas.UpdateAssetModelResponse), output: &UpdateAssetModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

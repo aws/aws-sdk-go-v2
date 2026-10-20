@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type ListIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListIntegrationsRequest_DomainName, *v.DomainName)
+	}
+	if v.IncludeHidden != nil {
+		s.WriteBool(schemas.ListIntegrationsRequest_IncludeHidden, *v.IncludeHidden)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntegrationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIntegrationsOutput struct {
 
 	// The list of ListIntegrations instances.
@@ -57,13 +80,35 @@ type ListIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationList(s, schemas.ListIntegrationsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntegrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntegrationsResponse_Items:
+			return deserializeIntegrationList(d, schemas.ListIntegrationsResponse_Items, &v.Items)
+		case schemas.ListIntegrationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntegrationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrations, schemas.ListIntegrationsRequest, schemas.ListIntegrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrations, schemas.ListIntegrationsRequest, schemas.ListIntegrationsResponse), output: &ListIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

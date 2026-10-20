@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -184,6 +186,33 @@ type IndexFacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexFacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexFacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionId != nil {
+		s.WriteString(schemas.IndexFacesRequest_CollectionId, *v.CollectionId)
+	}
+	serializeAttributes(s, schemas.IndexFacesRequest_DetectionAttributes, v.DetectionAttributes)
+	if v.ExternalImageId != nil {
+		s.WriteString(schemas.IndexFacesRequest_ExternalImageId, *v.ExternalImageId)
+	}
+	if v.Image != nil {
+		s.WriteStruct(schemas.IndexFacesRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxFaces != nil {
+		s.WriteInt32(schemas.IndexFacesRequest_MaxFaces, *v.MaxFaces)
+	}
+	if v.QualityFilter != "" {
+		s.WriteString(schemas.IndexFacesRequest_QualityFilter, string(v.QualityFilter))
+	}
+}
+
 type IndexFacesOutput struct {
 
 	// The version number of the face detection model that's associated with the input
@@ -231,13 +260,48 @@ type IndexFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexFacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexFacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaceModelVersion != nil {
+		s.WriteString(schemas.IndexFacesResponse_FaceModelVersion, *v.FaceModelVersion)
+	}
+	serializeFaceRecordList(s, schemas.IndexFacesResponse_FaceRecords, v.FaceRecords)
+	if v.OrientationCorrection != "" {
+		s.WriteString(schemas.IndexFacesResponse_OrientationCorrection, string(v.OrientationCorrection))
+	}
+	serializeUnindexedFaces(s, schemas.IndexFacesResponse_UnindexedFaces, v.UnindexedFaces)
+}
+func (v *IndexFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexFacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexFacesResponse_FaceModelVersion:
+			v.FaceModelVersion = new(string)
+			return d.ReadString(schemas.IndexFacesResponse_FaceModelVersion, v.FaceModelVersion)
+		case schemas.IndexFacesResponse_FaceRecords:
+			return deserializeFaceRecordList(d, schemas.IndexFacesResponse_FaceRecords, &v.FaceRecords)
+		case schemas.IndexFacesResponse_OrientationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.IndexFacesResponse_OrientationCorrection, &ev); err != nil {
+				return err
+			}
+			v.OrientationCorrection = types.OrientationCorrection(ev)
+			return nil
+		case schemas.IndexFacesResponse_UnindexedFaces:
+			return deserializeUnindexedFaces(d, schemas.IndexFacesResponse_UnindexedFaces, &v.UnindexedFaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIndexFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIndexFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IndexFaces, schemas.IndexFacesRequest, schemas.IndexFacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpIndexFaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IndexFaces, schemas.IndexFacesRequest, schemas.IndexFacesResponse), output: &IndexFacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

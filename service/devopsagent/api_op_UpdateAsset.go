@@ -6,7 +6,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/document"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +57,28 @@ type UpdateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateAssetRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.UpdateAssetRequest_assetId, *v.AssetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAssetRequest_clientToken, *v.ClientToken)
+	}
+	serializeAssetContent(s, schemas.UpdateAssetRequest_content, v.Content)
+	if v.Metadata != nil {
+		s.WriteDocument(schemas.UpdateAssetRequest_metadata, &smithydocument.Opaque{Value: v.Metadata})
+	}
+}
+
 // Response structure for updating an asset
 type UpdateAssetOutput struct {
 
@@ -68,13 +93,34 @@ type UpdateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asset != nil {
+		s.WriteStruct(schemas.UpdateAssetResponse_asset)
+		v.Asset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetResponse_asset:
+			v.Asset = &types.Asset{}
+			return v.Asset.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse), output: &UpdateAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

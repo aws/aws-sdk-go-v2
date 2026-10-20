@@ -5,7 +5,9 @@ package codeartifact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,42 @@ type ListPackageVersionAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackageVersionAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackageVersionAssetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackageVersionAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_format, string(v.Format))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPackageVersionAssetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_nextToken, *v.NextToken)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_package, *v.Package)
+	}
+	if v.PackageVersion != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_packageVersion, *v.PackageVersion)
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsRequest_repository, *v.Repository)
+	}
+}
+
 type ListPackageVersionAssetsOutput struct {
 
 	//  The returned list of [AssetSummary] objects.
@@ -138,13 +176,69 @@ type ListPackageVersionAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackageVersionAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackageVersionAssetsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackageVersionAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetSummaryList(s, schemas.ListPackageVersionAssetsResult_assets, v.Assets)
+	if v.Format != "" {
+		s.WriteString(schemas.ListPackageVersionAssetsResult_format, string(v.Format))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsResult_namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsResult_nextToken, *v.NextToken)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsResult_package, *v.Package)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsResult_version, *v.Version)
+	}
+	if v.VersionRevision != nil {
+		s.WriteString(schemas.ListPackageVersionAssetsResult_versionRevision, *v.VersionRevision)
+	}
+}
+func (v *ListPackageVersionAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPackageVersionAssetsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPackageVersionAssetsResult_assets:
+			return deserializeAssetSummaryList(d, schemas.ListPackageVersionAssetsResult_assets, &v.Assets)
+		case schemas.ListPackageVersionAssetsResult_format:
+			var ev string
+			if err := d.ReadString(schemas.ListPackageVersionAssetsResult_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.PackageFormat(ev)
+			return nil
+		case schemas.ListPackageVersionAssetsResult_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.ListPackageVersionAssetsResult_namespace, v.Namespace)
+		case schemas.ListPackageVersionAssetsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPackageVersionAssetsResult_nextToken, v.NextToken)
+		case schemas.ListPackageVersionAssetsResult_package:
+			v.Package = new(string)
+			return d.ReadString(schemas.ListPackageVersionAssetsResult_package, v.Package)
+		case schemas.ListPackageVersionAssetsResult_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ListPackageVersionAssetsResult_version, v.Version)
+		case schemas.ListPackageVersionAssetsResult_versionRevision:
+			v.VersionRevision = new(string)
+			return d.ReadString(schemas.ListPackageVersionAssetsResult_versionRevision, v.VersionRevision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPackageVersionAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackageVersionAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageVersionAssets, schemas.ListPackageVersionAssetsRequest, schemas.ListPackageVersionAssetsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackageVersionAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageVersionAssets, schemas.ListPackageVersionAssetsRequest, schemas.ListPackageVersionAssetsResult), output: &ListPackageVersionAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

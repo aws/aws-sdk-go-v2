@@ -1,0 +1,5 @@
+200
+Content-Type: application/json
+X-Amzn-Browser-Session-Id: __SessionId__
+
+{"result":{"mouseClick":{"error":"__Error__","status":"SUCCESS"}}}

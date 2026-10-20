@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,31 @@ type CreateRecommenderFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommenderFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommenderFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommenderFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRecommenderFilterRequest_Description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateRecommenderFilterRequest_DomainName, *v.DomainName)
+	}
+	if v.RecommenderFilterExpression != nil {
+		s.WriteString(schemas.CreateRecommenderFilterRequest_RecommenderFilterExpression, *v.RecommenderFilterExpression)
+	}
+	if v.RecommenderFilterName != nil {
+		s.WriteString(schemas.CreateRecommenderFilterRequest_RecommenderFilterName, *v.RecommenderFilterName)
+	}
+	if v.RecommenderSchemaName != nil {
+		s.WriteString(schemas.CreateRecommenderFilterRequest_RecommenderSchemaName, *v.RecommenderSchemaName)
+	}
+	serializeTagMap(s, schemas.CreateRecommenderFilterRequest_Tags, v.Tags)
+}
+
 type CreateRecommenderFilterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the recommender filter.
@@ -71,13 +98,35 @@ type CreateRecommenderFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommenderFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommenderFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommenderFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderFilterArn != nil {
+		s.WriteString(schemas.CreateRecommenderFilterResponse_RecommenderFilterArn, *v.RecommenderFilterArn)
+	}
+	serializeTagMap(s, schemas.CreateRecommenderFilterResponse_Tags, v.Tags)
+}
+func (v *CreateRecommenderFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecommenderFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecommenderFilterResponse_RecommenderFilterArn:
+			v.RecommenderFilterArn = new(string)
+			return d.ReadString(schemas.CreateRecommenderFilterResponse_RecommenderFilterArn, v.RecommenderFilterArn)
+		case schemas.CreateRecommenderFilterResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateRecommenderFilterResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecommenderFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecommenderFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommenderFilter, schemas.CreateRecommenderFilterRequest, schemas.CreateRecommenderFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRecommenderFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommenderFilter, schemas.CreateRecommenderFilterRequest, schemas.CreateRecommenderFilterResponse), output: &CreateRecommenderFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

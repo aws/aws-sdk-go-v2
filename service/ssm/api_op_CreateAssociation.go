@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -248,6 +250,73 @@ type CreateAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmConfiguration != nil {
+		s.WriteStruct(schemas.CreateAssociationRequest_AlarmConfiguration)
+		v.AlarmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplyOnlyAtCronInterval != false {
+		s.WriteBool(schemas.CreateAssociationRequest_ApplyOnlyAtCronInterval, v.ApplyOnlyAtCronInterval)
+	}
+	if v.AssociationDispatchAssumeRole != nil {
+		s.WriteString(schemas.CreateAssociationRequest_AssociationDispatchAssumeRole, *v.AssociationDispatchAssumeRole)
+	}
+	if v.AssociationName != nil {
+		s.WriteString(schemas.CreateAssociationRequest_AssociationName, *v.AssociationName)
+	}
+	if v.AutomationTargetParameterName != nil {
+		s.WriteString(schemas.CreateAssociationRequest_AutomationTargetParameterName, *v.AutomationTargetParameterName)
+	}
+	serializeCalendarNameOrARNList(s, schemas.CreateAssociationRequest_CalendarNames, v.CalendarNames)
+	if v.ComplianceSeverity != "" {
+		s.WriteString(schemas.CreateAssociationRequest_ComplianceSeverity, string(v.ComplianceSeverity))
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.CreateAssociationRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Duration != nil {
+		s.WriteInt32(schemas.CreateAssociationRequest_Duration, *v.Duration)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateAssociationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteString(schemas.CreateAssociationRequest_MaxConcurrency, *v.MaxConcurrency)
+	}
+	if v.MaxErrors != nil {
+		s.WriteString(schemas.CreateAssociationRequest_MaxErrors, *v.MaxErrors)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAssociationRequest_Name, *v.Name)
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.CreateAssociationRequest_OutputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParameters(s, schemas.CreateAssociationRequest_Parameters, v.Parameters)
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.CreateAssociationRequest_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleOffset != nil {
+		s.WriteInt32(schemas.CreateAssociationRequest_ScheduleOffset, *v.ScheduleOffset)
+	}
+	if v.SyncCompliance != "" {
+		s.WriteString(schemas.CreateAssociationRequest_SyncCompliance, string(v.SyncCompliance))
+	}
+	serializeTagList(s, schemas.CreateAssociationRequest_Tags, v.Tags)
+	serializeTargetLocations(s, schemas.CreateAssociationRequest_TargetLocations, v.TargetLocations)
+	serializeTargetMaps(s, schemas.CreateAssociationRequest_TargetMaps, v.TargetMaps)
+	serializeTargets(s, schemas.CreateAssociationRequest_Targets, v.Targets)
+}
+
 type CreateAssociationOutput struct {
 
 	// Information about the association.
@@ -259,13 +328,34 @@ type CreateAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationDescription != nil {
+		s.WriteStruct(schemas.CreateAssociationResult_AssociationDescription)
+		v.AssociationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssociationResult_AssociationDescription:
+			v.AssociationDescription = &types.AssociationDescription{}
+			return v.AssociationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssociation, schemas.CreateAssociationRequest, schemas.CreateAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssociation, schemas.CreateAssociationRequest, schemas.CreateAssociationResult), output: &CreateAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

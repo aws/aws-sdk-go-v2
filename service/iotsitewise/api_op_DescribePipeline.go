@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,24 @@ type DescribePipelineInput struct {
 	PipelineVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.DescribePipelineRequest_pipelineName, *v.PipelineName)
+	}
+	if v.PipelineVersion != nil {
+		s.WriteString(schemas.DescribePipelineRequest_pipelineVersion, *v.PipelineVersion)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribePipelineRequest_workspaceName, *v.WorkspaceName)
+	}
 }
 
 // Response structure for DescribePipeline operation.
@@ -102,13 +122,82 @@ type DescribePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeNodeList(s, schemas.DescribePipelineResponse_computations, v.Computations)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribePipelineResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribePipelineResponse_description, *v.Description)
+	}
+	serializeEnvironmentVariablesMap(s, schemas.DescribePipelineResponse_environmentVariables, v.EnvironmentVariables)
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.DescribePipelineResponse_pipelineArn, *v.PipelineArn)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.DescribePipelineResponse_pipelineName, *v.PipelineName)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.DescribePipelineResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribePipelineResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DescribePipelineResponse_version, *v.Version)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribePipelineResponse_workspaceName, *v.WorkspaceName)
+	}
+}
+func (v *DescribePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePipelineResponse_computations:
+			return deserializeComputeNodeList(d, schemas.DescribePipelineResponse_computations, &v.Computations)
+		case schemas.DescribePipelineResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineResponse_createdAt, v.CreatedAt)
+		case schemas.DescribePipelineResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_description, v.Description)
+		case schemas.DescribePipelineResponse_environmentVariables:
+			return deserializeEnvironmentVariablesMap(d, schemas.DescribePipelineResponse_environmentVariables, &v.EnvironmentVariables)
+		case schemas.DescribePipelineResponse_pipelineArn:
+			v.PipelineArn = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_pipelineArn, v.PipelineArn)
+		case schemas.DescribePipelineResponse_pipelineName:
+			v.PipelineName = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_pipelineName, v.PipelineName)
+		case schemas.DescribePipelineResponse_status:
+			v.Status = &types.ResourceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.DescribePipelineResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineResponse_updatedAt, v.UpdatedAt)
+		case schemas.DescribePipelineResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_version, v.Version)
+		case schemas.DescribePipelineResponse_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_workspaceName, v.WorkspaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipeline, schemas.DescribePipelineRequest, schemas.DescribePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipeline, schemas.DescribePipelineRequest, schemas.DescribePipelineResponse), output: &DescribePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

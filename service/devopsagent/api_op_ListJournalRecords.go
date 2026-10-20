@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,33 @@ type ListJournalRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJournalRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJournalRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJournalRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListJournalRecordsRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ListJournalRecordsRequest_executionId, *v.ExecutionId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListJournalRecordsRequest_limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJournalRecordsRequest_nextToken, *v.NextToken)
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.ListJournalRecordsRequest_order, string(v.Order))
+	}
+	if v.RecordType != nil {
+		s.WriteString(schemas.ListJournalRecordsRequest_recordType, *v.RecordType)
+	}
+}
+
 // Response structure containing a list of journal records
 type ListJournalRecordsOutput struct {
 
@@ -72,13 +101,35 @@ type ListJournalRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJournalRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJournalRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJournalRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJournalRecordsResponse_nextToken, *v.NextToken)
+	}
+	serializeJournalRecordList(s, schemas.ListJournalRecordsResponse_records, v.Records)
+}
+func (v *ListJournalRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJournalRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJournalRecordsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJournalRecordsResponse_nextToken, v.NextToken)
+		case schemas.ListJournalRecordsResponse_records:
+			return deserializeJournalRecordList(d, schemas.ListJournalRecordsResponse_records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJournalRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJournalRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJournalRecords, schemas.ListJournalRecordsRequest, schemas.ListJournalRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJournalRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJournalRecords, schemas.ListJournalRecordsRequest, schemas.ListJournalRecordsResponse), output: &ListJournalRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

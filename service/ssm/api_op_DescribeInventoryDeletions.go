@@ -5,7 +5,9 @@ package ssm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type DescribeInventoryDeletionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInventoryDeletionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInventoryDeletionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInventoryDeletionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionId != nil {
+		s.WriteString(schemas.DescribeInventoryDeletionsRequest_DeletionId, *v.DeletionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeInventoryDeletionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInventoryDeletionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeInventoryDeletionsOutput struct {
 
 	// A list of status items for deleted inventory.
@@ -56,13 +76,35 @@ type DescribeInventoryDeletionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInventoryDeletionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInventoryDeletionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInventoryDeletionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInventoryDeletionsList(s, schemas.DescribeInventoryDeletionsResult_InventoryDeletions, v.InventoryDeletions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInventoryDeletionsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeInventoryDeletionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInventoryDeletionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInventoryDeletionsResult_InventoryDeletions:
+			return deserializeInventoryDeletionsList(d, schemas.DescribeInventoryDeletionsResult_InventoryDeletions, &v.InventoryDeletions)
+		case schemas.DescribeInventoryDeletionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInventoryDeletionsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInventoryDeletionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInventoryDeletions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInventoryDeletions, schemas.DescribeInventoryDeletionsRequest, schemas.DescribeInventoryDeletionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInventoryDeletions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInventoryDeletions, schemas.DescribeInventoryDeletionsRequest, schemas.DescribeInventoryDeletionsResult), output: &DescribeInventoryDeletionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

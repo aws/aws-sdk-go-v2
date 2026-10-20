@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,31 @@ type DetectModerationLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectModerationLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectModerationLabelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectModerationLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanLoopConfig != nil {
+		s.WriteStruct(schemas.DetectModerationLabelsRequest_HumanLoopConfig)
+		v.HumanLoopConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Image != nil {
+		s.WriteStruct(schemas.DetectModerationLabelsRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinConfidence != nil {
+		s.WriteFloat32(schemas.DetectModerationLabelsRequest_MinConfidence, *v.MinConfidence)
+	}
+	if v.ProjectVersion != nil {
+		s.WriteString(schemas.DetectModerationLabelsRequest_ProjectVersion, *v.ProjectVersion)
+	}
+}
+
 type DetectModerationLabelsOutput struct {
 
 	// A list of predicted results for the type of content an image contains. For
@@ -101,13 +128,52 @@ type DetectModerationLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectModerationLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectModerationLabelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectModerationLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContentTypes(s, schemas.DetectModerationLabelsResponse_ContentTypes, v.ContentTypes)
+	if v.HumanLoopActivationOutput != nil {
+		s.WriteStruct(schemas.DetectModerationLabelsResponse_HumanLoopActivationOutput)
+		v.HumanLoopActivationOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeModerationLabels(s, schemas.DetectModerationLabelsResponse_ModerationLabels, v.ModerationLabels)
+	if v.ModerationModelVersion != nil {
+		s.WriteString(schemas.DetectModerationLabelsResponse_ModerationModelVersion, *v.ModerationModelVersion)
+	}
+	if v.ProjectVersion != nil {
+		s.WriteString(schemas.DetectModerationLabelsResponse_ProjectVersion, *v.ProjectVersion)
+	}
+}
+func (v *DetectModerationLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectModerationLabelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectModerationLabelsResponse_ContentTypes:
+			return deserializeContentTypes(d, schemas.DetectModerationLabelsResponse_ContentTypes, &v.ContentTypes)
+		case schemas.DetectModerationLabelsResponse_HumanLoopActivationOutput:
+			v.HumanLoopActivationOutput = &types.HumanLoopActivationOutput{}
+			return v.HumanLoopActivationOutput.Deserialize(d)
+		case schemas.DetectModerationLabelsResponse_ModerationLabels:
+			return deserializeModerationLabels(d, schemas.DetectModerationLabelsResponse_ModerationLabels, &v.ModerationLabels)
+		case schemas.DetectModerationLabelsResponse_ModerationModelVersion:
+			v.ModerationModelVersion = new(string)
+			return d.ReadString(schemas.DetectModerationLabelsResponse_ModerationModelVersion, v.ModerationModelVersion)
+		case schemas.DetectModerationLabelsResponse_ProjectVersion:
+			v.ProjectVersion = new(string)
+			return d.ReadString(schemas.DetectModerationLabelsResponse_ProjectVersion, v.ProjectVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectModerationLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectModerationLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectModerationLabels, schemas.DetectModerationLabelsRequest, schemas.DetectModerationLabelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectModerationLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectModerationLabels, schemas.DetectModerationLabelsRequest, schemas.DetectModerationLabelsResponse), output: &DetectModerationLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListPrincipalsForPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalsForPortfolioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalsForPortfolioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalsForPortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListPrincipalsForPortfolioInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListPrincipalsForPortfolioInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListPrincipalsForPortfolioInput_PageToken, *v.PageToken)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.ListPrincipalsForPortfolioInput_PortfolioId, *v.PortfolioId)
+	}
+}
+
 type ListPrincipalsForPortfolioOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -66,13 +89,35 @@ type ListPrincipalsForPortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalsForPortfolioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalsForPortfolioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalsForPortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListPrincipalsForPortfolioOutput_NextPageToken, *v.NextPageToken)
+	}
+	serializePrincipals(s, schemas.ListPrincipalsForPortfolioOutput_Principals, v.Principals)
+}
+func (v *ListPrincipalsForPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrincipalsForPortfolioOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrincipalsForPortfolioOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListPrincipalsForPortfolioOutput_NextPageToken, v.NextPageToken)
+		case schemas.ListPrincipalsForPortfolioOutput_Principals:
+			return deserializePrincipals(d, schemas.ListPrincipalsForPortfolioOutput_Principals, &v.Principals)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrincipalsForPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPrincipalsForPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalsForPortfolio, schemas.ListPrincipalsForPortfolioInput, schemas.ListPrincipalsForPortfolioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPrincipalsForPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalsForPortfolio, schemas.ListPrincipalsForPortfolioInput, schemas.ListPrincipalsForPortfolioOutput), output: &ListPrincipalsForPortfolioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

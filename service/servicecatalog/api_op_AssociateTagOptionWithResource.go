@@ -4,6 +4,8 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type AssociateTagOptionWithResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTagOptionWithResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTagOptionWithResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTagOptionWithResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AssociateTagOptionWithResourceInput_ResourceId, *v.ResourceId)
+	}
+	if v.TagOptionId != nil {
+		s.WriteString(schemas.AssociateTagOptionWithResourceInput_TagOptionId, *v.TagOptionId)
+	}
+}
+
 type AssociateTagOptionWithResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type AssociateTagOptionWithResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTagOptionWithResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTagOptionWithResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTagOptionWithResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateTagOptionWithResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateTagOptionWithResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateTagOptionWithResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateTagOptionWithResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTagOptionWithResource, schemas.AssociateTagOptionWithResourceInput, schemas.AssociateTagOptionWithResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateTagOptionWithResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTagOptionWithResource, schemas.AssociateTagOptionWithResourceInput, schemas.AssociateTagOptionWithResourceOutput), output: &AssociateTagOptionWithResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

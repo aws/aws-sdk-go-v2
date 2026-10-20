@@ -4,6 +4,8 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type UnlabelParameterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnlabelParameterVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnlabelParameterVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnlabelParameterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterLabelList(s, schemas.UnlabelParameterVersionRequest_Labels, v.Labels)
+	if v.Name != nil {
+		s.WriteString(schemas.UnlabelParameterVersionRequest_Name, *v.Name)
+	}
+	if v.ParameterVersion != nil {
+		s.WriteInt64(schemas.UnlabelParameterVersionRequest_ParameterVersion, *v.ParameterVersion)
+	}
+}
+
 type UnlabelParameterVersionOutput struct {
 
 	// The labels that aren't attached to the given parameter version.
@@ -66,13 +84,32 @@ type UnlabelParameterVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnlabelParameterVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnlabelParameterVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnlabelParameterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterLabelList(s, schemas.UnlabelParameterVersionResult_InvalidLabels, v.InvalidLabels)
+	serializeParameterLabelList(s, schemas.UnlabelParameterVersionResult_RemovedLabels, v.RemovedLabels)
+}
+func (v *UnlabelParameterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnlabelParameterVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnlabelParameterVersionResult_InvalidLabels:
+			return deserializeParameterLabelList(d, schemas.UnlabelParameterVersionResult_InvalidLabels, &v.InvalidLabels)
+		case schemas.UnlabelParameterVersionResult_RemovedLabels:
+			return deserializeParameterLabelList(d, schemas.UnlabelParameterVersionResult_RemovedLabels, &v.RemovedLabels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnlabelParameterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnlabelParameterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnlabelParameterVersion, schemas.UnlabelParameterVersionRequest, schemas.UnlabelParameterVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUnlabelParameterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnlabelParameterVersion, schemas.UnlabelParameterVersionRequest, schemas.UnlabelParameterVersionResult), output: &UnlabelParameterVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iotdeviceadvisor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListSuiteDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuiteDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuiteDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuiteDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSuiteDefinitionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuiteDefinitionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSuiteDefinitionsOutput struct {
 
 	// A token used to get the next set of results.
@@ -55,13 +72,35 @@ type ListSuiteDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSuiteDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSuiteDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSuiteDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSuiteDefinitionsResponse_nextToken, *v.NextToken)
+	}
+	serializeSuiteDefinitionInformationList(s, schemas.ListSuiteDefinitionsResponse_suiteDefinitionInformationList, v.SuiteDefinitionInformationList)
+}
+func (v *ListSuiteDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSuiteDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSuiteDefinitionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSuiteDefinitionsResponse_nextToken, v.NextToken)
+		case schemas.ListSuiteDefinitionsResponse_suiteDefinitionInformationList:
+			return deserializeSuiteDefinitionInformationList(d, schemas.ListSuiteDefinitionsResponse_suiteDefinitionInformationList, &v.SuiteDefinitionInformationList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSuiteDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSuiteDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuiteDefinitions, schemas.ListSuiteDefinitionsRequest, schemas.ListSuiteDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSuiteDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSuiteDefinitions, schemas.ListSuiteDefinitionsRequest, schemas.ListSuiteDefinitionsResponse), output: &ListSuiteDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

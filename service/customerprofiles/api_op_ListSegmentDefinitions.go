@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListSegmentDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSegmentDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSegmentDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSegmentDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListSegmentDefinitionsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSegmentDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSegmentDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListSegmentDefinitionsOutput struct {
 
 	// List of segment definitions.
@@ -55,13 +75,35 @@ type ListSegmentDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSegmentDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSegmentDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSegmentDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSegmentDefinitionsList(s, schemas.ListSegmentDefinitionsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSegmentDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSegmentDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSegmentDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSegmentDefinitionsResponse_Items:
+			return deserializeSegmentDefinitionsList(d, schemas.ListSegmentDefinitionsResponse_Items, &v.Items)
+		case schemas.ListSegmentDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSegmentDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSegmentDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSegmentDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSegmentDefinitions, schemas.ListSegmentDefinitionsRequest, schemas.ListSegmentDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSegmentDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSegmentDefinitions, schemas.ListSegmentDefinitionsRequest, schemas.ListSegmentDefinitionsResponse), output: &ListSegmentDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

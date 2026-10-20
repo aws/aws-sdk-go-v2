@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assumedRoleUser":{"arn":"__Arn__","assumeRoleId":"__AssumeRoleId__"},"audience":"__Audience__","credentials":{"accessKeyId":"__AccessKeyId__","expiration":946684800,"secretAccessKey":"__SecretAccessKey__","sessionToken":"__SessionToken__"},"podIdentityAssociation":{"associationArn":"__AssociationArn__","associationId":"__AssociationId__"},"subject":{"namespace":"__Namespace__","serviceAccount":"__ServiceAccount__"}}

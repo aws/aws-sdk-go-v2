@@ -5,7 +5,9 @@ package pcs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,59 @@ type UpdateComputeNodeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComputeNodeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComputeNodeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiId != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_amiId, *v.AmiId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ComputeNodeGroupIdentifier != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_computeNodeGroupIdentifier, *v.ComputeNodeGroupIdentifier)
+	}
+	if v.CustomLaunchTemplate != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_customLaunchTemplate)
+		v.CustomLaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamInstanceProfileArn != nil {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_iamInstanceProfileArn, *v.IamInstanceProfileArn)
+	}
+	if v.NodeLifecycleActions != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_nodeLifecycleActions)
+		v.NodeLifecycleActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PurchaseOption != "" {
+		s.WriteString(schemas.UpdateComputeNodeGroupRequest_purchaseOption, string(v.PurchaseOption))
+	}
+	if v.ScalingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_scalingConfiguration)
+		v.ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SlurmConfiguration != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_slurmConfiguration)
+		v.SlurmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpotOptions != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_spotOptions)
+		v.SpotOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.UpdateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
+}
+
 type UpdateComputeNodeGroupOutput struct {
 
 	// A compute node group associated with a cluster.
@@ -113,13 +168,34 @@ type UpdateComputeNodeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComputeNodeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComputeNodeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComputeNodeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeNodeGroup != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupResponse_computeNodeGroup)
+		v.ComputeNodeGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateComputeNodeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComputeNodeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComputeNodeGroupResponse_computeNodeGroup:
+			v.ComputeNodeGroup = &types.ComputeNodeGroup{}
+			return v.ComputeNodeGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateComputeNodeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateComputeNodeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputeNodeGroup, schemas.UpdateComputeNodeGroupRequest, schemas.UpdateComputeNodeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateComputeNodeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputeNodeGroup, schemas.UpdateComputeNodeGroupRequest, schemas.UpdateComputeNodeGroupResponse), output: &UpdateComputeNodeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

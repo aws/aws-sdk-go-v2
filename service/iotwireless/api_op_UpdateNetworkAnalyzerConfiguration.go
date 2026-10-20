@@ -4,7 +4,9 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,32 @@ type UpdateNetworkAnalyzerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkAnalyzerConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkAnalyzerConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkAnalyzerConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.UpdateNetworkAnalyzerConfigurationRequest_ConfigurationName, *v.ConfigurationName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateNetworkAnalyzerConfigurationRequest_Description, *v.Description)
+	}
+	serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToAdd, v.MulticastGroupsToAdd)
+	serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToRemove, v.MulticastGroupsToRemove)
+	if v.TraceContent != nil {
+		s.WriteStruct(schemas.UpdateNetworkAnalyzerConfigurationRequest_TraceContent)
+		v.TraceContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToAdd, v.WirelessDevicesToAdd)
+	serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToRemove, v.WirelessDevicesToRemove)
+	serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToAdd, v.WirelessGatewaysToAdd)
+	serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToRemove, v.WirelessGatewaysToRemove)
+}
+
 type UpdateNetworkAnalyzerConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +99,26 @@ type UpdateNetworkAnalyzerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkAnalyzerConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkAnalyzerConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkAnalyzerConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNetworkAnalyzerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNetworkAnalyzerConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNetworkAnalyzerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNetworkAnalyzerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkAnalyzerConfiguration, schemas.UpdateNetworkAnalyzerConfigurationRequest, schemas.UpdateNetworkAnalyzerConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNetworkAnalyzerConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkAnalyzerConfiguration, schemas.UpdateNetworkAnalyzerConfigurationRequest, schemas.UpdateNetworkAnalyzerConfigurationResponse), output: &UpdateNetworkAnalyzerConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

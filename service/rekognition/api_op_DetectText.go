@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,25 @@ type DetectTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectTextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectTextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectTextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DetectTextRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Image != nil {
+		s.WriteStruct(schemas.DetectTextRequest_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetectTextOutput struct {
 
 	// An array of text that was detected in the input image.
@@ -88,13 +109,35 @@ type DetectTextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectTextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectTextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTextDetectionList(s, schemas.DetectTextResponse_TextDetections, v.TextDetections)
+	if v.TextModelVersion != nil {
+		s.WriteString(schemas.DetectTextResponse_TextModelVersion, *v.TextModelVersion)
+	}
+}
+func (v *DetectTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectTextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectTextResponse_TextDetections:
+			return deserializeTextDetectionList(d, schemas.DetectTextResponse_TextDetections, &v.TextDetections)
+		case schemas.DetectTextResponse_TextModelVersion:
+			v.TextModelVersion = new(string)
+			return d.ReadString(schemas.DetectTextResponse_TextModelVersion, v.TextModelVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectText{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectText, schemas.DetectTextRequest, schemas.DetectTextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectText{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectText, schemas.DetectTextRequest, schemas.DetectTextResponse), output: &DetectTextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

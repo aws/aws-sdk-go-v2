@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"packageVersion":{"displayName":"__DisplayName__","format":"npm","homePage":"__HomePage__","licenses":[{"name":"__Name__","url":"__Url__"},{"name":"__Name__","url":"__Url__"}],"namespace":"__Namespace__","origin":{"domainEntryPoint":{"externalConnectionName":"__ExternalConnectionName__","repositoryName":"__RepositoryName__"},"originType":"INTERNAL"},"packageName":"__PackageName__","publishedTime":946684800,"revision":"__Revision__","sourceCodeRepository":"__SourceCodeRepository__","status":"Published","summary":"__Summary__","version":"__Version__"}}

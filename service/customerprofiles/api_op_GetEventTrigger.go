@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetEventTriggerInput struct {
 	EventTriggerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEventTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetEventTriggerRequest_DomainName, *v.DomainName)
+	}
+	if v.EventTriggerName != nil {
+		s.WriteString(schemas.GetEventTriggerRequest_EventTriggerName, *v.EventTriggerName)
+	}
 }
 
 type GetEventTriggerOutput struct {
@@ -79,13 +96,76 @@ type GetEventTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetEventTriggerResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetEventTriggerResponse_Description, *v.Description)
+	}
+	serializeEventTriggerConditions(s, schemas.GetEventTriggerResponse_EventTriggerConditions, v.EventTriggerConditions)
+	if v.EventTriggerLimits != nil {
+		s.WriteStruct(schemas.GetEventTriggerResponse_EventTriggerLimits)
+		v.EventTriggerLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventTriggerName != nil {
+		s.WriteString(schemas.GetEventTriggerResponse_EventTriggerName, *v.EventTriggerName)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetEventTriggerResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.GetEventTriggerResponse_ObjectTypeName, *v.ObjectTypeName)
+	}
+	if v.SegmentFilter != nil {
+		s.WriteString(schemas.GetEventTriggerResponse_SegmentFilter, *v.SegmentFilter)
+	}
+	serializeTagMap(s, schemas.GetEventTriggerResponse_Tags, v.Tags)
+}
+func (v *GetEventTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventTriggerResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEventTriggerResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetEventTriggerResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetEventTriggerResponse_Description, v.Description)
+		case schemas.GetEventTriggerResponse_EventTriggerConditions:
+			return deserializeEventTriggerConditions(d, schemas.GetEventTriggerResponse_EventTriggerConditions, &v.EventTriggerConditions)
+		case schemas.GetEventTriggerResponse_EventTriggerLimits:
+			v.EventTriggerLimits = &types.EventTriggerLimits{}
+			return v.EventTriggerLimits.Deserialize(d)
+		case schemas.GetEventTriggerResponse_EventTriggerName:
+			v.EventTriggerName = new(string)
+			return d.ReadString(schemas.GetEventTriggerResponse_EventTriggerName, v.EventTriggerName)
+		case schemas.GetEventTriggerResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEventTriggerResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetEventTriggerResponse_ObjectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.GetEventTriggerResponse_ObjectTypeName, v.ObjectTypeName)
+		case schemas.GetEventTriggerResponse_SegmentFilter:
+			v.SegmentFilter = new(string)
+			return d.ReadString(schemas.GetEventTriggerResponse_SegmentFilter, v.SegmentFilter)
+		case schemas.GetEventTriggerResponse_Tags:
+			return deserializeTagMap(d, schemas.GetEventTriggerResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventTrigger, schemas.GetEventTriggerRequest, schemas.GetEventTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventTrigger, schemas.GetEventTriggerRequest, schemas.GetEventTriggerResponse), output: &GetEventTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

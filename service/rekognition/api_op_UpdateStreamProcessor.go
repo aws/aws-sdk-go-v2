@@ -4,7 +4,9 @@ package rekognition
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,30 @@ type UpdateStreamProcessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamProcessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStreamProcessorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSharingPreferenceForUpdate != nil {
+		s.WriteStruct(schemas.UpdateStreamProcessorRequest_DataSharingPreferenceForUpdate)
+		v.DataSharingPreferenceForUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateStreamProcessorRequest_Name, *v.Name)
+	}
+	serializeStreamProcessorParametersToDelete(s, schemas.UpdateStreamProcessorRequest_ParametersToDelete, v.ParametersToDelete)
+	serializeRegionsOfInterest(s, schemas.UpdateStreamProcessorRequest_RegionsOfInterestForUpdate, v.RegionsOfInterestForUpdate)
+	if v.SettingsForUpdate != nil {
+		s.WriteStruct(schemas.UpdateStreamProcessorRequest_SettingsForUpdate)
+		v.SettingsForUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateStreamProcessorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +94,26 @@ type UpdateStreamProcessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamProcessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStreamProcessorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStreamProcessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateStreamProcessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStreamProcessorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStreamProcessor, schemas.UpdateStreamProcessorRequest, schemas.UpdateStreamProcessorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStreamProcessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStreamProcessor, schemas.UpdateStreamProcessorRequest, schemas.UpdateStreamProcessorResponse), output: &UpdateStreamProcessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

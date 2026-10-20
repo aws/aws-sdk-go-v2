@@ -5,7 +5,9 @@ package ssoadmin
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type ListAccountAssignmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountAssignmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountAssignmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountAssignmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListAccountAssignmentsRequest_AccountId, *v.AccountId)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.ListAccountAssignmentsRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccountAssignmentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountAssignmentsRequest_NextToken, *v.NextToken)
+	}
+	if v.PermissionSetArn != nil {
+		s.WriteString(schemas.ListAccountAssignmentsRequest_PermissionSetArn, *v.PermissionSetArn)
+	}
+}
+
 type ListAccountAssignmentsOutput struct {
 
 	// The list of assignments that match the input Amazon Web Services account and
@@ -72,13 +98,35 @@ type ListAccountAssignmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountAssignmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountAssignmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountAssignmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountAssignmentList(s, schemas.ListAccountAssignmentsResponse_AccountAssignments, v.AccountAssignments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountAssignmentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountAssignmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountAssignmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountAssignmentsResponse_AccountAssignments:
+			return deserializeAccountAssignmentList(d, schemas.ListAccountAssignmentsResponse_AccountAssignments, &v.AccountAssignments)
+		case schemas.ListAccountAssignmentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountAssignmentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountAssignmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountAssignments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssignments, schemas.ListAccountAssignmentsRequest, schemas.ListAccountAssignmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountAssignments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssignments, schemas.ListAccountAssignmentsRequest, schemas.ListAccountAssignmentsResponse), output: &ListAccountAssignmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

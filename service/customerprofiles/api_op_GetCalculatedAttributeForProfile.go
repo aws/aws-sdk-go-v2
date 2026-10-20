@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,24 @@ type GetCalculatedAttributeForProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculatedAttributeForProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculatedAttributeForProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculatedAttributeForProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatedAttributeName != nil {
+		s.WriteString(schemas.GetCalculatedAttributeForProfileRequest_CalculatedAttributeName, *v.CalculatedAttributeName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetCalculatedAttributeForProfileRequest_DomainName, *v.DomainName)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetCalculatedAttributeForProfileRequest_ProfileId, *v.ProfileId)
+	}
+}
+
 type GetCalculatedAttributeForProfileOutput struct {
 
 	// The unique name of the calculated attribute.
@@ -69,13 +89,56 @@ type GetCalculatedAttributeForProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculatedAttributeForProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculatedAttributeForProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculatedAttributeForProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatedAttributeName != nil {
+		s.WriteString(schemas.GetCalculatedAttributeForProfileResponse_CalculatedAttributeName, *v.CalculatedAttributeName)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetCalculatedAttributeForProfileResponse_DisplayName, *v.DisplayName)
+	}
+	if v.IsDataPartial != nil {
+		s.WriteString(schemas.GetCalculatedAttributeForProfileResponse_IsDataPartial, *v.IsDataPartial)
+	}
+	if v.LastObjectTimestamp != nil {
+		s.WriteTime(schemas.GetCalculatedAttributeForProfileResponse_LastObjectTimestamp, *v.LastObjectTimestamp)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.GetCalculatedAttributeForProfileResponse_Value, *v.Value)
+	}
+}
+func (v *GetCalculatedAttributeForProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCalculatedAttributeForProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCalculatedAttributeForProfileResponse_CalculatedAttributeName:
+			v.CalculatedAttributeName = new(string)
+			return d.ReadString(schemas.GetCalculatedAttributeForProfileResponse_CalculatedAttributeName, v.CalculatedAttributeName)
+		case schemas.GetCalculatedAttributeForProfileResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetCalculatedAttributeForProfileResponse_DisplayName, v.DisplayName)
+		case schemas.GetCalculatedAttributeForProfileResponse_IsDataPartial:
+			v.IsDataPartial = new(string)
+			return d.ReadString(schemas.GetCalculatedAttributeForProfileResponse_IsDataPartial, v.IsDataPartial)
+		case schemas.GetCalculatedAttributeForProfileResponse_LastObjectTimestamp:
+			v.LastObjectTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetCalculatedAttributeForProfileResponse_LastObjectTimestamp, v.LastObjectTimestamp)
+		case schemas.GetCalculatedAttributeForProfileResponse_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.GetCalculatedAttributeForProfileResponse_Value, v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCalculatedAttributeForProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCalculatedAttributeForProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculatedAttributeForProfile, schemas.GetCalculatedAttributeForProfileRequest, schemas.GetCalculatedAttributeForProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCalculatedAttributeForProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculatedAttributeForProfile, schemas.GetCalculatedAttributeForProfileRequest, schemas.GetCalculatedAttributeForProfileResponse), output: &GetCalculatedAttributeForProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

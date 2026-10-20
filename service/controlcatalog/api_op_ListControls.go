@@ -5,7 +5,9 @@ package controlcatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type ListControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListControlsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListControlsOutput struct {
 
 	// Returns a list of controls, given as structures of type controlSummary.
@@ -60,13 +82,35 @@ type ListControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControls(s, schemas.ListControlsResponse_Controls, v.Controls)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlsResponse_Controls:
+			return deserializeControls(d, schemas.ListControlsResponse_Controls, &v.Controls)
+		case schemas.ListControlsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControls, schemas.ListControlsRequest, schemas.ListControlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControls, schemas.ListControlsRequest, schemas.ListControlsResponse), output: &ListControlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

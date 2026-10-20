@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -89,6 +91,22 @@ type CreateEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnrichmentJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnrichmentJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEnrichmentJobRequest_clientToken, *v.ClientToken)
+	}
+	serializeEnrichmentJobConfiguration(s, schemas.CreateEnrichmentJobRequest_jobConfiguration, v.JobConfiguration)
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateEnrichmentJobRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 type CreateEnrichmentJobOutput struct {
 
 	// Timestamp when the enrichment job was created in ISO 8601 format.
@@ -117,13 +135,48 @@ type CreateEnrichmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnrichmentJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnrichmentJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateEnrichmentJobResponse_createdAt, *v.CreatedAt)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateEnrichmentJobResponse_jobId, *v.JobId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateEnrichmentJobResponse_status, string(v.Status))
+	}
+}
+func (v *CreateEnrichmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnrichmentJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnrichmentJobResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEnrichmentJobResponse_createdAt, v.CreatedAt)
+		case schemas.CreateEnrichmentJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateEnrichmentJobResponse_jobId, v.JobId)
+		case schemas.CreateEnrichmentJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnrichmentJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnrichmentJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnrichmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnrichmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnrichmentJob, schemas.CreateEnrichmentJobRequest, schemas.CreateEnrichmentJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnrichmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnrichmentJob, schemas.CreateEnrichmentJobRequest, schemas.CreateEnrichmentJobResponse), output: &CreateEnrichmentJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

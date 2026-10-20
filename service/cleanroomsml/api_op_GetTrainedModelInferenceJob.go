@@ -4,7 +4,9 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetTrainedModelInferenceJobInput struct {
 	TrainedModelInferenceJobArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTrainedModelInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrainedModelInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrainedModelInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.TrainedModelInferenceJobArn != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobRequest_trainedModelInferenceJobArn, *v.TrainedModelInferenceJobArn)
+	}
 }
 
 type GetTrainedModelInferenceJobOutput struct {
@@ -176,13 +193,186 @@ type GetTrainedModelInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrainedModelInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrainedModelInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrainedModelInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredModelAlgorithmAssociationArn != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn, *v.ConfiguredModelAlgorithmAssociationArn)
+	}
+	if v.ContainerExecutionParameters != nil {
+		s.WriteStruct(schemas.GetTrainedModelInferenceJobResponse_containerExecutionParameters)
+		v.ContainerExecutionParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.GetTrainedModelInferenceJobResponse_createTime, *v.CreateTime)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.GetTrainedModelInferenceJobResponse_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_description, *v.Description)
+	}
+	serializeInferenceEnvironmentMap(s, schemas.GetTrainedModelInferenceJobResponse_environment, v.Environment)
+	if v.InferenceContainerImageDigest != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_inferenceContainerImageDigest, *v.InferenceContainerImageDigest)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LogsStatus != "" {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_logsStatus, string(v.LogsStatus))
+	}
+	if v.LogsStatusDetails != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_logsStatusDetails, *v.LogsStatusDetails)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.MetricsStatus != "" {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_metricsStatus, string(v.MetricsStatus))
+	}
+	if v.MetricsStatusDetails != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_metricsStatusDetails, *v.MetricsStatusDetails)
+	}
+	if v.MlModelInferencePayerAccountId != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId, *v.MlModelInferencePayerAccountId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_name, *v.Name)
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.GetTrainedModelInferenceJobResponse_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.GetTrainedModelInferenceJobResponse_resourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteStruct(schemas.GetTrainedModelInferenceJobResponse_statusDetails)
+		v.StatusDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.GetTrainedModelInferenceJobResponse_tags, v.Tags)
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_trainedModelArn, *v.TrainedModelArn)
+	}
+	if v.TrainedModelInferenceJobArn != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn, *v.TrainedModelInferenceJobArn)
+	}
+	if v.TrainedModelVersionIdentifier != nil {
+		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier, *v.TrainedModelVersionIdentifier)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetTrainedModelInferenceJobResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *GetTrainedModelInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrainedModelInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn:
+			v.ConfiguredModelAlgorithmAssociationArn = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn, v.ConfiguredModelAlgorithmAssociationArn)
+		case schemas.GetTrainedModelInferenceJobResponse_containerExecutionParameters:
+			v.ContainerExecutionParameters = &types.InferenceContainerExecutionParameters{}
+			return v.ContainerExecutionParameters.Deserialize(d)
+		case schemas.GetTrainedModelInferenceJobResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrainedModelInferenceJobResponse_createTime, v.CreateTime)
+		case schemas.GetTrainedModelInferenceJobResponse_dataSource:
+			v.DataSource = &types.ModelInferenceDataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.GetTrainedModelInferenceJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_description, v.Description)
+		case schemas.GetTrainedModelInferenceJobResponse_environment:
+			return deserializeInferenceEnvironmentMap(d, schemas.GetTrainedModelInferenceJobResponse_environment, &v.Environment)
+		case schemas.GetTrainedModelInferenceJobResponse_inferenceContainerImageDigest:
+			v.InferenceContainerImageDigest = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_inferenceContainerImageDigest, v.InferenceContainerImageDigest)
+		case schemas.GetTrainedModelInferenceJobResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetTrainedModelInferenceJobResponse_logsStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetTrainedModelInferenceJobResponse_logsStatus, &ev); err != nil {
+				return err
+			}
+			v.LogsStatus = types.LogsStatus(ev)
+			return nil
+		case schemas.GetTrainedModelInferenceJobResponse_logsStatusDetails:
+			v.LogsStatusDetails = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_logsStatusDetails, v.LogsStatusDetails)
+		case schemas.GetTrainedModelInferenceJobResponse_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.GetTrainedModelInferenceJobResponse_metricsStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetTrainedModelInferenceJobResponse_metricsStatus, &ev); err != nil {
+				return err
+			}
+			v.MetricsStatus = types.MetricsStatus(ev)
+			return nil
+		case schemas.GetTrainedModelInferenceJobResponse_metricsStatusDetails:
+			v.MetricsStatusDetails = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_metricsStatusDetails, v.MetricsStatusDetails)
+		case schemas.GetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId:
+			v.MlModelInferencePayerAccountId = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId, v.MlModelInferencePayerAccountId)
+		case schemas.GetTrainedModelInferenceJobResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_name, v.Name)
+		case schemas.GetTrainedModelInferenceJobResponse_outputConfiguration:
+			v.OutputConfiguration = &types.InferenceOutputConfiguration{}
+			return v.OutputConfiguration.Deserialize(d)
+		case schemas.GetTrainedModelInferenceJobResponse_resourceConfig:
+			v.ResourceConfig = &types.InferenceResourceConfig{}
+			return v.ResourceConfig.Deserialize(d)
+		case schemas.GetTrainedModelInferenceJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetTrainedModelInferenceJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TrainedModelInferenceJobStatus(ev)
+			return nil
+		case schemas.GetTrainedModelInferenceJobResponse_statusDetails:
+			v.StatusDetails = &types.StatusDetails{}
+			return v.StatusDetails.Deserialize(d)
+		case schemas.GetTrainedModelInferenceJobResponse_tags:
+			return deserializeTagMap(d, schemas.GetTrainedModelInferenceJobResponse_tags, &v.Tags)
+		case schemas.GetTrainedModelInferenceJobResponse_trainedModelArn:
+			v.TrainedModelArn = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_trainedModelArn, v.TrainedModelArn)
+		case schemas.GetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn:
+			v.TrainedModelInferenceJobArn = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn, v.TrainedModelInferenceJobArn)
+		case schemas.GetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier:
+			v.TrainedModelVersionIdentifier = new(string)
+			return d.ReadString(schemas.GetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier, v.TrainedModelVersionIdentifier)
+		case schemas.GetTrainedModelInferenceJobResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrainedModelInferenceJobResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrainedModelInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrainedModelInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrainedModelInferenceJob, schemas.GetTrainedModelInferenceJobRequest, schemas.GetTrainedModelInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrainedModelInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrainedModelInferenceJob, schemas.GetTrainedModelInferenceJobRequest, schemas.GetTrainedModelInferenceJobResponse), output: &GetTrainedModelInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

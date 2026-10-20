@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetCapacityProviderInput struct {
 	CapacityProviderId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCapacityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityProviderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderId != nil {
+		s.WriteString(schemas.GetCapacityProviderInput_capacityProviderId, *v.CapacityProviderId)
+	}
 }
 
 type GetCapacityProviderOutput struct {
@@ -97,13 +111,99 @@ type GetCapacityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCapacityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityProviderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderArn != nil {
+		s.WriteString(schemas.GetCapacityProviderOutput_capacityProviderArn, *v.CapacityProviderArn)
+	}
+	if v.CapacityProviderId != nil {
+		s.WriteString(schemas.GetCapacityProviderOutput_capacityProviderId, *v.CapacityProviderId)
+	}
+	serializeComputeConfiguration(s, schemas.GetCapacityProviderOutput_computeConfiguration, v.ComputeConfiguration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCapacityProviderOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetCapacityProviderOutput_description, *v.Description)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetCapacityProviderOutput_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCapacityProviderOutput_name, *v.Name)
+	}
+	if v.PermissionsConfiguration != nil {
+		s.WriteStruct(schemas.GetCapacityProviderOutput_permissionsConfiguration)
+		v.PermissionsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCapacityProviderOutput_status, string(v.Status))
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.GetCapacityProviderOutput_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetCapacityProviderOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *GetCapacityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCapacityProviderOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCapacityProviderOutput_capacityProviderArn:
+			v.CapacityProviderArn = new(string)
+			return d.ReadString(schemas.GetCapacityProviderOutput_capacityProviderArn, v.CapacityProviderArn)
+		case schemas.GetCapacityProviderOutput_capacityProviderId:
+			v.CapacityProviderId = new(string)
+			return d.ReadString(schemas.GetCapacityProviderOutput_capacityProviderId, v.CapacityProviderId)
+		case schemas.GetCapacityProviderOutput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.GetCapacityProviderOutput_computeConfiguration, &v.ComputeConfiguration)
+		case schemas.GetCapacityProviderOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCapacityProviderOutput_createdAt, v.CreatedAt)
+		case schemas.GetCapacityProviderOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCapacityProviderOutput_description, v.Description)
+		case schemas.GetCapacityProviderOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCapacityProviderOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetCapacityProviderOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCapacityProviderOutput_name, v.Name)
+		case schemas.GetCapacityProviderOutput_permissionsConfiguration:
+			v.PermissionsConfiguration = &types.PermissionsConfiguration{}
+			return v.PermissionsConfiguration.Deserialize(d)
+		case schemas.GetCapacityProviderOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCapacityProviderOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CapacityProviderStatus(ev)
+			return nil
+		case schemas.GetCapacityProviderOutput_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.GetCapacityProviderOutput_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = types.CapacityProviderStatusCode(ev)
+			return nil
+		case schemas.GetCapacityProviderOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetCapacityProviderOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityProvider, schemas.GetCapacityProviderInput, schemas.GetCapacityProviderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityProvider, schemas.GetCapacityProviderInput, schemas.GetCapacityProviderOutput), output: &GetCapacityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

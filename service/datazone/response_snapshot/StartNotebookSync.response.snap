@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","gitMetadata":{"branch":"__Branch__","commitHash":"__CommitHash__","commitMessage":"__CommitMessage__","committedAt":946684800,"connectionId":"__ConnectionId__","fileName":"__FileName__","repository":"__Repository__"},"name":"__Name__","notebookId":"__NotebookId__","owningProjectId":"__OwningProjectId__","sourceLocation":{"s3":"__SourceLocationMemberS3__"},"status":"ACTIVE"}

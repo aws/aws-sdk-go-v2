@@ -5,7 +5,9 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListCustomDomainAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDomainAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomDomainAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomDomainAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainCertificateArn != nil {
+		s.WriteString(schemas.ListCustomDomainAssociationsRequest_customDomainCertificateArn, *v.CustomDomainCertificateArn)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.ListCustomDomainAssociationsRequest_customDomainName, *v.CustomDomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomDomainAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomDomainAssociationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCustomDomainAssociationsOutput struct {
 
 	// A list of Association objects.
@@ -61,13 +84,35 @@ type ListCustomDomainAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDomainAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomDomainAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomDomainAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociationList(s, schemas.ListCustomDomainAssociationsResponse_associations, v.Associations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomDomainAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomDomainAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomDomainAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomDomainAssociationsResponse_associations:
+			return deserializeAssociationList(d, schemas.ListCustomDomainAssociationsResponse_associations, &v.Associations)
+		case schemas.ListCustomDomainAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomDomainAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomDomainAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomDomainAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDomainAssociations, schemas.ListCustomDomainAssociationsRequest, schemas.ListCustomDomainAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCustomDomainAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDomainAssociations, schemas.ListCustomDomainAssociationsRequest, schemas.ListCustomDomainAssociationsResponse), output: &ListCustomDomainAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

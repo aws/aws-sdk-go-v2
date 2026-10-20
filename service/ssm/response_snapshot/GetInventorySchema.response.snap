@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetInventorySchema
+
+{"NextToken":"__NextToken__","Schemas":[{"Attributes":[{"DataType":"string","Name":"__Name__"},{"DataType":"string","Name":"__Name__"}],"DisplayName":"__DisplayName__","TypeName":"__TypeName__","Version":"__Version__"},{"Attributes":[{"DataType":"string","Name":"__Name__"},{"DataType":"string","Name":"__Name__"}],"DisplayName":"__DisplayName__","TypeName":"__TypeName__","Version":"__Version__"}]}

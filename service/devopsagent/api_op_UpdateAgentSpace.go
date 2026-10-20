@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,28 @@ type UpdateAgentSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentSpaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateAgentSpaceInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentSpaceInput_description, *v.Description)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.UpdateAgentSpaceInput_locale, *v.Locale)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAgentSpaceInput_name, *v.Name)
+	}
+	serializeAgentSpacePreferences(s, schemas.UpdateAgentSpaceInput_preferences, v.Preferences)
+}
+
 // Output containing the updated AgentSpace.
 type UpdateAgentSpaceOutput struct {
 
@@ -68,13 +92,34 @@ type UpdateAgentSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentSpaceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpace != nil {
+		s.WriteStruct(schemas.UpdateAgentSpaceOutput_agentSpace)
+		v.AgentSpace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentSpaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentSpaceOutput_agentSpace:
+			v.AgentSpace = &types.AgentSpace{}
+			return v.AgentSpace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentSpace, schemas.UpdateAgentSpaceInput, schemas.UpdateAgentSpaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentSpace, schemas.UpdateAgentSpaceInput, schemas.UpdateAgentSpaceOutput), output: &UpdateAgentSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

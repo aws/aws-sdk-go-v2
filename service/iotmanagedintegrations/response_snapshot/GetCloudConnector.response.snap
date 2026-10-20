@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Description":"__Description__","EndpointConfig":{"lambda":{"arn":"__Arn__"}},"EndpointType":"LAMBDA","Id":"__Id__","Name":"__Name__","Type":"LISTED"}

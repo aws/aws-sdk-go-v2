@@ -4,6 +4,8 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,21 @@ type GetUploadJobPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUploadJobPathInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUploadJobPathRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUploadJobPathInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetUploadJobPathRequest_DomainName, *v.DomainName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetUploadJobPathRequest_JobId, *v.JobId)
+	}
+}
+
 type GetUploadJobPathOutput struct {
 
 	// The pre-signed S3 URL for uploading the CSV file associated with the upload
@@ -71,13 +88,44 @@ type GetUploadJobPathOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUploadJobPathOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUploadJobPathResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUploadJobPathOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.GetUploadJobPathResponse_ClientToken, *v.ClientToken)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GetUploadJobPathResponse_Url, *v.Url)
+	}
+	if v.ValidUntil != nil {
+		s.WriteTime(schemas.GetUploadJobPathResponse_ValidUntil, *v.ValidUntil)
+	}
+}
+func (v *GetUploadJobPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUploadJobPathResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUploadJobPathResponse_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.GetUploadJobPathResponse_ClientToken, v.ClientToken)
+		case schemas.GetUploadJobPathResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GetUploadJobPathResponse_Url, v.Url)
+		case schemas.GetUploadJobPathResponse_ValidUntil:
+			v.ValidUntil = new(time.Time)
+			return d.ReadTime(schemas.GetUploadJobPathResponse_ValidUntil, v.ValidUntil)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUploadJobPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUploadJobPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUploadJobPath, schemas.GetUploadJobPathRequest, schemas.GetUploadJobPathResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUploadJobPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUploadJobPath, schemas.GetUploadJobPathRequest, schemas.GetUploadJobPathResponse), output: &GetUploadJobPathOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

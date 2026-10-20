@@ -5,7 +5,9 @@ package bedrockdataautomation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,36 @@ type CreateBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBlueprintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBlueprintRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintName != nil {
+		s.WriteString(schemas.CreateBlueprintRequest_blueprintName, *v.BlueprintName)
+	}
+	if v.BlueprintStage != "" {
+		s.WriteString(schemas.CreateBlueprintRequest_blueprintStage, string(v.BlueprintStage))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBlueprintRequest_clientToken, *v.ClientToken)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateBlueprintRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.CreateBlueprintRequest_schema, *v.Schema)
+	}
+	serializeTagList(s, schemas.CreateBlueprintRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateBlueprintRequest_type, string(v.Type))
+	}
+}
+
 // Create Blueprint Response
 type CreateBlueprintOutput struct {
 
@@ -72,13 +104,34 @@ type CreateBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBlueprintOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBlueprintResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBlueprintOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blueprint != nil {
+		s.WriteStruct(schemas.CreateBlueprintResponse_blueprint)
+		v.Blueprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBlueprintResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBlueprintResponse_blueprint:
+			v.Blueprint = &types.Blueprint{}
+			return v.Blueprint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBlueprint, schemas.CreateBlueprintRequest, schemas.CreateBlueprintResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBlueprint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBlueprint, schemas.CreateBlueprintRequest, schemas.CreateBlueprintResponse), output: &CreateBlueprintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

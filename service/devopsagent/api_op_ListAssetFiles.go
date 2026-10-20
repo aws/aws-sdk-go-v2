@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,30 @@ type ListAssetFilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetFilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetFilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetFilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListAssetFilesRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.ListAssetFilesRequest_assetId, *v.AssetId)
+	}
+	if v.AssetVersion != nil {
+		s.WriteInt32(schemas.ListAssetFilesRequest_assetVersion, *v.AssetVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetFilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetFilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Response structure for listing asset files
 type ListAssetFilesOutput struct {
 
@@ -70,13 +96,35 @@ type ListAssetFilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetFilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetFilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetFilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetFileSummaryList(s, schemas.ListAssetFilesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetFilesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetFilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetFilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetFilesResponse_items:
+			return deserializeAssetFileSummaryList(d, schemas.ListAssetFilesResponse_items, &v.Items)
+		case schemas.ListAssetFilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetFilesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetFilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetFiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetFiles, schemas.ListAssetFilesRequest, schemas.ListAssetFilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetFiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetFiles, schemas.ListAssetFilesRequest, schemas.ListAssetFilesResponse), output: &ListAssetFilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

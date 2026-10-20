@@ -4,7 +4,9 @@ package cleanroomsml
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,35 @@ type StartTrainedModelExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTrainedModelExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTrainedModelExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTrainedModelExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.StartTrainedModelExportJobRequest_description, *v.Description)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.StartTrainedModelExportJobRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartTrainedModelExportJobRequest_name, *v.Name)
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.StartTrainedModelExportJobRequest_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.StartTrainedModelExportJobRequest_trainedModelArn, *v.TrainedModelArn)
+	}
+	if v.TrainedModelVersionIdentifier != nil {
+		s.WriteString(schemas.StartTrainedModelExportJobRequest_trainedModelVersionIdentifier, *v.TrainedModelVersionIdentifier)
+	}
+}
+
 type StartTrainedModelExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +95,26 @@ type StartTrainedModelExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTrainedModelExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTrainedModelExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartTrainedModelExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTrainedModelExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTrainedModelExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTrainedModelExportJob, schemas.StartTrainedModelExportJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTrainedModelExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTrainedModelExportJob, schemas.StartTrainedModelExportJobRequest, nil), output: &StartTrainedModelExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

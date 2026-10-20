@@ -4,6 +4,8 @@ package databrew
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,23 @@ type CreateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CronExpression != nil {
+		s.WriteString(schemas.CreateScheduleRequest_CronExpression, *v.CronExpression)
+	}
+	serializeJobNameList(s, schemas.CreateScheduleRequest_JobNames, v.JobNames)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateScheduleRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateScheduleRequest_Tags, v.Tags)
+}
+
 type CreateScheduleOutput struct {
 
 	// The name of the schedule that was created.
@@ -62,13 +81,32 @@ type CreateScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateScheduleResponse_Name, *v.Name)
+	}
+}
+func (v *CreateScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateScheduleResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateScheduleResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchedule, schemas.CreateScheduleRequest, schemas.CreateScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchedule, schemas.CreateScheduleRequest, schemas.CreateScheduleResponse), output: &CreateScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

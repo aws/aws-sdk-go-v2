@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,37 @@ type StartPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipelineExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartPipelineExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.ExecutionEnvironmentVariableOverrides != nil {
+		s.WriteStruct(schemas.StartPipelineExecutionRequest_executionEnvironmentVariableOverrides)
+		v.ExecutionEnvironmentVariableOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionMountOverrides != nil {
+		s.WriteStruct(schemas.StartPipelineExecutionRequest_executionMountOverrides)
+		v.ExecutionMountOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionPriority != nil {
+		s.WriteInt32(schemas.StartPipelineExecutionRequest_executionPriority, *v.ExecutionPriority)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.StartPipelineExecutionRequest_pipelineName, *v.PipelineName)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.StartPipelineExecutionRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for StartPipelineExecution operation.
 type StartPipelineExecutionOutput struct {
 
@@ -86,13 +119,32 @@ type StartPipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipelineExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.StartPipelineExecutionResponse_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *StartPipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPipelineExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPipelineExecutionResponse_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.StartPipelineExecutionResponse_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipelineExecution, schemas.StartPipelineExecutionRequest, schemas.StartPipelineExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipelineExecution, schemas.StartPipelineExecutionRequest, schemas.StartPipelineExecutionResponse), output: &StartPipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

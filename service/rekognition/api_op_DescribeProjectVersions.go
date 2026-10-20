@@ -5,7 +5,9 @@ package rekognition
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -64,6 +66,25 @@ type DescribeProjectVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProjectVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProjectVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProjectVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeProjectVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProjectVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.DescribeProjectVersionsRequest_ProjectArn, *v.ProjectArn)
+	}
+	serializeVersionNames(s, schemas.DescribeProjectVersionsRequest_VersionNames, v.VersionNames)
+}
+
 type DescribeProjectVersionsOutput struct {
 
 	// If the previous response was incomplete (because there is more results to
@@ -81,13 +102,35 @@ type DescribeProjectVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProjectVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProjectVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProjectVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProjectVersionsResponse_NextToken, *v.NextToken)
+	}
+	serializeProjectVersionDescriptions(s, schemas.DescribeProjectVersionsResponse_ProjectVersionDescriptions, v.ProjectVersionDescriptions)
+}
+func (v *DescribeProjectVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProjectVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProjectVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeProjectVersionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeProjectVersionsResponse_ProjectVersionDescriptions:
+			return deserializeProjectVersionDescriptions(d, schemas.DescribeProjectVersionsResponse_ProjectVersionDescriptions, &v.ProjectVersionDescriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProjectVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProjectVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProjectVersions, schemas.DescribeProjectVersionsRequest, schemas.DescribeProjectVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProjectVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProjectVersions, schemas.DescribeProjectVersionsRequest, schemas.DescribeProjectVersionsResponse), output: &DescribeProjectVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

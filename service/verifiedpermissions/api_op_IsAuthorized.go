@@ -4,7 +4,9 @@ package verifiedpermissions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,35 @@ type IsAuthorizedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IsAuthorizedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsAuthorizedInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsAuthorizedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.IsAuthorizedInput_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContextDefinition(s, schemas.IsAuthorizedInput_context, v.Context)
+	serializeEntitiesDefinition(s, schemas.IsAuthorizedInput_entities, v.Entities)
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.IsAuthorizedInput_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.IsAuthorizedInput_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.IsAuthorizedInput_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type IsAuthorizedOutput struct {
 
 	// An authorization decision that indicates if the authorization request should be
@@ -105,13 +136,42 @@ type IsAuthorizedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IsAuthorizedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsAuthorizedOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsAuthorizedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Decision != "" {
+		s.WriteString(schemas.IsAuthorizedOutput_decision, string(v.Decision))
+	}
+	serializeDeterminingPolicyList(s, schemas.IsAuthorizedOutput_determiningPolicies, v.DeterminingPolicies)
+	serializeEvaluationErrorList(s, schemas.IsAuthorizedOutput_errors, v.Errors)
+}
+func (v *IsAuthorizedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IsAuthorizedOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IsAuthorizedOutput_decision:
+			var ev string
+			if err := d.ReadString(schemas.IsAuthorizedOutput_decision, &ev); err != nil {
+				return err
+			}
+			v.Decision = types.Decision(ev)
+			return nil
+		case schemas.IsAuthorizedOutput_determiningPolicies:
+			return deserializeDeterminingPolicyList(d, schemas.IsAuthorizedOutput_determiningPolicies, &v.DeterminingPolicies)
+		case schemas.IsAuthorizedOutput_errors:
+			return deserializeEvaluationErrorList(d, schemas.IsAuthorizedOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIsAuthorizedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpIsAuthorized{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsAuthorized, schemas.IsAuthorizedInput, schemas.IsAuthorizedOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpIsAuthorized{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsAuthorized, schemas.IsAuthorizedInput, schemas.IsAuthorizedOutput), output: &IsAuthorizedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

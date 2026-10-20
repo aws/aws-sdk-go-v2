@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type ListPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelinesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPipelinesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelinesRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.ListPipelinesRequest_workspaceName, *v.WorkspaceName)
+	}
+}
+
 // Response structure for ListPipelines operation.
 type ListPipelinesOutput struct {
 
@@ -62,13 +82,35 @@ type ListPipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelinesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelinesResponse_nextToken, *v.NextToken)
+	}
+	serializePipelineSummaries(s, schemas.ListPipelinesResponse_pipelineSummaries, v.PipelineSummaries)
+}
+func (v *ListPipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipelinesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipelinesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipelinesResponse_nextToken, v.NextToken)
+		case schemas.ListPipelinesResponse_pipelineSummaries:
+			return deserializePipelineSummaries(d, schemas.ListPipelinesResponse_pipelineSummaries, &v.PipelineSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPipelines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelines, schemas.ListPipelinesRequest, schemas.ListPipelinesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPipelines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelines, schemas.ListPipelinesRequest, schemas.ListPipelinesResponse), output: &ListPipelinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

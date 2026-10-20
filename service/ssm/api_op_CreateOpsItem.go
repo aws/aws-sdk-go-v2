@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -164,6 +166,55 @@ type CreateOpsItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOpsItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOpsItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOpsItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CreateOpsItemRequest_AccountId, *v.AccountId)
+	}
+	if v.ActualEndTime != nil {
+		s.WriteTime(schemas.CreateOpsItemRequest_ActualEndTime, *v.ActualEndTime)
+	}
+	if v.ActualStartTime != nil {
+		s.WriteTime(schemas.CreateOpsItemRequest_ActualStartTime, *v.ActualStartTime)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.CreateOpsItemRequest_Category, *v.Category)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateOpsItemRequest_Description, *v.Description)
+	}
+	serializeOpsItemNotifications(s, schemas.CreateOpsItemRequest_Notifications, v.Notifications)
+	serializeOpsItemOperationalData(s, schemas.CreateOpsItemRequest_OperationalData, v.OperationalData)
+	if v.OpsItemType != nil {
+		s.WriteString(schemas.CreateOpsItemRequest_OpsItemType, *v.OpsItemType)
+	}
+	if v.PlannedEndTime != nil {
+		s.WriteTime(schemas.CreateOpsItemRequest_PlannedEndTime, *v.PlannedEndTime)
+	}
+	if v.PlannedStartTime != nil {
+		s.WriteTime(schemas.CreateOpsItemRequest_PlannedStartTime, *v.PlannedStartTime)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateOpsItemRequest_Priority, *v.Priority)
+	}
+	serializeRelatedOpsItems(s, schemas.CreateOpsItemRequest_RelatedOpsItems, v.RelatedOpsItems)
+	if v.Severity != nil {
+		s.WriteString(schemas.CreateOpsItemRequest_Severity, *v.Severity)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.CreateOpsItemRequest_Source, *v.Source)
+	}
+	serializeTagList(s, schemas.CreateOpsItemRequest_Tags, v.Tags)
+	if v.Title != nil {
+		s.WriteString(schemas.CreateOpsItemRequest_Title, *v.Title)
+	}
+}
+
 type CreateOpsItemOutput struct {
 
 	// The OpsItem Amazon Resource Name (ARN).
@@ -178,13 +229,38 @@ type CreateOpsItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOpsItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOpsItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOpsItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OpsItemArn != nil {
+		s.WriteString(schemas.CreateOpsItemResponse_OpsItemArn, *v.OpsItemArn)
+	}
+	if v.OpsItemId != nil {
+		s.WriteString(schemas.CreateOpsItemResponse_OpsItemId, *v.OpsItemId)
+	}
+}
+func (v *CreateOpsItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOpsItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOpsItemResponse_OpsItemArn:
+			v.OpsItemArn = new(string)
+			return d.ReadString(schemas.CreateOpsItemResponse_OpsItemArn, v.OpsItemArn)
+		case schemas.CreateOpsItemResponse_OpsItemId:
+			v.OpsItemId = new(string)
+			return d.ReadString(schemas.CreateOpsItemResponse_OpsItemId, v.OpsItemId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOpsItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOpsItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOpsItem, schemas.CreateOpsItemRequest, schemas.CreateOpsItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOpsItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOpsItem, schemas.CreateOpsItemRequest, schemas.CreateOpsItemResponse), output: &CreateOpsItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package kinesisvideo
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,26 @@ type ListSignalingChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalingChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalingChannelsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalingChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelNameCondition != nil {
+		s.WriteStruct(schemas.ListSignalingChannelsInput_ChannelNameCondition)
+		v.ChannelNameCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSignalingChannelsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalingChannelsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListSignalingChannelsOutput struct {
 
 	// An array of ChannelInfo objects.
@@ -58,13 +80,35 @@ type ListSignalingChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalingChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalingChannelsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalingChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannelInfoList(s, schemas.ListSignalingChannelsOutput_ChannelInfoList, v.ChannelInfoList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalingChannelsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSignalingChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSignalingChannelsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSignalingChannelsOutput_ChannelInfoList:
+			return deserializeChannelInfoList(d, schemas.ListSignalingChannelsOutput_ChannelInfoList, &v.ChannelInfoList)
+		case schemas.ListSignalingChannelsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSignalingChannelsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSignalingChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSignalingChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalingChannels, schemas.ListSignalingChannelsInput, schemas.ListSignalingChannelsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSignalingChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalingChannels, schemas.ListSignalingChannelsInput, schemas.ListSignalingChannelsOutput), output: &ListSignalingChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ssm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,27 @@ type GetDocumentInput struct {
 	VersionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentFormat != "" {
+		s.WriteString(schemas.GetDocumentRequest_DocumentFormat, string(v.DocumentFormat))
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.GetDocumentRequest_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDocumentRequest_Name, *v.Name)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.GetDocumentRequest_VersionName, *v.VersionName)
+	}
 }
 
 type GetDocumentOutput struct {
@@ -112,13 +135,114 @@ type GetDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachmentContentList(s, schemas.GetDocumentResult_AttachmentsContent, v.AttachmentsContent)
+	if v.Content != nil {
+		s.WriteString(schemas.GetDocumentResult_Content, *v.Content)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetDocumentResult_CreatedDate, *v.CreatedDate)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetDocumentResult_DisplayName, *v.DisplayName)
+	}
+	if v.DocumentFormat != "" {
+		s.WriteString(schemas.GetDocumentResult_DocumentFormat, string(v.DocumentFormat))
+	}
+	if v.DocumentType != "" {
+		s.WriteString(schemas.GetDocumentResult_DocumentType, string(v.DocumentType))
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.GetDocumentResult_DocumentVersion, *v.DocumentVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDocumentResult_Name, *v.Name)
+	}
+	serializeDocumentRequiresList(s, schemas.GetDocumentResult_Requires, v.Requires)
+	if v.ReviewStatus != "" {
+		s.WriteString(schemas.GetDocumentResult_ReviewStatus, string(v.ReviewStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDocumentResult_Status, string(v.Status))
+	}
+	if v.StatusInformation != nil {
+		s.WriteString(schemas.GetDocumentResult_StatusInformation, *v.StatusInformation)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.GetDocumentResult_VersionName, *v.VersionName)
+	}
+}
+func (v *GetDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentResult_AttachmentsContent:
+			return deserializeAttachmentContentList(d, schemas.GetDocumentResult_AttachmentsContent, &v.AttachmentsContent)
+		case schemas.GetDocumentResult_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.GetDocumentResult_Content, v.Content)
+		case schemas.GetDocumentResult_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetDocumentResult_CreatedDate, v.CreatedDate)
+		case schemas.GetDocumentResult_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetDocumentResult_DisplayName, v.DisplayName)
+		case schemas.GetDocumentResult_DocumentFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetDocumentResult_DocumentFormat, &ev); err != nil {
+				return err
+			}
+			v.DocumentFormat = types.DocumentFormat(ev)
+			return nil
+		case schemas.GetDocumentResult_DocumentType:
+			var ev string
+			if err := d.ReadString(schemas.GetDocumentResult_DocumentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentType = types.DocumentType(ev)
+			return nil
+		case schemas.GetDocumentResult_DocumentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.GetDocumentResult_DocumentVersion, v.DocumentVersion)
+		case schemas.GetDocumentResult_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDocumentResult_Name, v.Name)
+		case schemas.GetDocumentResult_Requires:
+			return deserializeDocumentRequiresList(d, schemas.GetDocumentResult_Requires, &v.Requires)
+		case schemas.GetDocumentResult_ReviewStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetDocumentResult_ReviewStatus, &ev); err != nil {
+				return err
+			}
+			v.ReviewStatus = types.ReviewStatus(ev)
+			return nil
+		case schemas.GetDocumentResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDocumentResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DocumentStatus(ev)
+			return nil
+		case schemas.GetDocumentResult_StatusInformation:
+			v.StatusInformation = new(string)
+			return d.ReadString(schemas.GetDocumentResult_StatusInformation, v.StatusInformation)
+		case schemas.GetDocumentResult_VersionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.GetDocumentResult_VersionName, v.VersionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocument, schemas.GetDocumentRequest, schemas.GetDocumentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocument, schemas.GetDocumentRequest, schemas.GetDocumentResult), output: &GetDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

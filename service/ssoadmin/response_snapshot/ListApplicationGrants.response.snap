@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.ListApplicationGrants
+
+{"Grants":[{"Grant":{"AuthorizationCode":{"RedirectUris":["__Member__","__Member__"]}},"GrantType":"authorization_code"},{"Grant":{"AuthorizationCode":{"RedirectUris":["__Member__","__Member__"]}},"GrantType":"authorization_code"}],"NextToken":"__NextToken__"}

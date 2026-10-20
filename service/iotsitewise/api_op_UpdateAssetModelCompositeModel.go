@@ -5,7 +5,9 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -105,6 +107,43 @@ type UpdateAssetModelCompositeModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetModelCompositeModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetModelCompositeModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetModelCompositeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelCompositeModelDescription != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelDescription, *v.AssetModelCompositeModelDescription)
+	}
+	if v.AssetModelCompositeModelExternalId != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelExternalId, *v.AssetModelCompositeModelExternalId)
+	}
+	if v.AssetModelCompositeModelId != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelId, *v.AssetModelCompositeModelId)
+	}
+	if v.AssetModelCompositeModelName != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelName, *v.AssetModelCompositeModelName)
+	}
+	serializeAssetModelProperties(s, schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_clientToken, *v.ClientToken)
+	}
+	if v.IfMatch != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_ifMatch, *v.IfMatch)
+	}
+	if v.IfNoneMatch != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_ifNoneMatch, *v.IfNoneMatch)
+	}
+	if v.MatchForVersionType != "" {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_matchForVersionType, string(v.MatchForVersionType))
+	}
+}
+
 type UpdateAssetModelCompositeModelOutput struct {
 
 	// The path to the composite model listing the parent composite models.
@@ -129,13 +168,43 @@ type UpdateAssetModelCompositeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetModelCompositeModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetModelCompositeModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetModelCompositeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetModelCompositeModelPath(s, schemas.UpdateAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.UpdateAssetModelCompositeModelResponse_assetModelId, *v.AssetModelId)
+	}
+	if v.AssetModelStatus != nil {
+		s.WriteStruct(schemas.UpdateAssetModelCompositeModelResponse_assetModelStatus)
+		v.AssetModelStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssetModelCompositeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetModelCompositeModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetModelCompositeModelResponse_assetModelCompositeModelPath:
+			return deserializeAssetModelCompositeModelPath(d, schemas.UpdateAssetModelCompositeModelResponse_assetModelCompositeModelPath, &v.AssetModelCompositeModelPath)
+		case schemas.UpdateAssetModelCompositeModelResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.UpdateAssetModelCompositeModelResponse_assetModelId, v.AssetModelId)
+		case schemas.UpdateAssetModelCompositeModelResponse_assetModelStatus:
+			v.AssetModelStatus = &types.AssetModelStatus{}
+			return v.AssetModelStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetModelCompositeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssetModelCompositeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetModelCompositeModel, schemas.UpdateAssetModelCompositeModelRequest, schemas.UpdateAssetModelCompositeModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssetModelCompositeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssetModelCompositeModel, schemas.UpdateAssetModelCompositeModelRequest, schemas.UpdateAssetModelCompositeModelResponse), output: &UpdateAssetModelCompositeModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

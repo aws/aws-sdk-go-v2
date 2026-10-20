@@ -5,7 +5,9 @@ package devopsagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,23 @@ type AssociateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.AssociateServiceInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeAssociationCapabilities(s, schemas.AssociateServiceInput_capabilities, v.Capabilities)
+	serializeServiceConfiguration(s, schemas.AssociateServiceInput_configuration, v.Configuration)
+	if v.ServiceId != nil {
+		s.WriteString(schemas.AssociateServiceInput_serviceId, *v.ServiceId)
+	}
+}
+
 // Output containing the newly created association and optional webhook
 // configuration.
 type AssociateServiceOutput struct {
@@ -70,13 +89,42 @@ type AssociateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.AssociateServiceOutput_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Webhook != nil {
+		s.WriteStruct(schemas.AssociateServiceOutput_webhook)
+		v.Webhook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateServiceOutput_association:
+			v.Association = &types.Association{}
+			return v.Association.Deserialize(d)
+		case schemas.AssociateServiceOutput_webhook:
+			v.Webhook = &types.GenericWebhook{}
+			return v.Webhook.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateService, schemas.AssociateServiceInput, schemas.AssociateServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateService, schemas.AssociateServiceInput, schemas.AssociateServiceOutput), output: &AssociateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

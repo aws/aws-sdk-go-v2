@@ -5,7 +5,9 @@ package cleanroomsml
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type ListCollaborationTrainedModelExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationTrainedModelExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationTrainedModelExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationTrainedModelExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelExportJobsRequest_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollaborationTrainedModelExportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelExportJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelExportJobsRequest_trainedModelArn, *v.TrainedModelArn)
+	}
+	if v.TrainedModelVersionIdentifier != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelExportJobsRequest_trainedModelVersionIdentifier, *v.TrainedModelVersionIdentifier)
+	}
+}
+
 type ListCollaborationTrainedModelExportJobsOutput struct {
 
 	// The exports jobs that exist for the requested trained model in the requested
@@ -71,13 +97,35 @@ type ListCollaborationTrainedModelExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationTrainedModelExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationTrainedModelExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationTrainedModelExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollaborationTrainedModelExportJobList(s, schemas.ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs, v.CollaborationTrainedModelExportJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationTrainedModelExportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollaborationTrainedModelExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollaborationTrainedModelExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs:
+			return deserializeCollaborationTrainedModelExportJobList(d, schemas.ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs, &v.CollaborationTrainedModelExportJobs)
+		case schemas.ListCollaborationTrainedModelExportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollaborationTrainedModelExportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollaborationTrainedModelExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollaborationTrainedModelExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationTrainedModelExportJobs, schemas.ListCollaborationTrainedModelExportJobsRequest, schemas.ListCollaborationTrainedModelExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollaborationTrainedModelExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationTrainedModelExportJobs, schemas.ListCollaborationTrainedModelExportJobsRequest, schemas.ListCollaborationTrainedModelExportJobsResponse), output: &ListCollaborationTrainedModelExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

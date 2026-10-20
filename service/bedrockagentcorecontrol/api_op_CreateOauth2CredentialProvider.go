@@ -4,7 +4,9 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,23 @@ type CreateOauth2CredentialProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOauth2CredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOauth2CredentialProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOauth2CredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialProviderVendor != "" {
+		s.WriteString(schemas.CreateOauth2CredentialProviderRequest_credentialProviderVendor, string(v.CredentialProviderVendor))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOauth2CredentialProviderRequest_name, *v.Name)
+	}
+	serializeOauth2ProviderConfigInput(s, schemas.CreateOauth2CredentialProviderRequest_oauth2ProviderConfigInput, v.Oauth2ProviderConfigInput)
+	serializeTagsMap(s, schemas.CreateOauth2CredentialProviderRequest_tags, v.Tags)
+}
+
 type CreateOauth2CredentialProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the client secret in Amazon Web Services
@@ -96,13 +115,81 @@ type CreateOauth2CredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOauth2CredentialProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOauth2CredentialProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOauth2CredentialProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallbackUrl != nil {
+		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_callbackUrl, *v.CallbackUrl)
+	}
+	if v.ClientSecretArn != nil {
+		s.WriteStruct(schemas.CreateOauth2CredentialProviderResponse_clientSecretArn)
+		v.ClientSecretArn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientSecretJsonKey != nil {
+		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_clientSecretJsonKey, *v.ClientSecretJsonKey)
+	}
+	if v.ClientSecretSource != "" {
+		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_clientSecretSource, string(v.ClientSecretSource))
+	}
+	if v.CredentialProviderArn != nil {
+		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_credentialProviderArn, *v.CredentialProviderArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_name, *v.Name)
+	}
+	serializeOauth2ProviderConfigOutput(s, schemas.CreateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, v.Oauth2ProviderConfigOutput)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_status, string(v.Status))
+	}
+}
+func (v *CreateOauth2CredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOauth2CredentialProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOauth2CredentialProviderResponse_callbackUrl:
+			v.CallbackUrl = new(string)
+			return d.ReadString(schemas.CreateOauth2CredentialProviderResponse_callbackUrl, v.CallbackUrl)
+		case schemas.CreateOauth2CredentialProviderResponse_clientSecretArn:
+			v.ClientSecretArn = &types.Secret{}
+			return v.ClientSecretArn.Deserialize(d)
+		case schemas.CreateOauth2CredentialProviderResponse_clientSecretJsonKey:
+			v.ClientSecretJsonKey = new(string)
+			return d.ReadString(schemas.CreateOauth2CredentialProviderResponse_clientSecretJsonKey, v.ClientSecretJsonKey)
+		case schemas.CreateOauth2CredentialProviderResponse_clientSecretSource:
+			var ev string
+			if err := d.ReadString(schemas.CreateOauth2CredentialProviderResponse_clientSecretSource, &ev); err != nil {
+				return err
+			}
+			v.ClientSecretSource = types.SecretSourceType(ev)
+			return nil
+		case schemas.CreateOauth2CredentialProviderResponse_credentialProviderArn:
+			v.CredentialProviderArn = new(string)
+			return d.ReadString(schemas.CreateOauth2CredentialProviderResponse_credentialProviderArn, v.CredentialProviderArn)
+		case schemas.CreateOauth2CredentialProviderResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateOauth2CredentialProviderResponse_name, v.Name)
+		case schemas.CreateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput:
+			return deserializeOauth2ProviderConfigOutput(d, schemas.CreateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, &v.Oauth2ProviderConfigOutput)
+		case schemas.CreateOauth2CredentialProviderResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateOauth2CredentialProviderResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOauth2CredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOauth2CredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOauth2CredentialProvider, schemas.CreateOauth2CredentialProviderRequest, schemas.CreateOauth2CredentialProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOauth2CredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOauth2CredentialProvider, schemas.CreateOauth2CredentialProviderRequest, schemas.CreateOauth2CredentialProviderResponse), output: &CreateOauth2CredentialProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type ListObjectTypeAttributeValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectTypeAttributeValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectTypeAttributeValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectTypeAttributeValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ListObjectTypeAttributeValuesRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListObjectTypeAttributeValuesRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListObjectTypeAttributeValuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectTypeAttributeValuesRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.ListObjectTypeAttributeValuesRequest_ObjectTypeName, *v.ObjectTypeName)
+	}
+}
+
 type ListObjectTypeAttributeValuesOutput struct {
 
 	// A list of unique attribute values sorted on the basis of LastUpdatedAt.
@@ -71,13 +97,35 @@ type ListObjectTypeAttributeValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectTypeAttributeValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectTypeAttributeValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectTypeAttributeValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListObjectTypeAttributeValuesList(s, schemas.ListObjectTypeAttributeValuesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectTypeAttributeValuesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListObjectTypeAttributeValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListObjectTypeAttributeValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListObjectTypeAttributeValuesResponse_Items:
+			return deserializeListObjectTypeAttributeValuesList(d, schemas.ListObjectTypeAttributeValuesResponse_Items, &v.Items)
+		case schemas.ListObjectTypeAttributeValuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListObjectTypeAttributeValuesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListObjectTypeAttributeValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectTypeAttributeValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectTypeAttributeValues, schemas.ListObjectTypeAttributeValuesRequest, schemas.ListObjectTypeAttributeValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectTypeAttributeValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectTypeAttributeValues, schemas.ListObjectTypeAttributeValuesRequest, schemas.ListObjectTypeAttributeValuesResponse), output: &ListObjectTypeAttributeValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

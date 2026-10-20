@@ -1,0 +1,5 @@
+409
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.CreateContact
+
+{"__type":"ConflictException","DependentEntities":[{"DependentResourceIds":["__Member__","__Member__"],"RelationType":"__RelationType__"},{"DependentResourceIds":["__Member__","__Member__"],"RelationType":"__RelationType__"}],"Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

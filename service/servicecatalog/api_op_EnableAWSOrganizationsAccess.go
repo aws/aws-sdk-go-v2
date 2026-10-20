@@ -4,6 +4,8 @@ package servicecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,15 @@ type EnableAWSOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAWSOrganizationsAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableAWSOrganizationsAccessInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAWSOrganizationsAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type EnableAWSOrganizationsAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +65,26 @@ type EnableAWSOrganizationsAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAWSOrganizationsAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableAWSOrganizationsAccessOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAWSOrganizationsAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableAWSOrganizationsAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableAWSOrganizationsAccessOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableAWSOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableAWSOrganizationsAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAWSOrganizationsAccess, schemas.EnableAWSOrganizationsAccessInput, schemas.EnableAWSOrganizationsAccessOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableAWSOrganizationsAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAWSOrganizationsAccess, schemas.EnableAWSOrganizationsAccessInput, schemas.EnableAWSOrganizationsAccessOutput), output: &EnableAWSOrganizationsAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

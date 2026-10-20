@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","PolicyToPathList":[{"Path":"__Path__","Policies":[{"ObjectIdentifier":"__ObjectIdentifier__","PolicyId":"__PolicyId__","PolicyType":"__PolicyType__"},{"ObjectIdentifier":"__ObjectIdentifier__","PolicyId":"__PolicyId__","PolicyType":"__PolicyType__"}]},{"Path":"__Path__","Policies":[{"ObjectIdentifier":"__ObjectIdentifier__","PolicyId":"__PolicyId__","PolicyType":"__PolicyType__"},{"ObjectIdentifier":"__ObjectIdentifier__","PolicyId":"__PolicyId__","PolicyType":"__PolicyType__"}]}]}

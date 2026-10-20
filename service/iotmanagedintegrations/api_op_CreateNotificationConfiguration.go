@@ -5,7 +5,9 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type CreateNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotificationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateNotificationConfigurationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.CreateNotificationConfigurationRequest_DestinationName, *v.DestinationName)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.CreateNotificationConfigurationRequest_EventType, string(v.EventType))
+	}
+	serializeTagsMap(s, schemas.CreateNotificationConfigurationRequest_Tags, v.Tags)
+}
+
 type CreateNotificationConfigurationOutput struct {
 
 	// The type of event triggering a device notification to the customer-managed
@@ -64,13 +85,36 @@ type CreateNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotificationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventType != "" {
+		s.WriteString(schemas.CreateNotificationConfigurationResponse_EventType, string(v.EventType))
+	}
+}
+func (v *CreateNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotificationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotificationConfigurationResponse_EventType:
+			var ev string
+			if err := d.ReadString(schemas.CreateNotificationConfigurationResponse_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = types.EventType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotificationConfiguration, schemas.CreateNotificationConfigurationRequest, schemas.CreateNotificationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotificationConfiguration, schemas.CreateNotificationConfigurationRequest, schemas.CreateNotificationConfigurationResponse), output: &CreateNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

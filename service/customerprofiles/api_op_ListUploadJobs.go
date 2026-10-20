@@ -5,7 +5,9 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListUploadJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUploadJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUploadJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUploadJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListUploadJobsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUploadJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUploadJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListUploadJobsOutput struct {
 
 	// The list of upload jobs for the specified domain.
@@ -56,13 +76,35 @@ type ListUploadJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUploadJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUploadJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUploadJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUploadJobsList(s, schemas.ListUploadJobsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUploadJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListUploadJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUploadJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUploadJobsResponse_Items:
+			return deserializeUploadJobsList(d, schemas.ListUploadJobsResponse_Items, &v.Items)
+		case schemas.ListUploadJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUploadJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUploadJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUploadJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUploadJobs, schemas.ListUploadJobsRequest, schemas.ListUploadJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUploadJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUploadJobs, schemas.ListUploadJobsRequest, schemas.ListUploadJobsResponse), output: &ListUploadJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

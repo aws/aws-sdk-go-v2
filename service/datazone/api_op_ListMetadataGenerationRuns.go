@@ -5,7 +5,9 @@ package datazone
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,33 @@ type ListMetadataGenerationRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetadataGenerationRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetadataGenerationRunsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetadataGenerationRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListMetadataGenerationRunsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMetadataGenerationRunsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetadataGenerationRunsInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMetadataGenerationRunsInput_status, string(v.Status))
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.ListMetadataGenerationRunsInput_targetIdentifier, *v.TargetIdentifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListMetadataGenerationRunsInput_type, string(v.Type))
+	}
+}
+
 type ListMetadataGenerationRunsOutput struct {
 
 	// The results of the ListMetadataGenerationRuns action.
@@ -93,13 +122,35 @@ type ListMetadataGenerationRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetadataGenerationRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetadataGenerationRunsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetadataGenerationRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadataGenerationRuns(s, schemas.ListMetadataGenerationRunsOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetadataGenerationRunsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMetadataGenerationRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetadataGenerationRunsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetadataGenerationRunsOutput_items:
+			return deserializeMetadataGenerationRuns(d, schemas.ListMetadataGenerationRunsOutput_items, &v.Items)
+		case schemas.ListMetadataGenerationRunsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetadataGenerationRunsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetadataGenerationRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMetadataGenerationRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetadataGenerationRuns, schemas.ListMetadataGenerationRunsInput, schemas.ListMetadataGenerationRunsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMetadataGenerationRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetadataGenerationRuns, schemas.ListMetadataGenerationRunsInput, schemas.ListMetadataGenerationRunsOutput), output: &ListMetadataGenerationRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

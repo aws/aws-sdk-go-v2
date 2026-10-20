@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Results":[{"BackupCreationTime":946684800,"BackupResourceArn":"__BackupResourceArn__","IndexCreationTime":946684800,"ResourceType":"S3","SourceResourceArn":"__SourceResourceArn__","Status":"RUNNING","StatusMessage":"__StatusMessage__"},{"BackupCreationTime":946684800,"BackupResourceArn":"__BackupResourceArn__","IndexCreationTime":946684800,"ResourceType":"S3","SourceResourceArn":"__SourceResourceArn__","Status":"RUNNING","StatusMessage":"__StatusMessage__"}]}

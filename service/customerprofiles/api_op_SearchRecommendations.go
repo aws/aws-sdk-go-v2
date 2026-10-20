@@ -4,7 +4,9 @@ package customerprofiles
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,42 @@ type SearchRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCandidateIdList(s, schemas.SearchRecommendationsRequest_CandidateIds, v.CandidateIds)
+	serializeRecommenderContext(s, schemas.SearchRecommendationsRequest_Context, v.Context)
+	if v.Diversity != nil {
+		s.WriteStruct(schemas.SearchRecommendationsRequest_Diversity)
+		v.Diversity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.SearchRecommendationsRequest_DomainName, *v.DomainName)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.SearchRecommendationsRequest_KeyName, *v.KeyName)
+	}
+	serializeKeyValuesList(s, schemas.SearchRecommendationsRequest_KeyValues, v.KeyValues)
+	if v.MaxRecommendations != nil {
+		s.WriteInt32(schemas.SearchRecommendationsRequest_MaxRecommendations, *v.MaxRecommendations)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.SearchRecommendationsRequest_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Recommender != nil {
+		s.WriteStruct(schemas.SearchRecommendationsRequest_Recommender)
+		v.Recommender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchRecommendationsOutput struct {
 
 	// The unique identifier of the profile for which to retrieve recommendations.
@@ -92,13 +130,35 @@ type SearchRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.SearchRecommendationsResponse_ProfileId, *v.ProfileId)
+	}
+	serializeRecommendations(s, schemas.SearchRecommendationsResponse_Recommendations, v.Recommendations)
+}
+func (v *SearchRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchRecommendationsResponse_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.SearchRecommendationsResponse_ProfileId, v.ProfileId)
+		case schemas.SearchRecommendationsResponse_Recommendations:
+			return deserializeRecommendations(d, schemas.SearchRecommendationsResponse_Recommendations, &v.Recommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRecommendations, schemas.SearchRecommendationsRequest, schemas.SearchRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRecommendations, schemas.SearchRecommendationsRequest, schemas.SearchRecommendationsResponse), output: &SearchRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
