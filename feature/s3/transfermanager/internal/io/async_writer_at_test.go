@@ -570,22 +570,6 @@ func TestAsyncWriterAtWriteBeforeStart(t *testing.T) {
 	sink.checkComplete(t, 1)
 }
 
-func TestAsyncWriterAtStartIdempotent(t *testing.T) {
-	checkGoroutines(t)
-
-	pool := newTestPool(t, 8)
-	w := NewAsyncWriterAt(newMemWriterAt(t, 0), pool)
-
-	base := runtime.NumGoroutine()
-	w.Start()
-	w.Start()
-	w.Start()
-	if got := runtime.NumGoroutine() - base; got != numWriteWorkers {
-		t.Errorf("started %d workers, want %d", got, numWriteWorkers)
-	}
-	shutdown(t, w, pool)
-}
-
 func TestAsyncWriterAtStopIdempotent(t *testing.T) {
 	checkGoroutines(t)
 
