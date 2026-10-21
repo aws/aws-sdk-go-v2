@@ -186,6 +186,56 @@
                 "target": "com.amazonaws.autoscaling#AcceleratorType"
             }
         },
+        "com.amazonaws.autoscaling#AccountSetting": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the account setting. Each account setting has a unique name that identifies the specific feature it controls.\n        </p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The current value of the account setting.\n        </p>"
+                    }
+                },
+                "EnforcementType": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The type of enforcement for the account setting. Valid values include: <code>hard</code> (the setting has a hard enforcement date after which the setting will be enforced and cannot be modified), <code>flexible</code> (the setting has a flexible enforcement where you can always modify the setting value), and <code>none</code> (the setting has no enforcement and can always be modified).\n        </p>"
+                    }
+                },
+                "EnforcementDate": {
+                    "target": "com.amazonaws.autoscaling#TimestampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date when the account setting will be enforced. After this date, for settings with hard enforcement type, you can no longer modify the setting value. This parameter is only returned for settings with hard or flexible enforcement types.\n        </p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The default value of the account setting before the enforcement date. Valid values are enabled and disabled. This parameter is only returned for settings with hard or flexible enforcement types.\n        </p>"
+                    }
+                },
+                "EnforcedValue": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The value that will be enforced after the enforcement date. Valid values are enabled and disabled. This parameter is only returned for settings with hard or flexible enforcement types.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes an account setting for Amazon EC2 Auto Scaling. Account settings control how certain features behave for your account. Some settings can be enforced after a specified date, meaning that after the enforcement date, you can no longer modify the setting.\n        </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#AccountSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#AccountSetting"
+            }
+        },
         "com.amazonaws.autoscaling#ActiveInstanceRefreshNotFoundFault": {
             "type": "structure",
             "members": {
@@ -1264,6 +1314,9 @@
                     "target": "com.amazonaws.autoscaling#DescribeAccountLimits"
                 },
                 {
+                    "target": "com.amazonaws.autoscaling#DescribeAccountSettings"
+                },
+                {
                     "target": "com.amazonaws.autoscaling#DescribeAdjustmentTypes"
                 },
                 {
@@ -1355,6 +1408,9 @@
                 },
                 {
                     "target": "com.amazonaws.autoscaling#LaunchInstances"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#PutAccountSetting"
                 },
                 {
                     "target": "com.amazonaws.autoscaling#PutLifecycleHook"
@@ -4411,6 +4467,63 @@
                     "target": "com.amazonaws.autoscaling#NumberOfLaunchConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The current number of launch configurations for your account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#DescribeAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscaling#DescribeAccountSettingsType"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscaling#DescribeAccountSettingsAnswer"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscaling#InvalidNextToken"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes the current Amazon EC2 Auto Scaling account settings for your account. Account settings are a framework that allows you to enable or disable features for your account. The framework also gives you visibility into features that will be enforced by a given date, providing a time window to prepare for backwards-incompatible changes.\n        </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#DescribeAccountSettingsAnswer": {
+            "type": "structure",
+            "members": {
+                "Settings": {
+                    "target": "com.amazonaws.autoscaling#AccountSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information about the account settings.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the <code>NextToken</code> value when requesting the next set of items. This value is <code>null</code> when there are no more items to return.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#DescribeAccountSettingsType": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the account setting to describe. If you omit this parameter, all account settings are described.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The token for the next set of items to return. (You received this token from a previous call.)\n        </p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.autoscaling#MaxRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.\n        </p>"
                     }
                 }
             }
@@ -9768,6 +9881,43 @@
         },
         "com.amazonaws.autoscaling#ProtectedFromScaleIn": {
             "type": "boolean"
+        },
+        "com.amazonaws.autoscaling#PutAccountSetting": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscaling#PutAccountSettingType"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscaling#PutAccountSettingAnswer"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Modifies an account setting for your account. You can use this operation to opt in or opt out of features provided through account settings when permitted. Account settings give you control over features that might have backwards-incompatible changes. When Amazon EC2 Auto Scaling introduces such changes, account settings allow you to test and adopt new features. Some account settings are enforced after a specified date. This means that after the enforcement date, you can no longer modify the setting.\n        </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#PutAccountSettingAnswer": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.autoscaling#PutAccountSettingType": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The name of the account setting to modify. Each account setting has a unique name that identifies the specific feature it controls.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.autoscaling#AsciiStringMaxLen255",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The value for the account setting.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
         },
         "com.amazonaws.autoscaling#PutLifecycleHook": {
             "type": "operation",

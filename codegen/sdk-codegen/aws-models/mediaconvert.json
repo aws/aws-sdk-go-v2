@@ -2587,6 +2587,12 @@
         "com.amazonaws.mediaconvert#Av1RateControlMode": {
             "type": "enum",
             "members": {
+                "CBR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CBR"
+                    }
+                },
                 "QVBR": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -2595,7 +2601,33 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'"
+                "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports quality-defined variable bitrate (QVBR) and constant bitrate (CBR). You can''t use VBR.'"
+            }
+        },
+        "com.amazonaws.mediaconvert#Av1SceneChangeDetect": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "TRANSITION_DETECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSITION_DETECTION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Optional. Use this setting to have the service insert I-frames at scene changes that it automatically detects. For AV1, scene change detection is disabled by default. Choose Enabled to insert I-frames at detected scene changes, which can improve video quality. If this output uses QVBR, you can instead choose Transition detection for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr."
             }
         },
         "com.amazonaws.mediaconvert#Av1Settings": {
@@ -2613,6 +2645,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the Bit depth. You can choose 8-bit or 10-bit.",
                         "smithy.api#jsonName": "bitDepth"
+                    }
+                },
+                "Bitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1152000000",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the average bitrate in bits per second. Required when Rate control mode is CBR.",
+                        "smithy.api#jsonName": "bitrate"
                     }
                 },
                 "FilmGrainSynthesis": {
@@ -2681,15 +2720,22 @@
                 "QvbrSettings": {
                     "target": "com.amazonaws.mediaconvert#Av1QvbrSettings",
                     "traits": {
-                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode.",
+                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the AV1 codec. Use these settings only when you set QVBR for Rate control mode.",
                         "smithy.api#jsonName": "qvbrSettings"
                     }
                 },
                 "RateControlMode": {
                     "target": "com.amazonaws.mediaconvert#Av1RateControlMode",
                     "traits": {
-                        "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'",
+                        "smithy.api#documentation": "'With AV1 outputs, for rate control mode, MediaConvert supports quality-defined variable bitrate (QVBR) and constant bitrate (CBR). You can''t use VBR.'",
                         "smithy.api#jsonName": "rateControlMode"
+                    }
+                },
+                "SceneChangeDetect": {
+                    "target": "com.amazonaws.mediaconvert#Av1SceneChangeDetect",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Use this setting to have the service insert I-frames at scene changes that it automatically detects. For AV1, scene change detection is disabled by default. Choose Enabled to insert I-frames at detected scene changes, which can improve video quality. If this output uses QVBR, you can instead choose Transition detection for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.",
+                        "smithy.api#jsonName": "sceneChangeDetect"
                     }
                 },
                 "Slices": {
@@ -2697,6 +2743,20 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or 32. For progressive pictures, this value must be less than or equal to the number of macroblock rows. For interlaced pictures, this value must be less than or equal to half the number of macroblock rows.",
                         "smithy.api#jsonName": "slices"
+                    }
+                },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1152000000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the QVBR rate control mode. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
                     }
                 },
                 "SpatialAdaptiveQuantization": {
@@ -4496,6 +4556,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist generation.",
                         "smithy.api#jsonName": "codecSpecification"
+                    }
+                },
+                "DashAdaptationSetGrouping": {
+                    "target": "com.amazonaws.mediaconvert#__listOfDashAdaptationSetGrouping",
+                    "traits": {
+                        "smithy.api#documentation": "Specify additional criteria for partitioning video outputs into separate AdaptationSets. These criteria are applied on top of the grouping produced by DashManifestStyle.",
+                        "smithy.api#jsonName": "dashAdaptationSetGrouping"
                     }
                 },
                 "DashIFrameTrickPlayNameModifier": {
@@ -7129,6 +7196,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediaconvert#DashAdaptationSetGrouping": {
+            "type": "enum",
+            "members": {
+                "CODEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODEC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify additional criteria for partitioning video outputs into separate AdaptationSets. These criteria are applied on top of the grouping produced by DashManifestStyle."
+            }
+        },
         "com.amazonaws.mediaconvert#DashAdditionalManifest": {
             "type": "structure",
             "members": {
@@ -7215,6 +7296,13 @@
                     "traits": {
                         "smithy.api#documentation": "A partial URI prefix that will be put in the manifest (.mpd) file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.",
                         "smithy.api#jsonName": "baseUrl"
+                    }
+                },
+                "DashAdaptationSetGrouping": {
+                    "target": "com.amazonaws.mediaconvert#__listOfDashAdaptationSetGrouping",
+                    "traits": {
+                        "smithy.api#documentation": "Specify additional criteria for partitioning video outputs into separate AdaptationSets. These criteria are applied on top of the grouping produced by DashManifestStyle.",
+                        "smithy.api#jsonName": "dashAdaptationSetGrouping"
                     }
                 },
                 "DashIFrameTrickPlayNameModifier": {
@@ -12563,6 +12651,20 @@
                         "smithy.api#jsonName": "slices"
                     }
                 },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1152000000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the VBR, CBR, and QVBR rate control modes. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
+                    }
+                },
                 "SlowPal": {
                     "target": "com.amazonaws.mediaconvert#H264SlowPal",
                     "traits": {
@@ -13691,6 +13793,20 @@
                     "traits": {
                         "smithy.api#documentation": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.",
                         "smithy.api#jsonName": "slices"
+                    }
+                },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max1466400000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the VBR, CBR, and QVBR rate control modes. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
                     }
                 },
                 "SlowPal": {
@@ -22870,6 +22986,20 @@
                         "smithy.api#jsonName": "sceneChangeDetect"
                     }
                 },
+                "SlidingWindowMs": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max3000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the duration, in milliseconds, of the sliding window over which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate but omit this value, MediaConvert uses a default sliding window of 1000.",
+                        "smithy.api#jsonName": "slidingWindowMs"
+                    }
+                },
+                "SlidingWindowPeakBitrate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1000Max300000000",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that MediaConvert enforces over the sliding window set by Peak bitrate window. For example, enter fifty megabits per second as 50000000. Applies in the VBR and CBR rate control modes. When you specify a value below Max bitrate, MediaConvert raises it to Max bitrate.",
+                        "smithy.api#jsonName": "slidingWindowPeakBitrate"
+                    }
+                },
                 "SlowPal": {
                     "target": "com.amazonaws.mediaconvert#Mpeg2SlowPal",
                     "traits": {
@@ -23637,7 +23767,7 @@
                 "Filter": {
                     "target": "com.amazonaws.mediaconvert#NoiseReducerFilter",
                     "traits": {
-                        "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion.",
+                        "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion. * Perceptual exploits perceptual masking, avoiding encoding bits spent on imperceptible detail. * None disables noise reduction, including the perceptual filter that MediaConvert otherwise applies by default for AVC, HEVC, AV1, MPEG-2, VP8, and VP9 outputs. MediaConvert doesn't apply that default to mezzanine and archival outputs (AVC-Intra, XAVC, Apple ProRes, VC3, Uncompressed), to frame capture outputs, or to outputs that use Dolby Vision, which doesn't support any noise reducer.",
                         "smithy.api#jsonName": "filter"
                     }
                 },
@@ -23717,10 +23847,22 @@
                     "traits": {
                         "smithy.api#enumValue": "TEMPORAL"
                     }
+                },
+                "PERCEPTUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCEPTUAL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion."
+                "smithy.api#documentation": "Use Noise reducer filter to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer. * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion. * Perceptual exploits perceptual masking, avoiding encoding bits spent on imperceptible detail. * None disables noise reduction, including the perceptual filter that MediaConvert otherwise applies by default for AVC, HEVC, AV1, MPEG-2, VP8, and VP9 outputs. MediaConvert doesn't apply that default to mezzanine and archival outputs (AVC-Intra, XAVC, Apple ProRes, VC3, Uncompressed), to frame capture outputs, or to outputs that use Dolby Vision, which doesn't support any noise reducer."
             }
         },
         "com.amazonaws.mediaconvert#NoiseReducerFilterSettings": {
@@ -31188,6 +31330,15 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__integerMin1000Max3000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1000,
+                    "max": 3000
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin1000Max30000": {
             "type": "integer",
             "traits": {
@@ -31888,6 +32039,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#ColorConversion3DLUTSetting"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfDashAdaptationSetGrouping": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#DashAdaptationSetGrouping"
             }
         },
         "com.amazonaws.mediaconvert#__listOfDashAdditionalManifest": {

@@ -781,6 +781,9 @@
         "com.amazonaws.networkfirewall#AvailabilityZone": {
             "type": "string"
         },
+        "com.amazonaws.networkfirewall#AvailabilityZoneId": {
+            "type": "string"
+        },
         "com.amazonaws.networkfirewall#AvailabilityZoneMapping": {
             "type": "structure",
             "members": {
@@ -1025,20 +1028,20 @@
                 "Key": {
                     "target": "com.amazonaws.networkfirewall#ContainerAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attribute key to filter on.</p>",
+                        "smithy.api#documentation": "<p>The attribute key to filter on. For Amazon EKS, specify <code>namespace</code> to filter by namespace, or\n      specify a Kubernetes label key. For Amazon ECS, specify a container instance attribute name. Keys don't support\n      wildcards.</p>\n         <p>Valid characters are letters, numbers, spaces, hyphens (<code>-</code>), underscores (<code>_</code>),\n      periods (<code>.</code>), forward slashes (<code>/</code>), and colons (<code>:</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.networkfirewall#ContainerAttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attribute value to match.</p>",
+                        "smithy.api#documentation": "<p>The attribute value to match. You can specify an exact value, such as <code>payments-api</code>, or a\n      wildcard pattern, such as <code>payments-*</code>.</p>\n         <p>Valid characters are letters, numbers, spaces, hyphens (<code>-</code>), underscores (<code>_</code>),\n      periods (<code>.</code>), forward slashes (<code>/</code>), colons (<code>:</code>), asterisks\n      (<code>*</code>), and backslashes (<code>\\</code>).</p>\n         <p>Network Firewall evaluates the value using the following rules:</p>\n         <ul>\n            <li>\n               <p>An asterisk (<code>*</code>) matches zero or more characters. For example, <code>payments-*</code>\n            matches <code>payments-</code>, <code>payments-api</code>, and <code>payments-api-v2</code>, and\n            <code>*-prod</code> matches <code>web-prod</code>.</p>\n            </li>\n            <li>\n               <p>The pattern must match the entire value. For example, <code>payments-*</code> doesn't match\n            <code>my-payments-api</code>. To match a value that contains <code>payments</code> anywhere, use\n            <code>*payments*</code>.</p>\n            </li>\n            <li>\n               <p>Matching is case sensitive. For example, <code>Payments-*</code> doesn't match\n            <code>payments-api</code>.</p>\n            </li>\n            <li>\n               <p>To match a literal asterisk, escape it with a backslash (<code>\\*</code>). To match a literal\n            backslash, use <code>\\\\</code>. A backslash followed by any other character matches a literal backslash\n            followed by that character.</p>\n            </li>\n            <li>\n               <p>A wildcard pattern matches only containers that have the attribute. For example, a filter with key\n            <code>app</code> and value <code>*</code> matches every container that has an <code>app</code> label, but\n            doesn't match a container without an <code>app</code> label.</p>\n            </li>\n            <li>\n               <p>A value that doesn't contain <code>*</code> or <code>\\</code> matches only that exact value.</p>\n            </li>\n         </ul>\n         <p>A value can contain at most 10 unescaped asterisks. Escaped asterisks (<code>\\*</code>) don't count toward\n      this limit. A value can't end with a single unescaped backslash.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key-value filter pair used in container association monitoring configurations to narrow which containers\n      are tracked.</p>"
+                "smithy.api#documentation": "<p>A key-value filter pair used in container association monitoring configurations to narrow which containers\n      are tracked. The key must match exactly. The value can be an exact value or a wildcard pattern.</p>"
             }
         },
         "com.amazonaws.networkfirewall#ContainerAttributeKey": {
@@ -1080,7 +1083,7 @@
                 "AttributeFilters": {
                     "target": "com.amazonaws.networkfirewall#ContainerAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs that filter which containers are tracked. For Amazon EKS, you can filter by namespace and\n      Kubernetes labels. For Amazon ECS, you can filter by container instance attributes (EC2 launch type only).</p>"
+                        "smithy.api#documentation": "<p>Key-value pairs that filter which containers are tracked. For Amazon EKS, you can filter by namespace and\n      Kubernetes labels. For Amazon ECS, you can filter by container instance attributes (EC2 launch type only).</p>\n         <p>Attribute values can contain wildcard patterns, for example <code>payments-*</code>. Attribute keys must\n      match exactly.</p>"
                     }
                 }
             },
@@ -1289,6 +1292,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#InvalidRequestException"
@@ -2289,6 +2295,39 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.networkfirewall#CustomAction"
+            }
+        },
+        "com.amazonaws.networkfirewall#DNSExpiryExceptionPolicy": {
+            "type": "enum",
+            "members": {
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
+                },
+                "DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DROP"
+                    }
+                },
+                "CONTINUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#DNSFirewallRuleGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^rslvr-frg-[0-9a-f]+$"
             }
         },
         "com.amazonaws.networkfirewall#DeepThreatInspection": {
@@ -3348,7 +3387,34 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the data objects for the specified firewall policy. </p>"
+                "smithy.api#documentation": "<p>Returns the data objects for the specified firewall policy. </p>",
+                "smithy.waiters#waitable": {
+                    "FirewallPolicyActive": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "FirewallPolicyResponse.FirewallPolicyStatus",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "FirewallPolicyResponse.FirewallPolicyStatus",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    }
+                }
             }
         },
         "com.amazonaws.networkfirewall#DescribeFirewallPolicyRequest": {
@@ -3484,7 +3550,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>use2-az1</code>. Availability Zone IDs are the same in every Amazon Web Services account, so use this parameter when you coordinate resources across accounts. Specify either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, not both. If you specify both, the request fails.</p>"
                     }
                 },
                 "VpcEndpointAssociationArn": {
@@ -3523,7 +3595,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>use2-az1</code>.</p>"
                     }
                 },
                 "VpcEndpointAssociationArn": {
@@ -5173,10 +5251,83 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. Requires an associated TLS Inspection configuration.</p>"
                     }
+                },
+                "Route53ResolvedIPValidation": {
+                    "target": "com.amazonaws.networkfirewall#Route53ResolvedIPValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings that enable resolved IP validation for the policy. Resolved IP validation\n         verifies that a connection's destination IP address is one that the Amazon Route 53 Resolver\n         returned in a DNS response for a domain. The response must come from a VPC that's associated\n         with the Route 53 Resolver DNS Firewall rule group that you specify. This checks how the\n         destination IP address was obtained, instead of relying only on the domain that the client\n         asserts in its TLS Server Name Indication (SNI) or HTTP <code>Host</code> header. For more\n         information, see <a>Route53ResolvedIPValidation</a>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The firewall policy defines the behavior of a firewall using a collection of stateless\n         and stateful rule groups and other settings. You can use one firewall policy for multiple\n         firewalls. </p>\n         <p>This, along with <a>FirewallPolicyResponse</a>, define the policy.\n         You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallPolicyError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code identifies the type of error. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DNS_FIREWALL_RULE_GROUP_UNAVAILABLE</code> – The Amazon Route 53 Resolver DNS\n               Firewall rule group that resolved IP validation references is unavailable, for example,\n               because it was deleted or is no longer accessible from your account. Update the rule\n               group ID or remove the resolved IP validation configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROUTE53_RESOLVED_IP_VALIDATION_MISSING</code> – An associated stateful rule\n               group uses the <code>aws_route_53_resolved_domain</code> keyword, but the policy doesn't\n               have resolved IP validation configured. The affected rules are inactive until you add\n               resolved IP validation to the policy or remove the keyword rules.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.networkfirewall#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error and how to resolve it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyErrorResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource that the error relates to, when applicable. For example, for\n         <code>DNS_FIREWALL_RULE_GROUP_UNAVAILABLE</code> this is the Amazon Route 53 Resolver DNS\n         Firewall rule group ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration error that Network Firewall detected for a firewall policy.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallPolicyErrorCode": {
+            "type": "enum",
+            "members": {
+                "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"
+                    }
+                },
+                "ROUTE53_RESOLVED_IP_VALIDATION_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallPolicyErrorResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:/_.-]+$"
+            }
+        },
+        "com.amazonaws.networkfirewall#FirewallPolicyErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#FirewallPolicyError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.networkfirewall#FirewallPolicyMetadata": {
@@ -5235,6 +5386,12 @@
                         "smithy.api#documentation": "<p>The current status of the firewall policy. You can retrieve this for a firewall policy\n         by calling <a>DescribeFirewallPolicy</a> and providing the firewall policy's\n         name or ARN.</p>"
                     }
                 },
+                "StatusMessage": {
+                    "target": "com.amazonaws.networkfirewall#ResourceStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional detail about the firewall policy's current status, when applicable. For\n         example, while an Amazon Route 53 Resolver DNS Firewall rule group change is in progress, the\n         status is <code>UPDATING</code> and this message is \"A DNS Firewall rule group change is in\n         progress.\"</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.networkfirewall#TagList",
                     "traits": {
@@ -5269,6 +5426,12 @@
                     "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains the Amazon Web Services KMS encryption configuration settings for your firewall policy.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.networkfirewall#FirewallPolicyErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any configuration errors that apply to the firewall policy. Network Firewall detects these\n         errors asynchronously, after you create or update the policy, so an error can appear after\n         the request that caused it has already succeeded. Each entry describes the problem and how to\n         resolve it, and Network Firewall clears it automatically after you resolve the problem.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -6424,7 +6587,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>use2-az1</code>. Availability Zone IDs are the same in every Amazon Web Services account, so use this parameter when you coordinate resources across accounts. Specify either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, not both. If you specify both, the request fails.</p>"
                     }
                 },
                 "VpcEndpointId": {
@@ -6456,7 +6625,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>use2-az1</code>.</p>"
                     }
                 },
                 "VpcEndpointAssociationArn": {
@@ -6557,7 +6732,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>use2-az1</code>. Availability Zone IDs are the same in every Amazon Web Services account, so use this parameter when you coordinate resources across accounts. Specify either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, not both. If you specify both, the request fails.</p>"
                     }
                 },
                 "VpcEndpointAssociationArn": {
@@ -7771,7 +7952,7 @@
                     "name": "network-firewall"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>This is the API Reference for Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the Amazon Web Services REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a>. </p>\n         <p>To view the complete list of Amazon Web Services Regions where Network Firewall is available, see\n         <a href=\"https://docs.aws.amazon.com/general/latest/gr/network-firewall.html\">Service\n            endpoints and quotas</a> in the <i>Amazon Web Services General\n               Reference</i>.\n      </p>\n         <p>To access Network Firewall using the IPv4 REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n         </p>\n         <p>To access Network Firewall using the Dualstack (IPv4 and IPv6) REST API endpoint:\n               <code>https://network-firewall.<region>.aws.api </code>\n         </p>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n               <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or Direct Connect. Network Firewall uses rules that are compatible\n      with Suricata, a free, open source network analysis and threat detection engine.\n      Network Firewall supports Suricata version 7.0.8. For information about Suricata,\n          see the <a href=\"https://suricata.io/\">Suricata website</a> and the \n          <a href=\"https://suricata.readthedocs.io/en/suricata-7.0.8/\">Suricata User Guide</a>. </p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known Amazon Web Services service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, define the firewall behavior as follows: </p>\n               <ol>\n                  <li>\n                     <p>Create stateless and stateful rule groups,\n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n                  </li>\n                  <li>\n                     <p>Create a firewall policy that uses your rule groups and\n                     specifies additional default traffic filtering behavior. </p>\n                  </li>\n               </ol>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and\n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>\n         <p>After your firewall is established, you can add firewall endpoints for new Availability Zones by following the prior steps for the Amazon VPC setup and \n      firewall subnet definitions. You can also add endpoints to Availability Zones that you're using in the firewall, either for the same VPC \n          or for another VPC, by following the prior steps for the Amazon VPC setup, and defining the new VPC subnets as VPC endpoint associations. </p>",
+                "smithy.api#documentation": "<p>This is the API Reference for Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the Amazon Web Services REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a>. </p>\n         <p>To view the complete list of Amazon Web Services Regions where Network Firewall is available, see\n         <a href=\"https://docs.aws.amazon.com/general/latest/gr/network-firewall.html\">Service\n            endpoints and quotas</a> in the <i>Amazon Web Services General\n               Reference</i>.\n      </p>\n         <p>To access Network Firewall using the IPv4 REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n         </p>\n         <p>To access Network Firewall using the Dualstack (IPv4 and IPv6) REST API endpoint:\n               <code>https://network-firewall.<region>.aws.api </code>\n         </p>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n               <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or Direct Connect. Network Firewall uses rules that are compatible\n      with Suricata, a free, open source network analysis and threat detection engine.\n      Network Firewall supports Suricata version 8.0.3. For information about Suricata,\n          see the <a href=\"https://suricata.io/\">Suricata website</a> and the \n          <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/\">Suricata User Guide</a>. </p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known Amazon Web Services service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, define the firewall behavior as follows: </p>\n               <ol>\n                  <li>\n                     <p>Create stateless and stateful rule groups,\n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n                  </li>\n                  <li>\n                     <p>Create a firewall policy that uses your rule groups and\n                     specifies additional default traffic filtering behavior. </p>\n                  </li>\n               </ol>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and\n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>\n         <p>After your firewall is established, you can add firewall endpoints for new Availability Zones by following the prior steps for the Amazon VPC setup and \n      firewall subnet definitions. You can also add endpoints to Availability Zones that you're using in the firewall, either for the same VPC \n          or for another VPC, by following the prior steps for the Amazon VPC setup, and defining the new VPC subnets as VPC endpoint associations. </p>",
                 "smithy.api#title": "AWS Network Firewall",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -10071,6 +10252,21 @@
                     "traits": {
                         "smithy.api#enumValue": "ERROR"
                     }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#ResourceStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
                 }
             }
         },
@@ -10094,6 +10290,82 @@
                     "traits": {
                         "smithy.api#enumValue": "REJECT"
                     }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#Route53ResolvedIPValidation": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.networkfirewall#Route53ResolvedIPValidationAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that Network Firewall takes for a connection whose destination IP address fails\n         resolved IP validation. A destination IP address fails validation when the Route 53 Resolver\n         didn't return it in a DNS response in an associated VPC. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALERT</code> – Tags the matching connection in the firewall's flow logs\n               without blocking it, when you enable logging. Use this to observe the effect of\n               resolved IP validation before you enforce it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DROP</code> – Silently blocks the connection without sending any response to the\n               client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECT</code> – Blocks the connection and sends a TCP reset (RST) to the\n               client. Because a TCP reset applies only to TCP connections, Network Firewall drops non-TCP\n               traffic instead of resetting it.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DNSFirewallRuleGroupId": {
+                    "target": "com.amazonaws.networkfirewall#DNSFirewallRuleGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Route 53 Resolver DNS Firewall rule group that determines which VPCs'\n         DNS resolutions count for resolved IP validation. A destination IP address counts as resolved for a domain only when the Route 53 Resolver returned it in a DNS response within a VPC\n         that's associated with this rule group. Associate the rule group with the VPCs that send\n         traffic to the firewall. The ID must match the pattern <code>^rslvr-frg-[0-9a-f]+$</code>. It must also exist and\n         be accessible from your account. Network Firewall validates this when you create or update the\n         policy.</p>\n         <p>Changing this value swaps the managed rule group association. Network Firewall processes\n            the swap asynchronously. Each policy can have only one managed Route 53 Resolver DNS\n            Firewall association. While a swap is in progress, Network Firewall rejects further changes to this setting. Wait\n            until the swap completes, then retry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DNSExpiryExceptionPolicy": {
+                    "target": "com.amazonaws.networkfirewall#DNSExpiryExceptionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that Network Firewall takes when the DNS resolution recorded for a destination IP\n         address has expired from the resolved IP cache. This applies when Network Firewall still sees\n         traffic to that IP address after the expiry. Network Firewall keeps a resolution for longer than\n         the DNS record's time to live (TTL). Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> – Treats the expired resolution as still valid and doesn't\n               block the connection because of expiry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DROP</code> – Silently blocks traffic to the IP address after its resolution\n               has expired, without sending any response to the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REJECT</code> – Blocks traffic to the IP address after its resolution has\n               expired and sends a TCP reset (RST) to the client. Network Firewall drops non-TCP traffic\n               instead of resetting it.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BypassDestinationValidationIPRanges": {
+                    "target": "com.amazonaws.networkfirewall#Route53ResolvedIPValidationAddresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination IP address ranges that are exempt from the policy-level resolved IP check.\n         Network Firewall doesn't apply the <code>Action</code> in this configuration to a connection\n         whose destination falls in these ranges, even if the Route 53 Resolver didn't return that IP\n         address in an associated VPC. Specify each entry as an IPv4 or IPv6 address or CIDR range, up\n         to 100 entries.</p>\n         <p>This exemption applies only to the policy-level check. Stateful rules that use the\n            <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> target type or the\n            <code>aws_route_53_resolved_domain</code> keyword still evaluate connections to these\n            destinations and match them independently of this list.</p>"
+                    }
+                },
+                "SourceIPRanges": {
+                    "target": "com.amazonaws.networkfirewall#Route53ResolvedIPValidationAddresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client source IP address ranges whose connections are subject to resolved IP\n         validation. Specify each entry as an IPv4 or IPv6 address or CIDR range, up to 100 entries. If\n         you omit this field, resolved IP validation applies to the CIDR ranges of the firewall's VPC and of any additional\n         VPCs attached to the firewall. Specifying an\n         empty list is not the same as omitting the field: an empty list means that Network Firewall doesn't validate any source addresses.</p>\n         <p>This scope applies to the policy-level check only. Stateful rules that use the\n            <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> target type or the\n            <code>aws_route_53_resolved_domain</code> keyword still evaluate their destinations\n            regardless of <code>SourceIPRanges</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy-level configuration for resolved IP validation. When you set this on a firewall policy, you require that the destination IP address of a\n         connection is one that the Amazon Route 53 Resolver returned in a DNS response for a domain. The Route 53 Resolver\n         must have returned the response in a VPC that's associated with the Route 53 Resolver DNS\n         Firewall rule group identified by <code>DNSFirewallRuleGroupId</code>. At the policy level,\n         this verifies that the destination IP address was resolved for some domain. To match specific\n         domains, also configure stateful rule groups that use the\n         <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> target type or the\n         <code>aws_route_53_resolved_domain</code> rule keyword.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#Route53ResolvedIPValidationAction": {
+            "type": "enum",
+            "members": {
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
+                },
+                "DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DROP"
+                    }
+                },
+                "ALERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALERT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#Route53ResolvedIPValidationAddresses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#Address"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -10352,14 +10624,14 @@
                 "Keyword": {
                     "target": "com.amazonaws.networkfirewall#Keyword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The keyword for the Suricata compatible rule option. You must include a <code>sid</code> (signature ID), and can optionally include other keywords. For information about Suricata compatible keywords, see <a href=\"https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options\">Rule options</a> in the Suricata documentation.</p>",
+                        "smithy.api#documentation": "<p>The keyword for the Suricata compatible rule option. You must include a <code>sid</code> (signature ID), and can optionally include other keywords. For information about Suricata compatible keywords, see <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html#rule-options\">Rule options</a> in the Suricata documentation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Settings": {
                     "target": "com.amazonaws.networkfirewall#Settings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings of the Suricata compatible rule option. Rule options have zero or more setting values, and the number of possible and required settings depends on the <code>Keyword</code>. For more information about the settings for specific options, see <a href=\"https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options\">Rule options</a>.</p>"
+                        "smithy.api#documentation": "<p>The settings of the Suricata compatible rule option. Rule options have zero or more setting values, and the number of possible and required settings depends on the <code>Keyword</code>. For more information about the settings for specific options, see <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html#rule-options\">Rule options</a>.</p>"
                     }
                 }
             },
@@ -10476,7 +10748,7 @@
                 "StatefulRules": {
                     "target": "com.amazonaws.networkfirewall#StatefulRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html\">Rules Format</a>. </p>"
+                        "smithy.api#documentation": "<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.\n       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html\">Rules Format</a>. </p>"
                     }
                 },
                 "StatelessRulesAndCustomActions": {
@@ -10503,7 +10775,7 @@
                 "TargetTypes": {
                     "target": "com.amazonaws.networkfirewall#TargetTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocols you want to inspect. Specify <code>TLS_SNI</code> for <code>HTTPS</code>. Specify <code>HTTP_HOST</code> for <code>HTTP</code>. You can specify either or both. </p>",
+                        "smithy.api#documentation": "<p>The types of matching to perform against the domains in <code>Targets</code>. You can specify any combination of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> – Match the domain against the domain that the Amazon Route 53 Resolver resolved the connection's destination IP address for.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HTTP_HOST</code> – Match the domain against the <code>Host</code> header of HTTP traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS_SNI</code> – Match the domain against the Server Name Indication (SNI) of HTTPS traffic.</p>\n            </li>\n         </ul>\n         <p>\n            <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> matches on how the destination IP address was resolved, rather than on the domain that the client asserts in its TLS SNI or HTTP <code>Host</code> header. This target type takes effect when you configure resolved IP validation on the firewall policy. For more information, see <a>Route53ResolvedIPValidation</a>.</p>\n         <p>Whether you include <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> changes what the generated rules match, together with <code>GeneratedRulesType</code>:</p>\n         <ul>\n            <li>\n               <p>Combining <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> with <code>TLS_SNI</code> or <code>HTTP_HOST</code> in an <code>ALLOWLIST</code> requires both conditions to match. The SNI or <code>Host</code> header must match the domain, <b>and</b> the Route 53 Resolver must have resolved the destination IP address for that domain. Network Firewall allows traffic only in that case. Traffic that matches one condition, such as a spoofed <code>Host</code> header sent to an unresolved IP address, is not allowed.</p>\n            </li>\n            <li>\n               <p>In a <code>DENYLIST</code>, or when <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> is the only target type, Network Firewall evaluates each condition independently: a match on either the domain (SNI or <code>Host</code>) or the resolved destination IP address triggers the rule.</p>\n            </li>\n            <li>\n               <p>When you don't include <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code>, the generated rules match only on the SNI or <code>Host</code> header, without checking how the destination IP address was resolved.</p>\n            </li>\n         </ul>\n         <p>An <code>ALLOWLIST</code> whose only target type is <code>AWS_ROUTE_53_RESOLVED_DOMAIN</code> is additive: it allows matching traffic but doesn't generate a default rule that drops non-matching traffic. Only the <code>TLS_SNI</code> and <code>HTTP_HOST</code> target types generate that default drop. To allow only the resolved domains and drop all other traffic, include a protocol target type as well.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10783,7 +11055,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>use2-az1</code>. Availability Zone IDs are the same in every Amazon Web Services account, so use this parameter when you coordinate resources across accounts. Specify either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, not both. If you specify both, the request fails.</p>"
                     }
                 },
                 "VpcEndpointAssociationArn": {
@@ -10881,7 +11159,13 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.networkfirewall#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone where the firewall is located. For example, <code>us-east-2a</code>.</p>\n         <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.networkfirewall#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone where the firewall is located. For example, <code>use2-az1</code>. Availability Zone IDs are the same in every Amazon Web Services account, so use this parameter when you coordinate resources across accounts. Specify either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, not both. If you specify both, the request fails.</p>"
                     }
                 },
                 "VpcEndpointAssociationArn": {
@@ -11030,7 +11314,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html\">Rules Format</a>. </p>"
+                "smithy.api#documentation": "<p>A single Suricata rules specification, for use in a stateful rule group.\n       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.\n       For information about the Suricata <code>Rules</code> format, see\n                                        <a href=\"https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html\">Rules Format</a>. </p>"
             }
         },
         "com.amazonaws.networkfirewall#StatefulRuleDirection": {
@@ -11868,6 +12152,12 @@
                     "traits": {
                         "smithy.api#enumValue": "HTTP_HOST"
                     }
+                },
+                "AWS_ROUTE_53_RESOLVED_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_ROUTE_53_RESOLVED_DOMAIN"
+                    }
                 }
             }
         },
@@ -12287,6 +12577,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
@@ -12794,6 +13087,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#InvalidRequestException"

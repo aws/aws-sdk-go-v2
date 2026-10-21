@@ -825,6 +825,15 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.quicksight#AdminAccountEmail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.quicksight#Agent": {
             "type": "structure",
             "members": {
@@ -12213,6 +12222,15 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ClientEmail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.quicksight#ClientId": {
             "type": "string",
             "traits": {
@@ -22880,6 +22898,16 @@
                 "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
+        "com.amazonaws.quicksight#DataSourceCertThumbprint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#DataSourceCredentials": {
             "type": "structure",
             "members": {
@@ -22917,6 +22945,24 @@
                     "target": "com.amazonaws.quicksight#OAuthClientCredentials",
                     "traits": {
                         "smithy.api#documentation": "<p>The OAuth client credentials for connecting to a data source using OAuth 2.0 client\n            credentials (2LO) authentication. For more information, see\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_OAuthClientCredentials.html\">OAuthClientCredentials</a>\n            </code>.</p>"
+                    }
+                },
+                "ServiceAccountCredentials": {
+                    "target": "com.amazonaws.quicksight#ServiceAccountCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service account credentials for connecting to a data source that uses Google Workspace domain-wide delegation.</p>"
+                    }
+                },
+                "SharePointClientCredentials": {
+                    "target": "com.amazonaws.quicksight#SharePointClientCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client credentials for connecting to a Microsoft SharePoint data source using two-legged OAuth (2LO) certificate-based authentication.</p>"
+                    }
+                },
+                "OneDriveClientCredentials": {
+                    "target": "com.amazonaws.quicksight#OneDriveClientCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client credentials for connecting to a Microsoft OneDrive data source using two-legged OAuth (2LO) certificate-based authentication.</p>"
                     }
                 }
             },
@@ -23025,6 +23071,17 @@
                         "smithy.api#enumValue": "DATASOURCE_NAME"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DataSourceKmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#DataSourceList": {
@@ -57046,6 +57103,28 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#OneDriveClientCredentials": {
+            "type": "structure",
+            "members": {
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.quicksight#DataSourceKmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used to encrypt the OneDrive certificate credentials. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CertThumbprint": {
+                    "target": "com.amazonaws.quicksight#DataSourceCertThumbprint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The thumbprint of the certificate used for two-legged OAuth (2LO) authentication to OneDrive. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client credentials for connecting to a Microsoft OneDrive data source using two-legged OAuth (2LO) certificate-based authentication. OneDrive connections access files stored in your OneDrive storage. The tenant ID and client ID are supplied through <code>OneDriveParameters</code>.</p>"
+            }
+        },
         "com.amazonaws.quicksight#OneDriveClientId": {
             "type": "string",
             "traits": {
@@ -68582,6 +68661,35 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ServiceAccountCredentials": {
+            "type": "structure",
+            "members": {
+                "AdminAccountEmail": {
+                    "target": "com.amazonaws.quicksight#AdminAccountEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the Google Workspace administrator account that the service account impersonates through domain-wide delegation. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceAccountPrivateKey": {
+                    "target": "com.amazonaws.quicksight#PrivateKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private key of the Google service account used for domain-wide delegation. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientEmail": {
+                    "target": "com.amazonaws.quicksight#ClientEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client email address of the Google service account used for domain-wide delegation. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service account credentials used for Google Workspace domain-wide delegation. Use this structure when you authenticate a data source connection using domain-wide delegation across your Google Workspace domain.</p>"
+            }
+        },
         "com.amazonaws.quicksight#ServiceNowParameters": {
             "type": "structure",
             "members": {
@@ -68765,6 +68873,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The shape conditional formatting of a filled map visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SharePointClientCredentials": {
+            "type": "structure",
+            "members": {
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.quicksight#DataSourceKmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used to encrypt the SharePoint certificate credentials. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CertThumbprint": {
+                    "target": "com.amazonaws.quicksight#DataSourceCertThumbprint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The thumbprint of the certificate used for two-legged OAuth (2LO) authentication to SharePoint. This field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client credentials for connecting to a Microsoft SharePoint data source using two-legged OAuth (2LO) certificate-based authentication. SharePoint connections access documents stored in SharePoint sites and libraries. The tenant ID and client ID are supplied through <code>SharePointParameters</code>.</p>"
             }
         },
         "com.amazonaws.quicksight#SharePointClientId": {

@@ -2110,6 +2110,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Fallback"
                     }
+                },
+                "DialogManager": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DialogManager"
+                    }
                 }
             },
             "traits": {
@@ -6391,7 +6397,7 @@
                 "qnAIntentConfiguration": {
                     "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex V2 can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
                     }
                 },
                 "qInConnectIntentConfiguration": {
@@ -13545,8 +13551,7 @@
                 "promptSpecification": {
                     "target": "com.amazonaws.lexmodelsv2#PromptSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Prompts the user to confirm the intent. This question should have a\n         yes or no answer.</p>\n         <p>Amazon Lex uses this prompt to ensure that the user acknowledges that the\n         intent is ready for fulfillment. For example, with the\n            <code>OrderPizza</code> intent, you might want to confirm that the\n         order is correct before placing it. For other intents, such as intents\n         that simply respond to user questions, you might not need to ask the\n         user for confirmation before providing the information. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Prompts the user to confirm the intent. This question should have a\n         yes or no answer.</p>\n         <p>Amazon Lex uses this prompt to ensure that the user acknowledges that the\n         intent is ready for fulfillment. For example, with the\n            <code>OrderPizza</code> intent, you might want to confirm that the\n         order is correct before placing it. For other intents, such as intents\n         that simply respond to user questions, you might not need to ask the\n         user for confirmation before providing the information. </p>\n         <p>Required unless the bot locale's <code>assistedNluMode</code> is\n         <code>DialogManager</code>, in which case Amazon Lex generates the\n         confirmation prompt.</p>"
                     }
                 },
                 "declinationResponse": {
@@ -19170,7 +19175,7 @@
                 "assistedNluMode": {
                     "target": "com.amazonaws.lexmodelsv2#AssistedNluMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode for Assisted NLU operation. Use <code>Primary</code> to make Assisted NLU the primary intent recognition method, or <code>Fallback</code> to use it only when standard NLU confidence is low.</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode for Assisted NLU operation. Use <code>Primary</code> to make Assisted NLU the primary intent recognition method, <code>Fallback</code> to use it only when standard NLU confidence is low, or <code>DialogManager</code> to use a large language model to manage the conversation, including intent recognition, slot elicitation, and confirmation.</p>"
                     }
                 },
                 "intentDisambiguationSettings": {
@@ -20993,7 +20998,7 @@
                 "slotResolutionStrategy": {
                     "target": "com.amazonaws.lexmodelsv2#SlotResolutionStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether assisted slot resolution is turned on for the slot or not. If the value is <code>EnhancedFallback</code>, assisted slot resolution is activated when Amazon Lex defaults to the <code>AMAZON.FallbackIntent</code>. If the value is <code>Default</code>, assisted slot resolution is turned off.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether assisted slot resolution is turned on for the slot or not. If the value is <code>EnhancedFallback</code>, assisted slot resolution is activated when Amazon Lex V2 defaults to the <code>AMAZON.FallbackIntent</code>. If the value is <code>Default</code>, assisted slot resolution is turned off.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -25236,7 +25241,7 @@
                 "qnAIntentConfiguration": {
                     "target": "com.amazonaws.lexmodelsv2#QnAIntentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration of the built-in <code>Amazon.QnAIntent</code>. The <code>AMAZON.QnAIntent</code> intent is called when\n         Amazon Lex V2 can't determine another intent to invoke. If you specify this field, you can't specify the <code>kendraConfiguration</code> field.</p>"
                     }
                 },
                 "qInConnectIntentConfiguration": {
@@ -26648,15 +26653,13 @@
                 "waitingResponse": {
                     "target": "com.amazonaws.lexmodelsv2#ResponseSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is waiting\n         for the conversation to continue.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is waiting\n         for the conversation to continue. Required unless the bot locale's\n         <code>assistedNluMode</code> is <code>DialogManager</code>.</p>"
                     }
                 },
                 "continueResponse": {
                     "target": "com.amazonaws.lexmodelsv2#ResponseSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is ready to\n         continue the conversation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to indicate that the bot is ready to\n         continue the conversation. Required unless the bot locale's\n         <code>assistedNluMode</code> is <code>DialogManager</code>.</p>"
                     }
                 },
                 "stillWaitingResponse": {

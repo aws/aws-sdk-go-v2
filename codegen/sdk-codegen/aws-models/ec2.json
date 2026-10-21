@@ -6823,6 +6823,70 @@
                 }
             }
         },
+        "com.amazonaws.ec2#AnalysisTransitGatewayPolicyTableEntry": {
+            "type": "structure",
+            "members": {
+                "RuleNumber": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RuleNumber",
+                        "smithy.api#documentation": "<p>The rule number for the policy table entry. Entries are evaluated in ascending order of rule number.</p>",
+                        "smithy.api#xmlName": "ruleNumber"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Protocol",
+                        "smithy.api#documentation": "<p>The protocol number. A value of <code>-1</code> means that the entry matches all protocols.</p>",
+                        "smithy.api#xmlName": "protocol"
+                    }
+                },
+                "SourceCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SourceCidr",
+                        "smithy.api#documentation": "<p>The source CIDR block. If this value is not present, the entry matches any source address.</p>",
+                        "smithy.api#xmlName": "sourceCidr"
+                    }
+                },
+                "DestinationCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DestinationCidr",
+                        "smithy.api#documentation": "<p>The destination CIDR block. If this value is not present, the entry matches any destination address.</p>",
+                        "smithy.api#xmlName": "destinationCidr"
+                    }
+                },
+                "SourcePortRange": {
+                    "target": "com.amazonaws.ec2#PortRange",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SourcePortRange",
+                        "smithy.api#documentation": "<p>The source port range. If this value is not present, the entry matches any source port.</p>",
+                        "smithy.api#xmlName": "sourcePortRange"
+                    }
+                },
+                "DestinationPortRange": {
+                    "target": "com.amazonaws.ec2#PortRange",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DestinationPortRange",
+                        "smithy.api#documentation": "<p>The destination port range. If this value is not present, the entry matches any destination port.</p>",
+                        "smithy.api#xmlName": "destinationPortRange"
+                    }
+                },
+                "TargetRouteTableId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TargetRouteTableId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway route table to which the entry routes matching traffic.</p>",
+                        "smithy.api#xmlName": "targetRouteTableId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an entry in a transit gateway policy table.</p>"
+            }
+        },
         "com.amazonaws.ec2#ApplianceModeSupportValue": {
             "type": "enum",
             "members": {
@@ -64266,6 +64330,22 @@
                         "smithy.api#xmlName": "transitGatewayRouteTableRoute"
                     }
                 },
+                "TransitGatewayPolicyTable": {
+                    "target": "com.amazonaws.ec2#AnalysisComponent",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTable",
+                        "smithy.api#documentation": "<p>The transit gateway policy table.</p>",
+                        "smithy.api#xmlName": "transitGatewayPolicyTable"
+                    }
+                },
+                "TransitGatewayPolicyTableEntry": {
+                    "target": "com.amazonaws.ec2#AnalysisTransitGatewayPolicyTableEntry",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntry",
+                        "smithy.api#documentation": "<p>The transit gateway policy table entry.</p>",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableEntry"
+                    }
+                },
                 "TransitGatewayAttachment": {
                     "target": "com.amazonaws.ec2#AnalysisComponent",
                     "traits": {
@@ -82276,10 +82356,18 @@
                         "smithy.api#documentation": "<p>Reports the application-level health status for the instance.</p>",
                         "smithy.api#xmlName": "applicationStatus"
                     }
+                },
+                "PerformanceStatus": {
+                    "target": "com.amazonaws.ec2#PerformanceStatusSummary",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PerformanceStatus",
+                        "smithy.api#documentation": "<p>Reports the performance-related health status for the instance. This information is\n            returned only when performance status checks are enabled for the instance.</p>",
+                        "smithy.api#xmlName": "performanceStatus"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the status of an instance, including system status, instance status,\n            attached EBS status, and application status.</p>"
+                "smithy.api#documentation": "<p>Describes the status of an instance, including system status, instance status,\n            attached EBS status, application status, and performance status.</p>"
             }
         },
         "com.amazonaws.ec2#InstanceStatusDetails": {
@@ -104161,7 +104249,7 @@
                 "DevicePostureOptions": {
                     "target": "com.amazonaws.ec2#DevicePostureOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The device posture options for the Client VPN endpoint. Specifying this parameter replaces the entire device posture configuration for the endpoint. To remove all device trust providers, specify an empty list.</p>"
+                        "smithy.api#documentation": "<p>The device posture options for the Client VPN endpoint. Specifying this parameter replaces the entire device posture configuration for the endpoint. To disable device posture and remove all device trust providers, specify <code>false</code> for <code>Enabled</code>.</p>"
                     }
                 }
             },
@@ -114745,6 +114833,14 @@
                         "smithy.api#xmlName": "transitGatewayRouteTableRoute"
                     }
                 },
+                "TransitGatewayPolicyTableEntry": {
+                    "target": "com.amazonaws.ec2#AnalysisTransitGatewayPolicyTableEntry",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntry",
+                        "smithy.api#documentation": "<p>The entry in a transit gateway policy table.</p>",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableEntry"
+                    }
+                },
                 "Explanations": {
                     "target": "com.amazonaws.ec2#ExplanationList",
                     "traits": {
@@ -115225,6 +115321,38 @@
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
+            }
+        },
+        "com.amazonaws.ec2#PerformanceStatusSummary": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#SummaryStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current status.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "ImpairedSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImpairedSince",
+                        "smithy.api#documentation": "<p>The date and time when the performance status became impaired.</p>",
+                        "smithy.api#xmlName": "impairedSince"
+                    }
+                },
+                "Remediation": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Remediation",
+                        "smithy.api#documentation": "<p>The recommended action to remediate the impaired instance, if one is available. This\n            value is returned only when the instance is impaired.</p>",
+                        "smithy.api#xmlName": "remediation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the performance status check results for an instance.</p>"
             }
         },
         "com.amazonaws.ec2#Period": {

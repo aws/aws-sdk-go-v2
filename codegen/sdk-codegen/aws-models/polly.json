@@ -900,7 +900,7 @@
                 "Alphabet": {
                     "target": "com.amazonaws.polly#Alphabet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Phonetic alphabet used in the lexicon. Valid values are\n        <code>ipa</code> and <code>x-sampa</code>.</p>"
+                        "smithy.api#documentation": "<p>Phonetic alphabet used in the lexicon. Valid values are\n        <code>ipa</code>, <code>x-sampa</code>, <code>x-amazon-pinyin</code>,\n        <code>x-amazon-jyutping</code>, <code>x-amazon-pron-kana</code>, and\n        <code>x-amazon-yomigana</code>.</p>"
                     }
                 },
                 "LanguageCode": {
@@ -1350,7 +1350,7 @@
                         "h2"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing\n      high-quality speech from plain text and Speech Synthesis Markup Language\n      (SSML), along with managing pronunciations lexicons that enable you to get\n      the best results for your application domain.</p>",
+                "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing\n      high-quality speech from plain text and Speech Synthesis Markup Language\n      (SSML), along with managing pronunciations lexicons that enable you to get\n      the best results for your application domain.</p>\n         <p>Authenticated API calls must be signed using the Signature Version 4 Signing Process. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Signing Amazon Web Services API Requests</a> in the <i>IAM User Guide</i>.</p>",
                 "smithy.api#title": "Amazon Polly",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://polly.amazonaws.com/doc/v1"
@@ -2611,7 +2611,7 @@
         "com.amazonaws.polly#SnsTopicArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:[a-z0-9_-]{1,50}:\\d{12}:[a-zA-Z0-9_-]{1,251}([a-zA-Z0-9_-]{0,5}|\\.fifo)$"
+                "smithy.api#pattern": "^arn:aws(-(cn|iso(-b)?|us-gov|eusc))?:sns:[a-z0-9_-]{1,50}:\\d{12}:[a-zA-Z0-9_-]{1,251}([a-zA-Z0-9_-]{0,5}|\\.fifo)$"
             }
         },
         "com.amazonaws.polly#SpeechMarkType": {
@@ -2691,7 +2691,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection. \n      Specify synthesis parameters in HTTP/2 headers, send text incrementally as events on the input stream,\n       and receive synthesized audio as it becomes available.</p>\n         <p>This operation serves as a bidirectional counterpart to <code>SynthesizeSpeech</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/polly/latest/API/API_SynthesizeSpeech.html\">SynthesizeSpeech</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection. \n      Specify synthesis parameters in HTTP/2 headers, send text incrementally as events on the input stream,\n       and receive synthesized audio as it becomes available.</p>\n         <p>This operation serves as a bidirectional counterpart to <code>SynthesizeSpeech</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html\">SynthesizeSpeech</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/synthesisStream",
@@ -2805,7 +2805,7 @@
                 "VoiceId": {
                     "target": "com.amazonaws.polly#VoiceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The voice to use in synthesis. To get a list of available voice IDs, use the <a href=\"https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html\">DescribeVoices</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The voice to use in synthesis. To get a list of available voice IDs, use the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation.</p>",
                         "smithy.api#httpHeader": "x-amzn-VoiceId",
                         "smithy.api#required": {}
                     }
@@ -3441,7 +3441,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The alphabet specified by the lexicon is not a supported alphabet.\n      Valid values are <code>x-sampa</code> and <code>ipa</code>.</p>",
+                "smithy.api#documentation": "<p>The alphabet specified by the lexicon is not a supported alphabet.\n      Valid values are <code>ipa</code>, <code>x-sampa</code>,\n      <code>x-amazon-pinyin</code>, <code>x-amazon-jyutping</code>,\n      <code>x-amazon-pron-kana</code>, and\n      <code>x-amazon-yomigana</code>. Replace the unsupported alphabet\n      with one of the valid values and resubmit your request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4238,6 +4238,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Tiffany"
+                    }
+                },
+                "Arjun": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Arjun"
+                    }
+                },
+                "Carlos": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Carlos"
+                    }
+                },
+                "Carolina": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Carolina"
+                    }
+                },
+                "Curtis": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Curtis"
+                    }
+                },
+                "Hyunduk": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hyunduk"
+                    }
+                },
+                "Kenneth": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kenneth"
+                    }
+                },
+                "Kiara": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kiara"
+                    }
+                },
+                "Leo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Leo"
+                    }
+                },
+                "Nate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Nate"
+                    }
+                },
+                "Tina": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tina"
                     }
                 }
             }

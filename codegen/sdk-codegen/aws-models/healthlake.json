@@ -630,6 +630,41 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.healthlake#AgentErrorType": {
+            "type": "enum",
+            "members": {
+                "InternalServerException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalServerException"
+                    }
+                },
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
+                    }
+                },
+                "ValidationException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationException"
+                    }
+                },
+                "AccessDeniedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                },
+                "ThrottlingException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThrottlingException"
+                    }
+                }
+            }
+        },
         "com.amazonaws.healthlake#AgentInputMessage": {
             "type": "structure",
             "members": {
@@ -669,21 +704,6 @@
                 }
             }
         },
-        "com.amazonaws.healthlake#AgentMessageOutOfContextException": {
-            "type": "structure",
-            "members": {
-                "Message": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The agent message does not fit within the current conversation context. Start a new conversation or provide a message that relates to the current profile customization session.</p>",
-                "smithy.api#error": "client"
-            }
-        },
         "com.amazonaws.healthlake#AgentMessageString": {
             "type": "string",
             "traits": {
@@ -694,79 +714,43 @@
                 "smithy.api#sensitive": {}
             }
         },
-        "com.amazonaws.healthlake#AgentOutputMessage": {
-            "type": "structure",
+        "com.amazonaws.healthlake#AgentOutputMessageStream": {
+            "type": "union",
             "members": {
-                "Body": {
-                    "target": "com.amazonaws.healthlake#AgentMessageString",
+                "TextMessageEvent": {
+                    "target": "com.amazonaws.healthlake#TextMessageEvent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text of the agent's response.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An incremental text update from the agent.</p>"
                     }
                 },
-                "Type": {
-                    "target": "com.amazonaws.healthlake#AgentOutputMessageType",
+                "ProgressEvent": {
+                    "target": "com.amazonaws.healthlake#ProgressEvent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of output message, which indicates how to interpret the agent's response.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An incremental progress update from the agent.</p>"
                     }
                 },
-                "OptionsList": {
-                    "target": "com.amazonaws.healthlake#DataTransformationChatOptionsList",
+                "HeartbeatEvent": {
+                    "target": "com.amazonaws.healthlake#HeartbeatEvent",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of selectable options presented when the response type is <code>options</code>.</p>"
+                        "smithy.api#documentation": "<p>Periodically emitted event to keep the connection alive.</p>"
+                    }
+                },
+                "ErrorEvent": {
+                    "target": "com.amazonaws.healthlake#ErrorEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An exception encountered while serving the request.</p>"
+                    }
+                },
+                "EndOfOutputEvent": {
+                    "target": "com.amazonaws.healthlake#EndOfOutputEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The final event in the response stream from the agent during chat-based profile customization. The caller can assume that the stream has ended upon receiving this event.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a response message from the agent during chat-based profile customization.</p>"
-            }
-        },
-        "com.amazonaws.healthlake#AgentOutputMessageType": {
-            "type": "enum",
-            "members": {
-                "INITIAL_GREETING": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "INITIAL_GREETING"
-                    }
-                },
-                "NORMAL": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "normal"
-                    }
-                },
-                "USER_CONFIRMATION_REQUEST": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "confirmation"
-                    }
-                },
-                "COMPLETE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "complete"
-                    }
-                },
-                "ERROR": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "error"
-                    }
-                },
-                "OPTIONS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "options"
-                    }
-                },
-                "CHOICES": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "choices"
-                    }
-                }
+                "smithy.api#documentation": "<p>Represents the response stream type from the agent during chat-based profile customization.</p>",
+                "smithy.api#streaming": {}
             }
         },
         "com.amazonaws.healthlake#AmazonResourceName": {
@@ -1031,22 +1015,6 @@
                     "min": 1,
                     "max": 36
                 }
-            }
-        },
-        "com.amazonaws.healthlake#ConversationNotFoundException": {
-            "type": "structure",
-            "members": {
-                "Message": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The specified conversation identifier does not exist. Verify the conversation ID or omit it to start a new conversation.</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.healthlake#CreateDataTransformationProfile": {
@@ -2489,6 +2457,34 @@
                 "smithy.api#pattern": "^(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))$"
             }
         },
+        "com.amazonaws.healthlake#EndOfOutputEvent": {
+            "type": "structure",
+            "members": {
+                "FinalResponseMessage": {
+                    "target": "com.amazonaws.healthlake#AgentMessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The final response message from the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Options": {
+                    "target": "com.amazonaws.healthlake#DataTransformationChatOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response options that you can use to easily answer follow-up questions from the agent.</p>"
+                    }
+                },
+                "ConversationId": {
+                    "target": "com.amazonaws.healthlake#ConversationIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversation ID of the request. You can use this ID to continue the profile mapping based on this request's context at a later time.</p>",
+                        "smithy.api#unstable": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the final response event from the agent, including the response message, response options, and conversation ID.</p>"
+            }
+        },
         "com.amazonaws.healthlake#ErrorCategory": {
             "type": "enum",
             "members": {
@@ -2524,6 +2520,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The error information for <code>CreateFHIRDatastore</code> and <code>DeleteFHIRDatastore</code> actions.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#ErrorEvent": {
+            "type": "structure",
+            "members": {
+                "Error": {
+                    "target": "com.amazonaws.healthlake#AgentErrorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.healthlake#AgentMessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of an event that returns an exception encountered while serving the request.</p>"
             }
         },
         "com.amazonaws.healthlake#ErrorMessage": {
@@ -2897,7 +2915,16 @@
                 "aws.auth#sigv4": {
                     "name": "healthlake"
                 },
-                "aws.protocols#awsJson1_0": {},
+                "aws.protocols#awsJson1_0": {
+                    "http": [
+                        "h2",
+                        "http/1.1"
+                    ],
+                    "eventStreamHttp": [
+                        "h2",
+                        "http/1.1"
+                    ]
+                },
                 "smithy.api#documentation": "<p>This is the <i>HealthLake API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html\">What is HealthLake?</a> in the <i>HealthLake Developer Guide</i>.</p>",
                 "smithy.api#title": "Amazon HealthLake",
                 "smithy.rules#endpointBdd": {
@@ -3722,6 +3749,13 @@
             "type": "timestamp",
             "traits": {
                 "smithy.api#documentation": "A timestamp value."
+            }
+        },
+        "com.amazonaws.healthlake#HeartbeatEvent": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The type for a periodically emitted event to keep the connection alive.</p>"
             }
         },
         "com.amazonaws.healthlake#IamRoleArn": {
@@ -4848,22 +4882,6 @@
                 }
             }
         },
-        "com.amazonaws.healthlake#NotImplementedOperationException": {
-            "type": "structure",
-            "members": {
-                "Message": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The requested operation is not yet available. Check the service documentation for a list of supported operations.</p>",
-                "smithy.api#error": "server",
-                "smithy.api#httpError": 501
-            }
-        },
         "com.amazonaws.healthlake#OutputDataConfig": {
             "type": "union",
             "members": {
@@ -5006,6 +5024,21 @@
                     "min": 0,
                     "max": 99
                 }
+            }
+        },
+        "com.amazonaws.healthlake#ProgressEvent": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#AgentMessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An incremental progress update message by the agent</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type for an incremental progress update from the agent.</p>"
             }
         },
         "com.amazonaws.healthlake#PublishDataTransformationProfile": {
@@ -5958,6 +5991,21 @@
                 }
             }
         },
+        "com.amazonaws.healthlake#TextMessageEvent": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#AgentMessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An incremental text update from the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type for an incremental text update from the agent.</p>"
+            }
+        },
         "com.amazonaws.healthlake#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -6247,38 +6295,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Amazon S3 output location and encryption configuration for a transformation job.</p>"
-            }
-        },
-        "com.amazonaws.healthlake#UnauthorizedException": {
-            "type": "structure",
-            "members": {
-                "Message": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>You are not authorized to make this request. Verify that your Amazon Web Services credentials are valid and that you have the required permissions.</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 401
-            }
-        },
-        "com.amazonaws.healthlake#UnsupportedMIMETypeException": {
-            "type": "structure",
-            "members": {
-                "Message": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The content type in your request is not supported. Use a supported content type for this operation.</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 415
             }
         },
         "com.amazonaws.healthlake#UntagResource": {
@@ -6603,28 +6619,13 @@
                     "target": "com.amazonaws.healthlake#AccessDeniedException"
                 },
                 {
-                    "target": "com.amazonaws.healthlake#AgentMessageOutOfContextException"
-                },
-                {
-                    "target": "com.amazonaws.healthlake#ConversationNotFoundException"
-                },
-                {
                     "target": "com.amazonaws.healthlake#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.healthlake#NotImplementedOperationException"
                 },
                 {
                     "target": "com.amazonaws.healthlake#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.healthlake#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.healthlake#UnauthorizedException"
-                },
-                {
-                    "target": "com.amazonaws.healthlake#UnsupportedMIMETypeException"
                 },
                 {
                     "target": "com.amazonaws.healthlake#ValidationException"
@@ -6652,13 +6653,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "SourceFormat": {
-                    "target": "com.amazonaws.healthlake#SourceFormat",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The source data format for the transformation.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "InputMessage": {
                     "target": "com.amazonaws.healthlake#AgentInputMessage",
                     "traits": {
@@ -6669,7 +6663,8 @@
                 "ConversationId": {
                     "target": "com.amazonaws.healthlake#ConversationIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The conversation identifier for multi-turn interactions. Omit to start a new conversation.</p>"
+                        "smithy.api#documentation": "<p>The conversation identifier for multi-turn interactions. Omit to start a new conversation.</p>",
+                        "smithy.api#unstable": {}
                     }
                 }
             },
@@ -6682,16 +6677,10 @@
             "type": "structure",
             "members": {
                 "AgentResponse": {
-                    "target": "com.amazonaws.healthlake#AgentOutputMessage",
+                    "target": "com.amazonaws.healthlake#AgentOutputMessageStream",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response message from the agent.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "ConversationId": {
-                    "target": "com.amazonaws.healthlake#ConversationIdString",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The conversation identifier to use for follow-up messages in this conversation.</p>",
+                        "smithy.api#documentation": "<p>The streaming response from the agent.</p>",
+                        "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
                 }

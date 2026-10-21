@@ -3117,6 +3117,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#CedarDesignationPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A Cedar permit policy that defines what actions designation holders can perform.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
         "com.amazonaws.datazone#CellInformation": {
             "type": "structure",
             "members": {},
@@ -6113,6 +6123,167 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#CreateDesignation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#CreateDesignationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#CreateDesignationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates a new user-defined designation with a Cedar permit policy.\nThe designation defines a named role that can be assigned to project members.",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/designations"
+                }
+            }
+        },
+        "com.amazonaws.datazone#CreateDesignationInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain in which the designation is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DesignationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the designation. The name must be unique within the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the designation and its intended use.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.datazone#CedarDesignationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "The Cedar permit policy that defines what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. Defaults to true when omitted."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#CreateDesignationOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain in which the designation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DesignationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the designation. The name is unique within the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the designation and its intended use.</p>"
+                    }
+                },
+                "designationType": {
+                    "target": "com.amazonaws.datazone#DesignationType",
+                    "traits": {
+                        "smithy.api#documentation": "The classification of this designation. MANAGED designations are\nsystem-defined and cannot be modified or deleted.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.datazone#CedarDesignationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "The Cedar permit policy that governs what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. When true,\nDeleteDesignation is rejected until protection is disabled via UpdateDesignation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone user who created the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A designation defines a named role with a Cedar permit policy that controls\nwhat actions members holding this designation can perform within a project.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#CreateDomain": {
             "type": "operation",
             "input": {
@@ -8415,6 +8586,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The designation of the project membership.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "userCreatedDesignationId": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user-created designation to assign to the project member. Required when <code>designation</code> is <code>USER_CREATED_DESIGNATION</code>; must not be provided otherwise.</p>"
                     }
                 }
             },
@@ -11088,6 +11265,9 @@
                     "target": "com.amazonaws.datazone#CreateConnection"
                 },
                 {
+                    "target": "com.amazonaws.datazone#CreateDesignation"
+                },
+                {
                     "target": "com.amazonaws.datazone#CreateEnvironment"
                 },
                 {
@@ -11137,6 +11317,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#DeleteDataExportConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.datazone#DeleteDesignation"
                 },
                 {
                     "target": "com.amazonaws.datazone#DeleteEnvironment"
@@ -11191,6 +11374,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#GetDataExportConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.datazone#GetDesignation"
                 },
                 {
                     "target": "com.amazonaws.datazone#GetEnvironment"
@@ -11266,6 +11452,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#ListDataSourceRunActivities"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ListDesignations"
                 },
                 {
                     "target": "com.amazonaws.datazone#ListEntityOwners"
@@ -11386,6 +11575,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateConnection"
+                },
+                {
+                    "target": "com.amazonaws.datazone#UpdateDesignation"
                 },
                 {
                     "target": "com.amazonaws.datazone#UpdateEnvironment"
@@ -12787,6 +12979,75 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDesignation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteDesignationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#DeleteDesignationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a designation. Managed designations cannot be deleted.\nThis operation is idempotent.",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/designations/{identifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDesignationInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain that contains the designation to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the designation to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteDesignationOutput": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -14535,6 +14796,119 @@
                     "max": 2048
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.datazone#DesignationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#DesignationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\w -]+$"
+            }
+        },
+        "com.amazonaws.datazone#DesignationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#DesignationSummary"
+            }
+        },
+        "com.amazonaws.datazone#DesignationSummary": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain that contains the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DesignationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the designation. The name is unique within the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the designation and its intended use.</p>"
+                    }
+                },
+                "designationType": {
+                    "target": "com.amazonaws.datazone#DesignationType",
+                    "traits": {
+                        "smithy.api#documentation": "The classification of this designation."
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone user who created the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary representation of a designation returned by list operations."
+            }
+        },
+        "com.amazonaws.datazone#DesignationType": {
+            "type": "enum",
+            "members": {
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "System-defined designation that cannot be modified or deleted.",
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                },
+                "USER_CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Created by a user via the CreateDesignation API.",
+                        "smithy.api#enumValue": "USER_CREATED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The classification of a designation."
             }
         },
         "com.amazonaws.datazone#DetailedGlossaryTerm": {
@@ -18491,6 +18865,143 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDesignation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetDesignationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetDesignationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Gets the details of a designation, including its Cedar policy.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/designations/{identifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDesignationInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain that contains the designation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the designation to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetDesignationOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain that contains the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DesignationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the designation. The name is unique within the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the designation and its intended use.</p>"
+                    }
+                },
+                "designationType": {
+                    "target": "com.amazonaws.datazone#DesignationType",
+                    "traits": {
+                        "smithy.api#documentation": "The classification of this designation. MANAGED designations are\nsystem-defined and cannot be modified or deleted.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.datazone#CedarDesignationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "The Cedar permit policy that governs what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. When true,\nDeleteDesignation is rejected until protection is disabled via UpdateDesignation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone user who created the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A designation defines a named role with a Cedar permit policy that controls\nwhat actions members holding this designation can perform within a project.",
                 "smithy.api#output": {}
             }
         },
@@ -26727,6 +27238,108 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#ListDesignations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListDesignationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListDesignationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists the designations in a domain. Returns system-managed designations\nfirst, followed by user-created designations sorted alphabetically by name.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/designations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListDesignationsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain that contains the designations to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the results exceed the value of <code>MaxResults</code>, the previous call returns a pagination token. Specify this token in a subsequent call to <code>ListDesignations</code> to retrieve the next set of results. If not specified, the operation returns the first page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#ListDesignationsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 20,
+                        "smithy.api#documentation": "<p>The maximum number of designations to return in a single call to <code>ListDesignations</code>. If the number of designations exceeds <code>MaxResults</code>, the response includes a <code>NextToken</code> value. Use that token in a subsequent call to <code>ListDesignations</code> to retrieve the next set of designations. The default value is 20.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListDesignationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Maximum number of results for ListDesignations. Minimum 10 ensures\nbuilt-in designations always fit on the first page.",
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.datazone#ListDesignationsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#DesignationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The designation summaries that <code>ListDesignations</code> returned. Each item contains summary information about a designation in the domain.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that indicates that more results are available. Pass this token to a subsequent call to <code>ListDesignations</code> to retrieve the next page of results. If there are no more results, this value is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#ListDomainUnitsForParent": {
             "type": "operation",
             "input": {
@@ -31641,7 +32254,7 @@
                 "notifyOn": {
                     "target": "com.amazonaws.datazone#NotifyOnStates",
                     "traits": {
-                        "smithy.api#documentation": "Notebook run states that trigger notifications. Ordering is not significant.",
+                        "smithy.api#documentation": "<p>The notebook run states that trigger notifications. You can specify up to 7 states, and the ordering of the states is not significant.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -32918,6 +33531,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PROJECT_CATALOG_STEWARD"
                     }
+                },
+                "USER_CREATED_DESIGNATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_CREATED_DESIGNATION"
+                    }
                 }
             }
         },
@@ -32963,6 +33582,12 @@
                         "smithy.api#documentation": "<p>The designated role of a project member.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "userCreatedDesignationId": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user-created designation held by the project member when <code>designation</code> is <code>USER_CREATED_DESIGNATION</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -32990,6 +33615,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The designation of the project membership.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "userCreatedDesignationId": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user-created designation to assign to this member when creating the project. Required when <code>designation</code> is <code>USER_CREATED_DESIGNATION</code>; must not be provided otherwise.</p>"
                     }
                 }
             },
@@ -33022,6 +33653,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The project designation of the project policy grant principal.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "userCreatedDesignationId": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user-created designation granted to the project principal. Required when <code>projectDesignation</code> is <code>USER_CREATED_DESIGNATION</code>; must not be provided otherwise.</p>"
                     }
                 },
                 "projectIdentifier": {
@@ -42132,6 +42769,169 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#UpdateDesignation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#UpdateDesignationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#UpdateDesignationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates an existing designation. Managed designations cannot be modified.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/v2/domains/{domainIdentifier}/designations/{identifier}"
+                }
+            }
+        },
+        "com.amazonaws.datazone#UpdateDesignationInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain that contains the designation to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the designation to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DesignationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name of the designation. The name must be unique within the domain.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated human-readable description of the designation and its intended use.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.datazone#CedarDesignationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "The updated Cedar permit policy."
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. Omit to keep the existing value."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#UpdateDesignationOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone domain that contains the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DesignationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.datazone#DesignationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the designation. The name is unique within the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.datazone#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the designation and its intended use.</p>"
+                    }
+                },
+                "designationType": {
+                    "target": "com.amazonaws.datazone#DesignationType",
+                    "traits": {
+                        "smithy.api#documentation": "The classification of this designation. MANAGED designations are\nsystem-defined and cannot be modified or deleted.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.datazone#CedarDesignationPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "The Cedar permit policy that governs what actions holders of this\ndesignation are allowed to perform.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Whether deletion protection is enabled for this designation. When true,\nDeleteDesignation is rejected until protection is disabled via UpdateDesignation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.datazone#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DataZone user who created the designation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the designation was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A designation defines a named role with a Cedar permit policy that controls\nwhat actions members holding this designation can perform within a project.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#UpdateDomain": {
             "type": "operation",
             "input": {
@@ -45329,6 +46129,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PROJECT_CATALOG_STEWARD"
+                    }
+                },
+                "USER_CREATED_DESIGNATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_CREATED_DESIGNATION"
                     }
                 }
             }

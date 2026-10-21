@@ -56355,6 +56355,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The granular access control configuration for the security profile, including data table permissions.</p>"
                     }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#SecurityProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the security profile: <code>AWS_MANAGED</code> or <code>CUSTOMER_MANAGED</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -56496,6 +56502,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#SecurityProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the security profile: <code>AWS_MANAGED</code> or <code>CUSTOMER_MANAGED</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -56534,6 +56546,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
                     }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#SecurityProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the security profile: <code>AWS_MANAGED</code> or <code>CUSTOMER_MANAGED</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -56544,6 +56562,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#SecurityProfileSummary"
+            }
+        },
+        "com.amazonaws.connect#SecurityProfileType": {
+            "type": "enum",
+            "members": {
+                "AWS_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_MANAGED"
+                    }
+                },
+                "CUSTOMER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#SecurityProfiles": {
