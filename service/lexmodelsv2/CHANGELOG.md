@@ -1,3 +1,7 @@
+# v1.72.0 (2026-10-21)
+
+* **Feature**: Adds support for Assisted NLU - Dialog Manager mode allowing usage of LLMs as the default NLU system and dialog management
+
 # v1.71.5 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

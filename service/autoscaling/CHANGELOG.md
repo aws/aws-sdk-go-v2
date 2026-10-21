@@ -1,3 +1,7 @@
+# v1.79.0 (2026-10-21)
+
+* **Feature**: EC2 Auto Scaling now supports account settings, letting you manage account-level configuration for Auto Scaling.
+
 # v1.78.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

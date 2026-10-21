@@ -1,8 +1,0 @@
-{
-    "id": "5169b713-ea8c-4a63-8381-927b249ee43d",
-    "type": "bugfix",
-    "description": "Enforce event stream header key value length limit instead of truncating",
-    "modules": [
-        "aws/protocol/eventstream"
-    ]
-}

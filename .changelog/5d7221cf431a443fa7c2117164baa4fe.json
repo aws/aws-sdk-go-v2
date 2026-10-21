@@ -1,8 +1,0 @@
-{
-    "id": "5d7221cf-431a-443f-a7c2-117164baa4fe",
-    "type": "feature",
-    "description": "Adds support for Assisted NLU - Dialog Manager mode allowing usage of LLMs as the default NLU system and dialog management",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

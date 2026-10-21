@@ -1,8 +1,0 @@
-{
-    "id": "4ea43fd4-e966-4c41-b067-d157218d41e9",
-    "type": "feature",
-    "description": "Added support for AWS-managed security profiles.",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.52.0 (2026-10-21)
+
+* **Feature**: Release minor updates to API model
+
 # v1.51.5 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

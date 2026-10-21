@@ -1,8 +1,0 @@
-{
-    "id": "b1f3da28-3e19-4582-92d4-e099d008c61b",
-    "type": "feature",
-    "description": "EC2 Auto Scaling now supports account settings, letting you manage account-level configuration for Auto Scaling.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.107.0 (2026-10-21)
+
+* **Feature**: Adds AV1 CBR rate control and scene change detection. New sliding window peak bitrate setting for all codecs. DASH adaptation set grouping update. Option to disable the AV1 perceptual quality filter. Support for vertical (portrait) AV1 encoding.
+
 # v1.106.5 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

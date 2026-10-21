@@ -1,3 +1,7 @@
+# v1.138.0 (2026-10-21)
+
+* **Feature**: Adds support for SharePoint and OneDrive two-legged OAuth certificate credentials and Google Workspace service account credentials when creating data sources
+
 # v1.137.2 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

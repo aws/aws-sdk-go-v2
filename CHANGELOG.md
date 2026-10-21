@@ -1,3 +1,49 @@
+# Release (2026-10-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream`: [v1.7.23](aws/protocol/eventstream/CHANGELOG.md#v1723-2026-10-21)
+  * **Bug Fix**: Enforce event stream header key value length limit instead of truncating
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.79.0](service/autoscaling/CHANGELOG.md#v1790-2026-10-21)
+  * **Feature**: EC2 Auto Scaling now supports account settings, letting you manage account-level configuration for Auto Scaling.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.54.0](service/bedrockagentcore/CHANGELOG.md#v1540-2026-10-21)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.207.0](service/connect/CHANGELOG.md#v12070-2026-10-21)
+  * **Feature**: Added support for AWS-managed security profiles.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.14.0](service/connecthealth/CHANGELOG.md#v1140-2026-10-21)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.81.0](service/datazone/CHANGELOG.md#v1810-2026-10-21)
+  * **Feature**: Added custom designations support with new CRUD APIs. The designation field in project membership and policy grant APIs supports a new enum for custom designations. These APIs also support a new field for custom designation id.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.21.0](service/devopsagent/CHANGELOG.md#v1210-2026-10-21)
+  * **Feature**: Adds support for Microsoft Teams as a notification service. Associations can now be created and updated with a Microsoft Teams team and channel configuration using the DevOps Agent API and SDKs.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.340.0](service/ec2/CHANGELOG.md#v13400-2026-10-21)
+  * **Feature**: Adds new response fields to DescribeInstanceStatus and Network Insights analysis results.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.54.0](service/healthlake/CHANGELOG.md#v1540-2026-10-21)
+  * **Feature**: Update the UpdateProfileWithAgent API to return a streaming response to provide more frequent updates on what the agent is doing.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.64.0](service/iotsitewise/CHANGELOG.md#v1640-2026-10-21)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.72.0](service/lexmodelsv2/CHANGELOG.md#v1720-2026-10-21)
+  * **Feature**: Adds support for Assisted NLU - Dialog Manager mode allowing usage of LLMs as the default NLU system and dialog management
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.67.0](service/lightsail/CHANGELOG.md#v1670-2026-10-21)
+  * **Feature**: This release adds support for metrics related to system-disk performance.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.107.0](service/mediaconvert/CHANGELOG.md#v11070-2026-10-21)
+  * **Feature**: Adds AV1 CBR rate control and scene change detection. New sliding window peak bitrate setting for all codecs. DASH adaptation set grouping update. Option to disable the AV1 perceptual quality filter. Support for vertical (portrait) AV1 encoding.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.77.0](service/networkfirewall/CHANGELOG.md#v1770-2026-10-21)
+  * **Feature**: Adds support for Network Firewall Resolved IP validation.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.66.0](service/polly/CHANGELOG.md#v1660-2026-10-21)
+  * **Feature**: Added support for the new voices - Kenneth (en-US), Nate (en-US), Tina (de-DE), Carlos (es-US), Carolina (pt-BR), Leo (pt-BR), Curtis (en-AU), Kiara (en-IN), Arjun (en-IN) and Hyunduk (ko-KR). They are available as a Generative voices only.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.138.0](service/quicksight/CHANGELOG.md#v11380-2026-10-21)
+  * **Feature**: Adds support for SharePoint and OneDrive two-legged OAuth certificate credentials and Google Workspace service account credentials when creating data sources
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.51.0](service/redshiftdata/CHANGELOG.md#v1510-2026-10-21)
+  * **Feature**: Add Redshift QueryUUID field to DescribeStatement response
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.52.0](service/sfn/CHANGELOG.md#v1520-2026-10-21)
+  * **Feature**: Release minor updates to API model
+
 # Release (2026-10-20)
 
 ## General Highlights

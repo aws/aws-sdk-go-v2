@@ -1,3 +1,8 @@
+# v1.51.0 (2026-10-21)
+
+* **Feature**: Add Redshift QueryUUID field to DescribeStatement response
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.50.0 (2026-10-20)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

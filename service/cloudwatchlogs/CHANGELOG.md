@@ -1,3 +1,7 @@
+# v1.90.1 (2026-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.90.0 (2026-10-19)
 
 * **Feature**: Amazon CloudWatch Logs now supports filtering DescribeDeliverySources by resourceArns, DescribeDeliveryDestinations by names, and DescribeDeliveries by deliverySourceNames.

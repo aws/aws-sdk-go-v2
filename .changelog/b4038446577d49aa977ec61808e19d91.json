@@ -1,8 +1,0 @@
-{
-    "id": "b4038446-577d-49aa-977e-c61808e19d91",
-    "type": "feature",
-    "description": "Update the UpdateProfileWithAgent API to return a streaming response to provide more frequent updates on what the agent is doing.",
-    "modules": [
-        "service/healthlake"
-    ]
-}

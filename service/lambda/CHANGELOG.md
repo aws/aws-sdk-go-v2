@@ -1,3 +1,7 @@
+# v1.113.2 (2026-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.113.1 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

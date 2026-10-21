@@ -1,8 +1,0 @@
-{
-    "id": "13da2cdb-7246-4ae8-a37b-7939ecfc3acd",
-    "type": "feature",
-    "description": "Add Redshift QueryUUID field to DescribeStatement response",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}

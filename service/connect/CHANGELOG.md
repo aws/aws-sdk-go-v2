@@ -1,3 +1,7 @@
+# v1.207.0 (2026-10-21)
+
+* **Feature**: Added support for AWS-managed security profiles.
+
 # v1.206.0 (2026-10-19)
 
 * **Feature**: Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.

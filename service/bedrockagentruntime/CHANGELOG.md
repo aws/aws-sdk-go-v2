@@ -1,3 +1,7 @@
+# v1.65.1 (2026-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.0 (2026-10-19)
 
 * **Feature**: Adds support for applying a Retrieval Instruction, optionally by version, to AgenticRetrieveStream requests for Amazon Bedrock Knowledge Bases, and reports the applied instruction and version on the trace.

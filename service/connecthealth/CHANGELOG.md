@@ -1,3 +1,8 @@
+# v1.14.0 (2026-10-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2026-10-20)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

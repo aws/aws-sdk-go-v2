@@ -1,3 +1,7 @@
+# v1.77.0 (2026-10-21)
+
+* **Feature**: Adds support for Network Firewall Resolved IP validation.
+
 # v1.76.2 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

@@ -1,3 +1,7 @@
+# v1.54.0 (2026-10-21)
+
+* **Feature**: Update the UpdateProfileWithAgent API to return a streaming response to provide more frequent updates on what the agent is doing.
+
 # v1.53.2 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

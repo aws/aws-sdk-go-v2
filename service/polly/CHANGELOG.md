@@ -1,3 +1,8 @@
+# v1.66.0 (2026-10-21)
+
+* **Feature**: Added support for the new voices - Kenneth (en-US), Nate (en-US), Tina (de-DE), Carlos (es-US), Carolina (pt-BR), Leo (pt-BR), Curtis (en-AU), Kiara (en-IN), Arjun (en-IN) and Hyunduk (ko-KR). They are available as a Generative voices only.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.4 (2026-10-09.2)
 
 * **Dependency Update**: Update to smithy-go v1.28.5.

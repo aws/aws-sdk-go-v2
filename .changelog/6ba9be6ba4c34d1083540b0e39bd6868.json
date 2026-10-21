@@ -1,8 +1,0 @@
-{
-    "id": "6ba9be6b-a4c3-4d10-8354-0b0e39bd6868",
-    "type": "feature",
-    "description": "Adds new response fields to DescribeInstanceStatus and Network Insights analysis results.",
-    "modules": [
-        "service/ec2"
-    ]
-}

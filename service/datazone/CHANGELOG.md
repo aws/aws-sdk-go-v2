@@ -1,3 +1,8 @@
+# v1.81.0 (2026-10-21)
+
+* **Feature**: Added custom designations support with new CRUD APIs. The designation field in project membership and policy grant APIs supports a new enum for custom designations. These APIs also support a new field for custom designation id.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.80.0 (2026-10-20)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

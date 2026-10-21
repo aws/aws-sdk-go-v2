@@ -1,3 +1,7 @@
+# v1.67.0 (2026-10-21)
+
+* **Feature**: This release adds support for metrics related to system-disk performance.
+
 # v1.66.5 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

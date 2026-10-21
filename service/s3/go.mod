@@ -4,7 +4,7 @@ go 1.24
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.47.3
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.22
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.23
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.6
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.6
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.6

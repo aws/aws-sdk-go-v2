@@ -1,8 +1,0 @@
-{
-    "id": "38edd31c-3333-4dcd-8f70-87ad9607d455",
-    "type": "feature",
-    "description": "Release minor updates to API model",
-    "modules": [
-        "service/sfn"
-    ]
-}

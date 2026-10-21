@@ -1,8 +1,0 @@
-{
-    "id": "66a19d78-decd-42fe-bcd7-ece3c9cca23b",
-    "type": "feature",
-    "description": "Adds support for SharePoint and OneDrive two-legged OAuth certificate credentials and Google Workspace service account credentials when creating data sources",
-    "modules": [
-        "service/quicksight"
-    ]
-}
