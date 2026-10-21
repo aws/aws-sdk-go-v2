@@ -11036,6 +11036,19 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 				ClientSecret: ptr.String("__ClientSecret__"),
 				Username:     ptr.String("__Username__"),
 			},
+			ServiceAccountCredentials: &types.ServiceAccountCredentials{
+				AdminAccountEmail:        ptr.String("__AdminAccountEmail__"),
+				ServiceAccountPrivateKey: ptr.String("__ServiceAccountPrivateKey__"),
+				ClientEmail:              ptr.String("__ClientEmail__"),
+			},
+			SharePointClientCredentials: &types.SharePointClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
+			OneDriveClientCredentials: &types.OneDriveClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
 		},
 		Permissions: []types.ResourcePermission{
 			{
@@ -50115,6 +50128,19 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 				ClientSecret: ptr.String("__ClientSecret__"),
 				Username:     ptr.String("__Username__"),
 			},
+			ServiceAccountCredentials: &types.ServiceAccountCredentials{
+				AdminAccountEmail:        ptr.String("__AdminAccountEmail__"),
+				ServiceAccountPrivateKey: ptr.String("__ServiceAccountPrivateKey__"),
+				ClientEmail:              ptr.String("__ClientEmail__"),
+			},
+			SharePointClientCredentials: &types.SharePointClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
+			OneDriveClientCredentials: &types.OneDriveClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
 		},
 		VpcConnectionProperties: &types.VpcConnectionProperties{
 			VpcConnectionArn: ptr.String("__VpcConnectionArn__"),
@@ -59547,6 +59573,19 @@ func TestCheckResponseSnapshot_Error_CustomerManagedKeyUnavailableException(t *t
 				ClientId:     ptr.String("__ClientId__"),
 				ClientSecret: ptr.String("__ClientSecret__"),
 				Username:     ptr.String("__Username__"),
+			},
+			ServiceAccountCredentials: &types.ServiceAccountCredentials{
+				AdminAccountEmail:        ptr.String("__AdminAccountEmail__"),
+				ServiceAccountPrivateKey: ptr.String("__ServiceAccountPrivateKey__"),
+				ClientEmail:              ptr.String("__ClientEmail__"),
+			},
+			SharePointClientCredentials: &types.SharePointClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
+			},
+			OneDriveClientCredentials: &types.OneDriveClientCredentials{
+				KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+				CertThumbprint: ptr.String("__CertThumbprint__"),
 			},
 		},
 		Permissions: []types.ResourcePermission{

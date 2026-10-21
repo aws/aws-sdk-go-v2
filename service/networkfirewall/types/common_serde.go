@@ -197,6 +197,19 @@ func serializeFirewallPolicies(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeFirewallPolicyErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []FirewallPolicyError) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFirewalls(s smithy.ShapeSerializer, schema *smithy.Schema, v []FirewallMetadata) {
 	if v == nil {
 		return
@@ -519,6 +532,19 @@ func serializeResourceNameList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRoute53ResolvedIPValidationAddresses(s smithy.ShapeSerializer, schema *smithy.Schema, v []Address) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -1156,6 +1182,28 @@ func deserializeFirewallPolicies(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeFirewallPolicyErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FirewallPolicyError) error {
+	*v = make([]FirewallPolicyError, 0)
+	var vv FirewallPolicyError
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FirewallPolicyError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FirewallPolicyError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFirewalls(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FirewallMetadata) error {
 	*v = make([]FirewallMetadata, 0)
 	var vv FirewallMetadata
@@ -1714,6 +1762,28 @@ func deserializeResourceNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRoute53ResolvedIPValidationAddresses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Address) error {
+	*v = make([]Address, 0)
+	var vv Address
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Address
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = Address{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

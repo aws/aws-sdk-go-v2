@@ -1087,6 +1087,7 @@ type Av1RateControlMode string
 
 // Enum values for Av1RateControlMode
 const (
+	Av1RateControlModeCbr  Av1RateControlMode = "CBR"
 	Av1RateControlModeQvbr Av1RateControlMode = "QVBR"
 )
 
@@ -1096,7 +1097,29 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (Av1RateControlMode) Values() []Av1RateControlMode {
 	return []Av1RateControlMode{
+		"CBR",
 		"QVBR",
+	}
+}
+
+type Av1SceneChangeDetect string
+
+// Enum values for Av1SceneChangeDetect
+const (
+	Av1SceneChangeDetectDisabled            Av1SceneChangeDetect = "DISABLED"
+	Av1SceneChangeDetectEnabled             Av1SceneChangeDetect = "ENABLED"
+	Av1SceneChangeDetectTransitionDetection Av1SceneChangeDetect = "TRANSITION_DETECTION"
+)
+
+// Values returns all known values for Av1SceneChangeDetect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1SceneChangeDetect) Values() []Av1SceneChangeDetect {
+	return []Av1SceneChangeDetect{
+		"DISABLED",
+		"ENABLED",
+		"TRANSITION_DETECTION",
 	}
 }
 
@@ -2663,6 +2686,23 @@ func (CopyProtectionAction) Values() []CopyProtectionAction {
 	return []CopyProtectionAction{
 		"PASSTHROUGH",
 		"STRIP",
+	}
+}
+
+type DashAdaptationSetGrouping string
+
+// Enum values for DashAdaptationSetGrouping
+const (
+	DashAdaptationSetGroupingCodec DashAdaptationSetGrouping = "CODEC"
+)
+
+// Values returns all known values for DashAdaptationSetGrouping. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashAdaptationSetGrouping) Values() []DashAdaptationSetGrouping {
+	return []DashAdaptationSetGrouping{
+		"CODEC",
 	}
 }
 
@@ -8399,14 +8439,16 @@ type NoiseReducerFilter string
 
 // Enum values for NoiseReducerFilter
 const (
-	NoiseReducerFilterBilateral NoiseReducerFilter = "BILATERAL"
-	NoiseReducerFilterMean      NoiseReducerFilter = "MEAN"
-	NoiseReducerFilterGaussian  NoiseReducerFilter = "GAUSSIAN"
-	NoiseReducerFilterLanczos   NoiseReducerFilter = "LANCZOS"
-	NoiseReducerFilterSharpen   NoiseReducerFilter = "SHARPEN"
-	NoiseReducerFilterConserve  NoiseReducerFilter = "CONSERVE"
-	NoiseReducerFilterSpatial   NoiseReducerFilter = "SPATIAL"
-	NoiseReducerFilterTemporal  NoiseReducerFilter = "TEMPORAL"
+	NoiseReducerFilterBilateral  NoiseReducerFilter = "BILATERAL"
+	NoiseReducerFilterMean       NoiseReducerFilter = "MEAN"
+	NoiseReducerFilterGaussian   NoiseReducerFilter = "GAUSSIAN"
+	NoiseReducerFilterLanczos    NoiseReducerFilter = "LANCZOS"
+	NoiseReducerFilterSharpen    NoiseReducerFilter = "SHARPEN"
+	NoiseReducerFilterConserve   NoiseReducerFilter = "CONSERVE"
+	NoiseReducerFilterSpatial    NoiseReducerFilter = "SPATIAL"
+	NoiseReducerFilterTemporal   NoiseReducerFilter = "TEMPORAL"
+	NoiseReducerFilterPerceptual NoiseReducerFilter = "PERCEPTUAL"
+	NoiseReducerFilterNone       NoiseReducerFilter = "NONE"
 )
 
 // Values returns all known values for NoiseReducerFilter. Note that this can be
@@ -8423,6 +8465,8 @@ func (NoiseReducerFilter) Values() []NoiseReducerFilter {
 		"CONSERVE",
 		"SPATIAL",
 		"TEMPORAL",
+		"PERCEPTUAL",
+		"NONE",
 	}
 }
 

@@ -2191,6 +2191,71 @@ func validateMonthlyRecurrence(v *types.MonthlyRecurrence) error {
 	}
 }
 
+func validateMSTeamsChannel(v *types.MSTeamsChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsChannel"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMSTeamsConfiguration(v *types.MSTeamsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsConfiguration"}
+	if v.TeamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeamId"))
+	}
+	if v.TeamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeamName"))
+	}
+	if v.TransmissionTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransmissionTarget"))
+	} else if v.TransmissionTarget != nil {
+		if err := validateMSTeamsTransmissionTarget(v.TransmissionTarget); err != nil {
+			invalidParams.AddNested("TransmissionTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMSTeamsTransmissionTarget(v *types.MSTeamsTransmissionTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsTransmissionTarget"}
+	if v.OpsOncallTarget != nil {
+		if err := validateMSTeamsChannel(v.OpsOncallTarget); err != nil {
+			invalidParams.AddNested("OpsOncallTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpsSRETarget != nil {
+		if err := validateMSTeamsChannel(v.OpsSRETarget); err != nil {
+			invalidParams.AddNested("OpsSRETarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNetworkAccessConfiguration(v types.NetworkAccessConfiguration) error {
 	if v == nil {
 		return nil
@@ -2769,6 +2834,11 @@ func validateServiceConfiguration(v types.ServiceConfiguration) error {
 	case *types.ServiceConfigurationMemberMcpserversigv4:
 		if err := validateMCPServerSigV4Configuration(&uv.Value); err != nil {
 			invalidParams.AddNested("[mcpserversigv4]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceConfigurationMemberMsteams:
+		if err := validateMSTeamsConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[msteams]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ServiceConfigurationMemberPagerduty:

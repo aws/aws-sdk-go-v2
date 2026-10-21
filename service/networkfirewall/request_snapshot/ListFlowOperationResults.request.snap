@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: NetworkFirewall_20201112.ListFlowOperationResults
 
-{"AvailabilityZone":"__AvailabilityZone__","FirewallArn":"__FirewallArn__","FlowOperationId":"__FlowOperationId__","MaxResults":1,"NextToken":"__NextToken__","VpcEndpointAssociationArn":"__VpcEndpointAssociationArn__","VpcEndpointId":"__VpcEndpointId__"}
+{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","FirewallArn":"__FirewallArn__","FlowOperationId":"__FlowOperationId__","MaxResults":1,"NextToken":"__NextToken__","VpcEndpointAssociationArn":"__VpcEndpointAssociationArn__","VpcEndpointId":"__VpcEndpointId__"}

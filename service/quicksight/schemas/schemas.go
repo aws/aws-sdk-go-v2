@@ -2418,6 +2418,11 @@ var AdHocFilteringOption = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AdHocFilteringOption_AvailabilityStatus *smithy.Schema
 
+var _AdminAccountEmail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AdminAccountEmail",
+}, smithy.ShapeTypeString, 0)
+
 var Agent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "Agent",
@@ -6724,6 +6729,11 @@ var ClientCredentialsSource = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var ClientCredentialsSource_PLAIN_CREDENTIALS *smithy.Schema
 
+var _ClientEmail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ClientEmail",
+}, smithy.ShapeTypeString, 0)
+
 var _ClientId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ClientId",
@@ -9251,10 +9261,15 @@ var _DataSourceArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DataSourceArn",
 }, smithy.ShapeTypeString, 0)
 
+var _DataSourceCertThumbprint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DataSourceCertThumbprint",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var DataSourceCredentials = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DataSourceCredentials",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
 var DataSourceCredentials_CredentialPair *smithy.Schema
 
 var DataSourceCredentials_CopySourceArn *smithy.Schema
@@ -9266,6 +9281,12 @@ var DataSourceCredentials_KeyPairCredentials *smithy.Schema
 var DataSourceCredentials_WebProxyCredentials *smithy.Schema
 
 var DataSourceCredentials_OAuthClientCredentials *smithy.Schema
+
+var DataSourceCredentials_ServiceAccountCredentials *smithy.Schema
+
+var DataSourceCredentials_SharePointClientCredentials *smithy.Schema
+
+var DataSourceCredentials_OneDriveClientCredentials *smithy.Schema
 
 var DataSourceErrorInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -9306,6 +9327,11 @@ var DataSourceFilterAttribute_DIRECT_QUICKSIGHT_OWNER *smithy.Schema
 var DataSourceFilterAttribute_DIRECT_QUICKSIGHT_SOLE_OWNER *smithy.Schema
 
 var DataSourceFilterAttribute_DATASOURCE_NAME *smithy.Schema
+
+var _DataSourceKmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DataSourceKmsKeyArn",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _DataSourceList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -15954,6 +15980,14 @@ var _OnClause = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OnClause",
 }, smithy.ShapeTypeString, 0)
 
+var OneDriveClientCredentials = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "OneDriveClientCredentials",
+}, smithy.ShapeTypeStructure, 2)
+var OneDriveClientCredentials_KmsKeyArn *smithy.Schema
+
+var OneDriveClientCredentials_CertThumbprint *smithy.Schema
+
 var _OneDriveClientId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "OneDriveClientId",
@@ -19110,6 +19144,16 @@ var _SeriesItemList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SeriesItemList_member *smithy.Schema
 
+var ServiceAccountCredentials = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ServiceAccountCredentials",
+}, smithy.ShapeTypeStructure, 3)
+var ServiceAccountCredentials_AdminAccountEmail *smithy.Schema
+
+var ServiceAccountCredentials_ServiceAccountPrivateKey *smithy.Schema
+
+var ServiceAccountCredentials_ClientEmail *smithy.Schema
+
 var ServiceNowParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ServiceNowParameters",
@@ -19211,6 +19255,14 @@ var SharedViewConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SharedViewConfigurations",
 }, smithy.ShapeTypeStructure, 1)
 var SharedViewConfigurations_Enabled *smithy.Schema
+
+var SharePointClientCredentials = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "SharePointClientCredentials",
+}, smithy.ShapeTypeStructure, 2)
+var SharePointClientCredentials_KmsKeyArn *smithy.Schema
+
+var SharePointClientCredentials_CertThumbprint *smithy.Schema
 
 var _SharePointClientId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -41690,6 +41742,20 @@ func init() {
 
 	OAuthClientCredentials_Username = OAuthClientCredentials.AddMember("Username", _OAuthUsername)
 
+	ServiceAccountCredentials_AdminAccountEmail = ServiceAccountCredentials.AddMember("AdminAccountEmail", _AdminAccountEmail)
+
+	ServiceAccountCredentials_ServiceAccountPrivateKey = ServiceAccountCredentials.AddMember("ServiceAccountPrivateKey", _PrivateKey)
+
+	ServiceAccountCredentials_ClientEmail = ServiceAccountCredentials.AddMember("ClientEmail", _ClientEmail)
+
+	SharePointClientCredentials_KmsKeyArn = SharePointClientCredentials.AddMember("KmsKeyArn", _DataSourceKmsKeyArn)
+
+	SharePointClientCredentials_CertThumbprint = SharePointClientCredentials.AddMember("CertThumbprint", _DataSourceCertThumbprint)
+
+	OneDriveClientCredentials_KmsKeyArn = OneDriveClientCredentials.AddMember("KmsKeyArn", _DataSourceKmsKeyArn)
+
+	OneDriveClientCredentials_CertThumbprint = OneDriveClientCredentials.AddMember("CertThumbprint", _DataSourceCertThumbprint)
+
 	DataSourceCredentials_CredentialPair = DataSourceCredentials.AddMember("CredentialPair", CredentialPair)
 
 	DataSourceCredentials_CopySourceArn = DataSourceCredentials.AddMember("CopySourceArn", _CopySourceArn)
@@ -41701,6 +41767,12 @@ func init() {
 	DataSourceCredentials_WebProxyCredentials = DataSourceCredentials.AddMember("WebProxyCredentials", WebProxyCredentials)
 
 	DataSourceCredentials_OAuthClientCredentials = DataSourceCredentials.AddMember("OAuthClientCredentials", OAuthClientCredentials)
+
+	DataSourceCredentials_ServiceAccountCredentials = DataSourceCredentials.AddMember("ServiceAccountCredentials", ServiceAccountCredentials)
+
+	DataSourceCredentials_SharePointClientCredentials = DataSourceCredentials.AddMember("SharePointClientCredentials", SharePointClientCredentials)
+
+	DataSourceCredentials_OneDriveClientCredentials = DataSourceCredentials.AddMember("OneDriveClientCredentials", OneDriveClientCredentials)
 
 	DataSourceFilterAttribute_DIRECT_QUICKSIGHT_VIEWER_OR_OWNER = DataSourceFilterAttribute.AddMember("DIRECT_QUICKSIGHT_VIEWER_OR_OWNER", smithyprelude.Unit)
 

@@ -1576,6 +1576,11 @@ func validateFirewallPolicy(v *types.FirewallPolicy) error {
 			invalidParams.AddNested("PolicyVariables", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Route53ResolvedIPValidation != nil {
+		if err := validateRoute53ResolvedIPValidation(v.Route53ResolvedIPValidation); err != nil {
+			invalidParams.AddNested("Route53ResolvedIPValidation", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1917,6 +1922,54 @@ func validatePublishMetricAction(v *types.PublishMetricAction) error {
 	} else if v.Dimensions != nil {
 		if err := validateDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoute53ResolvedIPValidation(v *types.Route53ResolvedIPValidation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Route53ResolvedIPValidation"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.DNSFirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DNSFirewallRuleGroupId"))
+	}
+	if len(v.DNSExpiryExceptionPolicy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DNSExpiryExceptionPolicy"))
+	}
+	if v.BypassDestinationValidationIPRanges != nil {
+		if err := validateRoute53ResolvedIPValidationAddresses(v.BypassDestinationValidationIPRanges); err != nil {
+			invalidParams.AddNested("BypassDestinationValidationIPRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceIPRanges != nil {
+		if err := validateRoute53ResolvedIPValidationAddresses(v.SourceIPRanges); err != nil {
+			invalidParams.AddNested("SourceIPRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoute53ResolvedIPValidationAddresses(v []types.Address) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Route53ResolvedIPValidationAddresses"}
+	for i := range v {
+		if err := validateAddress(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1,0 +1,8 @@
+{
+    "id": "7ceb8783-1ee5-49bc-8820-ffe48da1708d",
+    "type": "feature",
+    "description": "This release adds support for metrics related to system-disk performance.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

@@ -1765,6 +1765,37 @@ var MonthlyRecurrence = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var MonthlyRecurrence_dayOfMonth *smithy.Schema
 
+var MSTeamsChannel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "MSTeamsChannel",
+}, smithy.ShapeTypeStructure, 2)
+var MSTeamsChannel_channelName *smithy.Schema
+
+var MSTeamsChannel_channelId *smithy.Schema
+
+var _MSTeamsChannelId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "MSTeamsChannelId",
+}, smithy.ShapeTypeString, 0)
+
+var MSTeamsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "MSTeamsConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var MSTeamsConfiguration_teamId *smithy.Schema
+
+var MSTeamsConfiguration_teamName *smithy.Schema
+
+var MSTeamsConfiguration_transmissionTarget *smithy.Schema
+
+var MSTeamsTransmissionTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "MSTeamsTransmissionTarget",
+}, smithy.ShapeTypeStructure, 2)
+var MSTeamsTransmissionTarget_opsOncallTarget *smithy.Schema
+
+var MSTeamsTransmissionTarget_opsSRETarget *smithy.Schema
+
 var NetworkAccessConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "NetworkAccessConfiguration",
@@ -2708,7 +2739,7 @@ var SendMessageUsageInfo_totalTokens *smithy.Schema
 var Service = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "Service",
-}, smithy.ShapeTypeEnum, 18)
+}, smithy.ShapeTypeEnum, 19)
 var Service_GITHUB *smithy.Schema
 
 var Service_SLACK *smithy.Schema
@@ -2716,6 +2747,8 @@ var Service_SLACK *smithy.Schema
 var Service_AZURE *smithy.Schema
 
 var Service_AZURE_DEVOPS *smithy.Schema
+
+var Service_MS_TEAMS *smithy.Schema
 
 var Service_DYNATRACE *smithy.Schema
 
@@ -2748,7 +2781,7 @@ var Service_REMOTE_AGENT_SIGV4 *smithy.Schema
 var ServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "ServiceConfiguration",
-}, smithy.ShapeTypeUnion, 20)
+}, smithy.ShapeTypeUnion, 21)
 var ServiceConfiguration_sourceAws *smithy.Schema
 
 var ServiceConfiguration_aws *smithy.Schema
@@ -2786,6 +2819,8 @@ var ServiceConfiguration_mcpserversigv4 *smithy.Schema
 var ServiceConfiguration_remoteagent *smithy.Schema
 
 var ServiceConfiguration_remoteagentsigv4 *smithy.Schema
+
+var ServiceConfiguration_msteams *smithy.Schema
 
 var ServiceConfiguration_releaseManagement *smithy.Schema
 
@@ -5035,6 +5070,20 @@ func init() {
 
 	MCPServerSigV4Configuration_toolDetails = MCPServerSigV4Configuration.AddMember("toolDetails", _MCPToolDetailsList)
 
+	MSTeamsChannel_channelName = MSTeamsChannel.AddMember("channelName", smithyprelude.String)
+
+	MSTeamsChannel_channelId = MSTeamsChannel.AddMember("channelId", _MSTeamsChannelId)
+
+	MSTeamsTransmissionTarget_opsOncallTarget = MSTeamsTransmissionTarget.AddMember("opsOncallTarget", MSTeamsChannel)
+
+	MSTeamsTransmissionTarget_opsSRETarget = MSTeamsTransmissionTarget.AddMember("opsSRETarget", MSTeamsChannel)
+
+	MSTeamsConfiguration_teamId = MSTeamsConfiguration.AddMember("teamId", _Guid)
+
+	MSTeamsConfiguration_teamName = MSTeamsConfiguration.AddMember("teamName", smithyprelude.String)
+
+	MSTeamsConfiguration_transmissionTarget = MSTeamsConfiguration.AddMember("transmissionTarget", MSTeamsTransmissionTarget)
+
 	PrivateNetworkAccess_privateConnectionName = PrivateNetworkAccess.AddMember("privateConnectionName", _PrivateConnectionName)
 
 	PrivateNetworkAccess_runtimeRoleArn = PrivateNetworkAccess.AddMember("runtimeRoleArn", _RoleArn)
@@ -5082,6 +5131,8 @@ func init() {
 	ServiceConfiguration_remoteagent = ServiceConfiguration.AddMember("remoteagent", RemoteAgentConfiguration)
 
 	ServiceConfiguration_remoteagentsigv4 = ServiceConfiguration.AddMember("remoteagentsigv4", RemoteAgentSigV4Configuration)
+
+	ServiceConfiguration_msteams = ServiceConfiguration.AddMember("msteams", MSTeamsConfiguration)
 
 	ServiceConfiguration_releaseManagement = ServiceConfiguration.AddMember("releaseManagement", ReleaseManagementConfiguration)
 
@@ -5738,6 +5789,8 @@ func init() {
 	Service_AZURE = Service.AddMember("AZURE", smithyprelude.Unit)
 
 	Service_AZURE_DEVOPS = Service.AddMember("AZURE_DEVOPS", smithyprelude.Unit)
+
+	Service_MS_TEAMS = Service.AddMember("MS_TEAMS", smithyprelude.Unit)
 
 	Service_DYNATRACE = Service.AddMember("DYNATRACE", smithyprelude.Unit)
 

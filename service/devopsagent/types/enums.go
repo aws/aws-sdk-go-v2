@@ -677,6 +677,7 @@ const (
 	ServiceSlack        Service = "slack"
 	ServiceAzure        Service = "azure"
 	ServiceAzureDevops  Service = "azuredevops"
+	ServiceMsTeams      Service = "msteams"
 	ServiceDynatrace    Service = "dynatrace"
 	ServiceServicenow   Service = "servicenow"
 	ServicePagerduty    Service = "pagerduty"
@@ -712,6 +713,7 @@ func (Service) Values() []Service {
 		"slack",
 		"azure",
 		"azuredevops",
+		"msteams",
 		"dynatrace",
 		"servicenow",
 		"pagerduty",

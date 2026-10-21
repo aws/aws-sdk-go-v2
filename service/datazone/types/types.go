@@ -5777,6 +5777,123 @@ func (v *DeploymentProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Summary representation of a designation returned by list operations.
+type DesignationSummary struct {
+
+	// The identifier of the Amazon DataZone user who created the designation.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// Whether deletion protection is enabled for this designation.
+	//
+	// This member is required.
+	DeletionProtection *bool
+
+	// The identifier of the Amazon DataZone domain that contains the designation.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The unique ID of the designation.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the designation. The name is unique within the domain.
+	//
+	// This member is required.
+	Name *string
+
+	// The date and time when the designation was created.
+	CreatedAt *time.Time
+
+	// A human-readable description of the designation and its intended use.
+	Description *string
+
+	// The classification of this designation.
+	DesignationType DesignationType
+
+	// The date and time when the designation was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *DesignationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DesignationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DesignationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DesignationSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DesignationSummary_createdBy, *v.CreatedBy)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.DesignationSummary_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DesignationSummary_description, *v.Description)
+	}
+	if v.DesignationType != "" {
+		s.WriteString(schemas.DesignationSummary_designationType, string(v.DesignationType))
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DesignationSummary_domainId, *v.DomainId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DesignationSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DesignationSummary_name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DesignationSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DesignationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DesignationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DesignationSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DesignationSummary_createdAt, v.CreatedAt)
+		case schemas.DesignationSummary_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DesignationSummary_createdBy, v.CreatedBy)
+		case schemas.DesignationSummary_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.DesignationSummary_deletionProtection, v.DeletionProtection)
+		case schemas.DesignationSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DesignationSummary_description, v.Description)
+		case schemas.DesignationSummary_designationType:
+			var ev string
+			if err := d.ReadString(schemas.DesignationSummary_designationType, &ev); err != nil {
+				return err
+			}
+			v.DesignationType = DesignationType(ev)
+			return nil
+		case schemas.DesignationSummary_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DesignationSummary_domainId, v.DomainId)
+		case schemas.DesignationSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DesignationSummary_id, v.Id)
+		case schemas.DesignationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DesignationSummary_name, v.Name)
+		case schemas.DesignationSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DesignationSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Details of a glossary term attached to the inventory asset.
 type DetailedGlossaryTerm struct {
 
@@ -13002,7 +13119,8 @@ func (v *NotEqualToExpression) Deserialize(d smithy.ShapeDeserializer) error {
 // Studio.
 type NotificationConfig struct {
 
-	// Notebook run states that trigger notifications. Ordering is not significant.
+	// The notebook run states that trigger notifications. You can specify up to 7
+	// states, and the ordering of the states is not significant.
 	//
 	// This member is required.
 	NotifyOn []NotifyOnState
@@ -14556,6 +14674,10 @@ type ProjectMember struct {
 	// This member is required.
 	MemberDetails MemberDetails
 
+	// The ID of the user-created designation held by the project member when
+	// designation is USER_CREATED_DESIGNATION .
+	UserCreatedDesignationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -14570,6 +14692,9 @@ func (v *ProjectMember) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.ProjectMember_designation, string(v.Designation))
 	}
 	serializeMemberDetails(s, schemas.ProjectMember_memberDetails, v.MemberDetails)
+	if v.UserCreatedDesignationId != nil {
+		s.WriteString(schemas.ProjectMember_userCreatedDesignationId, *v.UserCreatedDesignationId)
+	}
 }
 func (v *ProjectMember) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectMember, func(s *smithy.Schema) error {
@@ -14583,6 +14708,9 @@ func (v *ProjectMember) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.ProjectMember_memberDetails:
 			return deserializeMemberDetails(d, schemas.ProjectMember_memberDetails, &v.MemberDetails)
+		case schemas.ProjectMember_userCreatedDesignationId:
+			v.UserCreatedDesignationId = new(string)
+			return d.ReadString(schemas.ProjectMember_userCreatedDesignationId, v.UserCreatedDesignationId)
 		}
 		return nil
 	})
@@ -14602,6 +14730,11 @@ type ProjectMembershipAssignment struct {
 	// This member is required.
 	Member Member
 
+	// The ID of the user-created designation to assign to this member when creating
+	// the project. Required when designation is USER_CREATED_DESIGNATION ; must not be
+	// provided otherwise.
+	UserCreatedDesignationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -14616,6 +14749,9 @@ func (v *ProjectMembershipAssignment) SerializeMembers(s smithy.ShapeSerializer)
 		s.WriteString(schemas.ProjectMembershipAssignment_designation, string(v.Designation))
 	}
 	serializeMember(s, schemas.ProjectMembershipAssignment_member, v.Member)
+	if v.UserCreatedDesignationId != nil {
+		s.WriteString(schemas.ProjectMembershipAssignment_userCreatedDesignationId, *v.UserCreatedDesignationId)
+	}
 }
 func (v *ProjectMembershipAssignment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectMembershipAssignment, func(s *smithy.Schema) error {
@@ -14629,6 +14765,9 @@ func (v *ProjectMembershipAssignment) Deserialize(d smithy.ShapeDeserializer) er
 			return nil
 		case schemas.ProjectMembershipAssignment_member:
 			return deserializeMember(d, schemas.ProjectMembershipAssignment_member, &v.Member)
+		case schemas.ProjectMembershipAssignment_userCreatedDesignationId:
+			v.UserCreatedDesignationId = new(string)
+			return d.ReadString(schemas.ProjectMembershipAssignment_userCreatedDesignationId, v.UserCreatedDesignationId)
 		}
 		return nil
 	})
@@ -14648,6 +14787,11 @@ type ProjectPolicyGrantPrincipal struct {
 	// The project ID of the project policy grant principal.
 	ProjectIdentifier *string
 
+	// The ID of the user-created designation granted to the project principal.
+	// Required when projectDesignation is USER_CREATED_DESIGNATION ; must not be
+	// provided otherwise.
+	UserCreatedDesignationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -14665,6 +14809,9 @@ func (v *ProjectPolicyGrantPrincipal) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ProjectIdentifier != nil {
 		s.WriteString(schemas.ProjectPolicyGrantPrincipal_projectIdentifier, *v.ProjectIdentifier)
 	}
+	if v.UserCreatedDesignationId != nil {
+		s.WriteString(schemas.ProjectPolicyGrantPrincipal_userCreatedDesignationId, *v.UserCreatedDesignationId)
+	}
 }
 func (v *ProjectPolicyGrantPrincipal) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectPolicyGrantPrincipal, func(s *smithy.Schema) error {
@@ -14681,6 +14828,9 @@ func (v *ProjectPolicyGrantPrincipal) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.ProjectPolicyGrantPrincipal_projectIdentifier:
 			v.ProjectIdentifier = new(string)
 			return d.ReadString(schemas.ProjectPolicyGrantPrincipal_projectIdentifier, v.ProjectIdentifier)
+		case schemas.ProjectPolicyGrantPrincipal_userCreatedDesignationId:
+			v.UserCreatedDesignationId = new(string)
+			return d.ReadString(schemas.ProjectPolicyGrantPrincipal_userCreatedDesignationId, v.UserCreatedDesignationId)
 		}
 		return nil
 	})

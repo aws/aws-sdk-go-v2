@@ -29983,6 +29983,9 @@ type SecurityProfile struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
+	// The type of the security profile: AWS_MANAGED or CUSTOMER_MANAGED .
+	Type SecurityProfileType
+
 	noSmithyDocumentSerde
 }
 
@@ -30026,6 +30029,9 @@ func (v *SecurityProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeTagRestrictedResourceList(s, schemas.SecurityProfile_TagRestrictedResources, v.TagRestrictedResources)
 	serializeTagMap(s, schemas.SecurityProfile_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityProfile_Type, string(v.Type))
+	}
 }
 func (v *SecurityProfile) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityProfile, func(s *smithy.Schema) error {
@@ -30065,6 +30071,13 @@ func (v *SecurityProfile) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeTagRestrictedResourceList(d, schemas.SecurityProfile_TagRestrictedResources, &v.TagRestrictedResources)
 		case schemas.SecurityProfile_Tags:
 			return deserializeTagMap(d, schemas.SecurityProfile_Tags, &v.Tags)
+		case schemas.SecurityProfile_Type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityProfile_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -30172,6 +30185,9 @@ type SecurityProfileSearchSummary struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
+	// The type of the security profile: AWS_MANAGED or CUSTOMER_MANAGED .
+	Type SecurityProfileType
+
 	noSmithyDocumentSerde
 }
 
@@ -30198,6 +30214,9 @@ func (v *SecurityProfileSearchSummary) SerializeMembers(s smithy.ShapeSerializer
 		s.WriteString(schemas.SecurityProfileSearchSummary_SecurityProfileName, *v.SecurityProfileName)
 	}
 	serializeTagMap(s, schemas.SecurityProfileSearchSummary_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityProfileSearchSummary_Type, string(v.Type))
+	}
 }
 func (v *SecurityProfileSearchSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityProfileSearchSummary, func(s *smithy.Schema) error {
@@ -30219,6 +30238,13 @@ func (v *SecurityProfileSearchSummary) Deserialize(d smithy.ShapeDeserializer) e
 			return d.ReadString(schemas.SecurityProfileSearchSummary_SecurityProfileName, v.SecurityProfileName)
 		case schemas.SecurityProfileSearchSummary_Tags:
 			return deserializeTagMap(d, schemas.SecurityProfileSearchSummary_Tags, &v.Tags)
+		case schemas.SecurityProfileSearchSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityProfileSearchSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -30280,6 +30306,9 @@ type SecurityProfileSummary struct {
 	// The name of the security profile.
 	Name *string
 
+	// The type of the security profile: AWS_MANAGED or CUSTOMER_MANAGED .
+	Type SecurityProfileType
+
 	noSmithyDocumentSerde
 }
 
@@ -30305,6 +30334,9 @@ func (v *SecurityProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SecurityProfileSummary_Name, *v.Name)
 	}
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityProfileSummary_Type, string(v.Type))
+	}
 }
 func (v *SecurityProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityProfileSummary, func(s *smithy.Schema) error {
@@ -30324,6 +30356,13 @@ func (v *SecurityProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SecurityProfileSummary_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.SecurityProfileSummary_Name, v.Name)
+		case schemas.SecurityProfileSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityProfileSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityProfileType(ev)
+			return nil
 		}
 		return nil
 	})

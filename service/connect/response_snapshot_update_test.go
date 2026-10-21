@@ -6845,6 +6845,7 @@ func TestUpdateResponseSnapshot_DescribeSecurityProfile(t *testing.T) {
 					},
 				},
 			},
+			Type: types.SecurityProfileType("AWS_MANAGED"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)
@@ -11810,6 +11811,7 @@ func TestUpdateResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                 ptr.String("__Id__"),
@@ -11817,6 +11819,7 @@ func TestUpdateResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -14820,6 +14823,7 @@ func TestUpdateResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                     ptr.String("__Id__"),
@@ -14830,6 +14834,7 @@ func TestUpdateResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken:             ptr.String("__NextToken__"),

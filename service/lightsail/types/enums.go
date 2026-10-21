@@ -940,6 +940,13 @@ const (
 	InstanceMetricNameBurstCapacityTime         InstanceMetricName = "BurstCapacityTime"
 	InstanceMetricNameBurstCapacityPercentage   InstanceMetricName = "BurstCapacityPercentage"
 	InstanceMetricNameMetadataNoToken           InstanceMetricName = "MetadataNoToken"
+	InstanceMetricNameDiskReadOps               InstanceMetricName = "DiskReadOps"
+	InstanceMetricNameDiskWriteOps              InstanceMetricName = "DiskWriteOps"
+	InstanceMetricNameDiskReadBytes             InstanceMetricName = "DiskReadBytes"
+	InstanceMetricNameDiskWriteBytes            InstanceMetricName = "DiskWriteBytes"
+	InstanceMetricNameDiskTotalReadTime         InstanceMetricName = "DiskTotalReadTime"
+	InstanceMetricNameDiskTotalWriteTime        InstanceMetricName = "DiskTotalWriteTime"
+	InstanceMetricNameDiskQueueLength           InstanceMetricName = "DiskQueueLength"
 )
 
 // Values returns all known values for InstanceMetricName. Note that this can be
@@ -957,6 +964,13 @@ func (InstanceMetricName) Values() []InstanceMetricName {
 		"BurstCapacityTime",
 		"BurstCapacityPercentage",
 		"MetadataNoToken",
+		"DiskReadOps",
+		"DiskWriteOps",
+		"DiskReadBytes",
+		"DiskWriteBytes",
+		"DiskTotalReadTime",
+		"DiskTotalWriteTime",
+		"DiskQueueLength",
 	}
 }
 
@@ -1322,6 +1336,13 @@ const (
 	MetricNameSwapUsage                      MetricName = "SwapUsage"
 	MetricNameBurstCapacityTime              MetricName = "BurstCapacityTime"
 	MetricNameBurstCapacityPercentage        MetricName = "BurstCapacityPercentage"
+	MetricNameDiskReadOps                    MetricName = "DiskReadOps"
+	MetricNameDiskWriteOps                   MetricName = "DiskWriteOps"
+	MetricNameDiskReadBytes                  MetricName = "DiskReadBytes"
+	MetricNameDiskWriteBytes                 MetricName = "DiskWriteBytes"
+	MetricNameDiskTotalReadTime              MetricName = "DiskTotalReadTime"
+	MetricNameDiskTotalWriteTime             MetricName = "DiskTotalWriteTime"
+	MetricNameDiskQueueLength                MetricName = "DiskQueueLength"
 )
 
 // Values returns all known values for MetricName. Note that this can be expanded
@@ -1357,6 +1378,13 @@ func (MetricName) Values() []MetricName {
 		"SwapUsage",
 		"BurstCapacityTime",
 		"BurstCapacityPercentage",
+		"DiskReadOps",
+		"DiskWriteOps",
+		"DiskReadBytes",
+		"DiskWriteBytes",
+		"DiskTotalReadTime",
+		"DiskTotalWriteTime",
+		"DiskQueueLength",
 	}
 }
 

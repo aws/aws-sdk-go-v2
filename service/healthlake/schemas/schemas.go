@@ -174,6 +174,20 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
+var AgentErrorType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AgentErrorType",
+}, smithy.ShapeTypeEnum, 5)
+var AgentErrorType_InternalServerException *smithy.Schema
+
+var AgentErrorType_ResourceNotFoundException *smithy.Schema
+
+var AgentErrorType_ValidationException *smithy.Schema
+
+var AgentErrorType_AccessDeniedException *smithy.Schema
+
+var AgentErrorType_ThrottlingException *smithy.Schema
+
 var AgentInputMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "AgentInputMessage",
@@ -190,44 +204,24 @@ var AgentInputMessageType_NORMAL *smithy.Schema
 
 var AgentInputMessageType_USER_CONFIRMATION_RESPONSE *smithy.Schema
 
-var AgentMessageOutOfContextException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentMessageOutOfContextException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var AgentMessageOutOfContextException_Message *smithy.Schema
-
 var _AgentMessageString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "AgentMessageString",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
-var AgentOutputMessage = smithy.NewSchema(smithy.ShapeID{
+var AgentOutputMessageStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentOutputMessage",
-}, smithy.ShapeTypeStructure, 3)
-var AgentOutputMessage_Body *smithy.Schema
+	Name:      "AgentOutputMessageStream",
+}, smithy.ShapeTypeUnion, 5, &smithytraits.Streaming{})
+var AgentOutputMessageStream_TextMessageEvent *smithy.Schema
 
-var AgentOutputMessage_Type *smithy.Schema
+var AgentOutputMessageStream_ProgressEvent *smithy.Schema
 
-var AgentOutputMessage_OptionsList *smithy.Schema
+var AgentOutputMessageStream_HeartbeatEvent *smithy.Schema
 
-var AgentOutputMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentOutputMessageType",
-}, smithy.ShapeTypeEnum, 7)
-var AgentOutputMessageType_INITIAL_GREETING *smithy.Schema
+var AgentOutputMessageStream_ErrorEvent *smithy.Schema
 
-var AgentOutputMessageType_NORMAL *smithy.Schema
-
-var AgentOutputMessageType_USER_CONFIRMATION_REQUEST *smithy.Schema
-
-var AgentOutputMessageType_COMPLETE *smithy.Schema
-
-var AgentOutputMessageType_ERROR *smithy.Schema
-
-var AgentOutputMessageType_OPTIONS *smithy.Schema
-
-var AgentOutputMessageType_CHOICES *smithy.Schema
+var AgentOutputMessageStream_EndOfOutputEvent *smithy.Schema
 
 var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -352,13 +346,6 @@ var _ConversationIdString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ConversationIdString",
 }, smithy.ShapeTypeString, 0)
-
-var ConversationNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ConversationNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ConversationNotFoundException_Message *smithy.Schema
 
 var CreateDataTransformationProfileSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -594,6 +581,16 @@ var _EncryptionKeyID = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EncryptionKeyID",
 }, smithy.ShapeTypeString, 0)
 
+var EndOfOutputEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "EndOfOutputEvent",
+}, smithy.ShapeTypeStructure, 3)
+var EndOfOutputEvent_FinalResponseMessage *smithy.Schema
+
+var EndOfOutputEvent_Options *smithy.Schema
+
+var EndOfOutputEvent_ConversationId *smithy.Schema
+
 var ErrorCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ErrorCategory",
@@ -609,6 +606,14 @@ var ErrorCause = smithy.NewSchema(smithy.ShapeID{
 var ErrorCause_ErrorMessage *smithy.Schema
 
 var ErrorCause_ErrorCategory *smithy.Schema
+
+var ErrorEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ErrorEvent",
+}, smithy.ShapeTypeStructure, 2)
+var ErrorEvent_Error *smithy.Schema
+
+var ErrorEvent_Message *smithy.Schema
 
 var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -688,6 +693,11 @@ var _HealthLakeTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "HealthLakeTimestamp",
 }, smithy.ShapeTypeTimestamp, 0)
+
+var HeartbeatEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "HeartbeatEvent",
+}, smithy.ShapeTypeStructure, 0)
 
 var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -881,13 +891,6 @@ var NlpStatus_DISABLED *smithy.Schema
 
 var NlpStatus_DISABLING *smithy.Schema
 
-var NotImplementedOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "NotImplementedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 501})
-var NotImplementedOperationException_Message *smithy.Schema
-
 var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "OutputDataConfig",
@@ -955,6 +958,12 @@ var _ProfileVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ProfileVersion",
 }, smithy.ShapeTypeInteger, 0)
+
+var ProgressEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProgressEvent",
+}, smithy.ShapeTypeStructure, 1)
+var ProgressEvent_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -1072,6 +1081,12 @@ var TargetFormat = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var TargetFormat_FHIR_R4 *smithy.Schema
 
+var TextMessageEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TextMessageEvent",
+}, smithy.ShapeTypeStructure, 1)
+var TextMessageEvent_Message *smithy.Schema
+
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ThrottlingException",
@@ -1176,20 +1191,6 @@ var TransformationOutputDataConfig = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TransformationOutputDataConfig",
 }, smithy.ShapeTypeStructure, 1)
 var TransformationOutputDataConfig_S3Configuration *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_Message *smithy.Schema
-
-var UnsupportedMIMETypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UnsupportedMIMETypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 415})
-var UnsupportedMIMETypeException_Message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -1767,10 +1768,8 @@ var UpdateFHIRDatastoreResponse_DatastoreProperties *smithy.Schema
 var UpdateProfileWithAgentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "UpdateProfileWithAgentRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 3)
 var UpdateProfileWithAgentRequest_ProfileId *smithy.Schema
-
-var UpdateProfileWithAgentRequest_SourceFormat *smithy.Schema
 
 var UpdateProfileWithAgentRequest_InputMessage *smithy.Schema
 
@@ -1779,15 +1778,23 @@ var UpdateProfileWithAgentRequest_ConversationId *smithy.Schema
 var UpdateProfileWithAgentResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "UpdateProfileWithAgentResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 1)
 var UpdateProfileWithAgentResponse_AgentResponse *smithy.Schema
-
-var UpdateProfileWithAgentResponse_ConversationId *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _HealthLakeString)
+
+	AgentErrorType_InternalServerException = AgentErrorType.AddMember("InternalServerException", smithyprelude.Unit)
+
+	AgentErrorType_ResourceNotFoundException = AgentErrorType.AddMember("ResourceNotFoundException", smithyprelude.Unit)
+
+	AgentErrorType_ValidationException = AgentErrorType.AddMember("ValidationException", smithyprelude.Unit)
+
+	AgentErrorType_AccessDeniedException = AgentErrorType.AddMember("AccessDeniedException", smithyprelude.Unit)
+
+	AgentErrorType_ThrottlingException = AgentErrorType.AddMember("ThrottlingException", smithyprelude.Unit)
 
 	AgentInputMessageType_NORMAL = AgentInputMessageType.AddMember("NORMAL", smithyprelude.Unit)
 
@@ -1797,29 +1804,31 @@ func init() {
 
 	AgentInputMessage_Type = AgentInputMessage.AddMember("Type", AgentInputMessageType)
 
-	AgentMessageOutOfContextException_Message = AgentMessageOutOfContextException.AddMember("Message", smithyprelude.String)
+	TextMessageEvent_Message = TextMessageEvent.AddMember("Message", _AgentMessageString)
 
-	AgentOutputMessageType_INITIAL_GREETING = AgentOutputMessageType.AddMember("INITIAL_GREETING", smithyprelude.Unit)
+	ProgressEvent_Message = ProgressEvent.AddMember("Message", _AgentMessageString)
 
-	AgentOutputMessageType_NORMAL = AgentOutputMessageType.AddMember("NORMAL", smithyprelude.Unit)
+	ErrorEvent_Error = ErrorEvent.AddMember("Error", AgentErrorType)
 
-	AgentOutputMessageType_USER_CONFIRMATION_REQUEST = AgentOutputMessageType.AddMember("USER_CONFIRMATION_REQUEST", smithyprelude.Unit)
-
-	AgentOutputMessageType_COMPLETE = AgentOutputMessageType.AddMember("COMPLETE", smithyprelude.Unit)
-
-	AgentOutputMessageType_ERROR = AgentOutputMessageType.AddMember("ERROR", smithyprelude.Unit)
-
-	AgentOutputMessageType_OPTIONS = AgentOutputMessageType.AddMember("OPTIONS", smithyprelude.Unit)
-
-	AgentOutputMessageType_CHOICES = AgentOutputMessageType.AddMember("CHOICES", smithyprelude.Unit)
+	ErrorEvent_Message = ErrorEvent.AddMember("Message", _AgentMessageString)
 
 	_DataTransformationChatOptionsList_member = _DataTransformationChatOptionsList.AddMember("member", _DataTransformationChatOptionString)
 
-	AgentOutputMessage_Body = AgentOutputMessage.AddMember("Body", _AgentMessageString)
+	EndOfOutputEvent_FinalResponseMessage = EndOfOutputEvent.AddMember("FinalResponseMessage", _AgentMessageString)
 
-	AgentOutputMessage_Type = AgentOutputMessage.AddMember("Type", AgentOutputMessageType)
+	EndOfOutputEvent_Options = EndOfOutputEvent.AddMember("Options", _DataTransformationChatOptionsList)
 
-	AgentOutputMessage_OptionsList = AgentOutputMessage.AddMember("OptionsList", _DataTransformationChatOptionsList)
+	EndOfOutputEvent_ConversationId = EndOfOutputEvent.AddMember("ConversationId", _ConversationIdString)
+
+	AgentOutputMessageStream_TextMessageEvent = AgentOutputMessageStream.AddMember("TextMessageEvent", TextMessageEvent)
+
+	AgentOutputMessageStream_ProgressEvent = AgentOutputMessageStream.AddMember("ProgressEvent", ProgressEvent)
+
+	AgentOutputMessageStream_HeartbeatEvent = AgentOutputMessageStream.AddMember("HeartbeatEvent", HeartbeatEvent)
+
+	AgentOutputMessageStream_ErrorEvent = AgentOutputMessageStream.AddMember("ErrorEvent", ErrorEvent)
+
+	AgentOutputMessageStream_EndOfOutputEvent = AgentOutputMessageStream.AddMember("EndOfOutputEvent", EndOfOutputEvent)
 
 	AnalyticsStatus_ENABLED = AnalyticsStatus.AddMember("ENABLED", smithyprelude.Unit)
 
@@ -1862,8 +1871,6 @@ func init() {
 	ConflictException_Message = ConflictException.AddMember("Message", _HealthLakeString)
 
 	ContinuousBackupRestoreConfiguration_RestorePointTime = ContinuousBackupRestoreConfiguration.AddMember("RestorePointTime", _HealthLakeTimestamp)
-
-	ConversationNotFoundException_Message = ConversationNotFoundException.AddMember("Message", smithyprelude.String)
 
 	StarterProfileSource_StarterProfileName = StarterProfileSource.AddMember("StarterProfileName", smithyprelude.String)
 
@@ -2153,8 +2160,6 @@ func init() {
 
 	InternalServerException_Message = InternalServerException.AddMember("Message", _HealthLakeString)
 
-	NotImplementedOperationException_Message = NotImplementedOperationException.AddMember("Message", smithyprelude.String)
-
 	_ProfileMapping_key = _ProfileMapping.AddMember("key", _ProfileMappingKey)
 
 	_ProfileMapping_value = _ProfileMapping.AddMember("value", _ProfileMappingValue)
@@ -2248,10 +2253,6 @@ func init() {
 	TransformationJobSummary_SourceFormat = TransformationJobSummary.AddMember("SourceFormat", SourceFormat)
 
 	_TransformationJobSummaryList_member = _TransformationJobSummaryList.AddMember("member", TransformationJobSummary)
-
-	UnauthorizedException_Message = UnauthorizedException.AddMember("Message", smithyprelude.String)
-
-	UnsupportedMIMETypeException_Message = UnsupportedMIMETypeException.AddMember("Message", smithyprelude.String)
 
 	ValidationException_Message = ValidationException.AddMember("Message", _HealthLakeString)
 
@@ -2611,14 +2612,10 @@ func init() {
 
 	UpdateProfileWithAgentRequest_ProfileId = UpdateProfileWithAgentRequest.AddMember("ProfileId", _ProfileIdString)
 
-	UpdateProfileWithAgentRequest_SourceFormat = UpdateProfileWithAgentRequest.AddMember("SourceFormat", SourceFormat)
-
 	UpdateProfileWithAgentRequest_InputMessage = UpdateProfileWithAgentRequest.AddMember("InputMessage", AgentInputMessage)
 
 	UpdateProfileWithAgentRequest_ConversationId = UpdateProfileWithAgentRequest.AddMember("ConversationId", _ConversationIdString)
 
-	UpdateProfileWithAgentResponse_AgentResponse = UpdateProfileWithAgentResponse.AddMember("AgentResponse", AgentOutputMessage)
-
-	UpdateProfileWithAgentResponse_ConversationId = UpdateProfileWithAgentResponse.AddMember("ConversationId", _ConversationIdString)
+	UpdateProfileWithAgentResponse_AgentResponse = UpdateProfileWithAgentResponse.AddMember("AgentResponse", AgentOutputMessageStream, &smithytraits.HTTPPayload{})
 
 }

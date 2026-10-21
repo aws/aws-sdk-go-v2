@@ -3161,7 +3161,7 @@ var InstanceMetadataState_applied *smithy.Schema
 var InstanceMetricName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "InstanceMetricName",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 16)
 var InstanceMetricName_CPUUtilization *smithy.Schema
 
 var InstanceMetricName_NetworkIn *smithy.Schema
@@ -3179,6 +3179,20 @@ var InstanceMetricName_BurstCapacityTime *smithy.Schema
 var InstanceMetricName_BurstCapacityPercentage *smithy.Schema
 
 var InstanceMetricName_MetadataNoToken *smithy.Schema
+
+var InstanceMetricName_DiskReadOps *smithy.Schema
+
+var InstanceMetricName_DiskWriteOps *smithy.Schema
+
+var InstanceMetricName_DiskReadBytes *smithy.Schema
+
+var InstanceMetricName_DiskWriteBytes *smithy.Schema
+
+var InstanceMetricName_DiskTotalReadTime *smithy.Schema
+
+var InstanceMetricName_DiskTotalWriteTime *smithy.Schema
+
+var InstanceMetricName_DiskQueueLength *smithy.Schema
 
 var InstanceNetworking = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -3868,7 +3882,7 @@ var _MetricDatapointList_member *smithy.Schema
 var MetricName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "MetricName",
-}, smithy.ShapeTypeEnum, 27)
+}, smithy.ShapeTypeEnum, 34)
 var MetricName_CPUUtilization *smithy.Schema
 
 var MetricName_NetworkIn *smithy.Schema
@@ -3922,6 +3936,20 @@ var MetricName_SwapUsage *smithy.Schema
 var MetricName_BurstCapacityTime *smithy.Schema
 
 var MetricName_BurstCapacityPercentage *smithy.Schema
+
+var MetricName_DiskReadOps *smithy.Schema
+
+var MetricName_DiskWriteOps *smithy.Schema
+
+var MetricName_DiskReadBytes *smithy.Schema
+
+var MetricName_DiskWriteBytes *smithy.Schema
+
+var MetricName_DiskTotalReadTime *smithy.Schema
+
+var MetricName_DiskTotalWriteTime *smithy.Schema
+
+var MetricName_DiskQueueLength *smithy.Schema
 
 var _MetricPeriod = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -8241,6 +8269,20 @@ func init() {
 
 	MetricName_BurstCapacityPercentage = MetricName.AddMember("BurstCapacityPercentage", smithyprelude.Unit)
 
+	MetricName_DiskReadOps = MetricName.AddMember("DiskReadOps", smithyprelude.Unit)
+
+	MetricName_DiskWriteOps = MetricName.AddMember("DiskWriteOps", smithyprelude.Unit)
+
+	MetricName_DiskReadBytes = MetricName.AddMember("DiskReadBytes", smithyprelude.Unit)
+
+	MetricName_DiskWriteBytes = MetricName.AddMember("DiskWriteBytes", smithyprelude.Unit)
+
+	MetricName_DiskTotalReadTime = MetricName.AddMember("DiskTotalReadTime", smithyprelude.Unit)
+
+	MetricName_DiskTotalWriteTime = MetricName.AddMember("DiskTotalWriteTime", smithyprelude.Unit)
+
+	MetricName_DiskQueueLength = MetricName.AddMember("DiskQueueLength", smithyprelude.Unit)
+
 	AlarmState_OK = AlarmState.AddMember("OK", smithyprelude.Unit)
 
 	AlarmState_ALARM = AlarmState.AddMember("ALARM", smithyprelude.Unit)
@@ -9680,6 +9722,20 @@ func init() {
 	InstanceMetricName_BurstCapacityPercentage = InstanceMetricName.AddMember("BurstCapacityPercentage", smithyprelude.Unit)
 
 	InstanceMetricName_MetadataNoToken = InstanceMetricName.AddMember("MetadataNoToken", smithyprelude.Unit)
+
+	InstanceMetricName_DiskReadOps = InstanceMetricName.AddMember("DiskReadOps", smithyprelude.Unit)
+
+	InstanceMetricName_DiskWriteOps = InstanceMetricName.AddMember("DiskWriteOps", smithyprelude.Unit)
+
+	InstanceMetricName_DiskReadBytes = InstanceMetricName.AddMember("DiskReadBytes", smithyprelude.Unit)
+
+	InstanceMetricName_DiskWriteBytes = InstanceMetricName.AddMember("DiskWriteBytes", smithyprelude.Unit)
+
+	InstanceMetricName_DiskTotalReadTime = InstanceMetricName.AddMember("DiskTotalReadTime", smithyprelude.Unit)
+
+	InstanceMetricName_DiskTotalWriteTime = InstanceMetricName.AddMember("DiskTotalWriteTime", smithyprelude.Unit)
+
+	InstanceMetricName_DiskQueueLength = InstanceMetricName.AddMember("DiskQueueLength", smithyprelude.Unit)
 
 	PortState_Open = PortState.AddMember("Open", smithyprelude.Unit)
 

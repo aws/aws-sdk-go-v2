@@ -243,6 +243,17 @@ func serialize__listOfColorConversion3DLUTSetting(s smithy.ShapeSerializer, sche
 	s.CloseList()
 }
 
+func serialize__listOfDashAdaptationSetGrouping(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DashAdaptationSetGrouping) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serialize__listOfDashAdditionalManifest(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DashAdditionalManifest) {
 	if v == nil {
 		return
@@ -1205,6 +1216,27 @@ func deserialize__listOfColorConversion3DLUTSetting(d smithy.ShapeDeserializer, 
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserialize__listOfDashAdaptationSetGrouping(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DashAdaptationSetGrouping) error {
+	*v = make([]types.DashAdaptationSetGrouping, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DashAdaptationSetGrouping
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.DashAdaptationSetGrouping(vv))
 		return nil
 	})
 }

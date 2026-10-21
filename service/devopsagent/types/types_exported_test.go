@@ -529,6 +529,9 @@ func ExampleServiceConfiguration_outputUsage() {
 	case *types.ServiceConfigurationMemberMcpserversplunk:
 		_ = v.Value // Value is types.MCPServerSplunkConfiguration
 
+	case *types.ServiceConfigurationMemberMsteams:
+		_ = v.Value // Value is types.MSTeamsConfiguration
+
 	case *types.ServiceConfigurationMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyConfiguration
 
@@ -570,6 +573,7 @@ var _ *types.MCPServerSigV4Configuration
 var _ *types.EventChannelConfiguration
 var _ *types.GitLabConfiguration
 var _ *types.MCPServerConfiguration
+var _ *types.MSTeamsConfiguration
 var _ *types.AzureConfiguration
 var _ *types.SlackConfiguration
 var _ *types.MCPServerDatadogConfiguration

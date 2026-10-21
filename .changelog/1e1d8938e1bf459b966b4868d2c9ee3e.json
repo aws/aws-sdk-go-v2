@@ -1,0 +1,8 @@
+{
+    "id": "1e1d8938-e1bf-459b-966b-4868d2c9ee3e",
+    "type": "feature",
+    "description": "Adds support for Network Firewall Resolved IP validation.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

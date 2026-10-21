@@ -672,6 +672,7 @@ func TestCheckResponseSnapshot_CreateFirewallPolicy(t *testing.T) {
 			FirewallPolicyId:     ptr.String("__FirewallPolicyId__"),
 			Description:          ptr.String("__Description__"),
 			FirewallPolicyStatus: types.ResourceStatus("ACTIVE"),
+			StatusMessage:        ptr.String("__StatusMessage__"),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -689,6 +690,18 @@ func TestCheckResponseSnapshot_CreateFirewallPolicy(t *testing.T) {
 			EncryptionConfiguration: &types.EncryptionConfiguration{
 				KeyId: ptr.String("__KeyId__"),
 				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
 			},
 			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -795,6 +808,27 @@ func TestCheckResponseSnapshot_CreateFirewallPolicy(t *testing.T) {
 				},
 			},
 			EnableTLSSessionHolding: ptr.Bool(true),
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		Tags: []types.Tag{
@@ -2617,6 +2651,7 @@ func TestCheckResponseSnapshot_DeleteFirewallPolicy(t *testing.T) {
 			FirewallPolicyId:     ptr.String("__FirewallPolicyId__"),
 			Description:          ptr.String("__Description__"),
 			FirewallPolicyStatus: types.ResourceStatus("ACTIVE"),
+			StatusMessage:        ptr.String("__StatusMessage__"),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -2634,6 +2669,18 @@ func TestCheckResponseSnapshot_DeleteFirewallPolicy(t *testing.T) {
 			EncryptionConfiguration: &types.EncryptionConfiguration{
 				KeyId: ptr.String("__KeyId__"),
 				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
 			},
 			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -3442,6 +3489,7 @@ func TestCheckResponseSnapshot_DescribeFirewallPolicy(t *testing.T) {
 			FirewallPolicyId:     ptr.String("__FirewallPolicyId__"),
 			Description:          ptr.String("__Description__"),
 			FirewallPolicyStatus: types.ResourceStatus("ACTIVE"),
+			StatusMessage:        ptr.String("__StatusMessage__"),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -3459,6 +3507,18 @@ func TestCheckResponseSnapshot_DescribeFirewallPolicy(t *testing.T) {
 			EncryptionConfiguration: &types.EncryptionConfiguration{
 				KeyId: ptr.String("__KeyId__"),
 				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
 			},
 			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -3554,6 +3614,27 @@ func TestCheckResponseSnapshot_DescribeFirewallPolicy(t *testing.T) {
 				},
 			},
 			EnableTLSSessionHolding: ptr.Bool(true),
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeFirewallPolicy.response")
@@ -3580,6 +3661,7 @@ func TestCheckResponseSnapshot_DescribeFlowOperation(t *testing.T) {
 	want := &DescribeFlowOperationOutput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationId:           ptr.String("__FlowOperationId__"),
@@ -3632,6 +3714,7 @@ func TestCheckResponseSnapshot_DescribeFlowOperation(t *testing.T) {
 	got, err := svc.DescribeFlowOperation(context.Background(), &DescribeFlowOperationInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationId:           ptr.String("__FlowOperationId__"),
@@ -5201,6 +5284,7 @@ func TestCheckResponseSnapshot_ListFlowOperationResults(t *testing.T) {
 	want := &ListFlowOperationResultsOutput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationId:           ptr.String("__FlowOperationId__"),
@@ -5253,6 +5337,7 @@ func TestCheckResponseSnapshot_ListFlowOperationResults(t *testing.T) {
 		NextToken:                 ptr.String("__NextToken__"),
 		MaxResults:                ptr.Int32(1),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 	})
@@ -5293,6 +5378,7 @@ func TestCheckResponseSnapshot_ListFlowOperations(t *testing.T) {
 	got, err := svc.ListFlowOperations(context.Background(), &ListFlowOperationsInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		FlowOperationType:         types.FlowOperationType("FLOW_FLUSH"),
@@ -5639,6 +5725,7 @@ func TestCheckResponseSnapshot_StartFlowCapture(t *testing.T) {
 	got, err := svc.StartFlowCapture(context.Background(), &StartFlowCaptureInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		MinimumFlowAgeInSeconds:   ptr.Int32(1),
@@ -5698,6 +5785,7 @@ func TestCheckResponseSnapshot_StartFlowFlush(t *testing.T) {
 	got, err := svc.StartFlowFlush(context.Background(), &StartFlowFlushInput{
 		FirewallArn:               ptr.String("__FirewallArn__"),
 		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:        ptr.String("__AvailabilityZoneId__"),
 		VpcEndpointAssociationArn: ptr.String("__VpcEndpointAssociationArn__"),
 		VpcEndpointId:             ptr.String("__VpcEndpointId__"),
 		MinimumFlowAgeInSeconds:   ptr.Int32(1),
@@ -6070,6 +6158,7 @@ func TestCheckResponseSnapshot_UpdateFirewallPolicy(t *testing.T) {
 			FirewallPolicyId:     ptr.String("__FirewallPolicyId__"),
 			Description:          ptr.String("__Description__"),
 			FirewallPolicyStatus: types.ResourceStatus("ACTIVE"),
+			StatusMessage:        ptr.String("__StatusMessage__"),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -6087,6 +6176,18 @@ func TestCheckResponseSnapshot_UpdateFirewallPolicy(t *testing.T) {
 			EncryptionConfiguration: &types.EncryptionConfiguration{
 				KeyId: ptr.String("__KeyId__"),
 				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
 			},
 			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
@@ -6195,6 +6296,27 @@ func TestCheckResponseSnapshot_UpdateFirewallPolicy(t *testing.T) {
 				},
 			},
 			EnableTLSSessionHolding: ptr.Bool(true),
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
 		},
 		Description: ptr.String("__Description__"),
 		DryRun:      true,

@@ -1060,6 +1060,49 @@ func TestCheckResponseSnapshot_DescribeAccountLimits(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeAccountSettings(t *testing.T) {
+	want := &DescribeAccountSettingsOutput{
+		Settings: []types.AccountSetting{
+			{
+				Name:            ptr.String("__Name__"),
+				Value:           ptr.String("__Value__"),
+				EnforcementType: ptr.String("__EnforcementType__"),
+				EnforcementDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DefaultValue:    ptr.String("__DefaultValue__"),
+				EnforcedValue:   ptr.String("__EnforcedValue__"),
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				Value:           ptr.String("__Value__"),
+				EnforcementType: ptr.String("__EnforcementType__"),
+				EnforcementDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DefaultValue:    ptr.String("__DefaultValue__"),
+				EnforcedValue:   ptr.String("__EnforcedValue__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeAccountSettings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeAccountSettings(context.Background(), &DescribeAccountSettingsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAccountSettings.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeAdjustmentTypes(t *testing.T) {
 	want := &DescribeAdjustmentTypesOutput{
 		AdjustmentTypes: []types.AdjustmentType{
@@ -5160,6 +5203,28 @@ func TestCheckResponseSnapshot_LaunchInstances(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutAccountSetting(t *testing.T) {
+	want := &PutAccountSettingOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutAccountSetting.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAccountSetting(context.Background(), &PutAccountSettingInput{
+		Name:  ptr.String("__Name__"),
+		Value: ptr.String("__Value__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAccountSetting.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutLifecycleHook(t *testing.T) {
 	want := &PutLifecycleHookOutput{}
 	status, header, body, err := serdeRespReadSnapshot("PutLifecycleHook.response")
@@ -6799,30 +6864,10 @@ func TestCheckResponseSnapshot_Error_InvalidNextToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAutoScalingGroups(context.Background(), &DescribeAutoScalingGroupsInput{
-		AutoScalingGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		IncludeInstances: ptr.Bool(true),
-		NextToken:        ptr.String("__NextToken__"),
-		MaxRecords:       ptr.Int32(1),
-		Filters: []types.Filter{
-			{
-				Name: ptr.String("__Name__"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				Name: ptr.String("__Name__"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
+	_, opErr := svc.DescribeAccountSettings(context.Background(), &DescribeAccountSettingsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

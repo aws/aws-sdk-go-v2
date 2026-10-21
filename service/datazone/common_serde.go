@@ -2652,6 +2652,19 @@ func serializeDeploymentMessagesList(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serializeDesignationSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DesignationSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDetailedGlossaryTerms(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DetailedGlossaryTerm) {
 	if v == nil {
 		return
@@ -4784,6 +4797,28 @@ func deserializeDeploymentMessagesList(d smithy.ShapeDeserializer, s *smithy.Sch
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDesignationSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DesignationSummary) error {
+	*v = make([]types.DesignationSummary, 0)
+	var vv types.DesignationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DesignationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.DesignationSummary{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

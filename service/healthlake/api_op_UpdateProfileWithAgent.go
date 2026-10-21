@@ -9,7 +9,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"sync"
 )
 
 // Updates a data transformation profile using chat-based interaction with an
@@ -19,7 +21,7 @@ func (c *Client) UpdateProfileWithAgent(ctx context.Context, params *UpdateProfi
 		params = &UpdateProfileWithAgentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateProfileWithAgent", params, optFns, c.addOperationUpdateProfileWithAgentMiddlewares)
+	result, metadata, err := c.invokeEventStreamOperation(ctx, "UpdateProfileWithAgent", params, optFns, c.addOperationUpdateProfileWithAgentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,11 +43,6 @@ type UpdateProfileWithAgentInput struct {
 	//
 	// This member is required.
 	ProfileId *string
-
-	// The source data format for the transformation.
-	//
-	// This member is required.
-	SourceFormat types.SourceFormat
 
 	// The conversation identifier for multi-turn interactions. Omit to start a new
 	// conversation.
@@ -72,24 +69,13 @@ func (v *UpdateProfileWithAgentInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ProfileId != nil {
 		s.WriteString(schemas.UpdateProfileWithAgentRequest_ProfileId, *v.ProfileId)
 	}
-	if v.SourceFormat != "" {
-		s.WriteString(schemas.UpdateProfileWithAgentRequest_SourceFormat, string(v.SourceFormat))
-	}
 }
 
 // The response from the UpdateProfileWithAgent operation.
 type UpdateProfileWithAgentOutput struct {
+	eventStream *UpdateProfileWithAgentEventStream
 
-	// The response message from the agent.
-	//
-	// This member is required.
-	AgentResponse *types.AgentOutputMessage
-
-	// The conversation identifier to use for follow-up messages in this conversation.
-	//
-	// This member is required.
-	ConversationId *string
-
+	initialReply chan UpdateProfileWithAgentInitialReply
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -103,28 +89,32 @@ func (v *UpdateProfileWithAgentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateProfileWithAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentResponse != nil {
-		s.WriteStruct(schemas.UpdateProfileWithAgentResponse_AgentResponse)
-		v.AgentResponse.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConversationId != nil {
-		s.WriteString(schemas.UpdateProfileWithAgentResponse_ConversationId, *v.ConversationId)
-	}
 }
 func (v *UpdateProfileWithAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateProfileWithAgentResponse, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.UpdateProfileWithAgentResponse_AgentResponse:
-			v.AgentResponse = &types.AgentOutputMessage{}
-			return v.AgentResponse.Deserialize(d)
-		case schemas.UpdateProfileWithAgentResponse_ConversationId:
-			v.ConversationId = new(string)
-			return d.ReadString(schemas.UpdateProfileWithAgentResponse_ConversationId, v.ConversationId)
 		}
 		return nil
 	})
 }
+
+// GetStream returns the type to interact with the event stream.
+func (o *UpdateProfileWithAgentOutput) GetStream() *UpdateProfileWithAgentEventStream {
+	return o.eventStream
+}
+
+// The response from the UpdateProfileWithAgent operation.
+type UpdateProfileWithAgentInitialReply struct {
+	// Metadata pertaining to the operation's result.
+	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
+}
+
+func (o *UpdateProfileWithAgentOutput) GetInitialReply() <-chan UpdateProfileWithAgentInitialReply {
+	return o.initialReply
+}
+
 func (c *Client) addOperationUpdateProfileWithAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UpdateProfileWithAgentRequest, schemas.UpdateProfileWithAgentResponse)}, middleware.After); err != nil {
 		return err
@@ -132,7 +122,13 @@ func (c *Client) addOperationUpdateProfileWithAgentMiddlewares(stack *middleware
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UpdateProfileWithAgentRequest, schemas.UpdateProfileWithAgentResponse), output: &UpdateProfileWithAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamUpdateProfileWithAgent{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
 
+	if err = addEventStreamBuild_opUpdateProfileWithAgentMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -169,6 +165,46 @@ func (c *Client) addOperationUpdateProfileWithAgentMiddlewares(stack *middleware
 	return nil
 }
 
+type eventStreamBuild_opUpdateProfileWithAgentMiddleware struct {
+}
+
+func (*eventStreamBuild_opUpdateProfileWithAgentMiddleware) ID() string {
+	return "EventStreamBuildMiddleware"
+}
+
+func (m *eventStreamBuild_opUpdateProfileWithAgentMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleBuild(ctx, in)
+	res, ok := middleware.GetEventStreamOutputToMetadata[UpdateProfileWithAgentOutput](&metadata)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected to find an object of type UpdateProfileWithAgentOutput on metadata, none was found. Metadata %v. Additionally %w", metadata, err)
+	}
+	if err != nil {
+		// fail the event stream because the middleware failed
+		res.eventStream.err.SetError(err)
+		res.GetStream().Close()
+	}
+	initialReply, ok := out.Result.(*UpdateProfileWithAgentInitialReply)
+	_ = initialReply
+	if !ok {
+		// set an initial reply with just the metadata. Error was set above
+		response := UpdateProfileWithAgentInitialReply{
+			ResultMetadata: metadata,
+		}
+		res.initialReply <- response
+		return out, metadata, fmt.Errorf("unexpected type of result. expected UpdateProfileWithAgentInitialReply, got %T. Additionally %w", out.Result, err)
+	}
+	response := UpdateProfileWithAgentInitialReply{
+		ResultMetadata: metadata,
+	}
+	res.initialReply <- response
+	return out, metadata, err
+}
+func addEventStreamBuild_opUpdateProfileWithAgentMiddleware(stack *middleware.Stack) error {
+	return stack.Build.Add(&eventStreamBuild_opUpdateProfileWithAgentMiddleware{}, middleware.Before)
+}
+
 type endpointPrefix_opUpdateProfileWithAgentMiddleware struct {
 }
 
@@ -194,4 +230,104 @@ func (m *endpointPrefix_opUpdateProfileWithAgentMiddleware) HandleFinalize(ctx c
 }
 func addEndpointPrefix_opUpdateProfileWithAgentMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdateProfileWithAgentMiddleware{}, "ResolveEndpointV2", middleware.After)
+}
+
+// UpdateProfileWithAgentEventStream provides the event stream handling for the UpdateProfileWithAgent operation.
+//
+// For testing and mocking the event stream this type should be initialized via
+// the NewUpdateProfileWithAgentEventStream constructor function. Using the functional options
+// to pass in nested mock behavior.
+type UpdateProfileWithAgentEventStream struct {
+	// AgentOutputMessageStreamReader is the EventStream reader for the
+	// AgentOutputMessageStream events. This value is automatically set by the SDK when
+	// the API call is made Use this member when unit testing your code with the SDK to
+	// mock out the EventStream Reader.
+	//
+	// Must not be nil.
+	Reader AgentOutputMessageStreamReader
+
+	done      chan struct{}
+	closeOnce sync.Once
+	err       *smithysync.OnceErr
+}
+
+// NewUpdateProfileWithAgentEventStream initializes an UpdateProfileWithAgentEventStream.
+// This function should only be used for testing and mocking the UpdateProfileWithAgentEventStream
+// stream within your application.
+//
+// The Reader member must be set before reading events from the stream.
+func NewUpdateProfileWithAgentEventStream(optFns ...func(*UpdateProfileWithAgentEventStream)) *UpdateProfileWithAgentEventStream {
+	es := &UpdateProfileWithAgentEventStream{
+		done: make(chan struct{}),
+		err:  smithysync.NewOnceErr(),
+	}
+	for _, fn := range optFns {
+		fn(es)
+	}
+	return es
+}
+
+// Events returns a channel to read events from.
+func (es *UpdateProfileWithAgentEventStream) Events() <-chan types.AgentOutputMessageStream {
+	return es.Reader.Events()
+}
+
+// Close closes the stream. This will also cause the stream to be closed.
+// Close must be called when done using the stream API. Not calling Close
+// may result in resource leaks.
+//
+// Will close the underlying EventStream writer and reader, and no more events can be
+// sent or received.
+func (es *UpdateProfileWithAgentEventStream) Close() error {
+	es.closeOnce.Do(es.safeClose)
+	return es.Err()
+}
+
+func (es *UpdateProfileWithAgentEventStream) safeClose() {
+	close(es.done)
+
+	es.Reader.Close()
+}
+
+// Err returns any error that occurred while reading or writing EventStream Events
+// from the service API's response. Returns nil if there were no errors.
+func (es *UpdateProfileWithAgentEventStream) Err() error {
+	if err := es.err.Err(); err != nil {
+		return err
+	}
+
+	if err := es.Reader.Err(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (es *UpdateProfileWithAgentEventStream) waitStreamClose() {
+	type errorSet interface {
+		ErrorSet() <-chan struct{}
+	}
+
+	var outputErrCh <-chan struct{}
+	if v, ok := es.Reader.(errorSet); ok {
+		outputErrCh = v.ErrorSet()
+	}
+	var outputClosedCh <-chan struct{}
+	if v, ok := es.Reader.(interface{ Closed() <-chan struct{} }); ok {
+		outputClosedCh = v.Closed()
+	}
+
+	select {
+	case <-es.done:
+	case <-outputErrCh:
+		es.err.SetError(es.Reader.Err())
+		es.Close()
+
+	case <-outputClosedCh:
+		if err := es.Reader.Err(); err != nil {
+			es.err.SetError(es.Reader.Err())
+		}
+		es.Close()
+
+	}
 }

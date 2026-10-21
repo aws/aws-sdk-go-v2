@@ -15,29 +15,33 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.AccessDeniedException,
 			New:    func() any { return &types.AccessDeniedException{} },
 		},
-		"com.amazonaws.healthlake#AgentMessageOutOfContextException": {
-			Schema: schemas.AgentMessageOutOfContextException,
-			New:    func() any { return &types.AgentMessageOutOfContextException{} },
-		},
 		"com.amazonaws.healthlake#ConflictException": {
 			Schema: schemas.ConflictException,
 			New:    func() any { return &types.ConflictException{} },
 		},
-		"com.amazonaws.healthlake#ConversationNotFoundException": {
-			Schema: schemas.ConversationNotFoundException,
-			New:    func() any { return &types.ConversationNotFoundException{} },
+		"com.amazonaws.healthlake#EndOfOutputEvent": {
+			Schema: schemas.EndOfOutputEvent,
+			New:    func() any { return &types.EndOfOutputEvent{} },
+		},
+		"com.amazonaws.healthlake#ErrorEvent": {
+			Schema: schemas.ErrorEvent,
+			New:    func() any { return &types.ErrorEvent{} },
 		},
 		"com.amazonaws.healthlake#FailedDependencyException": {
 			Schema: schemas.FailedDependencyException,
 			New:    func() any { return &types.FailedDependencyException{} },
 		},
+		"com.amazonaws.healthlake#HeartbeatEvent": {
+			Schema: schemas.HeartbeatEvent,
+			New:    func() any { return &types.HeartbeatEvent{} },
+		},
 		"com.amazonaws.healthlake#InternalServerException": {
 			Schema: schemas.InternalServerException,
 			New:    func() any { return &types.InternalServerException{} },
 		},
-		"com.amazonaws.healthlake#NotImplementedOperationException": {
-			Schema: schemas.NotImplementedOperationException,
-			New:    func() any { return &types.NotImplementedOperationException{} },
+		"com.amazonaws.healthlake#ProgressEvent": {
+			Schema: schemas.ProgressEvent,
+			New:    func() any { return &types.ProgressEvent{} },
 		},
 		"com.amazonaws.healthlake#ResourceNotFoundException": {
 			Schema: schemas.ResourceNotFoundException,
@@ -47,17 +51,13 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ServiceQuotaExceededException,
 			New:    func() any { return &types.ServiceQuotaExceededException{} },
 		},
+		"com.amazonaws.healthlake#TextMessageEvent": {
+			Schema: schemas.TextMessageEvent,
+			New:    func() any { return &types.TextMessageEvent{} },
+		},
 		"com.amazonaws.healthlake#ThrottlingException": {
 			Schema: schemas.ThrottlingException,
 			New:    func() any { return &types.ThrottlingException{} },
-		},
-		"com.amazonaws.healthlake#UnauthorizedException": {
-			Schema: schemas.UnauthorizedException,
-			New:    func() any { return &types.UnauthorizedException{} },
-		},
-		"com.amazonaws.healthlake#UnsupportedMIMETypeException": {
-			Schema: schemas.UnsupportedMIMETypeException,
-			New:    func() any { return &types.UnsupportedMIMETypeException{} },
 		},
 		"com.amazonaws.healthlake#ValidationException": {
 			Schema: schemas.ValidationException,

@@ -513,6 +513,11 @@ var ___integerMin1000Max288000000 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__integerMin1000Max288000000",
 }, smithy.ShapeTypeInteger, 0)
 
+var ___integerMin1000Max3000 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "__integerMin1000Max3000",
+}, smithy.ShapeTypeInteger, 0)
+
 var ___integerMin1000Max30000 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "__integerMin1000Max30000",
@@ -992,6 +997,12 @@ var ___listOfColorConversion3DLUTSetting = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__listOfColorConversion3DLUTSetting",
 }, smithy.ShapeTypeList, 1)
 var ___listOfColorConversion3DLUTSetting_member *smithy.Schema
+
+var ___listOfDashAdaptationSetGrouping = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "__listOfDashAdaptationSetGrouping",
+}, smithy.ShapeTypeList, 1)
+var ___listOfDashAdaptationSetGrouping_member *smithy.Schema
 
 var ___listOfDashAdditionalManifest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -2468,16 +2479,30 @@ var Av1QvbrSettings_QvbrQualityLevelFineTune *smithy.Schema
 var Av1RateControlMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Av1RateControlMode",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
+var Av1RateControlMode_CBR *smithy.Schema
+
 var Av1RateControlMode_QVBR *smithy.Schema
+
+var Av1SceneChangeDetect = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "Av1SceneChangeDetect",
+}, smithy.ShapeTypeEnum, 3)
+var Av1SceneChangeDetect_DISABLED *smithy.Schema
+
+var Av1SceneChangeDetect_ENABLED *smithy.Schema
+
+var Av1SceneChangeDetect_TRANSITION_DETECTION *smithy.Schema
 
 var Av1Settings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Av1Settings",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 19)
 var Av1Settings_AdaptiveQuantization *smithy.Schema
 
 var Av1Settings_BitDepth *smithy.Schema
+
+var Av1Settings_Bitrate *smithy.Schema
 
 var Av1Settings_FilmGrainSynthesis *smithy.Schema
 
@@ -2501,7 +2526,13 @@ var Av1Settings_QvbrSettings *smithy.Schema
 
 var Av1Settings_RateControlMode *smithy.Schema
 
+var Av1Settings_SceneChangeDetect *smithy.Schema
+
 var Av1Settings_Slices *smithy.Schema
+
+var Av1Settings_SlidingWindowMs *smithy.Schema
+
+var Av1Settings_SlidingWindowPeakBitrate *smithy.Schema
 
 var Av1Settings_SpatialAdaptiveQuantization *smithy.Schema
 
@@ -3105,7 +3136,7 @@ var CmafEncryptionType_AES_CTR *smithy.Schema
 var CmafGroupSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "CmafGroupSettings",
-}, smithy.ShapeTypeStructure, 29)
+}, smithy.ShapeTypeStructure, 30)
 var CmafGroupSettings_AdditionalManifests *smithy.Schema
 
 var CmafGroupSettings_BaseUrl *smithy.Schema
@@ -3113,6 +3144,8 @@ var CmafGroupSettings_BaseUrl *smithy.Schema
 var CmafGroupSettings_ClientCache *smithy.Schema
 
 var CmafGroupSettings_CodecSpecification *smithy.Schema
+
+var CmafGroupSettings_DashAdaptationSetGrouping *smithy.Schema
 
 var CmafGroupSettings_DashIFrameTrickPlayNameModifier *smithy.Schema
 
@@ -3819,6 +3852,12 @@ var CopyProtectionAction_PASSTHROUGH *smithy.Schema
 
 var CopyProtectionAction_STRIP *smithy.Schema
 
+var DashAdaptationSetGrouping = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "DashAdaptationSetGrouping",
+}, smithy.ShapeTypeEnum, 1)
+var DashAdaptationSetGrouping_CODEC *smithy.Schema
+
 var DashAdditionalManifest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "DashAdditionalManifest",
@@ -3846,12 +3885,14 @@ var DashIsoGroupAudioChannelConfigSchemeIdUri_DOLBY_CHANNEL_CONFIGURATION *smith
 var DashIsoGroupSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "DashIsoGroupSettings",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var DashIsoGroupSettings_AdditionalManifests *smithy.Schema
 
 var DashIsoGroupSettings_AudioChannelConfigSchemeIdUri *smithy.Schema
 
 var DashIsoGroupSettings_BaseUrl *smithy.Schema
+
+var DashIsoGroupSettings_DashAdaptationSetGrouping *smithy.Schema
 
 var DashIsoGroupSettings_DashIFrameTrickPlayNameModifier *smithy.Schema
 
@@ -5377,7 +5418,7 @@ var H264SceneChangeDetect_TRANSITION_DETECTION *smithy.Schema
 var H264Settings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "H264Settings",
-}, smithy.ShapeTypeStructure, 47)
+}, smithy.ShapeTypeStructure, 49)
 var H264Settings_AdaptiveQuantization *smithy.Schema
 
 var H264Settings_BandwidthReductionFilter *smithy.Schema
@@ -5455,6 +5496,10 @@ var H264Settings_ScanTypeConversionMode *smithy.Schema
 var H264Settings_SceneChangeDetect *smithy.Schema
 
 var H264Settings_Slices *smithy.Schema
+
+var H264Settings_SlidingWindowMs *smithy.Schema
+
+var H264Settings_SlidingWindowPeakBitrate *smithy.Schema
 
 var H264Settings_SlowPal *smithy.Schema
 
@@ -5777,7 +5822,7 @@ var H265SceneChangeDetect_TRANSITION_DETECTION *smithy.Schema
 var H265Settings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "H265Settings",
-}, smithy.ShapeTypeStructure, 51)
+}, smithy.ShapeTypeStructure, 53)
 var H265Settings_AdaptiveQuantization *smithy.Schema
 
 var H265Settings_AlternateTransferFunctionSei *smithy.Schema
@@ -5855,6 +5900,10 @@ var H265Settings_ScanTypeConversionMode *smithy.Schema
 var H265Settings_SceneChangeDetect *smithy.Schema
 
 var H265Settings_Slices *smithy.Schema
+
+var H265Settings_SlidingWindowMs *smithy.Schema
+
+var H265Settings_SlidingWindowPeakBitrate *smithy.Schema
 
 var H265Settings_SlowPal *smithy.Schema
 
@@ -8298,7 +8347,7 @@ var Mpeg2SceneChangeDetect_ENABLED *smithy.Schema
 var Mpeg2Settings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Mpeg2Settings",
-}, smithy.ShapeTypeStructure, 34)
+}, smithy.ShapeTypeStructure, 36)
 var Mpeg2Settings_AdaptiveQuantization *smithy.Schema
 
 var Mpeg2Settings_Bitrate *smithy.Schema
@@ -8354,6 +8403,10 @@ var Mpeg2Settings_RateControlMode *smithy.Schema
 var Mpeg2Settings_ScanTypeConversionMode *smithy.Schema
 
 var Mpeg2Settings_SceneChangeDetect *smithy.Schema
+
+var Mpeg2Settings_SlidingWindowMs *smithy.Schema
+
+var Mpeg2Settings_SlidingWindowPeakBitrate *smithy.Schema
 
 var Mpeg2Settings_SlowPal *smithy.Schema
 
@@ -8644,7 +8697,7 @@ var NoiseReducer_TemporalFilterSettings *smithy.Schema
 var NoiseReducerFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "NoiseReducerFilter",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 10)
 var NoiseReducerFilter_BILATERAL *smithy.Schema
 
 var NoiseReducerFilter_MEAN *smithy.Schema
@@ -8660,6 +8713,10 @@ var NoiseReducerFilter_CONSERVE *smithy.Schema
 var NoiseReducerFilter_SPATIAL *smithy.Schema
 
 var NoiseReducerFilter_TEMPORAL *smithy.Schema
+
+var NoiseReducerFilter_PERCEPTUAL *smithy.Schema
+
+var NoiseReducerFilter_NONE *smithy.Schema
 
 var NoiseReducerFilterSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -13150,6 +13207,10 @@ func init() {
 
 	___listOfColorConversion3DLUTSetting_member = ___listOfColorConversion3DLUTSetting.AddMember("member", ColorConversion3DLUTSetting)
 
+	DashAdaptationSetGrouping_CODEC = DashAdaptationSetGrouping.AddMember("CODEC", smithyprelude.Unit)
+
+	___listOfDashAdaptationSetGrouping_member = ___listOfDashAdaptationSetGrouping.AddMember("member", DashAdaptationSetGrouping)
+
 	DashAdditionalManifest_ManifestNameModifier = DashAdditionalManifest.AddMember("ManifestNameModifier", ___stringMin1, &smithytraits.JSONName{Name: "manifestNameModifier"})
 
 	DashAdditionalManifest_SelectedOutputs = DashAdditionalManifest.AddMember("SelectedOutputs", ___listOf__stringMin1, &smithytraits.JSONName{Name: "selectedOutputs"})
@@ -14318,6 +14379,8 @@ func init() {
 
 	CmafGroupSettings_CodecSpecification = CmafGroupSettings.AddMember("CodecSpecification", CmafCodecSpecification, &smithytraits.JSONName{Name: "codecSpecification"})
 
+	CmafGroupSettings_DashAdaptationSetGrouping = CmafGroupSettings.AddMember("DashAdaptationSetGrouping", ___listOfDashAdaptationSetGrouping, &smithytraits.JSONName{Name: "dashAdaptationSetGrouping"})
+
 	CmafGroupSettings_DashIFrameTrickPlayNameModifier = CmafGroupSettings.AddMember("DashIFrameTrickPlayNameModifier", ___stringMin1Max256, &smithytraits.JSONName{Name: "dashIFrameTrickPlayNameModifier"})
 
 	CmafGroupSettings_DashManifestStyle = CmafGroupSettings.AddMember("DashManifestStyle", DashManifestStyle, &smithytraits.JSONName{Name: "dashManifestStyle"})
@@ -14453,6 +14516,8 @@ func init() {
 	DashIsoGroupSettings_AudioChannelConfigSchemeIdUri = DashIsoGroupSettings.AddMember("AudioChannelConfigSchemeIdUri", DashIsoGroupAudioChannelConfigSchemeIdUri, &smithytraits.JSONName{Name: "audioChannelConfigSchemeIdUri"})
 
 	DashIsoGroupSettings_BaseUrl = DashIsoGroupSettings.AddMember("BaseUrl", ___string, &smithytraits.JSONName{Name: "baseUrl"})
+
+	DashIsoGroupSettings_DashAdaptationSetGrouping = DashIsoGroupSettings.AddMember("DashAdaptationSetGrouping", ___listOfDashAdaptationSetGrouping, &smithytraits.JSONName{Name: "dashAdaptationSetGrouping"})
 
 	DashIsoGroupSettings_DashIFrameTrickPlayNameModifier = DashIsoGroupSettings.AddMember("DashIFrameTrickPlayNameModifier", ___stringMin1Max256, &smithytraits.JSONName{Name: "dashIFrameTrickPlayNameModifier"})
 
@@ -15404,7 +15469,15 @@ func init() {
 
 	Av1QvbrSettings_QvbrQualityLevelFineTune = Av1QvbrSettings.AddMember("QvbrQualityLevelFineTune", ___doubleMin0Max1, &smithytraits.JSONName{Name: "qvbrQualityLevelFineTune"})
 
+	Av1RateControlMode_CBR = Av1RateControlMode.AddMember("CBR", smithyprelude.Unit)
+
 	Av1RateControlMode_QVBR = Av1RateControlMode.AddMember("QVBR", smithyprelude.Unit)
+
+	Av1SceneChangeDetect_DISABLED = Av1SceneChangeDetect.AddMember("DISABLED", smithyprelude.Unit)
+
+	Av1SceneChangeDetect_ENABLED = Av1SceneChangeDetect.AddMember("ENABLED", smithyprelude.Unit)
+
+	Av1SceneChangeDetect_TRANSITION_DETECTION = Av1SceneChangeDetect.AddMember("TRANSITION_DETECTION", smithyprelude.Unit)
 
 	Av1SpatialAdaptiveQuantization_DISABLED = Av1SpatialAdaptiveQuantization.AddMember("DISABLED", smithyprelude.Unit)
 
@@ -15413,6 +15486,8 @@ func init() {
 	Av1Settings_AdaptiveQuantization = Av1Settings.AddMember("AdaptiveQuantization", Av1AdaptiveQuantization, &smithytraits.JSONName{Name: "adaptiveQuantization"})
 
 	Av1Settings_BitDepth = Av1Settings.AddMember("BitDepth", Av1BitDepth, &smithytraits.JSONName{Name: "bitDepth"})
+
+	Av1Settings_Bitrate = Av1Settings.AddMember("Bitrate", ___integerMin1000Max1152000000, &smithytraits.JSONName{Name: "bitrate"})
 
 	Av1Settings_FilmGrainSynthesis = Av1Settings.AddMember("FilmGrainSynthesis", Av1FilmGrainSynthesis, &smithytraits.JSONName{Name: "filmGrainSynthesis"})
 
@@ -15436,7 +15511,13 @@ func init() {
 
 	Av1Settings_RateControlMode = Av1Settings.AddMember("RateControlMode", Av1RateControlMode, &smithytraits.JSONName{Name: "rateControlMode"})
 
+	Av1Settings_SceneChangeDetect = Av1Settings.AddMember("SceneChangeDetect", Av1SceneChangeDetect, &smithytraits.JSONName{Name: "sceneChangeDetect"})
+
 	Av1Settings_Slices = Av1Settings.AddMember("Slices", ___integerMin1Max32, &smithytraits.JSONName{Name: "slices"})
+
+	Av1Settings_SlidingWindowMs = Av1Settings.AddMember("SlidingWindowMs", ___integerMin1000Max3000, &smithytraits.JSONName{Name: "slidingWindowMs"})
+
+	Av1Settings_SlidingWindowPeakBitrate = Av1Settings.AddMember("SlidingWindowPeakBitrate", ___integerMin1000Max1152000000, &smithytraits.JSONName{Name: "slidingWindowPeakBitrate"})
 
 	Av1Settings_SpatialAdaptiveQuantization = Av1Settings.AddMember("SpatialAdaptiveQuantization", Av1SpatialAdaptiveQuantization, &smithytraits.JSONName{Name: "spatialAdaptiveQuantization"})
 
@@ -15850,6 +15931,10 @@ func init() {
 
 	H264Settings_Slices = H264Settings.AddMember("Slices", ___integerMin1Max32, &smithytraits.JSONName{Name: "slices"})
 
+	H264Settings_SlidingWindowMs = H264Settings.AddMember("SlidingWindowMs", ___integerMin1000Max3000, &smithytraits.JSONName{Name: "slidingWindowMs"})
+
+	H264Settings_SlidingWindowPeakBitrate = H264Settings.AddMember("SlidingWindowPeakBitrate", ___integerMin1000Max1152000000, &smithytraits.JSONName{Name: "slidingWindowPeakBitrate"})
+
 	H264Settings_SlowPal = H264Settings.AddMember("SlowPal", H264SlowPal, &smithytraits.JSONName{Name: "slowPal"})
 
 	H264Settings_Softness = H264Settings.AddMember("Softness", ___integerMin0Max128, &smithytraits.JSONName{Name: "softness"})
@@ -16142,6 +16227,10 @@ func init() {
 
 	H265Settings_Slices = H265Settings.AddMember("Slices", ___integerMin1Max32, &smithytraits.JSONName{Name: "slices"})
 
+	H265Settings_SlidingWindowMs = H265Settings.AddMember("SlidingWindowMs", ___integerMin1000Max3000, &smithytraits.JSONName{Name: "slidingWindowMs"})
+
+	H265Settings_SlidingWindowPeakBitrate = H265Settings.AddMember("SlidingWindowPeakBitrate", ___integerMin1000Max1466400000, &smithytraits.JSONName{Name: "slidingWindowPeakBitrate"})
+
 	H265Settings_SlowPal = H265Settings.AddMember("SlowPal", H265SlowPal, &smithytraits.JSONName{Name: "slowPal"})
 
 	H265Settings_SpatialAdaptiveQuantization = H265Settings.AddMember("SpatialAdaptiveQuantization", H265SpatialAdaptiveQuantization, &smithytraits.JSONName{Name: "spatialAdaptiveQuantization"})
@@ -16325,6 +16414,10 @@ func init() {
 	Mpeg2Settings_ScanTypeConversionMode = Mpeg2Settings.AddMember("ScanTypeConversionMode", Mpeg2ScanTypeConversionMode, &smithytraits.JSONName{Name: "scanTypeConversionMode"})
 
 	Mpeg2Settings_SceneChangeDetect = Mpeg2Settings.AddMember("SceneChangeDetect", Mpeg2SceneChangeDetect, &smithytraits.JSONName{Name: "sceneChangeDetect"})
+
+	Mpeg2Settings_SlidingWindowMs = Mpeg2Settings.AddMember("SlidingWindowMs", ___integerMin1000Max3000, &smithytraits.JSONName{Name: "slidingWindowMs"})
+
+	Mpeg2Settings_SlidingWindowPeakBitrate = Mpeg2Settings.AddMember("SlidingWindowPeakBitrate", ___integerMin1000Max300000000, &smithytraits.JSONName{Name: "slidingWindowPeakBitrate"})
 
 	Mpeg2Settings_SlowPal = Mpeg2Settings.AddMember("SlowPal", Mpeg2SlowPal, &smithytraits.JSONName{Name: "slowPal"})
 
@@ -17043,6 +17136,10 @@ func init() {
 	NoiseReducerFilter_SPATIAL = NoiseReducerFilter.AddMember("SPATIAL", smithyprelude.Unit)
 
 	NoiseReducerFilter_TEMPORAL = NoiseReducerFilter.AddMember("TEMPORAL", smithyprelude.Unit)
+
+	NoiseReducerFilter_PERCEPTUAL = NoiseReducerFilter.AddMember("PERCEPTUAL", smithyprelude.Unit)
+
+	NoiseReducerFilter_NONE = NoiseReducerFilter.AddMember("NONE", smithyprelude.Unit)
 
 	NoiseReducerFilterSettings_Strength = NoiseReducerFilterSettings.AddMember("Strength", ___integerMin0Max3, &smithytraits.JSONName{Name: "strength"})
 

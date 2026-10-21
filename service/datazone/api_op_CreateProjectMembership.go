@@ -48,6 +48,11 @@ type CreateProjectMembershipInput struct {
 	// This member is required.
 	ProjectIdentifier *string
 
+	// The ID of the user-created designation to assign to the project member.
+	// Required when designation is USER_CREATED_DESIGNATION ; must not be provided
+	// otherwise.
+	UserCreatedDesignationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -67,6 +72,9 @@ func (v *CreateProjectMembershipInput) SerializeMembers(s smithy.ShapeSerializer
 	serializeMember(s, schemas.CreateProjectMembershipInput_member, v.Member)
 	if v.ProjectIdentifier != nil {
 		s.WriteString(schemas.CreateProjectMembershipInput_projectIdentifier, *v.ProjectIdentifier)
+	}
+	if v.UserCreatedDesignationId != nil {
+		s.WriteString(schemas.CreateProjectMembershipInput_userCreatedDesignationId, *v.UserCreatedDesignationId)
 	}
 }
 

@@ -99,9 +99,9 @@ type UpdateIntentInput struct {
 	QInConnectIntentConfiguration *types.QInConnectIntentConfiguration
 
 	// Specifies the configuration of the built-in Amazon.QnAIntent . The
-	// AMAZON.QnAIntent intent is called when Amazon Lex can't determine another intent
-	// to invoke. If you specify this field, you can't specify the kendraConfiguration
-	// field.
+	// AMAZON.QnAIntent intent is called when Amazon Lex V2 can't determine another
+	// intent to invoke. If you specify this field, you can't specify the
+	// kendraConfiguration field.
 	QnAIntentConfiguration *types.QnAIntentConfiguration
 
 	// New utterances used to invoke the intent.

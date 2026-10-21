@@ -47,12 +47,19 @@ type StartFlowFlushInput struct {
 	// This member is required.
 	FlowFilters []types.FlowFilter
 
-	// The ID of the Availability Zone where the firewall is located. For example,
+	// The name of the Availability Zone where the firewall is located. For example,
 	// us-east-2a .
 	//
 	// Defines the scope a flow operation. You can use up to 20 filters to configure a
 	// single flow operation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the firewall is located. For example,
+	// use2-az1 . Availability Zone IDs are the same in every Amazon Web Services
+	// account, so use this parameter when you coordinate resources across accounts.
+	// Specify either AvailabilityZone or AvailabilityZoneId , not both. If you specify
+	// both, the request fails.
+	AvailabilityZoneId *string
 
 	// The reqested FlowOperation ignores flows with an age (in seconds) lower than
 	// MinimumFlowAgeInSeconds . You provide this for start commands.
@@ -76,6 +83,9 @@ func (v *StartFlowFlushInput) Serialize(s smithy.ShapeSerializer) {
 func (v *StartFlowFlushInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.StartFlowFlushRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.StartFlowFlushRequest_AvailabilityZoneId, *v.AvailabilityZoneId)
 	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.StartFlowFlushRequest_FirewallArn, *v.FirewallArn)

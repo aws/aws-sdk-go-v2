@@ -141,6 +141,13 @@ var CreateDataSource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/domains/{domainIdentifier}/data-sources",
 	Code: 201})
 
+var CreateDesignation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "CreateDesignation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/domains/{domainIdentifier}/designations",
+	Code: 201})
+
 var CreateDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "CreateDomain",
@@ -336,6 +343,13 @@ var DeleteDataSource = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/domains/{domainIdentifier}/data-sources/{identifier}",
 	Code: 200})
+
+var DeleteDesignation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DeleteDesignation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v2/domains/{domainIdentifier}/designations/{identifier}",
+	Code: 204})
 
 var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -559,6 +573,13 @@ var GetDataSourceRun = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetDataSourceRun",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domains/{domainIdentifier}/data-source-runs/{identifier}",
+	Code: 200})
+
+var GetDesignation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "GetDesignation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/domains/{domainIdentifier}/designations/{identifier}",
 	Code: 200})
 
 var GetDomain = smithy.NewSchema(smithy.ShapeID{
@@ -832,6 +853,13 @@ var ListDataSources = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListDataSources",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domains/{domainIdentifier}/data-sources",
+	Code: 200})
+
+var ListDesignations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "ListDesignations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/domains/{domainIdentifier}/designations",
 	Code: 200})
 
 var ListDomains = smithy.NewSchema(smithy.ShapeID{
@@ -1210,6 +1238,13 @@ var UpdateDataSource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateDataSource",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/domains/{domainIdentifier}/data-sources/{identifier}",
+	Code: 200})
+
+var UpdateDesignation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "UpdateDesignation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/v2/domains/{domainIdentifier}/designations/{identifier}",
 	Code: 200})
 
 var UpdateDomain = smithy.NewSchema(smithy.ShapeID{
@@ -2123,6 +2158,11 @@ var BusinessNameGenerationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BusinessNameGenerationConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var BusinessNameGenerationConfiguration_enabled *smithy.Schema
+
+var _CedarDesignationPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "CedarDesignationPolicy",
+}, smithy.ShapeTypeString, 0)
 
 var CellInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -3147,6 +3187,52 @@ var _Description = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "Description",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _DesignationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DesignationId",
+}, smithy.ShapeTypeString, 0)
+
+var _DesignationName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DesignationName",
+}, smithy.ShapeTypeString, 0)
+
+var _DesignationSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DesignationSummaries",
+}, smithy.ShapeTypeList, 1)
+var _DesignationSummaries_member *smithy.Schema
+
+var DesignationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DesignationSummary",
+}, smithy.ShapeTypeStructure, 9)
+var DesignationSummary_domainId *smithy.Schema
+
+var DesignationSummary_id *smithy.Schema
+
+var DesignationSummary_name *smithy.Schema
+
+var DesignationSummary_description *smithy.Schema
+
+var DesignationSummary_designationType *smithy.Schema
+
+var DesignationSummary_deletionProtection *smithy.Schema
+
+var DesignationSummary_createdBy *smithy.Schema
+
+var DesignationSummary_createdAt *smithy.Schema
+
+var DesignationSummary_updatedAt *smithy.Schema
+
+var DesignationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DesignationType",
+}, smithy.ShapeTypeEnum, 2)
+var DesignationType_MANAGED *smithy.Schema
+
+var DesignationType_USER_CREATED *smithy.Schema
 
 var DetailedGlossaryTerm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -5144,6 +5230,11 @@ var _LineageSyncScheduleCronString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "LineageSyncScheduleCronString",
 }, smithy.ShapeTypeString, 0)
 
+var _ListDesignationsMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "ListDesignationsMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListEnvironmentActionSummaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "ListEnvironmentActionSummaries",
@@ -6181,12 +6272,14 @@ var ProjectDeletionError_message *smithy.Schema
 var ProjectDesignation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "ProjectDesignation",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ProjectDesignation_OWNER *smithy.Schema
 
 var ProjectDesignation_CONTRIBUTOR *smithy.Schema
 
 var ProjectDesignation_PROJECT_CATALOG_STEWARD *smithy.Schema
+
+var ProjectDesignation_USER_CREATED_DESIGNATION *smithy.Schema
 
 var ProjectGrantFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -6208,10 +6301,12 @@ var _ProjectIds_member *smithy.Schema
 var ProjectMember = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "ProjectMember",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ProjectMember_memberDetails *smithy.Schema
 
 var ProjectMember_designation *smithy.Schema
+
+var ProjectMember_userCreatedDesignationId *smithy.Schema
 
 var _ProjectMembers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -6222,10 +6317,12 @@ var _ProjectMembers_member *smithy.Schema
 var ProjectMembershipAssignment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "ProjectMembershipAssignment",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ProjectMembershipAssignment_member *smithy.Schema
 
 var ProjectMembershipAssignment_designation *smithy.Schema
+
+var ProjectMembershipAssignment_userCreatedDesignationId *smithy.Schema
 
 var _ProjectMembershipAssignments = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -6241,8 +6338,10 @@ var _ProjectName = smithy.NewSchema(smithy.ShapeID{
 var ProjectPolicyGrantPrincipal = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "ProjectPolicyGrantPrincipal",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ProjectPolicyGrantPrincipal_projectDesignation *smithy.Schema
+
+var ProjectPolicyGrantPrincipal_userCreatedDesignationId *smithy.Schema
 
 var ProjectPolicyGrantPrincipal_projectIdentifier *smithy.Schema
 
@@ -8418,7 +8517,7 @@ var UserAssignment_MANUAL *smithy.Schema
 var UserDesignation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "UserDesignation",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var UserDesignation_PROJECT_OWNER *smithy.Schema
 
 var UserDesignation_PROJECT_CONTRIBUTOR *smithy.Schema
@@ -8428,6 +8527,8 @@ var UserDesignation_PROJECT_CATALOG_VIEWER *smithy.Schema
 var UserDesignation_PROJECT_CATALOG_CONSUMER *smithy.Schema
 
 var UserDesignation_PROJECT_CATALOG_STEWARD *smithy.Schema
+
+var UserDesignation_USER_CREATED_DESIGNATION *smithy.Schema
 
 var UserDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -9354,6 +9455,44 @@ var CreateDataSourceOutput_createdAt *smithy.Schema
 
 var CreateDataSourceOutput_updatedAt *smithy.Schema
 
+var CreateDesignationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "CreateDesignationInput",
+}, smithy.ShapeTypeStructure, 5)
+var CreateDesignationInput_domainIdentifier *smithy.Schema
+
+var CreateDesignationInput_name *smithy.Schema
+
+var CreateDesignationInput_description *smithy.Schema
+
+var CreateDesignationInput_policy *smithy.Schema
+
+var CreateDesignationInput_deletionProtection *smithy.Schema
+
+var CreateDesignationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "CreateDesignationOutput",
+}, smithy.ShapeTypeStructure, 10)
+var CreateDesignationOutput_domainId *smithy.Schema
+
+var CreateDesignationOutput_id *smithy.Schema
+
+var CreateDesignationOutput_name *smithy.Schema
+
+var CreateDesignationOutput_description *smithy.Schema
+
+var CreateDesignationOutput_designationType *smithy.Schema
+
+var CreateDesignationOutput_policy *smithy.Schema
+
+var CreateDesignationOutput_deletionProtection *smithy.Schema
+
+var CreateDesignationOutput_createdBy *smithy.Schema
+
+var CreateDesignationOutput_createdAt *smithy.Schema
+
+var CreateDesignationOutput_lastUpdatedAt *smithy.Schema
+
 var CreateDomainInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "CreateDomainInput",
@@ -9903,7 +10042,7 @@ var CreateProjectInput_membershipAssignments *smithy.Schema
 var CreateProjectMembershipInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "CreateProjectMembershipInput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var CreateProjectMembershipInput_domainIdentifier *smithy.Schema
 
 var CreateProjectMembershipInput_projectIdentifier *smithy.Schema
@@ -9911,6 +10050,8 @@ var CreateProjectMembershipInput_projectIdentifier *smithy.Schema
 var CreateProjectMembershipInput_member *smithy.Schema
 
 var CreateProjectMembershipInput_designation *smithy.Schema
+
+var CreateProjectMembershipInput_userCreatedDesignationId *smithy.Schema
 
 var CreateProjectMembershipOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -10383,6 +10524,19 @@ var DeleteDataSourceOutput_updatedAt *smithy.Schema
 var DeleteDataSourceOutput_selfGrantStatus *smithy.Schema
 
 var DeleteDataSourceOutput_retainPermissionsOnRevokeFailure *smithy.Schema
+
+var DeleteDesignationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DeleteDesignationInput",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteDesignationInput_domainIdentifier *smithy.Schema
+
+var DeleteDesignationInput_identifier *smithy.Schema
+
+var DeleteDesignationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "DeleteDesignationOutput",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteDomainInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -11069,6 +11223,38 @@ var GetDataSourceRunOutput_updatedAt *smithy.Schema
 var GetDataSourceRunOutput_startedAt *smithy.Schema
 
 var GetDataSourceRunOutput_stoppedAt *smithy.Schema
+
+var GetDesignationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "GetDesignationInput",
+}, smithy.ShapeTypeStructure, 2)
+var GetDesignationInput_domainIdentifier *smithy.Schema
+
+var GetDesignationInput_identifier *smithy.Schema
+
+var GetDesignationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "GetDesignationOutput",
+}, smithy.ShapeTypeStructure, 10)
+var GetDesignationOutput_domainId *smithy.Schema
+
+var GetDesignationOutput_id *smithy.Schema
+
+var GetDesignationOutput_name *smithy.Schema
+
+var GetDesignationOutput_description *smithy.Schema
+
+var GetDesignationOutput_designationType *smithy.Schema
+
+var GetDesignationOutput_policy *smithy.Schema
+
+var GetDesignationOutput_deletionProtection *smithy.Schema
+
+var GetDesignationOutput_createdBy *smithy.Schema
+
+var GetDesignationOutput_createdAt *smithy.Schema
+
+var GetDesignationOutput_lastUpdatedAt *smithy.Schema
 
 var GetDomainInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -12371,6 +12557,24 @@ var ListDataSourcesOutput = smithy.NewSchema(smithy.ShapeID{
 var ListDataSourcesOutput_items *smithy.Schema
 
 var ListDataSourcesOutput_nextToken *smithy.Schema
+
+var ListDesignationsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "ListDesignationsInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListDesignationsInput_domainIdentifier *smithy.Schema
+
+var ListDesignationsInput_nextToken *smithy.Schema
+
+var ListDesignationsInput_maxResults *smithy.Schema
+
+var ListDesignationsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "ListDesignationsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListDesignationsOutput_items *smithy.Schema
+
+var ListDesignationsOutput_nextToken *smithy.Schema
 
 var ListDomainsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -14000,6 +14204,46 @@ var UpdateDataSourceOutput_updatedAt *smithy.Schema
 var UpdateDataSourceOutput_selfGrantStatus *smithy.Schema
 
 var UpdateDataSourceOutput_retainPermissionsOnRevokeFailure *smithy.Schema
+
+var UpdateDesignationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "UpdateDesignationInput",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateDesignationInput_domainIdentifier *smithy.Schema
+
+var UpdateDesignationInput_identifier *smithy.Schema
+
+var UpdateDesignationInput_name *smithy.Schema
+
+var UpdateDesignationInput_description *smithy.Schema
+
+var UpdateDesignationInput_policy *smithy.Schema
+
+var UpdateDesignationInput_deletionProtection *smithy.Schema
+
+var UpdateDesignationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "UpdateDesignationOutput",
+}, smithy.ShapeTypeStructure, 10)
+var UpdateDesignationOutput_domainId *smithy.Schema
+
+var UpdateDesignationOutput_id *smithy.Schema
+
+var UpdateDesignationOutput_name *smithy.Schema
+
+var UpdateDesignationOutput_description *smithy.Schema
+
+var UpdateDesignationOutput_designationType *smithy.Schema
+
+var UpdateDesignationOutput_policy *smithy.Schema
+
+var UpdateDesignationOutput_deletionProtection *smithy.Schema
+
+var UpdateDesignationOutput_createdBy *smithy.Schema
+
+var UpdateDesignationOutput_createdAt *smithy.Schema
+
+var UpdateDesignationOutput_lastUpdatedAt *smithy.Schema
 
 var UpdateDomainInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -16773,6 +17017,30 @@ func init() {
 
 	DeploymentProperties_endTimeoutMinutes = DeploymentProperties.AddMember("endTimeoutMinutes", smithyprelude.Integer)
 
+	DesignationType_MANAGED = DesignationType.AddMember("MANAGED", smithyprelude.Unit)
+
+	DesignationType_USER_CREATED = DesignationType.AddMember("USER_CREATED", smithyprelude.Unit)
+
+	DesignationSummary_domainId = DesignationSummary.AddMember("domainId", _DomainId)
+
+	DesignationSummary_id = DesignationSummary.AddMember("id", _DesignationId)
+
+	DesignationSummary_name = DesignationSummary.AddMember("name", _DesignationName)
+
+	DesignationSummary_description = DesignationSummary.AddMember("description", _Description)
+
+	DesignationSummary_designationType = DesignationSummary.AddMember("designationType", DesignationType)
+
+	DesignationSummary_deletionProtection = DesignationSummary.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	DesignationSummary_createdBy = DesignationSummary.AddMember("createdBy", _CreatedBy)
+
+	DesignationSummary_createdAt = DesignationSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DesignationSummary_updatedAt = DesignationSummary.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	_DesignationSummaries_member = _DesignationSummaries.AddMember("member", DesignationSummary)
+
 	DomainStatus_CREATING = DomainStatus.AddMember("CREATING", smithyprelude.Unit)
 
 	DomainStatus_AVAILABLE = DomainStatus.AddMember("AVAILABLE", smithyprelude.Unit)
@@ -18009,9 +18277,13 @@ func init() {
 
 	ProjectDesignation_PROJECT_CATALOG_STEWARD = ProjectDesignation.AddMember("PROJECT_CATALOG_STEWARD", smithyprelude.Unit)
 
+	ProjectDesignation_USER_CREATED_DESIGNATION = ProjectDesignation.AddMember("USER_CREATED_DESIGNATION", smithyprelude.Unit)
+
 	ProjectGrantFilter_domainUnitFilter = ProjectGrantFilter.AddMember("domainUnitFilter", DomainUnitFilterForProject)
 
 	ProjectPolicyGrantPrincipal_projectDesignation = ProjectPolicyGrantPrincipal.AddMember("projectDesignation", ProjectDesignation)
+
+	ProjectPolicyGrantPrincipal_userCreatedDesignationId = ProjectPolicyGrantPrincipal.AddMember("userCreatedDesignationId", _DesignationId)
 
 	ProjectPolicyGrantPrincipal_projectIdentifier = ProjectPolicyGrantPrincipal.AddMember("projectIdentifier", _ProjectId)
 
@@ -18053,15 +18325,21 @@ func init() {
 
 	UserDesignation_PROJECT_CATALOG_STEWARD = UserDesignation.AddMember("PROJECT_CATALOG_STEWARD", smithyprelude.Unit)
 
+	UserDesignation_USER_CREATED_DESIGNATION = UserDesignation.AddMember("USER_CREATED_DESIGNATION", smithyprelude.Unit)
+
 	ProjectMember_memberDetails = ProjectMember.AddMember("memberDetails", MemberDetails)
 
 	ProjectMember_designation = ProjectMember.AddMember("designation", UserDesignation)
+
+	ProjectMember_userCreatedDesignationId = ProjectMember.AddMember("userCreatedDesignationId", _DesignationId)
 
 	_ProjectMembers_member = _ProjectMembers.AddMember("member", ProjectMember)
 
 	ProjectMembershipAssignment_member = ProjectMembershipAssignment.AddMember("member", Member)
 
 	ProjectMembershipAssignment_designation = ProjectMembershipAssignment.AddMember("designation", UserDesignation)
+
+	ProjectMembershipAssignment_userCreatedDesignationId = ProjectMembershipAssignment.AddMember("userCreatedDesignationId", _DesignationId)
 
 	_ProjectMembershipAssignments_member = _ProjectMembershipAssignments.AddMember("member", ProjectMembershipAssignment)
 
@@ -19287,6 +19565,36 @@ func init() {
 
 	CreateDataSourceOutput_updatedAt = CreateDataSourceOutput.AddMember("updatedAt", _DateTime)
 
+	CreateDesignationInput_domainIdentifier = CreateDesignationInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
+
+	CreateDesignationInput_name = CreateDesignationInput.AddMember("name", _DesignationName)
+
+	CreateDesignationInput_description = CreateDesignationInput.AddMember("description", _Description)
+
+	CreateDesignationInput_policy = CreateDesignationInput.AddMember("policy", _CedarDesignationPolicy)
+
+	CreateDesignationInput_deletionProtection = CreateDesignationInput.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	CreateDesignationOutput_domainId = CreateDesignationOutput.AddMember("domainId", _DomainId)
+
+	CreateDesignationOutput_id = CreateDesignationOutput.AddMember("id", _DesignationId)
+
+	CreateDesignationOutput_name = CreateDesignationOutput.AddMember("name", _DesignationName)
+
+	CreateDesignationOutput_description = CreateDesignationOutput.AddMember("description", _Description)
+
+	CreateDesignationOutput_designationType = CreateDesignationOutput.AddMember("designationType", DesignationType)
+
+	CreateDesignationOutput_policy = CreateDesignationOutput.AddMember("policy", _CedarDesignationPolicy)
+
+	CreateDesignationOutput_deletionProtection = CreateDesignationOutput.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	CreateDesignationOutput_createdBy = CreateDesignationOutput.AddMember("createdBy", _CreatedBy)
+
+	CreateDesignationOutput_createdAt = CreateDesignationOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CreateDesignationOutput_lastUpdatedAt = CreateDesignationOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
 	CreateDomainInput_name = CreateDomainInput.AddMember("name", smithyprelude.String)
 
 	CreateDomainInput_description = CreateDomainInput.AddMember("description", smithyprelude.String)
@@ -19741,6 +20049,8 @@ func init() {
 
 	CreateProjectMembershipInput_designation = CreateProjectMembershipInput.AddMember("designation", UserDesignation)
 
+	CreateProjectMembershipInput_userCreatedDesignationId = CreateProjectMembershipInput.AddMember("userCreatedDesignationId", _DesignationId)
+
 	CreateProjectOutput_domainId = CreateProjectOutput.AddMember("domainId", _DomainId)
 
 	CreateProjectOutput_id = CreateProjectOutput.AddMember("id", _ProjectId)
@@ -20090,6 +20400,10 @@ func init() {
 	DeleteDataSourceOutput_selfGrantStatus = DeleteDataSourceOutput.AddMember("selfGrantStatus", SelfGrantStatusOutput)
 
 	DeleteDataSourceOutput_retainPermissionsOnRevokeFailure = DeleteDataSourceOutput.AddMember("retainPermissionsOnRevokeFailure", smithyprelude.Boolean)
+
+	DeleteDesignationInput_domainIdentifier = DeleteDesignationInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
+
+	DeleteDesignationInput_identifier = DeleteDesignationInput.AddMember("identifier", _DesignationId, &smithytraits.HTTPLabel{})
 
 	DeleteDomainInput_identifier = DeleteDomainInput.AddMember("identifier", _DomainId, &smithytraits.HTTPLabel{})
 
@@ -20530,6 +20844,30 @@ func init() {
 	GetDataSourceRunOutput_startedAt = GetDataSourceRunOutput.AddMember("startedAt", _DateTime)
 
 	GetDataSourceRunOutput_stoppedAt = GetDataSourceRunOutput.AddMember("stoppedAt", _DateTime)
+
+	GetDesignationInput_domainIdentifier = GetDesignationInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
+
+	GetDesignationInput_identifier = GetDesignationInput.AddMember("identifier", _DesignationId, &smithytraits.HTTPLabel{})
+
+	GetDesignationOutput_domainId = GetDesignationOutput.AddMember("domainId", _DomainId)
+
+	GetDesignationOutput_id = GetDesignationOutput.AddMember("id", _DesignationId)
+
+	GetDesignationOutput_name = GetDesignationOutput.AddMember("name", _DesignationName)
+
+	GetDesignationOutput_description = GetDesignationOutput.AddMember("description", _Description)
+
+	GetDesignationOutput_designationType = GetDesignationOutput.AddMember("designationType", DesignationType)
+
+	GetDesignationOutput_policy = GetDesignationOutput.AddMember("policy", _CedarDesignationPolicy)
+
+	GetDesignationOutput_deletionProtection = GetDesignationOutput.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	GetDesignationOutput_createdBy = GetDesignationOutput.AddMember("createdBy", _CreatedBy)
+
+	GetDesignationOutput_createdAt = GetDesignationOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetDesignationOutput_lastUpdatedAt = GetDesignationOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	GetDomainInput_identifier = GetDomainInput.AddMember("identifier", _DomainId, &smithytraits.HTTPLabel{})
 
@@ -21520,6 +21858,16 @@ func init() {
 	ListDataSourcesOutput_items = ListDataSourcesOutput.AddMember("items", _DataSourceSummaries)
 
 	ListDataSourcesOutput_nextToken = ListDataSourcesOutput.AddMember("nextToken", _PaginationToken)
+
+	ListDesignationsInput_domainIdentifier = ListDesignationsInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
+
+	ListDesignationsInput_nextToken = ListDesignationsInput.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDesignationsInput_maxResults = ListDesignationsInput.AddMember("maxResults", _ListDesignationsMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDesignationsOutput_items = ListDesignationsOutput.AddMember("items", _DesignationSummaries)
+
+	ListDesignationsOutput_nextToken = ListDesignationsOutput.AddMember("nextToken", _PaginationToken)
 
 	ListDomainsInput_status = ListDomainsInput.AddMember("status", DomainStatus, &smithytraits.HTTPQuery{Name: "status"})
 
@@ -22712,6 +23060,38 @@ func init() {
 	UpdateDataSourceOutput_selfGrantStatus = UpdateDataSourceOutput.AddMember("selfGrantStatus", SelfGrantStatusOutput)
 
 	UpdateDataSourceOutput_retainPermissionsOnRevokeFailure = UpdateDataSourceOutput.AddMember("retainPermissionsOnRevokeFailure", smithyprelude.Boolean)
+
+	UpdateDesignationInput_domainIdentifier = UpdateDesignationInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
+
+	UpdateDesignationInput_identifier = UpdateDesignationInput.AddMember("identifier", _DesignationId, &smithytraits.HTTPLabel{})
+
+	UpdateDesignationInput_name = UpdateDesignationInput.AddMember("name", _DesignationName)
+
+	UpdateDesignationInput_description = UpdateDesignationInput.AddMember("description", _Description)
+
+	UpdateDesignationInput_policy = UpdateDesignationInput.AddMember("policy", _CedarDesignationPolicy)
+
+	UpdateDesignationInput_deletionProtection = UpdateDesignationInput.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	UpdateDesignationOutput_domainId = UpdateDesignationOutput.AddMember("domainId", _DomainId)
+
+	UpdateDesignationOutput_id = UpdateDesignationOutput.AddMember("id", _DesignationId)
+
+	UpdateDesignationOutput_name = UpdateDesignationOutput.AddMember("name", _DesignationName)
+
+	UpdateDesignationOutput_description = UpdateDesignationOutput.AddMember("description", _Description)
+
+	UpdateDesignationOutput_designationType = UpdateDesignationOutput.AddMember("designationType", DesignationType)
+
+	UpdateDesignationOutput_policy = UpdateDesignationOutput.AddMember("policy", _CedarDesignationPolicy)
+
+	UpdateDesignationOutput_deletionProtection = UpdateDesignationOutput.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	UpdateDesignationOutput_createdBy = UpdateDesignationOutput.AddMember("createdBy", _CreatedBy)
+
+	UpdateDesignationOutput_createdAt = UpdateDesignationOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	UpdateDesignationOutput_lastUpdatedAt = UpdateDesignationOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	UpdateDomainInput_identifier = UpdateDomainInput.AddMember("identifier", _DomainId, &smithytraits.HTTPLabel{})
 

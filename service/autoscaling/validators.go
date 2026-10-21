@@ -730,6 +730,26 @@ func (m *validateOpLaunchInstances) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountSetting struct {
+}
+
+func (*validateOpPutAccountSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountSettingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutLifecycleHook struct {
 }
 
@@ -1172,6 +1192,10 @@ func addOpGetPredictiveScalingForecastValidationMiddleware(stack *middleware.Sta
 
 func addOpLaunchInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpLaunchInstances{}, middleware.After)
+}
+
+func addOpPutAccountSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountSetting{}, middleware.After)
 }
 
 func addOpPutLifecycleHookValidationMiddleware(stack *middleware.Stack) error {
@@ -2657,6 +2681,24 @@ func validateOpLaunchInstancesInput(v *LaunchInstancesInput) error {
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountSettingInput(v *PutAccountSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountSettingInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -26900,9 +26900,21 @@ type DataSourceCredentials struct {
 	// [OAuthClientCredentials]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_OAuthClientCredentials.html
 	OAuthClientCredentials *OAuthClientCredentials
 
+	// The client credentials for connecting to a Microsoft OneDrive data source using
+	// two-legged OAuth (2LO) certificate-based authentication.
+	OneDriveClientCredentials *OneDriveClientCredentials
+
 	// The Amazon Resource Name (ARN) of the secret associated with the data source in
 	// Amazon Secrets Manager.
 	SecretArn *string
+
+	// The service account credentials for connecting to a data source that uses
+	// Google Workspace domain-wide delegation.
+	ServiceAccountCredentials *ServiceAccountCredentials
+
+	// The client credentials for connecting to a Microsoft SharePoint data source
+	// using two-legged OAuth (2LO) certificate-based authentication.
+	SharePointClientCredentials *SharePointClientCredentials
 
 	// The credentials for connecting through a web proxy server.
 	WebProxyCredentials *WebProxyCredentials
@@ -26935,8 +26947,23 @@ func (v *DataSourceCredentials) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OAuthClientCredentials.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.OneDriveClientCredentials != nil {
+		s.WriteStruct(schemas.DataSourceCredentials_OneDriveClientCredentials)
+		v.OneDriveClientCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.DataSourceCredentials_SecretArn, *v.SecretArn)
+	}
+	if v.ServiceAccountCredentials != nil {
+		s.WriteStruct(schemas.DataSourceCredentials_ServiceAccountCredentials)
+		v.ServiceAccountCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SharePointClientCredentials != nil {
+		s.WriteStruct(schemas.DataSourceCredentials_SharePointClientCredentials)
+		v.SharePointClientCredentials.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.WebProxyCredentials != nil {
 		s.WriteStruct(schemas.DataSourceCredentials_WebProxyCredentials)
@@ -26959,9 +26986,18 @@ func (v *DataSourceCredentials) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DataSourceCredentials_OAuthClientCredentials:
 			v.OAuthClientCredentials = &OAuthClientCredentials{}
 			return v.OAuthClientCredentials.Deserialize(d)
+		case schemas.DataSourceCredentials_OneDriveClientCredentials:
+			v.OneDriveClientCredentials = &OneDriveClientCredentials{}
+			return v.OneDriveClientCredentials.Deserialize(d)
 		case schemas.DataSourceCredentials_SecretArn:
 			v.SecretArn = new(string)
 			return d.ReadString(schemas.DataSourceCredentials_SecretArn, v.SecretArn)
+		case schemas.DataSourceCredentials_ServiceAccountCredentials:
+			v.ServiceAccountCredentials = &ServiceAccountCredentials{}
+			return v.ServiceAccountCredentials.Deserialize(d)
+		case schemas.DataSourceCredentials_SharePointClientCredentials:
+			v.SharePointClientCredentials = &SharePointClientCredentials{}
+			return v.SharePointClientCredentials.Deserialize(d)
 		case schemas.DataSourceCredentials_WebProxyCredentials:
 			v.WebProxyCredentials = &WebProxyCredentials{}
 			return v.WebProxyCredentials.Deserialize(d)
@@ -49705,6 +49741,55 @@ func (v *OAuthParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The client credentials for connecting to a Microsoft OneDrive data source using
+// two-legged OAuth (2LO) certificate-based authentication. OneDrive connections
+// access files stored in your OneDrive storage. The tenant ID and client ID are
+// supplied through OneDriveParameters .
+type OneDriveClientCredentials struct {
+
+	// The thumbprint of the certificate used for two-legged OAuth (2LO)
+	// authentication to OneDrive. This field is required.
+	//
+	// This member is required.
+	CertThumbprint *string
+
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key
+	// used to encrypt the OneDrive certificate credentials. This field is required.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OneDriveClientCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OneDriveClientCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OneDriveClientCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertThumbprint != nil {
+		s.WriteString(schemas.OneDriveClientCredentials_CertThumbprint, *v.CertThumbprint)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.OneDriveClientCredentials_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *OneDriveClientCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OneDriveClientCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OneDriveClientCredentials_CertThumbprint:
+			v.CertThumbprint = new(string)
+			return d.ReadString(schemas.OneDriveClientCredentials_CertThumbprint, v.CertThumbprint)
+		case schemas.OneDriveClientCredentials_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.OneDriveClientCredentials_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
 // The connection parameters for an OneDrive data source. Provide these parameters
 // in the DataSourceParameters object when you create or update a data source that
 // uses OneDrive.
@@ -60381,6 +60466,67 @@ func (v *SeriesItem) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The service account credentials used for Google Workspace domain-wide
+// delegation. Use this structure when you authenticate a data source connection
+// using domain-wide delegation across your Google Workspace domain.
+type ServiceAccountCredentials struct {
+
+	// The email address of the Google Workspace administrator account that the
+	// service account impersonates through domain-wide delegation. This field is
+	// required.
+	//
+	// This member is required.
+	AdminAccountEmail *string
+
+	// The client email address of the Google service account used for domain-wide
+	// delegation. This field is required.
+	//
+	// This member is required.
+	ClientEmail *string
+
+	// The private key of the Google service account used for domain-wide delegation.
+	// This field is required.
+	//
+	// This member is required.
+	ServiceAccountPrivateKey *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceAccountCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceAccountCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceAccountCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccountEmail != nil {
+		s.WriteString(schemas.ServiceAccountCredentials_AdminAccountEmail, *v.AdminAccountEmail)
+	}
+	if v.ClientEmail != nil {
+		s.WriteString(schemas.ServiceAccountCredentials_ClientEmail, *v.ClientEmail)
+	}
+	if v.ServiceAccountPrivateKey != nil {
+		s.WriteString(schemas.ServiceAccountCredentials_ServiceAccountPrivateKey, *v.ServiceAccountPrivateKey)
+	}
+}
+func (v *ServiceAccountCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceAccountCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceAccountCredentials_AdminAccountEmail:
+			v.AdminAccountEmail = new(string)
+			return d.ReadString(schemas.ServiceAccountCredentials_AdminAccountEmail, v.AdminAccountEmail)
+		case schemas.ServiceAccountCredentials_ClientEmail:
+			v.ClientEmail = new(string)
+			return d.ReadString(schemas.ServiceAccountCredentials_ClientEmail, v.ClientEmail)
+		case schemas.ServiceAccountCredentials_ServiceAccountPrivateKey:
+			v.ServiceAccountPrivateKey = new(string)
+			return d.ReadString(schemas.ServiceAccountCredentials_ServiceAccountPrivateKey, v.ServiceAccountPrivateKey)
+		}
+		return nil
+	})
+}
+
 // The parameters for ServiceNow.
 type ServiceNowParameters struct {
 
@@ -60604,6 +60750,55 @@ func (v *SharedViewConfigurations) Deserialize(d smithy.ShapeDeserializer) error
 		switch s {
 		case schemas.SharedViewConfigurations_Enabled:
 			return d.ReadBool(schemas.SharedViewConfigurations_Enabled, &v.Enabled)
+		}
+		return nil
+	})
+}
+
+// The client credentials for connecting to a Microsoft SharePoint data source
+// using two-legged OAuth (2LO) certificate-based authentication. SharePoint
+// connections access documents stored in SharePoint sites and libraries. The
+// tenant ID and client ID are supplied through SharePointParameters .
+type SharePointClientCredentials struct {
+
+	// The thumbprint of the certificate used for two-legged OAuth (2LO)
+	// authentication to SharePoint. This field is required.
+	//
+	// This member is required.
+	CertThumbprint *string
+
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key
+	// used to encrypt the SharePoint certificate credentials. This field is required.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SharePointClientCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharePointClientCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SharePointClientCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertThumbprint != nil {
+		s.WriteString(schemas.SharePointClientCredentials_CertThumbprint, *v.CertThumbprint)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.SharePointClientCredentials_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *SharePointClientCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SharePointClientCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SharePointClientCredentials_CertThumbprint:
+			v.CertThumbprint = new(string)
+			return d.ReadString(schemas.SharePointClientCredentials_CertThumbprint, v.CertThumbprint)
+		case schemas.SharePointClientCredentials_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.SharePointClientCredentials_KmsKeyArn, v.KmsKeyArn)
 		}
 		return nil
 	})

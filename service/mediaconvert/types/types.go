@@ -2251,6 +2251,10 @@ type Av1Settings struct {
 	// Specify the Bit depth. You can choose 8-bit or 10-bit.
 	BitDepth Av1BitDepth
 
+	// Specify the average bitrate in bits per second. Required when Rate control mode
+	// is CBR.
+	Bitrate *int32
+
 	// Film grain synthesis replaces film grain present in your content with similar
 	// quality synthesized AV1 film grain. We recommend that you choose Enabled to
 	// reduce the bandwidth of your QVBR quality level 5, 6, 7, or 8 outputs. For QVBR
@@ -2334,19 +2338,39 @@ type Av1Settings struct {
 	// uses the QVBR rate control mode. * SHOT_CHANGE: Shot Changes
 	PerFrameMetrics []FrameMetricType
 
-	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
-	// Use these settings only when you set QVBR for Rate control mode.
+	// Settings for quality-defined variable bitrate encoding with the AV1 codec. Use
+	// these settings only when you set QVBR for Rate control mode.
 	QvbrSettings *Av1QvbrSettings
 
-	// 'With AV1 outputs, for rate control mode, MediaConvert supports only
-	// quality-defined variable bitrate (QVBR). You can''t use CBR or VBR.'
+	// 'With AV1 outputs, for rate control mode, MediaConvert supports quality-defined
+	// variable bitrate (QVBR) and constant bitrate (CBR). You can''t use VBR.'
 	RateControlMode Av1RateControlMode
+
+	// Optional. Use this setting to have the service insert I-frames at scene changes
+	// that it automatically detects. For AV1, scene change detection is disabled by
+	// default. Choose Enabled to insert I-frames at detected scene changes, which can
+	// improve video quality. If this output uses QVBR, you can instead choose
+	// Transition detection for further video quality improvement. For more information
+	// about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
+	SceneChangeDetect Av1SceneChangeDetect
 
 	// Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or
 	// 32. For progressive pictures, this value must be less than or equal to the
 	// number of macroblock rows. For interlaced pictures, this value must be less than
 	// or equal to half the number of macroblock rows.
 	Slices *int32
+
+	// Optional. Specify the duration, in milliseconds, of the sliding window over
+	// which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate
+	// but omit this value, MediaConvert uses a default sliding window of 1000.
+	SlidingWindowMs *int32
+
+	// Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that
+	// MediaConvert enforces over the sliding window set by Peak bitrate window. For
+	// example, enter fifty megabits per second as 50000000. Applies in the QVBR rate
+	// control mode. When you specify a value below Max bitrate, MediaConvert raises it
+	// to Max bitrate.
+	SlidingWindowPeakBitrate *int32
 
 	// Keep the default value, Enabled, to adjust quantization within each frame based
 	// on spatial variation of content complexity. When you enable this feature, the
@@ -2379,6 +2403,9 @@ func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.BitDepth != "" {
 		s.WriteString(schemas.Av1Settings_BitDepth, string(v.BitDepth))
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Av1Settings_Bitrate, *v.Bitrate)
 	}
 	if v.FilmGrainSynthesis != "" {
 		s.WriteString(schemas.Av1Settings_FilmGrainSynthesis, string(v.FilmGrainSynthesis))
@@ -2413,8 +2440,17 @@ func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RateControlMode != "" {
 		s.WriteString(schemas.Av1Settings_RateControlMode, string(v.RateControlMode))
 	}
+	if v.SceneChangeDetect != "" {
+		s.WriteString(schemas.Av1Settings_SceneChangeDetect, string(v.SceneChangeDetect))
+	}
 	if v.Slices != nil {
 		s.WriteInt32(schemas.Av1Settings_Slices, *v.Slices)
+	}
+	if v.SlidingWindowMs != nil {
+		s.WriteInt32(schemas.Av1Settings_SlidingWindowMs, *v.SlidingWindowMs)
+	}
+	if v.SlidingWindowPeakBitrate != nil {
+		s.WriteInt32(schemas.Av1Settings_SlidingWindowPeakBitrate, *v.SlidingWindowPeakBitrate)
 	}
 	if v.SpatialAdaptiveQuantization != "" {
 		s.WriteString(schemas.Av1Settings_SpatialAdaptiveQuantization, string(v.SpatialAdaptiveQuantization))
@@ -2437,6 +2473,9 @@ func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.BitDepth = Av1BitDepth(ev)
 			return nil
+		case schemas.Av1Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_Bitrate, v.Bitrate)
 		case schemas.Av1Settings_FilmGrainSynthesis:
 			var ev string
 			if err := d.ReadString(schemas.Av1Settings_FilmGrainSynthesis, &ev); err != nil {
@@ -2485,9 +2524,22 @@ func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.RateControlMode = Av1RateControlMode(ev)
 			return nil
+		case schemas.Av1Settings_SceneChangeDetect:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_SceneChangeDetect, &ev); err != nil {
+				return err
+			}
+			v.SceneChangeDetect = Av1SceneChangeDetect(ev)
+			return nil
 		case schemas.Av1Settings_Slices:
 			v.Slices = new(int32)
 			return d.ReadInt32(schemas.Av1Settings_Slices, v.Slices)
+		case schemas.Av1Settings_SlidingWindowMs:
+			v.SlidingWindowMs = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_SlidingWindowMs, v.SlidingWindowMs)
+		case schemas.Av1Settings_SlidingWindowPeakBitrate:
+			v.SlidingWindowPeakBitrate = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_SlidingWindowPeakBitrate, v.SlidingWindowPeakBitrate)
 		case schemas.Av1Settings_SpatialAdaptiveQuantization:
 			var ev string
 			if err := d.ReadString(schemas.Av1Settings_SpatialAdaptiveQuantization, &ev); err != nil {
@@ -4170,6 +4222,11 @@ type CmafGroupSettings struct {
 	// generation.
 	CodecSpecification CmafCodecSpecification
 
+	// Specify additional criteria for partitioning video outputs into separate
+	// AdaptationSets. These criteria are applied on top of the grouping produced by
+	// DashManifestStyle.
+	DashAdaptationSetGrouping []DashAdaptationSetGrouping
+
 	// Specify whether MediaConvert generates I-frame only video segments for DASH
 	// trick play, also known as trick mode. When specified, the I-frame only video
 	// segments are included within an additional AdaptationSet in your DASH output
@@ -4374,6 +4431,7 @@ func (v *CmafGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CodecSpecification != "" {
 		s.WriteString(schemas.CmafGroupSettings_CodecSpecification, string(v.CodecSpecification))
 	}
+	serialize__listOfDashAdaptationSetGrouping(s, schemas.CmafGroupSettings_DashAdaptationSetGrouping, v.DashAdaptationSetGrouping)
 	if v.DashIFrameTrickPlayNameModifier != nil {
 		s.WriteString(schemas.CmafGroupSettings_DashIFrameTrickPlayNameModifier, *v.DashIFrameTrickPlayNameModifier)
 	}
@@ -4476,6 +4534,8 @@ func (v *CmafGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CodecSpecification = CmafCodecSpecification(ev)
 			return nil
+		case schemas.CmafGroupSettings_DashAdaptationSetGrouping:
+			return deserialize__listOfDashAdaptationSetGrouping(d, schemas.CmafGroupSettings_DashAdaptationSetGrouping, &v.DashAdaptationSetGrouping)
 		case schemas.CmafGroupSettings_DashIFrameTrickPlayNameModifier:
 			v.DashIFrameTrickPlayNameModifier = new(string)
 			return d.ReadString(schemas.CmafGroupSettings_DashIFrameTrickPlayNameModifier, v.DashIFrameTrickPlayNameModifier)
@@ -6055,6 +6115,11 @@ type DashIsoGroupSettings struct {
 	// than the manifest file.
 	BaseUrl *string
 
+	// Specify additional criteria for partitioning video outputs into separate
+	// AdaptationSets. These criteria are applied on top of the grouping produced by
+	// DashManifestStyle.
+	DashAdaptationSetGrouping []DashAdaptationSetGrouping
+
 	// Specify whether MediaConvert generates I-frame only video segments for DASH
 	// trick play, also known as trick mode. When specified, the I-frame only video
 	// segments are included within an additional AdaptationSet in your DASH output
@@ -6231,6 +6296,7 @@ func (v *DashIsoGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseUrl != nil {
 		s.WriteString(schemas.DashIsoGroupSettings_BaseUrl, *v.BaseUrl)
 	}
+	serialize__listOfDashAdaptationSetGrouping(s, schemas.DashIsoGroupSettings_DashAdaptationSetGrouping, v.DashAdaptationSetGrouping)
 	if v.DashIFrameTrickPlayNameModifier != nil {
 		s.WriteString(schemas.DashIsoGroupSettings_DashIFrameTrickPlayNameModifier, *v.DashIFrameTrickPlayNameModifier)
 	}
@@ -6311,6 +6377,8 @@ func (v *DashIsoGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DashIsoGroupSettings_BaseUrl:
 			v.BaseUrl = new(string)
 			return d.ReadString(schemas.DashIsoGroupSettings_BaseUrl, v.BaseUrl)
+		case schemas.DashIsoGroupSettings_DashAdaptationSetGrouping:
+			return deserialize__listOfDashAdaptationSetGrouping(d, schemas.DashIsoGroupSettings_DashAdaptationSetGrouping, &v.DashAdaptationSetGrouping)
 		case schemas.DashIsoGroupSettings_DashIFrameTrickPlayNameModifier:
 			v.DashIFrameTrickPlayNameModifier = new(string)
 			return d.ReadString(schemas.DashIsoGroupSettings_DashIFrameTrickPlayNameModifier, v.DashIFrameTrickPlayNameModifier)
@@ -9841,6 +9909,18 @@ type H264Settings struct {
 	// number of macroblock rows for interlaced pictures.
 	Slices *int32
 
+	// Optional. Specify the duration, in milliseconds, of the sliding window over
+	// which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate
+	// but omit this value, MediaConvert uses a default sliding window of 1000.
+	SlidingWindowMs *int32
+
+	// Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that
+	// MediaConvert enforces over the sliding window set by Peak bitrate window. For
+	// example, enter fifty megabits per second as 50000000. Applies in the VBR, CBR,
+	// and QVBR rate control modes. When you specify a value below Max bitrate,
+	// MediaConvert raises it to Max bitrate.
+	SlidingWindowPeakBitrate *int32
+
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output. When you enable slow
 	// PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio
@@ -10060,6 +10140,12 @@ func (v *H264Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Slices != nil {
 		s.WriteInt32(schemas.H264Settings_Slices, *v.Slices)
+	}
+	if v.SlidingWindowMs != nil {
+		s.WriteInt32(schemas.H264Settings_SlidingWindowMs, *v.SlidingWindowMs)
+	}
+	if v.SlidingWindowPeakBitrate != nil {
+		s.WriteInt32(schemas.H264Settings_SlidingWindowPeakBitrate, *v.SlidingWindowPeakBitrate)
 	}
 	if v.SlowPal != "" {
 		s.WriteString(schemas.H264Settings_SlowPal, string(v.SlowPal))
@@ -10289,6 +10375,12 @@ func (v *H264Settings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.H264Settings_Slices:
 			v.Slices = new(int32)
 			return d.ReadInt32(schemas.H264Settings_Slices, v.Slices)
+		case schemas.H264Settings_SlidingWindowMs:
+			v.SlidingWindowMs = new(int32)
+			return d.ReadInt32(schemas.H264Settings_SlidingWindowMs, v.SlidingWindowMs)
+		case schemas.H264Settings_SlidingWindowPeakBitrate:
+			v.SlidingWindowPeakBitrate = new(int32)
+			return d.ReadInt32(schemas.H264Settings_SlidingWindowPeakBitrate, v.SlidingWindowPeakBitrate)
 		case schemas.H264Settings_SlowPal:
 			var ev string
 			if err := d.ReadString(schemas.H264Settings_SlowPal, &ev); err != nil {
@@ -10716,6 +10808,18 @@ type H265Settings struct {
 	// number of macroblock rows for interlaced pictures.
 	Slices *int32
 
+	// Optional. Specify the duration, in milliseconds, of the sliding window over
+	// which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate
+	// but omit this value, MediaConvert uses a default sliding window of 1000.
+	SlidingWindowMs *int32
+
+	// Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that
+	// MediaConvert enforces over the sliding window set by Peak bitrate window. For
+	// example, enter fifty megabits per second as 50000000. Applies in the VBR, CBR,
+	// and QVBR rate control modes. When you specify a value below Max bitrate,
+	// MediaConvert raises it to Max bitrate.
+	SlidingWindowPeakBitrate *int32
+
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output. When you enable slow
 	// PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio
@@ -10942,6 +11046,12 @@ func (v *H265Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Slices != nil {
 		s.WriteInt32(schemas.H265Settings_Slices, *v.Slices)
+	}
+	if v.SlidingWindowMs != nil {
+		s.WriteInt32(schemas.H265Settings_SlidingWindowMs, *v.SlidingWindowMs)
+	}
+	if v.SlidingWindowPeakBitrate != nil {
+		s.WriteInt32(schemas.H265Settings_SlidingWindowPeakBitrate, *v.SlidingWindowPeakBitrate)
 	}
 	if v.SlowPal != "" {
 		s.WriteString(schemas.H265Settings_SlowPal, string(v.SlowPal))
@@ -11183,6 +11293,12 @@ func (v *H265Settings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.H265Settings_Slices:
 			v.Slices = new(int32)
 			return d.ReadInt32(schemas.H265Settings_Slices, v.Slices)
+		case schemas.H265Settings_SlidingWindowMs:
+			v.SlidingWindowMs = new(int32)
+			return d.ReadInt32(schemas.H265Settings_SlidingWindowMs, v.SlidingWindowMs)
+		case schemas.H265Settings_SlidingWindowPeakBitrate:
+			v.SlidingWindowPeakBitrate = new(int32)
+			return d.ReadInt32(schemas.H265Settings_SlidingWindowPeakBitrate, v.SlidingWindowPeakBitrate)
 		case schemas.H265Settings_SlowPal:
 			var ev string
 			if err := d.ReadString(schemas.H265Settings_SlowPal, &ev); err != nil {
@@ -17630,6 +17746,18 @@ type Mpeg2Settings struct {
 	// automatically detects. This improves video quality and is enabled by default.
 	SceneChangeDetect Mpeg2SceneChangeDetect
 
+	// Optional. Specify the duration, in milliseconds, of the sliding window over
+	// which MediaConvert enforces your Peak bitrate. When you specify a Peak bitrate
+	// but omit this value, MediaConvert uses a default sliding window of 1000.
+	SlidingWindowMs *int32
+
+	// Optional. Specify an instantaneous peak bitrate ceiling, in bits/second, that
+	// MediaConvert enforces over the sliding window set by Peak bitrate window. For
+	// example, enter fifty megabits per second as 50000000. Applies in the VBR and CBR
+	// rate control modes. When you specify a value below Max bitrate, MediaConvert
+	// raises it to Max bitrate.
+	SlidingWindowPeakBitrate *int32
+
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output. When you enable slow
 	// PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio
@@ -17784,6 +17912,12 @@ func (v *Mpeg2Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.SceneChangeDetect != "" {
 		s.WriteString(schemas.Mpeg2Settings_SceneChangeDetect, string(v.SceneChangeDetect))
+	}
+	if v.SlidingWindowMs != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_SlidingWindowMs, *v.SlidingWindowMs)
+	}
+	if v.SlidingWindowPeakBitrate != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_SlidingWindowPeakBitrate, *v.SlidingWindowPeakBitrate)
 	}
 	if v.SlowPal != "" {
 		s.WriteString(schemas.Mpeg2Settings_SlowPal, string(v.SlowPal))
@@ -17946,6 +18080,12 @@ func (v *Mpeg2Settings) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SceneChangeDetect = Mpeg2SceneChangeDetect(ev)
 			return nil
+		case schemas.Mpeg2Settings_SlidingWindowMs:
+			v.SlidingWindowMs = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_SlidingWindowMs, v.SlidingWindowMs)
+		case schemas.Mpeg2Settings_SlidingWindowPeakBitrate:
+			v.SlidingWindowPeakBitrate = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_SlidingWindowPeakBitrate, v.SlidingWindowPeakBitrate)
 		case schemas.Mpeg2Settings_SlowPal:
 			var ev string
 			if err := d.ReadString(schemas.Mpeg2Settings_SlowPal, &ev); err != nil {
@@ -18713,7 +18853,13 @@ type NoiseReducer struct {
 	// preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and
 	// Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise
 	// reduction. * Spatial does frequency-domain filtering based on JND principles. *
-	// Temporal optimizes video quality for complex motion.
+	// Temporal optimizes video quality for complex motion. * Perceptual exploits
+	// perceptual masking, avoiding encoding bits spent on imperceptible detail. * None
+	// disables noise reduction, including the perceptual filter that MediaConvert
+	// otherwise applies by default for AVC, HEVC, AV1, MPEG-2, VP8, and VP9 outputs.
+	// MediaConvert doesn't apply that default to mezzanine and archival outputs
+	// (AVC-Intra, XAVC, Apple ProRes, VC3, Uncompressed), to frame capture outputs, or
+	// to outputs that use Dolby Vision, which doesn't support any noise reducer.
 	Filter NoiseReducerFilter
 
 	// Settings for a noise reducer filter

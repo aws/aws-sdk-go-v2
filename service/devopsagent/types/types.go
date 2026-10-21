@@ -4066,6 +4066,157 @@ func (v *MonthlyRecurrence) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Represents a channel in a Microsoft Teams team that the DevOps Agent service
+// can send notifications to.
+type MSTeamsChannel struct {
+
+	// The unique identifier of the Microsoft Teams channel, for example
+	// 19:abc123def456@thread.tacv2.
+	//
+	// This member is required.
+	ChannelId *string
+
+	// The name of the Microsoft Teams channel.
+	//
+	// This member is required.
+	ChannelName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MSTeamsChannel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MSTeamsChannel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MSTeamsChannel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.MSTeamsChannel_channelId, *v.ChannelId)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.MSTeamsChannel_channelName, *v.ChannelName)
+	}
+}
+func (v *MSTeamsChannel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MSTeamsChannel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MSTeamsChannel_channelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.MSTeamsChannel_channelId, v.ChannelId)
+		case schemas.MSTeamsChannel_channelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.MSTeamsChannel_channelName, v.ChannelName)
+		}
+		return nil
+	})
+}
+
+// Configuration for connecting a Microsoft Teams team to the DevOps Agent
+// service. Use this configuration to specify which team to connect and how to
+// route agent notifications to channels within that team.
+type MSTeamsConfiguration struct {
+
+	// The identifier of the Microsoft Teams team to connect to the DevOps Agent
+	// service.
+	//
+	// This member is required.
+	TeamId *string
+
+	// The name of the Microsoft Teams team to connect to the DevOps Agent service.
+	//
+	// This member is required.
+	TeamName *string
+
+	// The Microsoft Teams channels that receive agent notifications.
+	//
+	// This member is required.
+	TransmissionTarget *MSTeamsTransmissionTarget
+
+	noSmithyDocumentSerde
+}
+
+func (v *MSTeamsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MSTeamsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MSTeamsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TeamId != nil {
+		s.WriteString(schemas.MSTeamsConfiguration_teamId, *v.TeamId)
+	}
+	if v.TeamName != nil {
+		s.WriteString(schemas.MSTeamsConfiguration_teamName, *v.TeamName)
+	}
+	if v.TransmissionTarget != nil {
+		s.WriteStruct(schemas.MSTeamsConfiguration_transmissionTarget)
+		v.TransmissionTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MSTeamsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MSTeamsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MSTeamsConfiguration_teamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.MSTeamsConfiguration_teamId, v.TeamId)
+		case schemas.MSTeamsConfiguration_teamName:
+			v.TeamName = new(string)
+			return d.ReadString(schemas.MSTeamsConfiguration_teamName, v.TeamName)
+		case schemas.MSTeamsConfiguration_transmissionTarget:
+			v.TransmissionTarget = &MSTeamsTransmissionTarget{}
+			return v.TransmissionTarget.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies the Microsoft Teams channels that receive different types of agent
+// notifications.
+type MSTeamsTransmissionTarget struct {
+
+	// The Microsoft Teams channel that receives notifications from the On-call Agent.
+	OpsOncallTarget *MSTeamsChannel
+
+	// The Microsoft Teams channel that receives notifications from the SRE Agent.
+	OpsSRETarget *MSTeamsChannel
+
+	noSmithyDocumentSerde
+}
+
+func (v *MSTeamsTransmissionTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MSTeamsTransmissionTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MSTeamsTransmissionTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OpsOncallTarget != nil {
+		s.WriteStruct(schemas.MSTeamsTransmissionTarget_opsOncallTarget)
+		v.OpsOncallTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpsSRETarget != nil {
+		s.WriteStruct(schemas.MSTeamsTransmissionTarget_opsSRETarget)
+		v.OpsSRETarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MSTeamsTransmissionTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MSTeamsTransmissionTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MSTeamsTransmissionTarget_opsOncallTarget:
+			v.OpsOncallTarget = &MSTeamsChannel{}
+			return v.OpsOncallTarget.Deserialize(d)
+		case schemas.MSTeamsTransmissionTarget_opsSRETarget:
+			v.OpsSRETarget = &MSTeamsChannel{}
+			return v.OpsSRETarget.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies how AWS DevOps Agent reaches your application using a Release
 // Management Environment
 //
@@ -7536,6 +7687,7 @@ func (v *SendMessageUsageInfo) Deserialize(d smithy.ShapeDeserializer) error {
 //	ServiceConfigurationMemberMcpservernewrelic
 //	ServiceConfigurationMemberMcpserversigv4
 //	ServiceConfigurationMemberMcpserversplunk
+//	ServiceConfigurationMemberMsteams
 //	ServiceConfigurationMemberPagerduty
 //	ServiceConfigurationMemberReleaseManagement
 //	ServiceConfigurationMemberRemoteagent
@@ -7765,6 +7917,24 @@ func (v *ServiceConfigurationMemberMcpserversplunk) Serialize(s smithy.ShapeSeri
 	s.CloseStruct()
 }
 func (v *ServiceConfigurationMemberMcpserversplunk) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for connecting a Microsoft Teams team to the DevOps Agent
+// service.
+type ServiceConfigurationMemberMsteams struct {
+	Value MSTeamsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberMsteams) isServiceConfiguration() {}
+func (v *ServiceConfigurationMemberMsteams) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceConfiguration_msteams)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ServiceConfigurationMemberMsteams) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 

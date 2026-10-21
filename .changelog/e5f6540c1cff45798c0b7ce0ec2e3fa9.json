@@ -1,0 +1,8 @@
+{
+    "id": "e5f6540c-1cff-4579-8c0b-7ce0ec2e3fa9",
+    "type": "feature",
+    "description": "Added support for the new voices - Kenneth (en-US), Nate (en-US), Tina (de-DE), Carlos (es-US), Carolina (pt-BR), Leo (pt-BR), Curtis (en-AU), Kiara (en-IN), Arjun (en-IN) and Hyunduk (ko-KR). They are available as a Generative voices only.",
+    "modules": [
+        "service/polly"
+    ]
+}

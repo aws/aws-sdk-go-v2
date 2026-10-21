@@ -14595,7 +14595,7 @@ var _SecurityKeysList_member *smithy.Schema
 var SecurityProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfile",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var SecurityProfile_Id *smithy.Schema
 
 var SecurityProfile_OrganizationResourceId *smithy.Schema
@@ -14621,6 +14621,8 @@ var SecurityProfile_HierarchyRestrictedResources *smithy.Schema
 var SecurityProfile_AllowedAccessControlHierarchyGroupId *smithy.Schema
 
 var SecurityProfile_GranularAccessControlConfiguration *smithy.Schema
+
+var SecurityProfile_Type *smithy.Schema
 
 var _SecurityProfileDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14695,7 +14697,7 @@ var SecurityProfileSearchCriteria_StringCondition *smithy.Schema
 var SecurityProfileSearchSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfileSearchSummary",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var SecurityProfileSearchSummary_Id *smithy.Schema
 
 var SecurityProfileSearchSummary_OrganizationResourceId *smithy.Schema
@@ -14707,6 +14709,8 @@ var SecurityProfileSearchSummary_SecurityProfileName *smithy.Schema
 var SecurityProfileSearchSummary_Description *smithy.Schema
 
 var SecurityProfileSearchSummary_Tags *smithy.Schema
+
+var SecurityProfileSearchSummary_Type *smithy.Schema
 
 var SecurityProfilesSearchFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14723,7 +14727,7 @@ var _SecurityProfilesSearchSummaryList_member *smithy.Schema
 var SecurityProfileSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfileSummary",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var SecurityProfileSummary_Id *smithy.Schema
 
 var SecurityProfileSummary_Arn *smithy.Schema
@@ -14734,11 +14738,21 @@ var SecurityProfileSummary_LastModifiedTime *smithy.Schema
 
 var SecurityProfileSummary_LastModifiedRegion *smithy.Schema
 
+var SecurityProfileSummary_Type *smithy.Schema
+
 var _SecurityProfileSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SecurityProfileSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _SecurityProfileSummaryList_member *smithy.Schema
+
+var SecurityProfileType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "SecurityProfileType",
+}, smithy.ShapeTypeEnum, 2)
+var SecurityProfileType_AWS_MANAGED *smithy.Schema
+
+var SecurityProfileType_CUSTOMER_MANAGED *smithy.Schema
 
 var _SecurityToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -31249,6 +31263,10 @@ func init() {
 
 	_TagRestrictedResourceList_member = _TagRestrictedResourceList.AddMember("member", _TagRestrictedResourceName)
 
+	SecurityProfileType_AWS_MANAGED = SecurityProfileType.AddMember("AWS_MANAGED", smithyprelude.Unit)
+
+	SecurityProfileType_CUSTOMER_MANAGED = SecurityProfileType.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
+
 	SecurityProfile_Id = SecurityProfile.AddMember("Id", _SecurityProfileId)
 
 	SecurityProfile_OrganizationResourceId = SecurityProfile.AddMember("OrganizationResourceId", _InstanceId)
@@ -31274,6 +31292,8 @@ func init() {
 	SecurityProfile_AllowedAccessControlHierarchyGroupId = SecurityProfile.AddMember("AllowedAccessControlHierarchyGroupId", _HierarchyGroupId)
 
 	SecurityProfile_GranularAccessControlConfiguration = SecurityProfile.AddMember("GranularAccessControlConfiguration", GranularAccessControlConfiguration)
+
+	SecurityProfile_Type = SecurityProfile.AddMember("Type", SecurityProfileType)
 
 	SecurityProfileItem_Id = SecurityProfileItem.AddMember("Id", _SecurityProfileId)
 
@@ -31301,6 +31321,8 @@ func init() {
 
 	SecurityProfileSearchSummary_Tags = SecurityProfileSearchSummary.AddMember("Tags", _TagMap)
 
+	SecurityProfileSearchSummary_Type = SecurityProfileSearchSummary.AddMember("Type", SecurityProfileType)
+
 	SecurityProfilesSearchFilter_TagFilter = SecurityProfilesSearchFilter.AddMember("TagFilter", ControlPlaneTagFilter)
 
 	_SecurityProfilesSearchSummaryList_member = _SecurityProfilesSearchSummaryList.AddMember("member", SecurityProfileSearchSummary)
@@ -31314,6 +31336,8 @@ func init() {
 	SecurityProfileSummary_LastModifiedTime = SecurityProfileSummary.AddMember("LastModifiedTime", _Timestamp)
 
 	SecurityProfileSummary_LastModifiedRegion = SecurityProfileSummary.AddMember("LastModifiedRegion", _RegionName)
+
+	SecurityProfileSummary_Type = SecurityProfileSummary.AddMember("Type", SecurityProfileType)
 
 	_SecurityProfileSummaryList_member = _SecurityProfileSummaryList.AddMember("member", SecurityProfileSummary)
 

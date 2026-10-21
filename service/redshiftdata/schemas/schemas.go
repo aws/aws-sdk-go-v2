@@ -454,7 +454,7 @@ var _String = smithy.NewSchema(smithy.ShapeID{
 var SubStatementData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.redshiftdata",
 	Name:      "SubStatementData",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var SubStatementData_Id *smithy.Schema
 
 var SubStatementData_Duration *smithy.Schema
@@ -474,6 +474,8 @@ var SubStatementData_ResultRows *smithy.Schema
 var SubStatementData_ResultSize *smithy.Schema
 
 var SubStatementData_RedshiftQueryId *smithy.Schema
+
+var SubStatementData_RedshiftQueryUuid *smithy.Schema
 
 var SubStatementData_HasResultSet *smithy.Schema
 
@@ -606,7 +608,7 @@ var DescribeStatementRequest_WaitTimeSeconds *smithy.Schema
 var DescribeStatementResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.redshiftdata",
 	Name:      "DescribeStatementResponse",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var DescribeStatementResponse_Id *smithy.Schema
 
 var DescribeStatementResponse_SecretArn *smithy.Schema
@@ -638,6 +640,8 @@ var DescribeStatementResponse_ResultRows *smithy.Schema
 var DescribeStatementResponse_ResultSize *smithy.Schema
 
 var DescribeStatementResponse_RedshiftQueryId *smithy.Schema
+
+var DescribeStatementResponse_RedshiftQueryUuid *smithy.Schema
 
 var DescribeStatementResponse_QueryParameters *smithy.Schema
 
@@ -1098,6 +1102,8 @@ func init() {
 
 	SubStatementData_RedshiftQueryId = SubStatementData.AddMember("RedshiftQueryId", _Long)
 
+	SubStatementData_RedshiftQueryUuid = SubStatementData.AddMember("RedshiftQueryUuid", _String)
+
 	SubStatementData_HasResultSet = SubStatementData.AddMember("HasResultSet", smithyprelude.Boolean)
 
 	_SubStatementList_member = _SubStatementList.AddMember("member", SubStatementData)
@@ -1205,6 +1211,8 @@ func init() {
 	DescribeStatementResponse_ResultSize = DescribeStatementResponse.AddMember("ResultSize", _Long)
 
 	DescribeStatementResponse_RedshiftQueryId = DescribeStatementResponse.AddMember("RedshiftQueryId", _Long)
+
+	DescribeStatementResponse_RedshiftQueryUuid = DescribeStatementResponse.AddMember("RedshiftQueryUuid", _String)
 
 	DescribeStatementResponse_QueryParameters = DescribeStatementResponse.AddMember("QueryParameters", _SqlParametersList)
 

@@ -587,6 +587,11 @@ var _AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AvailabilityZone",
 }, smithy.ShapeTypeString, 0)
 
+var _AvailabilityZoneId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "AvailabilityZoneId",
+}, smithy.ShapeTypeString, 0)
+
 var AvailabilityZoneMapping = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "AvailabilityZoneMapping",
@@ -908,6 +913,21 @@ var _DimensionValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DimensionValue",
 }, smithy.ShapeTypeString, 0)
 
+var DNSExpiryExceptionPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DNSExpiryExceptionPolicy",
+}, smithy.ShapeTypeEnum, 3)
+var DNSExpiryExceptionPolicy_REJECT *smithy.Schema
+
+var DNSExpiryExceptionPolicy_DROP *smithy.Schema
+
+var DNSExpiryExceptionPolicy_CONTINUE *smithy.Schema
+
+var _DNSFirewallRuleGroupId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DNSFirewallRuleGroupId",
+}, smithy.ShapeTypeString, 0)
+
 var _DnsName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DnsName",
@@ -1050,7 +1070,7 @@ var _FirewallPolicies_member *smithy.Schema
 var FirewallPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "FirewallPolicy",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var FirewallPolicy_StatelessRuleGroupReferences *smithy.Schema
 
 var FirewallPolicy_StatelessDefaultActions *smithy.Schema
@@ -1071,6 +1091,37 @@ var FirewallPolicy_PolicyVariables *smithy.Schema
 
 var FirewallPolicy_EnableTLSSessionHolding *smithy.Schema
 
+var FirewallPolicy_Route53ResolvedIPValidation *smithy.Schema
+
+var FirewallPolicyError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPolicyError",
+}, smithy.ShapeTypeStructure, 3)
+var FirewallPolicyError_Code *smithy.Schema
+
+var FirewallPolicyError_Message *smithy.Schema
+
+var FirewallPolicyError_ResourceId *smithy.Schema
+
+var FirewallPolicyErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPolicyErrorCode",
+}, smithy.ShapeTypeEnum, 2)
+var FirewallPolicyErrorCode_DNS_FIREWALL_RULE_GROUP_UNAVAILABLE *smithy.Schema
+
+var FirewallPolicyErrorCode_ROUTE53_RESOLVED_IP_VALIDATION_MISSING *smithy.Schema
+
+var _FirewallPolicyErrorResourceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPolicyErrorResourceId",
+}, smithy.ShapeTypeString, 0)
+
+var _FirewallPolicyErrors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPolicyErrors",
+}, smithy.ShapeTypeList, 1)
+var _FirewallPolicyErrors_member *smithy.Schema
+
 var FirewallPolicyMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "FirewallPolicyMetadata",
@@ -1082,7 +1133,7 @@ var FirewallPolicyMetadata_Arn *smithy.Schema
 var FirewallPolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "FirewallPolicyResponse",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var FirewallPolicyResponse_FirewallPolicyName *smithy.Schema
 
 var FirewallPolicyResponse_FirewallPolicyArn *smithy.Schema
@@ -1092,6 +1143,8 @@ var FirewallPolicyResponse_FirewallPolicyId *smithy.Schema
 var FirewallPolicyResponse_Description *smithy.Schema
 
 var FirewallPolicyResponse_FirewallPolicyStatus *smithy.Schema
+
+var FirewallPolicyResponse_StatusMessage *smithy.Schema
 
 var FirewallPolicyResponse_Tags *smithy.Schema
 
@@ -1104,6 +1157,8 @@ var FirewallPolicyResponse_ConsumedStatefulDomainCapacity *smithy.Schema
 var FirewallPolicyResponse_NumberOfAssociations *smithy.Schema
 
 var FirewallPolicyResponse_EncryptionConfiguration *smithy.Schema
+
+var FirewallPolicyResponse_Errors *smithy.Schema
 
 var FirewallPolicyResponse_LastModifiedTime *smithy.Schema
 
@@ -2129,12 +2184,19 @@ var ResourceOwnerCheckException_Message *smithy.Schema
 var ResourceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceStatus",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ResourceStatus_ACTIVE *smithy.Schema
 
 var ResourceStatus_DELETING *smithy.Schema
 
 var ResourceStatus_ERROR *smithy.Schema
+
+var ResourceStatus_UPDATING *smithy.Schema
+
+var _ResourceStatusMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ResourceStatusMessage",
+}, smithy.ShapeTypeString, 0)
 
 var RevocationCheckAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2145,6 +2207,36 @@ var RevocationCheckAction_PASS *smithy.Schema
 var RevocationCheckAction_DROP *smithy.Schema
 
 var RevocationCheckAction_REJECT *smithy.Schema
+
+var Route53ResolvedIPValidation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "Route53ResolvedIPValidation",
+}, smithy.ShapeTypeStructure, 5)
+var Route53ResolvedIPValidation_Action *smithy.Schema
+
+var Route53ResolvedIPValidation_DNSFirewallRuleGroupId *smithy.Schema
+
+var Route53ResolvedIPValidation_DNSExpiryExceptionPolicy *smithy.Schema
+
+var Route53ResolvedIPValidation_BypassDestinationValidationIPRanges *smithy.Schema
+
+var Route53ResolvedIPValidation_SourceIPRanges *smithy.Schema
+
+var Route53ResolvedIPValidationAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "Route53ResolvedIPValidationAction",
+}, smithy.ShapeTypeEnum, 3)
+var Route53ResolvedIPValidationAction_REJECT *smithy.Schema
+
+var Route53ResolvedIPValidationAction_DROP *smithy.Schema
+
+var Route53ResolvedIPValidationAction_ALERT *smithy.Schema
+
+var _Route53ResolvedIPValidationAddresses = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "Route53ResolvedIPValidationAddresses",
+}, smithy.ShapeTypeList, 1)
+var _Route53ResolvedIPValidationAddresses_member *smithy.Schema
 
 var _RuleCapacity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2729,10 +2821,12 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var TargetType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "TargetType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var TargetType_TLS_SNI *smithy.Schema
 
 var TargetType_HTTP_HOST *smithy.Schema
+
+var TargetType_AWS_ROUTE_53_RESOLVED_DOMAIN *smithy.Schema
 
 var _TargetTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3677,10 +3771,12 @@ var DescribeFirewallPolicyResponse_FirewallPolicy *smithy.Schema
 var DescribeFlowOperationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeFlowOperationRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var DescribeFlowOperationRequest_FirewallArn *smithy.Schema
 
 var DescribeFlowOperationRequest_AvailabilityZone *smithy.Schema
+
+var DescribeFlowOperationRequest_AvailabilityZoneId *smithy.Schema
 
 var DescribeFlowOperationRequest_VpcEndpointAssociationArn *smithy.Schema
 
@@ -3691,10 +3787,12 @@ var DescribeFlowOperationRequest_FlowOperationId *smithy.Schema
 var DescribeFlowOperationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeFlowOperationResponse",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var DescribeFlowOperationResponse_FirewallArn *smithy.Schema
 
 var DescribeFlowOperationResponse_AvailabilityZone *smithy.Schema
+
+var DescribeFlowOperationResponse_AvailabilityZoneId *smithy.Schema
 
 var DescribeFlowOperationResponse_VpcEndpointAssociationArn *smithy.Schema
 
@@ -4091,7 +4189,7 @@ var ListFirewallsResponse_Firewalls *smithy.Schema
 var ListFlowOperationResultsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFlowOperationResultsRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ListFlowOperationResultsRequest_FirewallArn *smithy.Schema
 
 var ListFlowOperationResultsRequest_FlowOperationId *smithy.Schema
@@ -4102,6 +4200,8 @@ var ListFlowOperationResultsRequest_MaxResults *smithy.Schema
 
 var ListFlowOperationResultsRequest_AvailabilityZone *smithy.Schema
 
+var ListFlowOperationResultsRequest_AvailabilityZoneId *smithy.Schema
+
 var ListFlowOperationResultsRequest_VpcEndpointId *smithy.Schema
 
 var ListFlowOperationResultsRequest_VpcEndpointAssociationArn *smithy.Schema
@@ -4109,10 +4209,12 @@ var ListFlowOperationResultsRequest_VpcEndpointAssociationArn *smithy.Schema
 var ListFlowOperationResultsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFlowOperationResultsResponse",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var ListFlowOperationResultsResponse_FirewallArn *smithy.Schema
 
 var ListFlowOperationResultsResponse_AvailabilityZone *smithy.Schema
+
+var ListFlowOperationResultsResponse_AvailabilityZoneId *smithy.Schema
 
 var ListFlowOperationResultsResponse_VpcEndpointAssociationArn *smithy.Schema
 
@@ -4133,10 +4235,12 @@ var ListFlowOperationResultsResponse_NextToken *smithy.Schema
 var ListFlowOperationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFlowOperationsRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ListFlowOperationsRequest_FirewallArn *smithy.Schema
 
 var ListFlowOperationsRequest_AvailabilityZone *smithy.Schema
+
+var ListFlowOperationsRequest_AvailabilityZoneId *smithy.Schema
 
 var ListFlowOperationsRequest_VpcEndpointAssociationArn *smithy.Schema
 
@@ -4326,10 +4430,12 @@ var StartAnalysisReportResponse_AnalysisReportId *smithy.Schema
 var StartFlowCaptureRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "StartFlowCaptureRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var StartFlowCaptureRequest_FirewallArn *smithy.Schema
 
 var StartFlowCaptureRequest_AvailabilityZone *smithy.Schema
+
+var StartFlowCaptureRequest_AvailabilityZoneId *smithy.Schema
 
 var StartFlowCaptureRequest_VpcEndpointAssociationArn *smithy.Schema
 
@@ -4352,10 +4458,12 @@ var StartFlowCaptureResponse_FlowOperationStatus *smithy.Schema
 var StartFlowFlushRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "StartFlowFlushRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var StartFlowFlushRequest_FirewallArn *smithy.Schema
 
 var StartFlowFlushRequest_AvailabilityZone *smithy.Schema
+
+var StartFlowFlushRequest_AvailabilityZoneId *smithy.Schema
 
 var StartFlowFlushRequest_VpcEndpointAssociationArn *smithy.Schema
 
@@ -5154,6 +5262,12 @@ func init() {
 
 	DescribeProxyResource_Tags = DescribeProxyResource.AddMember("Tags", _TagList)
 
+	DNSExpiryExceptionPolicy_REJECT = DNSExpiryExceptionPolicy.AddMember("REJECT", smithyprelude.Unit)
+
+	DNSExpiryExceptionPolicy_DROP = DNSExpiryExceptionPolicy.AddMember("DROP", smithyprelude.Unit)
+
+	DNSExpiryExceptionPolicy_CONTINUE = DNSExpiryExceptionPolicy.AddMember("CONTINUE", smithyprelude.Unit)
+
 	_EnabledAnalysisTypes_member = _EnabledAnalysisTypes.AddMember("member", EnabledAnalysisType)
 
 	EncryptionType_CUSTOMER_KMS = EncryptionType.AddMember("CUSTOMER_KMS", smithyprelude.Unit)
@@ -5288,6 +5402,24 @@ func init() {
 
 	PolicyVariables_RuleVariables = PolicyVariables.AddMember("RuleVariables", _IPSets)
 
+	Route53ResolvedIPValidationAction_REJECT = Route53ResolvedIPValidationAction.AddMember("REJECT", smithyprelude.Unit)
+
+	Route53ResolvedIPValidationAction_DROP = Route53ResolvedIPValidationAction.AddMember("DROP", smithyprelude.Unit)
+
+	Route53ResolvedIPValidationAction_ALERT = Route53ResolvedIPValidationAction.AddMember("ALERT", smithyprelude.Unit)
+
+	_Route53ResolvedIPValidationAddresses_member = _Route53ResolvedIPValidationAddresses.AddMember("member", Address)
+
+	Route53ResolvedIPValidation_Action = Route53ResolvedIPValidation.AddMember("Action", Route53ResolvedIPValidationAction)
+
+	Route53ResolvedIPValidation_DNSFirewallRuleGroupId = Route53ResolvedIPValidation.AddMember("DNSFirewallRuleGroupId", _DNSFirewallRuleGroupId)
+
+	Route53ResolvedIPValidation_DNSExpiryExceptionPolicy = Route53ResolvedIPValidation.AddMember("DNSExpiryExceptionPolicy", DNSExpiryExceptionPolicy)
+
+	Route53ResolvedIPValidation_BypassDestinationValidationIPRanges = Route53ResolvedIPValidation.AddMember("BypassDestinationValidationIPRanges", _Route53ResolvedIPValidationAddresses)
+
+	Route53ResolvedIPValidation_SourceIPRanges = Route53ResolvedIPValidation.AddMember("SourceIPRanges", _Route53ResolvedIPValidationAddresses)
+
 	FirewallPolicy_StatelessRuleGroupReferences = FirewallPolicy.AddMember("StatelessRuleGroupReferences", _StatelessRuleGroupReferences)
 
 	FirewallPolicy_StatelessDefaultActions = FirewallPolicy.AddMember("StatelessDefaultActions", _StatelessActions)
@@ -5308,11 +5440,27 @@ func init() {
 
 	FirewallPolicy_EnableTLSSessionHolding = FirewallPolicy.AddMember("EnableTLSSessionHolding", _EnableTLSSessionHolding)
 
+	FirewallPolicy_Route53ResolvedIPValidation = FirewallPolicy.AddMember("Route53ResolvedIPValidation", Route53ResolvedIPValidation)
+
+	FirewallPolicyErrorCode_DNS_FIREWALL_RULE_GROUP_UNAVAILABLE = FirewallPolicyErrorCode.AddMember("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", smithyprelude.Unit)
+
+	FirewallPolicyErrorCode_ROUTE53_RESOLVED_IP_VALIDATION_MISSING = FirewallPolicyErrorCode.AddMember("ROUTE53_RESOLVED_IP_VALIDATION_MISSING", smithyprelude.Unit)
+
+	FirewallPolicyError_Code = FirewallPolicyError.AddMember("Code", FirewallPolicyErrorCode)
+
+	FirewallPolicyError_Message = FirewallPolicyError.AddMember("Message", _StatusReason)
+
+	FirewallPolicyError_ResourceId = FirewallPolicyError.AddMember("ResourceId", _FirewallPolicyErrorResourceId)
+
+	_FirewallPolicyErrors_member = _FirewallPolicyErrors.AddMember("member", FirewallPolicyError)
+
 	ResourceStatus_ACTIVE = ResourceStatus.AddMember("ACTIVE", smithyprelude.Unit)
 
 	ResourceStatus_DELETING = ResourceStatus.AddMember("DELETING", smithyprelude.Unit)
 
 	ResourceStatus_ERROR = ResourceStatus.AddMember("ERROR", smithyprelude.Unit)
+
+	ResourceStatus_UPDATING = ResourceStatus.AddMember("UPDATING", smithyprelude.Unit)
 
 	FirewallPolicyResponse_FirewallPolicyName = FirewallPolicyResponse.AddMember("FirewallPolicyName", _ResourceName)
 
@@ -5323,6 +5471,8 @@ func init() {
 	FirewallPolicyResponse_Description = FirewallPolicyResponse.AddMember("Description", _Description)
 
 	FirewallPolicyResponse_FirewallPolicyStatus = FirewallPolicyResponse.AddMember("FirewallPolicyStatus", ResourceStatus)
+
+	FirewallPolicyResponse_StatusMessage = FirewallPolicyResponse.AddMember("StatusMessage", _ResourceStatusMessage)
 
 	FirewallPolicyResponse_Tags = FirewallPolicyResponse.AddMember("Tags", _TagList)
 
@@ -5335,6 +5485,8 @@ func init() {
 	FirewallPolicyResponse_NumberOfAssociations = FirewallPolicyResponse.AddMember("NumberOfAssociations", _NumberOfAssociations)
 
 	FirewallPolicyResponse_EncryptionConfiguration = FirewallPolicyResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	FirewallPolicyResponse_Errors = FirewallPolicyResponse.AddMember("Errors", _FirewallPolicyErrors)
 
 	FirewallPolicyResponse_LastModifiedTime = FirewallPolicyResponse.AddMember("LastModifiedTime", _LastUpdateTime)
 
@@ -5827,6 +5979,8 @@ func init() {
 	TargetType_TLS_SNI = TargetType.AddMember("TLS_SNI", smithyprelude.Unit)
 
 	TargetType_HTTP_HOST = TargetType.AddMember("HTTP_HOST", smithyprelude.Unit)
+
+	TargetType_AWS_ROUTE_53_RESOLVED_DOMAIN = TargetType.AddMember("AWS_ROUTE_53_RESOLVED_DOMAIN", smithyprelude.Unit)
 
 	_TargetTypes_member = _TargetTypes.AddMember("member", TargetType)
 
@@ -6472,6 +6626,8 @@ func init() {
 
 	DescribeFlowOperationRequest_AvailabilityZone = DescribeFlowOperationRequest.AddMember("AvailabilityZone", _AvailabilityZone)
 
+	DescribeFlowOperationRequest_AvailabilityZoneId = DescribeFlowOperationRequest.AddMember("AvailabilityZoneId", _AvailabilityZoneId)
+
 	DescribeFlowOperationRequest_VpcEndpointAssociationArn = DescribeFlowOperationRequest.AddMember("VpcEndpointAssociationArn", _ResourceArn)
 
 	DescribeFlowOperationRequest_VpcEndpointId = DescribeFlowOperationRequest.AddMember("VpcEndpointId", _VpcEndpointId)
@@ -6481,6 +6637,8 @@ func init() {
 	DescribeFlowOperationResponse_FirewallArn = DescribeFlowOperationResponse.AddMember("FirewallArn", _ResourceArn)
 
 	DescribeFlowOperationResponse_AvailabilityZone = DescribeFlowOperationResponse.AddMember("AvailabilityZone", _AvailabilityZone)
+
+	DescribeFlowOperationResponse_AvailabilityZoneId = DescribeFlowOperationResponse.AddMember("AvailabilityZoneId", _AvailabilityZoneId)
 
 	DescribeFlowOperationResponse_VpcEndpointAssociationArn = DescribeFlowOperationResponse.AddMember("VpcEndpointAssociationArn", _ResourceArn)
 
@@ -6732,6 +6890,8 @@ func init() {
 
 	ListFlowOperationResultsRequest_AvailabilityZone = ListFlowOperationResultsRequest.AddMember("AvailabilityZone", _AvailabilityZone)
 
+	ListFlowOperationResultsRequest_AvailabilityZoneId = ListFlowOperationResultsRequest.AddMember("AvailabilityZoneId", _AvailabilityZoneId)
+
 	ListFlowOperationResultsRequest_VpcEndpointId = ListFlowOperationResultsRequest.AddMember("VpcEndpointId", _VpcEndpointId)
 
 	ListFlowOperationResultsRequest_VpcEndpointAssociationArn = ListFlowOperationResultsRequest.AddMember("VpcEndpointAssociationArn", _ResourceArn)
@@ -6739,6 +6899,8 @@ func init() {
 	ListFlowOperationResultsResponse_FirewallArn = ListFlowOperationResultsResponse.AddMember("FirewallArn", _ResourceArn)
 
 	ListFlowOperationResultsResponse_AvailabilityZone = ListFlowOperationResultsResponse.AddMember("AvailabilityZone", _AvailabilityZone)
+
+	ListFlowOperationResultsResponse_AvailabilityZoneId = ListFlowOperationResultsResponse.AddMember("AvailabilityZoneId", _AvailabilityZoneId)
 
 	ListFlowOperationResultsResponse_VpcEndpointAssociationArn = ListFlowOperationResultsResponse.AddMember("VpcEndpointAssociationArn", _ResourceArn)
 
@@ -6759,6 +6921,8 @@ func init() {
 	ListFlowOperationsRequest_FirewallArn = ListFlowOperationsRequest.AddMember("FirewallArn", _ResourceArn)
 
 	ListFlowOperationsRequest_AvailabilityZone = ListFlowOperationsRequest.AddMember("AvailabilityZone", _AvailabilityZone)
+
+	ListFlowOperationsRequest_AvailabilityZoneId = ListFlowOperationsRequest.AddMember("AvailabilityZoneId", _AvailabilityZoneId)
 
 	ListFlowOperationsRequest_VpcEndpointAssociationArn = ListFlowOperationsRequest.AddMember("VpcEndpointAssociationArn", _ResourceArn)
 
@@ -6864,6 +7028,8 @@ func init() {
 
 	StartFlowCaptureRequest_AvailabilityZone = StartFlowCaptureRequest.AddMember("AvailabilityZone", _AvailabilityZone)
 
+	StartFlowCaptureRequest_AvailabilityZoneId = StartFlowCaptureRequest.AddMember("AvailabilityZoneId", _AvailabilityZoneId)
+
 	StartFlowCaptureRequest_VpcEndpointAssociationArn = StartFlowCaptureRequest.AddMember("VpcEndpointAssociationArn", _ResourceArn)
 
 	StartFlowCaptureRequest_VpcEndpointId = StartFlowCaptureRequest.AddMember("VpcEndpointId", _VpcEndpointId)
@@ -6881,6 +7047,8 @@ func init() {
 	StartFlowFlushRequest_FirewallArn = StartFlowFlushRequest.AddMember("FirewallArn", _ResourceArn)
 
 	StartFlowFlushRequest_AvailabilityZone = StartFlowFlushRequest.AddMember("AvailabilityZone", _AvailabilityZone)
+
+	StartFlowFlushRequest_AvailabilityZoneId = StartFlowFlushRequest.AddMember("AvailabilityZoneId", _AvailabilityZoneId)
 
 	StartFlowFlushRequest_VpcEndpointAssociationArn = StartFlowFlushRequest.AddMember("VpcEndpointAssociationArn", _ResourceArn)
 

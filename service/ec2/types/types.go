@@ -698,6 +698,39 @@ type AnalysisSecurityGroupRule struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an entry in a transit gateway policy table.
+type AnalysisTransitGatewayPolicyTableEntry struct {
+
+	// The destination CIDR block. If this value is not present, the entry matches any
+	// destination address.
+	DestinationCidr *string
+
+	// The destination port range. If this value is not present, the entry matches any
+	// destination port.
+	DestinationPortRange *PortRange
+
+	// The protocol number. A value of -1 means that the entry matches all protocols.
+	Protocol *string
+
+	// The rule number for the policy table entry. Entries are evaluated in ascending
+	// order of rule number.
+	RuleNumber *int32
+
+	// The source CIDR block. If this value is not present, the entry matches any
+	// source address.
+	SourceCidr *string
+
+	// The source port range. If this value is not present, the entry matches any
+	// source port.
+	SourcePortRange *PortRange
+
+	// The ID of the transit gateway route table to which the entry routes matching
+	// traffic.
+	TargetRouteTableId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the application-level health status for an instance.
 type ApplicationStatus struct {
 
@@ -6336,6 +6369,12 @@ type Explanation struct {
 	// The transit gateway attachment.
 	TransitGatewayAttachment *AnalysisComponent
 
+	// The transit gateway policy table.
+	TransitGatewayPolicyTable *AnalysisComponent
+
+	// The transit gateway policy table entry.
+	TransitGatewayPolicyTableEntry *AnalysisTransitGatewayPolicyTableEntry
+
 	// The transit gateway route table.
 	TransitGatewayRouteTable *AnalysisComponent
 
@@ -11489,7 +11528,7 @@ type InstanceStateChange struct {
 }
 
 // Describes the status of an instance, including system status, instance status,
-// attached EBS status, and application status.
+// attached EBS status, application status, and performance status.
 type InstanceStatus struct {
 
 	// Reports the application-level health status for the instance.
@@ -11524,6 +11563,11 @@ type InstanceStatus struct {
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
+
+	// Reports the performance-related health status for the instance. This
+	// information is returned only when performance status checks are enabled for the
+	// instance.
+	PerformanceStatus *PerformanceStatusSummary
 
 	// Reports impaired functionality that stems from issues related to the systems
 	// that support an instance, such as hardware failures and network connectivity
@@ -18143,6 +18187,9 @@ type PathComponent struct {
 	// The transit gateway.
 	TransitGateway *AnalysisComponent
 
+	// The entry in a transit gateway policy table.
+	TransitGatewayPolicyTableEntry *AnalysisTransitGatewayPolicyTableEntry
+
 	// The route in a transit gateway route table.
 	TransitGatewayRouteTableRoute *TransitGatewayRouteTableRoute
 
@@ -18408,6 +18455,22 @@ type PerformanceFactorReferenceRequest struct {
 	// [RequestSpotFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet
 	// [ModifyFleet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyFleet
 	InstanceFamily *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the performance status check results for an instance.
+type PerformanceStatusSummary struct {
+
+	// The date and time when the performance status became impaired.
+	ImpairedSince *time.Time
+
+	// The recommended action to remediate the impaired instance, if one is available.
+	// This value is returned only when the instance is impaired.
+	Remediation *string
+
+	// The current status.
+	Status SummaryStatus
 
 	noSmithyDocumentSerde
 }

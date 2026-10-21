@@ -83,8 +83,9 @@ type PutAlarmInput struct {
 	// The following metrics are available for each resource type:
 	//
 	//   - Instances: BurstCapacityPercentage , BurstCapacityTime , CPUUtilization ,
-	//   NetworkIn , NetworkOut , StatusCheckFailed , StatusCheckFailed_Instance , and
-	//   StatusCheckFailed_System .
+	//   NetworkIn , NetworkOut , StatusCheckFailed , StatusCheckFailed_Instance ,
+	//   StatusCheckFailed_System , DiskReadOps , DiskWriteOps , DiskReadBytes ,
+	//   DiskWriteBytes , DiskTotalReadTime , DiskTotalWriteTime , and DiskQueueLength .
 	//
 	//   - Load balancers: ClientTLSNegotiationErrorCount , HealthyHostCount ,
 	//   UnhealthyHostCount , HTTPCode_LB_4XX_Count , HTTPCode_LB_5XX_Count ,

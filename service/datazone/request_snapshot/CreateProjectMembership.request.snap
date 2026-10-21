@@ -2,4 +2,4 @@ POST /v2/domains/__DomainIdentifier__/projects/__ProjectIdentifier__/createMembe
 
 Content-Type: application/json
 
-{"designation":"PROJECT_OWNER","member":{"userIdentifier":"__MemberMemberUserIdentifier__"}}
+{"designation":"PROJECT_OWNER","member":{"userIdentifier":"__MemberMemberUserIdentifier__"},"userCreatedDesignationId":"__UserCreatedDesignationId__"}

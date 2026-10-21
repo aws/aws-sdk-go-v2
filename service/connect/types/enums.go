@@ -4451,6 +4451,25 @@ func (SearchContactsTimeRangeType) Values() []SearchContactsTimeRangeType {
 	}
 }
 
+type SecurityProfileType string
+
+// Enum values for SecurityProfileType
+const (
+	SecurityProfileTypeAwsManaged      SecurityProfileType = "AWS_MANAGED"
+	SecurityProfileTypeCustomerManaged SecurityProfileType = "CUSTOMER_MANAGED"
+)
+
+// Values returns all known values for SecurityProfileType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityProfileType) Values() []SecurityProfileType {
+	return []SecurityProfileType{
+		"AWS_MANAGED",
+		"CUSTOMER_MANAGED",
+	}
+}
+
 type SingleSelectQuestionRuleCategoryAutomationCondition string
 
 // Enum values for SingleSelectQuestionRuleCategoryAutomationCondition

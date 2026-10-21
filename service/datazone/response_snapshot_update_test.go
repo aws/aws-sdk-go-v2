@@ -1434,6 +1434,39 @@ func TestUpdateResponseSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateDesignation(t *testing.T) {
+	want := &CreateDesignationOutput{
+		DomainId:           ptr.String("__DomainId__"),
+		Id:                 ptr.String("__Id__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		DesignationType:    types.DesignationType("MANAGED"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+		CreatedBy:          ptr.String("__CreatedBy__"),
+		CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.DataZone)
+	opSchema := smithy.NewOperationSchema(schemas.CreateDesignation, schemas.CreateDesignationOutput, schemas.CreateDesignationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateDesignation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateDomain(t *testing.T) {
 	want := &CreateDomainOutput{
 		Id:               ptr.String("__Id__"),
@@ -2984,6 +3017,28 @@ func TestUpdateResponseSnapshot_DeleteDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteDesignation(t *testing.T) {
+	want := &DeleteDesignationOutput{}
+	proto := restjson1.New(schemas.DataZone)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteDesignation, schemas.DeleteDesignationOutput, schemas.DeleteDesignationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteDesignation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteDomain(t *testing.T) {
 	want := &DeleteDomainOutput{
 		Status: types.DomainStatus("CREATING"),
@@ -4308,6 +4363,39 @@ func TestUpdateResponseSnapshot_GetDataSourceRun(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetDataSourceRun.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetDesignation(t *testing.T) {
+	want := &GetDesignationOutput{
+		DomainId:           ptr.String("__DomainId__"),
+		Id:                 ptr.String("__Id__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		DesignationType:    types.DesignationType("MANAGED"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+		CreatedBy:          ptr.String("__CreatedBy__"),
+		CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.DataZone)
+	opSchema := smithy.NewOperationSchema(schemas.GetDesignation, schemas.GetDesignationOutput, schemas.GetDesignationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDesignation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7106,6 +7194,54 @@ func TestUpdateResponseSnapshot_ListDataSources(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListDesignations(t *testing.T) {
+	want := &ListDesignationsOutput{
+		Items: []types.DesignationSummary{
+			{
+				DomainId:           ptr.String("__DomainId__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				DesignationType:    types.DesignationType("MANAGED"),
+				DeletionProtection: ptr.Bool(true),
+				CreatedBy:          ptr.String("__CreatedBy__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				DomainId:           ptr.String("__DomainId__"),
+				Id:                 ptr.String("__Id__"),
+				Name:               ptr.String("__Name__"),
+				Description:        ptr.String("__Description__"),
+				DesignationType:    types.DesignationType("MANAGED"),
+				DeletionProtection: ptr.Bool(true),
+				CreatedBy:          ptr.String("__CreatedBy__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.DataZone)
+	opSchema := smithy.NewOperationSchema(schemas.ListDesignations, schemas.ListDesignationsOutput, schemas.ListDesignationsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListDesignations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListDomainUnitsForParent(t *testing.T) {
 	want := &ListDomainUnitsForParentOutput{
 		Items: []types.DomainUnitSummary{
@@ -8111,7 +8247,8 @@ func TestUpdateResponseSnapshot_ListProjectMemberships(t *testing.T) {
 						UserId: ptr.String("__UserId__"),
 					},
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 			{
 				MemberDetails: &types.MemberDetailsMemberUser{
@@ -8119,7 +8256,8 @@ func TestUpdateResponseSnapshot_ListProjectMemberships(t *testing.T) {
 						UserId: ptr.String("__UserId__"),
 					},
 				},
-				Designation: types.UserDesignation("PROJECT_OWNER"),
+				Designation:              types.UserDesignation("PROJECT_OWNER"),
+				UserCreatedDesignationId: ptr.String("__UserCreatedDesignationId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -11142,6 +11280,39 @@ func TestUpdateResponseSnapshot_UpdateDataSource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateDataSource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateDesignation(t *testing.T) {
+	want := &UpdateDesignationOutput{
+		DomainId:           ptr.String("__DomainId__"),
+		Id:                 ptr.String("__Id__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		DesignationType:    types.DesignationType("MANAGED"),
+		Policy:             ptr.String("__Policy__"),
+		DeletionProtection: ptr.Bool(true),
+		CreatedBy:          ptr.String("__CreatedBy__"),
+		CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.DataZone)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateDesignation, schemas.UpdateDesignationOutput, schemas.UpdateDesignationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateDesignation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

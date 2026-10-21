@@ -92,6 +92,27 @@ func (ContainerMonitoringType) Values() []ContainerMonitoringType {
 	}
 }
 
+type DNSExpiryExceptionPolicy string
+
+// Enum values for DNSExpiryExceptionPolicy
+const (
+	DNSExpiryExceptionPolicyReject   DNSExpiryExceptionPolicy = "REJECT"
+	DNSExpiryExceptionPolicyDrop     DNSExpiryExceptionPolicy = "DROP"
+	DNSExpiryExceptionPolicyContinue DNSExpiryExceptionPolicy = "CONTINUE"
+)
+
+// Values returns all known values for DNSExpiryExceptionPolicy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DNSExpiryExceptionPolicy) Values() []DNSExpiryExceptionPolicy {
+	return []DNSExpiryExceptionPolicy{
+		"REJECT",
+		"DROP",
+		"CONTINUE",
+	}
+}
+
 type EnabledAnalysisType string
 
 // Enum values for EnabledAnalysisType
@@ -127,6 +148,25 @@ func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"CUSTOMER_KMS",
 		"AWS_OWNED_KMS_KEY",
+	}
+}
+
+type FirewallPolicyErrorCode string
+
+// Enum values for FirewallPolicyErrorCode
+const (
+	FirewallPolicyErrorCodeDnsFirewallRuleGroupUnavailable    FirewallPolicyErrorCode = "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"
+	FirewallPolicyErrorCodeRoute53ResolvedIpValidationMissing FirewallPolicyErrorCode = "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+)
+
+// Values returns all known values for FirewallPolicyErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallPolicyErrorCode) Values() []FirewallPolicyErrorCode {
+	return []FirewallPolicyErrorCode{
+		"DNS_FIREWALL_RULE_GROUP_UNAVAILABLE",
+		"ROUTE53_RESOLVED_IP_VALIDATION_MISSING",
 	}
 }
 
@@ -504,6 +544,7 @@ const (
 	ResourceStatusActive   ResourceStatus = "ACTIVE"
 	ResourceStatusDeleting ResourceStatus = "DELETING"
 	ResourceStatusError    ResourceStatus = "ERROR"
+	ResourceStatusUpdating ResourceStatus = "UPDATING"
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
@@ -515,6 +556,7 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"ACTIVE",
 		"DELETING",
 		"ERROR",
+		"UPDATING",
 	}
 }
 
@@ -536,6 +578,28 @@ func (RevocationCheckAction) Values() []RevocationCheckAction {
 		"PASS",
 		"DROP",
 		"REJECT",
+	}
+}
+
+type Route53ResolvedIPValidationAction string
+
+// Enum values for Route53ResolvedIPValidationAction
+const (
+	Route53ResolvedIPValidationActionReject Route53ResolvedIPValidationAction = "REJECT"
+	Route53ResolvedIPValidationActionDrop   Route53ResolvedIPValidationAction = "DROP"
+	Route53ResolvedIPValidationActionAlert  Route53ResolvedIPValidationAction = "ALERT"
+)
+
+// Values returns all known values for Route53ResolvedIPValidationAction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Route53ResolvedIPValidationAction) Values() []Route53ResolvedIPValidationAction {
+	return []Route53ResolvedIPValidationAction{
+		"REJECT",
+		"DROP",
+		"ALERT",
 	}
 }
 
@@ -764,8 +828,9 @@ type TargetType string
 
 // Enum values for TargetType
 const (
-	TargetTypeTlsSni   TargetType = "TLS_SNI"
-	TargetTypeHttpHost TargetType = "HTTP_HOST"
+	TargetTypeTlsSni                   TargetType = "TLS_SNI"
+	TargetTypeHttpHost                 TargetType = "HTTP_HOST"
+	TargetTypeAwsRoute53ResolvedDomain TargetType = "AWS_ROUTE_53_RESOLVED_DOMAIN"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -776,6 +841,7 @@ func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"TLS_SNI",
 		"HTTP_HOST",
+		"AWS_ROUTE_53_RESOLVED_DOMAIN",
 	}
 }
 

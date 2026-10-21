@@ -12780,6 +12780,21 @@ func validateDataSourceCredentials(v *types.DataSourceCredentials) error {
 			invalidParams.AddNested("WebProxyCredentials", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ServiceAccountCredentials != nil {
+		if err := validateServiceAccountCredentials(v.ServiceAccountCredentials); err != nil {
+			invalidParams.AddNested("ServiceAccountCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SharePointClientCredentials != nil {
+		if err := validateSharePointClientCredentials(v.SharePointClientCredentials); err != nil {
+			invalidParams.AddNested("SharePointClientCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OneDriveClientCredentials != nil {
+		if err := validateOneDriveClientCredentials(v.OneDriveClientCredentials); err != nil {
+			invalidParams.AddNested("OneDriveClientCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -19160,6 +19175,24 @@ func validateOAuthParameters(v *types.OAuthParameters) error {
 	}
 }
 
+func validateOneDriveClientCredentials(v *types.OneDriveClientCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OneDriveClientCredentials"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if v.CertThumbprint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertThumbprint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOperandList(v []types.Identifier) error {
 	if v == nil {
 		return nil
@@ -22371,6 +22404,27 @@ func validateSeriesItemList(v []types.SeriesItem) error {
 	}
 }
 
+func validateServiceAccountCredentials(v *types.ServiceAccountCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceAccountCredentials"}
+	if v.AdminAccountEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountEmail"))
+	}
+	if v.ServiceAccountPrivateKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountPrivateKey"))
+	}
+	if v.ClientEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientEmail"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceNowParameters(v *types.ServiceNowParameters) error {
 	if v == nil {
 		return nil
@@ -22516,6 +22570,24 @@ func validateSharedViewConfigurations(v *types.SharedViewConfigurations) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SharedViewConfigurations"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharePointClientCredentials(v *types.SharePointClientCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharePointClientCredentials"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if v.CertThumbprint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertThumbprint"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

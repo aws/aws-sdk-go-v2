@@ -43,12 +43,19 @@ type ListFlowOperationsInput struct {
 	// This member is required.
 	FirewallArn *string
 
-	// The ID of the Availability Zone where the firewall is located. For example,
+	// The name of the Availability Zone where the firewall is located. For example,
 	// us-east-2a .
 	//
 	// Defines the scope a flow operation. You can use up to 20 filters to configure a
 	// single flow operation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the firewall is located. For example,
+	// use2-az1 . Availability Zone IDs are the same in every Amazon Web Services
+	// account, so use this parameter when you coordinate resources across accounts.
+	// Specify either AvailabilityZone or AvailabilityZoneId , not both. If you specify
+	// both, the request fails.
+	AvailabilityZoneId *string
 
 	// An optional string that defines whether any or all operation types are returned.
 	FlowOperationType types.FlowOperationType
@@ -84,6 +91,9 @@ func (v *ListFlowOperationsInput) Serialize(s smithy.ShapeSerializer) {
 func (v *ListFlowOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.ListFlowOperationsRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_AvailabilityZoneId, *v.AvailabilityZoneId)
 	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.ListFlowOperationsRequest_FirewallArn, *v.FirewallArn)

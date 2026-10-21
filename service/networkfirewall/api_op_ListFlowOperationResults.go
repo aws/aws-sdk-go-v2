@@ -48,12 +48,19 @@ type ListFlowOperationResultsInput struct {
 	// This member is required.
 	FlowOperationId *string
 
-	// The ID of the Availability Zone where the firewall is located. For example,
+	// The name of the Availability Zone where the firewall is located. For example,
 	// us-east-2a .
 	//
 	// Defines the scope a flow operation. You can use up to 20 filters to configure a
 	// single flow operation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the firewall is located. For example,
+	// use2-az1 . Availability Zone IDs are the same in every Amazon Web Services
+	// account, so use this parameter when you coordinate resources across accounts.
+	// Specify either AvailabilityZone or AvailabilityZoneId , not both. If you specify
+	// both, the request fails.
+	AvailabilityZoneId *string
 
 	// The maximum number of objects that you want Network Firewall to return for this
 	// request. If more objects are available, in the response, Network Firewall
@@ -87,6 +94,9 @@ func (v *ListFlowOperationResultsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.ListFlowOperationResultsRequest_AvailabilityZone, *v.AvailabilityZone)
 	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ListFlowOperationResultsRequest_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.ListFlowOperationResultsRequest_FirewallArn, *v.FirewallArn)
 	}
@@ -109,12 +119,16 @@ func (v *ListFlowOperationResultsInput) SerializeMembers(s smithy.ShapeSerialize
 
 type ListFlowOperationResultsOutput struct {
 
-	// The ID of the Availability Zone where the firewall is located. For example,
+	// The name of the Availability Zone where the firewall is located. For example,
 	// us-east-2a .
 	//
 	// Defines the scope a flow operation. You can use up to 20 filters to configure a
 	// single flow operation.
 	AvailabilityZone *string
+
+	// The ID of the Availability Zone where the firewall is located. For example,
+	// use2-az1 .
+	AvailabilityZoneId *string
 
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string
@@ -174,6 +188,9 @@ func (v *ListFlowOperationResultsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.ListFlowOperationResultsResponse_AvailabilityZone, *v.AvailabilityZone)
 	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ListFlowOperationResultsResponse_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.ListFlowOperationResultsResponse_FirewallArn, *v.FirewallArn)
 	}
@@ -206,6 +223,9 @@ func (v *ListFlowOperationResultsOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.ListFlowOperationResultsResponse_AvailabilityZone:
 			v.AvailabilityZone = new(string)
 			return d.ReadString(schemas.ListFlowOperationResultsResponse_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ListFlowOperationResultsResponse_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.ListFlowOperationResultsResponse_AvailabilityZoneId, v.AvailabilityZoneId)
 		case schemas.ListFlowOperationResultsResponse_FirewallArn:
 			v.FirewallArn = new(string)
 			return d.ReadString(schemas.ListFlowOperationResultsResponse_FirewallArn, v.FirewallArn)

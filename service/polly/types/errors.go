@@ -585,7 +585,9 @@ func (e *ThrottlingException) ErrorCode() string {
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The alphabet specified by the lexicon is not a supported alphabet. Valid values
-// are x-sampa and ipa .
+// are ipa , x-sampa , x-amazon-pinyin , x-amazon-jyutping , x-amazon-pron-kana ,
+// and x-amazon-yomigana . Replace the unsupported alphabet with one of the valid
+// values and resubmit your request.
 type UnsupportedPlsAlphabetException struct {
 	Message *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "4c2b47c6-a2cf-43b7-84e1-d6acd817d9f2",
+    "type": "feature",
+    "description": "Adds support for Microsoft Teams as a notification service. Associations can now be created and updated with a Microsoft Teams team and channel configuration using the DevOps Agent API and SDKs.",
+    "modules": [
+        "service/devopsagent"
+    ]
+}

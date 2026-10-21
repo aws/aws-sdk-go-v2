@@ -1248,38 +1248,6 @@ func TestUpdateResponseSnapshot_UpdateFHIRDatastore(t *testing.T) {
 	}
 }
 
-func TestUpdateResponseSnapshot_UpdateProfileWithAgent(t *testing.T) {
-	want := &UpdateProfileWithAgentOutput{
-		AgentResponse: &types.AgentOutputMessage{
-			Body: ptr.String("__Body__"),
-			Type: types.AgentOutputMessageType("INITIAL_GREETING"),
-			OptionsList: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		ConversationId: ptr.String("__ConversationId__"),
-	}
-	proto := awsjson.New10(schemas.HealthLake)
-	opSchema := smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UpdateProfileWithAgentResponse, schemas.UpdateProfileWithAgentResponse)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("UpdateProfileWithAgent.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
@@ -1305,31 +1273,6 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 }
 
-func TestUpdateResponseSnapshot_Error_AgentMessageOutOfContextException(t *testing.T) {
-	want := &types.AgentMessageOutOfContextException{
-		Message: ptr.String("__Message__"),
-	}
-	proto := awsjson.New10(schemas.HealthLake)
-	opSchema := smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.AgentMessageOutOfContextException, schemas.AgentMessageOutOfContextException)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
-	if err := serdeRespWriteSnapshot("AgentMessageOutOfContextException.error", 400, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
@@ -1351,31 +1294,6 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateResponseSnapshot_Error_ConversationNotFoundException(t *testing.T) {
-	want := &types.ConversationNotFoundException{
-		Message: ptr.String("__Message__"),
-	}
-	proto := awsjson.New10(schemas.HealthLake)
-	opSchema := smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.ConversationNotFoundException, schemas.ConversationNotFoundException)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
-	if err := serdeRespWriteSnapshot("ConversationNotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1426,31 +1344,6 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServerException.error", 500, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateResponseSnapshot_Error_NotImplementedOperationException(t *testing.T) {
-	want := &types.NotImplementedOperationException{
-		Message: ptr.String("__Message__"),
-	}
-	proto := awsjson.New10(schemas.HealthLake)
-	opSchema := smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.NotImplementedOperationException, schemas.NotImplementedOperationException)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
-	if err := serdeRespWriteSnapshot("NotImplementedOperationException.error", 501, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1526,56 +1419,6 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ThrottlingException.error", 429, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
-	want := &types.UnauthorizedException{
-		Message: ptr.String("__Message__"),
-	}
-	proto := awsjson.New10(schemas.HealthLake)
-	opSchema := smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UnauthorizedException, schemas.UnauthorizedException)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
-	if err := serdeRespWriteSnapshot("UnauthorizedException.error", 401, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateResponseSnapshot_Error_UnsupportedMIMETypeException(t *testing.T) {
-	want := &types.UnsupportedMIMETypeException{
-		Message: ptr.String("__Message__"),
-	}
-	proto := awsjson.New10(schemas.HealthLake)
-	opSchema := smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UnsupportedMIMETypeException, schemas.UnsupportedMIMETypeException)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
-	if err := serdeRespWriteSnapshot("UnsupportedMIMETypeException.error", 415, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

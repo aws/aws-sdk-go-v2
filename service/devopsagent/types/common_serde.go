@@ -451,6 +451,12 @@ func serializeServiceConfiguration(s smithy.ShapeSerializer, schema *smithy.Sche
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ServiceConfigurationMemberMsteams:
+		s.WriteUnion(schema, schemas.ServiceConfiguration_msteams)
+		s.WriteStruct(schemas.ServiceConfiguration_msteams)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ServiceConfigurationMemberPagerduty:
 		s.WriteUnion(schema, schemas.ServiceConfiguration_pagerduty)
 		s.WriteStruct(schemas.ServiceConfiguration_pagerduty)
@@ -1001,6 +1007,10 @@ func deserializeServiceConfiguration(d smithy.ShapeDeserializer, s *smithy.Schem
 			return vv.Deserialize(d)
 		case schemas.ServiceConfiguration_mcpserversplunk:
 			vv := &ServiceConfigurationMemberMcpserversplunk{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ServiceConfiguration_msteams:
+			vv := &ServiceConfigurationMemberMsteams{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ServiceConfiguration_pagerduty:

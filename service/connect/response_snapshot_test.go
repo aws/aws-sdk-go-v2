@@ -9057,6 +9057,7 @@ func TestCheckResponseSnapshot_DescribeSecurityProfile(t *testing.T) {
 					},
 				},
 			},
+			Type: types.SecurityProfileType("AWS_MANAGED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeSecurityProfile.response")
@@ -14571,6 +14572,7 @@ func TestCheckResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                 ptr.String("__Id__"),
@@ -14578,6 +14580,7 @@ func TestCheckResponseSnapshot_ListSecurityProfiles(t *testing.T) {
 				Name:               ptr.String("__Name__"),
 				LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+				Type:               types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -19024,6 +19027,7 @@ func TestCheckResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 			{
 				Id:                     ptr.String("__Id__"),
@@ -19034,6 +19038,7 @@ func TestCheckResponseSnapshot_SearchSecurityProfiles(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				Type: types.SecurityProfileType("AWS_MANAGED"),
 			},
 		},
 		NextToken:             ptr.String("__NextToken__"),
