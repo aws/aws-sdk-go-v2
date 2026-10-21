@@ -3,8 +3,11 @@ package eventstream
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
+	"fmt"
 	"io"
 	"reflect"
+	"strings"
 	"testing"
 	"time"
 )
@@ -199,5 +202,189 @@ func TestValue_String(t *testing.T) {
 		if e, a := c.Expect, c.Val.String(); e != a {
 			t.Errorf("%d, expect %v, got %v", i, e, a)
 		}
+	}
+}
+
+// safeErr formats an error for test output without dumping an oversized
+// LengthError.Value payload (which can be tens of kilobytes). For a
+// LengthError it prints only Part/Want/Have; for anything else it falls back
+// to the normal error string.
+func safeErr(err error) string {
+	if err == nil {
+		return "<nil>"
+	}
+	var le LengthError
+	if errors.As(err, &le) {
+		return fmt.Sprintf("LengthError{Part:%q Want:%d Have:%d}", le.Part, le.Want, le.Have)
+	}
+	return err.Error()
+}
+
+// TestStringValue_EncodeRejectsOversizedLength verifies that the string header
+// encoder validates the encoded byte length before writing the 16-bit length
+// field. It must return an error on overflow rather than truncating the length
+// to its low 16 bits while still appending the full value (the header-smuggling
+// primitive). This is the core protocol invariant for outbound event-stream
+// headers.
+func TestStringValue_EncodeRejectsOversizedLength(t *testing.T) {
+	cases := map[string]struct {
+		len       int
+		expectErr bool
+	}{
+		"at Go limit": {
+			len:       maxHeaderValueLen,
+			expectErr: false,
+		},
+		"one over Go limit": {
+			len:       maxHeaderValueLen + 1,
+			expectErr: true,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			v := StringValue(strings.Repeat("a", c.len))
+
+			var w bytes.Buffer
+			err := v.encode(&w)
+
+			if c.expectErr {
+				if err == nil {
+					t.Fatalf("expected error for value of length %d, got nil", c.len)
+				}
+
+				var lenErr LengthError
+				if !errors.As(err, &lenErr) {
+					t.Fatalf("expected LengthError, got %T: %s", err, safeErr(err))
+				}
+				if lenErr.Have != c.len {
+					t.Errorf("expected Have=%d, got %d", c.len, lenErr.Have)
+				}
+				if lenErr.Want != maxHeaderValueLen {
+					t.Errorf("expected Want=%d, got %d", maxHeaderValueLen, lenErr.Want)
+				}
+
+				// No partially serialized frame may be left on the wire
+				// after validation fails.
+				if w.Len() != 0 {
+					t.Errorf("expected no bytes written on rejection, got %d bytes", w.Len())
+				}
+				return
+			}
+
+			if err != nil {
+				t.Fatalf("expected no error for value of length %d, got %s", c.len, safeErr(err))
+			}
+			// 1 byte type tag + 2 byte length + value bytes.
+			if e, a := 1+2+c.len, w.Len(); e != a {
+				t.Errorf("expected %d bytes written, got %d", e, a)
+			}
+		})
+	}
+}
+
+// TestBytesValue_EncodeRejectsOversizedLength verifies the same bounds check
+// for byte-array header values, the other variable-length value type that
+// carries a 16-bit length prefix.
+func TestBytesValue_EncodeRejectsOversizedLength(t *testing.T) {
+	cases := map[string]struct {
+		len       int
+		expectErr bool
+	}{
+		"at Go limit": {
+			len:       maxHeaderValueLen,
+			expectErr: false,
+		},
+		"one over Go limit": {
+			len:       maxHeaderValueLen + 1,
+			expectErr: true,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			v := BytesValue(bytes.Repeat([]byte{0x61}, c.len))
+
+			var w bytes.Buffer
+			err := v.encode(&w)
+
+			if c.expectErr {
+				var lenErr LengthError
+				if !errors.As(err, &lenErr) {
+					t.Fatalf("expected LengthError, got %T: %s", err, safeErr(err))
+				}
+				if w.Len() != 0 {
+					t.Errorf("expected no bytes written on rejection, got %d bytes", w.Len())
+				}
+				return
+			}
+
+			if err != nil {
+				t.Fatalf("expected no error for value of length %d, got %s", c.len, safeErr(err))
+			}
+			// 1 byte type tag + 2 byte length + value bytes.
+			if e, a := 1+2+c.len, w.Len(); e != a {
+				t.Errorf("expected %d bytes written, got %d", e, a)
+			}
+		})
+	}
+}
+
+// TestStringValue_MultibyteByteLengthEnforced verifies that the length check is
+// on ENCODED BYTE LENGTH, not rune/character count. A string whose rune count
+// is within the limit but whose UTF-8 encoding exceeds it must be rejected.
+//
+// Uses the 3-byte rune U+20AC (euro sign, "€"). The rune count stays at or
+// below the limit while the byte length is ~3x, so a correct byte-length check
+// rejects it. This case PASSES against current behavior because the Go encoder
+// correctly uses len(v) (bytes), not utf8.RuneCountInString.
+func TestStringValue_MultibyteByteLengthEnforced(t *testing.T) {
+	const euro = "\u20ac" // 3 UTF-8 bytes, 1 rune
+
+	// Rune count = maxHeaderValueLen (within the per-character limit), but
+	// byte length = 3 * maxHeaderValueLen (well over the limit).
+	runeCount := maxHeaderValueLen
+	v := StringValue(strings.Repeat(euro, runeCount))
+
+	byteLen := len(string(v))
+	if byteLen <= maxHeaderValueLen {
+		t.Fatalf("test setup: expected byte length > %d, got %d", maxHeaderValueLen, byteLen)
+	}
+
+	var w bytes.Buffer
+	err := v.encode(&w)
+
+	var lenErr LengthError
+	if !errors.As(err, &lenErr) {
+		t.Fatalf("expected LengthError for %d-byte (%d-rune) value, got %T: %s",
+			byteLen, runeCount, err, safeErr(err))
+	}
+	if lenErr.Have != byteLen {
+		t.Errorf("expected LengthError.Have to be byte length %d, got %d", byteLen, lenErr.Have)
+	}
+	if w.Len() != 0 {
+		t.Errorf("expected no bytes written on rejection, got %d bytes", w.Len())
+	}
+}
+
+// TestFixedWidthValue_UUIDDecodeRejectsTruncated covers the invalid-width half
+// of fixed-width value handling for UUID values. UUIDValue is structurally
+// fixed on the ENCODE side in Go ([16]byte), so an encoder can never emit a
+// wrong width, and the valid-width round-trip is already covered by
+// TestValue_MarshalValue / TestHeader_DecodeValues. The gap is the DECODE
+// side: an independent, spec-compliant decoder must reject a truncated
+// fixed-width value rather than silently accepting it.
+func TestFixedWidthValue_UUIDDecodeRejectsTruncated(t *testing.T) {
+	// Type tag for UUID followed by only 8 value bytes (should be 16).
+	truncated := append([]byte{byte(uuidValueType)}, make([]byte, 8)...)
+
+	_, err := decodeHeaderValue(bytes.NewReader(truncated))
+	if err == nil {
+		t.Fatal("expected error decoding a 8-byte UUID value, got nil")
+	}
+	if !errors.Is(err, io.ErrUnexpectedEOF) && err != io.EOF {
+		// decodeFixedBytesValue uses io.ReadFull, which returns
+		// ErrUnexpectedEOF for a short read.
+		t.Logf("decode error (acceptable as long as non-nil): %v", err)
 	}
 }
