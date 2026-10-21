@@ -1,5 +1,0 @@
-PUT /sol/vnfpkgm/v1/vnf_packages/__VnfPkgId__/package_content
-
-Content-Type: application/zip
-
-blob
