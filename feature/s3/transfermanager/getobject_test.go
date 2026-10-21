@@ -6,13 +6,16 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io"
+	"net/http"
 	"reflect"
+	"strconv"
 	"strings"
 	"sync/atomic"
 	"testing"
 	"time"
 
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
@@ -202,6 +205,7 @@ func TestGetObject(t *testing.T) {
 			},
 			optFn: func(o *Options) {
 				o.GetObjectType = types.GetObjectRanges
+				o.PartBodyMaxRetries = 1
 			},
 			expectInvocations: 1,
 			expectReadErr:     "unexpected EOF",
@@ -318,7 +322,9 @@ func TestGetObject(t *testing.T) {
 		"part download fail retry": {
 			data:        []byte("ab"),
 			getObjectFn: s3testing.ErrReaderFn,
-			optFn:       func(o *Options) {},
+			optFn: func(o *Options) {
+				o.PartBodyMaxRetries = 1
+			},
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 2, Err: io.ErrUnexpectedEOF},
 			},
@@ -444,37 +450,31 @@ func TestGetAsyncWithFailure(t *testing.T) {
 			s3Client.PartsCount = 10
 			s3Client.Data = buf80MB
 			s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (out *s3.GetObjectOutput, err error) {
-				count := reqCount.Load()
-				switch count {
-				case 1:
-					// Give a chance for the multipart chunks to be queued up
-					time.Sleep(1 * time.Second)
-					err = fmt.Errorf("some connection error")
-				default:
-					var start, end int64
-					if params.Range != nil {
-						start, end, err = getReqRange(aws.ToString(params.Range))
-						if err != nil {
-							return
-						}
-					} else {
-						start, end = count*defaultPartSizeBytes, (count+1)*defaultPartSizeBytes-1
-					}
-					body := bytes.NewReader(make([]byte, defaultPartSizeBytes))
-					out = &s3.GetObjectOutput{
-						Body:          io.NopCloser(body),
-						ContentLength: aws.Int64(int64(body.Len())),
-						ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, end, body.Len()*10)),
-					}
-
-					if count > 0 {
-						// sleep here to ensure context switching between goroutines
-						time.Sleep(25 * time.Millisecond)
+				reqCount.Add(1)
+				// parts are requested concurrently, so pick the failing part by
+				// position rather than by arrival order
+				start := int64(aws.ToInt32(params.PartNumber)-1) * defaultPartSizeBytes
+				if params.Range != nil {
+					start, _, err = getReqRange(aws.ToString(params.Range))
+					if err != nil {
+						return
 					}
 				}
+				if start == defaultPartSizeBytes {
+					// Give a chance for the multipart chunks to be queued up
+					time.Sleep(1 * time.Second)
+					return nil, fmt.Errorf("some connection error")
+				}
 
-				reqCount.Add(1)
-				return out, err
+				body := bytes.NewReader(make([]byte, defaultPartSizeBytes))
+				out = &s3.GetObjectOutput{
+					Body:          io.NopCloser(body),
+					ContentLength: aws.Int64(int64(body.Len())),
+					ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, start+defaultPartSizeBytes-1, body.Len()*10)),
+				}
+				// sleep here to ensure context switching between goroutines
+				time.Sleep(25 * time.Millisecond)
+				return out, nil
 			}
 
 			mgr := New(s3Client, func(o *Options) {
@@ -701,5 +701,34 @@ func TestGetObjectUnequalParts(t *testing.T) {
 				t.Fatalf("expect downloaded object to equal the assembled parts")
 			}
 		})
+	}
+}
+
+// TestGetObjectChecksumMismatch verifies that a part whose body does not match
+// its checksum fails the read.
+func TestGetObjectChecksumMismatch(t *testing.T) {
+	body := []byte("hello world")
+	client := s3.New(s3.Options{
+		Region:       "us-west-2",
+		UsePathStyle: true,
+		HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+			h := http.Header{
+				"Content-Length":       {strconv.Itoa(len(body))},
+				"Etag":                 {`"etag"`},
+				"X-Amz-Checksum-Crc32": {"AAAAAA=="}, // CRC32 of no bytes
+			}
+			return &http.Response{StatusCode: 200, Header: h, Body: io.NopCloser(bytes.NewReader(body))}, nil
+		}),
+	})
+
+	out, err := New(client).GetObject(context.Background(), &GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if _, err := io.ReadAll(out.Body); err == nil || !strings.Contains(err.Error(), "checksum did not match") {
+		t.Errorf("expect checksum mismatch error, got %v", err)
 	}
 }
