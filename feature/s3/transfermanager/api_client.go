@@ -66,6 +66,9 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	for _, fn := range optFns {
 		fn(&opts)
 	}
+	if opts.Concurrency == 0 {
+		opts.Concurrency = defaultConfigTransferConcurrency
+	}
 
 	return newClient(opts)
 }

@@ -279,6 +279,43 @@ func TestDlChunkReadFromErrorWaitsForWrites(t *testing.T) {
 	}
 }
 
+type failingSink struct{ err error }
+
+func (s failingSink) WriteAt([]byte, int64) (int, error) { return 0, s.err }
+
+type zeroReader struct{}
+
+func (zeroReader) Read(p []byte) (int, error) { return len(p), nil }
+
+// Once the sink has failed, ReadFrom must stop consuming the body instead of
+// reading to EOF and discarding every buffer.
+func TestDlChunkReadFromSinkFailed(t *testing.T) {
+	pool := &countingPool{t: t, outstanding: map[*byte]struct{}{}}
+	errWrite := errors.New("write failed")
+	w := internalio.NewAsyncWriterAt(failingSink{err: errWrite}, pool)
+	w.Start()
+	defer w.Stop()
+
+	c := dlChunk{sink: w}
+	returned := make(chan error, 1)
+	go func() {
+		_, err := c.ReadFrom(zeroReader{})
+		returned <- err
+	}()
+
+	select {
+	case err := <-returned:
+		if err != errWrite {
+			t.Fatalf("err = %v, want %v", err, errWrite)
+		}
+	case <-time.After(5 * time.Second):
+		t.Fatal("ReadFrom kept reading after the sink failed")
+	}
+	if n := len(pool.outstanding); n != 0 {
+		t.Errorf("%d buffers were never returned to the pool", n)
+	}
+}
+
 func isZero(b []byte) bool {
 	for _, v := range b {
 		if v != 0 {

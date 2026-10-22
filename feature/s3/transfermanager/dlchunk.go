@@ -35,6 +35,8 @@ func readChunk(r io.Reader, buf []byte) (int, error) {
 // write at an arbitrary length is not valid on a file opened with O_DIRECT.
 // The returned count only includes bytes that were queued for writing.
 //
+// If the sink has failed, ReadFrom stops reading and returns the sink's error.
+//
 // ReadFrom does not return an error until every write it queued has landed or
 // been discarded. The caller retries from start, and a retry's writes must not
 // race with this attempt's: if this attempt failed checksum validation, a stale
@@ -43,6 +45,13 @@ func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
 	var pending sync.WaitGroup
 	var total int64
 	for {
+		select {
+		case <-c.sink.Done():
+			pending.Wait()
+			return total, c.sink.Error()
+		default:
+		}
+
 		buf := c.sink.Buffer()
 		n, err := readChunk(r, buf)
 		if err != nil && err != io.EOF {

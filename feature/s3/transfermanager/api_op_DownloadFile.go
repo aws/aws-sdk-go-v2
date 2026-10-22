@@ -39,10 +39,11 @@ type DownloadFileInput struct {
 	// for large downloads on fast storage, but data written this way is not
 	// cached for subsequent reads, and some filesystems do not support it.
 	//
-	// Direct I/O is currently only supported on Linux, and only takes effect
-	// when GetObjectType is GetObjectRanges and PartSizeBytes and the
-	// destination filesystem are compatible with the required 4KiB alignment.
-	// Otherwise the file is written with normal buffered I/O.
+	// DirectIO requires GetObjectType to be GetObjectRanges, DownloadFile returns
+	// an error otherwise. Direct I/O is currently only supported on Linux, and
+	// only takes effect when PartSizeBytes and the destination filesystem are
+	// compatible with the required 4KiB alignment. Otherwise the file is written
+	// with normal buffered I/O.
 	DirectIO bool
 
 	// To retrieve the checksum, this mode must be enabled.
@@ -135,7 +136,8 @@ func (i *DownloadFileInput) toDownloadObjectInput(w io.WriterAt) *DownloadObject
 }
 
 // DownloadFile downloads an object from S3 to a local file at input.FilePath,
-// splitting it into byte ranges fetched in parallel.
+// fetching the object's parts or byte ranges in parallel (see
+// Options.GetObjectType).
 //
 // The destination is replaced atomically: data is written to a temporary file
 // alongside input.FilePath, synced to stable storage, and renamed into place on
@@ -154,6 +156,10 @@ func (c *Client) DownloadFile(ctx context.Context, input *DownloadFileInput, opt
 	options := c.options.Copy()
 	for _, opt := range opts {
 		opt(&options)
+	}
+
+	if input.DirectIO && options.GetObjectType != types.GetObjectRanges {
+		return nil, fmt.Errorf("DirectIO requires GetObjectType to be %s", types.GetObjectRanges)
 	}
 
 	tmp, err := tempPath(input.FilePath)

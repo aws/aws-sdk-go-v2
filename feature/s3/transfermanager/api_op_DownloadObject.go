@@ -771,12 +771,6 @@ func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clien
 
 // downloadChunk downloads the chunk from s3
 func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOptions ...func(*s3.Options)) (*DownloadObjectOutput, error) {
-	select {
-	case <-d.writer.Done():
-		return nil, d.writer.Error()
-	default:
-	}
-
 	params := d.in.mapGetObjectInput(!d.options.DisableChecksumValidation)
 	if chunk.part != 0 {
 		params.PartNumber = aws.Int32(chunk.part)
@@ -787,6 +781,12 @@ func (d *downloader) downloadChunk(ctx context.Context, chunk dlChunk, clientOpt
 	var out *s3.GetObjectOutput
 	var err error
 	for retry := 0; retry < d.options.PartBodyMaxRetries; retry++ {
+		select {
+		case <-d.writer.Done():
+			return nil, d.writer.Error()
+		default:
+		}
+
 		if params.VersionId == nil && d.etag != "" {
 			params.IfMatch = aws.String(d.etag)
 		}

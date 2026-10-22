@@ -237,16 +237,6 @@ func TestDownloadFile(t *testing.T) {
 			expectData:   data,
 			expectInit:   &fakeInit{size: int64(len(data))},
 		},
-		// part sizes aren't known up front, so direct I/O is not used
-		"parts, direct I/O": {
-			data:         data,
-			getObjectFn:  partsGetObjectFn(data, partSizes),
-			optFn:        parts,
-			directIO:     true,
-			expectEvents: []string{"Init", "Sync", "Close", "Rename", "SyncDir"},
-			expectData:   data,
-			expectInit:   &fakeInit{size: int64(len(data))},
-		},
 		"explicit range": {
 			data:         data,
 			getObjectFn:  s3testing.RangeGetObjectFn,
@@ -473,5 +463,30 @@ func TestDownloadFileRequiresPath(t *testing.T) {
 	}
 	if len(h.created) != 0 || len(h.events) != 0 {
 		t.Fatalf("expect no file operations, got created=%v events=%v", h.created, h.events)
+	}
+}
+
+func TestDownloadFileDirectIORequiresRanges(t *testing.T) {
+	for name, optFn := range map[string]func(*Options){
+		"parts":   func(o *Options) { o.GetObjectType = types.GetObjectParts },
+		"default": func(*Options) {},
+	} {
+		t.Run(name, func(t *testing.T) {
+			h := stubDownloadFile(t, &fakeDownloadFile{}, nil, nil)
+			client := New(&s3testing.TransferManagerLoggingClient{}, optFn)
+
+			_, err := client.DownloadFile(context.Background(), &DownloadFileInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				FilePath: testFilePath,
+				DirectIO: true,
+			})
+			if err == nil || !strings.Contains(err.Error(), "DirectIO requires GetObjectType") {
+				t.Fatalf("expect DirectIO error, got %v", err)
+			}
+			if len(h.created) != 0 || len(h.events) != 0 {
+				t.Fatalf("expect no file operations, got created=%v events=%v", h.created, h.events)
+			}
+		})
 	}
 }
