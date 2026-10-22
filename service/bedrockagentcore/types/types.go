@@ -3500,6 +3500,12 @@ type EvaluationResultContent struct {
 	// resolve issues with evaluator configuration or input data.
 	ErrorMessage *string
 
+	//  The name of the dimension that this result scores. This field is set only on
+	// results produced by an evaluator that uses a multi-dimensional rating scale,
+	// where each dimension is scored independently. For evaluators with a single
+	// rating scale, this field is absent.
+	EvaluationDimensionName *string
+
 	//  The detailed explanation provided by the evaluator describing the reasoning
 	// behind the assigned score. This qualitative feedback helps understand why
 	// specific ratings were given and provides actionable insights for improvement.
@@ -3544,6 +3550,9 @@ func (v *EvaluationResultContent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.EvaluationResultContent_errorMessage, *v.ErrorMessage)
 	}
+	if v.EvaluationDimensionName != nil {
+		s.WriteString(schemas.EvaluationResultContent_evaluationDimensionName, *v.EvaluationDimensionName)
+	}
 	if v.EvaluatorArn != nil {
 		s.WriteString(schemas.EvaluationResultContent_evaluatorArn, *v.EvaluatorArn)
 	}
@@ -3580,6 +3589,9 @@ func (v *EvaluationResultContent) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.EvaluationResultContent_errorMessage:
 			v.ErrorMessage = new(string)
 			return d.ReadString(schemas.EvaluationResultContent_errorMessage, v.ErrorMessage)
+		case schemas.EvaluationResultContent_evaluationDimensionName:
+			v.EvaluationDimensionName = new(string)
+			return d.ReadString(schemas.EvaluationResultContent_evaluationDimensionName, v.EvaluationDimensionName)
 		case schemas.EvaluationResultContent_evaluatorArn:
 			v.EvaluatorArn = new(string)
 			return d.ReadString(schemas.EvaluationResultContent_evaluatorArn, v.EvaluatorArn)
@@ -3780,6 +3792,11 @@ func (v *EvaluatorStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 // Summary statistics for a single evaluator within a batch evaluation.
 type EvaluatorSummary struct {
 
+	// The name of the dimension that this summary covers. This field is set only for
+	// evaluators that use a multi-dimensional rating scale, where each dimension is
+	// summarized separately. For single-scale evaluators, this field is not set.
+	EvaluationDimensionName *string
+
 	// The unique identifier of the evaluator.
 	EvaluatorId *string
 
@@ -3802,6 +3819,9 @@ func (v *EvaluatorSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluatorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationDimensionName != nil {
+		s.WriteString(schemas.EvaluatorSummary_evaluationDimensionName, *v.EvaluationDimensionName)
+	}
 	if v.EvaluatorId != nil {
 		s.WriteString(schemas.EvaluatorSummary_evaluatorId, *v.EvaluatorId)
 	}
@@ -3820,6 +3840,9 @@ func (v *EvaluatorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *EvaluatorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluatorSummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EvaluatorSummary_evaluationDimensionName:
+			v.EvaluationDimensionName = new(string)
+			return d.ReadString(schemas.EvaluatorSummary_evaluationDimensionName, v.EvaluationDimensionName)
 		case schemas.EvaluatorSummary_evaluatorId:
 			v.EvaluatorId = new(string)
 			return d.ReadString(schemas.EvaluatorSummary_evaluatorId, v.EvaluatorId)

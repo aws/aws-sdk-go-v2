@@ -153,6 +153,12 @@ func serializeComputeConfiguration(s smithy.ShapeSerializer, schema *smithy.Sche
 
 func serializeCondition(s smithy.ShapeSerializer, schema *smithy.Schema, v Condition) {
 	switch vv := v.(type) {
+	case *ConditionMemberMatchModels:
+		s.WriteUnion(schema, schemas.Condition_matchModels)
+		s.WriteStruct(schemas.Condition_matchModels)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ConditionMemberMatchPaths:
 		s.WriteUnion(schema, schemas.Condition_matchPaths)
 		s.WriteStruct(schemas.Condition_matchPaths)
@@ -439,6 +445,19 @@ func serializeDataSourceType(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 		s.WriteStruct(schemas.DataSourceType_s3Source)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeDimensionRatingScale(s smithy.ShapeSerializer, schema *smithy.Schema, v DimensionRatingScale) {
+	switch vv := v.(type) {
+	case *DimensionRatingScaleMemberCategorical:
+		s.WriteUnion(schema, schemas.DimensionRatingScale_categorical)
+		serializeCategoricalScaleDefinitions(s, schemas.DimensionRatingScale_categorical, vv.Value)
+		s.CloseUnion()
+	case *DimensionRatingScaleMemberNumerical:
+		s.WriteUnion(schema, schemas.DimensionRatingScale_numerical)
+		serializeNumericalScaleDefinitions(s, schemas.DimensionRatingScale_numerical, vv.Value)
 		s.CloseUnion()
 	}
 }
@@ -1239,6 +1258,10 @@ func serializeRatingScale(s smithy.ShapeSerializer, schema *smithy.Schema, v Rat
 		s.WriteUnion(schema, schemas.RatingScale_categorical)
 		serializeCategoricalScaleDefinitions(s, schemas.RatingScale_categorical, vv.Value)
 		s.CloseUnion()
+	case *RatingScaleMemberMultiDimensional:
+		s.WriteUnion(schema, schemas.RatingScale_multiDimensional)
+		serializeEvaluationDimensions(s, schemas.RatingScale_multiDimensional, vv.Value)
+		s.CloseUnion()
 	case *RatingScaleMemberNumerical:
 		s.WriteUnion(schema, schemas.RatingScale_numerical)
 		serializeNumericalScaleDefinitions(s, schemas.RatingScale_numerical, vv.Value)
@@ -1641,6 +1664,10 @@ func deserializeComputeConfiguration(d smithy.ShapeDeserializer, s *smithy.Schem
 func deserializeCondition(d smithy.ShapeDeserializer, s *smithy.Schema, v *Condition) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.Condition_matchModels:
+			vv := &ConditionMemberMatchModels{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.Condition_matchPaths:
 			vv := &ConditionMemberMatchPaths{}
 			*v = vv
@@ -1903,6 +1930,22 @@ func deserializeDataSourceType(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 			return vv.Deserialize(d)
 		case schemas.DataSourceType_s3Source:
 			vv := &DataSourceTypeMemberS3Source{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeDimensionRatingScale(d smithy.ShapeDeserializer, s *smithy.Schema, v *DimensionRatingScale) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.DimensionRatingScale_categorical:
+			vv := &DimensionRatingScaleMemberCategorical{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.DimensionRatingScale_numerical:
+			vv := &DimensionRatingScaleMemberNumerical{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -2651,6 +2694,10 @@ func deserializeRatingScale(d smithy.ShapeDeserializer, s *smithy.Schema, v *Rat
 		switch ms {
 		case schemas.RatingScale_categorical:
 			vv := &RatingScaleMemberCategorical{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RatingScale_multiDimensional:
+			vv := &RatingScaleMemberMultiDimensional{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.RatingScale_numerical:
@@ -3481,6 +3528,30 @@ func serializeEphemeralBlockDeviceMappingList(s smithy.ShapeSerializer, schema *
 	s.CloseList()
 }
 
+func serializeErrorStatusCodePatterns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEvaluationDimensions(s smithy.ShapeSerializer, schema *smithy.Schema, v []EvaluationDimension) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeEvaluatorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EvaluatorReference) {
 	if v == nil {
 		return
@@ -3506,6 +3577,17 @@ func serializeEvaluatorSummaryList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeExampleIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeFallbackErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []FallbackError) {
 	if v == nil {
 		return
 	}
@@ -3865,6 +3947,19 @@ func serializeLogGroupNamesList(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeMatchModelEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []MatchModelEntry) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -4487,6 +4582,19 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeTargetFallbacks(s smithy.ShapeSerializer, schema *smithy.Schema, v []FallbackTarget) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -5665,6 +5773,49 @@ func deserializeEphemeralBlockDeviceMappingList(d smithy.ShapeDeserializer, s *s
 	})
 }
 
+func deserializeErrorStatusCodePatterns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEvaluationDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EvaluationDimension) error {
+	*v = make([]EvaluationDimension, 0)
+	var vv EvaluationDimension
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EvaluationDimension
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = EvaluationDimension{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeEvaluatorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EvaluatorReference) error {
 	*v = make([]EvaluatorReference, 0)
 	var vv EvaluatorReference
@@ -5725,6 +5876,27 @@ func deserializeExampleIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFallbackErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FallbackError) error {
+	*v = make([]FallbackError, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FallbackError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, FallbackError(vv))
 		return nil
 	})
 }
@@ -6347,6 +6519,28 @@ func deserializeLogGroupNamesList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMatchModelEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MatchModelEntry) error {
+	*v = make([]MatchModelEntry, 0)
+	var vv MatchModelEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MatchModelEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = MatchModelEntry{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -7464,6 +7658,28 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTargetFallbacks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FallbackTarget) error {
+	*v = make([]FallbackTarget, 0)
+	var vv FallbackTarget
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FallbackTarget
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FallbackTarget{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

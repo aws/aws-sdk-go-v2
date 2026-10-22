@@ -1,0 +1,5 @@
+POST /environments/__EnvironmentId__/collectors
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","collectorArn":"__CollectorArn__","collectorDataAccessRoleArn":"__CollectorDataAccessRoleArn__"}

@@ -4730,6 +4730,26 @@ func (m *validateOpListRealtimeContactAnalysisSegmentsV2) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListReplicationFindings struct {
+}
+
+func (*validateOpListReplicationFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListReplicationFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListReplicationFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListReplicationFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRoutingProfileManualAssignmentQueues struct {
 }
 
@@ -8892,6 +8912,10 @@ func addOpListQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListRealtimeContactAnalysisSegmentsV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRealtimeContactAnalysisSegmentsV2{}, middleware.After)
+}
+
+func addOpListReplicationFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListReplicationFindings{}, middleware.After)
 }
 
 func addOpListRoutingProfileManualAssignmentQueuesValidationMiddleware(stack *middleware.Stack) error {
@@ -18361,6 +18385,24 @@ func validateOpListRealtimeContactAnalysisSegmentsV2Input(v *ListRealtimeContact
 	}
 	if v.SegmentTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SegmentTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListReplicationFindingsInput(v *ListReplicationFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListReplicationFindingsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

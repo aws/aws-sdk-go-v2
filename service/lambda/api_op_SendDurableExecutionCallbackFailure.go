@@ -35,7 +35,8 @@ type SendDurableExecutionCallbackFailureInput struct {
 	// This member is required.
 	CallbackId *string
 
-	// Error details describing why the callback operation failed.
+	// Error details describing why the callback operation failed. The combined size
+	// of all error fields is limited to 1 MB.
 	Error *types.ErrorObject
 
 	noSmithyDocumentSerde

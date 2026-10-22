@@ -4,6 +4,7 @@ package networkmanager
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
 	smithy "github.com/aws/smithy-go"
@@ -49,6 +50,12 @@ type GetNetworkRoutesInput struct {
 	// The most specific route that matches the traffic (longest prefix match).
 	LongestPrefixMatches []string
 
+	// The maximum number of results to return.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
 	// The IDs of the prefix lists.
 	PrefixListIds []string
 
@@ -81,6 +88,12 @@ func (v *GetNetworkRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.GetNetworkRoutesRequest_GlobalNetworkId, *v.GlobalNetworkId)
 	}
 	serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_LongestPrefixMatches, v.LongestPrefixMatches)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetNetworkRoutesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkRoutesRequest_NextToken, *v.NextToken)
+	}
 	serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_PrefixListIds, v.PrefixListIds)
 	if v.RouteTableIdentifier != nil {
 		s.WriteStruct(schemas.GetNetworkRoutesRequest_RouteTableIdentifier)
@@ -95,11 +108,19 @@ func (v *GetNetworkRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetNetworkRoutesOutput struct {
 
+	// Describes the network function group route table that the routes are from. This
+	// field is present only when you specify CoreNetworkNetworkFunctionGroup in
+	// RouteTableIdentifier .
+	CoreNetworkNetworkFunctionGroup *types.CoreNetworkNetworkFunctionGroupIdentifier
+
 	// Describes a core network segment edge.
 	CoreNetworkSegmentEdge *types.CoreNetworkSegmentEdgeIdentifier
 
 	// The network routes.
 	NetworkRoutes []types.NetworkRoute
+
+	// The token for the next page of results.
+	NextToken *string
 
 	// The ARN of the route table.
 	RouteTableArn *string
@@ -123,12 +144,20 @@ func (v *GetNetworkRoutesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetNetworkRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkNetworkFunctionGroup != nil {
+		s.WriteStruct(schemas.GetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup)
+		v.CoreNetworkNetworkFunctionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CoreNetworkSegmentEdge != nil {
 		s.WriteStruct(schemas.GetNetworkRoutesResponse_CoreNetworkSegmentEdge)
 		v.CoreNetworkSegmentEdge.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	serializeNetworkRouteList(s, schemas.GetNetworkRoutesResponse_NetworkRoutes, v.NetworkRoutes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkRoutesResponse_NextToken, *v.NextToken)
+	}
 	if v.RouteTableArn != nil {
 		s.WriteString(schemas.GetNetworkRoutesResponse_RouteTableArn, *v.RouteTableArn)
 	}
@@ -142,11 +171,17 @@ func (v *GetNetworkRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GetNetworkRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetNetworkRoutesResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup:
+			v.CoreNetworkNetworkFunctionGroup = &types.CoreNetworkNetworkFunctionGroupIdentifier{}
+			return v.CoreNetworkNetworkFunctionGroup.Deserialize(d)
 		case schemas.GetNetworkRoutesResponse_CoreNetworkSegmentEdge:
 			v.CoreNetworkSegmentEdge = &types.CoreNetworkSegmentEdgeIdentifier{}
 			return v.CoreNetworkSegmentEdge.Deserialize(d)
 		case schemas.GetNetworkRoutesResponse_NetworkRoutes:
 			return deserializeNetworkRouteList(d, schemas.GetNetworkRoutesResponse_NetworkRoutes, &v.NetworkRoutes)
+		case schemas.GetNetworkRoutesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetNetworkRoutesResponse_NextToken, v.NextToken)
 		case schemas.GetNetworkRoutesResponse_RouteTableArn:
 			v.RouteTableArn = new(string)
 			return d.ReadString(schemas.GetNetworkRoutesResponse_RouteTableArn, v.RouteTableArn)
@@ -204,3 +239,96 @@ func (c *Client) addOperationGetNetworkRoutesMiddlewares(stack *middleware.Stack
 	}
 	return nil
 }
+
+// GetNetworkRoutesPaginatorOptions is the paginator options for GetNetworkRoutes
+type GetNetworkRoutesPaginatorOptions struct {
+	// The maximum number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetNetworkRoutesPaginator is a paginator for GetNetworkRoutes
+type GetNetworkRoutesPaginator struct {
+	options   GetNetworkRoutesPaginatorOptions
+	client    GetNetworkRoutesAPIClient
+	params    *GetNetworkRoutesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetNetworkRoutesPaginator returns a new GetNetworkRoutesPaginator
+func NewGetNetworkRoutesPaginator(client GetNetworkRoutesAPIClient, params *GetNetworkRoutesInput, optFns ...func(*GetNetworkRoutesPaginatorOptions)) *GetNetworkRoutesPaginator {
+	if params == nil {
+		params = &GetNetworkRoutesInput{}
+	}
+
+	options := GetNetworkRoutesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetNetworkRoutesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetNetworkRoutesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetNetworkRoutes page.
+func (p *GetNetworkRoutesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetNetworkRoutesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.GetNetworkRoutes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// GetNetworkRoutesAPIClient is a client that implements the GetNetworkRoutes
+// operation.
+type GetNetworkRoutesAPIClient interface {
+	GetNetworkRoutes(context.Context, *GetNetworkRoutesInput, ...func(*Options)) (*GetNetworkRoutesOutput, error)
+}
+
+var _ GetNetworkRoutesAPIClient = (*Client)(nil)

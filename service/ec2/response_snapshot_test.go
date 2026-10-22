@@ -56838,6 +56838,7 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayAttachments(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				NatGatewaySupport: types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
 			},
 			{
 				TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
@@ -56863,6 +56864,7 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayAttachments(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				NatGatewaySupport: types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -73590,6 +73592,46 @@ func TestCheckResponseSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	want := &GetTransitGatewayAttachmentNatConfigurationOutput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRule{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTransitGatewayAttachmentNatConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), &GetTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTransitGatewayAttachmentNatConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	want := &GetTransitGatewayAttachmentPropagationsOutput{
 		TransitGatewayAttachmentPropagations: []types.TransitGatewayAttachmentPropagation{
@@ -79102,6 +79144,61 @@ func TestCheckResponseSnapshot_ModifyTransitGateway(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ModifyTransitGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	want := &ModifyTransitGatewayAttachmentNatConfigurationOutput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportState("enabled"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRule{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+				State:           types.TransitGatewayNatRuleState("pending"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyTransitGatewayAttachmentNatConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), &ModifyTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportValue("enable"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
+		ResetNatGatewayRules: ptr.Bool(true),
+		DryRun:               ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyTransitGatewayAttachmentNatConfiguration.response", err)
 	}
 }
 

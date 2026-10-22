@@ -2,4 +2,4 @@ POST /site-to-site-vpn-attachments
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpnConnectionArn":"__VpnConnectionArn__"}
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","NatGatewayRules":[{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1},{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1}],"NatGatewaySupport":"ENABLE","NatSystemRouteSupport":true,"RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpnConnectionArn":"__VpnConnectionArn__"}

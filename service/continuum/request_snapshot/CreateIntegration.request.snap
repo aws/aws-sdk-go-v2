@@ -1,0 +1,5 @@
+POST /integrations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","name":"__Name__","providerConfiguration":{"github":{"authorization":{"authorizationCode":"__AuthorizationCode__","redirectUrl":"__RedirectUrl__","state":"__State__"},"organizationName":"__OrganizationName__"}}}

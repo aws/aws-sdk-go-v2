@@ -1032,6 +1032,19 @@ func serializeApplications(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeApproximateDriftedResourceCounts(s smithy.ShapeSerializer, schema *smithy.Schema, v []ApproximateDriftedResourceCount) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeAssociatedContactSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AssociatedContactSummary) {
 	if v == nil {
 		return
@@ -3756,6 +3769,19 @@ func serializeReferenceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeReplicationFindingsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplicationFinding) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeReplicationStatusSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReplicationStatusSummary) {
 	if v == nil {
 		return
@@ -3789,6 +3815,19 @@ func serializeresourceArnListMaxLimit100(s smithy.ShapeSerializer, schema *smith
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeResourceReplicationStatuses(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceReplicationStatus) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -5496,6 +5535,28 @@ func deserializeApplications(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 		}
 
 		vv = Application{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeApproximateDriftedResourceCounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ApproximateDriftedResourceCount) error {
+	*v = make([]ApproximateDriftedResourceCount, 0)
+	var vv ApproximateDriftedResourceCount
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ApproximateDriftedResourceCount
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ApproximateDriftedResourceCount{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -10246,6 +10307,28 @@ func deserializeReferenceTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	})
 }
 
+func deserializeReplicationFindingsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReplicationFinding) error {
+	*v = make([]ReplicationFinding, 0)
+	var vv ReplicationFinding
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ReplicationFinding
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ReplicationFinding{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeReplicationStatusSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReplicationStatusSummary) error {
 	*v = make([]ReplicationStatusSummary, 0)
 	var vv ReplicationStatusSummary
@@ -10303,6 +10386,28 @@ func deserializeresourceArnListMaxLimit100(d smithy.ShapeDeserializer, s *smithy
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeResourceReplicationStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceReplicationStatus) error {
+	*v = make([]ResourceReplicationStatus, 0)
+	var vv ResourceReplicationStatus
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ResourceReplicationStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ResourceReplicationStatus{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

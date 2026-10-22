@@ -1,5 +1,5 @@
 404
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: OpenSearchServerless.CreateIndex
+X-Amz-Target: OpenSearchServerless.CancelIngestionJob
 
 {"__type":"ResourceNotFoundException","message":"__Message__"}

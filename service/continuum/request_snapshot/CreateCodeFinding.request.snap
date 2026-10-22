@@ -1,0 +1,5 @@
+POST /environments/__EnvironmentId__/code-findings
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","ocsfDocument":"__Document__"}

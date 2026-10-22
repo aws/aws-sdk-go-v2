@@ -5983,7 +5983,8 @@ type OperationUpdate struct {
 	// Options for context operations.
 	ContextOptions *ContextOptions
 
-	// The error information for failed operations.
+	// The error information for failed operations. The combined size of all error
+	// fields is limited to 1 MB.
 	Error *ErrorObject
 
 	// The customer-provided name for this operation.
@@ -5994,9 +5995,9 @@ type OperationUpdate struct {
 	ParentId *string
 
 	// The payload for successful operations. The maximum payload size is 6 MB for
-	// synchronous EXECUTION operations (RequestResponse invocationType), 1 MB for
-	// asynchronous EXECUTION (Event invocationType) and CHAINED_INVOKE operations,
-	// and 256 KB for CONTEXT , STEP , WAIT , and CALLBACK operations.
+	// synchronous EXECUTION operations (RequestResponse invocationType), and 1 MB for
+	// asynchronous EXECUTION (Event invocationType), CHAINED_INVOKE , CONTEXT , STEP ,
+	// WAIT , and CALLBACK operations.
 	Payload *string
 
 	// Options for step operations.

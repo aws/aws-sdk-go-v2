@@ -39,6 +39,7 @@
         "api_op_ListStages.go",
         "api_op_ListStorageConfigurations.go",
         "api_op_ListTagsForResource.go",
+        "api_op_RevokeConnectionToken.go",
         "api_op_StartComposition.go",
         "api_op_StartParticipantReplication.go",
         "api_op_StopComposition.go",

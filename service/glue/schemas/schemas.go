@@ -14038,20 +14038,32 @@ var _ViewValidationList_member *smithy.Schema
 var WorkerType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "WorkerType",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 13)
 var WorkerType_Standard *smithy.Schema
 
 var WorkerType_G_1X *smithy.Schema
 
 var WorkerType_G_2X *smithy.Schema
 
-var WorkerType_G_025X *smithy.Schema
-
 var WorkerType_G_4X *smithy.Schema
 
 var WorkerType_G_8X *smithy.Schema
 
+var WorkerType_G_025X *smithy.Schema
+
 var WorkerType_Z_2X *smithy.Schema
+
+var WorkerType_G_12X *smithy.Schema
+
+var WorkerType_G_16X *smithy.Schema
+
+var WorkerType_R_1X *smithy.Schema
+
+var WorkerType_R_2X *smithy.Schema
+
+var WorkerType_R_4X *smithy.Schema
+
+var WorkerType_R_8X *smithy.Schema
 
 var Workflow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -24866,13 +24878,25 @@ func init() {
 
 	WorkerType_G_2X = WorkerType.AddMember("G_2X", smithyprelude.Unit)
 
-	WorkerType_G_025X = WorkerType.AddMember("G_025X", smithyprelude.Unit)
-
 	WorkerType_G_4X = WorkerType.AddMember("G_4X", smithyprelude.Unit)
 
 	WorkerType_G_8X = WorkerType.AddMember("G_8X", smithyprelude.Unit)
 
+	WorkerType_G_025X = WorkerType.AddMember("G_025X", smithyprelude.Unit)
+
 	WorkerType_Z_2X = WorkerType.AddMember("Z_2X", smithyprelude.Unit)
+
+	WorkerType_G_12X = WorkerType.AddMember("G_12X", smithyprelude.Unit)
+
+	WorkerType_G_16X = WorkerType.AddMember("G_16X", smithyprelude.Unit)
+
+	WorkerType_R_1X = WorkerType.AddMember("R_1X", smithyprelude.Unit)
+
+	WorkerType_R_2X = WorkerType.AddMember("R_2X", smithyprelude.Unit)
+
+	WorkerType_R_4X = WorkerType.AddMember("R_4X", smithyprelude.Unit)
+
+	WorkerType_R_8X = WorkerType.AddMember("R_8X", smithyprelude.Unit)
 
 	_PublicKeysList_member = _PublicKeysList.AddMember("member", _GenericString)
 

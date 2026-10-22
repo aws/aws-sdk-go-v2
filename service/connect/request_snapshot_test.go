@@ -9648,6 +9648,36 @@ func TestCheckRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T
 	}
 }
 
+func TestCheckRequestSnapshot_ListReplicationFindings(t *testing.T) {
+	input := &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListReplicationFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReplicationFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
 	input := &ListRoutingProfileManualAssignmentQueuesInput{
 		InstanceId:       ptr.String("__InstanceId__"),
@@ -28190,6 +28220,36 @@ func TestUpdateRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRealtimeContactAnalysisSegmentsV2"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListReplicationFindings(t *testing.T) {
+	input := &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListReplicationFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListReplicationFindings"); err != nil {
 		t.Fatal(err)
 	}
 }

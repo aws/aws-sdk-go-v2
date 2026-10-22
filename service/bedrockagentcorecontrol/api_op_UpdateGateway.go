@@ -12,6 +12,12 @@ import (
 )
 
 // Updates an existing gateway.
+//
+// Replaces the entire gateway configuration. Any optional field that you omit,
+// including fields in protocolConfiguration , is reset. For information about
+// retrieving the current configuration, see [GetGateway].
+//
+// [GetGateway]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html
 func (c *Client) UpdateGateway(ctx context.Context, params *UpdateGatewayInput, optFns ...func(*Options)) (*UpdateGatewayOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayInput{}

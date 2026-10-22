@@ -29,6 +29,13 @@ var CreateFeed = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/feed",
 	Code: 202})
 
+var CreateScheduleAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateScheduleAction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/feed/{id}/schedule-actions",
+	Code: 201})
+
 var DeleteDictionary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "DeleteDictionary",
@@ -49,6 +56,13 @@ var DeleteFeedPolicy = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/feed/{id}/policy",
 	Code: 204})
+
+var DeleteScheduleAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteScheduleAction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/feed/{id}/schedule-actions",
+	Code: 200})
 
 var DisassociateFeed = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -104,6 +118,13 @@ var ListFeeds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListFeeds",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/feeds",
+	Code: 200})
+
+var ListScheduleActions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListScheduleActions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/feed/{id}/schedule-actions",
 	Code: 200})
 
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
@@ -407,6 +428,12 @@ var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FilterValueList_member *smithy.Schema
 
+var FixedModeScheduleActionStartSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FixedModeScheduleActionStartSettings",
+}, smithy.ShapeTypeStructure, 1)
+var FixedModeScheduleActionStartSettings_scheduledAt *smithy.Schema
+
 var _FixtureDate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "FixtureDate",
@@ -513,6 +540,12 @@ var ProfanityFilterMode_CENSOR *smithy.Schema
 
 var ProfanityFilterMode_DROP *smithy.Schema
 
+var RemoveClippingDataSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "RemoveClippingDataSourceConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var RemoveClippingDataSourceConfiguration_outputName *smithy.Schema
+
 var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "ResourceArn",
@@ -539,6 +572,74 @@ var _S3Uri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "S3Uri",
 }, smithy.ShapeTypeString, 0)
+
+var ScheduleAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleAction",
+}, smithy.ShapeTypeStructure, 5)
+var ScheduleAction_actionName *smithy.Schema
+
+var ScheduleAction_startConfiguration *smithy.Schema
+
+var ScheduleAction_operations *smithy.Schema
+
+var ScheduleAction_status *smithy.Schema
+
+var ScheduleAction_error *smithy.Schema
+
+var ScheduleActionError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleActionError",
+}, smithy.ShapeTypeStructure, 2)
+var ScheduleActionError_errorCode *smithy.Schema
+
+var ScheduleActionError_errorMessage *smithy.Schema
+
+var ScheduleActionErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleActionErrorCode",
+}, smithy.ShapeTypeEnum, 2)
+var ScheduleActionErrorCode_INVALID_ACTION_TARGET *smithy.Schema
+
+var ScheduleActionErrorCode_INTERNAL_ERROR *smithy.Schema
+
+var _ScheduleActionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleActionList",
+}, smithy.ShapeTypeList, 1)
+var _ScheduleActionList_member *smithy.Schema
+
+var ScheduleActionOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleActionOperation",
+}, smithy.ShapeTypeUnion, 3)
+var ScheduleActionOperation_updateOutputStatus *smithy.Schema
+
+var ScheduleActionOperation_updateClippingDataSourceConfiguration *smithy.Schema
+
+var ScheduleActionOperation_removeClippingDataSourceConfiguration *smithy.Schema
+
+var _ScheduleActionOperations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleActionOperations",
+}, smithy.ShapeTypeList, 1)
+var _ScheduleActionOperations_member *smithy.Schema
+
+var ScheduleActionStartConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleActionStartConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var ScheduleActionStartConfiguration_fixedModeScheduleActionStartSettings *smithy.Schema
+
+var ScheduleActionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ScheduleActionStatus",
+}, smithy.ShapeTypeEnum, 3)
+var ScheduleActionStatus_PENDING *smithy.Schema
+
+var ScheduleActionStatus_COMPLETED *smithy.Schema
+
+var ScheduleActionStatus_FAILED *smithy.Schema
 
 var SearchFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -667,6 +768,14 @@ var TranscriptionLanguage_SPA *smithy.Schema
 
 var TranscriptionLanguage_POR *smithy.Schema
 
+var UpdateClippingDataSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateClippingDataSourceConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateClippingDataSourceConfiguration_outputName *smithy.Schema
+
+var UpdateClippingDataSourceConfiguration_dataSourceConfiguration *smithy.Schema
+
 var UpdateOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "UpdateOutput",
@@ -686,6 +795,14 @@ var _UpdateOutputList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateOutputList",
 }, smithy.ShapeTypeList, 1)
 var _UpdateOutputList_member *smithy.Schema
+
+var UpdateOutputStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateOutputStatus",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateOutputStatus_outputName *smithy.Schema
+
+var UpdateOutputStatus_status *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -778,6 +895,32 @@ var CreateFeedResponse_association *smithy.Schema
 
 var CreateFeedResponse_tags *smithy.Schema
 
+var CreateScheduleActionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateScheduleActionRequest",
+}, smithy.ShapeTypeStructure, 4)
+var CreateScheduleActionRequest_id *smithy.Schema
+
+var CreateScheduleActionRequest_actionName *smithy.Schema
+
+var CreateScheduleActionRequest_startConfiguration *smithy.Schema
+
+var CreateScheduleActionRequest_operations *smithy.Schema
+
+var CreateScheduleActionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateScheduleActionResponse",
+}, smithy.ShapeTypeStructure, 5)
+var CreateScheduleActionResponse_actionName *smithy.Schema
+
+var CreateScheduleActionResponse_startConfiguration *smithy.Schema
+
+var CreateScheduleActionResponse_operations *smithy.Schema
+
+var CreateScheduleActionResponse_status *smithy.Schema
+
+var CreateScheduleActionResponse_error *smithy.Schema
+
 var DeleteDictionaryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "DeleteDictionaryRequest",
@@ -815,6 +958,20 @@ var DeleteFeedPolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteFeedPolicyRequest",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteFeedPolicyRequest_id *smithy.Schema
+
+var DeleteScheduleActionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteScheduleActionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteScheduleActionRequest_id *smithy.Schema
+
+var DeleteScheduleActionRequest_actionName *smithy.Schema
+
+var DeleteScheduleActionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteScheduleActionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteScheduleActionResponse_actionName *smithy.Schema
 
 var DisassociateFeedRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -963,6 +1120,24 @@ var ListFeedsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListFeedsResponse_feeds *smithy.Schema
 
 var ListFeedsResponse_nextToken *smithy.Schema
+
+var ListScheduleActionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListScheduleActionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListScheduleActionsRequest_id *smithy.Schema
+
+var ListScheduleActionsRequest_maxResults *smithy.Schema
+
+var ListScheduleActionsRequest_nextToken *smithy.Schema
+
+var ListScheduleActionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListScheduleActionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListScheduleActionsResponse_scheduleActions *smithy.Schema
+
+var ListScheduleActionsResponse_nextToken *smithy.Schema
 
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -1264,6 +1439,8 @@ func init() {
 
 	_FilterValueList_member = _FilterValueList.AddMember("member", _FilterValue)
 
+	FixedModeScheduleActionStartSettings_scheduledAt = FixedModeScheduleActionStartSettings.AddMember("scheduledAt", smithyprelude.Timestamp)
+
 	FixtureSummary_fixtureId = FixtureSummary.AddMember("fixtureId", _FixtureId)
 
 	FixtureSummary_name = FixtureSummary.AddMember("name", smithyprelude.String)
@@ -1294,7 +1471,53 @@ func init() {
 
 	InternalServerErrorException_message = InternalServerErrorException.AddMember("message", smithyprelude.String)
 
+	RemoveClippingDataSourceConfiguration_outputName = RemoveClippingDataSourceConfiguration.AddMember("outputName", _ResourceName)
+
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
+
+	ScheduleActionStartConfiguration_fixedModeScheduleActionStartSettings = ScheduleActionStartConfiguration.AddMember("fixedModeScheduleActionStartSettings", FixedModeScheduleActionStartSettings)
+
+	UpdateOutputStatus_outputName = UpdateOutputStatus.AddMember("outputName", _ResourceName)
+
+	UpdateOutputStatus_status = UpdateOutputStatus.AddMember("status", OutputStatus)
+
+	UpdateClippingDataSourceConfiguration_outputName = UpdateClippingDataSourceConfiguration.AddMember("outputName", _ResourceName)
+
+	UpdateClippingDataSourceConfiguration_dataSourceConfiguration = UpdateClippingDataSourceConfiguration.AddMember("dataSourceConfiguration", DataSourceConfiguration)
+
+	ScheduleActionOperation_updateOutputStatus = ScheduleActionOperation.AddMember("updateOutputStatus", UpdateOutputStatus)
+
+	ScheduleActionOperation_updateClippingDataSourceConfiguration = ScheduleActionOperation.AddMember("updateClippingDataSourceConfiguration", UpdateClippingDataSourceConfiguration)
+
+	ScheduleActionOperation_removeClippingDataSourceConfiguration = ScheduleActionOperation.AddMember("removeClippingDataSourceConfiguration", RemoveClippingDataSourceConfiguration)
+
+	_ScheduleActionOperations_member = _ScheduleActionOperations.AddMember("member", ScheduleActionOperation)
+
+	ScheduleActionStatus_PENDING = ScheduleActionStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	ScheduleActionStatus_COMPLETED = ScheduleActionStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	ScheduleActionStatus_FAILED = ScheduleActionStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ScheduleActionErrorCode_INVALID_ACTION_TARGET = ScheduleActionErrorCode.AddMember("INVALID_ACTION_TARGET", smithyprelude.Unit)
+
+	ScheduleActionErrorCode_INTERNAL_ERROR = ScheduleActionErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	ScheduleActionError_errorCode = ScheduleActionError.AddMember("errorCode", ScheduleActionErrorCode)
+
+	ScheduleActionError_errorMessage = ScheduleActionError.AddMember("errorMessage", smithyprelude.String)
+
+	ScheduleAction_actionName = ScheduleAction.AddMember("actionName", _ResourceName)
+
+	ScheduleAction_startConfiguration = ScheduleAction.AddMember("startConfiguration", ScheduleActionStartConfiguration)
+
+	ScheduleAction_operations = ScheduleAction.AddMember("operations", _ScheduleActionOperations)
+
+	ScheduleAction_status = ScheduleAction.AddMember("status", ScheduleActionStatus)
+
+	ScheduleAction_error = ScheduleAction.AddMember("error", ScheduleActionError)
+
+	_ScheduleActionList_member = _ScheduleActionList.AddMember("member", ScheduleAction)
 
 	SearchFilter_name = SearchFilter.AddMember("name", FilterName)
 
@@ -1390,6 +1613,24 @@ func init() {
 
 	CreateFeedResponse_tags = CreateFeedResponse.AddMember("tags", _TagMap)
 
+	CreateScheduleActionRequest_id = CreateScheduleActionRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
+
+	CreateScheduleActionRequest_actionName = CreateScheduleActionRequest.AddMember("actionName", _ResourceName)
+
+	CreateScheduleActionRequest_startConfiguration = CreateScheduleActionRequest.AddMember("startConfiguration", ScheduleActionStartConfiguration)
+
+	CreateScheduleActionRequest_operations = CreateScheduleActionRequest.AddMember("operations", _ScheduleActionOperations)
+
+	CreateScheduleActionResponse_actionName = CreateScheduleActionResponse.AddMember("actionName", _ResourceName)
+
+	CreateScheduleActionResponse_startConfiguration = CreateScheduleActionResponse.AddMember("startConfiguration", ScheduleActionStartConfiguration)
+
+	CreateScheduleActionResponse_operations = CreateScheduleActionResponse.AddMember("operations", _ScheduleActionOperations)
+
+	CreateScheduleActionResponse_status = CreateScheduleActionResponse.AddMember("status", ScheduleActionStatus)
+
+	CreateScheduleActionResponse_error = CreateScheduleActionResponse.AddMember("error", ScheduleActionError)
+
 	DeleteDictionaryRequest_id = DeleteDictionaryRequest.AddMember("id", _DictionaryId, &smithytraits.HTTPLabel{})
 
 	DeleteDictionaryResponse_arn = DeleteDictionaryResponse.AddMember("arn", _DictionaryArn)
@@ -1407,6 +1648,12 @@ func init() {
 	DeleteFeedResponse_status = DeleteFeedResponse.AddMember("status", FeedStatus)
 
 	DeleteFeedPolicyRequest_id = DeleteFeedPolicyRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
+
+	DeleteScheduleActionRequest_id = DeleteScheduleActionRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
+
+	DeleteScheduleActionRequest_actionName = DeleteScheduleActionRequest.AddMember("actionName", _ResourceName, &smithytraits.HTTPQuery{Name: "actionName"})
+
+	DeleteScheduleActionResponse_actionName = DeleteScheduleActionResponse.AddMember("actionName", _ResourceName)
 
 	DisassociateFeedRequest_id = DisassociateFeedRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
 
@@ -1491,6 +1738,16 @@ func init() {
 	ListFeedsResponse_feeds = ListFeedsResponse.AddMember("feeds", _FeedSummaryList)
 
 	ListFeedsResponse_nextToken = ListFeedsResponse.AddMember("nextToken", smithyprelude.String)
+
+	ListScheduleActionsRequest_id = ListScheduleActionsRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
+
+	ListScheduleActionsRequest_maxResults = ListScheduleActionsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListScheduleActionsRequest_nextToken = ListScheduleActionsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListScheduleActionsResponse_scheduleActions = ListScheduleActionsResponse.AddMember("scheduleActions", _ScheduleActionList)
+
+	ListScheduleActionsResponse_nextToken = ListScheduleActionsResponse.AddMember("nextToken", smithyprelude.String)
 
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
 

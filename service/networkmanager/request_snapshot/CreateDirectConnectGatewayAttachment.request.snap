@@ -2,4 +2,4 @@ POST /direct-connect-gateway-attachments
 
 Content-Type: application/json
 
-{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","DirectConnectGatewayArn":"__DirectConnectGatewayArn__","EdgeLocations":["__Member__","__Member__"],"RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","DirectConnectGatewayArn":"__DirectConnectGatewayArn__","EdgeLocations":["__Member__","__Member__"],"NatGatewayRules":[{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1},{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1}],"NatGatewaySupport":"ENABLE","NatSystemRouteSupport":true,"RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

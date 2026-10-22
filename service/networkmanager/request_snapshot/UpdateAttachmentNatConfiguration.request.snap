@@ -1,0 +1,5 @@
+PATCH /attachments/__AttachmentId__/nat-configuration
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","NatGatewayRules":[{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1},{"MatchSourceCidr":"__MatchSourceCidr__","NatCidr":"__NatCidr__","RuleNumber":1}],"NatGatewaySupport":"ENABLE","NatSystemRouteSupport":true}

@@ -28616,6 +28616,34 @@ func TestCheckRequestSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	input := &GetTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTransitGatewayAttachmentNatConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	input := &GetTransitGatewayAttachmentPropagationsInput{
 		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
@@ -33117,6 +33145,49 @@ func TestCheckRequestSnapshot_ModifyTransitGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	input := &ModifyTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportValue("enable"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
+		ResetNatGatewayRules: ptr.Bool(true),
+		DryRun:               ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayAttachmentNatConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -68077,6 +68148,34 @@ func TestUpdateRequestSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	input := &GetTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTransitGatewayAttachmentNatConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	input := &GetTransitGatewayAttachmentPropagationsInput{
 		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
@@ -72578,6 +72677,49 @@ func TestUpdateRequestSnapshot_ModifyTransitGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	input := &ModifyTransitGatewayAttachmentNatConfigurationInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		NatGatewaySupport:          types.TransitGatewayAttachmentNatGatewaySupportValue("enable"),
+		NatSystemRouteSupport:      types.TransitGatewayAttachmentNatSystemRouteSupportValue("enable"),
+		NatGatewayRules: []types.TransitGatewayNatRuleRequest{
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+			{
+				RuleNumber:      ptr.Int32(1),
+				MatchSourceCidr: ptr.String("__MatchSourceCidr__"),
+				NatCidr:         ptr.String("__NatCidr__"),
+			},
+		},
+		ResetNatGatewayRules: ptr.Bool(true),
+		DryRun:               ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayAttachmentNatConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }

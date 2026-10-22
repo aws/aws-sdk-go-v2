@@ -4359,6 +4359,11 @@ func validateCondition(v types.Condition) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Condition"}
 	switch uv := v.(type) {
+	case *types.ConditionMemberMatchModels:
+		if err := validateMatchModels(&uv.Value); err != nil {
+			invalidParams.AddNested("[matchModels]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConditionMemberMatchPaths:
 		if err := validateMatchPaths(&uv.Value); err != nil {
 			invalidParams.AddNested("[matchPaths]", err.(smithy.InvalidParamsError))
@@ -5134,6 +5139,30 @@ func validateDerivedEvaluatorConfig(v *types.DerivedEvaluatorConfig) error {
 	}
 }
 
+func validateDimensionRatingScale(v types.DimensionRatingScale) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DimensionRatingScale"}
+	switch uv := v.(type) {
+	case *types.DimensionRatingScaleMemberCategorical:
+		if err := validateCategoricalScaleDefinitions(uv.Value); err != nil {
+			invalidParams.AddNested("[categorical]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DimensionRatingScaleMemberNumerical:
+		if err := validateNumericalScaleDefinitions(uv.Value); err != nil {
+			invalidParams.AddNested("[numerical]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEbsVolumeConfiguration(v *types.EbsVolumeConfiguration) error {
 	if v == nil {
 		return nil
@@ -5350,6 +5379,48 @@ func validateEpisodicReflectionConfigurationInput(v *types.EpisodicReflectionCon
 	}
 }
 
+func validateEvaluationDimension(v *types.EvaluationDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationDimension"}
+	if v.DimensionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionName"))
+	}
+	if v.DimensionInstruction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionInstruction"))
+	}
+	if v.DimensionRatingScale == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionRatingScale"))
+	} else if v.DimensionRatingScale != nil {
+		if err := validateDimensionRatingScale(v.DimensionRatingScale); err != nil {
+			invalidParams.AddNested("DimensionRatingScale", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationDimensions(v []types.EvaluationDimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationDimensions"}
+	for i := range v {
+		if err := validateEvaluationDimension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluatorConfig(v types.EvaluatorConfig) error {
 	if v == nil {
 		return nil
@@ -5414,6 +5485,40 @@ func validateExtractionConfig(v types.ExtractionConfig) error {
 			invalidParams.AddNested("[llmExtractionConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFallback(v *types.Fallback) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Fallback"}
+	if v.TargetFallback == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetFallback"))
+	} else if v.TargetFallback != nil {
+		if err := validateTargetFallbacks(v.TargetFallback); err != nil {
+			invalidParams.AddNested("TargetFallback", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFallbackTarget(v *types.FallbackTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FallbackTarget"}
+	if v.TargetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7040,6 +7145,57 @@ func validateManagedVpcResource(v *types.ManagedVpcResource) error {
 	}
 }
 
+func validateMatchModelEntries(v []types.MatchModelEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchModelEntries"}
+	for i := range v {
+		if err := validateMatchModelEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchModelEntry(v *types.MatchModelEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchModelEntry"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchModels(v *types.MatchModels) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchModels"}
+	if v.AnyOf == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnyOf"))
+	} else if v.AnyOf != nil {
+		if err := validateMatchModelEntries(v.AnyOf); err != nil {
+			invalidParams.AddNested("AnyOf", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMatchPaths(v *types.MatchPaths) error {
 	if v == nil {
 		return nil
@@ -8057,6 +8213,11 @@ func validateRatingScale(v types.RatingScale) error {
 			invalidParams.AddNested("[categorical]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RatingScaleMemberMultiDimensional:
+		if err := validateEvaluationDimensions(uv.Value); err != nil {
+			invalidParams.AddNested("[multiDimensional]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RatingScaleMemberNumerical:
 		if err := validateNumericalScaleDefinitions(uv.Value); err != nil {
 			invalidParams.AddNested("[numerical]", err.(smithy.InvalidParamsError))
@@ -8653,6 +8814,11 @@ func validateStaticRoute(v *types.StaticRoute) error {
 	if v.TargetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
 	}
+	if v.Fallback != nil {
+		if err := validateFallback(v.Fallback); err != nil {
+			invalidParams.AddNested("Fallback", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8874,6 +9040,23 @@ func validateTargetConfiguration(v types.TargetConfiguration) error {
 	}
 }
 
+func validateTargetFallbacks(v []types.FallbackTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetFallbacks"}
+	for i := range v {
+		if err := validateFallbackTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTargetTrafficSplitEntries(v []types.TargetTrafficSplitEntry) error {
 	if v == nil {
 		return nil
@@ -8896,14 +9079,19 @@ func validateTargetTrafficSplitEntry(v *types.TargetTrafficSplitEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetTrafficSplitEntry"}
+	if v.TargetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
+	}
+	if v.Fallback != nil {
+		if err := validateFallback(v.Fallback); err != nil {
+			invalidParams.AddNested("Fallback", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Weight == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Weight"))
-	}
-	if v.TargetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

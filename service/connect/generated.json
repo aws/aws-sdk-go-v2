@@ -246,6 +246,7 @@
         "api_op_ListQueues.go",
         "api_op_ListQuickConnects.go",
         "api_op_ListRealtimeContactAnalysisSegmentsV2.go",
+        "api_op_ListReplicationFindings.go",
         "api_op_ListRoutingProfileManualAssignmentQueues.go",
         "api_op_ListRoutingProfileQueues.go",
         "api_op_ListRoutingProfiles.go",

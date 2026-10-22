@@ -37,7 +37,8 @@ type StopDurableExecutionInput struct {
 	// This member is required.
 	DurableExecutionArn *string
 
-	// Optional error details explaining why the execution is being stopped.
+	// Optional error details explaining why the execution is being stopped. The
+	// combined size of all error fields is limited to 1 MB.
 	Error *types.ErrorObject
 
 	noSmithyDocumentSerde

@@ -36,3 +36,47 @@ var _ *types.SubtitlingConfig
 var _ *types.ContextualMetadataConfig
 var _ *types.ClippingConfig
 var _ *types.CroppingConfig
+
+func ExampleScheduleActionOperation_outputUsage() {
+	var union types.ScheduleActionOperation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration:
+		_ = v.Value // Value is types.RemoveClippingDataSourceConfiguration
+
+	case *types.ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration:
+		_ = v.Value // Value is types.UpdateClippingDataSourceConfiguration
+
+	case *types.ScheduleActionOperationMemberUpdateOutputStatus:
+		_ = v.Value // Value is types.UpdateOutputStatus
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UpdateClippingDataSourceConfiguration
+var _ *types.RemoveClippingDataSourceConfiguration
+var _ *types.UpdateOutputStatus
+
+func ExampleScheduleActionStartConfiguration_outputUsage() {
+	var union types.ScheduleActionStartConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings:
+		_ = v.Value // Value is types.FixedModeScheduleActionStartSettings
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FixedModeScheduleActionStartSettings

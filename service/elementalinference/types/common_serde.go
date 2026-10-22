@@ -36,6 +36,40 @@ func serializeOutputConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v Ou
 	}
 }
 
+func serializeScheduleActionOperation(s smithy.ShapeSerializer, schema *smithy.Schema, v ScheduleActionOperation) {
+	switch vv := v.(type) {
+	case *ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration:
+		s.WriteUnion(schema, schemas.ScheduleActionOperation_removeClippingDataSourceConfiguration)
+		s.WriteStruct(schemas.ScheduleActionOperation_removeClippingDataSourceConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration:
+		s.WriteUnion(schema, schemas.ScheduleActionOperation_updateClippingDataSourceConfiguration)
+		s.WriteStruct(schemas.ScheduleActionOperation_updateClippingDataSourceConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ScheduleActionOperationMemberUpdateOutputStatus:
+		s.WriteUnion(schema, schemas.ScheduleActionOperation_updateOutputStatus)
+		s.WriteStruct(schemas.ScheduleActionOperation_updateOutputStatus)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeScheduleActionStartConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v ScheduleActionStartConfiguration) {
+	switch vv := v.(type) {
+	case *ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings:
+		s.WriteUnion(schema, schemas.ScheduleActionStartConfiguration_fixedModeScheduleActionStartSettings)
+		s.WriteStruct(schemas.ScheduleActionStartConfiguration_fixedModeScheduleActionStartSettings)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func deserializeOutputConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v *OutputConfig) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -53,6 +87,38 @@ func deserializeOutputConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v *Ou
 			return vv.Deserialize(d)
 		case schemas.OutputConfig_subtitling:
 			vv := &OutputConfigMemberSubtitling{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeScheduleActionOperation(d smithy.ShapeDeserializer, s *smithy.Schema, v *ScheduleActionOperation) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ScheduleActionOperation_removeClippingDataSourceConfiguration:
+			vv := &ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ScheduleActionOperation_updateClippingDataSourceConfiguration:
+			vv := &ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ScheduleActionOperation_updateOutputStatus:
+			vv := &ScheduleActionOperationMemberUpdateOutputStatus{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeScheduleActionStartConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *ScheduleActionStartConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ScheduleActionStartConfiguration_fixedModeScheduleActionStartSettings:
+			vv := &ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -156,6 +222,30 @@ func serializeGetOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeScheduleActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ScheduleAction) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeScheduleActionOperations(s smithy.ShapeSerializer, schema *smithy.Schema, v []ScheduleActionOperation) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeScheduleActionOperation(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -398,6 +488,49 @@ func deserializeGetOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 
 		vv = GetOutput{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeScheduleActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ScheduleAction) error {
+	*v = make([]ScheduleAction, 0)
+	var vv ScheduleAction
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ScheduleAction
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ScheduleAction{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeScheduleActionOperations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ScheduleActionOperation) error {
+	*v = make([]ScheduleActionOperation, 0)
+	var vv ScheduleActionOperation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ScheduleActionOperation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeScheduleActionOperation(d, s.ListMember(), &vv); err != nil {
 			return err
 		}
 

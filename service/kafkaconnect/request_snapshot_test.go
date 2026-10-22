@@ -720,6 +720,33 @@ func TestCheckRequestSnapshot_ListWorkerConfigurations(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PauseConnector(t *testing.T) {
+	input := &PauseConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PauseConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PauseConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RestartConnector(t *testing.T) {
 	input := &RestartConnectorInput{
 		ConnectorArn:    ptr.String("__ConnectorArn__"),
@@ -744,6 +771,33 @@ func TestCheckRequestSnapshot_RestartConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestartConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ResumeConnector(t *testing.T) {
+	input := &ResumeConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResumeConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResumeConnector"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -832,8 +886,9 @@ func TestCheckRequestSnapshot_UpdateConnector(t *testing.T) {
 		ConnectorConfiguration: map[string]string{
 			"key0": "__Value__",
 		},
-		ConnectorArn:   ptr.String("__ConnectorArn__"),
-		CurrentVersion: ptr.String("__CurrentVersion__"),
+		SkipHealthValidation: true,
+		ConnectorArn:         ptr.String("__ConnectorArn__"),
+		CurrentVersion:       ptr.String("__CurrentVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1372,6 +1427,33 @@ func TestUpdateRequestSnapshot_ListWorkerConfigurations(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_PauseConnector(t *testing.T) {
+	input := &PauseConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PauseConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PauseConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_RestartConnector(t *testing.T) {
 	input := &RestartConnectorInput{
 		ConnectorArn:    ptr.String("__ConnectorArn__"),
@@ -1396,6 +1478,33 @@ func TestUpdateRequestSnapshot_RestartConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestartConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ResumeConnector(t *testing.T) {
+	input := &ResumeConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResumeConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResumeConnector"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1484,8 +1593,9 @@ func TestUpdateRequestSnapshot_UpdateConnector(t *testing.T) {
 		ConnectorConfiguration: map[string]string{
 			"key0": "__Value__",
 		},
-		ConnectorArn:   ptr.String("__ConnectorArn__"),
-		CurrentVersion: ptr.String("__CurrentVersion__"),
+		SkipHealthValidation: true,
+		ConnectorArn:         ptr.String("__ConnectorArn__"),
+		CurrentVersion:       ptr.String("__CurrentVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

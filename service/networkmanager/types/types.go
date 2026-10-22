@@ -83,6 +83,15 @@ type Attachment struct {
 	// Describes the error associated with the attachment request.
 	LastModificationErrors []AttachmentError
 
+	// The state of NAT gateway support on the attachment. This is returned only to
+	// the core network owner for attachment types that support NAT.
+	NatGatewaySupport NatGatewaySupportState
+
+	// Indicates whether the core network installs system routes for the NAT CIDR
+	// blocks of the attachment's NAT rules. This is returned only to the core network
+	// owner for attachment types that support NAT.
+	NatSystemRouteSupport *bool
+
 	// The name of the network function group.
 	NetworkFunctionGroupName *string
 
@@ -144,6 +153,12 @@ func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	serializeExternalRegionCodeList(s, schemas.Attachment_EdgeLocations, v.EdgeLocations)
 	serializeAttachmentErrorList(s, schemas.Attachment_LastModificationErrors, v.LastModificationErrors)
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.Attachment_NatGatewaySupport, string(v.NatGatewaySupport))
+	}
+	if v.NatSystemRouteSupport != nil {
+		s.WriteBool(schemas.Attachment_NatSystemRouteSupport, *v.NatSystemRouteSupport)
+	}
 	if v.NetworkFunctionGroupName != nil {
 		s.WriteString(schemas.Attachment_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
 	}
@@ -206,6 +221,16 @@ func (v *Attachment) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeExternalRegionCodeList(d, schemas.Attachment_EdgeLocations, &v.EdgeLocations)
 		case schemas.Attachment_LastModificationErrors:
 			return deserializeAttachmentErrorList(d, schemas.Attachment_LastModificationErrors, &v.LastModificationErrors)
+		case schemas.Attachment_NatGatewaySupport:
+			var ev string
+			if err := d.ReadString(schemas.Attachment_NatGatewaySupport, &ev); err != nil {
+				return err
+			}
+			v.NatGatewaySupport = NatGatewaySupportState(ev)
+			return nil
+		case schemas.Attachment_NatSystemRouteSupport:
+			v.NatSystemRouteSupport = new(bool)
+			return d.ReadBool(schemas.Attachment_NatSystemRouteSupport, v.NatSystemRouteSupport)
 		case schemas.Attachment_NetworkFunctionGroupName:
 			v.NetworkFunctionGroupName = new(string)
 			return d.ReadString(schemas.Attachment_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
@@ -298,6 +323,66 @@ func (v *AttachmentError) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AttachmentError_ResourceArn:
 			v.ResourceArn = new(string)
 			return d.ReadString(schemas.AttachmentError_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
+// Describes the NAT configuration of a core network attachment.
+type AttachmentNatConfiguration struct {
+
+	// The ID of the attachment.
+	AttachmentId *string
+
+	// The NAT rules of the attachment.
+	NatGatewayRules []NatRule
+
+	// The state of NAT gateway support on the attachment.
+	NatGatewaySupport NatGatewaySupportState
+
+	// Indicates whether the core network installs system routes for the NAT CIDR
+	// blocks of the attachment's NAT rules.
+	NatSystemRouteSupport *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *AttachmentNatConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachmentNatConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachmentNatConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.AttachmentNatConfiguration_AttachmentId, *v.AttachmentId)
+	}
+	serializeNatRuleList(s, schemas.AttachmentNatConfiguration_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.AttachmentNatConfiguration_NatGatewaySupport, string(v.NatGatewaySupport))
+	}
+	if v.NatSystemRouteSupport != nil {
+		s.WriteBool(schemas.AttachmentNatConfiguration_NatSystemRouteSupport, *v.NatSystemRouteSupport)
+	}
+}
+func (v *AttachmentNatConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachmentNatConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachmentNatConfiguration_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.AttachmentNatConfiguration_AttachmentId, v.AttachmentId)
+		case schemas.AttachmentNatConfiguration_NatGatewayRules:
+			return deserializeNatRuleList(d, schemas.AttachmentNatConfiguration_NatGatewayRules, &v.NatGatewayRules)
+		case schemas.AttachmentNatConfiguration_NatGatewaySupport:
+			var ev string
+			if err := d.ReadString(schemas.AttachmentNatConfiguration_NatGatewaySupport, &ev); err != nil {
+				return err
+			}
+			v.NatGatewaySupport = NatGatewaySupportState(ev)
+			return nil
+		case schemas.AttachmentNatConfiguration_NatSystemRouteSupport:
+			v.NatSystemRouteSupport = new(bool)
+			return d.ReadBool(schemas.AttachmentNatConfiguration_NatSystemRouteSupport, v.NatSystemRouteSupport)
 		}
 		return nil
 	})
@@ -1503,8 +1588,8 @@ type CoreNetworkChangeEventValues struct {
 	// The edge location of the peer in a core network change event.
 	PeerEdgeLocation *string
 
-	// The names of the routing policies and other association details in the core
-	// network change values.
+	// The names of the routing policies and other association details in a core
+	// network change event.
 	RoutingPolicyAssociationDetails []RoutingPolicyAssociationDetail
 
 	// The routing policy direction (inbound/outbound) in a core network change event.
@@ -1619,7 +1704,8 @@ type CoreNetworkChangeValues struct {
 	// network change values.
 	RoutingPolicyAssociationDetails []RoutingPolicyAssociationDetail
 
-	// The routing policy direction (inbound/outbound) in a core network change event.
+	// The routing policy direction (inbound/outbound) in the core network change
+	// values.
 	RoutingPolicyDirection RoutingPolicyDirection
 
 	// Indicates whether security group referencing is enabled for the core network.
@@ -2993,6 +3079,153 @@ func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes a NAT rule of an attachment.
+type NatRule struct {
+
+	// The source CIDR block that the rule matches for traffic from the attachment.
+	MatchSourceCidr *string
+
+	// The CIDR block that matching source addresses are translated to.
+	NatCidr *string
+
+	// The rule number. Rule numbers identify the rules of an attachment and don't set
+	// the order in which rules are evaluated.
+	RuleNumber *int32
+
+	// The state of the NAT rule. The possible values are the following:
+	//
+	//   - CREATING : The rule is being created.
+	//
+	//   - MODIFYING : The rule is being modified.
+	//
+	//   - DELETING : The rule is being deleted.
+	//
+	//   - ACTIVATING : NAT gateway support is being enabled, and the rule is being
+	//   applied.
+	//
+	//   - ACTIVATED : NAT gateway support is enabled, and the rule is applied.
+	//
+	//   - DEACTIVATING : NAT gateway support is being disabled, and the rule is being
+	//   removed from use.
+	//
+	//   - DEACTIVATED : NAT gateway support is disabled, and the rule isn't applied.
+	//
+	//   - FAILED : The attachment failed to be created, and the rule isn't applied.
+	//
+	//   - PENDING_ATTACHMENT_ACCEPTANCE : The attachment is pending acceptance. The
+	//   rule is applied after the attachment is accepted.
+	State NatRuleState
+
+	noSmithyDocumentSerde
+}
+
+func (v *NatRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NatRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NatRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchSourceCidr != nil {
+		s.WriteString(schemas.NatRule_MatchSourceCidr, *v.MatchSourceCidr)
+	}
+	if v.NatCidr != nil {
+		s.WriteString(schemas.NatRule_NatCidr, *v.NatCidr)
+	}
+	if v.RuleNumber != nil {
+		s.WriteInt32(schemas.NatRule_RuleNumber, *v.RuleNumber)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.NatRule_State, string(v.State))
+	}
+}
+func (v *NatRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NatRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NatRule_MatchSourceCidr:
+			v.MatchSourceCidr = new(string)
+			return d.ReadString(schemas.NatRule_MatchSourceCidr, v.MatchSourceCidr)
+		case schemas.NatRule_NatCidr:
+			v.NatCidr = new(string)
+			return d.ReadString(schemas.NatRule_NatCidr, v.NatCidr)
+		case schemas.NatRule_RuleNumber:
+			v.RuleNumber = new(int32)
+			return d.ReadInt32(schemas.NatRule_RuleNumber, v.RuleNumber)
+		case schemas.NatRule_State:
+			var ev string
+			if err := d.ReadString(schemas.NatRule_State, &ev); err != nil {
+				return err
+			}
+			v.State = NatRuleState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Describes a NAT rule to configure on an attachment. Source addresses in the
+// source CIDR block of traffic from the attachment are translated to the same host
+// addresses in the NAT CIDR block. Traffic to an address in the NAT CIDR block is
+// translated back to the matching address in the source CIDR block.
+type NatRuleRequest struct {
+
+	// The IPv4 CIDR block to match against the source address of traffic from the
+	// attachment. The CIDR block can't overlap with the multicast range (224.0.0.0/4).
+	//
+	// This member is required.
+	MatchSourceCidr *string
+
+	// The IPv4 CIDR block to translate matching source addresses to. The prefix
+	// length must be the same as the prefix length of MatchSourceCidr . The CIDR block
+	// must be within a private (RFC 1918) or shared address space (RFC 6598) range.
+	// The CIDR blocks of the NAT rules of an attachment can't overlap with each other.
+	//
+	// This member is required.
+	NatCidr *string
+
+	// The rule number, from 1 to 32766. Each rule number must be unique for the
+	// attachment.
+	//
+	// This member is required.
+	RuleNumber *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *NatRuleRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NatRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NatRuleRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchSourceCidr != nil {
+		s.WriteString(schemas.NatRuleRequest_MatchSourceCidr, *v.MatchSourceCidr)
+	}
+	if v.NatCidr != nil {
+		s.WriteString(schemas.NatRuleRequest_NatCidr, *v.NatCidr)
+	}
+	if v.RuleNumber != nil {
+		s.WriteInt32(schemas.NatRuleRequest_RuleNumber, *v.RuleNumber)
+	}
+}
+func (v *NatRuleRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NatRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NatRuleRequest_MatchSourceCidr:
+			v.MatchSourceCidr = new(string)
+			return d.ReadString(schemas.NatRuleRequest_MatchSourceCidr, v.MatchSourceCidr)
+		case schemas.NatRuleRequest_NatCidr:
+			v.NatCidr = new(string)
+			return d.ReadString(schemas.NatRuleRequest_NatCidr, v.NatCidr)
+		case schemas.NatRuleRequest_RuleNumber:
+			v.RuleNumber = new(int32)
+			return d.ReadInt32(schemas.NatRuleRequest_RuleNumber, v.RuleNumber)
+		}
+		return nil
+	})
+}
+
 // Describes a network function group for service insertion.
 type NetworkFunctionGroup struct {
 
@@ -3311,7 +3544,9 @@ type NetworkRoute struct {
 	// The route state. The possible values are active and blackhole .
 	State RouteState
 
-	// The route type. The possible values are propagated and static .
+	// The route type. The possible values are PROPAGATED , STATIC , and SYSTEM . A
+	// SYSTEM route is installed by the core network for the NAT CIDR block of an
+	// attachment's NAT rule.
 	Type RouteType
 
 	noSmithyDocumentSerde
@@ -3683,7 +3918,7 @@ type Peering struct {
 	// The edge location for the peer.
 	EdgeLocation *string
 
-	// Describes the error associated with the Connect peer request.
+	// Describes the error associated with the peering request.
 	LastModificationErrors []PeeringError
 
 	// The ID of the account owner.
@@ -3898,7 +4133,7 @@ func (v *PermissionsErrorContext) Deserialize(d smithy.ShapeDeserializer) error 
 // Information about a prefix list association with a core network.
 type PrefixListAssociation struct {
 
-	// The core network id in the association.
+	// The ID of the core network in the association.
 	CoreNetworkId *string
 
 	// The alias of the prefix list in the association.

@@ -1578,6 +1578,11 @@ var _EvaluationContentList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _EvaluationContentList_member *smithy.Schema
 
+var _EvaluationDimensionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "EvaluationDimensionName",
+}, smithy.ShapeTypeString, 0)
+
 var _EvaluationErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "EvaluationErrorCode",
@@ -1648,12 +1653,14 @@ var _EvaluationReferenceInputs_member *smithy.Schema
 var EvaluationResultContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "EvaluationResultContent",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var EvaluationResultContent_evaluatorArn *smithy.Schema
 
 var EvaluationResultContent_evaluatorId *smithy.Schema
 
 var EvaluationResultContent_evaluatorName *smithy.Schema
+
+var EvaluationResultContent_evaluationDimensionName *smithy.Schema
 
 var EvaluationResultContent_explanation *smithy.Schema
 
@@ -1754,8 +1761,10 @@ var EvaluatorStatistics_averageScore *smithy.Schema
 var EvaluatorSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "EvaluatorSummary",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var EvaluatorSummary_evaluatorId *smithy.Schema
+
+var EvaluatorSummary_evaluationDimensionName *smithy.Schema
 
 var EvaluatorSummary_statistics *smithy.Schema
 
@@ -7531,6 +7540,8 @@ func init() {
 
 	EvaluatorSummary_evaluatorId = EvaluatorSummary.AddMember("evaluatorId", smithyprelude.String)
 
+	EvaluatorSummary_evaluationDimensionName = EvaluatorSummary.AddMember("evaluationDimensionName", smithyprelude.String)
+
 	EvaluatorSummary_statistics = EvaluatorSummary.AddMember("statistics", EvaluatorStatistics)
 
 	EvaluatorSummary_totalEvaluated = EvaluatorSummary.AddMember("totalEvaluated", smithyprelude.Integer)
@@ -8220,6 +8231,8 @@ func init() {
 	EvaluationResultContent_evaluatorId = EvaluationResultContent.AddMember("evaluatorId", _EvaluatorId)
 
 	EvaluationResultContent_evaluatorName = EvaluationResultContent.AddMember("evaluatorName", _EvaluatorName)
+
+	EvaluationResultContent_evaluationDimensionName = EvaluationResultContent.AddMember("evaluationDimensionName", _EvaluationDimensionName)
 
 	EvaluationResultContent_explanation = EvaluationResultContent.AddMember("explanation", _EvaluationExplanation)
 

@@ -13,6 +13,12 @@ const (
 	ConnectorOperationStateRollbackInProgress ConnectorOperationState = "ROLLBACK_IN_PROGRESS"
 	ConnectorOperationStateRollbackFailed     ConnectorOperationState = "ROLLBACK_FAILED"
 	ConnectorOperationStateRollbackComplete   ConnectorOperationState = "ROLLBACK_COMPLETE"
+	ConnectorOperationStatePauseComplete      ConnectorOperationState = "PAUSE_COMPLETE"
+	ConnectorOperationStatePauseFailed        ConnectorOperationState = "PAUSE_FAILED"
+	ConnectorOperationStateResumeComplete     ConnectorOperationState = "RESUME_COMPLETE"
+	ConnectorOperationStateResumeFailed       ConnectorOperationState = "RESUME_FAILED"
+	ConnectorOperationStatePauseInProgress    ConnectorOperationState = "PAUSE_IN_PROGRESS"
+	ConnectorOperationStateResumeInProgress   ConnectorOperationState = "RESUME_IN_PROGRESS"
 	ConnectorOperationStateRestartInProgress  ConnectorOperationState = "RESTART_IN_PROGRESS"
 	ConnectorOperationStateRestartComplete    ConnectorOperationState = "RESTART_COMPLETE"
 	ConnectorOperationStateRestartFailed      ConnectorOperationState = "RESTART_FAILED"
@@ -31,6 +37,12 @@ func (ConnectorOperationState) Values() []ConnectorOperationState {
 		"ROLLBACK_IN_PROGRESS",
 		"ROLLBACK_FAILED",
 		"ROLLBACK_COMPLETE",
+		"PAUSE_COMPLETE",
+		"PAUSE_FAILED",
+		"RESUME_COMPLETE",
+		"RESUME_FAILED",
+		"PAUSE_IN_PROGRESS",
+		"RESUME_IN_PROGRESS",
 		"RESTART_IN_PROGRESS",
 		"RESTART_COMPLETE",
 		"RESTART_FAILED",
@@ -96,6 +108,8 @@ const (
 	ConnectorOperationTypeIsolateConnector             ConnectorOperationType = "ISOLATE_CONNECTOR"
 	ConnectorOperationTypeRestoreConnector             ConnectorOperationType = "RESTORE_CONNECTOR"
 	ConnectorOperationTypeRestartConnector             ConnectorOperationType = "RESTART_CONNECTOR"
+	ConnectorOperationTypePauseConnector               ConnectorOperationType = "PAUSE_CONNECTOR"
+	ConnectorOperationTypeResumeConnector              ConnectorOperationType = "RESUME_CONNECTOR"
 )
 
 // Values returns all known values for ConnectorOperationType. Note that this can
@@ -109,6 +123,8 @@ func (ConnectorOperationType) Values() []ConnectorOperationType {
 		"ISOLATE_CONNECTOR",
 		"RESTORE_CONNECTOR",
 		"RESTART_CONNECTOR",
+		"PAUSE_CONNECTOR",
+		"RESUME_CONNECTOR",
 	}
 }
 
@@ -121,7 +137,10 @@ const (
 	ConnectorStateUpdating   ConnectorState = "UPDATING"
 	ConnectorStateDeleting   ConnectorState = "DELETING"
 	ConnectorStateFailed     ConnectorState = "FAILED"
+	ConnectorStatePaused     ConnectorState = "PAUSED"
 	ConnectorStateRestarting ConnectorState = "RESTARTING"
+	ConnectorStatePausing    ConnectorState = "PAUSING"
+	ConnectorStateResuming   ConnectorState = "RESUMING"
 )
 
 // Values returns all known values for ConnectorState. Note that this can be
@@ -135,7 +154,10 @@ func (ConnectorState) Values() []ConnectorState {
 		"UPDATING",
 		"DELETING",
 		"FAILED",
+		"PAUSED",
 		"RESTARTING",
+		"PAUSING",
+		"RESUMING",
 	}
 }
 

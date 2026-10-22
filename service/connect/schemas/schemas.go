@@ -1674,6 +1674,13 @@ var ListRealtimeContactAnalysisSegmentsV2 = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/contact/list-real-time-analysis-segments-v2/{InstanceId}/{ContactId}",
 	Code: 200})
 
+var ListReplicationFindings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListReplicationFindings",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/replication-findings/{InstanceId}",
+	Code: 200})
+
 var ListRoutingProfileManualAssignmentQueues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListRoutingProfileManualAssignmentQueues",
@@ -3553,6 +3560,22 @@ var ApplicationType = smithy.NewSchema(smithy.ShapeID{
 var ApplicationType_MCP *smithy.Schema
 
 var ApplicationType_THIRD_PARTY_APPLICATION *smithy.Schema
+
+var ApproximateDriftedResourceCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ApproximateDriftedResourceCount",
+}, smithy.ShapeTypeStructure, 3)
+var ApproximateDriftedResourceCount_Region *smithy.Schema
+
+var ApproximateDriftedResourceCount_Count *smithy.Schema
+
+var ApproximateDriftedResourceCount_Timestamp *smithy.Schema
+
+var _ApproximateDriftedResourceCounts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ApproximateDriftedResourceCounts",
+}, smithy.ShapeTypeList, 1)
+var _ApproximateDriftedResourceCounts_member *smithy.Schema
 
 var _ApproximateTotalCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -13704,6 +13727,57 @@ var ReplicationConfiguration_SourceRegion *smithy.Schema
 
 var ReplicationConfiguration_GlobalSignInEndpoint *smithy.Schema
 
+var ReplicationFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFinding",
+}, smithy.ShapeTypeStructure, 8)
+var ReplicationFinding_Arn *smithy.Schema
+
+var ReplicationFinding_Id *smithy.Schema
+
+var ReplicationFinding_Region *smithy.Schema
+
+var ReplicationFinding_ResourceType *smithy.Schema
+
+var ReplicationFinding_Name *smithy.Schema
+
+var ReplicationFinding_Operation *smithy.Schema
+
+var ReplicationFinding_ReferenceCode *smithy.Schema
+
+var ReplicationFinding_Message *smithy.Schema
+
+var _ReplicationFindingMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingMessage",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingOperation",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingReferenceCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingReferenceCode",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingResourceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingResourceName",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingResourceType",
+}, smithy.ShapeTypeString, 0)
+
+var _ReplicationFindingsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ReplicationFindingsList",
+}, smithy.ShapeTypeList, 1)
+var _ReplicationFindingsList_member *smithy.Schema
+
 var _ReplicationStatusReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReplicationStatusReason",
@@ -13789,6 +13863,25 @@ var ResourceNotReadyException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 409})
 var ResourceNotReadyException_Message *smithy.Schema
+
+var ResourceReplicationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ResourceReplicationStatus",
+}, smithy.ShapeTypeStructure, 2)
+var ResourceReplicationStatus_Region *smithy.Schema
+
+var ResourceReplicationStatus_Status *smithy.Schema
+
+var _ResourceReplicationStatuses = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ResourceReplicationStatuses",
+}, smithy.ShapeTypeList, 1)
+var _ResourceReplicationStatuses_member *smithy.Schema
+
+var _ResourceReplicationStatusValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ResourceReplicationStatusValue",
+}, smithy.ShapeTypeString, 0)
 
 var ResourceTagsSearchCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -20540,7 +20633,7 @@ var GetTrafficDistributionRequest_Id *smithy.Schema
 var GetTrafficDistributionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetTrafficDistributionResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var GetTrafficDistributionResponse_TelephonyConfig *smithy.Schema
 
 var GetTrafficDistributionResponse_Id *smithy.Schema
@@ -20550,6 +20643,8 @@ var GetTrafficDistributionResponse_Arn *smithy.Schema
 var GetTrafficDistributionResponse_SignInConfig *smithy.Schema
 
 var GetTrafficDistributionResponse_AgentConfig *smithy.Schema
+
+var GetTrafficDistributionResponse_LastFailoverTime *smithy.Schema
 
 var ImportPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -21541,6 +21636,30 @@ var ListRealtimeContactAnalysisSegmentsV2Response_Status *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsV2Response_Segments *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Response_NextToken *smithy.Schema
+
+var ListReplicationFindingsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListReplicationFindingsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListReplicationFindingsRequest_InstanceId *smithy.Schema
+
+var ListReplicationFindingsRequest_ResourceType *smithy.Schema
+
+var ListReplicationFindingsRequest_MaxResults *smithy.Schema
+
+var ListReplicationFindingsRequest_NextToken *smithy.Schema
+
+var ListReplicationFindingsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListReplicationFindingsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListReplicationFindingsResponse_ReplicationFindingsList *smithy.Schema
+
+var ListReplicationFindingsResponse_ApproximateDriftedResourceCounts *smithy.Schema
+
+var ListReplicationFindingsResponse_NextToken *smithy.Schema
+
+var ListReplicationFindingsResponse_ResourceReplicationStatuses *smithy.Schema
 
 var ListRoutingProfileManualAssignmentQueuesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -25376,6 +25495,14 @@ func init() {
 	Application_Type = Application.AddMember("Type", ApplicationType)
 
 	_Applications_member = _Applications.AddMember("member", Application)
+
+	ApproximateDriftedResourceCount_Region = ApproximateDriftedResourceCount.AddMember("Region", _AwsRegion)
+
+	ApproximateDriftedResourceCount_Count = ApproximateDriftedResourceCount.AddMember("Count", _ApproximateTotalCount)
+
+	ApproximateDriftedResourceCount_Timestamp = ApproximateDriftedResourceCount.AddMember("Timestamp", _Timestamp)
+
+	_ApproximateDriftedResourceCounts_member = _ApproximateDriftedResourceCounts.AddMember("member", ApproximateDriftedResourceCount)
 
 	ArtifactStatus_APPROVED = ArtifactStatus.AddMember("APPROVED", smithyprelude.Unit)
 
@@ -30841,6 +30968,24 @@ func init() {
 
 	ReplicationConfiguration_GlobalSignInEndpoint = ReplicationConfiguration.AddMember("GlobalSignInEndpoint", _GlobalSignInEndpoint)
 
+	ReplicationFinding_Arn = ReplicationFinding.AddMember("Arn", _ARN)
+
+	ReplicationFinding_Id = ReplicationFinding.AddMember("Id", _ResourceId)
+
+	ReplicationFinding_Region = ReplicationFinding.AddMember("Region", _AwsRegion)
+
+	ReplicationFinding_ResourceType = ReplicationFinding.AddMember("ResourceType", _ReplicationFindingResourceType)
+
+	ReplicationFinding_Name = ReplicationFinding.AddMember("Name", _ReplicationFindingResourceName)
+
+	ReplicationFinding_Operation = ReplicationFinding.AddMember("Operation", _ReplicationFindingOperation)
+
+	ReplicationFinding_ReferenceCode = ReplicationFinding.AddMember("ReferenceCode", _ReplicationFindingReferenceCode)
+
+	ReplicationFinding_Message = ReplicationFinding.AddMember("Message", _ReplicationFindingMessage)
+
+	_ReplicationFindingsList_member = _ReplicationFindingsList.AddMember("member", ReplicationFinding)
+
 	RequiredFieldInfo_Id = RequiredFieldInfo.AddMember("Id", TaskTemplateFieldIdentifier)
 
 	_RequiredTaskTemplateFields_member = _RequiredTaskTemplateFields.AddMember("member", RequiredFieldInfo)
@@ -30874,6 +31019,12 @@ func init() {
 	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
 
 	ResourceNotReadyException_Message = ResourceNotReadyException.AddMember("Message", _Message)
+
+	ResourceReplicationStatus_Region = ResourceReplicationStatus.AddMember("Region", _AwsRegion)
+
+	ResourceReplicationStatus_Status = ResourceReplicationStatus.AddMember("Status", _ResourceReplicationStatusValue)
+
+	_ResourceReplicationStatuses_member = _ResourceReplicationStatuses.AddMember("member", ResourceReplicationStatus)
 
 	TagSearchCondition_tagKey = TagSearchCondition.AddMember("tagKey", _TagKeyString)
 
@@ -34045,6 +34196,8 @@ func init() {
 
 	GetTrafficDistributionResponse_AgentConfig = GetTrafficDistributionResponse.AddMember("AgentConfig", AgentConfig)
 
+	GetTrafficDistributionResponse_LastFailoverTime = GetTrafficDistributionResponse.AddMember("LastFailoverTime", _Timestamp)
+
 	ImportPhoneNumberRequest_InstanceId = ImportPhoneNumberRequest.AddMember("InstanceId", _InstanceId)
 
 	ImportPhoneNumberRequest_SourcePhoneNumberArn = ImportPhoneNumberRequest.AddMember("SourcePhoneNumberArn", _ARN)
@@ -34642,6 +34795,22 @@ func init() {
 	ListRealtimeContactAnalysisSegmentsV2Response_Segments = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("Segments", _RealtimeContactAnalysisSegments)
 
 	ListRealtimeContactAnalysisSegmentsV2Response_NextToken = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("NextToken", _LargeNextToken)
+
+	ListReplicationFindingsRequest_InstanceId = ListReplicationFindingsRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	ListReplicationFindingsRequest_ResourceType = ListReplicationFindingsRequest.AddMember("ResourceType", _ReplicationFindingResourceType, &smithytraits.HTTPQuery{Name: "resourceType"})
+
+	ListReplicationFindingsRequest_MaxResults = ListReplicationFindingsRequest.AddMember("MaxResults", _MaxResult100, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListReplicationFindingsRequest_NextToken = ListReplicationFindingsRequest.AddMember("NextToken", _LargeNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListReplicationFindingsResponse_ReplicationFindingsList = ListReplicationFindingsResponse.AddMember("ReplicationFindingsList", _ReplicationFindingsList)
+
+	ListReplicationFindingsResponse_ApproximateDriftedResourceCounts = ListReplicationFindingsResponse.AddMember("ApproximateDriftedResourceCounts", _ApproximateDriftedResourceCounts)
+
+	ListReplicationFindingsResponse_NextToken = ListReplicationFindingsResponse.AddMember("NextToken", _LargeNextToken)
+
+	ListReplicationFindingsResponse_ResourceReplicationStatuses = ListReplicationFindingsResponse.AddMember("ResourceReplicationStatuses", _ResourceReplicationStatuses)
 
 	ListRoutingProfileManualAssignmentQueuesRequest_InstanceId = ListRoutingProfileManualAssignmentQueuesRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 

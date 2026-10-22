@@ -1,0 +1,8 @@
+{
+    "id": "451de40b-64e6-4854-b71a-64915ae9e9a1",
+    "type": "feature",
+    "description": "Adds APIs to create, get, list, and cancel ingestion jobs, and to create, get, list, and delete ingestion streams, for ingesting data from Amazon S3 into OpenSearch Serverless collections.",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

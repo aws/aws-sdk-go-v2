@@ -1033,6 +1033,30 @@ func TestCheckResponseSnapshot_ListWorkerConfigurations(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PauseConnector(t *testing.T) {
+	want := &PauseConnectorOutput{
+		ConnectorArn:          ptr.String("__ConnectorArn__"),
+		ConnectorOperationArn: ptr.String("__ConnectorOperationArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PauseConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PauseConnector(context.Background(), &PauseConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PauseConnector.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RestartConnector(t *testing.T) {
 	want := &RestartConnectorOutput{
 		ConnectorArn:          ptr.String("__ConnectorArn__"),
@@ -1055,6 +1079,30 @@ func TestCheckResponseSnapshot_RestartConnector(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RestartConnector.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ResumeConnector(t *testing.T) {
+	want := &ResumeConnectorOutput{
+		ConnectorArn:          ptr.String("__ConnectorArn__"),
+		ConnectorOperationArn: ptr.String("__ConnectorOperationArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ResumeConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ResumeConnector(context.Background(), &ResumeConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ResumeConnector.response", err)
 	}
 }
 
@@ -1143,8 +1191,9 @@ func TestCheckResponseSnapshot_UpdateConnector(t *testing.T) {
 		ConnectorConfiguration: map[string]string{
 			"key0": "__Value__",
 		},
-		ConnectorArn:   ptr.String("__ConnectorArn__"),
-		CurrentVersion: ptr.String("__CurrentVersion__"),
+		SkipHealthValidation: true,
+		ConnectorArn:         ptr.String("__ConnectorArn__"),
+		CurrentVersion:       ptr.String("__CurrentVersion__"),
 	})
 	if err != nil {
 		t.Fatal(err)

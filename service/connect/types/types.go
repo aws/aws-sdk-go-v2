@@ -1677,6 +1677,63 @@ func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains an approximate count of the resources of a given type that are not yet
+// in sync in a Region, along with the time the count was last calculated.
+type ApproximateDriftedResourceCount struct {
+
+	// The approximate number of resources of the requested type that are not yet in
+	// sync in the Region. A value of zero means the resources are in sync.
+	//
+	// This member is required.
+	Count *int64
+
+	// The Amazon Web Services Region that the count applies to.
+	//
+	// This member is required.
+	Region *string
+
+	// The time, in Unix epoch time, when the count was last calculated.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ApproximateDriftedResourceCount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproximateDriftedResourceCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApproximateDriftedResourceCount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.ApproximateDriftedResourceCount_Count, *v.Count)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ApproximateDriftedResourceCount_Region, *v.Region)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ApproximateDriftedResourceCount_Timestamp, *v.Timestamp)
+	}
+}
+func (v *ApproximateDriftedResourceCount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApproximateDriftedResourceCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApproximateDriftedResourceCount_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.ApproximateDriftedResourceCount_Count, v.Count)
+		case schemas.ApproximateDriftedResourceCount_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ApproximateDriftedResourceCount_Region, v.Region)
+		case schemas.ApproximateDriftedResourceCount_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ApproximateDriftedResourceCount_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // This action must be set if TriggerEventSource is one of the following values:
 // OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable |
 // OnRealTimeChatAnalysisAvailable | OnPostChatAnalysisAvailable . Contact is
@@ -27293,6 +27350,111 @@ func (v *ReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// Contains information about a resource that could not be replicated across the
+// Regions of a Global Resiliency deployment, including the reason and any action
+// required to resolve it.
+type ReplicationFinding struct {
+
+	// The Amazon Resource Name (ARN) of the resource that the finding is for.
+	//
+	// This member is required.
+	Arn *string
+
+	// The identifier of the resource that the finding is for.
+	//
+	// This member is required.
+	Id *string
+
+	// The type of resource that the finding is for, such as QUEUE or ROUTING_PROFILE .
+	//
+	// This member is required.
+	ResourceType *string
+
+	// A human-readable description of the finding and the action, if any, required to
+	// resolve it.
+	Message *string
+
+	// The name of the resource that the finding is for.
+	Name *string
+
+	// The replication operation that produced the finding, such as a create, update,
+	// or delete of the resource.
+	Operation *string
+
+	// A stable code that identifies the class of the finding. Use this code to look
+	// up the recommended steps to resolve the finding.
+	ReferenceCode *string
+
+	// The Amazon Web Services Region that the finding was detected in.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicationFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReplicationFinding_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReplicationFinding_Id, *v.Id)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ReplicationFinding_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ReplicationFinding_Name, *v.Name)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ReplicationFinding_Operation, *v.Operation)
+	}
+	if v.ReferenceCode != nil {
+		s.WriteString(schemas.ReplicationFinding_ReferenceCode, *v.ReferenceCode)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ReplicationFinding_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ReplicationFinding_ResourceType, *v.ResourceType)
+	}
+}
+func (v *ReplicationFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationFinding_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Arn, v.Arn)
+		case schemas.ReplicationFinding_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Id, v.Id)
+		case schemas.ReplicationFinding_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Message, v.Message)
+		case schemas.ReplicationFinding_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Name, v.Name)
+		case schemas.ReplicationFinding_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Operation, v.Operation)
+		case schemas.ReplicationFinding_ReferenceCode:
+			v.ReferenceCode = new(string)
+			return d.ReadString(schemas.ReplicationFinding_ReferenceCode, v.ReferenceCode)
+		case schemas.ReplicationFinding_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ReplicationFinding_Region, v.Region)
+		case schemas.ReplicationFinding_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ReplicationFinding_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Status information about the replication process, where you use the [ReplicateInstance] API to
 // create a replica of your Connect Customer instance in another Amazon Web
 // Services Region. For more information, see [Set up Connect Customer Global Resiliency]in the Connect Customer
@@ -27383,6 +27545,52 @@ func (v *RequiredFieldInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RequiredFieldInfo_Id:
 			v.Id = &TaskTemplateFieldIdentifier{}
 			return v.Id.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Indicates whether a resource type is being replicated and kept in sync in a
+// specific Amazon Web Services Region of a Global Resiliency deployment.
+type ResourceReplicationStatus struct {
+
+	// The Amazon Web Services Region that the replication status applies to.
+	//
+	// This member is required.
+	Region *string
+
+	// The replication status of the resource type in the Region, such as ENABLED ,
+	// BLOCKED , or DISABLED .
+	//
+	// This member is required.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceReplicationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceReplicationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceReplicationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.ResourceReplicationStatus_Region, *v.Region)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ResourceReplicationStatus_Status, *v.Status)
+	}
+}
+func (v *ResourceReplicationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceReplicationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceReplicationStatus_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ResourceReplicationStatus_Region, v.Region)
+		case schemas.ResourceReplicationStatus_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ResourceReplicationStatus_Status, v.Status)
 		}
 		return nil
 	})

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyTransitGatewayAttachmentNatConfiguration&DryRun=true&NatGatewayRule.1.MatchSourceCidr=__MatchSourceCidr__&NatGatewayRule.1.NatCidr=__NatCidr__&NatGatewayRule.1.RuleNumber=1&NatGatewayRule.2.MatchSourceCidr=__MatchSourceCidr__&NatGatewayRule.2.NatCidr=__NatCidr__&NatGatewayRule.2.RuleNumber=1&NatGatewaySupport=enable&NatSystemRouteSupport=enable&ResetNatGatewayRules=true&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&Version=2016-11-15

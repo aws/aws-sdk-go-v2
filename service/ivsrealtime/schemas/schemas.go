@@ -225,6 +225,13 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tags/{resourceArn}",
 	Code: 200})
 
+var RevokeConnectionToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "RevokeConnectionToken",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/RevokeConnectionToken",
+	Code: 200})
+
 var StartComposition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "StartComposition",
@@ -466,6 +473,11 @@ var ConflictException_xFrameOptions *smithy.Schema
 var ConflictException_xAmznErrorType *smithy.Schema
 
 var ConflictException_exceptionMessage *smithy.Schema
+
+var _ConnectionTokenId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "ConnectionTokenId",
+}, smithy.ShapeTypeString, 0)
 
 var Destination = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
@@ -2215,6 +2227,17 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
 
+var RevokeConnectionTokenRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "RevokeConnectionTokenRequest",
+}, smithy.ShapeTypeStructure, 1)
+var RevokeConnectionTokenRequest_tokenId *smithy.Schema
+
+var RevokeConnectionTokenResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ivsrealtime",
+	Name:      "RevokeConnectionTokenResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var StartCompositionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "StartCompositionRequest",
@@ -3304,6 +3327,8 @@ func init() {
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
+
+	RevokeConnectionTokenRequest_tokenId = RevokeConnectionTokenRequest.AddMember("tokenId", _ConnectionTokenId)
 
 	StartCompositionRequest_stageArn = StartCompositionRequest.AddMember("stageArn", _StageArn)
 

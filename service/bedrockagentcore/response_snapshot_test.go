@@ -891,10 +891,11 @@ func TestCheckResponseSnapshot_Evaluate(t *testing.T) {
 	want := &EvaluateOutput{
 		EvaluationResults: []types.EvaluationResultContent{
 			{
-				EvaluatorArn:  ptr.String("__EvaluatorArn__"),
-				EvaluatorId:   ptr.String("__EvaluatorId__"),
-				EvaluatorName: ptr.String("__EvaluatorName__"),
-				Explanation:   ptr.String("__Explanation__"),
+				EvaluatorArn:            ptr.String("__EvaluatorArn__"),
+				EvaluatorId:             ptr.String("__EvaluatorId__"),
+				EvaluatorName:           ptr.String("__EvaluatorName__"),
+				EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+				Explanation:             ptr.String("__Explanation__"),
 				Context: &types.ContextMemberSpanContext{
 					Value: types.SpanContext{
 						SessionId: ptr.String("__SessionId__"),
@@ -917,10 +918,11 @@ func TestCheckResponseSnapshot_Evaluate(t *testing.T) {
 				},
 			},
 			{
-				EvaluatorArn:  ptr.String("__EvaluatorArn__"),
-				EvaluatorId:   ptr.String("__EvaluatorId__"),
-				EvaluatorName: ptr.String("__EvaluatorName__"),
-				Explanation:   ptr.String("__Explanation__"),
+				EvaluatorArn:            ptr.String("__EvaluatorArn__"),
+				EvaluatorId:             ptr.String("__EvaluatorId__"),
+				EvaluatorName:           ptr.String("__EvaluatorName__"),
+				EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+				Explanation:             ptr.String("__Explanation__"),
 				Context: &types.ContextMemberSpanContext{
 					Value: types.SpanContext{
 						SessionId: ptr.String("__SessionId__"),
@@ -1291,7 +1293,8 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 			NumberOfSessionsIgnored:    ptr.Int32(1),
 			EvaluatorSummaries: []types.EvaluatorSummary{
 				{
-					EvaluatorId: ptr.String("__EvaluatorId__"),
+					EvaluatorId:             ptr.String("__EvaluatorId__"),
+					EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 					Statistics: &types.EvaluatorStatistics{
 						AverageScore: ptr.Float64(1.0),
 					},
@@ -1299,7 +1302,8 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 					TotalFailed:    ptr.Int32(1),
 				},
 				{
-					EvaluatorId: ptr.String("__EvaluatorId__"),
+					EvaluatorId:             ptr.String("__EvaluatorId__"),
+					EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 					Statistics: &types.EvaluatorStatistics{
 						AverageScore: ptr.Float64(1.0),
 					},
@@ -3461,7 +3465,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 					NumberOfSessionsIgnored:    ptr.Int32(1),
 					EvaluatorSummaries: []types.EvaluatorSummary{
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3469,7 +3474,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 							TotalFailed:    ptr.Int32(1),
 						},
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3516,7 +3522,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 					NumberOfSessionsIgnored:    ptr.Int32(1),
 					EvaluatorSummaries: []types.EvaluatorSummary{
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},
@@ -3524,7 +3531,8 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 							TotalFailed:    ptr.Int32(1),
 						},
 						{
-							EvaluatorId: ptr.String("__EvaluatorId__"),
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
 							Statistics: &types.EvaluatorStatistics{
 								AverageScore: ptr.Float64(1.0),
 							},

@@ -24539,6 +24539,10 @@ type TransitGatewayAttachment struct {
 	// The creation time.
 	CreationTime *time.Time
 
+	// The state of NAT gateway support for the attachment. Only the owner of the
+	// transit gateway receives this parameter.
+	NatGatewaySupport TransitGatewayAttachmentNatGatewaySupportState
+
 	// The ID of the resource.
 	ResourceId *string
 
@@ -25043,6 +25047,57 @@ type TransitGatewayMulticastRegisteredGroupSources struct {
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a NAT gateway rule for a transit gateway attachment,
+// including the rule number, the source CIDR block, the translated CIDR block, and
+// the state of the rule.
+type TransitGatewayNatRule struct {
+
+	// The IPv4 CIDR block of the source addresses to translate.
+	MatchSourceCidr *string
+
+	// The IPv4 CIDR block that the transit gateway translates the source addresses to.
+	NatCidr *string
+
+	// The rule number.
+	RuleNumber *int32
+
+	// The state of the NAT gateway rule. The possible values are:
+	//
+	//   - pending - The transit gateway is applying a change to the rule.
+	//
+	//   - activated - The rule is in effect because NAT gateway support is enabled for
+	//   the attachment.
+	//
+	//   - deactivated - The rule isn't in effect because NAT gateway support is
+	//   disabled for the attachment.
+	State TransitGatewayNatRuleState
+
+	noSmithyDocumentSerde
+}
+
+// Describes a NAT gateway rule to apply to a transit gateway attachment. A NAT
+// gateway rule translates source addresses in the MatchSourceCidr range to the
+// corresponding addresses in the NatCidr range.
+type TransitGatewayNatRuleRequest struct {
+
+	// The IPv4 CIDR block of the source addresses to translate. The CIDR block can't
+	// overlap the multicast range ( 224.0.0.0/4 ) or the link-local range (
+	// 169.254.0.0/16 ).
+	MatchSourceCidr *string
+
+	// The IPv4 CIDR block to translate the source addresses to. The CIDR block must
+	// be in a private (RFC 1918) or shared address space (RFC 6598) range, and must
+	// have the same prefix length as MatchSourceCidr . The CIDR blocks in the rules
+	// for an attachment can't overlap each other.
+	NatCidr *string
+
+	// The rule number. Valid values are 1 to 32766. Each rule number must be unique
+	// within the request.
+	RuleNumber *int32
 
 	noSmithyDocumentSerde
 }

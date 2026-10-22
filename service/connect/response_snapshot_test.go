@@ -11667,6 +11667,7 @@ func TestCheckResponseSnapshot_GetTrafficDistribution(t *testing.T) {
 				},
 			},
 		},
+		LastFailoverTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTrafficDistribution.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -14169,6 +14170,76 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListRealtimeContactAnalysisSegmentsV2.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListReplicationFindings(t *testing.T) {
+	want := &ListReplicationFindingsOutput{
+		ReplicationFindingsList: []types.ReplicationFinding{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+		},
+		ApproximateDriftedResourceCounts: []types.ApproximateDriftedResourceCount{
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		ResourceReplicationStatuses: []types.ResourceReplicationStatus{
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListReplicationFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListReplicationFindings(context.Background(), &ListReplicationFindingsInput{
+		InstanceId:   ptr.String("__InstanceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListReplicationFindings.response", err)
 	}
 }
 

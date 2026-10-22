@@ -2088,6 +2088,43 @@ func (v *CertificateLocationMemberSecretsManager) Deserialize(d smithy.ShapeDese
 	return v.Value.Deserialize(d)
 }
 
+// Specifies whether the circuit breaker monitors failures for the targets in a
+// fallback chain.
+type CircuitBreakerConfiguration struct {
+
+	// Specifies whether you want the circuit breaker turned on. To turn it off, set
+	// this value to DISABLED . The default is ENABLED .
+	Mode CircuitBreakerMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *CircuitBreakerConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CircuitBreakerConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CircuitBreakerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.CircuitBreakerConfiguration_mode, string(v.Mode))
+	}
+}
+func (v *CircuitBreakerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CircuitBreakerConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CircuitBreakerConfiguration_mode:
+			var ev string
+			if err := d.ReadString(schemas.CircuitBreakerConfiguration_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = CircuitBreakerMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The value or values to match for.
 //
 //   - Include a matchValueString with the EQUALS operator to specify a string that
@@ -2873,14 +2910,32 @@ func (v *ComputeConfigurationMemberEc2Configuration) Deserialize(d smithy.ShapeD
 }
 
 // A condition that determines when a gateway rule applies. Conditions can match
-// on principals or request paths.
+// on principals, request paths, or the requested model.
 //
 // The following types satisfy this interface:
 //
+//	ConditionMemberMatchModels
 //	ConditionMemberMatchPaths
 //	ConditionMemberMatchPrincipals
 type Condition interface {
 	isCondition()
+}
+
+// A condition that matches on the model requested in an inference request.
+type ConditionMemberMatchModels struct {
+	Value MatchModels
+
+	noSmithyDocumentSerde
+}
+
+func (*ConditionMemberMatchModels) isCondition() {}
+func (v *ConditionMemberMatchModels) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Condition_matchModels)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConditionMemberMatchModels) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A condition that matches on the request path.
@@ -5317,6 +5372,52 @@ func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+//	The rating scale for one dimension of an LLM-as-a-judge evaluator, supporting
+//
+// either a numerical or a categorical scale.
+//
+// The following types satisfy this interface:
+//
+//	DimensionRatingScaleMemberCategorical
+//	DimensionRatingScaleMemberNumerical
+type DimensionRatingScale interface {
+	isDimensionRatingScale()
+}
+
+//	The categorical rating scale with named categories and definitions for
+//
+// qualitative evaluation of the dimension.
+type DimensionRatingScaleMemberCategorical struct {
+	Value []CategoricalScaleDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*DimensionRatingScaleMemberCategorical) isDimensionRatingScale() {}
+func (v *DimensionRatingScaleMemberCategorical) Serialize(s smithy.ShapeSerializer) {
+	serializeCategoricalScaleDefinitions(s, schemas.DimensionRatingScale_categorical, v.Value)
+}
+func (v *DimensionRatingScaleMemberCategorical) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCategoricalScaleDefinitions(d, schemas.DimensionRatingScale_categorical, &v.Value)
+}
+
+//	The numerical rating scale with defined score values and descriptions for
+//
+// quantitative evaluation of the dimension.
+type DimensionRatingScaleMemberNumerical struct {
+	Value []NumericalScaleDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*DimensionRatingScaleMemberNumerical) isDimensionRatingScale() {}
+func (v *DimensionRatingScaleMemberNumerical) Serialize(s smithy.ShapeSerializer) {
+	serializeNumericalScaleDefinitions(s, schemas.DimensionRatingScale_numerical, v.Value)
+}
+func (v *DimensionRatingScaleMemberNumerical) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeNumericalScaleDefinitions(d, schemas.DimensionRatingScale_numerical, &v.Value)
+}
+
 // The configuration for an Amazon EBS-backed persistent volume. The service
 // creates persistent volumes when a session first launches, and the volumes
 // survive instance termination. The volumes persist until you delete the session.
@@ -6361,6 +6462,63 @@ func (v *EpisodicReflectionOverride) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+//	A single dimension of an LLM-as-a-judge evaluator, defining what the evaluator
+//
+// model should judge for that dimension and how it should be scored.
+type EvaluationDimension struct {
+
+	//  The instruction to the evaluator model for this dimension, describing what the
+	// model should judge when scoring the dimension.
+	//
+	// This member is required.
+	DimensionInstruction *string
+
+	//  The name of the dimension. This name is unique within the evaluator and
+	// identifies the dimension's results.
+	//
+	// This member is required.
+	DimensionName *string
+
+	//  The rating scale for this dimension, which can be numerical or categorical. A
+	// dimension's rating scale cannot itself be multi-dimensional.
+	//
+	// This member is required.
+	DimensionRatingScale DimensionRatingScale
+
+	noSmithyDocumentSerde
+}
+
+func (v *EvaluationDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionInstruction != nil {
+		s.WriteString(schemas.EvaluationDimension_dimensionInstruction, *v.DimensionInstruction)
+	}
+	if v.DimensionName != nil {
+		s.WriteString(schemas.EvaluationDimension_dimensionName, *v.DimensionName)
+	}
+	serializeDimensionRatingScale(s, schemas.EvaluationDimension_dimensionRatingScale, v.DimensionRatingScale)
+}
+func (v *EvaluationDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationDimension_dimensionInstruction:
+			v.DimensionInstruction = new(string)
+			return d.ReadString(schemas.EvaluationDimension_dimensionInstruction, v.DimensionInstruction)
+		case schemas.EvaluationDimension_dimensionName:
+			v.DimensionName = new(string)
+			return d.ReadString(schemas.EvaluationDimension_dimensionName, v.DimensionName)
+		case schemas.EvaluationDimension_dimensionRatingScale:
+			return deserializeDimensionRatingScale(d, schemas.EvaluationDimension_dimensionRatingScale, &v.DimensionRatingScale)
+		}
+		return nil
+	})
+}
+
 //	The configuration that defines how an evaluator assesses agent performance,
 //
 // including the evaluation method and parameters.
@@ -6720,6 +6878,214 @@ func (v *ExtractionConfigurationMemberCustomExtractionConfiguration) Serialize(s
 }
 func (v *ExtractionConfigurationMemberCustomExtractionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return deserializeCustomExtractionConfiguration(d, schemas.ExtractionConfiguration_customExtractionConfiguration, &v.Value)
+}
+
+// The fallback configuration for a route to an inference target. Defines an
+// ordered list of fallback targets to try when a request to the route's target
+// fails, and the conditions that trigger a fallback. A fallback can occur only
+// before the gateway sends the first byte of the response to the caller. After a
+// streaming response starts, the gateway doesn't fall back.
+type Fallback struct {
+
+	// The ordered list of fallback targets. The gateway tries each target in order
+	// until a response doesn't match that target's triggers, and returns that response
+	// to the caller. If every target fails, the gateway returns the last response. You
+	// can specify up to two fallback targets. Each combination of target and model,
+	// including the route's target, can appear only once.
+	//
+	// This member is required.
+	TargetFallback []FallbackTarget
+
+	// Specifies whether the gateway temporarily stops sending your requests to a
+	// failing target. The circuit breaker tracks each combination of target and model
+	// separately. With the circuit breaker enabled, the gateway skips one or more
+	// targets and models that fail repeatedly, and your requests go to the next target
+	// in the chain. The gateway always tries the last remaining target in the chain.
+	// The gateway enables the circuit breaker by default.
+	CircuitBreaker *CircuitBreakerConfiguration
+
+	// The maximum time, in milliseconds, from sending the request to the route's
+	// target until the first byte of the response body arrives. If the time expires,
+	// the gateway abandons the request and treats it as a FIRST_BYTE_TIMEOUT error.
+	// If you don't specify a value, no timeout is enforced.
+	FirstByteTimeoutMilliseconds *int32
+
+	// The status codes and errors from the route's target that cause the gateway to
+	// send the request to the first fallback target. If you omit triggerOn , the
+	// gateway falls back on 5XX status codes and on the CONNECTION_ERROR ,
+	// FIRST_BYTE_TIMEOUT , and UNROUTABLE errors. If you specify triggerOn , only the
+	// status codes and errors that you list trigger a fallback.
+	TriggerOn *FallbackTriggers
+
+	noSmithyDocumentSerde
+}
+
+func (v *Fallback) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Fallback)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Fallback) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CircuitBreaker != nil {
+		s.WriteStruct(schemas.Fallback_circuitBreaker)
+		v.CircuitBreaker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirstByteTimeoutMilliseconds != nil {
+		s.WriteInt32(schemas.Fallback_firstByteTimeoutMilliseconds, *v.FirstByteTimeoutMilliseconds)
+	}
+	serializeTargetFallbacks(s, schemas.Fallback_targetFallback, v.TargetFallback)
+	if v.TriggerOn != nil {
+		s.WriteStruct(schemas.Fallback_triggerOn)
+		v.TriggerOn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Fallback) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Fallback, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Fallback_circuitBreaker:
+			v.CircuitBreaker = &CircuitBreakerConfiguration{}
+			return v.CircuitBreaker.Deserialize(d)
+		case schemas.Fallback_firstByteTimeoutMilliseconds:
+			v.FirstByteTimeoutMilliseconds = new(int32)
+			return d.ReadInt32(schemas.Fallback_firstByteTimeoutMilliseconds, v.FirstByteTimeoutMilliseconds)
+		case schemas.Fallback_targetFallback:
+			return deserializeTargetFallbacks(d, schemas.Fallback_targetFallback, &v.TargetFallback)
+		case schemas.Fallback_triggerOn:
+			v.TriggerOn = &FallbackTriggers{}
+			return v.TriggerOn.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies a target to send the request to when the previous target in the
+// fallback chain fails. Includes the target name, the model to send, and the
+// conditions that trigger a fallback from this target to the next one.
+type FallbackTarget struct {
+
+	// The name of the gateway target to fall back to. The target must be an inference
+	// target.
+	//
+	// This member is required.
+	TargetName *string
+
+	// The maximum time, in milliseconds, from sending the request to this target
+	// until the first byte of the response body arrives. This setting isn't inherited
+	// from the route. If you don't specify a value, no timeout is enforced.
+	FirstByteTimeoutMilliseconds *int32
+
+	// The model ID to send to this fallback target. If you don't specify a model, the
+	// gateway sends the model from the original request.
+	Model *string
+
+	// The status codes and errors from this target that cause the gateway to send the
+	// request to the next fallback target. This setting isn't inherited from the
+	// route. If you omit it, the gateway uses the default triggers: 5XX status codes
+	// and the CONNECTION_ERROR , FIRST_BYTE_TIMEOUT , and UNROUTABLE errors.
+	TriggerOn *FallbackTriggers
+
+	noSmithyDocumentSerde
+}
+
+func (v *FallbackTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FallbackTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FallbackTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirstByteTimeoutMilliseconds != nil {
+		s.WriteInt32(schemas.FallbackTarget_firstByteTimeoutMilliseconds, *v.FirstByteTimeoutMilliseconds)
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.FallbackTarget_model, *v.Model)
+	}
+	if v.TargetName != nil {
+		s.WriteString(schemas.FallbackTarget_targetName, *v.TargetName)
+	}
+	if v.TriggerOn != nil {
+		s.WriteStruct(schemas.FallbackTarget_triggerOn)
+		v.TriggerOn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FallbackTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FallbackTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FallbackTarget_firstByteTimeoutMilliseconds:
+			v.FirstByteTimeoutMilliseconds = new(int32)
+			return d.ReadInt32(schemas.FallbackTarget_firstByteTimeoutMilliseconds, v.FirstByteTimeoutMilliseconds)
+		case schemas.FallbackTarget_model:
+			v.Model = new(string)
+			return d.ReadString(schemas.FallbackTarget_model, v.Model)
+		case schemas.FallbackTarget_targetName:
+			v.TargetName = new(string)
+			return d.ReadString(schemas.FallbackTarget_targetName, v.TargetName)
+		case schemas.FallbackTarget_triggerOn:
+			v.TriggerOn = &FallbackTriggers{}
+			return v.TriggerOn.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The conditions that trigger a fallback to the next target. A fallback occurs if
+// the response matches any of the specified status codes or errors.
+type FallbackTriggers struct {
+
+	// The errors that trigger a fallback. You can specify the following:
+	//
+	//   - CONNECTION_ERROR – The gateway couldn't connect to the target because the
+	//   connection was refused, reset, or timed out. The request didn't reach the
+	//   target.
+	//
+	//   - FIRST_BYTE_TIMEOUT – The target accepted the connection but didn't return
+	//   the first byte of the response within firstByteTimeoutMilliseconds . The
+	//   gateway abandons the request before any of the response reaches you.
+	//
+	//   - UNROUTABLE – The gateway couldn't route the request to the target, for
+	//   example because the target doesn't exist or doesn't support the request path.
+	//   These errors don't count toward the circuit breaker.
+	Errors []FallbackError
+
+	// The HTTP status codes returned by the target that trigger a fallback. You can
+	// specify the following:
+	//
+	//   - An exact status code – A three-digit code, such as 429 .
+	//
+	//   - A class of status codes – The first digit followed by XX , such as 5XX ,
+	//   which matches every code from 500 to 599.
+	//
+	// Only 4XX and 5XX codes are supported. Throttling by the gateway itself doesn't
+	// trigger a fallback.
+	StatusCodes []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FallbackTriggers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FallbackTriggers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FallbackTriggers) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFallbackErrors(s, schemas.FallbackTriggers_errors, v.Errors)
+	serializeErrorStatusCodePatterns(s, schemas.FallbackTriggers_statusCodes, v.StatusCodes)
+}
+func (v *FallbackTriggers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FallbackTriggers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FallbackTriggers_errors:
+			return deserializeFallbackErrors(d, schemas.FallbackTriggers_errors, &v.Errors)
+		case schemas.FallbackTriggers_statusCodes:
+			return deserializeErrorStatusCodePatterns(d, schemas.FallbackTriggers_statusCodes, &v.StatusCodes)
+		}
+		return nil
+	})
 }
 
 // Configuration for a filesystem that can be mounted into the AgentCore Runtime.
@@ -12805,6 +13171,89 @@ func (v *ManagedVpcResource) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A model ID or pattern to match against the requested model, and the operator to
+// use for the comparison.
+type MatchModelEntry struct {
+
+	// The model ID or pattern to match. With the StringLike operator, you can use *
+	// and ? as wildcards, for example anthropic.claude-* .
+	//
+	// This member is required.
+	Value *string
+
+	// The operator to use when comparing the requested model to the value:
+	//
+	//   - StringEquals – Requires an exact match.
+	//
+	//   - StringLike – Supports wildcard patterns using * and ? . This is the default.
+	Operator MatchOperator
+
+	noSmithyDocumentSerde
+}
+
+func (v *MatchModelEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchModelEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchModelEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operator != "" {
+		s.WriteString(schemas.MatchModelEntry_operator, string(v.Operator))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MatchModelEntry_value, *v.Value)
+	}
+}
+func (v *MatchModelEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchModelEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchModelEntry_operator:
+			var ev string
+			if err := d.ReadString(schemas.MatchModelEntry_operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = MatchOperator(ev)
+			return nil
+		case schemas.MatchModelEntry_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MatchModelEntry_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A condition that matches inference requests based on the requested model.
+type MatchModels struct {
+
+	// A list of model entries. The condition is met if the requested model matches
+	// any of the entries.
+	//
+	// This member is required.
+	AnyOf []MatchModelEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *MatchModels) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchModels)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchModels) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMatchModelEntries(s, schemas.MatchModels_anyOf, v.AnyOf)
+}
+func (v *MatchModels) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchModels, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchModels_anyOf:
+			return deserializeMatchModelEntries(d, schemas.MatchModels_anyOf, &v.AnyOf)
+		}
+		return nil
+	})
+}
+
 // A condition that matches requests based on the request path.
 type MatchPaths struct {
 
@@ -12946,10 +13395,13 @@ func (v *McpDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 // defines how the gateway implements the MCP protocol.
 type MCPGatewayConfiguration struct {
 
-	// Specifies whether pagination is disabled for the Model Context Protocol (MCP)
-	// tools/list operation. When set to true , the gateway returns the complete list
-	// of tools in a single response without a pagination cursor. When set to false or
-	// omitted, the gateway returns tools in paginated responses.
+	// Specifies whether the gateway disables pagination for the Model Context
+	// Protocol (MCP) tools/list operation. When set to true , the gateway returns the
+	// complete list of tools in a single response without a pagination cursor. When
+	// set to false or omitted, the gateway returns tools in paginated responses. For
+	// information about changing this value on an existing gateway, see [UpdateGateway].
+	//
+	// [UpdateGateway]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_UpdateGateway.html
 	DisableMcpListToolsPagination *bool
 
 	// The instructions for using the Model Context Protocol gateway. These
@@ -17727,6 +18179,7 @@ func (v *RateConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	RatingScaleMemberCategorical
+//	RatingScaleMemberMultiDimensional
 //	RatingScaleMemberNumerical
 type RatingScale interface {
 	isRatingScale()
@@ -17747,6 +18200,24 @@ func (v *RatingScaleMemberCategorical) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *RatingScaleMemberCategorical) Deserialize(d smithy.ShapeDeserializer) error {
 	return deserializeCategoricalScaleDefinitions(d, schemas.RatingScale_categorical, &v.Value)
+}
+
+//	A list of dimensions that lets an LLM-as-a-judge evaluator score several
+//
+// dimensions of the same target in a single evaluation. Each dimension has its own
+// instruction and rating scale, and produces its own result.
+type RatingScaleMemberMultiDimensional struct {
+	Value []EvaluationDimension
+
+	noSmithyDocumentSerde
+}
+
+func (*RatingScaleMemberMultiDimensional) isRatingScale() {}
+func (v *RatingScaleMemberMultiDimensional) Serialize(s smithy.ShapeSerializer) {
+	serializeEvaluationDimensions(s, schemas.RatingScale_multiDimensional, v.Value)
+}
+func (v *RatingScaleMemberMultiDimensional) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeEvaluationDimensions(d, schemas.RatingScale_multiDimensional, &v.Value)
 }
 
 //	The numerical rating scale with defined score values and descriptions for
@@ -20251,6 +20722,14 @@ type StaticRoute struct {
 	// This member is required.
 	TargetName *string
 
+	// The fallback configuration for this route. Supported only for inference targets.
+	Fallback *Fallback
+
+	// The model ID to send to the target. Supported only for inference targets. If
+	// you don't specify a model, the gateway sends the model from the original
+	// request.
+	Model *string
+
 	noSmithyDocumentSerde
 }
 
@@ -20261,6 +20740,14 @@ func (v *StaticRoute) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StaticRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fallback != nil {
+		s.WriteStruct(schemas.StaticRoute_fallback)
+		v.Fallback.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.StaticRoute_model, *v.Model)
+	}
 	if v.TargetName != nil {
 		s.WriteString(schemas.StaticRoute_targetName, *v.TargetName)
 	}
@@ -20268,6 +20755,12 @@ func (v *StaticRoute) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *StaticRoute) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StaticRoute, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.StaticRoute_fallback:
+			v.Fallback = &Fallback{}
+			return v.Fallback.Deserialize(d)
+		case schemas.StaticRoute_model:
+			v.Model = new(string)
+			return d.ReadString(schemas.StaticRoute_model, v.Model)
 		case schemas.StaticRoute_targetName:
 			v.TargetName = new(string)
 			return d.ReadString(schemas.StaticRoute_targetName, v.TargetName)
@@ -21281,8 +21774,17 @@ type TargetTrafficSplitEntry struct {
 	// The description of this traffic split variant.
 	Description *string
 
+	// The fallback configuration for this variant. Supported only for inference
+	// targets.
+	Fallback *Fallback
+
 	// Key-value metadata associated with this traffic split variant.
 	Metadata map[string]string
+
+	// The model ID to send to the target for this variant. Supported only for
+	// inference targets. If you don't specify a model, the gateway sends the model
+	// from the original request.
+	Model *string
 
 	noSmithyDocumentSerde
 }
@@ -21297,7 +21799,15 @@ func (v *TargetTrafficSplitEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.TargetTrafficSplitEntry_description, *v.Description)
 	}
+	if v.Fallback != nil {
+		s.WriteStruct(schemas.TargetTrafficSplitEntry_fallback)
+		v.Fallback.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serializeTrafficSplitMetadataMap(s, schemas.TargetTrafficSplitEntry_metadata, v.Metadata)
+	if v.Model != nil {
+		s.WriteString(schemas.TargetTrafficSplitEntry_model, *v.Model)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TargetTrafficSplitEntry_name, *v.Name)
 	}
@@ -21314,8 +21824,14 @@ func (v *TargetTrafficSplitEntry) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.TargetTrafficSplitEntry_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.TargetTrafficSplitEntry_description, v.Description)
+		case schemas.TargetTrafficSplitEntry_fallback:
+			v.Fallback = &Fallback{}
+			return v.Fallback.Deserialize(d)
 		case schemas.TargetTrafficSplitEntry_metadata:
 			return deserializeTrafficSplitMetadataMap(d, schemas.TargetTrafficSplitEntry_metadata, &v.Metadata)
+		case schemas.TargetTrafficSplitEntry_model:
+			v.Model = new(string)
+			return d.ReadString(schemas.TargetTrafficSplitEntry_model, v.Model)
 		case schemas.TargetTrafficSplitEntry_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.TargetTrafficSplitEntry_name, v.Name)
@@ -23560,6 +24076,7 @@ func (*UnknownUnionMember) isCustomReflectionConfiguration()          {}
 func (*UnknownUnionMember) isCustomReflectionConfigurationInput()     {}
 func (*UnknownUnionMember) isDataSourceConfig()                       {}
 func (*UnknownUnionMember) isDataSourceType()                         {}
+func (*UnknownUnionMember) isDimensionRatingScale()                   {}
 func (*UnknownUnionMember) isEvaluatorConfig()                        {}
 func (*UnknownUnionMember) isEvaluatorModelConfig()                   {}
 func (*UnknownUnionMember) isEvaluatorReference()                     {}

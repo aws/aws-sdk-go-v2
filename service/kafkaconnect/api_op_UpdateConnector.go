@@ -45,6 +45,15 @@ type UpdateConnectorInput struct {
 	// A map of keys to values that represent the configuration for the connector.
 	ConnectorConfiguration map[string]string
 
+	// Specifies whether the update bypasses connector-level and task-level health
+	// checks. If true , the update skips the health checks. The update stays in effect
+	// even if the connector or its tasks are unhealthy, and Amazon MSK Connect doesn't
+	// roll it back. If false or not specified, the health checks run. If they fail,
+	// MSK Connect automatically rolls the connector back to its previous
+	// configuration, and the update doesn't take effect. To update a connector that is
+	// in the PAUSED state, you must set this parameter to true .
+	SkipHealthValidation bool
+
 	noSmithyDocumentSerde
 }
 
@@ -66,6 +75,9 @@ func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeConnectorConfigurationUpdate(s, schemas.UpdateConnectorRequest_connectorConfiguration, v.ConnectorConfiguration)
 	if v.CurrentVersion != nil {
 		s.WriteString(schemas.UpdateConnectorRequest_currentVersion, *v.CurrentVersion)
+	}
+	if v.SkipHealthValidation != false {
+		s.WriteBool(schemas.UpdateConnectorRequest_skipHealthValidation, v.SkipHealthValidation)
 	}
 }
 

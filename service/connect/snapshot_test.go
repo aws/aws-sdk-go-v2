@@ -2918,6 +2918,18 @@ func TestCheckSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListReplicationFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReplicationFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListReplicationFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRoutingProfileManualAssignmentQueues(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRoutingProfileManualAssignmentQueues(context.Background(), nil, func(o *Options) {
@@ -7734,6 +7746,18 @@ func TestUpdateSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T) {
 	_, err := svc.ListRealtimeContactAnalysisSegmentsV2(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRealtimeContactAnalysisSegmentsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListReplicationFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListReplicationFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListReplicationFindings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

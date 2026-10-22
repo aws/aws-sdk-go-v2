@@ -1,0 +1,5 @@
+POST /v1/feed/__Id__/schedule-actions
+
+Content-Type: application/json
+
+{"actionName":"__ActionName__","operations":[{"updateOutputStatus":{"outputName":"__OutputName__","status":"ENABLED"}},{"updateOutputStatus":{"outputName":"__OutputName__","status":"ENABLED"}}],"startConfiguration":{"fixedModeScheduleActionStartSettings":{"scheduledAt":946684800}}}

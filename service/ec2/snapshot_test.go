@@ -7442,6 +7442,18 @@ func TestCheckSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTransitGatewayAttachmentNatConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransitGatewayAttachmentPropagations(context.Background(), nil, func(o *Options) {
@@ -8407,6 +8419,18 @@ func TestCheckSnapshot_ModifyTransitGateway(t *testing.T) {
 	_, err := svc.ModifyTransitGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyTransitGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayAttachmentNatConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17125,6 +17149,18 @@ func TestUpdateSnapshot_GetSubnetCidrReservations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTransitGatewayAttachmentNatConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTransitGatewayAttachmentPropagations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransitGatewayAttachmentPropagations(context.Background(), nil, func(o *Options) {
@@ -18090,6 +18126,18 @@ func TestUpdateSnapshot_ModifyTransitGateway(t *testing.T) {
 	_, err := svc.ModifyTransitGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyTransitGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayAttachmentNatConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayAttachmentNatConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayAttachmentNatConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

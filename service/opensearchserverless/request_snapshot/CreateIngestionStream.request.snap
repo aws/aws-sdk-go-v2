@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.CreateIngestionStream
+
+{"clientToken":"__ClientToken__","collectionId":"__CollectionId__","failureIndexName":"__FailureIndexName__","indexName":"__IndexName__","ingestionStreamName":"__IngestionStreamName__","roleArn":"__RoleArn__","source":{"s3":{"buckets":[{"bucket":"__Bucket__","bucketOwnerAccountId":"__BucketOwnerAccountId__","initialScan":"ENABLED"},{"bucket":"__Bucket__","bucketOwnerAccountId":"__BucketOwnerAccountId__","initialScan":"ENABLED"}],"sqsArn":"__SqsArn__"}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

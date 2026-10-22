@@ -559,6 +559,45 @@ func (v *FeedSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Sets the time at which a schedule action runs once. This is a type of
+// ScheduleActionStartConfiguration.
+type FixedModeScheduleActionStartSettings struct {
+
+	// The UTC time at which the action runs. Specify the time in whole seconds. For
+	// the range of times that you can specify, see the AWS Elemental Inference User
+	// Guide.
+	//
+	// This time is approximate. The change can take a few minutes to take effect on
+	// the media that the feed is processing.
+	//
+	// This member is required.
+	ScheduledAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *FixedModeScheduleActionStartSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedModeScheduleActionStartSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedModeScheduleActionStartSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAt != nil {
+		s.WriteTime(schemas.FixedModeScheduleActionStartSettings_scheduledAt, *v.ScheduledAt)
+	}
+}
+func (v *FixedModeScheduleActionStartSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedModeScheduleActionStartSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedModeScheduleActionStartSettings_scheduledAt:
+			v.ScheduledAt = new(time.Time)
+			return d.ReadTime(schemas.FixedModeScheduleActionStartSettings_scheduledAt, v.ScheduledAt)
+		}
+		return nil
+	})
+}
+
 // Contains information about one fixture. It is used in the SearchFixtures
 // response.
 //
@@ -813,6 +852,272 @@ func (v *OutputConfigMemberSubtitling) Deserialize(d smithy.ShapeDeserializer) e
 	return v.Value.Deserialize(d)
 }
 
+// Removes the game from an event clipping output at the action's scheduled time.
+// This is a type of ScheduleActionOperation, and the output must be an event
+// clipping output.
+type RemoveClippingDataSourceConfiguration struct {
+
+	// The name of the output that you want to remove the game from.
+	//
+	// This member is required.
+	OutputName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemoveClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveClippingDataSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveClippingDataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputName != nil {
+		s.WriteString(schemas.RemoveClippingDataSourceConfiguration_outputName, *v.OutputName)
+	}
+}
+func (v *RemoveClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveClippingDataSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveClippingDataSourceConfiguration_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.RemoveClippingDataSourceConfiguration_outputName, v.OutputName)
+		}
+		return nil
+	})
+}
+
+// Describes one schedule action on a feed, including the changes it makes and
+// whether it has run yet. Elemental Inference returns this structure in the
+// ListScheduleActions operation.
+type ScheduleAction struct {
+
+	// The name of the schedule action. The name is unique within the feed.
+	//
+	// This member is required.
+	ActionName *string
+
+	// The configuration changes that the action makes to the feed.
+	//
+	// This member is required.
+	Operations []ScheduleActionOperation
+
+	// Specifies when the action runs.
+	//
+	// This member is required.
+	StartConfiguration ScheduleActionStartConfiguration
+
+	// The status of the action. Valid values are the following:
+	//
+	// PENDING The action is waiting for its scheduled time.
+	//
+	// COMPLETED Elemental Inference applied all the action's operations to the feed.
+	//
+	// FAILED Elemental Inference couldn't apply the action.
+	//
+	// This member is required.
+	Status ScheduleActionStatus
+
+	// A description of why the action failed. Elemental Inference returns this
+	// property only when the status is FAILED.
+	Error *ScheduleActionError
+
+	noSmithyDocumentSerde
+}
+
+func (v *ScheduleAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.ScheduleAction_actionName, *v.ActionName)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.ScheduleAction_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScheduleActionOperations(s, schemas.ScheduleAction_operations, v.Operations)
+	serializeScheduleActionStartConfiguration(s, schemas.ScheduleAction_startConfiguration, v.StartConfiguration)
+	if v.Status != "" {
+		s.WriteString(schemas.ScheduleAction_status, string(v.Status))
+	}
+}
+func (v *ScheduleAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleAction_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.ScheduleAction_actionName, v.ActionName)
+		case schemas.ScheduleAction_error:
+			v.Error = &ScheduleActionError{}
+			return v.Error.Deserialize(d)
+		case schemas.ScheduleAction_operations:
+			return deserializeScheduleActionOperations(d, schemas.ScheduleAction_operations, &v.Operations)
+		case schemas.ScheduleAction_startConfiguration:
+			return deserializeScheduleActionStartConfiguration(d, schemas.ScheduleAction_startConfiguration, &v.StartConfiguration)
+		case schemas.ScheduleAction_status:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleAction_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ScheduleActionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Describes the cause of a schedule action failure, including the failure type
+// and a description of what went wrong.
+type ScheduleActionError struct {
+
+	// The type of failure. Valid values are the following:
+	//
+	// INVALID_ACTION_TARGET The action referred to something that didn't exist or
+	// wasn't valid at the scheduled time, for example an output that you deleted.
+	//
+	// INTERNAL_ERROR An unexpected error prevented the action from completing.
+	//
+	// This member is required.
+	ErrorCode ScheduleActionErrorCode
+
+	// A description of the failure.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ScheduleActionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleActionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.ScheduleActionError_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ScheduleActionError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ScheduleActionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleActionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleActionError_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleActionError_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ScheduleActionErrorCode(ev)
+			return nil
+		case schemas.ScheduleActionError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ScheduleActionError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// Holds one typed configuration change that a schedule action makes to a feed.
+// Each operation must contain exactly one property.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration
+//	ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration
+//	ScheduleActionOperationMemberUpdateOutputStatus
+type ScheduleActionOperation interface {
+	isScheduleActionOperation()
+}
+
+// The operation type that removes the game from an event clipping output.
+type ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration struct {
+	Value RemoveClippingDataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration) isScheduleActionOperation() {
+}
+func (v *ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionOperation_removeClippingDataSourceConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionOperationMemberRemoveClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The operation type that attaches a game to an event clipping output.
+type ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration struct {
+	Value UpdateClippingDataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration) isScheduleActionOperation() {
+}
+func (v *ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionOperation_updateClippingDataSourceConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionOperationMemberUpdateClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The operation type that enables or disables an output.
+type ScheduleActionOperationMemberUpdateOutputStatus struct {
+	Value UpdateOutputStatus
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionOperationMemberUpdateOutputStatus) isScheduleActionOperation() {}
+func (v *ScheduleActionOperationMemberUpdateOutputStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionOperation_updateOutputStatus)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionOperationMemberUpdateOutputStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Holds the typed start settings that determine when a schedule action runs.
+// Currently, only fixed mode is supported.
+//
+// The following types satisfy this interface:
+//
+//	ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings
+type ScheduleActionStartConfiguration interface {
+	isScheduleActionStartConfiguration()
+}
+
+// The start settings type for an action that runs once, at a fixed time.
+type ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings struct {
+	Value FixedModeScheduleActionStartSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings) isScheduleActionStartConfiguration() {
+}
+func (v *ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActionStartConfiguration_fixedModeScheduleActionStartSettings)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // A filter for a fixture search. It is used in the filters array of a
 // SearchFixtures request.
 type SearchFilter struct {
@@ -987,6 +1292,54 @@ func (v *TemplateGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Attaches a game to an event clipping output at the action's scheduled time.
+// This is a type of ScheduleActionOperation, and the output must be an event
+// clipping output.
+type UpdateClippingDataSourceConfiguration struct {
+
+	// The game that you want to attach to the output.
+	//
+	// This member is required.
+	DataSourceConfiguration *DataSourceConfiguration
+
+	// The name of the output that you want to attach the game to.
+	//
+	// This member is required.
+	OutputName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateClippingDataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClippingDataSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClippingDataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateClippingDataSourceConfiguration_dataSourceConfiguration)
+		v.DataSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputName != nil {
+		s.WriteString(schemas.UpdateClippingDataSourceConfiguration_outputName, *v.OutputName)
+	}
+}
+func (v *UpdateClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClippingDataSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClippingDataSourceConfiguration_dataSourceConfiguration:
+			v.DataSourceConfiguration = &DataSourceConfiguration{}
+			return v.DataSourceConfiguration.Deserialize(d)
+		case schemas.UpdateClippingDataSourceConfiguration_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.UpdateClippingDataSourceConfiguration_outputName, v.OutputName)
+		}
+		return nil
+	})
+}
+
 // Contains configuration information about one output in a feed. It is used in
 // the UpdateFeed action.
 type UpdateOutput struct {
@@ -1071,6 +1424,56 @@ func (v *UpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Enables or disables an output at the action's scheduled time. This is a type of
+// ScheduleActionOperation.
+type UpdateOutputStatus struct {
+
+	// The name of the output that you want to enable or disable. The output must
+	// exist in the feed when you create the action.
+	//
+	// This member is required.
+	OutputName *string
+
+	// Specifies whether the output is enabled or disabled after the action runs.
+	//
+	// This member is required.
+	Status OutputStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateOutputStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutputStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutputStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputName != nil {
+		s.WriteString(schemas.UpdateOutputStatus_outputName, *v.OutputName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateOutputStatus_status, string(v.Status))
+	}
+}
+func (v *UpdateOutputStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutputStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutputStatus_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.UpdateOutputStatus_outputName, v.OutputName)
+		case schemas.UpdateOutputStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOutputStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1082,4 +1485,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isOutputConfig() {}
+func (*UnknownUnionMember) isOutputConfig()                     {}
+func (*UnknownUnionMember) isScheduleActionOperation()          {}
+func (*UnknownUnionMember) isScheduleActionStartConfiguration() {}

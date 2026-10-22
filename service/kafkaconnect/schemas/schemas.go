@@ -112,11 +112,25 @@ var ListWorkerConfigurations = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/worker-configurations",
 	Code: 200})
 
+var PauseConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "PauseConnector",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/connectors/{connectorArn}/pause",
+	Code: 200})
+
 var RestartConnector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "RestartConnector",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/connectors/{connectorArn}/restart",
+	Code: 200})
+
+var ResumeConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "ResumeConnector",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/connectors/{connectorArn}/resume",
 	Code: 200})
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -1264,6 +1278,20 @@ var ListWorkerConfigurationsResponse_nextToken *smithy.Schema
 
 var ListWorkerConfigurationsResponse_workerConfigurations *smithy.Schema
 
+var PauseConnectorRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "PauseConnectorRequest",
+}, smithy.ShapeTypeStructure, 1)
+var PauseConnectorRequest_connectorArn *smithy.Schema
+
+var PauseConnectorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "PauseConnectorResponse",
+}, smithy.ShapeTypeStructure, 2)
+var PauseConnectorResponse_connectorArn *smithy.Schema
+
+var PauseConnectorResponse_connectorOperationArn *smithy.Schema
+
 var RestartConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "RestartConnectorRequest",
@@ -1279,6 +1307,20 @@ var RestartConnectorResponse = smithy.NewSchema(smithy.ShapeID{
 var RestartConnectorResponse_connectorArn *smithy.Schema
 
 var RestartConnectorResponse_connectorOperationArn *smithy.Schema
+
+var ResumeConnectorRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "ResumeConnectorRequest",
+}, smithy.ShapeTypeStructure, 1)
+var ResumeConnectorRequest_connectorArn *smithy.Schema
+
+var ResumeConnectorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "ResumeConnectorResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ResumeConnectorResponse_connectorArn *smithy.Schema
+
+var ResumeConnectorResponse_connectorOperationArn *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
@@ -1309,10 +1351,12 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "UpdateConnectorRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateConnectorRequest_capacity *smithy.Schema
 
 var UpdateConnectorRequest_connectorConfiguration *smithy.Schema
+
+var UpdateConnectorRequest_skipHealthValidation *smithy.Schema
 
 var UpdateConnectorRequest_connectorArn *smithy.Schema
 
@@ -1891,6 +1935,12 @@ func init() {
 
 	ListWorkerConfigurationsResponse_workerConfigurations = ListWorkerConfigurationsResponse.AddMember("workerConfigurations", ___listOfWorkerConfigurationSummary)
 
+	PauseConnectorRequest_connectorArn = PauseConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
+
+	PauseConnectorResponse_connectorArn = PauseConnectorResponse.AddMember("connectorArn", ___string)
+
+	PauseConnectorResponse_connectorOperationArn = PauseConnectorResponse.AddMember("connectorOperationArn", ___string)
+
 	RestartConnectorRequest_connectorArn = RestartConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
 
 	RestartConnectorRequest_onlyFailedTasks = RestartConnectorRequest.AddMember("onlyFailedTasks", ___boolean, &smithytraits.HTTPQuery{Name: "onlyFailedTasks"})
@@ -1898,6 +1948,12 @@ func init() {
 	RestartConnectorResponse_connectorArn = RestartConnectorResponse.AddMember("connectorArn", ___string)
 
 	RestartConnectorResponse_connectorOperationArn = RestartConnectorResponse.AddMember("connectorOperationArn", ___string)
+
+	ResumeConnectorRequest_connectorArn = ResumeConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
+
+	ResumeConnectorResponse_connectorArn = ResumeConnectorResponse.AddMember("connectorArn", ___string)
+
+	ResumeConnectorResponse_connectorOperationArn = ResumeConnectorResponse.AddMember("connectorOperationArn", ___string)
 
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", ___string, &smithytraits.HTTPLabel{})
 
@@ -1910,6 +1966,8 @@ func init() {
 	UpdateConnectorRequest_capacity = UpdateConnectorRequest.AddMember("capacity", CapacityUpdate)
 
 	UpdateConnectorRequest_connectorConfiguration = UpdateConnectorRequest.AddMember("connectorConfiguration", _ConnectorConfigurationUpdate)
+
+	UpdateConnectorRequest_skipHealthValidation = UpdateConnectorRequest.AddMember("skipHealthValidation", ___boolean)
 
 	UpdateConnectorRequest_connectorArn = UpdateConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
 

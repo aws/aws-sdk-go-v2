@@ -168,6 +168,58 @@ func serializeEffectiveLifecyclePolicyErrorDetails(s smithy.ShapeSerializer, sch
 	s.CloseList()
 }
 
+func serializeIngestionAlerts(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IngestionAlert) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIngestionFailureReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IngestionFailureReason) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIngestionJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IngestionJobSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIngestionStreamSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IngestionStreamSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeLifecyclePolicyDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LifecyclePolicyDetail) {
 	if v == nil {
 		return
@@ -280,6 +332,19 @@ func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSecurityPolicySummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SecurityPolicySummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeStreamBucketConfigs(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.StreamBucketConfig) {
 	if v == nil {
 		return
 	}
@@ -659,6 +724,94 @@ func deserializeEffectiveLifecyclePolicyErrorDetails(d smithy.ShapeDeserializer,
 	})
 }
 
+func deserializeIngestionAlerts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IngestionAlert) error {
+	*v = make([]types.IngestionAlert, 0)
+	var vv types.IngestionAlert
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IngestionAlert
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.IngestionAlert{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIngestionFailureReasons(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IngestionFailureReason) error {
+	*v = make([]types.IngestionFailureReason, 0)
+	var vv types.IngestionFailureReason
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IngestionFailureReason
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.IngestionFailureReason{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIngestionJobSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IngestionJobSummary) error {
+	*v = make([]types.IngestionJobSummary, 0)
+	var vv types.IngestionJobSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IngestionJobSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.IngestionJobSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIngestionStreamSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IngestionStreamSummary) error {
+	*v = make([]types.IngestionStreamSummary, 0)
+	var vv types.IngestionStreamSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IngestionStreamSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.IngestionStreamSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeLifecyclePolicyDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LifecyclePolicyDetail) error {
 	*v = make([]types.LifecyclePolicyDetail, 0)
 	var vv types.LifecyclePolicyDetail
@@ -867,6 +1020,28 @@ func deserializeSecurityPolicySummaries(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		vv = types.SecurityPolicySummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeStreamBucketConfigs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StreamBucketConfig) error {
+	*v = make([]types.StreamBucketConfig, 0)
+	var vv types.StreamBucketConfig
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StreamBucketConfig
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.StreamBucketConfig{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

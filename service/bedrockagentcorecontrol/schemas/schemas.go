@@ -2116,6 +2116,20 @@ var _CertificateSecretArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CertificateSecretArn",
 }, smithy.ShapeTypeString, 0)
 
+var CircuitBreakerConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "CircuitBreakerConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var CircuitBreakerConfiguration_mode *smithy.Schema
+
+var CircuitBreakerMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "CircuitBreakerMode",
+}, smithy.ShapeTypeEnum, 2)
+var CircuitBreakerMode_ENABLED *smithy.Schema
+
+var CircuitBreakerMode_DISABLED *smithy.Schema
+
 var ClaimMatchOperatorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ClaimMatchOperatorType",
@@ -2385,6 +2399,11 @@ var ComputeConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeUnion, 1)
 var ComputeConfiguration_ec2Configuration *smithy.Schema
 
+var _ConcreteModelId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ConcreteModelId",
+}, smithy.ShapeTypeString, 0)
+
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ConcurrentModificationException",
@@ -2395,10 +2414,12 @@ var ConcurrentModificationException_message *smithy.Schema
 var Condition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "Condition",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var Condition_matchPrincipals *smithy.Schema
 
 var Condition_matchPaths *smithy.Schema
+
+var Condition_matchModels *smithy.Schema
 
 var _Conditions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -3296,6 +3317,14 @@ var _DimensionKeys = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DimensionKeys_member *smithy.Schema
 
+var DimensionRatingScale = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "DimensionRatingScale",
+}, smithy.ShapeTypeUnion, 2, &smithytraits.Sensitive{})
+var DimensionRatingScale_numerical *smithy.Schema
+
+var DimensionRatingScale_categorical *smithy.Schema
+
 var _Dimensions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "Dimensions",
@@ -3646,6 +3675,17 @@ var EpisodicReflectionOverride_namespaceTemplates *smithy.Schema
 
 var EpisodicReflectionOverride_memoryRecordSchema *smithy.Schema
 
+var _ErrorStatusCodePattern = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ErrorStatusCodePattern",
+}, smithy.ShapeTypeString, 0)
+
+var _ErrorStatusCodePatterns = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ErrorStatusCodePatterns",
+}, smithy.ShapeTypeList, 1)
+var _ErrorStatusCodePatterns_member *smithy.Schema
+
 var _EvaluationConfigDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "EvaluationConfigDescription",
@@ -3655,6 +3695,32 @@ var _EvaluationConfigName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "EvaluationConfigName",
 }, smithy.ShapeTypeString, 0)
+
+var EvaluationDimension = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "EvaluationDimension",
+}, smithy.ShapeTypeStructure, 3)
+var EvaluationDimension_dimensionName *smithy.Schema
+
+var EvaluationDimension_dimensionInstruction *smithy.Schema
+
+var EvaluationDimension_dimensionRatingScale *smithy.Schema
+
+var _EvaluationDimensionInstruction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "EvaluationDimensionInstruction",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _EvaluationDimensionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "EvaluationDimensionName",
+}, smithy.ShapeTypeString, 0)
+
+var _EvaluationDimensions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "EvaluationDimensions",
+}, smithy.ShapeTypeList, 1)
+var _EvaluationDimensions_member *smithy.Schema
 
 var _EvaluatorArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -3826,6 +3892,54 @@ var ExtractionType = smithy.NewSchema(smithy.ShapeID{
 var ExtractionType_LLM_INFERRED *smithy.Schema
 
 var ExtractionType_STRICTLY_CONSISTENT *smithy.Schema
+
+var Fallback = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "Fallback",
+}, smithy.ShapeTypeStructure, 4)
+var Fallback_triggerOn *smithy.Schema
+
+var Fallback_firstByteTimeoutMilliseconds *smithy.Schema
+
+var Fallback_circuitBreaker *smithy.Schema
+
+var Fallback_targetFallback *smithy.Schema
+
+var FallbackError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "FallbackError",
+}, smithy.ShapeTypeEnum, 3)
+var FallbackError_CONNECTION_ERROR *smithy.Schema
+
+var FallbackError_FIRST_BYTE_TIMEOUT *smithy.Schema
+
+var FallbackError_UNROUTABLE *smithy.Schema
+
+var _FallbackErrors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "FallbackErrors",
+}, smithy.ShapeTypeList, 1)
+var _FallbackErrors_member *smithy.Schema
+
+var FallbackTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "FallbackTarget",
+}, smithy.ShapeTypeStructure, 4)
+var FallbackTarget_targetName *smithy.Schema
+
+var FallbackTarget_model *smithy.Schema
+
+var FallbackTarget_triggerOn *smithy.Schema
+
+var FallbackTarget_firstByteTimeoutMilliseconds *smithy.Schema
+
+var FallbackTriggers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "FallbackTriggers",
+}, smithy.ShapeTypeStructure, 2)
+var FallbackTriggers_statusCodes *smithy.Schema
+
+var FallbackTriggers_errors *smithy.Schema
 
 var FilesystemConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5716,6 +5830,34 @@ var ManagedVpcResource_tags *smithy.Schema
 
 var ManagedVpcResource_routingDomain *smithy.Schema
 
+var _MatchModelEntries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "MatchModelEntries",
+}, smithy.ShapeTypeList, 1)
+var _MatchModelEntries_member *smithy.Schema
+
+var MatchModelEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "MatchModelEntry",
+}, smithy.ShapeTypeStructure, 2)
+var MatchModelEntry_value *smithy.Schema
+
+var MatchModelEntry_operator *smithy.Schema
+
+var MatchModels = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "MatchModels",
+}, smithy.ShapeTypeStructure, 1)
+var MatchModels_anyOf *smithy.Schema
+
+var MatchOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "MatchOperator",
+}, smithy.ShapeTypeEnum, 2)
+var MatchOperator_StringEquals *smithy.Schema
+
+var MatchOperator_StringLike *smithy.Schema
+
 var _MatchPathPattern = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "MatchPathPattern",
@@ -7350,10 +7492,12 @@ var _RateConfigs_member *smithy.Schema
 var RatingScale = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "RatingScale",
-}, smithy.ShapeTypeUnion, 2, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeUnion, 3, &smithytraits.Sensitive{})
 var RatingScale_numerical *smithy.Schema
 
 var RatingScale_categorical *smithy.Schema
+
+var RatingScale_multiDimensional *smithy.Schema
 
 var ReasoningConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -8313,8 +8457,12 @@ var _StaticQueryParameterValue = smithy.NewSchema(smithy.ShapeID{
 var StaticRoute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "StaticRoute",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 3)
 var StaticRoute_targetName *smithy.Schema
+
+var StaticRoute_model *smithy.Schema
+
+var StaticRoute_fallback *smithy.Schema
 
 var Status = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -8606,6 +8754,12 @@ var _TargetDescription = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TargetDescription",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var _TargetFallbacks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "TargetFallbacks",
+}, smithy.ShapeTypeList, 1)
+var _TargetFallbacks_member *smithy.Schema
+
 var _TargetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "TargetId",
@@ -8712,12 +8866,16 @@ var _TargetTrafficSplitEntries_member *smithy.Schema
 var TargetTrafficSplitEntry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "TargetTrafficSplitEntry",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
+var TargetTrafficSplitEntry_targetName *smithy.Schema
+
+var TargetTrafficSplitEntry_model *smithy.Schema
+
+var TargetTrafficSplitEntry_fallback *smithy.Schema
+
 var TargetTrafficSplitEntry_name *smithy.Schema
 
 var TargetTrafficSplitEntry_weight *smithy.Schema
-
-var TargetTrafficSplitEntry_targetName *smithy.Schema
 
 var TargetTrafficSplitEntry_description *smithy.Schema
 
@@ -13945,13 +14103,59 @@ func init() {
 
 	ConfigurationBundleAction_weightedOverride = ConfigurationBundleAction.AddMember("weightedOverride", WeightedOverride)
 
+	_ErrorStatusCodePatterns_member = _ErrorStatusCodePatterns.AddMember("member", _ErrorStatusCodePattern)
+
+	FallbackError_CONNECTION_ERROR = FallbackError.AddMember("CONNECTION_ERROR", smithyprelude.Unit)
+
+	FallbackError_FIRST_BYTE_TIMEOUT = FallbackError.AddMember("FIRST_BYTE_TIMEOUT", smithyprelude.Unit)
+
+	FallbackError_UNROUTABLE = FallbackError.AddMember("UNROUTABLE", smithyprelude.Unit)
+
+	_FallbackErrors_member = _FallbackErrors.AddMember("member", FallbackError)
+
+	FallbackTriggers_statusCodes = FallbackTriggers.AddMember("statusCodes", _ErrorStatusCodePatterns)
+
+	FallbackTriggers_errors = FallbackTriggers.AddMember("errors", _FallbackErrors)
+
+	CircuitBreakerMode_ENABLED = CircuitBreakerMode.AddMember("ENABLED", smithyprelude.Unit)
+
+	CircuitBreakerMode_DISABLED = CircuitBreakerMode.AddMember("DISABLED", smithyprelude.Unit)
+
+	CircuitBreakerConfiguration_mode = CircuitBreakerConfiguration.AddMember("mode", CircuitBreakerMode)
+
+	FallbackTarget_targetName = FallbackTarget.AddMember("targetName", _TargetName)
+
+	FallbackTarget_model = FallbackTarget.AddMember("model", _ConcreteModelId)
+
+	FallbackTarget_triggerOn = FallbackTarget.AddMember("triggerOn", FallbackTriggers)
+
+	FallbackTarget_firstByteTimeoutMilliseconds = FallbackTarget.AddMember("firstByteTimeoutMilliseconds", smithyprelude.Integer)
+
+	_TargetFallbacks_member = _TargetFallbacks.AddMember("member", FallbackTarget)
+
+	Fallback_triggerOn = Fallback.AddMember("triggerOn", FallbackTriggers)
+
+	Fallback_firstByteTimeoutMilliseconds = Fallback.AddMember("firstByteTimeoutMilliseconds", smithyprelude.Integer)
+
+	Fallback_circuitBreaker = Fallback.AddMember("circuitBreaker", CircuitBreakerConfiguration)
+
+	Fallback_targetFallback = Fallback.AddMember("targetFallback", _TargetFallbacks)
+
 	StaticRoute_targetName = StaticRoute.AddMember("targetName", _TargetName)
+
+	StaticRoute_model = StaticRoute.AddMember("model", _ConcreteModelId)
+
+	StaticRoute_fallback = StaticRoute.AddMember("fallback", Fallback)
+
+	TargetTrafficSplitEntry_targetName = TargetTrafficSplitEntry.AddMember("targetName", _TargetName)
+
+	TargetTrafficSplitEntry_model = TargetTrafficSplitEntry.AddMember("model", _ConcreteModelId)
+
+	TargetTrafficSplitEntry_fallback = TargetTrafficSplitEntry.AddMember("fallback", Fallback)
 
 	TargetTrafficSplitEntry_name = TargetTrafficSplitEntry.AddMember("name", smithyprelude.String)
 
 	TargetTrafficSplitEntry_weight = TargetTrafficSplitEntry.AddMember("weight", smithyprelude.Integer)
-
-	TargetTrafficSplitEntry_targetName = TargetTrafficSplitEntry.AddMember("targetName", _TargetName)
 
 	TargetTrafficSplitEntry_description = TargetTrafficSplitEntry.AddMember("description", smithyprelude.String)
 
@@ -14839,9 +15043,23 @@ func init() {
 
 	MatchPaths_anyOf = MatchPaths.AddMember("anyOf", _MatchPathPatterns)
 
+	MatchOperator_StringEquals = MatchOperator.AddMember("StringEquals", smithyprelude.Unit)
+
+	MatchOperator_StringLike = MatchOperator.AddMember("StringLike", smithyprelude.Unit)
+
+	MatchModelEntry_value = MatchModelEntry.AddMember("value", _ModelPattern)
+
+	MatchModelEntry_operator = MatchModelEntry.AddMember("operator", MatchOperator)
+
+	_MatchModelEntries_member = _MatchModelEntries.AddMember("member", MatchModelEntry)
+
+	MatchModels_anyOf = MatchModels.AddMember("anyOf", _MatchModelEntries)
+
 	Condition_matchPrincipals = Condition.AddMember("matchPrincipals", MatchPrincipals)
 
 	Condition_matchPaths = Condition.AddMember("matchPaths", MatchPaths)
+
+	Condition_matchModels = Condition.AddMember("matchModels", MatchModels)
 
 	_Conditions_member = _Conditions.AddMember("member", Condition)
 
@@ -15529,6 +15747,18 @@ func init() {
 
 	DescriptorType_AGENT_SKILLS = DescriptorType.AddMember("AGENT_SKILLS", smithyprelude.Unit)
 
+	NumericalScaleDefinition_definition = NumericalScaleDefinition.AddMember("definition", smithyprelude.String)
+
+	NumericalScaleDefinition_value = NumericalScaleDefinition.AddMember("value", smithyprelude.Double)
+
+	NumericalScaleDefinition_label = NumericalScaleDefinition.AddMember("label", smithyprelude.String)
+
+	_NumericalScaleDefinitions_member = _NumericalScaleDefinitions.AddMember("member", NumericalScaleDefinition)
+
+	DimensionRatingScale_numerical = DimensionRatingScale.AddMember("numerical", _NumericalScaleDefinitions)
+
+	DimensionRatingScale_categorical = DimensionRatingScale.AddMember("categorical", _CategoricalScaleDefinitions)
+
 	EfsAccessPointConfiguration_accessPointArn = EfsAccessPointConfiguration.AddMember("accessPointArn", _EfsAccessPointArn)
 
 	EfsAccessPointConfiguration_mountPath = EfsAccessPointConfiguration.AddMember("mountPath", _MountPath)
@@ -15575,17 +15805,19 @@ func init() {
 
 	EpisodicReflectionConfiguration_memoryRecordSchema = EpisodicReflectionConfiguration.AddMember("memoryRecordSchema", MemoryRecordSchema)
 
-	NumericalScaleDefinition_definition = NumericalScaleDefinition.AddMember("definition", smithyprelude.String)
+	EvaluationDimension_dimensionName = EvaluationDimension.AddMember("dimensionName", _EvaluationDimensionName)
 
-	NumericalScaleDefinition_value = NumericalScaleDefinition.AddMember("value", smithyprelude.Double)
+	EvaluationDimension_dimensionInstruction = EvaluationDimension.AddMember("dimensionInstruction", _EvaluationDimensionInstruction)
 
-	NumericalScaleDefinition_label = NumericalScaleDefinition.AddMember("label", smithyprelude.String)
+	EvaluationDimension_dimensionRatingScale = EvaluationDimension.AddMember("dimensionRatingScale", DimensionRatingScale)
 
-	_NumericalScaleDefinitions_member = _NumericalScaleDefinitions.AddMember("member", NumericalScaleDefinition)
+	_EvaluationDimensions_member = _EvaluationDimensions.AddMember("member", EvaluationDimension)
 
 	RatingScale_numerical = RatingScale.AddMember("numerical", _NumericalScaleDefinitions)
 
 	RatingScale_categorical = RatingScale.AddMember("categorical", _CategoricalScaleDefinitions)
+
+	RatingScale_multiDimensional = RatingScale.AddMember("multiDimensional", _EvaluationDimensions)
 
 	LlmAsAJudgeEvaluatorConfig_instructions = LlmAsAJudgeEvaluatorConfig.AddMember("instructions", _EvaluatorInstructions)
 

@@ -229,6 +229,9 @@ func ExampleCondition_outputUsage() {
 	var union types.Condition
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ConditionMemberMatchModels:
+		_ = v.Value // Value is types.MatchModels
+
 	case *types.ConditionMemberMatchPaths:
 		_ = v.Value // Value is types.MatchPaths
 
@@ -244,6 +247,7 @@ func ExampleCondition_outputUsage() {
 	}
 }
 
+var _ *types.MatchModels
 var _ *types.MatchPaths
 var _ *types.MatchPrincipals
 
@@ -591,6 +595,28 @@ func ExampleDataSourceType_outputUsage() {
 
 var _ *types.InlineExamplesSource
 var _ *types.S3Source
+
+func ExampleDimensionRatingScale_outputUsage() {
+	var union types.DimensionRatingScale
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DimensionRatingScaleMemberCategorical:
+		_ = v.Value // Value is []types.CategoricalScaleDefinition
+
+	case *types.DimensionRatingScaleMemberNumerical:
+		_ = v.Value // Value is []types.NumericalScaleDefinition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.CategoricalScaleDefinition
+var _ []types.NumericalScaleDefinition
 
 func ExampleEvaluatorConfig_outputUsage() {
 	var union types.EvaluatorConfig
@@ -1573,6 +1599,9 @@ func ExampleRatingScale_outputUsage() {
 	case *types.RatingScaleMemberCategorical:
 		_ = v.Value // Value is []types.CategoricalScaleDefinition
 
+	case *types.RatingScaleMemberMultiDimensional:
+		_ = v.Value // Value is []types.EvaluationDimension
+
 	case *types.RatingScaleMemberNumerical:
 		_ = v.Value // Value is []types.NumericalScaleDefinition
 
@@ -1587,6 +1616,7 @@ func ExampleRatingScale_outputUsage() {
 
 var _ []types.CategoricalScaleDefinition
 var _ []types.NumericalScaleDefinition
+var _ []types.EvaluationDimension
 
 func ExampleRecordExpirySpecification_outputUsage() {
 	var union types.RecordExpirySpecification

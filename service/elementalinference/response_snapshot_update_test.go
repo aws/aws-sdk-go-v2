@@ -293,6 +293,54 @@ func TestUpdateResponseSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateScheduleAction(t *testing.T) {
+	want := &CreateScheduleActionOutput{
+		ActionName: ptr.String("__ActionName__"),
+		StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+			Value: types.FixedModeScheduleActionStartSettings{
+				ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Operations: []types.ScheduleActionOperation{
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+			&types.ScheduleActionOperationMemberUpdateOutputStatus{
+				Value: types.UpdateOutputStatus{
+					OutputName: ptr.String("__OutputName__"),
+					Status:     types.OutputStatus("ENABLED"),
+				},
+			},
+		},
+		Status: types.ScheduleActionStatus("PENDING"),
+		Error: &types.ScheduleActionError{
+			ErrorCode:    types.ScheduleActionErrorCode("INVALID_ACTION_TARGET"),
+			ErrorMessage: ptr.String("__ErrorMessage__"),
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.CreateScheduleAction, schemas.CreateScheduleActionResponse, schemas.CreateScheduleActionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateScheduleAction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteDictionary(t *testing.T) {
 	want := &DeleteDictionaryOutput{
 		Arn:    ptr.String("__Arn__"),
@@ -363,6 +411,30 @@ func TestUpdateResponseSnapshot_DeleteFeedPolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteFeedPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteScheduleAction(t *testing.T) {
+	want := &DeleteScheduleActionOutput{
+		ActionName: ptr.String("__ActionName__"),
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteScheduleAction, schemas.DeleteScheduleActionResponse, schemas.DeleteScheduleActionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteScheduleAction.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -685,6 +757,86 @@ func TestUpdateResponseSnapshot_ListFeeds(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListFeeds.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListScheduleActions(t *testing.T) {
+	want := &ListScheduleActionsOutput{
+		ScheduleActions: []types.ScheduleAction{
+			{
+				ActionName: ptr.String("__ActionName__"),
+				StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+					Value: types.FixedModeScheduleActionStartSettings{
+						ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				Operations: []types.ScheduleActionOperation{
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+				},
+				Status: types.ScheduleActionStatus("PENDING"),
+				Error: &types.ScheduleActionError{
+					ErrorCode:    types.ScheduleActionErrorCode("INVALID_ACTION_TARGET"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+				},
+			},
+			{
+				ActionName: ptr.String("__ActionName__"),
+				StartConfiguration: &types.ScheduleActionStartConfigurationMemberFixedModeScheduleActionStartSettings{
+					Value: types.FixedModeScheduleActionStartSettings{
+						ScheduledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				Operations: []types.ScheduleActionOperation{
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+					&types.ScheduleActionOperationMemberUpdateOutputStatus{
+						Value: types.UpdateOutputStatus{
+							OutputName: ptr.String("__OutputName__"),
+							Status:     types.OutputStatus("ENABLED"),
+						},
+					},
+				},
+				Status: types.ScheduleActionStatus("PENDING"),
+				Error: &types.ScheduleActionError{
+					ErrorCode:    types.ScheduleActionErrorCode("INVALID_ACTION_TARGET"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.ListScheduleActions, schemas.ListScheduleActionsResponse, schemas.ListScheduleActionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListScheduleActions.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

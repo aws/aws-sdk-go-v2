@@ -972,6 +972,31 @@ func TestUpdateResponseSnapshot_ListWorkerConfigurations(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_PauseConnector(t *testing.T) {
+	want := &PauseConnectorOutput{
+		ConnectorArn:          ptr.String("__ConnectorArn__"),
+		ConnectorOperationArn: ptr.String("__ConnectorOperationArn__"),
+	}
+	proto := restjson1.New(schemas.KafkaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.PauseConnector, schemas.PauseConnectorResponse, schemas.PauseConnectorResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PauseConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RestartConnector(t *testing.T) {
 	want := &RestartConnectorOutput{
 		ConnectorArn:          ptr.String("__ConnectorArn__"),
@@ -993,6 +1018,31 @@ func TestUpdateResponseSnapshot_RestartConnector(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("RestartConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ResumeConnector(t *testing.T) {
+	want := &ResumeConnectorOutput{
+		ConnectorArn:          ptr.String("__ConnectorArn__"),
+		ConnectorOperationArn: ptr.String("__ConnectorOperationArn__"),
+	}
+	proto := restjson1.New(schemas.KafkaConnect)
+	opSchema := smithy.NewOperationSchema(schemas.ResumeConnector, schemas.ResumeConnectorResponse, schemas.ResumeConnectorResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ResumeConnector.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -58,6 +58,17 @@ type CreateConnectAttachmentInput struct {
 	// The client token associated with the request.
 	ClientToken *string
 
+	// The NAT rules for the Connect attachment, up to 50 rules.
+	NatGatewayRules []types.NatRuleRequest
+
+	// Specifies whether to enable NAT gateway support on the Connect attachment. NAT
+	// is supported only on Connect attachments that use the GRE tunnel protocol.
+	// Tunnel-less Connect attachments aren't supported. To enable NAT gateway support,
+	// you must also specify at least one NAT rule. If you don't specify a value, NAT
+	// gateway support is disabled. Only the core network owner can configure NAT on an
+	// attachment.
+	NatGatewaySupport types.NatGatewaySupportValue
+
 	// The routing policy label to apply to the Connect attachment for traffic routing
 	// decisions.
 	RoutingPolicyLabel *string
@@ -83,6 +94,10 @@ func (v *CreateConnectAttachmentInput) SerializeMembers(s smithy.ShapeSerializer
 	}
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.CreateConnectAttachmentRequest_EdgeLocation, *v.EdgeLocation)
+	}
+	serializeNatRuleRequestList(s, schemas.CreateConnectAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.CreateConnectAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
 	}
 	if v.Options != nil {
 		s.WriteStruct(schemas.CreateConnectAttachmentRequest_Options)

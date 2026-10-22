@@ -9088,6 +9088,7 @@ func TestUpdateResponseSnapshot_GetTrafficDistribution(t *testing.T) {
 				},
 			},
 		},
+		LastFailoverTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)
 	opSchema := smithy.NewOperationSchema(schemas.GetTrafficDistribution, schemas.GetTrafficDistributionResponse, schemas.GetTrafficDistributionResponse)
@@ -11424,6 +11425,74 @@ func TestUpdateResponseSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListRealtimeContactAnalysisSegmentsV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListReplicationFindings(t *testing.T) {
+	want := &ListReplicationFindingsOutput{
+		ReplicationFindingsList: []types.ReplicationFinding{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Region:        ptr.String("__Region__"),
+				ResourceType:  ptr.String("__ResourceType__"),
+				Name:          ptr.String("__Name__"),
+				Operation:     ptr.String("__Operation__"),
+				ReferenceCode: ptr.String("__ReferenceCode__"),
+				Message:       ptr.String("__Message__"),
+			},
+		},
+		ApproximateDriftedResourceCounts: []types.ApproximateDriftedResourceCount{
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Region:    ptr.String("__Region__"),
+				Count:     ptr.Int64(1),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		ResourceReplicationStatuses: []types.ResourceReplicationStatus{
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+			{
+				Region: ptr.String("__Region__"),
+				Status: ptr.String("__Status__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.ListReplicationFindings, schemas.ListReplicationFindingsResponse, schemas.ListReplicationFindingsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListReplicationFindings.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

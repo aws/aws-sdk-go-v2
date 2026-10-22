@@ -43,6 +43,23 @@ type CreateSiteToSiteVpnAttachmentInput struct {
 	// The client token associated with the request.
 	ClientToken *string
 
+	// The NAT rules for the Site-to-Site VPN attachment, up to 50 rules.
+	NatGatewayRules []types.NatRuleRequest
+
+	// Specifies whether to enable NAT gateway support on the Site-to-Site VPN
+	// attachment. To enable NAT gateway support, you must also specify at least one
+	// NAT rule. If you don't specify a value, NAT gateway support is disabled. Only
+	// the core network owner can configure NAT on an attachment.
+	NatGatewaySupport types.NatGatewaySupportValue
+
+	// Specifies whether the core network installs system routes for the NAT CIDR
+	// blocks of the attachment's NAT rules. System routes have a route type of SYSTEM
+	// . NAT is applied to traffic whether or not this option is enabled. The default
+	// is true for VPN connections that use BGP and false for VPN connections that use
+	// static routing. If the VPN connection uses static routing, you must specify
+	// false or omit this parameter.
+	NatSystemRouteSupport *bool
+
 	// The routing policy label to apply to the Site-to-Site VPN attachment for
 	// traffic routing decisions.
 	RoutingPolicyLabel *string
@@ -65,6 +82,13 @@ func (v *CreateSiteToSiteVpnAttachmentInput) SerializeMembers(s smithy.ShapeSeri
 	}
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	serializeNatRuleRequestList(s, schemas.CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewaySupport != "" {
+		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
+	}
+	if v.NatSystemRouteSupport != nil {
+		s.WriteBool(schemas.CreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport, *v.NatSystemRouteSupport)
 	}
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)

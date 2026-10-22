@@ -45,6 +45,19 @@ func serializeAttachmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeAttachmentNatConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AttachmentNatConfiguration) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeAttachmentRoutingPolicyAssociationsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AttachmentRoutingPolicyAssociationSummary) {
 	if v == nil {
 		return
@@ -414,6 +427,32 @@ func serializeLinkIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeLinkList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Link) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeNatRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []NatRule) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeNatRuleRequestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []NatRuleRequest) {
 	if v == nil {
 		return
 	}
@@ -818,6 +857,28 @@ func deserializeAttachmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		vv = Attachment{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAttachmentNatConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AttachmentNatConfiguration) error {
+	*v = make([]AttachmentNatConfiguration, 0)
+	var vv AttachmentNatConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AttachmentNatConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AttachmentNatConfiguration{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1490,6 +1551,50 @@ func deserializeLinkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Link
 		}
 
 		vv = Link{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeNatRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NatRule) error {
+	*v = make([]NatRule, 0)
+	var vv NatRule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero NatRule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = NatRule{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeNatRuleRequestList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NatRuleRequest) error {
+	*v = make([]NatRuleRequest, 0)
+	var vv NatRuleRequest
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero NatRuleRequest
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = NatRuleRequest{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

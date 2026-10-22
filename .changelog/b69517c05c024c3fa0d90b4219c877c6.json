@@ -1,0 +1,8 @@
+{
+    "id": "b69517c0-5c02-4c3f-a0d9-0b4219c877c6",
+    "type": "feature",
+    "description": "AWS Transit Gateway now provides managed one-to-one NAT directly on its attachments, through integration with Regional Private NAT Gateway. Use ModifyTransitGatewayAttachmentNatConfiguration to enable NAT and configure NAT rules, and GetTransitGatewayAttachmentNatConfiguration to view them.",
+    "modules": [
+        "service/ec2"
+    ]
+}

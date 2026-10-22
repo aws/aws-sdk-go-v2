@@ -1,0 +1,5 @@
+POST /environments/__EnvironmentId__/code-scans
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__"}
