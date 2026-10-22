@@ -1,3 +1,9 @@
+# v1.172.0 (2026-10-22)
+
+* **Feature**: Add support for large worker types in AWS Glue
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.171.1 (2026-10-19)
 
 * **Bug Fix**: Allow lists with null values to deserialize into its zero value instead of failing

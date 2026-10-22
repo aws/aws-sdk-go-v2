@@ -1,3 +1,9 @@
+# v1.208.0 (2026-10-22)
+
+* **Feature**: Adds support for customer queryable replication errors.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.207.0 (2026-10-21)
 
 * **Feature**: Added support for AWS-managed security profiles.

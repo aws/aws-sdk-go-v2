@@ -1,8 +1,0 @@
-{
-    "id": "7e267f3e-d94b-483d-a1ae-06f1dda78729",
-    "type": "feature",
-    "description": "Add support for large worker types in AWS Glue",
-    "modules": [
-        "service/glue"
-    ]
-}

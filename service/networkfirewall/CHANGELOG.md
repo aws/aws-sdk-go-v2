@@ -1,3 +1,8 @@
+# v1.77.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.77.0 (2026-10-21)
 
 * **Feature**: Adds support for Network Firewall Resolved IP validation.

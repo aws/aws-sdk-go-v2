@@ -1,3 +1,10 @@
+# v1.55.0 (2026-10-22)
+
+* **Feature**: Adds the dimension name to evaluation results and batch evaluation summaries. For multi-dimensional LLM-as-a-Judge evaluators, each result and summary now identifies which dimension it corresponds to.
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-10-21)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

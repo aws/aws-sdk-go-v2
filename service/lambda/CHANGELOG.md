@@ -1,3 +1,9 @@
+# v1.113.3 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Documentation**: AWS Lambda durable functions now supports payloads up to 1 MB for checkpoints, callback completion, and error details.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.113.2 (2026-10-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

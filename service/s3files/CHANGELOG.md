@@ -1,3 +1,8 @@
+# v1.9.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2026-10-20)
 
 * **Feature**: S3 Files adds support for the "Misconfigured" file system status.

@@ -1,3 +1,8 @@
+# v1.101.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.101.0 (2026-10-19)
 
 * **Feature**: Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs

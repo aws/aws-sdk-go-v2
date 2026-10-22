@@ -1,3 +1,9 @@
+# v1.341.0 (2026-10-22)
+
+* **Feature**: AWS Transit Gateway now provides managed one-to-one NAT directly on its attachments, through integration with Regional Private NAT Gateway. Use ModifyTransitGatewayAttachmentNatConfiguration to enable NAT and configure NAT rules, and GetTransitGatewayAttachmentNatConfiguration to view them.
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.340.0 (2026-10-21)
 
 * **Feature**: Adds new response fields to DescribeInstanceStatus and Network Insights analysis results.

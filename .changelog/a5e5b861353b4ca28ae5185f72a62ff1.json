@@ -1,8 +1,0 @@
-{
-    "id": "a5e5b861-353b-4ca2-8ae5-185f72a62ff1",
-    "type": "feature",
-    "description": "Adds support for customer queryable replication errors.",
-    "modules": [
-        "service/connect"
-    ]
-}

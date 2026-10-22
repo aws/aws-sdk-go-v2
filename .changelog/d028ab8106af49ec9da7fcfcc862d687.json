@@ -1,8 +1,0 @@
-{
-    "id": "d028ab81-06af-49ec-9da7-fcfcc862d687",
-    "type": "feature",
-    "description": "Elemental Inference now supports feed scheduling, letting you apply feed configuration changes at a time you choose instead of building your own automation.",
-    "modules": [
-        "service/elementalinference"
-    ]
-}

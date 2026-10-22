@@ -1,8 +1,0 @@
-{
-    "id": "076c43e2-f6f7-470d-9885-926e7a6c698f",
-    "type": "feature",
-    "description": "Amazon MSK Connect now supports pausing and resuming connectors via the asynchronous PauseConnector and ResumeConnector APIs. Paused connectors keep their configuration and committed offsets and resume where they left off. Each call returns an operation ARN to track with DescribeConnectorOperation.",
-    "modules": [
-        "service/kafkaconnect"
-    ]
-}

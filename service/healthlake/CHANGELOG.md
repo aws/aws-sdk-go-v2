@@ -1,3 +1,8 @@
+# v1.54.1 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-10-21)
 
 * **Feature**: Update the UpdateProfileWithAgent API to return a streaming response to provide more frequent updates on what the agent is doing.

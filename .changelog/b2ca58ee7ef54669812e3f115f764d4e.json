@@ -1,8 +1,0 @@
-{
-    "id": "b2ca58ee-7ef5-4669-812e-3f115f764d4e",
-    "type": "documentation",
-    "description": "AWS Lambda durable functions now supports payloads up to 1 MB for checkpoints, callback completion, and error details.",
-    "modules": [
-        "service/lambda"
-    ]
-}

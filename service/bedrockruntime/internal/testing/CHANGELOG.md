@@ -1,3 +1,8 @@
+# v1.0.0-preview.47 (2026-10-22)
+
+* **Bug Fix**: Update smithy-go to v1.28.6
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.46 (2026-10-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "6c7da0be-1cf9-44d2-a5fa-14f8bbe42d6b",
-    "type": "feature",
-    "description": "Adds model-based routing and fallback to AgentCore Gateway rules. Rules can match the requested model, route to a specific model, and fall back across inference targets with an optional circuit breaker. Adds multi-dimensional rating scales for AgentCore Evaluations LLM-as-a-Judge evaluators.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

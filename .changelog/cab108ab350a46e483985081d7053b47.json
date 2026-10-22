@@ -1,8 +1,0 @@
-{
-    "id": "cab108ab-350a-46e4-8398-5081d7053b47",
-    "type": "feature",
-    "description": "Adds RevokeConnectionToken operation for Amazon IVS Real-Time Streaming.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

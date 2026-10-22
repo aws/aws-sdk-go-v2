@@ -1,8 +1,0 @@
-{
-    "id": "ab6c5889-ab6c-4b11-b6a4-fbcb9a920664",
-    "type": "feature",
-    "description": "Adds the dimension name to evaluation results and batch evaluation summaries. For multi-dimensional LLM-as-a-Judge evaluators, each result and summary now identifies which dimension it corresponds to.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}
