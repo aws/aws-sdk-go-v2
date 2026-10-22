@@ -7,6 +7,7 @@ import (
 	"context"
 	"crypto/rand"
 	"crypto/tls"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -515,22 +516,95 @@ func testDownloadObject(t *testing.T, bucket string, testData downloadObjectTest
 	}
 }
 
-// testDownloadObjectWithChangingPartSize uploads testData.Body as a multipart
-// object whose parts have unequal sizes (testData.PartSizes), then downloads it
-// through the transfer manager and asserts the downloaded bytes exactly equal
-// what was uploaded. This exercises the download path that must not assume all
-// parts share the first part's size (#3526). S3 requires every part except the
-// last to be at least 5MB, so PartSizes must respect that.
-func testDownloadObjectWithChangingPartSize(t *testing.T, bucket string, testData downloadObjectTestData) {
-	key := UniqueID()
+type downloadFileTestData struct {
+	Key         string
+	Range       string
+	DirectIO    bool
+	OptFns      []func(*Options)
+	Existing    []byte // written to the destination before downloading
+	ExpectBody  []byte
+	ExpectError string
+}
 
-	body, err := io.ReadAll(testData.Body)
-	if err != nil {
-		t.Fatalf("expect no error reading test body, got %v", err)
+// testDownloadFile downloads testData.Key with DownloadFile and asserts the
+// destination on disk: on success it holds exactly ExpectBody, on failure it
+// holds Existing (or does not exist), and no temp file is left behind.
+func testDownloadFile(t *testing.T, bucket string, testData downloadFileTestData) {
+	t.Helper()
+
+	dir := t.TempDir()
+	path := filepath.Join(dir, "object")
+	if testData.Existing != nil {
+		if err := os.WriteFile(path, testData.Existing, 0o644); err != nil {
+			t.Fatal(err)
+		}
 	}
 
+	in := &DownloadFileInput{
+		Bucket:   aws.String(bucket),
+		Key:      aws.String(testData.Key),
+		FilePath: path,
+		DirectIO: testData.DirectIO,
+	}
+	if testData.Range != "" {
+		in.Range = aws.String(testData.Range)
+	}
+	out, err := s3TransferManagerClient.DownloadFile(context.Background(), in, testData.OptFns...)
+
+	want := testData.ExpectBody
+	if testData.ExpectError != "" {
+		if err == nil || !strings.Contains(err.Error(), testData.ExpectError) {
+			t.Fatalf("expect error to contain %q, got %v", testData.ExpectError, err)
+		}
+		want = testData.Existing
+	} else {
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		if e, a := int64(len(want)), aws.ToInt64(out.ContentLength); e != a {
+			t.Errorf("expect ContentLength %d, got %d", e, a)
+		}
+	}
+
+	fi, err := os.Stat(path)
+	if want == nil {
+		if !errors.Is(err, os.ErrNotExist) {
+			t.Fatalf("expect destination to not exist, got %v", err)
+		}
+	} else {
+		if err != nil {
+			t.Fatal(err)
+		}
+		if e, a := int64(len(want)), fi.Size(); e != a {
+			t.Fatalf("expect file size %d, got %d", e, a)
+		}
+		got, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !bytes.Equal(want, got) {
+			t.Fatalf("expect file contents to match (%d bytes)", len(want))
+		}
+	}
+
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, e := range entries {
+		if e.Name() != "object" {
+			t.Errorf("unexpected file left in destination directory: %s", e.Name())
+		}
+	}
+}
+
+// uploadWithPartSizes uploads body as a multipart object whose parts have
+// exactly partSizes bytes. All but the last must be >= 5MB per the S3 minimum.
+func uploadWithPartSizes(t *testing.T, bucket, key string, body []byte, partSizes []int64) {
+	t.Helper()
+
 	var total int64
-	for _, s := range testData.PartSizes {
+	for _, s := range partSizes {
 		total += s
 	}
 	if total != int64(len(body)) {
@@ -558,7 +632,7 @@ func testDownloadObjectWithChangingPartSize(t *testing.T, bucket string, testDat
 
 	var completedParts []s3types.CompletedPart
 	var offset int64
-	for i, size := range testData.PartSizes {
+	for i, size := range partSizes {
 		partNum := int32(i + 1)
 		partOut, err := s3Client.UploadPart(context.Background(),
 			&s3.UploadPartInput{
@@ -589,6 +663,23 @@ func testDownloadObjectWithChangingPartSize(t *testing.T, bucket string, testDat
 		abort()
 		t.Fatalf("expect no error completing multipart upload, got %v", err)
 	}
+}
+
+// testDownloadObjectWithChangingPartSize uploads testData.Body as a multipart
+// object whose parts have unequal sizes (testData.PartSizes), then downloads it
+// through the transfer manager and asserts the downloaded bytes exactly equal
+// what was uploaded. This exercises the download path that must not assume all
+// parts share the first part's size (#3526). S3 requires every part except the
+// last to be at least 5MB, so PartSizes must respect that.
+func testDownloadObjectWithChangingPartSize(t *testing.T, bucket string, testData downloadObjectTestData) {
+	key := UniqueID()
+
+	body, err := io.ReadAll(testData.Body)
+	if err != nil {
+		t.Fatalf("expect no error reading test body, got %v", err)
+	}
+
+	uploadWithPartSizes(t, bucket, key, body, testData.PartSizes)
 
 	w := types.NewWriteAtBuffer(make([]byte, 0))
 	_, err = s3TransferManagerClient.DownloadObject(context.Background(),

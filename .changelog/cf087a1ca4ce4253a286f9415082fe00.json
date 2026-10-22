@@ -1,0 +1,8 @@
+{
+    "id": "cf087a1c-a4ce-4253-a286-f9415082fe00",
+    "type": "feature",
+    "description": "Add NewFromConfig constructor, which constructs a transfermanager-owned S3 client and underlying HTTP transport by default. Use of this new constructor is preferred for high-throughput operations, though additional tuning may still be required.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}

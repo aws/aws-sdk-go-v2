@@ -1,0 +1,8 @@
+{
+    "id": "3bcc9b97-ce12-4e4f-bd19-8d1e082ca7f9",
+    "type": "feature",
+    "description": "Add DownloadFile API. DownloadFile accepts a filepath and owns the underlying file descriptor, allowing the transfermanager to perform platform-specific optimizations around writing to disk.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}

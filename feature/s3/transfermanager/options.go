@@ -9,7 +9,7 @@ import (
 
 // Options provides params needed for transfer api calls
 type Options struct {
-	// The client to use when uploading to S3.
+	// The client to use when uploading to or downloading from S3.
 	S3 S3APIClient
 
 	// The buffer size (in bytes) to use when buffering data into chunks and
@@ -55,7 +55,7 @@ type Options struct {
 	RequestChecksumCalculation aws.RequestChecksumCalculation
 
 	// The number of goroutines to spin up in parallel per call to transfer single object parts or directory objects.
-	// If this is set to zero, the DefaultUploadConcurrency value will be used.
+	// If this is set to zero, New defaults to 5 and NewFromConfig defaults to 128.
 	//
 	// The concurrency pool is not shared between multiple API calls.
 	Concurrency int
