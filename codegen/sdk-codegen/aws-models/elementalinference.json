@@ -595,6 +595,134 @@
                 "target": "com.amazonaws.elementalinference#CreateOutput"
             }
         },
+        "com.amazonaws.elementalinference#CreateScheduleAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#CreateScheduleActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#CreateScheduleActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a schedule action for a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a schedule action on a feed. A schedule action applies configuration changes to the feed at a time that you specify, in the same way as an UpdateFeed request. </p> <p>Elemental Inference validates the targets of the action when you create it.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/feed/{id}/schedule-actions",
+                    "code": 201
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateScheduleActionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ID of the feed that you want to add the schedule action to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the schedule action. The name must be unique within the feed. You can reuse the name of an action that you deleted. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startConfiguration": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionStartConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies when the action runs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operations": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the list of configuration changes that you want to make to the feed. Elemental Inference applies all the operations in an action together, in the order that you specify them. If any operation fails, Elemental Inference doesn't apply any of them. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateScheduleActionResponse": {
+            "type": "structure",
+            "members": {
+                "actionName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that you specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startConfiguration": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionStartConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies when the action runs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operations": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration changes that the action makes to the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the action. After you create the action successfully, Elemental Inference sets the status to PENDING. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why the action failed. Elemental Inference returns this property only when the status is FAILED. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#CroppingConfig": {
             "type": "structure",
             "members": {
@@ -864,6 +992,91 @@
                     "target": "com.amazonaws.elementalinference#FeedStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the feed. When deletion of the feed has succeeded, the status will be DELETED. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteScheduleAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#DeleteScheduleActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#DeleteScheduleActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a schedule action for a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes a schedule action from a feed. A deleted action never runs.</p> <p>You can delete only an action whose status is PENDING. Deleting an action doesn't reverse changes that the action already made to the feed. When you delete or archive a feed, Elemental Inference deletes all the schedule actions on that feed. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/feed/{id}/schedule-actions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteScheduleActionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed that holds the schedule action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "actionName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule action that you want to delete.</p>",
+                        "smithy.api#httpQuery": "actionName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteScheduleActionResponse": {
+            "type": "structure",
+            "members": {
+                "actionName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule action that Elemental Inference deleted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2201,13 +2414,22 @@
                     "target": "com.amazonaws.elementalinference#AssociateFeed"
                 },
                 {
+                    "target": "com.amazonaws.elementalinference#CreateScheduleAction"
+                },
+                {
                     "target": "com.amazonaws.elementalinference#DeleteFeedPolicy"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#DeleteScheduleAction"
                 },
                 {
                     "target": "com.amazonaws.elementalinference#DisassociateFeed"
                 },
                 {
                     "target": "com.amazonaws.elementalinference#GetFeedPolicy"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ListScheduleActions"
                 },
                 {
                     "target": "com.amazonaws.elementalinference#PutFeedPolicy"
@@ -2361,6 +2583,21 @@
                 "smithy.api#length": {
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.elementalinference#FixedModeScheduleActionStartSettings": {
+            "type": "structure",
+            "members": {
+                "scheduledAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC time at which the action runs. Specify the time in whole seconds. For the range of times that you can specify, see the AWS Elemental Inference User Guide. </p> <p>This time is approximate. The change can take a few minutes to take effect on the media that the feed is processing. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the time at which a schedule action runs once. This is a type of ScheduleActionStartConfiguration. </p>"
             }
         },
         "com.amazonaws.elementalinference#FixtureDate": {
@@ -3195,6 +3432,110 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#ListScheduleActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#ListScheduleActionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#ListScheduleActionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list schedule actions for a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Displays a list of the schedule actions on a feed, including the status of each action and, for a failed action, information about why it failed. </p> <p>Elemental Inference keeps an action whose status is COMPLETED or FAILED for about 48 hours after its scheduled time, and then deletes it automatically. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/feed/{id}/schedule-actions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "scheduleActions",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListScheduleActionsRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed that you want to query.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each API request. If you don't specify MaxResults, Elemental Inference returns a maximum of 10 results for each page. </p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies the batch of results that you want to see. To see the next batch, submit the request a second time and specify the NextToken value that Elemental Inference returned. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListScheduleActionsResponse": {
+            "type": "structure",
+            "members": {
+                "scheduleActions": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the schedule actions on the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies the next batch of results. Elemental Inference returns it only when more results are available. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -3420,13 +3761,28 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#RemoveClippingDataSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "outputName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the output that you want to remove the game from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the game from an event clipping output at the action's scheduled time. This is a type of ScheduleActionOperation, and the output must be an event clipping output. </p>"
+            }
+        },
         "com.amazonaws.elementalinference#ResourceArn": {
             "type": "string",
             "traits": {
                 "aws.api#arnReference": {
                     "type": "AWS::Elemental-Inference::Resource"
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:elemental-inference[a-z\\-]*:[a-z0-9\\-]+:[0-9]{12}:(feed|dictionary)/[a-zA-Z0-9]{1,19}$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:elemental-inference[a-z\\-]*:[a-z0-9\\-]+:[0-9]{12}:[a-z]+/[a-zA-Z0-9]{1,19}$"
             }
         },
         "com.amazonaws.elementalinference#ResourceDescription": {
@@ -3468,6 +3824,173 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$"
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleAction": {
+            "type": "structure",
+            "members": {
+                "actionName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule action. The name is unique within the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startConfiguration": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionStartConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies when the action runs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operations": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration changes that the action makes to the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the action. Valid values are the following:</p> <dl> <dt>PENDING</dt> <dd> <p>The action is waiting for its scheduled time.</p> </dd> <dt>COMPLETED</dt> <dd> <p>Elemental Inference applied all the action's operations to the feed.</p> </dd> <dt>FAILED</dt> <dd> <p>Elemental Inference couldn't apply the action.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why the action failed. Elemental Inference returns this property only when the status is FAILED. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one schedule action on a feed, including the changes it makes and whether it has run yet. Elemental Inference returns this structure in the ListScheduleActions operation. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleActionError": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.elementalinference#ScheduleActionErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of failure. Valid values are the following:</p> <dl> <dt>INVALID_ACTION_TARGET</dt> <dd> <p>The action referred to something that didn't exist or wasn't valid at the scheduled time, for example an output that you deleted. </p> </dd> <dt>INTERNAL_ERROR</dt> <dd> <p>An unexpected error prevented the action from completing.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the cause of a schedule action failure, including the failure type and a description of what went wrong. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleActionErrorCode": {
+            "type": "enum",
+            "members": {
+                "INVALID_ACTION_TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ACTION_TARGET"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#ScheduleAction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleActionOperation": {
+            "type": "union",
+            "members": {
+                "updateOutputStatus": {
+                    "target": "com.amazonaws.elementalinference#UpdateOutputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation type that enables or disables an output.</p>"
+                    }
+                },
+                "updateClippingDataSourceConfiguration": {
+                    "target": "com.amazonaws.elementalinference#UpdateClippingDataSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation type that attaches a game to an event clipping output.</p>"
+                    }
+                },
+                "removeClippingDataSourceConfiguration": {
+                    "target": "com.amazonaws.elementalinference#RemoveClippingDataSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation type that removes the game from an event clipping output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Holds one typed configuration change that a schedule action makes to a feed. Each operation must contain exactly one property. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleActionOperations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#ScheduleActionOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleActionStartConfiguration": {
+            "type": "union",
+            "members": {
+                "fixedModeScheduleActionStartSettings": {
+                    "target": "com.amazonaws.elementalinference#FixedModeScheduleActionStartSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start settings type for an action that runs once, at a fixed time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Holds the typed start settings that determine when a schedule action runs. Currently, only fixed mode is supported. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ScheduleActionStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.elementalinference#SearchFilter": {
@@ -3772,7 +4295,8 @@
                     "resources": {
                         "optional": {
                             "dictionary": {},
-                            "feed": {}
+                            "feed": {},
+                            "function": {}
                         }
                     }
                 },
@@ -3975,7 +4499,8 @@
                     "resources": {
                         "optional": {
                             "dictionary": {},
-                            "feed": {}
+                            "feed": {},
+                            "function": {}
                         }
                     }
                 },
@@ -4010,6 +4535,28 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#UpdateClippingDataSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "outputName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the output that you want to attach the game to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataSourceConfiguration": {
+                    "target": "com.amazonaws.elementalinference#DataSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The game that you want to attach to the output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a game to an event clipping output at the action's scheduled time. This is a type of ScheduleActionOperation, and the output must be an event clipping output. </p>"
             }
         },
         "com.amazonaws.elementalinference#UpdateDictionary": {
@@ -4358,6 +4905,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elementalinference#UpdateOutput"
+            }
+        },
+        "com.amazonaws.elementalinference#UpdateOutputStatus": {
+            "type": "structure",
+            "members": {
+                "outputName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the output that you want to enable or disable. The output must exist in the feed when you create the action. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#OutputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the output is enabled or disabled after the action runs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables or disables an output at the action's scheduled time. This is a type of ScheduleActionOperation. </p>"
             }
         },
         "com.amazonaws.elementalinference#ValidationException": {

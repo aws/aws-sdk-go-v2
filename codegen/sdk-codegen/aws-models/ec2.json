@@ -4528,6 +4528,9 @@
                     "target": "com.amazonaws.ec2#GetSubnetCidrReservations"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfiguration"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagations"
                 },
                 {
@@ -4769,6 +4772,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGateway"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayMeteringPolicy"
@@ -35503,7 +35509,7 @@
                 "target": "com.amazonaws.ec2#DeleteTransitGatewayRouteTableResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified transit gateway route table. If there are any route tables associated with\n         the transit gateway route table, you must first run <a>DisassociateRouteTable</a> before you can delete the transit gateway route table. This removes any route tables associated with the transit gateway route table.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified transit gateway route table. Before you can delete a transit gateway route table, you\n         must disassociate all attachments from it by using <a>DisassociateTransitGatewayRouteTable</a> and wait for the disassociations to\n         complete. You can't delete a transit gateway route table that is the default association route table\n         or default propagation route table for the transit gateway. To change the default route tables, use\n         <a>ModifyTransitGateway</a>.</p>"
             }
         },
         "com.amazonaws.ec2#DeleteTransitGatewayRouteTableAnnouncement": {
@@ -72720,6 +72726,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the NAT configuration for the specified transit gateway attachment. Only the owner of the transit gateway can describe the NAT configuration.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetTransitGatewayAttachmentNatConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewaySupport",
+                        "smithy.api#documentation": "<p>The state of NAT gateway support for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewaySupport"
+                    }
+                },
+                "NatSystemRouteSupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatSystemRouteSupport",
+                        "smithy.api#documentation": "<p>Specifies whether the transit gateway installs routes for the NAT CIDRs in the route tables to which the attachment propagates.</p>",
+                        "smithy.api#xmlName": "natSystemRouteSupport"
+                    }
+                },
+                "NatGatewayRules": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewayRuleSet",
+                        "smithy.api#documentation": "<p>The NAT gateway rules for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewayRuleSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagations": {
             "type": "operation",
             "input": {
@@ -108062,6 +108142,105 @@
                 "smithy.api#documentation": "<p>Modifies the specified transit gateway. When you modify a transit gateway, the modified options are applied to new transit gateway attachments only. Your existing transit gateway attachments are not modified.</p>"
             }
         },
+        "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the NAT configuration for the specified transit gateway attachment. Use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>Enable or disable NAT gateway support for the attachment.</p>\n            </li>\n            <li>\n               <p>Specify whether the transit gateway installs routes for the NAT CIDRs.</p>\n            </li>\n            <li>\n               <p>Replace the NAT gateway rules for the attachment.</p>\n            </li>\n         </ul>\n         <p>Only the owner of the transit gateway can modify the NAT configuration.</p>\n         <p>With NAT gateway support enabled, the transit gateway translates addresses in each rule's <code>MatchSourceCidr</code> range \n         to the corresponding addresses in its <code>NatCidr</code> range.</p>\n         <p>The transit gateway applies changes asynchronously. To check the result, use <code>GetTransitGatewayAttachmentNatConfiguration</code>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable or disable NAT gateway support for the attachment. To enable NAT gateway support, the attachment \n         must have at least one NAT gateway rule. You can't modify the NAT configuration while NAT gateway support is <code>enabling</code> \n         or <code>disabling</code>. If you omit this parameter, the current value doesn't change.</p>"
+                    }
+                },
+                "NatSystemRouteSupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the transit gateway installs routes for the NAT CIDRs in the route tables to which the attachment \n         propagates. For VPC attachments, the transit gateway always installs these routes. You can enable or disable this option only for \n         Amazon Web Services Direct Connect gateway attachments and Site-to-Site VPN attachments that use dynamic routing. For these \n         attachments, the default is <code>enable</code>. If you omit this parameter, the current value doesn't change.</p>"
+                    }
+                },
+                "NatGatewayRules": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NAT gateway rules for the attachment. The rules that you specify replace all existing NAT gateway rules for the attachment. \n         You can specify up to 50 rules for an attachment. If you omit this parameter, the existing rules don't change. \n         To remove all rules, use <code>ResetNatGatewayRules</code>.</p>",
+                        "smithy.api#xmlName": "NatGatewayRule"
+                    }
+                },
+                "ResetNatGatewayRules": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to remove all NAT gateway rules from the attachment. If you omit this parameter, the transit gateway doesn't \n         remove any rules. You can't specify this parameter together with <code>NatGatewayRules</code>. Because you can't enable \n         NAT gateway support without rules, also set <code>NatGatewaySupport</code> to <code>disable</code> in the same request \n         if NAT gateway support is currently enabled.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayAttachmentNatConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewaySupport",
+                        "smithy.api#documentation": "<p>The state of NAT gateway support for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewaySupport"
+                    }
+                },
+                "NatSystemRouteSupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatSystemRouteSupport",
+                        "smithy.api#documentation": "<p>Specifies whether the transit gateway installs routes for the NAT CIDRs in the route tables to which the attachment propagates.</p>",
+                        "smithy.api#xmlName": "natSystemRouteSupport"
+                    }
+                },
+                "NatGatewayRules": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewayRuleSet",
+                        "smithy.api#documentation": "<p>The NAT gateway rules for the attachment.</p>",
+                        "smithy.api#xmlName": "natGatewayRuleSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyTransitGatewayMeteringPolicy": {
             "type": "operation",
             "input": {
@@ -136358,6 +136537,14 @@
                         "smithy.api#documentation": "<p>The tags for the attachment.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
+                },
+                "NatGatewaySupport": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGatewaySupport",
+                        "smithy.api#documentation": "<p>The state of NAT gateway support for the attachment. Only the owner of the transit gateway receives this parameter.</p>",
+                        "smithy.api#xmlName": "natGatewaySupport"
+                    }
                 }
             },
             "traits": {
@@ -136468,6 +136655,69 @@
                 "target": "com.amazonaws.ec2#TransitGatewayAttachment",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportState": {
+            "type": "enum",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                },
+                "enabling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabling"
+                    }
+                },
+                "disabling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabling"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayAttachmentNatGatewaySupportValue": {
+            "type": "enum",
+            "members": {
+                "enable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable"
+                    }
+                },
+                "disable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayAttachmentNatSystemRouteSupportValue": {
+            "type": "enum",
+            "members": {
+                "enable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enable"
+                    }
+                },
+                "disable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable"
+                    }
                 }
             }
         },
@@ -137951,6 +138201,131 @@
                 "smithy.api#documentation": "<p>Describes the members registered with the  transit gateway multicast group.</p>"
             }
         },
+        "com.amazonaws.ec2#TransitGatewayNatRule": {
+            "type": "structure",
+            "members": {
+                "RuleNumber": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RuleNumber",
+                        "smithy.api#documentation": "<p>The rule number.</p>",
+                        "smithy.api#xmlName": "ruleNumber"
+                    }
+                },
+                "MatchSourceCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MatchSourceCidr",
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block of the source addresses to translate.</p>",
+                        "smithy.api#xmlName": "matchSourceCidr"
+                    }
+                },
+                "NatCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatCidr",
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block that the transit gateway translates the source addresses to.</p>",
+                        "smithy.api#xmlName": "natCidr"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNatRuleState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the NAT gateway rule. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>pending</code> - The transit gateway is applying a change to the rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>activated</code> - The rule is in effect because NAT gateway support is enabled for the attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deactivated</code> - The rule isn't in effect because NAT gateway support is disabled for the attachment.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "state"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a NAT gateway rule for a transit gateway attachment, including the rule number, the source CIDR block, the translated CIDR block, and the state of the rule.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayNatRule",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleRequest": {
+            "type": "structure",
+            "members": {
+                "RuleNumber": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule number. Valid values are 1 to 32766. Each rule number must be unique within the request.</p>"
+                    }
+                },
+                "MatchSourceCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block of the source addresses to translate. The CIDR block can't overlap the multicast \n         range (<code>224.0.0.0/4</code>) or the link-local range (<code>169.254.0.0/16</code>).</p>"
+                    }
+                },
+                "NatCidr": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block to translate the source addresses to. The CIDR block must be in a private (RFC 1918) \n         or shared address space (RFC 6598) range, and must have the same prefix length as <code>MatchSourceCidr</code>. \n         The CIDR blocks in the rules for an attachment can't overlap each other.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a NAT gateway rule to apply to a transit gateway attachment. A NAT gateway rule translates source addresses in the \n         <code>MatchSourceCidr</code> range to the corresponding addresses in the <code>NatCidr</code> range.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayNatRuleRequest",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNatRuleState": {
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "activated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "activated"
+                    }
+                },
+                "deactivated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deactivated"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#TransitGatewayNetworkInterfaceIdList": {
             "type": "list",
             "member": {
@@ -139420,6 +139795,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "propagated"
+                    }
+                },
+                "system": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "system"
                     }
                 }
             }

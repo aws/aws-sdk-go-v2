@@ -2107,6 +2107,9 @@
                     "target": "com.amazonaws.connect#ListRealtimeContactAnalysisSegmentsV2"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListReplicationFindings"
+                },
+                {
                     "target": "com.amazonaws.connect#ListRoutingProfileManualAssignmentQueues"
                 },
                 {
@@ -3902,6 +3905,47 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.connect#ApproximateDriftedResourceCount": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.connect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region that the count applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate number of resources of the requested type that are not yet in sync in the\n   Region. A value of zero means the resources are in sync.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in Unix epoch time, when the count was last calculated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains an approximate count of the resources of a given type that are not yet in sync in a\n   Region, along with the time the count was last calculated.</p>"
+            }
+        },
+        "com.amazonaws.connect#ApproximateDriftedResourceCounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ApproximateDriftedResourceCount"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
                 }
             }
         },
@@ -32100,6 +32144,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The distribution of agents between the instance and its replica(s).</p>"
                     }
+                },
+                "LastFailoverTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent failover for the traffic distribution group. This value is\n   updated each time <code>UpdateTrafficDistribution</code> is called to change the traffic\n   distribution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39645,6 +39695,117 @@
                     "target": "com.amazonaws.connect#LargeNextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListReplicationFindings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListReplicationFindingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListReplicationFindingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists replication findings for resources of a specified resource type in a specified\n   Connect Customer instance. A replication finding describes a single resource whose replication\n   to one or more Regions is incomplete or has encountered an error. Results are returned in pages.\n   This operation is available only for instances that are set up for Global Resiliency.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/replication-findings/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ReplicationFindingsList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListReplicationFindingsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can provide either the instance ID or\n   the full instance ARN. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the\n   Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.connect#ReplicationFindingResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource to list replication findings for. The following values are currently\n   supported: <code>AGENT</code>, <code>AGENT_GROUP</code>, <code>AGENT_GROUP_LEVEL</code>,\n   <code>AGENT_STATE</code>, <code>ATTRIBUTE</code>, <code>CONTACT_FLOW</code>,\n   <code>DATA_TABLE</code>, <code>DATA_TABLE_ATTRIBUTE</code>, <code>DATA_TABLE_RECORD</code>,\n   <code>DATA_TABLE_VALUE</code>, <code>FLOW_MODULE</code>, <code>FLOW_MODULE_ALIAS</code>,\n   <code>FLOW_MODULE_VERSION</code>, <code>METRIC</code>, <code>NOTIFICATION</code>,\n   <code>OPERATING_HOURS</code>, <code>PHONE_NUMBER</code>, <code>PROMPT</code>, <code>QUEUE</code>,\n   <code>REPORT</code>, <code>ROUTING_PROFILE</code>, <code>SECURITY_PROFILE</code>,\n   <code>TASK_TEMPLATE</code>, <code>TEST_CASE</code>, <code>TRANSFER_DESTINATION</code>,\n   <code>VIEW</code>, and <code>WORKSPACE</code>. Additional resource types can be supported over\n   time. Specifying a value that is not currently supported returns an\n   <code>InvalidRequestException</code>.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#LargeNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListReplicationFindingsResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicationFindingsList": {
+                    "target": "com.amazonaws.connect#ReplicationFindingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of replication findings for the requested resource type. Only findings that require\n   your action are returned, so this list can be empty even when a drift count is nonzero. Results\n   are paginated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApproximateDriftedResourceCounts": {
+                    "target": "com.amazonaws.connect#ApproximateDriftedResourceCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate number of resources of the requested type that are not yet in sync, reported\n   per Amazon Web Services Region. This count is independent of <code>ReplicationFindingsList</code>\n   and can be higher than the number of findings returned. It is eventually consistent and can lag\n   the current state of the instance. Each entry is the <code>ApproximateDriftedResourceCount</code>\n   for one Region; a Region appears only when its count has been computed.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#LargeNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for retrieving the next page of\n   <code>ReplicationFindingsList</code>.</p>"
+                    }
+                },
+                "ResourceReplicationStatuses": {
+                    "target": "com.amazonaws.connect#ResourceReplicationStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication status of the requested resource type in each Amazon Web Services Region\n   across which the Connect Customer instance is deployed for Global Resiliency, with one entry per\n   Region. This set describes the overall replication state for the request and is returned in full\n   on every page of results, so it does not change as you paginate.</p>"
                     }
                 }
             },
@@ -51134,6 +51295,116 @@
                 "smithy.api#documentation": "<p>Details about the status of the replication of a source Connect Customer instance across Amazon Web Services\n   Regions. Use these details to understand the general status of a given replication. For information about why a\n   replication process may fail, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html#why-replicateinstance-fails\">Why a\n    ReplicateInstance call fails</a> in the <i>Create a replica of your existing Connect Customer\n    instance</i> topic in the <i>Connect Customer Administrator Guide</i>. </p>"
             }
         },
+        "com.amazonaws.connect#ReplicationFinding": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that the finding is for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource that the finding is for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.connect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region that the finding was detected in.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.connect#ReplicationFindingResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that the finding is for, such as <code>QUEUE</code> or\n   <code>ROUTING_PROFILE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ReplicationFindingResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource that the finding is for.</p>"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.connect#ReplicationFindingOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication operation that produced the finding, such as a create, update, or delete of\n   the resource.</p>"
+                    }
+                },
+                "ReferenceCode": {
+                    "target": "com.amazonaws.connect#ReplicationFindingReferenceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stable code that identifies the class of the finding. Use this code to look up the\n   recommended steps to resolve the finding.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.connect#ReplicationFindingMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the finding and the action, if any, required to resolve\n   it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a resource that could not be replicated across the Regions of a\n   Global Resiliency deployment, including the reason and any action required to resolve it.</p>"
+            }
+        },
+        "com.amazonaws.connect#ReplicationFindingMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.connect#ReplicationFindingOperation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#ReplicationFindingReferenceCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#ReplicationFindingResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.connect#ReplicationFindingResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#ReplicationFindingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ReplicationFinding"
+            }
+        },
         "com.amazonaws.connect#ReplicationStatusReason": {
             "type": "string",
             "traits": {
@@ -51293,6 +51564,49 @@
                 "smithy.api#documentation": "<p>The resource is not ready.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.connect#ResourceReplicationStatus": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.connect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region that the replication status applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ResourceReplicationStatusValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication status of the resource type in the Region, such as <code>ENABLED</code>,\n   <code>BLOCKED</code>, or <code>DISABLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates whether a resource type is being replicated and kept in sync in a specific\n   Amazon Web Services Region of a Global Resiliency deployment.</p>"
+            }
+        },
+        "com.amazonaws.connect#ResourceReplicationStatusValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#ResourceReplicationStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ResourceReplicationStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.connect#ResourceTagsSearchCriteria": {
