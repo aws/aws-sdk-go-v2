@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.46.1
 )
 
-require github.com/aws/smithy-go v1.28.5
+require github.com/aws/smithy-go v1.28.6
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 
