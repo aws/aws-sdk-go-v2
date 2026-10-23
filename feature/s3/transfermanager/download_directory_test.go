@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -13,6 +14,7 @@ import (
 	"strings"
 	"sync"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 
@@ -697,11 +699,8 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 
 // createdFileCapture records map of file path corresponding to their *os.File handle that
 // DownloadDirectory creates via createFileFn, so a test can assert after the call returns that
-// each file was either closed or removed if downloaded failed. A
-// removed file path returns os.ErrNotExist from os.Stat, and isFileClosed
-// reports whether a still-present file's handle was closed, so a file that is
-// neither removed nor closed indicates the handle leaked. It is safe for concurrent
-// use by the download workers.
+// each handle was closed and no file was left under the temporary name it was created with.
+// It is safe for concurrent use by the download workers.
 type createdFileCapture struct {
 	mu    sync.Mutex
 	files map[string]*os.File
@@ -717,20 +716,37 @@ func (c *createdFileCapture) count() int {
 	return len(c.files)
 }
 
-// notRemovedOrStillOpen returns the names of captured files that are removed when download
-// failed or closed after download.
-func (c *createdFileCapture) removedOrClosed() (removed, closed []string) {
+// leftOrOpen returns the names of captured files that are still on disk and of those whose
+// handle is still open. Each temporary file is renamed into place when its download succeeds
+// and removed when it fails, so both are empty unless a file was leaked.
+func (c *createdFileCapture) leftOrOpen() (left, open []string) {
 	for path, file := range c.files {
-		_, err := os.Stat(path)
-		if errors.Is(err, os.ErrNotExist) {
-			removed = append(removed, path)
-		} else if isFileClosed(file) {
-			closed = append(closed, path)
+		if _, err := os.Stat(path); !errors.Is(err, os.ErrNotExist) {
+			left = append(left, path)
+		}
+		if !isFileClosed(file) {
+			open = append(open, path)
 		}
 	}
-	sort.Strings(closed)
-	sort.Strings(removed)
+	sort.Strings(left)
+	sort.Strings(open)
 	return
+}
+
+// countFiles returns the number of regular files under root.
+func countFiles(t *testing.T, root string) int {
+	t.Helper()
+	var n int
+	err := filepath.WalkDir(root, func(_ string, d fs.DirEntry, err error) error {
+		if err == nil && d.Type().IsRegular() {
+			n++
+		}
+		return err
+	})
+	if err != nil {
+		t.Fatalf("expect to walk %s, got %v", root, err)
+	}
+	return n
 }
 
 // TestDownloadDirectoryClosesCreatedFiles verifies that DownloadDirectory
@@ -745,8 +761,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 		getobjectFn        func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		failurePolicy      DownloadDirectoryFailurePolicy
 		expectCreated      int
-		expectRemoved      int
-		expectClosed       int
+		expectDownloaded   int
 		expectErr          string
 	}{
 		"single object": {
@@ -754,8 +769,8 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			objectsLists: [][]s3types.Object{
 				{{Key: aws.String("foo/bar")}},
 			},
-			expectCreated: 1,
-			expectClosed:  1,
+			expectCreated:    1,
+			expectDownloaded: 1,
 		},
 		"multiple objects with subdirs": {
 			destination: "close-multiple-objects",
@@ -767,8 +782,8 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 					{Key: aws.String("foo/zoo/oii/bababoii")},
 				},
 			},
-			expectCreated: 4,
-			expectClosed:  4,
+			expectCreated:    4,
+			expectDownloaded: 4,
 		},
 		"multiple objects paginated": {
 			destination: "close-multiple-objects-paginated",
@@ -779,7 +794,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			},
 			continuationTokens: []string{"token1", "token2"},
 			expectCreated:      6,
-			expectClosed:       6,
+			expectDownloaded:   6,
 		},
 		"created files are closed when some downloads fail and are ignored": {
 			destination: "close-error-ignored",
@@ -803,14 +818,12 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 				}, nil
 			},
 			failurePolicy: IgnoreDownloadFailurePolicy{},
-			// GetObject only performs a HeadObject up front and streams the
-			// body lazily, so os.Create runs for all four objects. foo/zoo/bar
-			// and baz then fail during io.Copy (body read), so their files are
-			// created, closed, and removed; the other two download normally.
-			// Every created file must be closed regardless of the outcome.
-			expectCreated: 4,
-			expectClosed:  2,
-			expectRemoved: 2,
+			// A temporary file is created before each transfer starts, so
+			// createFileFn runs for all four objects. foo/zoo/bar and baz fail
+			// their GET, so their temporary files are closed and removed and
+			// nothing is written at their destination.
+			expectCreated:    4,
+			expectDownloaded: 2,
 		},
 	}
 
@@ -864,13 +877,242 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			if e, a := c.expectCreated, capture.count(); e != a {
 				t.Errorf("expected DownloadDirectory to create %d file(s) under %s, captured %d", e, dstPath, a)
 			}
-			removed, closed := capture.removedOrClosed()
-			if e := c.expectRemoved; e != len(removed) {
-				t.Errorf("expected %d files to be removed, but removed %v", e, removed)
+			left, open := capture.leftOrOpen()
+			if len(left) != 0 {
+				t.Errorf("expected no temporary files left under %s, but found %v", dstPath, left)
 			}
-			if e := c.expectClosed; e != len(closed) {
-				t.Errorf("expected %d created files under %s to be closed after DownloadDirectory returned, but only close those: %v", e, dstPath, closed)
+			if len(open) != 0 {
+				t.Errorf("expected created files under %s to be closed after DownloadDirectory returned, but these are open: %v", dstPath, open)
+			}
+			if e, a := c.expectDownloaded, countFiles(t, dstPath); e != a {
+				t.Errorf("expected %d downloaded file(s) under %s, found %d", e, dstPath, a)
 			}
 		})
 	}
+}
+
+// TestDownloadDirectoryReplacesExistingFiles checks that an existing file is
+// replaced only by a successful download. The existing files are longer than
+// the object, so bytes left over from writing into the old file would show up
+// as a mismatch.
+func TestDownloadDirectoryReplacesExistingFiles(t *testing.T) {
+	dstPath := t.TempDir()
+	existing := []byte("existing content, longer than the object")
+	for _, name := range []string{"ok", "fail"} {
+		if err := os.WriteFile(filepath.Join(dstPath, name), existing, 0644); err != nil {
+			t.Fatalf("expect to write existing file %s, got %v", name, err)
+		}
+	}
+
+	s3Client, _ := s3testing.NewDownloadDirectoryClient()
+	s3Client.ListObjectsData = [][]s3types.Object{{
+		{Key: aws.String("ok")},
+		{Key: aws.String("fail")},
+	}}
+	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		if aws.ToString(in.Key) == "fail" {
+			return nil, fmt.Errorf("mocking error")
+		}
+		return s3testing.PartGetObjectFn(c, in)
+	}
+	s3Client.Data = []byte("new content")
+	s3Client.PartsCount = 1
+
+	out, err := New(s3Client).DownloadDirectory(context.Background(), &DownloadDirectoryInput{
+		Bucket:        aws.String("mock-bucket"),
+		Destination:   aws.String(dstPath),
+		FailurePolicy: IgnoreDownloadFailurePolicy{},
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(1), out.ObjectsDownloaded; e != a {
+		t.Errorf("expect %d object downloaded, got %d", e, a)
+	}
+	if e, a := int64(1), out.ObjectsFailed; e != a {
+		t.Errorf("expect %d object failed, got %d", e, a)
+	}
+
+	for name, want := range map[string][]byte{"ok": s3Client.Data, "fail": existing} {
+		got, err := os.ReadFile(filepath.Join(dstPath, name))
+		if err != nil {
+			t.Fatalf("expect to read %s, got %v", name, err)
+		}
+		if !bytes.Equal(want, got) {
+			t.Errorf("unexpected content in %s: %s", name, describeBytesDiff(want, got))
+		}
+	}
+	if e, a := 2, countFiles(t, dstPath); e != a {
+		t.Errorf("expect only the %d destination files under %s, found %d", e, dstPath, a)
+	}
+}
+
+// TestDownloadDirectoryNoHeadObject asserts the directory path issues no
+// HeadObject: DownloadObject learns each object's size from its first data GET.
+func TestDownloadDirectoryNoHeadObject(t *testing.T) {
+	s3Client, _ := s3testing.NewDownloadDirectoryClient()
+	s3Client.ListObjectsData = [][]s3types.Object{{
+		{Key: aws.String("foo/bar")},
+		{Key: aws.String("foo/baz")},
+	}}
+	s3Client.GetObjectFn = s3testing.PartGetObjectFn
+	s3Client.Data = []byte("hello world")
+	s3Client.PartsCount = 1
+
+	dstPath := t.TempDir()
+
+	out, err := New(s3Client).DownloadDirectory(context.Background(), &DownloadDirectoryInput{
+		Bucket:      aws.String("mock-bucket"),
+		Destination: aws.String(dstPath),
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(2), out.ObjectsDownloaded; e != a {
+		t.Fatalf("expect %d objects downloaded, got %d", e, a)
+	}
+
+	if n := len(s3Client.HeadObjectInputs); n != 0 {
+		t.Errorf("expect no HeadObject calls on the directory path, got %d", n)
+	}
+	// An empty HeadObjectInputs is also consistent with no download happening.
+	if e, a := 2, s3Client.GetObjectInvocations; e != a {
+		t.Errorf("expect %d GetObject calls, one per single-part object, got %d", e, a)
+	}
+}
+
+// TestDownloadDirectoryWriteOffsets is a regression test for
+// aws/aws-sdk-go-v2#3536. The parts are unequal so the size latched from part 1 is
+// wrong for parts 2 and 3, and each part carries a distinct byte so a misplaced
+// write shows up as a content mismatch rather than only a length mismatch.
+func TestDownloadDirectoryWriteOffsets(t *testing.T) {
+	partA := bytes.Repeat([]byte{'A'}, 1000)
+	partB := bytes.Repeat([]byte{'B'}, 700)
+	partC := bytes.Repeat([]byte{'C'}, 300)
+	want := bytes.Join([][]byte{partA, partB, partC}, nil)
+
+	s3Client, _ := s3testing.NewDownloadDirectoryClient()
+	s3Client.ListObjectsData = [][]s3types.Object{{
+		{Key: aws.String("multipart/object")},
+	}}
+	s3Client.GetObjectFn = s3testing.UnequalPartGetObjectFn
+	s3Client.PartsData = [][]byte{partA, partB, partC}
+	s3Client.PartsCount = 3
+
+	dstPath := t.TempDir()
+
+	out, err := New(s3Client).DownloadDirectory(context.Background(), &DownloadDirectoryInput{
+		Bucket:      aws.String("mock-bucket"),
+		Destination: aws.String(dstPath),
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(1), out.ObjectsDownloaded; e != a {
+		t.Fatalf("expect %d objects downloaded, got %d", e, a)
+	}
+
+	got, err := os.ReadFile(filepath.Join(dstPath, "multipart", "object"))
+	if err != nil {
+		t.Fatalf("expect to read downloaded file, got %v", err)
+	}
+	if !bytes.Equal(want, got) {
+		t.Fatalf("downloaded file does not match the expected object: %s", describeBytesDiff(want, got))
+	}
+}
+
+// TestMapDownloadObjectInputIsTotal guards against field drift: a field added to
+// both input types but forgotten in mapDownloadObjectInput would silently drop
+// customer input. Every source field is populated and required to arrive.
+func TestMapDownloadObjectInputIsTotal(t *testing.T) {
+	in := &GetObjectInput{}
+	src := reflect.ValueOf(in).Elem()
+	for i := 0; i < src.NumField(); i++ {
+		f := src.Type().Field(i)
+		v, err := distinctValue(f.Type, i)
+		if err != nil {
+			// Deliberately fatal rather than skipped: a type this helper cannot
+			// populate is a field the guard would silently stop covering.
+			t.Fatalf("cannot populate GetObjectInput.%s (%s): %v -- extend distinctValue", f.Name, f.Type, err)
+		}
+		src.Field(i).Set(v)
+	}
+
+	var w nopWriterAt
+	got := reflect.ValueOf(mapDownloadObjectInput(in, w)).Elem()
+
+	for i := 0; i < src.NumField(); i++ {
+		f := src.Type().Field(i)
+		dst := got.FieldByName(f.Name)
+		if !dst.IsValid() {
+			t.Errorf("DownloadObjectInput is missing field %s, which GetObjectInput has", f.Name)
+			continue
+		}
+		if e, a := f.Type, dst.Type(); e != a {
+			t.Errorf("field %s: GetObjectInput has type %s, DownloadObjectInput has %s", f.Name, e, a)
+			continue
+		}
+		if !reflect.DeepEqual(src.Field(i).Interface(), dst.Interface()) {
+			t.Errorf("field %s is not carried across by mapDownloadObjectInput: expect %s, got %s",
+				f.Name, deref(src.Field(i)), deref(dst))
+		}
+	}
+
+	// WriterAt is the only field DownloadObjectInput may add. Anything else new is
+	// a field DownloadDirectory would be leaving unset by accident.
+	for i := 0; i < got.NumField(); i++ {
+		f := got.Type().Field(i)
+		if f.Name == "WriterAt" {
+			continue
+		}
+		if _, ok := src.Type().FieldByName(f.Name); !ok {
+			t.Errorf("DownloadObjectInput has extra field %s: either map it or document why it stays unset", f.Name)
+		}
+	}
+	if got.FieldByName("WriterAt").IsNil() {
+		t.Error("expect WriterAt to be set by mapDownloadObjectInput")
+	}
+}
+
+// deref renders a pointer field as its value so failures print values, not addresses.
+func deref(v reflect.Value) string {
+	if v.Kind() == reflect.Ptr {
+		if v.IsNil() {
+			return "<nil>"
+		}
+		return fmt.Sprintf("%v", v.Elem().Interface())
+	}
+	return fmt.Sprintf("%v", v.Interface())
+}
+
+type nopWriterAt struct{}
+
+func (nopWriterAt) WriteAt(p []byte, off int64) (int, error) { return len(p), nil }
+
+// distinctValue builds a non-zero value of t that differs per field index, so a
+// mapper that assigns the right type from the wrong source field is still caught.
+func distinctValue(t reflect.Type, seed int) (reflect.Value, error) {
+	switch t.Kind() {
+	case reflect.String:
+		return reflect.ValueOf(fmt.Sprintf("value-%d", seed)).Convert(t), nil
+	case reflect.Ptr:
+		switch t.Elem() {
+		case reflect.TypeOf(time.Time{}):
+			ts := time.Unix(int64(1700000000+seed), 0).UTC()
+			p := reflect.New(t.Elem())
+			p.Elem().Set(reflect.ValueOf(ts))
+			return p, nil
+		}
+		switch t.Elem().Kind() {
+		case reflect.String:
+			p := reflect.New(t.Elem())
+			p.Elem().Set(reflect.ValueOf(fmt.Sprintf("value-%d", seed)).Convert(t.Elem()))
+			return p, nil
+		case reflect.Int32, reflect.Int64:
+			p := reflect.New(t.Elem())
+			p.Elem().SetInt(int64(seed + 1))
+			return p, nil
+		}
+	}
+	return reflect.Value{}, fmt.Errorf("unsupported kind %s", t.Kind())
 }
