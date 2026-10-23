@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -698,11 +699,8 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 
 // createdFileCapture records map of file path corresponding to their *os.File handle that
 // DownloadDirectory creates via createFileFn, so a test can assert after the call returns that
-// each file was either closed or removed if downloaded failed. A
-// removed file path returns os.ErrNotExist from os.Stat, and isFileClosed
-// reports whether a still-present file's handle was closed, so a file that is
-// neither removed nor closed indicates the handle leaked. It is safe for concurrent
-// use by the download workers.
+// each handle was closed and no file was left under the temporary name it was created with.
+// It is safe for concurrent use by the download workers.
 type createdFileCapture struct {
 	mu    sync.Mutex
 	files map[string]*os.File
@@ -718,20 +716,37 @@ func (c *createdFileCapture) count() int {
 	return len(c.files)
 }
 
-// notRemovedOrStillOpen returns the names of captured files that are removed when download
-// failed or closed after download.
-func (c *createdFileCapture) removedOrClosed() (removed, closed []string) {
+// leftOrOpen returns the names of captured files that are still on disk and of those whose
+// handle is still open. Each temporary file is renamed into place when its download succeeds
+// and removed when it fails, so both are empty unless a file was leaked.
+func (c *createdFileCapture) leftOrOpen() (left, open []string) {
 	for path, file := range c.files {
-		_, err := os.Stat(path)
-		if errors.Is(err, os.ErrNotExist) {
-			removed = append(removed, path)
-		} else if isFileClosed(file) {
-			closed = append(closed, path)
+		if _, err := os.Stat(path); !errors.Is(err, os.ErrNotExist) {
+			left = append(left, path)
+		}
+		if !isFileClosed(file) {
+			open = append(open, path)
 		}
 	}
-	sort.Strings(closed)
-	sort.Strings(removed)
+	sort.Strings(left)
+	sort.Strings(open)
 	return
+}
+
+// countFiles returns the number of regular files under root.
+func countFiles(t *testing.T, root string) int {
+	t.Helper()
+	var n int
+	err := filepath.WalkDir(root, func(_ string, d fs.DirEntry, err error) error {
+		if err == nil && d.Type().IsRegular() {
+			n++
+		}
+		return err
+	})
+	if err != nil {
+		t.Fatalf("expect to walk %s, got %v", root, err)
+	}
+	return n
 }
 
 // TestDownloadDirectoryClosesCreatedFiles verifies that DownloadDirectory
@@ -746,8 +761,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 		getobjectFn        func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		failurePolicy      DownloadDirectoryFailurePolicy
 		expectCreated      int
-		expectRemoved      int
-		expectClosed       int
+		expectDownloaded   int
 		expectErr          string
 	}{
 		"single object": {
@@ -755,8 +769,8 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			objectsLists: [][]s3types.Object{
 				{{Key: aws.String("foo/bar")}},
 			},
-			expectCreated: 1,
-			expectClosed:  1,
+			expectCreated:    1,
+			expectDownloaded: 1,
 		},
 		"multiple objects with subdirs": {
 			destination: "close-multiple-objects",
@@ -768,8 +782,8 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 					{Key: aws.String("foo/zoo/oii/bababoii")},
 				},
 			},
-			expectCreated: 4,
-			expectClosed:  4,
+			expectCreated:    4,
+			expectDownloaded: 4,
 		},
 		"multiple objects paginated": {
 			destination: "close-multiple-objects-paginated",
@@ -780,7 +794,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			},
 			continuationTokens: []string{"token1", "token2"},
 			expectCreated:      6,
-			expectClosed:       6,
+			expectDownloaded:   6,
 		},
 		"created files are closed when some downloads fail and are ignored": {
 			destination: "close-error-ignored",
@@ -804,13 +818,12 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 				}, nil
 			},
 			failurePolicy: IgnoreDownloadFailurePolicy{},
-			// The destination file is created before the transfer starts, so
-			// os.Create runs for all four objects. foo/zoo/bar and baz fail
-			// their GET and are closed then removed; removedOrClosed counts
-			// those under expectRemoved rather than expectClosed.
-			expectCreated: 4,
-			expectClosed:  2,
-			expectRemoved: 2,
+			// A temporary file is created before each transfer starts, so
+			// createFileFn runs for all four objects. foo/zoo/bar and baz fail
+			// their GET, so their temporary files are closed and removed and
+			// nothing is written at their destination.
+			expectCreated:    4,
+			expectDownloaded: 2,
 		},
 	}
 
@@ -864,14 +877,73 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			if e, a := c.expectCreated, capture.count(); e != a {
 				t.Errorf("expected DownloadDirectory to create %d file(s) under %s, captured %d", e, dstPath, a)
 			}
-			removed, closed := capture.removedOrClosed()
-			if e := c.expectRemoved; e != len(removed) {
-				t.Errorf("expected %d files to be removed, but removed %v", e, removed)
+			left, open := capture.leftOrOpen()
+			if len(left) != 0 {
+				t.Errorf("expected no temporary files left under %s, but found %v", dstPath, left)
 			}
-			if e := c.expectClosed; e != len(closed) {
-				t.Errorf("expected %d created files under %s to be closed after DownloadDirectory returned, but only close those: %v", e, dstPath, closed)
+			if len(open) != 0 {
+				t.Errorf("expected created files under %s to be closed after DownloadDirectory returned, but these are open: %v", dstPath, open)
+			}
+			if e, a := c.expectDownloaded, countFiles(t, dstPath); e != a {
+				t.Errorf("expected %d downloaded file(s) under %s, found %d", e, dstPath, a)
 			}
 		})
+	}
+}
+
+// TestDownloadDirectoryReplacesExistingFiles checks that an existing file is
+// replaced only by a successful download. The existing files are longer than
+// the object, so bytes left over from writing into the old file would show up
+// as a mismatch.
+func TestDownloadDirectoryReplacesExistingFiles(t *testing.T) {
+	dstPath := t.TempDir()
+	existing := []byte("existing content, longer than the object")
+	for _, name := range []string{"ok", "fail"} {
+		if err := os.WriteFile(filepath.Join(dstPath, name), existing, 0644); err != nil {
+			t.Fatalf("expect to write existing file %s, got %v", name, err)
+		}
+	}
+
+	s3Client, _ := s3testing.NewDownloadDirectoryClient()
+	s3Client.ListObjectsData = [][]s3types.Object{{
+		{Key: aws.String("ok")},
+		{Key: aws.String("fail")},
+	}}
+	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		if aws.ToString(in.Key) == "fail" {
+			return nil, fmt.Errorf("mocking error")
+		}
+		return s3testing.PartGetObjectFn(c, in)
+	}
+	s3Client.Data = []byte("new content")
+	s3Client.PartsCount = 1
+
+	out, err := New(s3Client).DownloadDirectory(context.Background(), &DownloadDirectoryInput{
+		Bucket:        aws.String("mock-bucket"),
+		Destination:   aws.String(dstPath),
+		FailurePolicy: IgnoreDownloadFailurePolicy{},
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(1), out.ObjectsDownloaded; e != a {
+		t.Errorf("expect %d object downloaded, got %d", e, a)
+	}
+	if e, a := int64(1), out.ObjectsFailed; e != a {
+		t.Errorf("expect %d object failed, got %d", e, a)
+	}
+
+	for name, want := range map[string][]byte{"ok": s3Client.Data, "fail": existing} {
+		got, err := os.ReadFile(filepath.Join(dstPath, name))
+		if err != nil {
+			t.Fatalf("expect to read %s, got %v", name, err)
+		}
+		if !bytes.Equal(want, got) {
+			t.Errorf("unexpected content in %s: %s", name, describeBytesDiff(want, got))
+		}
+	}
+	if e, a := 2, countFiles(t, dstPath); e != a {
+		t.Errorf("expect only the %d destination files under %s, found %d", e, dstPath, a)
 	}
 }
 

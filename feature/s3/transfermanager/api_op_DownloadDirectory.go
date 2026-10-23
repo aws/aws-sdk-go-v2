@@ -2,6 +2,8 @@ package transfermanager
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"io"
@@ -291,26 +293,34 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 		return
 	}
 
-	file, err := createFileFn(data.path)
+	// The object is written to a temporary file that replaces data.path only
+	// once the download succeeds, so a failed download leaves an existing file
+	// at data.path as it was.
+	tmpPath, err := tempFilePath(data.path)
+	if err != nil {
+		d.setErr(err)
+		return
+	}
+	file, err := createFileFn(tmpPath)
 	if err != nil {
 		d.setErr(fmt.Errorf("error when creating file %s: %v", data.path, err))
 		return
 	}
-	var transferFailed bool
+	var renamed bool
 	defer func() {
-		if err := file.Close(); err != nil {
-			d.setErr(fmt.Errorf("error when closing file %s: %v", data.path, err))
-		}
-		if transferFailed {
-			os.Remove(data.path)
+		if !renamed {
+			os.Remove(tmpPath)
 		}
 	}()
 
 	// Options are not forwarded here: d.options.Concurrency is the object worker
 	// count, and reusing it for parts would put workers^2 requests in flight.
 	out, err := d.c.DownloadObject(ctx, mapDownloadObjectInput(input, file))
+	closeErr := file.Close()
+	if closeErr != nil {
+		d.setErr(fmt.Errorf("error when closing file %s: %v", data.path, closeErr))
+	}
 	if err != nil {
-		transferFailed = true
 		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
 		if err != nil {
 			d.setErr(fmt.Errorf("error when downloading object %s to local file %s: %v", data.key, data.path, err))
@@ -319,10 +329,28 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 		d.objectsFailed.Add(1)
 		return
 	}
+	if closeErr != nil {
+		return
+	}
+	if err := os.Rename(tmpPath, data.path); err != nil {
+		d.setErr(fmt.Errorf("error when moving downloaded file to %s: %v", data.path, err))
+		return
+	}
+	renamed = true
 
 	d.objectsDownloaded.Add(1)
 	// DownloadObject sets ContentLength to the number of bytes it wrote.
 	d.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
+}
+
+// tempFilePath returns a random file name next to path. It has to be in path's
+// directory so the rename that replaces path stays on one file system.
+func tempFilePath(path string) (string, error) {
+	var b [8]byte
+	if _, err := rand.Read(b[:]); err != nil {
+		return "", fmt.Errorf("error when generating a temporary file name for %s: %v", path, err)
+	}
+	return fmt.Sprintf("%s.%s.tmp", path, hex.EncodeToString(b[:])), nil
 }
 
 // mapDownloadObjectInput returns the DownloadObjectInput equivalent of in, writing to w.
